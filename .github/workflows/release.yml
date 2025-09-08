@@ -31,19 +31,30 @@ jobs:
   sign-amo:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
-      AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
-    if: ${{ env.AMO_JWT_ISSUER != '' && env.AMO_JWT_SECRET != '' }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check AMO secrets
+        id: gate
+        shell: bash
+        run: |
+          if [ -n "${{ secrets.AMO_JWT_ISSUER }}" ] && [ -n "${{ secrets.AMO_JWT_SECRET }}" ]; then
+            echo "has_secrets=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_secrets=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Setup Node
+        if: steps.gate.outputs.has_secrets == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Install web-ext
+        if: steps.gate.outputs.has_secrets == 'true'
         run: npm i -g web-ext@7
       - name: Sign Firefox add-on
+        if: steps.gate.outputs.has_secrets == 'true'
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
         run: |
           mkdir -p dist-firefox
           web-ext sign \
@@ -53,6 +64,7 @@ jobs:
             --api-key=$AMO_JWT_ISSUER \
             --api-secret=$AMO_JWT_SECRET
       - name: Upload signed xpi
+        if: steps.gate.outputs.has_secrets == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: signed-xpi
