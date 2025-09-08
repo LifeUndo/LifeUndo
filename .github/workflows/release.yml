@@ -1,0 +1,76 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Zip Chrome extension
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path dist -Force | Out-Null
+          Compress-Archive -Path extension/* -DestinationPath dist/LifeUndo_Chrome.zip -Force
+
+      - name: Zip Firefox extension
+        shell: pwsh
+        run: |
+          Compress-Archive -Path extension_firefox/* -DestinationPath dist/LifeUndo_Firefox.zip -Force
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: zips
+          path: dist/*.zip
+
+  sign-amo:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ secrets.AMO_JWT_ISSUER && secrets.AMO_JWT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install web-ext
+        run: npm i -g web-ext@7
+      - name: Sign Firefox add-on
+        run: |
+          mkdir -p dist-firefox
+          web-ext sign \
+            --source-dir=extension_firefox \
+            --artifacts-dir=dist-firefox \
+            --channel=listed \
+            --api-key=${{ secrets.AMO_JWT_ISSUER }} \
+            --api-secret=${{ secrets.AMO_JWT_SECRET }}
+      - name: Upload signed xpi
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-xpi
+          path: dist-firefox/*.xpi
+
+  github-release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: zips
+          path: dist
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/LifeUndo_Chrome.zip
+            dist/LifeUndo_Firefox.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
