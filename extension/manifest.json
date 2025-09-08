@@ -3,6 +3,7 @@
   "name": "LifeUndo",
   "description": "Undo last actions: text input, closed tabs, clipboard history.",
   "version": "0.1.0",
+  "homepage_url": "https://lifeundo.github.io/LifeUndo/",
   "action": {
     "default_title": "LifeUndo",
     "default_popup": "popup.html"
