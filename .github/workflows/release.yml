@@ -31,7 +31,10 @@ jobs:
   sign-amo:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ secrets.AMO_JWT_ISSUER && secrets.AMO_JWT_SECRET }}
+    env:
+      AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+      AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+    if: ${{ env.AMO_JWT_ISSUER != '' && env.AMO_JWT_SECRET != '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
@@ -47,8 +50,8 @@ jobs:
             --source-dir=extension_firefox \
             --artifacts-dir=dist-firefox \
             --channel=listed \
-            --api-key=${{ secrets.AMO_JWT_ISSUER }} \
-            --api-secret=${{ secrets.AMO_JWT_SECRET }}
+            --api-key=$AMO_JWT_ISSUER \
+            --api-secret=$AMO_JWT_SECRET
       - name: Upload signed xpi
         uses: actions/upload-artifact@v4
         with:
