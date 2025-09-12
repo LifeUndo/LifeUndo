@@ -1,53 +1,72 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LifeUndo — Changelog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LifeUndo release notes and updates." />
-  <link rel="icon" href="/assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="description" content="Changelog for LifeUndo releases">
+  <link rel="icon" href="assets/icon-48.png" sizes="48x48">
+  <link rel="icon" href="assets/icon-128.png" sizes="128x128">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    .page { max-width: 880px; margin: 0 auto; padding: 32px 16px 64px; }
-    .back { margin: 16px 0 24px; display: inline-block; }
-    .badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; background:#111; color:#fff; }
-    .item { background: var(--card, #0f0f0f); border: 1px solid var(--line, #222); border-radius: 16px; padding: 20px; margin: 16px 0; }
-    .item h3 { margin: 0 0 6px; }
-    .muted { color: var(--muted, #888); font-size: 14px; margin-bottom: 12px; }
-    .list { margin: 8px 0 0 0; padding-left: 18px; }
-    .list li { margin: 6px 0; }
+    .changelog{max-width:880px;margin:0 auto;padding:32px 16px}
+    .changelog h1{font-size:28px;margin:0 0 16px}
+    .entry{border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;background:var(--card)}
+    .entry h2{margin:0 0 8px;font-size:18px}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border);margin-right:6px}
+    .tag.new{background:#ecffee;border-color:#b5f2b3}
+    .tag.fix{background:#fff2f2;border-color:#ffcaca}
+    .tag.change{background:#f3f6ff;border-color:#c9d6ff}
+    .muted{opacity:.7}
   </style>
 </head>
 <body>
-  <div class="page">
-    <a class="back" href="/">← Back to Home</a>
-    <h1>🚀 LifeUndo — Changelog</h1>
-    <p class="muted">Release notes and what’s new.</p>
-
-    <div class="item">
-      <h3>v0.2.0 <span class="badge">2025-09-11</span></h3>
-      <p class="muted">✨ Big update: Pro mode, trial and local statistics.</p>
-      <ul class="list">
-        <li>📊 Local statistics (undo actions, tabs, clipboard)</li>
-        <li>⭐ Pro limits: 200 texts / 50 tabs / 50 clipboard items</li>
-        <li>🎁 7-day free trial for new users</li>
-        <li>⚙️ License panel (activate/reset)</li>
-        <li>💾 Export & reset data</li>
-        <li>🎨 Improved popup & options UI with Pro badges</li>
-        <li>🛡 100% offline, no telemetry</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <h3>v0.1.0 <span class="badge">2025-09-08</span></h3>
-      <p class="muted">Initial release.</p>
-      <ul class="list">
-        <li>✏️ Undo last typed text</li>
-        <li>🗂 Restore last 10 closed tabs</li>
-        <li>📋 Clipboard history (last 10 items)</li>
-        <li>🛡 All data is local</li>
-      </ul>
-    </div>
+<header class="container header">
+  <div class="brand">
+    <img src="assets/icon-48.png" alt="" width="28" height="28">
+    <strong>LifeUndo</strong>
   </div>
+  <nav class="nav">
+    <a class="btn btn-ghost" href="index.html">Home</a>
+    <a class="btn btn-ghost" href="privacy">Privacy</a>
+    <a class="btn" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Install for Firefox</a>
+  </nav>
+</header>
+
+<main class="changelog">
+  <h1>Changelog</h1>
+  <p class="muted">History of notable changes and releases.</p>
+
+  <div class="entry">
+    <h2>v0.2.0 <span class="muted">— 2025-09-11</span></h2>
+    <p>
+      <span class="tag new">New</span>
+      <span class="tag change">Change</span>
+    </p>
+    <ul>
+      <li>Added <b>Pro mode</b> with higher limits (200 texts, 50 tabs, 50 clips) and <b>7-day free trial</b>.</li>
+      <li>New <b>Statistics</b> panel (popup opens, undo actions, tab/clipboard restores). Works fully offline.</li>
+      <li>Options page with license activation and stats reset/export (JSON).</li>
+      <li>Website: Pro section, pricing, and FAQ.</li>
+      <li>Everything remains local — no analytics or network requests.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <h2>v0.1.0 <span class="muted">— 2025-09-08</span></h2>
+    <p><span class="tag new">New</span></p>
+    <ul>
+      <li>Initial release: undo typed text, restore recent tabs, clipboard history — all local.</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="container footer">
+  <div>© 2025 LifeUndo</div>
+  <div class="muted">
+    <a href="privacy">Privacy</a> ·
+    <a href="changelog.html">Changelog</a>
+  </div>
+</footer>
 </body>
 </html>
