@@ -1,47 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LifeUndo — Ctrl+Z for your browser</title>
-  <meta name="description" content="Undo text, tabs and clipboard. All data stored locally. Pro limits, 7-day trial, statistics.">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="../assets/favicon.svg">
-  <meta name="theme-color" content="#0b0b12">
-  <link rel="stylesheet" href="../assets/site.css">
-  <meta property="og:title" content="LifeUndo — Ctrl+Z for your browser">
-  <meta property="og:description" content="Undo text, tabs and clipboard. All data stored locally.">
-  <meta property="og:image" content="https://lifeundo.ru/assets/logo.png">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://lifeundo.ru/en/">
+  <meta name="description" content="Undo text, tabs and clipboard. All data stays local. Pro limits, 7-day trial, local stats." />
+  <link rel="icon" href="../assets/logo.png" />
+  <meta property="og:title" content="LifeUndo — Ctrl+Z for your browser" />
+  <meta property="og:description" content="Undo text, closed tabs and clipboard. All data stays on your device." />
+  <meta property="og:image" content="../assets/logo.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/en/" class="brand">
-      <img src="../assets/logo.svg" alt="LifeUndo" width="28" height="28" style="vertical-align:-6px;margin-right:8px;">
-      LifeUndo
+    <a href="/en/" class="logo">
+      <img src="../assets/logo.png" alt="" aria-hidden="true" />
+      <span>LifeUndo</span>
     </a>
-    <a class="btn ghost" href="#use-cases">Features</a>
-    <a class="btn ghost" href="#pricing">Pro</a>
-    <a class="btn ghost" href="../changelog.html">Changelog</a>
-    <a class="btn ghost" href="../privacy/">Privacy</a>
+
+    <a class="btn ghost" href="#features">Features</a>
+    <a class="btn ghost" href="#usecases">Examples</a>
+    <a class="btn ghost" href="/changelog.html">Changes</a>
+    <a class="btn ghost" href="/privacy/">Privacy</a>
     <a class="btn ghost" href="/">RU</a>
-    <span class="btn ghost" style="color: var(--brand); cursor: default;">EN</span>
+
     <a class="btn primary" href="#install">Install</a>
   </div>
 </header>
 
 <section class="hero">
   <div class="container center">
-    <div class="badge">🆕 Latest update: <a href="../changelog.html">v0.2.0</a></div>
-    <h1>We made Ctrl+Z for your browser</h1>
-    <p>Undo text, closed tabs and clipboard. All data stays only on your device.</p>
+    <div class="badge">🆕 Latest update: <a href="/changelog.html">v0.2.0</a></div>
+    <h1>We brought Ctrl+Z to your browser</h1>
+    <p>Undo text, closed tabs and clipboard history. All data stays on your device.</p>
     <div class="btns">
-      <a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Install for Firefox</a>
-      <a class="btn ghost" href="#pricing">Upgrade to Pro</a>
-      <a class="btn ghost" href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn primary" href="#install">Install for Firefox</a>
     </div>
   </div>
 </section>
@@ -50,145 +45,79 @@
   <div class="container">
     <h2>What LifeUndo can do</h2>
     <div class="grid">
-      <div class="card">
-        <h3>✍️ Undo text</h3>
-        <p>Stores last <b>20</b> (Free) / <b>200</b> (Pro) text states. Made a mistake? Just undo it.</p>
-      </div>
-      <div class="card">
-        <h3>🧩 Undo tabs</h3>
-        <p>Restores last <b>10</b> (Free) / <b>50</b> (Pro) closed tabs: URL, title and favicon.</p>
-      </div>
-      <div class="card">
-        <h3>📋 Undo clipboard</h3>
-        <p>Clipboard history: <b>10</b> (Free) / <b>50</b> (Pro) latest copied values.</p>
-      </div>
-      <div class="card">
-        <h3>📊 Local statistics</h3>
-        <p>Action counters (popup/undo/restore) — no network requests or telemetry.</p>
-      </div>
-      <div class="card">
-        <h3>🔐 Full privacy</h3>
-        <p>Data lives in <code>chrome.storage.local / browser.storage.local</code>. No network requests.</p>
-      </div>
-      <div class="card">
-        <h3>🧩 License panel</h3>
-        <p>Offline Pro activation. 7-day Trial for new users.</p>
-      </div>
+      <div class="card"><h3>✍️ Text Undo</h3><p>Stores <b>20</b> (Free) / <b>200</b> (Pro) latest text states.</p></div>
+      <div class="card"><h3>🧩 Tabs Undo</h3><p>Restores <b>10</b> (Free) / <b>50</b> (Pro) recently closed tabs.</p></div>
+      <div class="card"><h3>📋 Clipboard Undo</h3><p>Clipboard history: <b>10</b> / <b>50</b> latest text values.</p></div>
+      <div class="card"><h3>📊 Local stats</h3><p>Counters (popup/undo/restore) — zero telemetry.</p></div>
+      <div class="card"><h3>🔐 Privacy-first</h3><p>Data in <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</p></div>
+      <div class="card"><h3>🔑 Offline license</h3><p>License panel in options. Free 7-day trial.</p></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="screenshots">
+<section class="section" id="what-is-undo">
   <div class="container">
-    <h2>Screenshots</h2>
-    <div class="screens-grid">
-      <img alt="Popup" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Popup — replace with real screenshot</text></svg>">
-      <img alt="Options" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Options — replace with real screenshot</text></svg>">
-      <img alt="History" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>History — replace with real screenshot</text></svg>">
-    </div>
+    <h2>What is “Undo”?</h2>
+    <p class="lead">Undo lets you revert the last action. LifeUndo remembers your text states, closed tabs and clipboard so you can <b>jump back</b> one or many steps with a single click.</p>
   </div>
 </section>
 
-<section class="section" id="use-cases">
+<section class="section" id="usecases">
   <div class="container">
-    <h2>How it helps in real life</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>1) Thesis/Report</h3>
-        <p>Return to old text formulation in 1 click — no need to keep dozens of file versions.</p>
-      </article>
-      <article class="card">
-        <h3>2) HR/Resume</h3>
-        <p>Fixed several job applications in a row and went wrong? Undo text and links back.</p>
-      </article>
-      <article class="card">
-        <h3>3) Online store</h3>
-        <p>Accidentally closed product page/cart — restore tab from closed history.</p>
-      </article>
-      <article class="card">
-        <h3>4) Lawyer/Analyst</h3>
-        <p>Edited long contract in web editor — restore previous revisions without fear.</p>
-      </article>
-      <article class="card">
-        <h3>5) Marketing/Copywriting</h3>
-        <p>Clipboard history: restore text/headlines that were "copied over".</p>
-      </article>
-      <article class="card">
-        <h3>6) Support/CRM</h3>
-        <p>Writing to client — lost template? Restore from copy history.</p>
-      </article>
-      <article class="card">
-        <h3>7) Corporate mode</h3>
-        <p>Pro licenses: extended limits, export, offline validation, multi-device installation.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="pricing">
-  <div class="container">
-    <h2>LifeUndo Pro</h2>
-    <div class="pricing">
-      <div class="card">
-        <h3>Individual</h3>
-        <p class="price">$3.99 <span class="small">/ month</span></p>
-        <ul class="list">
-          <li>10× limits: 200 / 50 / 50</li>
-          <li>Local statistics</li>
-          <li>Priority updates</li>
-        </ul>
-        <div class="kv"><a class="btn primary" href="#install">Activate 7-day Trial</a></div>
-      </div>
-      <div class="card">
-        <h3>Team</h3>
-        <p class="price">$10 <span class="small">/ month</span></p>
-        <ul class="list">
-          <li>All Pro features</li>
-          <li>Up to 5 devices</li>
-          <li>License management</li>
-        </ul>
-        <div class="kv"><a class="btn ghost" href="mailto:developer@lifeundo.ru?subject=LifeUndo%20Team">Contact</a></div>
-      </div>
+    <h2>Where it shines (9 examples)</h2>
+    <div class="grid">
+      <div class="card"><h3>🎓 Student</h3><p>Restore a deleted paragraph in your thesis — up to 200 states.</p></div>
+      <div class="card"><h3>🧳 HR</h3><p>Re-open 10 recently closed job tabs.</p></div>
+      <div class="card"><h3>🛒 Store</h3><p>Bring back a long product page after reload.</p></div>
+      <div class="card"><h3>⚖️ Lawyer</h3><p>Clipboard history helps to recover exact wording.</p></div>
+      <div class="card"><h3>📣 Marketing</h3><p>Iterate headlines — every attempt is kept locally.</p></div>
+      <div class="card"><h3>💬 Support</h3><p>Restore a prepared reply if the chat was closed.</p></div>
+      <div class="card"><h3>🏢 Enterprise</h3><p>Pro mode — ×10 limits and full offline workflow.</p></div>
+      <div class="card"><h3>🧪 Developer</h3><p>Quickly roll back forms/inputs while testing UI.</p></div>
+      <div class="card"><h3>📝 Blogger</h3><p>Never lose your draft — recover from clipboard history.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="install">
   <div class="container">
-    <h2>Installation</h2>
+    <h2>Install & Pro</h2>
     <div class="grid">
       <div class="card">
         <h3>Firefox</h3>
-        <p>Extension published on AMO.</p>
-        <p><a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Install for Firefox</a></p>
-        <p class="small">Direct link to addon page ready to use.</p>
+        <p>Published on AMO.</p>
+        <p><a class="btn primary" target="_blank" rel="noopener" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/">Open on AMO</a></p>
+        <p class="small">Android supported. iOS: similar extensions are restricted by Apple.</p>
       </div>
+
       <div class="card">
         <h3>Chrome / compatible</h3>
-        <p>Publication later (Google requires account/KYC). For now — manual loading.</p>
+        <p>Public release later (Google account/KYC needed). For now — manual install.</p>
         <ul class="list">
-          <li>Enable <b>Developer mode</b> on <code>chrome://extensions/</code></li>
-          <li><b>Load unpacked</b> → point to extension folder</li>
+          <li>Enable <b>Developer mode</b> at <code>chrome://extensions/</code></li>
+          <li><b>Load unpacked</b> → select the extension folder</li>
         </ul>
       </div>
+
+      <div class="card">
+        <h3>Pro</h3>
+        <ul class="list">
+          <li>×10 limits: text 200, tabs 50, clipboard 50</li>
+          <li>7-day trial</li>
+          <li>Offline license validation</li>
+        </ul>
+        <p class="small">Teams/enterprise — contact <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
+      </div>
+
       <div class="card">
         <h3>Support</h3>
         <ul class="list">
           <li><a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram channel</a></li>
+          <li><a href="https://github.com/LifeUndo/LifeUndo" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></li>
-          <li><a href="https://github.com/LifeUndo/LifeUndo">GitHub</a></li>
         </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="glossary">
-  <div class="container">
-    <h2>What is Undo?</h2>
-    <p><strong>Undo</strong> means "roll back" the last operation. We brought this principle to the browser: 
-    you can undo <em>text</em>, <em>closed tab</em> and <em>clipboard</em>. 
-    Clicked wrong? Just undo it.</p>
   </div>
 </section>
 
@@ -196,9 +125,8 @@
   <div class="container center">
     <div class="links">
       <a href="/en/">Home</a> ·
-      <a href="../changelog.html">Changelog</a> ·
-      <a href="../privacy/">Privacy</a> ·
-      <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>
+      <a href="/changelog.html">Changes</a> ·
+      <a href="/privacy/">Privacy</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
