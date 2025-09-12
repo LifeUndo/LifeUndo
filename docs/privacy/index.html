@@ -1,40 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Privacy Policy</title>
-  <link rel="stylesheet" href="../styles.css"/>
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-  <main class="container">
-    <p><a href="../index.html">← Home</a></p>
+
+<header class="header">
+  <div class="container nav">
+    <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
+    <a class="btn ghost" href="/">Home</a>
+    <a class="btn ghost" href="../changelog.html">Changelog</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
     <h1>LifeUndo — Privacy Policy</h1>
-    <p><em>Last updated: 2025-09-08</em></p>
+    <p class="lead">Last updated: 2025-09-08</p>
 
-    <p>LifeUndo stores data locally in your browser
-      (<code>chrome.storage.local</code> / <code>browser.storage.local</code>).
-      It does not send data to any server.</p>
+    <div class="card card-xl">
+      <p>LifeUndo stores data locally in your browser (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). It does not send data to any server.</p>
 
-    <h2>Processed data</h2>
-    <ul>
-      <li>Recent text snippets you typed (last 20 states)</li>
-      <li>Recently closed tabs (URL, title, favicon) — last 10</li>
-      <li>Clipboard text history (based on copy selection) — last 10</li>
-    </ul>
+      <h3>Processed data</h3>
+      <ul class="list">
+        <li>Recent text snippets you typed (last 20 states)</li>
+        <li>Recently closed tabs (URL, title, favicon) — last 10</li>
+        <li>Clipboard text history (based on copy selection) — last 10</li>
+      </ul>
 
-    <h2>Sharing</h2>
-    <p>No data leaves your device. No analytics. No network requests.</p>
+      <h3>Sharing</h3>
+      <p>No data leaves your device. No analytics. No network requests.</p>
 
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></p>
+      <h3>Contact</h3>
+      <ul class="list">
+        <li>Email: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></li>
+        <li>Telegram: <a href="https://t.me/TriggeraNet" target="_blank" rel="noopener">@TriggeraNet</a></li>
+      </ul>
+    </div>
+  </div>
+</main>
 
-    <hr/>
-    <p>
-      <a href="../index.html">Home</a> ·
+<footer class="footer">
+  <div class="container center">
+    <div class="links">
+      <a href="/">Home</a> ·
       <a href="../changelog.html">Changelog</a> ·
       <a href="https://t.me/TriggeraNet" target="_blank" rel="noopener">Telegram</a>
-    </p>
-  </main>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
