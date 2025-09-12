@@ -3,31 +3,192 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LifeUndo — Privacy Policy</title>
-    <style>
-      body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.6; }
-      h1, h2 { margin: 0 0 12px; }
-      .muted { color: #666; }
-      .wrap { max-width: 820px; margin: 0 auto; }
-      code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
-    </style>
+    <title>LifeUndo — Ctrl+Z for your browser</title>
+    <meta name="description" content="Расширение LifeUndo: откат текста, вкладок и буфера. Ctrl+Z для вашего браузера. Данные хранятся локально." />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <meta property="og:title" content="LifeUndo — Ctrl+Z for your browser" />
+    <meta property="og:description" content="Откатывай текст, вкладки и буфер. Все данные локально." />
+    <meta property="og:image" content="https://lifeundo.ru/assets/logo.png" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="wrap">
-      <h1>LifeUndo — Privacy Policy</h1>
-      <p class="muted">Last updated: 2025‑09‑08</p>
-      <p>LifeUndo stores data locally in your browser (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). It does not send data to any server.</p>
-      <h2>Processed data</h2>
-      <ul>
-        <li>Recent text snippets you typed (last 20 states)</li>
-        <li>Recently closed tabs (URL, title, favicon) — last 10</li>
-        <li>Clipboard text history (based on copy selection) — last 10</li>
-      </ul>
-      <h2>Sharing</h2>
-      <p>No data leaves your device. No analytics. No network requests.</p>
-      <h2>Contact</h2>
-      <p>Email: developer@lifeundo.ru</p>
-    </div>
+    <header>
+      <div class="wrap header-inner">
+        <div class="brand">
+          <img src="../assets/logo.png" alt="LifeUndo"/>
+          <div>
+            <div class="title">LifeUndo</div>
+            <div class="tag">Ctrl+Z for your digital life</div>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noreferrer">Установить в Firefox</a>
+          <a class="btn btn-secondary" href="#pro">Upgrade to Pro</a>
+          <a class="btn btn-ghost" href="changelog.html">Changelog</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap hero">
+        <div>
+          <h1>Мы сделали Ctrl+Z для браузера</h1>
+          <p>Откатывай текст, вкладки и буфер — легко. Теперь ошибки в интернете не страшны. Все данные локально.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noreferrer">Установить в Firefox</a>
+            <a class="btn btn-ghost" href="https://github.com/LifeUndo/LifeUndo/releases" target="_blank" rel="noreferrer">Скачать для Chrome (ручная установка)</a>
+          </div>
+        </div>
+        <div class="panel video">Demo GIF/Video</div>
+      </div>
+
+      <div class="wrap section">
+        <div class="latest-update">
+          <h3>🆕 Последнее обновление: <a href="changelog.html">v0.2.0</a></h3>
+          <p class="muted">Pro-лимиты, 7-дневный Trial и локальная статистика. <a href="changelog.html">Смотреть все изменения →</a></p>
+        </div>
+        <h2>Что умеет LifeUndo</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>✍️ Undo текста <span class="pro-badge">PRO</span></h3>
+            <p class="muted">Сохраняет последние 20 состояний текста (Free) / 200 (Pro). Ошибся? Просто откати назад.</p>
+          </div>
+          <div class="card">
+            <h3>🌐 Undo вкладок <span class="pro-badge">PRO</span></h3>
+            <p class="muted">Восстанавливает до 10 последних закрытых вкладок (Free) / 50 (Pro).</p>
+          </div>
+          <div class="card">
+            <h3>📋 Undo буфера <span class="pro-badge">PRO</span></h3>
+            <p class="muted">Хранит историю из 10 последних копирований (Free) / 50 (Pro).</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="pro" class="wrap section pro-section">
+        <h2>🚀 LifeUndo Pro</h2>
+        <p class="muted">Получите в 10 раз больше возможностей и продвинутые функции</p>
+        
+        <div class="pro-features">
+          <div class="pro-feature">
+            <h3>📈 Увеличенные лимиты</h3>
+            <ul>
+              <li>История текста: 200 состояний (вместо 20)</li>
+              <li>Закрытые вкладки: 50 (вместо 10)</li>
+              <li>Буфер обмена: 50 (вместо 10)</li>
+            </ul>
+          </div>
+          
+          <div class="pro-feature">
+            <h3>💾 Экспорт и импорт</h3>
+            <ul>
+              <li>Экспорт всех данных в JSON</li>
+              <li>Импорт данных из других устройств</li>
+              <li>Резервное копирование истории</li>
+            </ul>
+          </div>
+          
+          <div class="pro-feature">
+            <h3>📊 Статистика использования</h3>
+            <ul>
+              <li>Локальная статистика действий</li>
+              <li>Отслеживание эффективности</li>
+              <li>Анализ паттернов использования</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <h3>Цены</h3>
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <h4>Индивидуально</h4>
+              <div class="price">$3.99<span>/мес</span></div>
+              <ul>
+                <li>Все Pro функции</li>
+                <li>1 устройство</li>
+                <li>Приоритетная поддержка</li>
+              </ul>
+            </div>
+            <div class="pricing-card featured">
+              <h4>Команда</h4>
+              <div class="price">$10<span>/мес</span></div>
+              <ul>
+                <li>Все Pro функции</li>
+                <li>До 5 устройств</li>
+                <li>Управление лицензиями</li>
+              </ul>
+            </div>
+            <div class="pricing-card">
+              <h4>Enterprise</h4>
+              <div class="price">Custom</div>
+              <ul>
+                <li>Корпоративные лицензии</li>
+                <li>Безлимитные устройства</li>
+                <li>Персональный менеджер</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="trial-info">
+          <h3>🎁 7-дневный триал</h3>
+          <p>Попробуйте все Pro функции бесплатно в течение 7 дней. Никаких карт, никаких обязательств.</p>
+        </div>
+      </div>
+
+      <div class="wrap section">
+        <h2>Установка в Chrome и совместимых</h2>
+        <div class="steps">
+          <div class="step">Скачайте архив <b>LifeUndo_Chrome.zip</b></div>
+          <div class="step">Распакуйте файлы в папку</div>
+          <div class="step">Откройте <code>chrome://extensions/</code> → включите <b>Developer mode</b></div>
+          <div class="step">Нажмите <b>Load unpacked</b> → укажите папку с расширением</div>
+        </div>
+      </div>
+
+      <div class="wrap section">
+        <h2>Часто задаваемые вопросы</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h3>Как мы обрабатываем данные?</h3>
+            <p>Все данные хранятся локально в вашем браузере. Никаких сетевых запросов, никакой телеметрии. Ваша приватность — наш приоритет.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Работает ли расширение офлайн?</h3>
+            <p>Да, LifeUndo полностью работает офлайн. Все функции доступны без подключения к интернету.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Можно ли использовать на нескольких устройствах?</h3>
+            <p>Free версия работает только на одном устройстве. Pro версия позволяет использовать на нескольких устройствах с одной лицензией.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Что происходит с данными при удалении расширения?</h3>
+            <p>Все данные остаются в браузере до их ручного удаления. Вы можете экспортировать данные перед удалением расширения.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap section">
+        <h2>Приватность</h2>
+        <p class="muted">Данные хранятся локально в <code>chrome.storage.local</code> / <code>browser.storage.local</code>. Никаких сетевых запросов. Подробнее — <a href="privacy.html">политика конфиденциальности</a>.</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div>© 2025 LifeUndo</div>
+        <div>
+          <a href="mailto:support@lifeundo.ru">support@lifeundo.ru</a>
+          · <a href="https://t.me/LifeUndo" target="_blank" rel="noreferrer">Telegram</a>
+          · <a href="https://github.com/LifeUndo/LifeUndo" target="_blank" rel="noreferrer">GitHub</a>
+          · <a href="changelog.html">Changelog</a>
+        </div>
+      </div>
+    </footer>
   </body>
   </html>
 
