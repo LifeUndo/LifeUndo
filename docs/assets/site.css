@@ -20,7 +20,7 @@ a:hover{opacity:.9}
 .header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(8px);background:color-mix(in oklab, var(--bg) 85%, transparent);border-bottom:1px solid color-mix(in oklab, var(--fg) 10%, transparent);z-index:5}
 .nav{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700}
-.logo img{width:28px;height:28px; border-radius:8px}
+.logo img{width:24px;height:24px;border-radius:6px}
 .nav a.btn, .hero .btns a{padding:10px 16px;border-radius:999px;border:1px solid color-mix(in oklab, var(--fg) 15%, transparent)}
 .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border:none;box-shadow:var(--shadow)}
 .btn.ghost{background:transparent}
