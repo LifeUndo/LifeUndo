@@ -5,31 +5,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Ctrl+Z для браузера</title>
   <meta name="description" content="Откатывайте текст, вкладки и буфер. Все данные — локально. Pro-лимиты, 7-дневный триал, статистика.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/favicon.svg">
-  <meta name="theme-color" content="#0b0b12">
+  <link rel="icon" href="assets/logo.png">
   <link rel="stylesheet" href="assets/site.css">
   <meta property="og:title" content="LifeUndo — Ctrl+Z для браузера">
-  <meta property="og:description" content="Откатывайте текст, вкладки и буфер. Все данные — локально.">
-  <meta property="og:image" content="https://lifeundo.ru/assets/logo.png">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://lifeundo.ru/">
+  <meta property="og:description" content="Откатывайте текст, вкладки и буфер. Все данные — только на вашем устройстве.">
+  <meta property="og:image" content="assets/logo.png">
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/" class="brand">
-      <img src="assets/logo.svg" alt="LifeUndo" width="28" height="28" style="vertical-align:-6px;margin-right:8px;">
-      LifeUndo
-    </a>
-    <a class="btn ghost" href="#use-cases">Возможности</a>
-    <a class="btn ghost" href="#pricing">Pro</a>
-    <a class="btn ghost" href="changelog.html">Changelog</a>
-    <a class="btn ghost" href="privacy/">Privacy</a>
-    <span class="btn ghost" style="color: var(--brand); cursor: default;">RU</span>
+    <a href="/" class="logo"><img src="assets/logo.png" alt="LifeUndo logo"><span>LifeUndo</span></a>
+    <a class="btn ghost" href="#features">Возможности</a>
+    <a class="btn ghost" href="#usecases">Примеры</a>
+    <a class="btn ghost" href="changelog.html">Изменения</a>
+    <a class="btn ghost" href="privacy/">Приватность</a>
     <a class="btn ghost" href="/en/">EN</a>
-    <a class="btn primary" href="#install">Установить</a>
   </div>
 </header>
 
@@ -69,104 +60,54 @@
         <p>Данные живут в <code>chrome.storage.local / browser.storage.local</code>. Никаких сетевых запросов.</p>
       </div>
       <div class="card">
-        <h3>🧩 Панель лицензии</h3>
-        <p>Активация Pro офлайн. 7-дневный Trial для новых пользователей.</p>
+        <h3>🔑 Pro + триал</h3>
+        <p>Офлайн-активация лицензии. Для новых пользователей — бесплатный 7-дневный триал.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="screenshots">
+<section class="section">
   <div class="container">
-    <h2>Скриншоты</h2>
-    <div class="screens-grid">
-      <img alt="Popup" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Popup — replace with real screenshot</text></svg>">
-      <img alt="Options" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Options — replace with real screenshot</text></svg>">
-      <img alt="History" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>History — replace with real screenshot</text></svg>">
+    <h2>Что такое «Undo»?</h2>
+    <div class="card card-xl">
+      <p><b>Undo</b> — это «отменить последнее действие». В LifeUndo это работает в браузере: мы запоминаем недавние
+        состояния текста, недавно закрытые вкладки и последние значения буфера обмена — и позволяем быстро вернуться назад.</p>
+      <ul class="list">
+        <li>Текст: откат к одному из последних 20/200 состояний.</li>
+        <li>Вкладки: вернуть 10/50 последних закрытий с URL и заголовками.</li>
+        <li>Буфер: увидеть историю скопированного — и восстановить нужное.</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="section" id="use-cases">
+<section class="section" id="usecases">
   <div class="container">
-    <h2>Как это помогает в жизни</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>1) Диплом/отчёт</h3>
-        <p>Вернулся к старой формулировке в тексте в 1 клик — не нужно держать десяток версий файла.</p>
-      </article>
-      <article class="card">
-        <h3>2) HR/резюме</h3>
-        <p>Поправили несколько вакансий подряд и уехали не туда? Откатите текст и ссылки назад.</p>
-      </article>
-      <article class="card">
-        <h3>3) Интернет-магазин</h3>
-        <p>Случайно закрыли карточку товара/корзину — верните вкладку из истории закрытых.</p>
-      </article>
-      <article class="card">
-        <h3>4) Юрист/аналитик</h3>
-        <p>Правили длинный договор в веб-редакторе — восстановите прошлые редакции без страха.</p>
-      </article>
-      <article class="card">
-        <h3>5) Маркетинг/копирайт</h3>
-        <p>История буфера: верните текст/заголовки, которые были «скопированы поверх».</p>
-      </article>
-      <article class="card">
-        <h3>6) Поддержка/CRM</h3>
-        <p>Пишете клиенту — потеряли шаблон? Верните из истории копирования.</p>
-      </article>
-      <article class="card">
-        <h3>7) Корпоративный режим</h3>
-        <p>Pro-лицензии: расширенные лимиты, экспорт, офлайн-валидация, установка на несколько рабочих мест.</p>
-      </article>
-      <article class="card">
-        <h3>8) Студент/исследователь</h3>
-        <p>Пишете курсовую или диссертацию — легко вернуться к предыдущим версиям абзацев.</p>
-      </article>
-      <article class="card">
-        <h3>9) Фрилансер/контент</h3>
-        <p>Создаёте контент для соцсетей — быстро переключайтесь между вариантами текстов и ссылок.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="pricing">
-  <div class="container">
-    <h2>LifeUndo Pro</h2>
-    <div class="pricing">
-      <div class="card">
-        <h3>Индивидуально</h3>
-        <p class="price">$3.99 <span class="small">/ месяц</span></p>
-        <ul class="list">
-          <li>Лимиты ×10: 200 / 50 / 50</li>
-          <li>Локальная статистика</li>
-          <li>Приоритетные обновления</li>
-        </ul>
-        <div class="kv"><a class="btn primary" href="#install">Активировать Trial 7 дней</a></div>
-      </div>
-      <div class="card">
-        <h3>Команда</h3>
-        <p class="price">$10 <span class="small">/ месяц</span></p>
-        <ul class="list">
-          <li>Все Pro-функции</li>
-          <li>До 5 устройств</li>
-          <li>Управление лицензиями</li>
-        </ul>
-        <div class="kv"><a class="btn ghost" href="mailto:developer@lifeundo.ru?subject=LifeUndo%20Team">Связаться</a></div>
-      </div>
+    <h2>Где это полезно (9 примеров)</h2>
+    <div class="grid">
+      <div class="card"><h3>🎓 Студент</h3><p>Стерли абзац в дипломе — верните 1 из 200 предыдущих состояний.</p></div>
+      <div class="card"><h3>💼 HR</h3><p>Откройте снова 10 последних вакансий, которые закрыли по ошибке.</p></div>
+      <div class="card"><h3>🛒 Магазин</h3><p>Верните длинный текст карточки товара, если вкладка перезагрузилась.</p></div>
+      <div class="card"><h3>⚖️ Юрист</h3><p>История копирований поможет восстановить формулировку, которая была в буфере.</p></div>
+      <div class="card"><h3>📣 Маркетинг</h3><p>Перебирайте варианты заголовка — все попытки сохраняются локально.</p></div>
+      <div class="card"><h3>💬 Поддержка</h3><p>Верните заготовленный ответ клиенту, если случайно закрыли чат.</p></div>
+      <div class="card"><h3>🏢 Корпорации</h3><p>Pro-режим: лимиты ×10 и полный офлайн без передачи данных наружу.</p></div>
+      <div class="card"><h3>👨‍💻 Разработчик</h3><p>Восстановите текст из формы баг-репорта после перезагрузки или краша.</p></div>
+      <div class="card"><h3>📑 Бухгалтер</h3><p>Верните таблицу/реквизиты, если страницу случайно закрыли перед отправкой.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="install">
   <div class="container">
-    <h2>Установка</h2>
+    <h2>Установка и Pro</h2>
     <div class="grid">
       <div class="card">
         <h3>Firefox</h3>
         <p>Расширение опубликовано на AMO.</p>
-        <p><a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить в Firefox</a></p>
+        <p><a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Открыть в AMO</a></p>
+        <p class="small">Android: поддерживается. iOS: расширения с подобным функционалом недоступны из-за ограничений Apple.</p>
       </div>
       <div class="card">
         <h3>Chrome / совместимые</h3>
@@ -177,32 +118,32 @@
         </ul>
       </div>
       <div class="card">
+        <h3>Pro-подписка</h3>
+        <ul class="list">
+          <li>Лимиты ×10: текст 200, вкладки 50, буфер 50</li>
+          <li>7-дневный триал</li>
+          <li>Офлайн-валидация лицензии</li>
+        </ul>
+        <p class="small">Для команд/корпораций — напишите на <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></p>
+      </div>
+      <div class="card">
         <h3>Поддержка</h3>
         <ul class="list">
           <li><a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram-канал</a></li>
+          <li><a href="https://github.com/LifeUndo/LifeUndo" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></li>
-          <li><a href="https://github.com/LifeUndo/LifeUndo">GitHub</a></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="glossary">
-  <div class="container">
-    <h2>Что такое Undo?</h2>
-    <p><strong>Undo</strong> — это «откатить назад» последнюю операцию. Мы принесли этот принцип в браузер: 
-    можно откатить <em>текст</em>, <em>закрытую вкладку</em> и <em>буфер обмена</em>. 
-    Нажал не туда? Откатил.</p>
-  </div>
-</section>
-
 <footer class="footer">
   <div class="container center">
     <div class="links">
-      <a href="/">Home</a> ·
-      <a href="changelog.html">Changelog</a> ·
-      <a href="privacy/">Privacy</a> ·
+      <a href="/">Главная</a> ·
+      <a href="changelog.html">Изменения</a> ·
+      <a href="privacy/">Приватность</a> ·
       <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
