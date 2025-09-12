@@ -1,53 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>LifeUndo — Changelog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LifeUndo release notes and updates." />
-  <link rel="icon" href="/assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="История изменений LifeUndo">
+  <link rel="icon" href="assets/logo.png">
   <style>
-    .page { max-width: 880px; margin: 0 auto; padding: 32px 16px 64px; }
-    .back { margin: 16px 0 24px; display: inline-block; }
-    .badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; background:#111; color:#fff; }
-    .item { background: var(--card, #0f0f0f); border: 1px solid var(--line, #222); border-radius: 16px; padding: 20px; margin: 16px 0; }
-    .item h3 { margin: 0 0 6px; }
-    .muted { color: var(--muted, #888); font-size: 14px; margin-bottom: 12px; }
-    .list { margin: 8px 0 0 0; padding-left: 18px; }
-    .list li { margin: 6px 0; }
+    body{max-width:860px;margin:40px auto;padding:0 16px;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#e6e6e6;background:#0f1115}
+    h1{font-size:28px;margin:0 0 24px}
+    h2{margin:28px 0 6px}
+    .muted{color:#9aa4b2}
+    a{color:#6aa9ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .back{display:inline-block;margin:16px 0}
+    .card{border:1px solid #22252b;border-radius:12px;padding:16px;background:#12151b}
+    ul{margin:8px 0 0 20px}
+    hr{border:0;border-top:1px solid #23272f;margin:24px 0}
   </style>
 </head>
 <body>
-  <div class="page">
-    <a class="back" href="/">← Back to Home</a>
-    <h1>🚀 LifeUndo — Changelog</h1>
-    <p class="muted">Release notes and what’s new.</p>
+  <a class="back" href="./">← На главную</a>
+  <h1>LifeUndo — Changelog</h1>
 
-    <div class="item">
-      <h3>v0.2.0 <span class="badge">2025-09-11</span></h3>
-      <p class="muted">✨ Big update: Pro mode, trial and local statistics.</p>
-      <ul class="list">
-        <li>📊 Local statistics (undo actions, tabs, clipboard)</li>
-        <li>⭐ Pro limits: 200 texts / 50 tabs / 50 clipboard items</li>
-        <li>🎁 7-day free trial for new users</li>
-        <li>⚙️ License panel (activate/reset)</li>
-        <li>💾 Export & reset data</li>
-        <li>🎨 Improved popup & options UI with Pro badges</li>
-        <li>🛡 100% offline, no telemetry</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <h3>v0.1.0 <span class="badge">2025-09-08</span></h3>
-      <p class="muted">Initial release.</p>
-      <ul class="list">
-        <li>✏️ Undo last typed text</li>
-        <li>🗂 Restore last 10 closed tabs</li>
-        <li>📋 Clipboard history (last 10 items)</li>
-        <li>🛡 All data is local</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>v0.2.0 <span class="muted">· 2025-09-11</span></h2>
+    <ul>
+      <li>⚡ Pro-лимиты: 200 текстов, 50 вкладок, 50 буферов</li>
+      <li>🧪 7-дневный бесплатный триал</li>
+      <li>📊 Локальная статистика (popup/undo/restore)</li>
+      <li>🔑 Панель лицензии (опции), офлайн-валидация</li>
+      <li>🌐 Обновлён сайт, добавлен раздел Pro и FAQ</li>
+      <li>🦊 Сборка под Firefox одобрена на AMO</li>
+      <li>🔒 Ноль телеметрии, все данные хранятся локально</li>
+    </ul>
   </div>
+
+  <hr>
+  <p class="muted">Если заметили проблему — напишите на <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
 </body>
 </html>

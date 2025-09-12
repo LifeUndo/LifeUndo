@@ -1,69 +1,41 @@
-<!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>LifeUndo — Changelog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="All notable changes to LifeUndo." />
-  <meta property="og:title" content="LifeUndo — Changelog" />
-  <meta property="og:description" content="All notable changes to LifeUndo." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lifeundo.ru/changelog.html" />
-  <link rel="icon" href="/assets/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="История изменений LifeUndo">
+  <link rel="icon" href="assets/logo.png">
   <style>
-    :root{color-scheme:dark light}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;background:#0e0f12;color:#eaeef5}
-    .wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px}
-    header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-    header img{width:28px;height:28px;border-radius:6px}
-    h1{font-size:28px;margin:0 0 8px}
-    p.lead{opacity:.85;margin:0 0 24px}
-    .tag{display:inline-block;font:12px/1.6 monospace;background:#1c2130;color:#a5b3ff;border:1px solid #27304a;padding:2px 8px;border-radius:999px}
-    section{border:1px solid #242a3b;background:#121620;border-radius:12px;margin:14px 0;padding:16px 18px}
-    section h2{font-size:18px;margin:0 0 6px}
-    section .date{opacity:.7;font-size:13px;margin-bottom:8px}
-    ul{margin:10px 0 0 22px}
-    li{margin:6px 0}
-    footer{opacity:.65;margin-top:28px;font-size:13px}
-    a{color:#8fb4ff;text-decoration:none}
+    body{max-width:860px;margin:40px auto;padding:0 16px;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#e6e6e6;background:#0f1115}
+    h1{font-size:28px;margin:0 0 24px}
+    h2{margin:28px 0 6px}
+    .muted{color:#9aa4b2}
+    a{color:#6aa9ff;text-decoration:none}
     a:hover{text-decoration:underline}
+    .back{display:inline-block;margin:16px 0}
+    .card{border:1px solid #22252b;border-radius:12px;padding:16px;background:#12151b}
+    ul{margin:8px 0 0 20px}
+    hr{border:0;border-top:1px solid #23272f;margin:24px 0}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <img src="/assets/logo.png" alt="LifeUndo" />
-      <h1>LifeUndo — Changelog</h1>
-    </header>
-    <p class="lead">Все заметные изменения расширения LifeUndo.</p>
-    <p><a class="tag" href="/">← На главную</a></p>
+  <a class="back" href="./">← На главную</a>
+  <h1>LifeUndo — Changelog</h1>
 
-    <section id="v020">
-      <h2>v0.2.0 — Pro, Trial и статистика</h2>
-      <div class="date">2025-09-11</div>
-      <ul>
-        <li>✨ <strong>Pro-лимиты</strong>: 200 текстов, 50 вкладок, 50 буферов.</li>
-        <li>🧪 <strong>7-дневный Trial</strong> для новых пользователей.</li>
-        <li>📊 <strong>Локальная статистика</strong>, экспорт JSON.</li>
-        <li>🔑 <strong>Панель лицензии</strong> (Options) для активации Pro.</li>
-        <li>🛡️ Всё офлайн: никаких сетевых запросов, никакой телеметрии.</li>
-      </ul>
-    </section>
-
-    <section id="v010">
-      <h2>v0.1.0 — MVP</h2>
-      <div class="date">2025-09-08</div>
-      <ul>
-        <li>✍️ Undo текста.</li>
-        <li>🗂 История закрытых вкладок (10).</li>
-        <li>📋 История буфера обмена (10).</li>
-        <li>🔒 Политика приватности + сайт.</li>
-      </ul>
-    </section>
-
-    <footer>
-      Нужна помощь? Напишите на <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.
-    </footer>
+  <div class="card">
+    <h2>v0.2.0 <span class="muted">· 2025-09-11</span></h2>
+    <ul>
+      <li>⚡ Pro-лимиты: 200 текстов, 50 вкладок, 50 буферов</li>
+      <li>🧪 7-дневный бесплатный триал</li>
+      <li>📊 Локальная статистика (popup/undo/restore)</li>
+      <li>🔑 Панель лицензии (опции), офлайн-валидация</li>
+      <li>🌐 Обновлён сайт, добавлен раздел Pro и FAQ</li>
+      <li>🦊 Сборка под Firefox одобрена на AMO</li>
+      <li>🔒 Ноль телеметрии, все данные хранятся локально</li>
+    </ul>
   </div>
+
+  <hr>
+  <p class="muted">Если заметили проблему — напишите на <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
 </body>
 </html>
