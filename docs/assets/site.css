@@ -56,6 +56,19 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 .card-xl{padding:28px}
 .lead{color:var(--muted)}
 
+/* screenshots */
+.screens-grid {
+  display:grid; gap:16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+}
+.screens-grid img {
+  width:100%; border-radius:12px; border:1px solid color-mix(in oklab, var(--fg) 15%, transparent);
+  background:var(--card);
+}
+
+/* use cases */
+.cards{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+
 /* footer */
 .footer{border-top:1px solid color-mix(in oklab, var(--fg) 10%, transparent);padding:24px 0;color:var(--muted)}
 .footer .links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}

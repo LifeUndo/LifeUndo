@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
+  <title>LifeUndo — Политика конфиденциальности</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LifeUndo — Privacy Policy</title>
-  <link rel="icon" href="../assets/logo.png">
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+  <link rel="shortcut icon" href="../assets/logo.png" type="image/png">
   <link rel="stylesheet" href="../assets/site.css">
+  <meta name="description" content="LifeUndo хранит данные локально и не отправляет их на серверы.">
 </head>
 <body>
 
@@ -19,26 +21,39 @@
 
 <main class="page">
   <div class="container">
-    <h1>LifeUndo — Privacy Policy</h1>
-    <p class="lead">Last updated: 2025-09-08</p>
+    <h1>Политика конфиденциальности</h1>
+    <p class="lead">Последнее обновление: 2025-09-08</p>
 
     <div class="card card-xl">
-      <p>LifeUndo stores data locally in your browser (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). It does not send data to any server.</p>
-
-      <h3>Processed data</h3>
+      <h2>Кратко</h2>
       <ul class="list">
-        <li>Recent text snippets you typed (last 20 states)</li>
-        <li>Recently closed tabs (URL, title, favicon) — last 10</li>
-        <li>Clipboard text history (based on copy selection) — last 10</li>
+        <li>LifeUndo хранит данные <strong>локально</strong> в вашем браузере (<code>chrome.storage.local</code> / <code>browser.storage.local</code>).</li>
+        <li><strong>Нет</strong> телеметрии, <strong>нет</strong> сетевых запросов, <strong>нет</strong> серверов.</li>
+        <li>Все функции (включая Pro) доступны офлайн.</li>
       </ul>
 
-      <h3>Sharing</h3>
-      <p>No data leaves your device. No analytics. No network requests.</p>
+      <h3>Какие данные обрабатываются</h3>
+      <ul class="list">
+        <li><strong>История текста</strong> — последние N состояний (20 в Free / 200 в Pro). Хранится только в этом браузере.</li>
+        <li><strong>Закрытые вкладки</strong> — адрес, заголовок, favicon для последних N вкладок (10 / 50).</li>
+        <li><strong>Буфер обмена</strong> — последние N скопированных текстов (10 / 50).</li>
+        <li><strong>Лицензия</strong> — статус и ключ (офлайн-валидация). Ключ не отправляется на внешние сервисы.</li>
+        <li><strong>Локальная статистика</strong> — счётчики действий (popup/undo/restore), показываются только вам.</li>
+      </ul>
 
-      <h3>Contact</h3>
+      <h3>Срок хранения</h3>
+      <p>История и статистика хранятся до тех пор, пока вы не очистите их в настройках расширения или не удалите расширение/данные браузера.</p>
+
+      <h3>Безопасность</h3>
+      <ul class="list">
+        <li>Данные не покидают устройство. Мы не агрегируем и не анализируем их на стороне сервера.</li>
+        <li>Экспорт/импорт — по вашему явному действию (JSON-файл).</li>
+      </ul>
+
+      <h3>Контакты</h3>
       <ul class="list">
         <li>Email: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></li>
-        <li>Telegram: <a href="https://t.me/TriggeraNet" target="_blank" rel="noopener">@TriggeraNet</a></li>
+        <li>Telegram: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">@LifeUndo</a></li>
       </ul>
     </div>
   </div>
@@ -49,7 +64,7 @@
     <div class="links">
       <a href="/">Home</a> ·
       <a href="../changelog.html">Changelog</a> ·
-      <a href="https://t.me/TriggeraNet" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 </footer>
