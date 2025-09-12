@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Ctrl+Z для браузера</title>
   <meta name="description" content="Откатывайте текст, вкладки и буфер. Все данные — локально. Pro-лимиты, 7-дневный триал, статистика.">
-  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-  <link rel="icon" href="/assets/logo.png" sizes="128x128">
-  <link rel="apple-touch-icon" href="/assets/logo.png">
-  <meta name="theme-color" content="#0b0f19">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0b0b12">
   <link rel="stylesheet" href="assets/site.css">
   <meta property="og:title" content="LifeUndo — Ctrl+Z для браузера">
   <meta property="og:description" content="Откатывайте текст, вкладки и буфер. Все данные — локально.">
@@ -20,7 +19,10 @@
 
 <header class="header">
   <div class="container nav">
-    <a href="/" class="logo"><img src="/assets/logo.svg" alt="LifeUndo" class="logo"><span>LifeUndo</span></a>
+    <a href="/" class="brand">
+      <img src="assets/logo.svg" alt="LifeUndo" width="28" height="28" style="vertical-align:-6px;margin-right:8px;">
+      LifeUndo
+    </a>
     <a class="btn ghost" href="#use-cases">Возможности</a>
     <a class="btn ghost" href="#pricing">Pro</a>
     <a class="btn ghost" href="changelog.html">Changelog</a>
@@ -38,8 +40,6 @@
     <p>Откатывайте текст, закрытые вкладки и буфер обмена. Все данные — только на вашем устройстве.</p>
     <div class="btns">
       <a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить в Firefox</a>
-      <a class="btn ghost" href="#pricing">Upgrade to Pro</a>
-      <a class="btn ghost" href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 </section>
@@ -80,11 +80,9 @@
   <div class="container">
     <h2>Скриншоты</h2>
     <div class="screens-grid">
-      <img src="assets/screens/popup.png" alt="LifeUndo — Popup" loading="lazy">
-      <img src="assets/screens/options.png" alt="LifeUndo — Опции и лицензия" loading="lazy">
-      <img src="assets/screens/history-text.png" alt="История текста" loading="lazy">
-      <img src="assets/screens/history-tabs.png" alt="Закрытые вкладки" loading="lazy">
-      <img src="assets/screens/history-clipboard.png" alt="История буфера" loading="lazy">
+      <img alt="Popup" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Popup — replace with real screenshot</text></svg>">
+      <img alt="Options" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>Options — replace with real screenshot</text></svg>">
+      <img alt="History" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540'><rect width='100%' height='100%' fill='%23151a24'/><text x='50%' y='50%' fill='%23aab4ff' font-size='36' text-anchor='middle' font-family='Inter,Arial'>History — replace with real screenshot</text></svg>">
     </div>
   </div>
 </section>
@@ -120,6 +118,14 @@
       <article class="card">
         <h3>7) Корпоративный режим</h3>
         <p>Pro-лицензии: расширенные лимиты, экспорт, офлайн-валидация, установка на несколько рабочих мест.</p>
+      </article>
+      <article class="card">
+        <h3>8) Студент/исследователь</h3>
+        <p>Пишете курсовую или диссертацию — легко вернуться к предыдущим версиям абзацев.</p>
+      </article>
+      <article class="card">
+        <h3>9) Фрилансер/контент</h3>
+        <p>Создаёте контент для соцсетей — быстро переключайтесь между вариантами текстов и ссылок.</p>
       </article>
     </div>
   </div>
@@ -161,7 +167,6 @@
         <h3>Firefox</h3>
         <p>Расширение опубликовано на AMO.</p>
         <p><a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить в Firefox</a></p>
-        <p class="small">Добавим прямую ссылку на карточку дополнения, когда Mozilla присвоит URL.</p>
       </div>
       <div class="card">
         <h3>Chrome / совместимые</h3>
