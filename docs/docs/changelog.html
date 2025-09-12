@@ -1,72 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LifeUndo — Changelog</title>
-  <meta name="description" content="Changelog for LifeUndo releases">
-  <link rel="icon" href="assets/icon-48.png" sizes="48x48">
-  <link rel="icon" href="assets/icon-128.png" sizes="128x128">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="История изменений LifeUndo">
+  <link rel="icon" href="assets/logo.png">
   <style>
-    .changelog{max-width:880px;margin:0 auto;padding:32px 16px}
-    .changelog h1{font-size:28px;margin:0 0 16px}
-    .entry{border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;background:var(--card)}
-    .entry h2{margin:0 0 8px;font-size:18px}
-    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border);margin-right:6px}
-    .tag.new{background:#ecffee;border-color:#b5f2b3}
-    .tag.fix{background:#fff2f2;border-color:#ffcaca}
-    .tag.change{background:#f3f6ff;border-color:#c9d6ff}
-    .muted{opacity:.7}
+    body{max-width:860px;margin:40px auto;padding:0 16px;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#e6e6e6;background:#0f1115}
+    h1{font-size:28px;margin:0 0 24px}
+    h2{margin:28px 0 6px}
+    .muted{color:#9aa4b2}
+    a{color:#6aa9ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .back{display:inline-block;margin:16px 0}
+    .card{border:1px solid #22252b;border-radius:12px;padding:16px;background:#12151b}
+    ul{margin:8px 0 0 20px}
+    hr{border:0;border-top:1px solid #23272f;margin:24px 0}
   </style>
 </head>
 <body>
-<header class="container header">
-  <div class="brand">
-    <img src="assets/icon-48.png" alt="" width="28" height="28">
-    <strong>LifeUndo</strong>
-  </div>
-  <nav class="nav">
-    <a class="btn btn-ghost" href="index.html">Home</a>
-    <a class="btn btn-ghost" href="privacy">Privacy</a>
-    <a class="btn" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Install for Firefox</a>
-  </nav>
-</header>
+  <a class="back" href="./">← На главную</a>
+  <h1>LifeUndo — Changelog</h1>
 
-<main class="changelog">
-  <h1>Changelog</h1>
-  <p class="muted">History of notable changes and releases.</p>
-
-  <div class="entry">
-    <h2>v0.2.0 <span class="muted">— 2025-09-11</span></h2>
-    <p>
-      <span class="tag new">New</span>
-      <span class="tag change">Change</span>
-    </p>
+  <div class="card">
+    <h2>v0.2.0 <span class="muted">· 2025-09-11</span></h2>
     <ul>
-      <li>Added <b>Pro mode</b> with higher limits (200 texts, 50 tabs, 50 clips) and <b>7-day free trial</b>.</li>
-      <li>New <b>Statistics</b> panel (popup opens, undo actions, tab/clipboard restores). Works fully offline.</li>
-      <li>Options page with license activation and stats reset/export (JSON).</li>
-      <li>Website: Pro section, pricing, and FAQ.</li>
-      <li>Everything remains local — no analytics or network requests.</li>
+      <li>⚡ Pro-лимиты: 200 текстов, 50 вкладок, 50 буферов</li>
+      <li>🧪 7-дневный бесплатный триал</li>
+      <li>📊 Локальная статистика (popup/undo/restore)</li>
+      <li>🔑 Панель лицензии (опции), офлайн-валидация</li>
+      <li>🌐 Обновлён сайт, добавлен раздел Pro и FAQ</li>
+      <li>🦊 Сборка под Firefox одобрена на AMO</li>
+      <li>🔒 Ноль телеметрии, все данные хранятся локально</li>
     </ul>
   </div>
 
-  <div class="entry">
-    <h2>v0.1.0 <span class="muted">— 2025-09-08</span></h2>
-    <p><span class="tag new">New</span></p>
-    <ul>
-      <li>Initial release: undo typed text, restore recent tabs, clipboard history — all local.</li>
-    </ul>
-  </div>
-</main>
-
-<footer class="container footer">
-  <div>© 2025 LifeUndo</div>
-  <div class="muted">
-    <a href="privacy">Privacy</a> ·
-    <a href="changelog.html">Changelog</a>
-  </div>
-</footer>
+  <hr>
+  <p class="muted">Если заметили проблему — напишите на <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
 </body>
 </html>
