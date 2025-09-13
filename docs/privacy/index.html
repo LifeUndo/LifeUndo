@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Политика конфиденциальности</title>
-  <meta name="description" content="LifeUndo хранит данные локально в вашем браузере. Никакой телеметрии, сетевых запросов и передачи на сервер.">
+  <meta name="description" content="Мы храним данные локально в браузере. Никакой телеметрии, сети и сторонних серверов.">
   <link rel="icon" href="../assets/logo.png">
   <link rel="stylesheet" href="../assets/site.css">
   <meta property="og:title" content="LifeUndo — Политика конфиденциальности">
-  <meta property="og:description" content="Все данные — только на вашем устройстве. Локальное хранение, офлайн-валидация лицензии.">
+  <meta property="og:description" content="Данные хранятся локально. Без сетевых запросов и аналитики.">
   <meta property="og:image" content="../assets/logo.png">
 </head>
 <body>
@@ -16,69 +16,66 @@
 <header class="header">
   <div class="container nav">
     <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
-    <a class="btn ghost" href="/">Главная</a>
-    <a class="btn ghost" href="../changelog.html">Изменения</a>
-    <a class="btn ghost" href="../en/">EN</a>
-    <a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить</a>
+    <a class="btn ghost" href="/#features">Возможности</a>
+    <a class="btn ghost" href="/#usecases">Примеры</a>
+    <a class="btn ghost" href="/changelog.html">Изменения</a>
+    <a class="btn ghost active" href="/privacy/">Приватность</a>
+    <a class="btn ghost" href="/news/">Новости</a>
+    <a class="btn ghost" href="/en/privacy/">EN</a>
+    <a class="btn primary" href="/#install">Установить</a>
   </div>
 </header>
 
 <main class="page">
   <div class="container">
-    <h1>Политика конфиденциальности</h1>
-    <p class="small">Последнее обновление: 2025-09-08</p>
+    <h1>LifeUndo — Политика конфиденциальности</h1>
+    <p class="muted">Обновлено: 2025-09-08</p>
 
-    <article class="card card-xl">
+    <section class="card card-xl">
       <h2>Коротко</h2>
-      <p>LifeUndo хранит данные только локально в вашем браузере (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). Расширение не отправляет данные на серверы, не делает сетевых запросов и не использует аналитику/телеметрию.</p>
-    </article>
-
-    <article class="card">
-      <h3>Какие данные обрабатываются</h3>
       <ul class="list">
-        <li><b>История текста</b> — последние 20 состояний (Free) / 200 (Pro).</li>
-        <li><b>Недавно закрытые вкладки</b> — до 10 (Free) / 50 (Pro): URL, заголовок и favicon.</li>
-        <li><b>История буфера обмена</b> — до 10 (Free) / 50 (Pro) текстовых элементов.</li>
-        <li><b>Локальная статистика</b> (опционально) — счётчики действий: открытие попапа, undo, restore.</li>
+        <li>Все данные хранятся <b>локально</b> в вашем браузере: <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</li>
+        <li><b>Нет</b> сетевых запросов, телеметрии, внешней аналитики или рекламы.</li>
+        <li>Приложение работает <b>офлайн</b>; интернет не требуется для базовых функций.</li>
       </ul>
-      <p class="small">Все элементы хранятся только на вашем устройстве. Вы можете очистить их в интерфейсе расширения или удалить само расширение — данные будут удалены браузером.</p>
-    </article>
+    </section>
 
-    <article class="card">
-      <h3>Хранение и сроки</h3>
+    <section class="card">
+      <h2>Какие данные обрабатываются</h2>
       <ul class="list">
-        <li>Данные хранятся в локальном хранилище браузера до тех пор, пока вы их не удалите или не превысите лимиты истории.</li>
-        <li>Состояния «сдвигаются» по принципу кольцевого буфера (новые вытесняют самые старые).</li>
+        <li><b>История ввода текста</b> — последние 20 (Free) / 200 (Pro) состояний.</li>
+        <li><b>Недавно закрытые вкладки</b> — последние 10 (Free) / 50 (Pro) с URL, заголовком и favicon.</li>
+        <li><b>История буфера</b> — последние 10 (Free) / 50 (Pro) текстовых фрагментов.</li>
+        <li><b>Локальная статистика</b> — счётчики действий (popup/undo/restore) для вашего удобства; остаются локально.</li>
+        <li><b>Лицензия</b> — офлайн-файл/токен, хранимый в локальном хранилище для валидации Pro/Team.</li>
       </ul>
-    </article>
+      <p class="muted">Вы можете в любой момент удалить эти данные средствами браузера или самим расширением.</p>
+    </section>
 
-    <article class="card">
-      <h3>Безопасность</h3>
+    <section class="card">
+      <h2>Лицензии и триал</h2>
       <ul class="list">
-        <li>Обмена данными по сети нет — это снижает риски утечек.</li>
-        <li>Доступ к локальному хранилищу ограничен самим браузером и правами расширения.</li>
-        <li>Мы не запрашиваем доступ к сайтам сверх необходимого для работы «отмены».</li>
+        <li><b>7-дневный триал</b> стартует при первом запуске и хранится локально (с вспомогательной отметкой в <code>storage.sync</code>).</li>
+        <li><b>Офлайн-лицензия</b> — файл <code>.lifelic</code> или токен, подписанный нами (ECDSA P-256). Проверка происходит локально, без запроса на сервер.</li>
+        <li>В лицензии могут быть поля: <code>plan</code>, <code>expires</code>, <code>seats</code>, <code>email</code>. Это используется только локально для показа статуса в настройках.</li>
       </ul>
-    </article>
+    </section>
 
-    <article class="card">
-      <h3>Лицензии Pro</h3>
-      <p>Проверка лицензии происходит офлайн. Ключ хранится локально и может быть удалён вами в любой момент в панели лицензии.</p>
-    </article>
+    <section class="card">
+      <h2>Разрешения браузера</h2>
+      <p>Расширение запрашивает минимальные разрешения, необходимые для своей работы (доступ к локальному хранилищу). Список доступов можно увидеть на странице расширений браузера.</p>
+    </section>
 
-    <article class="card">
-      <h3>Ваши выборы и контроль</h3>
-      <ul class="list">
-        <li>Очистить историю текста/вкладок/буфера — в интерфейсе расширения.</li>
-        <li>Экспорт/импорт (Pro) — ваш архив с данными остаётся у вас.</li>
-        <li>Удалить расширение — браузер удалит и локальные данные.</li>
-      </ul>
-    </article>
+    <section class="card">
+      <h2>Файлы cookie и аналитика</h2>
+      <p>Мы не используем cookies и не проводим внешнюю аналитику. Сайт lifeundo.ru может содержать ссылки на сторонние ресурсы (например, магазин дополнений Firefox); переходя по ним, вы следуете их политикам конфиденциальности.</p>
+    </section>
 
-    <article class="card">
-      <h3>Связаться с нами</h3>
-      <p>Вопросы по приватности: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>. Новости и support: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>.</p>
-    </article>
+    <section class="card">
+      <h2>Контакты</h2>
+      <p>Почта: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></p>
+      <p>Telegram-канал: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">t.me/LifeUndo</a></p>
+    </section>
   </div>
 </main>
 
@@ -86,8 +83,9 @@
   <div class="container center">
     <div class="links">
       <a href="/">Главная</a> ·
-      <a href="../changelog.html">Изменения</a> ·
-      <a href="../en/">EN</a>
+      <a href="/changelog.html">Изменения</a> ·
+      <a href="/privacy/">Приватность</a> ·
+      <a href="/news/">Новости</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
