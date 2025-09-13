@@ -1,64 +1,83 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Privacy Policy</title>
-  <link rel="icon" href="../../assets/logo.png" />
-  <link rel="stylesheet" href="../../assets/site.css" />
-  <meta name="description" content="LifeUndo Privacy Policy. All data stays local — no telemetry, no network requests." />
+  <meta name="description" content="LifeUndo keeps all data locally in your browser. No telemetry, no network requests, no servers.">
+  <link rel="icon" href="../../assets/logo.png">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <meta property="og:title" content="LifeUndo — Privacy Policy">
+  <meta property="og:description" content="All data stays on your device. Local storage, offline license validation.">
+  <meta property="og:image" content="../../assets/logo.png">
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/en/" class="logo"><img src="../../assets/logo.png" alt="" aria-hidden="true" /><span>LifeUndo</span></a>
+    <a href="/en/" class="logo"><img src="../../assets/logo.png" alt=""><span>LifeUndo</span></a>
     <a class="btn ghost" href="/en/">Home</a>
-    <a class="btn ghost" href="/changelog.html">Changes</a>
-    <a class="btn ghost" href="/en/pricing.html">Pricing</a>
-    <a class="btn ghost" href="/en/blog/">News</a>
+    <a class="btn ghost" href="../../changelog.html">Changelog</a>
     <a class="btn ghost" href="/privacy/">RU</a>
+    <a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Install</a>
   </div>
 </header>
 
 <main class="page">
   <div class="container">
-    <h1>LifeUndo — Privacy Policy</h1>
-    <p class="small">Last updated: 2025-09-12</p>
+    <h1>Privacy Policy</h1>
+    <p class="small">Last updated: 2025-09-08</p>
 
     <article class="card card-xl">
-      <h2>TL;DR</h2>
-      <ul class="list">
-        <li><b>No data</b> is sent to any servers.</li>
-        <li>Everything is stored <b>locally</b> in your browser (<code>chrome.storage.local</code> / <code>browser.storage.local</code>).</li>
-        <li>No analytics, no telemetry, no ad SDKs, no network requests.</li>
-      </ul>
+      <h2>Summary</h2>
+      <p>LifeUndo stores data locally in your browser (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). The extension does not send data to servers, does not make network requests and does not use analytics/telemetry.</p>
     </article>
 
     <article class="card">
-      <h2>Data we process</h2>
+      <h3>Data we process</h3>
       <ul class="list">
         <li><b>Text history</b> — last 20 (Free) / 200 (Pro) states.</li>
-        <li><b>Closed tabs</b> — last 10 (Free) / 50 (Pro) entries (URL, title, favicon).</li>
-        <li><b>Clipboard history</b> — last 10 (Free) / 50 (Pro) text values.</li>
-        <li><b>Local stats</b> — counters (popup/undo/restore), stored only on device.</li>
+        <li><b>Recently closed tabs</b> — up to 10 (Free) / 50 (Pro): URL, title and favicon.</li>
+        <li><b>Clipboard history</b> — up to 10 (Free) / 50 (Pro) text items.</li>
+        <li><b>Local stats</b> (optional) — counters of popup/undo/restore actions.</li>
       </ul>
-      <p class="small">You can clear data in browser settings or uninstall the extension.</p>
+      <p class="small">All items are stored only on your device. You can clear them in the UI or remove the extension, and the browser will delete the storage.</p>
     </article>
 
     <article class="card">
-      <h2>Licenses & offline validation</h2>
-      <p>Pro activation happens in the options page and is stored locally. Offline validation uses local storage only. No personal data is transmitted.</p>
+      <h3>Storage & retention</h3>
+      <ul class="list">
+        <li>Data lives in the browser’s local storage until you delete it or history limits are reached.</li>
+        <li>Oldest items are rotated out by a ring-buffer strategy.</li>
+      </ul>
     </article>
 
     <article class="card">
-      <h2>Security & access</h2>
-      <p>Only the extension can access its local storage within the browser. We have no remote access to your content.</p>
+      <h3>Security</h3>
+      <ul class="list">
+        <li>No network data exchange — fewer leak vectors.</li>
+        <li>Local storage is protected by the browser and extension permissions.</li>
+        <li>We don’t request site permissions beyond what Undo features require.</li>
+      </ul>
     </article>
 
     <article class="card">
-      <h2>Contact</h2>
-      <p>Privacy questions — <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>. Channel: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">t.me/LifeUndo</a>.</p>
+      <h3>Pro licenses</h3>
+      <p>License validation is offline. The key is stored locally and can be removed by you at any time in the license panel.</p>
+    </article>
+
+    <article class="card">
+      <h3>Your choices & control</h3>
+      <ul class="list">
+        <li>Clear text/tabs/clipboard history in the UI.</li>
+        <li>Export/Import (Pro) — your archive stays with you.</li>
+        <li>Remove the extension — the browser deletes local data.</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>Contact</h3>
+      <p>Privacy questions: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>. News & support: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>.</p>
     </article>
   </div>
 </main>
@@ -67,9 +86,8 @@
   <div class="container center">
     <div class="links">
       <a href="/en/">Home</a> ·
-      <a href="/changelog.html">Changes</a> ·
-      <a href="/en/pricing.html">Pricing</a> ·
-      <a href="/en/blog/">News</a>
+      <a href="../../changelog.html">Changelog</a> ·
+      <a href="/privacy/">RU</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
