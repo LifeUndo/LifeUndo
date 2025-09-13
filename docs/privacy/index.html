@@ -1,64 +1,83 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Политика конфиденциальности</title>
-  <link rel="icon" href="../assets/logo.png" />
-  <link rel="stylesheet" href="../assets/site.css" />
-  <meta name="description" content="Политика конфиденциальности LifeUndo. Все данные хранятся локально, без телеметрии и сетевых запросов." />
+  <meta name="description" content="LifeUndo хранит данные локально в вашем браузере. Никакой телеметрии, сетевых запросов и передачи на сервер.">
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <meta property="og:title" content="LifeUndo — Политика конфиденциальности">
+  <meta property="og:description" content="Все данные — только на вашем устройстве. Локальное хранение, офлайн-валидация лицензии.">
+  <meta property="og:image" content="../assets/logo.png">
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/" class="logo"><img src="../assets/logo.png" alt="" aria-hidden="true" /><span>LifeUndo</span></a>
+    <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
     <a class="btn ghost" href="/">Главная</a>
-    <a class="btn ghost" href="/changelog.html">Изменения</a>
-    <a class="btn ghost" href="/pricing.html">Тарифы</a>
-    <a class="btn ghost" href="/blog/">Новости</a>
-    <a class="btn ghost" href="/en/privacy/">EN</a>
+    <a class="btn ghost" href="../changelog.html">Изменения</a>
+    <a class="btn ghost" href="../en/">EN</a>
+    <a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить</a>
   </div>
 </header>
 
 <main class="page">
   <div class="container">
-    <h1>LifeUndo — Политика конфиденциальности</h1>
-    <p class="small">Последнее обновление: 2025-09-12</p>
+    <h1>Политика конфиденциальности</h1>
+    <p class="small">Последнее обновление: 2025-09-08</p>
 
     <article class="card card-xl">
-      <h2>Кратко</h2>
+      <h2>Коротко</h2>
+      <p>LifeUndo хранит данные только локально в вашем браузере (<code>chrome.storage.local</code> / <code>browser.storage.local</code>). Расширение не отправляет данные на серверы, не делает сетевых запросов и не использует аналитику/телеметрию.</p>
+    </article>
+
+    <article class="card">
+      <h3>Какие данные обрабатываются</h3>
       <ul class="list">
-        <li>Данные <b>не отправляются</b> ни на какие серверы.</li>
-        <li>Всё хранится <b>локально</b> в вашем браузере (<code>chrome.storage.local</code> / <code>browser.storage.local</code>).</li>
-        <li>Нет аналитики, телеметрии, рекламных SDK и сетевых запросов.</li>
+        <li><b>История текста</b> — последние 20 состояний (Free) / 200 (Pro).</li>
+        <li><b>Недавно закрытые вкладки</b> — до 10 (Free) / 50 (Pro): URL, заголовок и favicon.</li>
+        <li><b>История буфера обмена</b> — до 10 (Free) / 50 (Pro) текстовых элементов.</li>
+        <li><b>Локальная статистика</b> (опционально) — счётчики действий: открытие попапа, undo, restore.</li>
+      </ul>
+      <p class="small">Все элементы хранятся только на вашем устройстве. Вы можете очистить их в интерфейсе расширения или удалить само расширение — данные будут удалены браузером.</p>
+    </article>
+
+    <article class="card">
+      <h3>Хранение и сроки</h3>
+      <ul class="list">
+        <li>Данные хранятся в локальном хранилище браузера до тех пор, пока вы их не удалите или не превысите лимиты истории.</li>
+        <li>Состояния «сдвигаются» по принципу кольцевого буфера (новые вытесняют самые старые).</li>
       </ul>
     </article>
 
     <article class="card">
-      <h2>Какие данные обрабатываются</h2>
+      <h3>Безопасность</h3>
       <ul class="list">
-        <li><b>История текста</b> — последние 20 (Free) / 200 (Pro) состояний.</li>
-        <li><b>Закрытые вкладки</b> — последние 10 (Free) / 50 (Pro) записей (URL, заголовок, favicon).</li>
-        <li><b>Буфер обмена</b> — последние 10 (Free) / 50 (Pro) текстовых значений.</li>
-        <li><b>Локальная статистика</b> — счётчики событий (popup/undo/restore), только на устройстве.</li>
+        <li>Обмена данными по сети нет — это снижает риски утечек.</li>
+        <li>Доступ к локальному хранилищу ограничен самим браузером и правами расширения.</li>
+        <li>Мы не запрашиваем доступ к сайтам сверх необходимого для работы «отмены».</li>
       </ul>
-      <p class="small">Вы можете очистить эти данные в настройках браузера или удалить расширение.</p>
     </article>
 
     <article class="card">
-      <h2>Лицензии и офлайн-валидация</h2>
-      <p>Активация Pro выполняется в панели опций и хранится локально. Для офлайн-валидации используется локальное хранилище. Никакие персональные данные не отправляются.</p>
+      <h3>Лицензии Pro</h3>
+      <p>Проверка лицензии происходит офлайн. Ключ хранится локально и может быть удалён вами в любой момент в панели лицензии.</p>
     </article>
 
     <article class="card">
-      <h2>Безопасность и доступ</h2>
-      <p>Доступ к данным ограничен самим расширением в рамках браузера. Мы не имеем удалённого доступа к вашему содержимому.</p>
+      <h3>Ваши выборы и контроль</h3>
+      <ul class="list">
+        <li>Очистить историю текста/вкладок/буфера — в интерфейсе расширения.</li>
+        <li>Экспорт/импорт (Pro) — ваш архив с данными остаётся у вас.</li>
+        <li>Удалить расширение — браузер удалит и локальные данные.</li>
+      </ul>
     </article>
 
     <article class="card">
-      <h2>Контакты</h2>
-      <p>Вопросы по приватности — <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>. Канал: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">t.me/LifeUndo</a>.</p>
+      <h3>Связаться с нами</h3>
+      <p>Вопросы по приватности: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>. Новости и support: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a>.</p>
     </article>
   </div>
 </main>
@@ -67,9 +86,8 @@
   <div class="container center">
     <div class="links">
       <a href="/">Главная</a> ·
-      <a href="/changelog.html">Изменения</a> ·
-      <a href="/pricing.html">Тарифы</a> ·
-      <a href="/blog/">Новости</a>
+      <a href="../changelog.html">Изменения</a> ·
+      <a href="../en/">EN</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
