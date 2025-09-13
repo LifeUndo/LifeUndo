@@ -20,6 +20,13 @@
     <h2 id="opt-title"></h2>
 
     <div class="card">
+      <h3>Лицензия</h3>
+      <p id="licStatus">Загрузка…</p>
+      <input id="licFileInput" type="file" accept=".lifelic,application/json" hidden>
+      <button id="licImportBtn" class="btn">Импортировать .lifelic</button>
+    </div>
+
+    <div class="card">
       <div id="plan-line"></div>
       <div id="trial-line" class="small" style="margin-top:6px"></div>
     </div>
@@ -50,5 +57,22 @@
       </div>
     </div>
   </div>
+
+  <script src="license.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const importBtn = document.getElementById('licImportBtn');
+      const fileInput = document.getElementById('licFileInput');
+      const statusEl  = document.getElementById('licStatus');
+      const refresh = async () => { const lic = await License.loadFromStorage(); statusEl.textContent = License.humanStatus(lic); };
+      importBtn?.addEventListener('click', () => fileInput?.click());
+      fileInput?.addEventListener('change', async (e) => {
+        const f = e.target.files?.[0]; if (!f) return;
+        try { const obj = JSON.parse(await f.text()); await License.importAndSave(obj); await refresh(); alert('Лицензия импортирована.'); }
+        catch(err){ console.error(err); alert('Ошибка проверки лицензии.'); }
+      });
+      await refresh();
+    });
+  </script>
 </body>
 </html>
