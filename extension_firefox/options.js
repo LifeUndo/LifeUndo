@@ -1,185 +1,80 @@
-// LifeUndo Options Page
-import { LINKS, TRIAL_DAYS } from './constants.js';
+import { t, getLang, setLang } from './i18n.js';
+import { verifyToken, daysLeft, TRIAL_DAYS } from './license.js';
 
-class OptionsManager {
-  constructor() {
-    this.init();
+const CHECKOUT_EN = 'https://lifeundo.gumroad.com/l/lifeundo-pro?variant=Pro';
+const CHECKOUT_RU = 'https://lifeundo.gumroad.com/l/lifeundo-pro?locale=ru&variant=Pro';
+
+async function fillTexts() {
+  document.title = t('opt_title');
+  document.getElementById('opt-title').textContent = t('opt_title');
+  document.getElementById('h-import').textContent = t('opt_import_license');
+  document.getElementById('lbl-token').textContent = t('opt_paste_token');
+  document.getElementById('btn-verify').textContent = t('opt_verify');
+  document.getElementById('h-buy').textContent = t('opt_buy');
+  document.getElementById('hint').textContent = t('checkout_hint');
+  document.getElementById('open-checkout').textContent = t('opt_open_checkout');
+
+  const lang = await getLang();
+  document.getElementById('lang').value = lang;
+
+  const st = await browser.storage.local.get(['trialStartedAt','license','plan','email']);
+  const planLine = document.getElementById('plan-line');
+  const trialLine = document.getElementById('trial-line');
+
+  if (st.license) {
+    planLine.textContent = `${t('opt_current_plan')}: ${st.plan || 'Pro'} (${st.email || ''})`;
+    trialLine.textContent = '';
+  } else if (st.trialStartedAt) {
+    const left = daysLeft(st.trialStartedAt);
+    trialLine.textContent = left > 0 ? `${t('opt_trial_left')}: ${left}` : t('ui_trial_ended');
+    planLine.textContent = `${t('opt_current_plan')}: ${t('opt_plan_free')}`;
+  } else {
+    planLine.textContent = `${t('opt_current_plan')}: ${t('opt_plan_free')}`;
+    trialLine.textContent = `${t('opt_trial_left')}: ${TRIAL_DAYS}`;
   }
 
-  async init() {
-    await this.loadData();
-    this.setupEventListeners();
-  }
+  const checkout = document.getElementById('checkout');
+  checkout.src = (lang === 'ru') ? CHECKOUT_RU : CHECKOUT_EN;
+}
 
-  async loadData() {
-    try {
-      // Load statistics and pro status
-      const response = await chrome.runtime.sendMessage({ type: 'LU_GET_STATS' });
-      if (response.ok) {
-        this.updateStats(response.stats);
-        this.updateLicenseStatus(response.pro);
-      }
-    } catch (error) {
-      console.error('Error loading data:', error);
-    }
-  }
+async function importFile(file) {
+  const txt = await file.text();
+  await verifyAndStore(txt);
+}
 
-  updateStats(stats) {
-    if (!stats) return;
-
-    document.getElementById('popupOpens').textContent = stats.popupOpens || 0;
-    document.getElementById('undos').textContent = stats.undos || 0;
-    document.getElementById('tabRestores').textContent = stats.tabRestores || 0;
-    document.getElementById('clipboardRestores').textContent = stats.clipboardRestores || 0;
-  }
-
-  updateLicenseStatus(pro) {
-    if (!pro) return;
-
-    const statusEl = document.getElementById('licenseStatus');
-    const trialInfoEl = document.getElementById('trialInfo');
-    const trialDaysEl = document.getElementById('trialDays');
-
-    statusEl.classList.remove('hidden', 'success', 'error', 'info');
-
-    if (pro.status === 'pro') {
-      statusEl.textContent = '✅ Pro License Active';
-      statusEl.classList.add('success');
-      trialInfoEl.classList.add('hidden');
-    } else if (pro.status === 'trial') {
-      const trialStart = pro.trialStart || Date.now();
-      const daysLeft = Math.max(0, TRIAL_DAYS - Math.floor((Date.now() - trialStart) / (24 * 60 * 60 * 1000)));
-      
-      if (daysLeft > 0) {
-        statusEl.textContent = `🕒 Trial Active (${daysLeft} days left)`;
-        statusEl.classList.add('info');
-        trialDaysEl.textContent = daysLeft;
-        trialInfoEl.classList.remove('hidden');
-      } else {
-        statusEl.textContent = '❌ Trial Expired - Upgrade to Pro';
-        statusEl.classList.add('error');
-        trialInfoEl.classList.add('hidden');
-      }
-    } else {
-      statusEl.textContent = '🆓 Free Version';
-      statusEl.classList.add('info');
-      trialInfoEl.classList.add('hidden');
-    }
-  }
-
-  setupEventListeners() {
-    // License activation
-    document.getElementById('activateBtn').addEventListener('click', () => {
-      this.activateLicense();
-    });
-
-    // Enter key for license input
-    document.getElementById('licenseKey').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        this.activateLicense();
-      }
-    });
-
-    // Export data
-    document.getElementById('exportBtn').addEventListener('click', () => {
-      this.exportData();
-    });
-
-    // Reset statistics
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      this.resetStats();
-    });
-  }
-
-  async activateLicense() {
-    const key = document.getElementById('licenseKey').value.trim();
-    const statusEl = document.getElementById('licenseStatus');
-    const activateBtn = document.getElementById('activateBtn');
-
-    if (!key) {
-      this.showStatus('Please enter a license key', 'error');
-      return;
-    }
-
-    activateBtn.disabled = true;
-    activateBtn.textContent = 'Activating...';
-
-    try {
-      const response = await chrome.runtime.sendMessage({
-        type: 'LU_ACTIVATE_LICENSE',
-        payload: { key }
-      });
-
-      if (response.ok) {
-        this.showStatus('✅ License activated successfully!', 'success');
-        document.getElementById('licenseKey').value = '';
-        await this.loadData(); // Reload to update status
-      } else {
-        this.showStatus(`❌ ${response.message}`, 'error');
-      }
-    } catch (error) {
-      this.showStatus('❌ Error activating license', 'error');
-    } finally {
-      activateBtn.disabled = false;
-      activateBtn.textContent = 'Activate License';
-    }
-  }
-
-  async exportData() {
-    try {
-      const response = await chrome.runtime.sendMessage({ type: 'LU_EXPORT_DATA' });
-      if (response.ok) {
-        const data = response.data;
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `lifeundo-stats-${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        this.showStatus('✅ Data exported successfully!', 'success');
-      } else {
-        this.showStatus('❌ Error exporting data', 'error');
-      }
-    } catch (error) {
-      this.showStatus('❌ Error exporting data', 'error');
-    }
-  }
-
-  async resetStats() {
-    if (!confirm('Are you sure you want to reset all statistics? This action cannot be undone.')) {
-      return;
-    }
-
-    try {
-      // Reset statistics in background
-      await chrome.runtime.sendMessage({ type: 'LU_RESET_STATS' });
-      await this.loadData(); // Reload to show updated stats
-      this.showStatus('✅ Statistics reset successfully!', 'success');
-    } catch (error) {
-      this.showStatus('❌ Error resetting statistics', 'error');
-    }
-  }
-
-  showStatus(message, type) {
-    const statusEl = document.getElementById('licenseStatus');
-    statusEl.textContent = message;
-    statusEl.className = `status ${type}`;
-    statusEl.classList.remove('hidden');
-
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-      statusEl.classList.add('hidden');
-    }, 5000);
+async function verifyAndStore(txt) {
+  const st = document.getElementById('status');
+  try {
+    const info = await verifyToken(txt.trim());
+    await browser.storage.local.set({ license: info.token, plan: info.plan, email: info.email, licenseExp: info.expires });
+    st.textContent = t('opt_status_valid');
+    st.className = 'ok';
+    await fillTexts();
+  } catch (e) {
+    st.textContent = t('opt_status_invalid');
+    st.className = 'bad';
+    console.error(e);
   }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new OptionsManager();
+document.getElementById('file').addEventListener('change', (e) => {
+  const f = e.target.files?.[0];
+  if (f) importFile(f);
 });
 
+document.getElementById('btn-verify').onclick = async () => {
+  const txt = document.getElementById('ta').value;
+  await verifyAndStore(txt);
+};
+
+document.getElementById('open-checkout').onclick = async () => {
+  const lang = await getLang();
+  const url = (lang === 'ru') ? CHECKOUT_RU : CHECKOUT_EN;
+  document.getElementById('checkout').src = url;
+};
+
+document.getElementById('lang').onchange = async (e) => {
+  await setLang(e.target.value);
+};
+
+fillTexts();

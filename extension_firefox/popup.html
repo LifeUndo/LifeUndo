@@ -1,150 +1,45 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LifeUndo</title>
-    <style>
-      body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 10px; width: 360px; }
-      h1 { font-size: 14px; margin: 0 0 8px; }
-      button { padding: 8px 10px; border-radius: 6px; border: 1px solid #ccc; background: #f7f7f7; cursor: pointer; }
-      button:hover { background: #f0f0f0; }
-      .section { margin-top: 12px; }
-      .list { max-height: 180px; overflow: auto; border: 1px solid #eee; border-radius: 6px; padding: 6px; }
-      .item { padding: 6px; margin-bottom: 6px; border-bottom: 1px dashed #ececec; }
-      .item:last-child { border-bottom: none; }
-      .muted { color: #666; font-size: 12px; }
-      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
-      .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-      a { color: #0b5fff; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      
-      /* Pro features */
-      .pro-badge { 
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
-        color: white; 
-        padding: 2px 8px; 
-        border-radius: 12px; 
-        font-size: 10px; 
-        font-weight: bold; 
-        text-transform: uppercase;
-        margin-left: 8px;
-      }
-      
-      .section-header { 
-        display: flex; 
-        align-items: center; 
-        justify-content: space-between; 
-        margin-bottom: 8px; 
-      }
-      
-      .upgrade-section {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 15px;
-        text-align: center;
-      }
-      
-      .upgrade-section h3 {
-        margin: 0 0 10px 0;
-        font-size: 16px;
-      }
-      
-      .upgrade-section p {
-        margin: 0 0 15px 0;
-        font-size: 12px;
-        opacity: 0.9;
-      }
-      
-      .upgrade-btn {
-        background: white;
-        color: #667eea;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-bottom: 10px;
-        display: block;
-        width: 100%;
-      }
-      
-      .upgrade-btn:hover {
-        background: #f8f9fa;
-      }
-      
-      .links {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      
-      .links a {
-        color: white;
-        font-size: 11px;
-        opacity: 0.8;
-      }
-      
-      .links a:hover {
-        opacity: 1;
-        text-decoration: underline;
-      }
-      
-      .tier-info {
-        font-size: 11px;
-        margin-top: 8px;
-        opacity: 0.8;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="row" style="margin-bottom:8px">
-      <h1>LifeUndo</h1>
-      <button id="undoBtn">↩ Undo Last Action</button>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div class="muted">Latest text inputs</div>
-        <span id="textProBadge" class="pro-badge hidden">PRO</span>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hdr">
+      <div class="title">LifeUndo</div>
+      <div class="lang">
+        <button id="lang-en">EN</button>
+        <button id="lang-ru">RU</button>
       </div>
-      <div id="textList" class="list"></div>
     </div>
 
-    <div class="section">
-      <div class="section-header">
-        <div class="muted">Recently closed tabs</div>
-        <span id="tabProBadge" class="pro-badge hidden">PRO</span>
+    <div id="trial" class="trial"></div>
+
+    <div class="list">
+      <div class="row disabled">
+        <span id="lbl-inputs"></span>
+        <span class="badge" id="b1">PRO</span>
       </div>
-      <div id="tabList" class="list"></div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">
-        <div class="muted">Clipboard history</div>
-        <span id="clipProBadge" class="pro-badge hidden">PRO</span>
+      <div class="row disabled">
+        <span id="lbl-tabs"></span>
+        <span class="badge" id="b2">PRO</span>
       </div>
-      <div id="clipList" class="list"></div>
+      <div class="row disabled">
+        <span id="lbl-clip"></span>
+        <span class="badge" id="b3">PRO</span>
+      </div>
     </div>
 
-    <div id="upgradeSection" class="upgrade-section hidden">
-      <h3>🚀 Upgrade to Pro</h3>
-      <p>Get 10x more storage and advanced features</p>
-      <button class="upgrade-btn" id="upgradeBtn">Upgrade to Pro</button>
+    <div class="cta">
+      <button id="btn-upgrade" class="primary"></button>
       <div class="links">
-        <a href="https://lifeundo.ru" target="_blank">Website</a>
-        <a href="https://lifeundo.ru/privacy" target="_blank">Privacy</a>
-        <a href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Firefox</a>
+        <a id="lnk-website" target="_blank" rel="noopener"></a> ·
+        <a id="lnk-privacy" target="_blank" rel="noopener"></a> ·
+        <a id="lnk-firefox" target="_blank" rel="noopener"></a>
       </div>
-      <div id="tierInfo" class="tier-info"></div>
     </div>
-
-    <script type="module" src="popup.js"></script>
-  </body>
-  </html>
-
-
-
+  </div>
+</body>
+</html>
