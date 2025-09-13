@@ -1,42 +1,54 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LifeUndo — Новости</title>
-  <link rel="icon" href="../assets/logo.png" />
-  <link rel="stylesheet" href="../assets/site.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LifeUndo — Новости и блог</title>
+  <meta name="description" content="Новости, обновления и планы разработки LifeUndo.">
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <meta property="og:title" content="LifeUndo — Новости и блог">
+  <meta property="og:description" content="Читайте о новых версиях, будущих фичах и планах команды LifeUndo.">
+  <meta property="og:image" content="../assets/logo.png">
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/" class="logo"><img src="../assets/logo.png" alt="" aria-hidden="true" /><span>LifeUndo</span></a>
+    <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
     <a class="btn ghost" href="/">Главная</a>
-    <a class="btn ghost" href="/changelog.html">Изменения</a>
-    <a class="btn ghost" href="/pricing.html">Тарифы</a>
-    <a class="btn ghost" href="/en/blog/">EN</a>
+    <a class="btn ghost" href="../changelog.html">Изменения</a>
+    <a class="btn ghost" href="../privacy/">Приватность</a>
+    <a class="btn ghost" href="../en/news/">EN</a>
+    <a class="btn primary" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить</a>
   </div>
 </header>
 
 <main class="page">
   <div class="container">
-    <h1>Новости</h1>
+    <h1>Новости и блог LifeUndo</h1>
+    <p class="small">Последнее обновление: 2025-09-12</p>
 
-    <article class="card">
-      <h2>v0.2.0: Pro-лимиты, Trial и лицензии офлайн</h2>
-      <p class="small">11 сентября 2025</p>
-      <p>Запустили Pro-лимиты (200 / 50 / 50), добавили 7-дневный Trial, офлайн-валидацию лицензии и локальную статистику. Сайт обновлён, сборка Firefox одобрена на AMO.</p>
-      <p><a class="btn ghost" href="/changelog.html">Полный changelog →</a></p>
+    <article class="card card-xl">
+      <h2>🚀 Запуск сайта LifeUndo</h2>
+      <p>Мы обновили сайт: добавлены тарифы, примеры использования и полная политика конфиденциальности.</p>
+      <p class="small">12 сентября 2025</p>
     </article>
 
     <article class="card">
-      <h2>Дальше в планах</h2>
+      <h3>📦 Версия 0.2.0 на AMO</h3>
+      <p>Расширение одобрено Mozilla и доступно для установки через <a href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">AMO</a>. Поддерживаются все версии Firefox для Windows, Linux и Android.</p>
+      <p class="small">11 сентября 2025</p>
+    </article>
+
+    <article class="card">
+      <h3>📅 В планах</h3>
       <ul class="list">
-        <li>Синхронизация между устройствами (опционально и без серверов — через экспорт/импорт).</li>
-        <li>Клиент для мобильных (Android, исследуем возможности).</li>
-        <li>Расширенные фильтры и поиск по истории.</li>
+        <li>Сборка для Chrome Web Store (после прохождения KYC).</li>
+        <li>Мобильное приложение (Android/iOS).</li>
+        <li>Новый тариф «Безлимит» для команд и организаций.</li>
       </ul>
+      <p class="small">Обновление списка: раз в 2–3 недели</p>
     </article>
   </div>
 </main>
@@ -45,8 +57,9 @@
   <div class="container center">
     <div class="links">
       <a href="/">Главная</a> ·
-      <a href="/changelog.html">Изменения</a> ·
-      <a href="/pricing.html">Тарифы</a>
+      <a href="../changelog.html">Изменения</a> ·
+      <a href="../privacy/">Приватность</a> ·
+      <a href="/news/">Новости</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
