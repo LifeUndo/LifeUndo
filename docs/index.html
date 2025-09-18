@@ -4,36 +4,36 @@
   <meta charset="utf-8" />
   <title>LifeUndo — твой второй шанс</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LifeUndo — сервис второго шанса. Верни утерянные вкладки, тексты и буфер. Сегодня это мелочь, завтра — спасенный проект." />
+  <meta name="description" content="LifeUndo — сервис второго шанса. Верни утерянные вкладки, тексты и буфер. Сегодня это мелочь, завтра — спасённый проект." />
   <link rel="canonical" href="https://lifeundo.ru/" />
   <style>
     :root{
-      --bg:#0b0e13; --panel:#121622; --card:#171b28; --text:#e6ebff; --muted:#a9b3c7;
-      --brand:#4aa3ff; --brand-2:#2d7cf0; --border:#222839; --ok:#ee8208; --vk:#2787f5; --tg:#2ba4e1; --yt:#ff3b3b; --rt:#18b85f; --dzen:#111; --gh:#fff;
+      --bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--ring:#93c5fd;
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;margin:0;color:var(--text);background:linear-gradient(180deg,#0b0e13 0%,#0d111a 60%,#0b0e13 100%)}
-    header,footer{padding:16px 20px;background:var(--panel);border-bottom:1px solid var(--border)}
-    footer{border-top:1px solid var(--border);border-bottom:none;margin-top:40px}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-    nav a{margin-right:16px;text-decoration:none;color:var(--text);opacity:.92}
-    nav a:hover{text-decoration:underline}
-    .lang{float:right;opacity:.8}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
+    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
+    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 14px}
+    nav a{margin-right:16px}
+    .lang{float:right;opacity:.9}
     .hero{padding:56px 0}
-    .hero h1{font-size:42px;line-height:1.1;margin:0 0 14px}
-    .hero p{font-size:18px;max-width:860px;color:var(--muted)}
-    .cta{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;text-decoration:none;border:1px solid #3b76d4;box-shadow:0 8px 24px rgba(42,113,255,.25)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
-    h2{margin:34px 0 14px}
+    .hero h1{font-size:44px;line-height:1.1;margin:0 0 12px}
+    .hero p{font-size:18px;max-width:820px;color:var(--muted)}
+    .cta{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:var(--accent);color:#fff;transition:.2s box-shadow}
+    .cta:hover{box-shadow:0 0 0 4px rgba(147,197,253,.25)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:22px 0}
+    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px}
+    h2{margin:28px 0 12px}
     ul{margin:0 0 0 18px}
     .muted{color:var(--muted)}
-    .social{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .btn-soc{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1420;color:#eaf1ff;text-decoration:none}
-    .ico{width:18px;height:18px;display:inline-block}
-    .ico svg{width:18px;height:18px;display:block}
-    .pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#0f1522;border:1px solid var(--border);font-size:12px;color:var(--muted)}
-    .section{padding:8px 0}
+    .socials{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .soc{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(147,197,253,.2);border-radius:12px;background:rgba(17,26,46,.6)}
+    .soc svg{width:18px;height:18px;fill:#cfe1ff;opacity:.9}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(96,165,250,.15);border:1px solid rgba(147,197,253,.25);color:#dbeafe;font-size:12px}
+    .section{margin-top:20px}
   </style>
 </head>
 <body>
@@ -42,9 +42,10 @@
     <nav>
       <a href="./index.html">Главная</a>
       <a href="./faq/ru.html">FAQ</a>
-      <a href="./news/">Новости</a>
+      <a href="./news/index.html">Новости</a>
       <a href="./changelog/ru.html">Changelog</a>
       <a href="./privacy/ru.html">Приватность</a>
+      <a href="./pricing/index.html">Тарифы</a>
       <span class="lang">Язык: <strong>RU</strong> · <a href="./en/index.html">EN</a></span>
     </nav>
   </div>
@@ -52,44 +53,72 @@
 
 <main class="wrap">
   <section class="hero">
-    <span class="pill">v0.3.7 • Firefox</span>
-    <h1>LifeUndo — твой второй шанс</h1>
-    <p>Неважно, потерял ли ты вкладку, текст или целый кусок работы — LifeUndo всегда рядом, чтобы вернуть то, что казалось утраченным. Сегодня это мелочь, завтра — спасённый проект, важное письмо или даже твоя безопасность.</p>
+    <span class="pill">LifeUndo — сервис второго шанса</span>
+    <h1>Ошибки не финальны. Вернись на шаг назад.</h1>
+    <p>Потерял вкладку, текст или буфер? LifeUndo всегда рядом, чтобы вернуть то, что казалось утраченным. Сегодня это мелочь, завтра — спасённый проект, важное письмо или даже безопасность.</p>
     <a class="cta" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить для Firefox</a>
     <p class="muted">Chrome/Edge — в подготовке.</p>
 
-    <!-- Соцсети: пока ведут на главную (заглушки). Потом заменишь href на реальные. -->
-    <div class="social">
-      <a class="btn-soc" href="/" title="VK" rel="nofollow">
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#2787f5"><path d="M3 7.5c0-.8.7-1.5 1.5-1.5h15c.8 0 1.5.7 1.5 1.5v9c0 .8-.7 1.5-1.5 1.5h-15C3.7 18 3 17.3 3 16.5v-9z"/></svg></span>VK
-      </a>
-      <a class="btn-soc" href="/" title="Telegram" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#2ba4e1"><path d="M21 3L3 11l6 2 2 6 3-4 4-12z"/></svg></span>Telegram
-      </a>
-      <a class="btn-soc" href="/" title="YouTube" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#ff3b3b"><path d="M3 8.7C3 7.2 4.2 6 5.7 6h12.6C19.8 6 21 7.2 21 8.7v6.6c0 1.5-1.2 2.7-2.7 2.7H5.7C4.2 18 3 16.8 3 15.3V8.7zM10 9l6 3-6 3V9z"/></svg></span>YouTube
-      </a>
-      <a class="btn-soc" href="/" title="RuTube" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#18b85f"><circle cx="12" cy="12" r="9"/></svg></span>RuTube
-      </a>
-      <a class="btn-soc" href="/" title="Дзен" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#fff"><rect x="5" y="5" width="14" height="14" rx="3"/></svg></span>Дзен
-      </a>
-      <a class="btn-soc" href="/" title="OK" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#ee8208"><circle cx="12" cy="8" r="3.5"/><path d="M7 21l5-5 5 5"/></svg></span>OK
-      </a>
-      <a class="btn-soc" href="/" title="GitHub" rel="nofollow">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.9 9.7.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.2-.3-4.5-1.1-4.5-5a4 4 0 0 1 1.1-2.8 3.6 3.6 0 0 1 .1-2.8s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4 1 .3 2 .1 2.8a4 4 0 0 1 1.1 2.8c0 3.9-2.3 4.8-4.5 5 .4.3.8 1 .8 2v3c0 .3.2.6.7.5A10.4 10.4 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"/></svg></span>GitHub
-      </a>
+    <div class="socials">
+      <!-- плейсхолдер-ссылки на главную; позже заменим -->
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg>VK</a>
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>OK</a>
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><path d="M10 15l5-3-5-3z"/></svg>YouTube</a>
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><path d="M4 4h16l-2 16-6-3-6 3z"/></svg>RuTube</a>
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><path d="M3 12l18 0"/><path d="M7 6l10 12"/></svg>Дзен</a>
+      <a class="soc" href="/"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6z"/></svg>Telegram</a>
     </div>
   </section>
 
   <section class="section">
-    <h2>Что такое Undo?</h2>
-    <p>«Undo» — это откат последнего действия. В жизни и в браузере ошибки случаются: вкладка закрылась, текст пропал, буфер очистился. <strong>LifeUndo</strong> — твоя «машина времени на несколько секунд назад», чтобы вернуть важное без паники.</p>
+    <h2>Что такое Undo</h2>
+    <div class="card">
+      <p><strong>Undo</strong> — это «отменить действие», вернуться на шаг назад. В жизни это недоступно, а в цифровом мире — можно. LifeUndo — твоя «машина времени на несколько секунд назад» для текста, вкладок и буфера.</p>
+    </div>
   </section>
 
   <section class="section">
     <h2>Как это работает</h2>
     <div class="grid">
-      <div class="card"><strong>Undo текста</strong><p>Восстанови набранный текст, который «исчез». Браузер подвис? Вклад
+      <div class="card"><strong>Undo текста</strong><p>Восстанови набранный текст, который исчез из-за зависания/перезагрузки вкладки.</p></div>
+      <div class="card"><strong>Undo вкладок</strong><p>Случайно закрыл важную вкладку? Быстро открой её из истории последних действий.</p></div>
+      <div class="card"><strong>Undo буфера</strong><p>Потерял содержимое буфера обмена? Верни недавние копирования.</p></div>
+    </div>
+    <p class="muted">Free — базовые лимиты. Pro — расширенные. VIP — без ограничений (офлайн-лицензия ECDSA).</p>
+  </section>
+
+  <section class="section">
+    <h2>Где это спасает — 9 реальных сценариев</h2>
+    <div class="grid">
+      <div class="card">🎓 <strong>Школьник / Студент</strong><p>Стер абзац диплома или сочинения? Откати прошлое состояние текста и продолжай без паники.</p></div>
+      <div class="card">📰 <strong>Журналист / Редактор</strong><p>Черновик переписали поверх? История текста и буфера вернёт удачную формулировку.</p></div>
+      <div class="card">⚖️ <strong>Юрист</strong><p>Нужна точная оговорка из черновика? Подними её из истории копирований за секунды.</p></div>
+      <div class="card">💻 <strong>Разработчик</strong><p>Слетел payload или вкладка с документацией? Верни закрытую вкладку и последний ввод.</p></div>
+      <div class="card">🧑‍💼 <strong>HR / Рекрутер</strong><p>Закрыли табы с кандидатами? Открой последние закрытые вкладки из списка.</p></div>
+      <div class="card">🛟 <strong>Служба поддержки</strong><p>Чат перезагрузился перед отправкой? Верни подготовленный ответ из истории текста.</p></div>
+      <div class="card">🏢 <strong>Руководитель / PM / CFO</strong><p>Браузер упал во время правок? Верни заметки и ссылки — продолжай с места сбоя.</p></div>
+      <div class="card">🔬 <strong>Исследователь / Преподаватель</strong><p>Потерял цепочку вкладок? Восстанови контекст сессии и заметки без повторного поиска.</p></div>
+      <div class="card">🛍️ <strong>E-commerce / Продавец</strong><p>Страница обновилась — описание исчезло? Подними текст из истории и сохрани правки.</p></div>
+    </div>
+    <p class="muted">Сегодня это кажется мелочью — завтра спасает проект. <strong>VIP</strong> снимает лимиты и всегда рядом как «подушка безопасности».</p>
+  </section>
+
+  <section class="section">
+    <h2>Готов к своему второму шансу?</h2>
+    <p>Не откладывай. Установи LifeUndo и активируй VIP — пусть подушка безопасности всегда будет под рукой.</p>
+    <a class="cta" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить LifeUndo</a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="./">Сайт</a>
+      <a href="./privacy/ru.html">Приватность</a>
+      <a href="/">Поддержка</a>
+      <span class="lang" aria-hidden="true">© LifeUndo</span>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
