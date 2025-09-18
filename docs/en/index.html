@@ -1,165 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LifeUndo — Ctrl+Z for your browser</title>
-  <meta name="description" content="Undo text, tabs and clipboard. All data stays local. Pro limits, 7-day trial, local stats.">
-  <link rel="icon" href="../assets/logo.png">
-  <link rel="stylesheet" href="../assets/site.css">
-  <meta property="og:title" content="LifeUndo — Ctrl+Z for your browser">
-  <meta property="og:description" content="Undo text, tabs and clipboard. All data stays on your device.">
-  <meta property="og:image" content="../assets/logo.png">
+  <meta charset="utf-8" />
+  <title>LifeUndo — your second chance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="LifeUndo gives you a second chance. Bring back lost tabs, text, and clipboard. Today it’s small, tomorrow it might save your project." />
+  <link rel="canonical" href="https://lifeundo.ru/en/" />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;margin:0;color:#0b0b0b;background:#fff}
+    header,footer{padding:16px 20px;border-bottom:1px solid #eee}
+    footer{border-top:1px solid #eee;border-bottom:none;margin-top:40px}
+    .wrap{max-width:980px;margin:0 auto;padding:0 12px}
+    nav a{margin-right:16px;text-decoration:none;color:#222}
+    nav a:hover{text-decoration:underline}
+    .hero{padding:48px 0}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 12px}
+    .hero p{font-size:18px;max-width:800px}
+    .cta{display:inline-block;margin-top:16px;padding:12px 18px;border-radius:10px;background:#111;color:#fff;text-decoration:none}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0}
+    .card{border:1px solid #eee;border-radius:14px;padding:16px}
+    h2{margin:32px 0 12px}
+    ul{margin:0 0 0 18px}
+    .lang{float:right}
+    .lang a{margin-left:10px}
+    .muted{color:#555}
+  </style>
 </head>
 <body>
-
-<header class="header">
-  <div class="container nav">
-    <a href="/en/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
-    <a class="btn ghost" href="#features">Features</a>
-    <a class="btn ghost" href="#examples">Use cases</a>
-    <a class="btn ghost" href="../changelog.html">Changelog</a>
-    <a class="btn ghost" href="../privacy/">Privacy</a>
-    <a class="btn ghost" href="/">RU</a>
-    <a class="btn primary" href="#install">Install</a>
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="./index.html">Home</a>
+      <a href="../faq/en.html">FAQ</a>
+      <a href="../news/">News</a>
+      <a href="../changelog/en.html">Changelog</a>
+      <a href="../privacy/en.html">Privacy</a>
+      <span class="lang">Language: <a href="../index.html">RU</a> · <strong>EN</strong></span>
+    </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container center">
-    <div class="badge">🆕 Latest update: <a href="../changelog.html">v0.2.0</a></div>
-    <h1>We brought Ctrl+Z to the browser</h1>
-    <p>Undo typed text, restore recently closed tabs and clipboard history. All data stays on your device.</p>
-    <div class="btns">
-      <a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Install for Firefox</a>
-    </div>
-  </div>
-</section>
+<main class="wrap">
+  <section class="hero">
+    <h1>LifeUndo — your second chance</h1>
+    <p>Whether it’s a lost tab, text, or an entire piece of work — LifeUndo is always there to bring it back. Today it’s small, tomorrow it could be the one thing that saves your project, your message, or even your safety.</p>
+    <a class="cta" href="https://addons.mozilla.org/" target="_blank" rel="noopener">Get for Firefox</a>
+    <p class="muted">Chrome/Edge — in progress.</p>
+  </section>
 
-<section class="section" id="features">
-  <div class="container">
-    <h2>What LifeUndo does</h2>
+  <section>
+    <h2>Why it matters</h2>
     <div class="grid">
-      <div class="card"><h3>✍️ Text Undo</h3><p>Stores <b>20</b> (Free) / <b>200</b> (Pro) text states. Made a mistake? Go back.</p></div>
-      <div class="card"><h3>🧩 Tab Undo</h3><p>Restores <b>10</b> (Free) / <b>50</b> (Pro) recently closed tabs with URL, title and favicon.</p></div>
-      <div class="card"><h3>📋 Clipboard Undo</h3><p>Clipboard history of <b>10</b> (Free) / <b>50</b> (Pro) recent items.</p></div>
-      <div class="card"><h3>📊 Local stats</h3><p>Action counters (popup/undo/restore). No telemetry, no network.</p></div>
-      <div class="card"><h3>🔐 Privacy</h3><p>Everything lives in <code>chrome.storage.local / browser.storage.local</code>.</p></div>
-      <div class="card"><h3>🔑 License panel</h3><p>Offline activation for Pro. 7-day trial for new users.</p></div>
+      <div class="card">
+        <strong>Mistakes aren’t final</strong>
+        <p>Most mistakes can be undone. LifeUndo is your “time machine for a few seconds back”.</p>
+      </div>
+      <div class="card">
+        <strong>Local & private</strong>
+        <p>Data lives locally in your browser. No telemetry by default. VIP license verification is offline (ECDSA).</p>
+      </div>
+      <div class="card">
+        <strong>Small today — critical tomorrow</strong>
+        <p>What feels trivial now can save hours later. Keep your safety net always with you.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="what-is-undo">
-  <div class="container">
-    <h2>What is “Undo”?</h2>
-    <p>Undo means reverting the last action. LifeUndo keeps local history for typed text, closed tabs and clipboard so you can jump back one, two or ten steps whenever you need.</p>
-  </div>
-</section>
-
-<section class="section" id="examples">
-  <div class="container">
-    <h2>Where it helps (9 examples)</h2>
+  <section>
+    <h2>How it works</h2>
     <div class="grid">
-      <div class="card"><h3>🎓 Student</h3><p>Accidentally deleted a paragraph — bring back one of 200 previous states.</p></div>
-      <div class="card"><h3>🧑‍💼 HR</h3><p>Reopen 10 recently closed openings you closed by mistake.</p></div>
-      <div class="card"><h3>🛒 Store</h3><p>Restore a long product description after a tab reload.</p></div>
-      <div class="card"><h3>⚖️ Lawyer</h3><p>Clipboard history helps recover the exact wording.</p></div>
-      <div class="card"><h3>✍️ Marketing</h3><p>Iterate headlines — every attempt stays local.</p></div>
-      <div class="card"><h3>💬 Support</h3><p>Bring back a prepared reply after a chat was closed.</p></div>
-      <div class="card"><h3>🏢 Enterprise</h3><p>Pro gives ×10 limits and works fully offline.</p></div>
-      <div class="card"><h3>🧪 Developer</h3><p>Compare request/text variants and jump back instantly.</p></div>
-      <div class="card"><h3>📚 Researcher</h3><p>Return to closed tabs without losing session context.</p></div>
+      <div class="card"><strong>Undo Text</strong><p>Recover typed text that “vanished”. Browser hiccup? Tab reloaded? Step back safely.</p></div>
+      <div class="card"><strong>Undo Tabs</strong><p>Accidentally closed a tab? Re-open it from your recent actions.</p></div>
+      <div class="card"><strong>Undo Clipboard</strong><p>Lost clipboard contents? Bring back your recent copies.</p></div>
     </div>
-  </div>
-</section>
+    <p class="muted">Free — basic limits. Pro — increased. VIP — unlimited.</p>
+  </section>
 
-<section class="section" id="install">
-  <div class="container">
-    <h2>Install & Pro</h2>
+  <section id="pricing">
+    <h2>Pricing</h2>
+    <ul>
+      <li><strong>Free</strong> — basic limits. <a href="../pricing/">Learn more</a></li>
+      <li><strong>Pro</strong> — 1/6/12 months. <a href="../pricing/">Learn more</a></li>
+      <li><strong>Team</strong> — 5/10/50/100 seats. <a href="../pricing/">Learn more</a></li>
+      <li><strong>VIP</strong> — unlimited (lifetime). <a href="../pricing/">Learn more</a></li>
+    </ul>
+  </section>
 
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Firefox</h3>
-        <p>Published on AMO.</p>
-        <p><a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Open on AMO</a></p>
-        <p class="small">Android is supported. iOS is restricted by Apple.</p>
-      </div>
+  <section>
+    <h2>Ready for your second chance?</h2>
+    <p>Don’t postpone it. Install LifeUndo and activate VIP — keep your safety net always with you.</p>
+    <a class="cta" href="https://addons.mozilla.org/" target="_blank" rel="noopener">Install LifeUndo</a>
+  </section>
+</main>
 
-      <div class="card">
-        <h3>Chrome / compatibles</h3>
-        <ul class="list">
-          <li>Publishing later (Google account/KYC). For now — load unpacked.</li>
-          <li>Enable <b>Developer mode</b> at <code>chrome://extensions/</code></li>
-          <li><b>Load unpacked</b> → select the extension folder</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Pro plans</h3>
-        <ul class="list">
-          <li>×10 limits: text 200, tabs 50, clipboard 50</li>
-          <li>7-day trial</li>
-          <li>Offline license validation</li>
-        </ul>
-        <p class="small">Teams/enterprises — <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
-      </div>
-    </div>
-
-    <h3 style="margin-top:32px">Pricing</h3>
-    <div class="grid grid-3 pricing">
-      <div class="card card-xl">
-        <h4>Free</h4>
-        <ul class="list"><li>Text: 20 states</li><li>Tabs: 10</li><li>Clipboard: 10</li></ul>
-        <p class="small">1 user, 1 device.</p>
-      </div>
-
-      <div class="card card-xl">
-        <h4>Pro (1 user)</h4>
-        <ul class="list"><li>×10 limits: 200 / 50 / 50</li><li>Up to 2 browsers</li><li>Local stats</li></ul>
-        <p><b>$3.99</b> / mo • 6 mo — $19.99 • 12 mo — $35.99 • Lifetime — $79</p>
-        <p><a class="btn primary" href="https://gum.co/lifeundo-pro" target="_blank" rel="noopener">Buy</a></p>
-      </div>
-
-      <div class="card card-xl">
-        <h4>Team (up to 5 users)</h4>
-        <ul class="list"><li>×10 limits per user</li><li>Up to 5 devices total</li><li>Offline licenses</li></ul>
-        <p><b>$10</b> / mo • 6 mo — $49 • 12 mo — $89 • Lifetime — $199</p>
-        <p><a class="btn ghost" href="https://gum.co/lifeundo-team" target="_blank" rel="noopener">Buy</a></p>
-      </div>
-    </div>
-
-    <div class="card card-xl" style="margin-top:24px">
-      <h4>Enterprise</h4>
-      <div class="table-wrap">
-        <table class="table">
-          <thead><tr><th>Users</th><th>Month</th><th>6 mo</th><th>12 mo</th><th>Lifetime</th></tr></thead>
-          <tbody>
-            <tr><td>10</td><td>$19</td><td>$99</td><td>$179</td><td>$399</td></tr>
-            <tr><td>50</td><td>$79</td><td>$399</td><td>$699</td><td>$1,599</td></tr>
-            <tr><td>100</td><td>$149</td><td>$749</td><td>$1,299</td><td>$2,999</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="small">Default license allows up to 2 devices/user. Need more / SSO / custom offer — <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a>.</p>
-      <p><a class="btn ghost" href="mailto:developer@lifeundo.ru?subject=LifeUndo%20procurement">Contact sales</a></p>
-    </div>
-
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container center">
-    <div class="links">
-      <a href="/en/">Home</a> ·
-      <a href="../changelog.html">Changelog</a> ·
-      <a href="../privacy/">Privacy</a> ·
-      <a href="/">RU</a>
-    </div>
-    <div class="small" style="margin-top:10px">Support: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a> · <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Telegram</a></div>
-    <div class="small" style="margin-top:6px">© 2025 LifeUndo</div>
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="../">Website</a>
+      <a href="../privacy/en.html">Privacy</a>
+      <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Support</a>
+      <span class="lang" aria-hidden="true">© LifeUndo</span>
+    </nav>
   </div>
 </footer>
-
 </body>
 </html>
