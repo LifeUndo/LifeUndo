@@ -1,20 +1,75 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Changelog — LifeUndo</title><style>body{font-family:system-ui;margin:20px;max-width:880px;color:#e8eefc;background:#0b1220} a{color:#60a5fa}</style></head><body>
-<h1>Changelog</h1>
-<h2>v0.3.7 • 2025-09-18</h2>
-<ul>
-  <li>“Activate VIP” opens the built-in License page (offline ECDSA).</li>
-  <li>RU/EN toggle fixed (incl. “What’s new” modal and footer labels).</li>
-  <li>UI polish: stable popup size; correct VIP/PRO states.</li>
-</ul>
-<h2>v0.2.0 • 2025-09-11</h2>
-<ul>
-  <li>Pro limits ×10 (text 200, tabs 50, clipboard 50), 7-day Trial.</li>
-  <li>Local counters, license panel (offline validation).</li>
-  <li>Site updates (Pro section, examples, RU/EN).</li>
-</ul>
-<h2>v0.1.0 • 2025-08-24</h2>
-<ul>
-  <li>First public MVP: text/tabs/clipboard history (Free limits).</li>
-</ul>
-<p><a href="../en/">← Back to Home</a></p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Changelog — LifeUndo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--ring:#93c5fd;--radius:14px}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
+    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
+    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 14px} nav a{margin-right:16px}.lang{float:right;opacity:.9}
+    h1{margin:24px 0 12px}
+    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px;margin:20px 0}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
+    <nav style="display:inline-block;vertical-align:middle">
+      <a href="/en/index.html">Home</a>
+      <a href="/faq/en.html">FAQ</a>
+      <a href="/en/news/index.html">News</a>
+      <a href="/changelog/en.html">Changelog</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/en/pricing/index.html">Pricing</a>
+      <span class="lang">Language: <a href="/changelog/ru.html">RU</a> · <strong>EN</strong></span>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Changelog</h1>
+
+  <div class="card">
+    <h3>v0.3.7 • 2025-09-18</h3>
+    <ul>
+      <li>“Activate VIP” opens the built-in License page (offline ECDSA).</li>
+      <li>RU/EN toggle fixed (incl. “What’s new” modal and footer labels).</li>
+      <li>UI polish: stable popup size; correct VIP/PRO states.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>v0.2.0 • 2025-09-11</h3>
+    <ul>
+      <li>Pro limits ×10 (text 200, tabs 50, clipboard 50), 7-day Trial.</li>
+      <li>Local counters, license panel (offline validation).</li>
+      <li>Site updates (Pro section, examples, RU/EN).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>v0.1.0 • 2025-08-24</h3>
+    <ul>
+      <li>First public MVP: text/tabs/clipboard history (Free limits).</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/en/index.html">Website</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/">Support</a>
+      · <a href="/">Telegram</a> · <a href="/">VK</a> · <a href="/">OK</a> · <a href="/">YouTube</a> · <a href="/">RuTube</a> · <a href="/">Dzen</a>
+      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
