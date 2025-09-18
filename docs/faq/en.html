@@ -1,10 +1,63 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FAQ — LifeUndo</title><style>body{font-family:system-ui;margin:20px;max-width:880px;color:#e8eefc;background:#0b1220} a{color:#60a5fa} h2{margin-top:28px}</style></head><body>
-<h1>FAQ</h1>
-<h2>What is LifeUndo?</h2><p>A second-chance service in your browser: quickly restore your recent text, tabs, and clipboard.</p>
-<h2>Does the extension send telemetry?</h2><p>No. Your data is stored locally in the browser.</p>
-<h2>How do I activate VIP?</h2><p>Open the popup → “Activate VIP” → import <code>.lifelic</code> on the License page (offline ECDSA verification).</p>
-<h2>How do I switch language?</h2><p>Use the extension settings to toggle RU/EN. Popup and “What’s new” are localized.</p>
-<h2>Free vs Pro vs VIP?</h2><p>Free — basic limits. Pro — increased. VIP — unlimited; PRO prompts are hidden when active.</p>
-<h2>Supported browsers?</h2><p>Firefox — available. Chrome/Edge — in preparation.</p>
-<p><a href="../en/">← Back to Home</a></p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FAQ — LifeUndo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--ring:#93c5fd;--radius:14px}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
+    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
+    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 14px} nav a{margin-right:16px}.lang{float:right;opacity:.9}
+    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
+    <nav style="display:inline-block;vertical-align:middle">
+      <a href="/en/index.html">Home</a>
+      <a href="/faq/en.html">FAQ</a>
+      <a href="/en/news/index.html">News</a>
+      <a href="/changelog/en.html">Changelog</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/en/pricing/index.html">Pricing</a>
+      <span class="lang">Language: <a href="/faq/ru.html">RU</a> · <strong>EN</strong></span>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>FAQ</h1>
+  <div class="card">
+    <h3>What is LifeUndo?</h3>
+    <p>A second-chance service in your browser: restore recent text, tabs, and clipboard.</p>
+    <h3>Does the extension send telemetry?</h3>
+    <p>No. Data is stored locally in your browser. No telemetry by default.</p>
+    <h3>How do I activate VIP?</h3>
+    <p>Open the popup → “Activate VIP” → import <code>.lifelic</code> on the License page. Verification is offline (ECDSA).</p>
+    <h3>How do I switch language?</h3>
+    <p>Use the extension settings to toggle RU/EN. The popup and “What’s new” are localized.</p>
+    <h3>Free vs Pro vs VIP?</h3>
+    <p>Free — basic limits. Pro — increased. VIP — unlimited; PRO prompts are hidden when active.</p>
+    <h3>Supported browsers?</h3>
+    <p>Firefox — available. Chrome/Edge — in preparation.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Website</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/">Support</a>
+      · <a href="/">Telegram</a> · <a href="/">VK</a> · <a href="/">OK</a> · <a href="/">YouTube</a> · <a href="/">RuTube</a> · <a href="/">Dzen</a>
+      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
