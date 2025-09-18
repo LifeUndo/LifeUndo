@@ -4,26 +4,36 @@
   <meta charset="utf-8" />
   <title>LifeUndo — твой второй шанс</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="LifeUndo — сервис, который дает второй шанс. Верни утерянные вкладки, тексты и буфер. Сегодня это мелочь, завтра — спасенный проект." />
+  <meta name="description" content="LifeUndo — сервис второго шанса. Верни утерянные вкладки, тексты и буфер. Сегодня это мелочь, завтра — спасенный проект." />
   <link rel="canonical" href="https://lifeundo.ru/" />
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;margin:0;color:#0b0b0b;background:#fff}
-    header,footer{padding:16px 20px;border-bottom:1px solid #eee}
-    footer{border-top:1px solid #eee;border-bottom:none;margin-top:40px}
-    .wrap{max-width:980px;margin:0 auto;padding:0 12px}
-    nav a{margin-right:16px;text-decoration:none;color:#222}
+    :root{
+      --bg:#0b0e13; --panel:#121622; --card:#171b28; --text:#e6ebff; --muted:#a9b3c7;
+      --brand:#4aa3ff; --brand-2:#2d7cf0; --border:#222839; --ok:#ee8208; --vk:#2787f5; --tg:#2ba4e1; --yt:#ff3b3b; --rt:#18b85f; --dzen:#111; --gh:#fff;
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;margin:0;color:var(--text);background:linear-gradient(180deg,#0b0e13 0%,#0d111a 60%,#0b0e13 100%)}
+    header,footer{padding:16px 20px;background:var(--panel);border-bottom:1px solid var(--border)}
+    footer{border-top:1px solid var(--border);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+    nav a{margin-right:16px;text-decoration:none;color:var(--text);opacity:.92}
     nav a:hover{text-decoration:underline}
-    .hero{padding:48px 0}
-    .hero h1{font-size:40px;line-height:1.1;margin:0 0 12px}
-    .hero p{font-size:18px;max-width:800px}
-    .cta{display:inline-block;margin-top:16px;padding:12px 18px;border-radius:10px;background:#111;color:#fff;text-decoration:none}
+    .lang{float:right;opacity:.8}
+    .hero{padding:56px 0}
+    .hero h1{font-size:42px;line-height:1.1;margin:0 0 14px}
+    .hero p{font-size:18px;max-width:860px;color:var(--muted)}
+    .cta{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;text-decoration:none;border:1px solid #3b76d4;box-shadow:0 8px 24px rgba(42,113,255,.25)}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0}
-    .card{border:1px solid #eee;border-radius:14px;padding:16px}
-    h2{margin:32px 0 12px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+    h2{margin:34px 0 14px}
     ul{margin:0 0 0 18px}
-    .lang{float:right}
-    .lang a{margin-left:10px}
-    .muted{color:#555}
+    .muted{color:var(--muted)}
+    .social{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn-soc{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0f1420;color:#eaf1ff;text-decoration:none}
+    .ico{width:18px;height:18px;display:inline-block}
+    .ico svg{width:18px;height:18px;display:block}
+    .pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#0f1522;border:1px solid var(--border);font-size:12px;color:var(--muted)}
+    .section{padding:8px 0}
   </style>
 </head>
 <body>
@@ -42,66 +52,44 @@
 
 <main class="wrap">
   <section class="hero">
+    <span class="pill">v0.3.7 • Firefox</span>
     <h1>LifeUndo — твой второй шанс</h1>
     <p>Неважно, потерял ли ты вкладку, текст или целый кусок работы — LifeUndo всегда рядом, чтобы вернуть то, что казалось утраченным. Сегодня это мелочь, завтра — спасённый проект, важное письмо или даже твоя безопасность.</p>
-    <a class="cta" href="https://addons.mozilla.org/" target="_blank" rel="noopener">Установить для Firefox</a>
+    <a class="cta" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Установить для Firefox</a>
     <p class="muted">Chrome/Edge — в подготовке.</p>
-  </section>
 
-  <section>
-    <h2>Почему это важно</h2>
-    <div class="grid">
-      <div class="card">
-        <strong>Ошибки не финальны</strong>
-        <p>Большинство ошибок можно откатить. LifeUndo — твоя «машина времени на несколько секунд назад».</p>
-      </div>
-      <div class="card">
-        <strong>Локально и приватно</strong>
-        <p>Данные хранятся локально в браузере. Никакой телеметрии по умолчанию. VIP лицензия проверяется офлайн (ECDSA).</p>
-      </div>
-      <div class="card">
-        <strong>Сегодня мелочь — завтра критично</strong>
-        <p>То, что сейчас кажется неважным, завтра может спасти часы работы. Пусть подушка безопасности всегда будет рядом.</p>
-      </div>
+    <!-- Соцсети: пока ведут на главную (заглушки). Потом заменишь href на реальные. -->
+    <div class="social">
+      <a class="btn-soc" href="/" title="VK" rel="nofollow">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#2787f5"><path d="M3 7.5c0-.8.7-1.5 1.5-1.5h15c.8 0 1.5.7 1.5 1.5v9c0 .8-.7 1.5-1.5 1.5h-15C3.7 18 3 17.3 3 16.5v-9z"/></svg></span>VK
+      </a>
+      <a class="btn-soc" href="/" title="Telegram" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#2ba4e1"><path d="M21 3L3 11l6 2 2 6 3-4 4-12z"/></svg></span>Telegram
+      </a>
+      <a class="btn-soc" href="/" title="YouTube" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#ff3b3b"><path d="M3 8.7C3 7.2 4.2 6 5.7 6h12.6C19.8 6 21 7.2 21 8.7v6.6c0 1.5-1.2 2.7-2.7 2.7H5.7C4.2 18 3 16.8 3 15.3V8.7zM10 9l6 3-6 3V9z"/></svg></span>YouTube
+      </a>
+      <a class="btn-soc" href="/" title="RuTube" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#18b85f"><circle cx="12" cy="12" r="9"/></svg></span>RuTube
+      </a>
+      <a class="btn-soc" href="/" title="Дзен" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#fff"><rect x="5" y="5" width="14" height="14" rx="3"/></svg></span>Дзен
+      </a>
+      <a class="btn-soc" href="/" title="OK" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#ee8208"><circle cx="12" cy="8" r="3.5"/><path d="M7 21l5-5 5 5"/></svg></span>OK
+      </a>
+      <a class="btn-soc" href="/" title="GitHub" rel="nofollow">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.9 9.7.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.5 1.1 3.1.9.1-.7.4-1.1.7-1.4-2.2-.3-4.5-1.1-4.5-5a4 4 0 0 1 1.1-2.8 3.6 3.6 0 0 1 .1-2.8s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4 1 .3 2 .1 2.8a4 4 0 0 1 1.1 2.8c0 3.9-2.3 4.8-4.5 5 .4.3.8 1 .8 2v3c0 .3.2.6.7.5A10.4 10.4 0 0 0 22 12.3C22 6.6 17.5 2 12 2Z"/></svg></span>GitHub
+      </a>
     </div>
   </section>
 
-  <section>
+  <section class="section">
+    <h2>Что такое Undo?</h2>
+    <p>«Undo» — это откат последнего действия. В жизни и в браузере ошибки случаются: вкладка закрылась, текст пропал, буфер очистился. <strong>LifeUndo</strong> — твоя «машина времени на несколько секунд назад», чтобы вернуть важное без паники.</p>
+  </section>
+
+  <section class="section">
     <h2>Как это работает</h2>
     <div class="grid">
-      <div class="card"><strong>Undo текста</strong><p>Восстанови набранный текст, который «исчез». Браузер подвис? Вкладка перезагрузилась? Вернись на шаг назад.</p></div>
-      <div class="card"><strong>Undo вкладок</strong><p>Случайно закрыл важную вкладку? Открой её снова из истории последних действий.</p></div>
-      <div class="card"><strong>Undo буфера</strong><p>Потерял содержимое буфера обмена? Мы поможем вернуть недавние копирования.</p></div>
-    </div>
-    <p class="muted">Free — базовые лимиты. Pro — расширенные. VIP — без ограничений.</p>
-  </section>
-
-  <section id="pricing">
-    <h2>Тарифы</h2>
-    <ul>
-      <li><strong>Free</strong> — базовые лимиты. <a href="./pricing/">Подробнее</a></li>
-      <li><strong>Pro</strong> — 1/6/12 месяцев. <a href="./pricing/">Подробнее</a></li>
-      <li><strong>Team</strong> — 5/10/50/100 устройств. <a href="./pricing/">Подробнее</a></li>
-      <li><strong>VIP</strong> — без ограничений (пожизненно). <a href="./pricing/">Подробнее</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Готов к своему второму шансу?</h2>
-    <p>Не откладывай. Установи LifeUndo и активируй VIP — пусть твоя подушка безопасности всегда будет под рукой.</p>
-    <a class="cta" href="https://addons.mozilla.org/" target="_blank" rel="noopener">Установить LifeUndo</a>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <nav>
-      <a href="./">Сайт</a>
-      <a href="./privacy/ru.html">Приватность</a>
-      <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">Поддержка</a>
-      <span class="lang" aria-hidden="true">© LifeUndo</span>
-    </nav>
-  </div>
-</footer>
-</body>
-</html>
+      <div class="card"><strong>Undo текста</strong><p>Восстанови набранный текст, который «исчез». Браузер подвис? Вклад
