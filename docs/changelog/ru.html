@@ -3,27 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <title>Changelog — LifeUndo</title>
-  <link rel="stylesheet" href="/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--ring:#93c5fd;--radius:14px}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
+    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
+    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 14px} nav a{margin-right:16px}.lang{float:right;opacity:.9}
+    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px;margin:20px 0}
+  </style>
 </head>
-<body class="dark">
-  <!-- вставить header -->
+<body>
+<header>
+  <div class="wrap">
+    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
+    <nav style="display:inline-block;vertical-align:middle">
+      <a href="/index.html">Главная</a>
+      <a href="/faq/ru.html">FAQ</a>
+      <a href="/news/index.html">Новости</a>
+      <a href="/changelog/ru.html">Changelog</a>
+      <a href="/privacy/ru.html">Приватность</a>
+      <a href="/pricing/index.html">Тарифы</a>
+      <span class="lang">Язык: <strong>RU</strong> · <a href="/changelog/en.html">EN</a></span>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <h1>Changelog</h1>
-    <h2>v0.3.7 • 18.09.2025</h2>
+<main class="wrap">
+  <h1>Changelog</h1>
+  <div class="card">
+    <h3>v0.3.7 • 2025-09-18</h3>
     <ul>
-      <li>«Активировать VIP» → открывает встроенную страницу «Лицензия»</li>
-      <li>Исправлено переключение RU/EN</li>
-      <li>UI-полировка, стабильный размер попапа</li>
+      <li>«Активировать VIP» открывает встроенную страницу «Лицензия» (офлайн ECDSA).</li>
+      <li>Исправлено переключение RU/EN (включая «Что нового» и футер).</li>
+      <li>UI-полировка: стабильный размер попапа; корректные статусы VIP/PRO.</li>
     </ul>
-
-    <h2>v0.2.0 • 11.09.2025</h2>
+  </div>
+  <div class="card">
+    <h3>v0.2.0 • 2025-09-11</h3>
     <ul>
-      <li>Pro лимиты ×10</li>
-      <li>7-дневный Trial</li>
+      <li>Pro-лимиты ×10, 7-дневный Trial.</li>
+      <li>Локальные счётчики, панель лицензии (офлайн-проверка).</li>
+      <li>Обновления сайта (Pro, примеры, RU/EN).</li>
     </ul>
-  </main>
+  </div>
+</main>
 
-  <!-- вставить footer -->
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/index.html">Сайт</a>
+      <a href="/privacy/ru.html">Приватность</a>
+      <a href="/">Поддержка</a>
+      · <a href="/">Telegram</a> · <a href="/">VK</a> · <a href="/">OK</a> · <a href="/">YouTube</a> · <a href="/">RuTube</a> · <a href="/">Дзен</a>
+      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
