@@ -1,9 +1,9 @@
 {
   "currency": "RUB",
-  "period": "Q3 2025",
+  "period": "2025-Q3",
+  "gross": 0,
+  "processor_fees": 0,
+  "taxes_refunds": 0,
   "net_revenue": 0,
-  "fund_amount": 0,
-  "projects_supported": 0,
-  "last_updated": "2025-09-22",
-  "status": "active"
+  "pledge_10pct": 0
 }

@@ -191,7 +191,7 @@ fetch('/assets/fund/totals.json')
   .then(response => response.json())
   .then(data => {
     document.getElementById('fundTotals').innerHTML = 
-      `💰 Period: <strong>${data.period}</strong> | 10% = <strong>${data.fund_amount.toLocaleString()} ${data.currency}</strong> | 🎯 Projects: <strong>${data.projects_supported}</strong>`;
+      `💰 Period: <strong>${data.period}</strong> | Net revenue: <strong>${data.net_revenue.toLocaleString()} ${data.currency}</strong> | 10% to fund: <strong>${data.pledge_10pct.toLocaleString()} ${data.currency}</strong>`;
   })
   .catch(() => {
     document.getElementById('fundTotals').innerHTML = '💰 Fund launched in September 2025';
