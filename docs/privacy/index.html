@@ -3,89 +3,98 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LifeUndo — Политика конфиденциальности</title>
-  <meta name="description" content="Мы храним данные локально в браузере. Никакой телеметрии, сети и сторонних серверов.">
-  <link rel="icon" href="../assets/logo.png">
+  <title>Политика приватности — LifeUndo</title>
+  <meta name="description" content="Политика приватности расширения LifeUndo. Локальное хранение данных, нет телеметрии, офлайн-валидация лицензий.">
+  <link rel="icon" href="../assets/lifeundo-round.png">
   <link rel="stylesheet" href="../assets/site.css">
-  <meta property="og:title" content="LifeUndo — Политика конфиденциальности">
-  <meta property="og:description" content="Данные хранятся локально. Без сетевых запросов и аналитики.">
-  <meta property="og:image" content="../assets/logo.png">
+  <link rel="canonical" href="https://lifeundo.ru/privacy/">
+  <link rel="alternate" hreflang="en" href="https://lifeundo.ru/en/privacy/">
+  <link rel="alternate" hreflang="ru" href="https://lifeundo.ru/privacy/">
+  <meta property="og:title" content="Политика приватности — LifeUndo">
+  <meta property="og:description" content="Политика приватности расширения LifeUndo. Локальное хранение данных, нет телеметрии, офлайн-валидация лицензий.">
+  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+  <meta property="og:type" content="website">
 </head>
 <body>
 
 <header class="header">
   <div class="container nav">
-    <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
-    <a class="btn ghost" href="/#features">Возможности</a>
-    <a class="btn ghost" href="/#usecases">Примеры</a>
-    <a class="btn ghost" href="/changelog.html">Изменения</a>
-    <a class="btn ghost active" href="/privacy/">Приватность</a>
+    <a href="/" class="logo"><img src="../assets/lifeundo-round.png" alt=""><span>LifeUndo</span></a>
+    <a class="btn ghost" href="/">Главная</a>
+    <a class="btn ghost" href="/faq/">FAQ</a>
     <a class="btn ghost" href="/news/">Новости</a>
+    <a class="btn ghost" href="/changelog/">Изменения</a>
+    <a class="btn ghost" href="/privacy/">Приватность</a>
+    <a class="btn ghost" href="/pricing/">Тарифы</a>
+    <a class="btn ghost" href="/support/">Поддержка</a>
+    <a class="btn ghost" href="/fund/">Фонд</a>
     <a class="btn ghost" href="/en/privacy/">EN</a>
-    <a class="btn primary" href="/#install">Установить</a>
   </div>
 </header>
 
-<main class="page">
+<section class="page">
   <div class="container">
-    <h1>LifeUndo — Политика конфиденциальности</h1>
-    <p class="muted">Обновлено: 2025-09-08</p>
-
-    <section class="card card-xl">
-      <h2>Коротко</h2>
-      <ul class="list">
-        <li>Все данные хранятся <b>локально</b> в вашем браузере: <code>chrome.storage.local</code> / <code>browser.storage.local</code>.</li>
-        <li><b>Нет</b> сетевых запросов, телеметрии, внешней аналитики или рекламы.</li>
-        <li>Приложение работает <b>офлайн</b>; интернет не требуется для базовых функций.</li>
+    <div class="card card-xl">
+      <h1>Политика приватности</h1>
+      <p><em>Обновлено: 2025-01-15</em></p>
+      
+      <h3>Принципы приватности</h3>
+      <ul>
+        <li><strong>Локальность данных:</strong> Все ваши данные (текст, вкладки, буфер обмена) хранятся только в вашем браузере</li>
+        <li><strong>Нет телеметрии:</strong> Расширение не отправляет никаких данных о вашем использовании</li>
+        <li><strong>Нет аналитики:</strong> Мы не собираем статистику использования или персональную информацию</li>
+        <li><strong>Офлайн-лицензии:</strong> VIP-лицензии проверяются локально через ECDSA P-256 без обращения к серверам</li>
       </ul>
-    </section>
 
-    <section class="card">
-      <h2>Какие данные обрабатываются</h2>
-      <ul class="list">
-        <li><b>История ввода текста</b> — последние 20 (Free) / 200 (Pro) состояний.</li>
-        <li><b>Недавно закрытые вкладки</b> — последние 10 (Free) / 50 (Pro) с URL, заголовком и favicon.</li>
-        <li><b>История буфера</b> — последние 10 (Free) / 50 (Pro) текстовых фрагментов.</li>
-        <li><b>Локальная статистика</b> — счётчики действий (popup/undo/restore) для вашего удобства; остаются локально.</li>
-        <li><b>Лицензия</b> — офлайн-файл/токен, хранимый в локальном хранилище для валидации Pro/Team.</li>
+      <h3>Какие данные мы НЕ собираем</h3>
+      <ul>
+        <li>Содержимое вашего текста или буфера обмена</li>
+        <li>URL посещённых страниц</li>
+        <li>Время использования или частоту действий</li>
+        <li>Информацию об устройствах или браузерах</li>
+        <li>IP-адреса или геолокацию</li>
       </ul>
-      <p class="muted">Вы можете в любой момент удалить эти данные средствами браузера или самим расширением.</p>
-    </section>
 
-    <section class="card">
-      <h2>Лицензии и триал</h2>
-      <ul class="list">
-        <li><b>7-дневный триал</b> стартует при первом запуске и хранится локально (с вспомогательной отметкой в <code>storage.sync</code>).</li>
-        <li><b>Офлайн-лицензия</b> — файл <code>.lifelic</code> или токен, подписанный нами (ECDSA P-256). Проверка происходит локально, без запроса на сервер.</li>
-        <li>В лицензии могут быть поля: <code>plan</code>, <code>expires</code>, <code>seats</code>, <code>email</code>. Это используется только локально для показа статуса в настройках.</li>
+      <h3>Хранение данных</h3>
+      <p>Все данные хранятся в локальном хранилище браузера (localStorage/sessionStorage) и могут быть очищены:</p>
+      <ul>
+        <li>Через настройки расширения (кнопка "Удалить ключ")</li>
+        <li>Через настройки браузера (Очистка данных сайта)</li>
+        <li>При удалении расширения</li>
       </ul>
-    </section>
 
-    <section class="card">
-      <h2>Разрешения браузера</h2>
-      <p>Расширение запрашивает минимальные разрешения, необходимые для своей работы (доступ к локальному хранилищу). Список доступов можно увидеть на странице расширений браузера.</p>
-    </section>
+      <h3>GetLifeUndo Fund</h3>
+      <p>10% от нашей чистой выручки направляется в фонд поддержки цифровой грамотности. Это не влияет на приватность пользователей — фонд работает с образовательными инициативами, не связанными с данными пользователей.</p>
 
-    <section class="card">
-      <h2>Файлы cookie и аналитика</h2>
-      <p>Мы не используем cookies и не проводим внешнюю аналитику. Сайт lifeundo.ru может содержать ссылки на сторонние ресурсы (например, магазин дополнений Firefox); переходя по ним, вы следуете их политикам конфиденциальности.</p>
-    </section>
-
-    <section class="card">
-      <h2>Контакты</h2>
-      <p>Почта: <a href="mailto:developer@lifeundo.ru">developer@lifeundo.ru</a></p>
-      <p>Telegram-канал: <a href="https://t.me/LifeUndo" target="_blank" rel="noopener">t.me/LifeUndo</a></p>
-    </section>
+      <h3>Изменения политики</h3>
+      <p>Мы обновим эту страницу при значительных изменениях. Текущая версия всегда доступна на сайте.</p>
+    </div>
   </div>
-</main>
+</section>
 
 <footer class="footer">
   <div class="container center">
     <div class="links">
       <a href="/">Главная</a> ·
-      <a href="/changelog.html">Изменения</a> ·
+      <a href="/changelog/">Изменения</a> ·
       <a href="/privacy/">Приватность</a> ·
-      <a href="/news/">Новости</a>
+      <a href="/news/">Новости</a> ·
+      <a href="/pricing/">Тарифы</a> ·
+      <a href="/fund/">Фонд</a>
+    </div>
+    <div style="margin-top: 16px;">
+      <a href="https://vc.ru/lifeundo" target="_blank" rel="noopener">vc.ru</a> ·
+      <a href="https://habr.com/ru/users/lifeundo" target="_blank" rel="noopener">Habr</a> ·
+      <a href="https://t.me/LifeUndoSupport" target="_blank" rel="noopener">Telegram</a> ·
+      <a href="https://youtube.com/@lifeundo" target="_blank" rel="noopener">YouTube</a> ·
+      <a href="https://reddit.com/r/lifeundo" target="_blank" rel="noopener">Reddit</a> ·
+      <a href="https://x.com/lifeundo" target="_blank" rel="noopener">X</a> ·
+      <a href="https://dzen.ru/lifeundo" target="_blank" rel="noopener">Dzen</a> ·
+      <a href="https://vk.com/lifeundo" target="_blank" rel="noopener">VK</a>
+    </div>
+    <div style="margin-top: 16px;">
+      <img src="../assets/fund/we_give_10.svg" height="28" alt="We give 10%">
+      <img src="../assets/freekassa/fk_badge_ru.svg" height="28" alt="FreeKassa" style="margin-left: 10px;">
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>

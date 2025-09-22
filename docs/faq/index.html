@@ -1,61 +1,109 @@
-<!doctype html><html lang="ru"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LifeUndo — Часто задаваемые вопросы</title>
-<link rel="icon" href="../assets/logo.png"><link rel="stylesheet" href="../assets/site.css">
-<link rel="canonical" href="https://lifeundo.ru/faq/">
-</head><body>
-<header class="header"><div class="container nav">
-  <a href="/" class="logo"><img src="../assets/logo.png" alt=""><span>LifeUndo</span></a>
-  <a class="btn ghost" href="/#features">Возможности</a>
-  <a class="btn ghost" href="/#usecases">Примеры</a>
-  <a class="btn ghost" href="/changelog.html">Изменения</a>
-  <a class="btn ghost" href="/privacy/">Приватность</a>
-  <a class="btn ghost" href="/news/">Новости</a>
-  <a class="btn ghost" href="/en/faq/">EN</a>
-</div></header>
-<main class="page"><div class="container">
-  <h1>Часто задаваемые вопросы</h1>
-  
-  <article class="card">
-    <h2>Что такое «Undo»?</h2>
-    <p><b>Undo</b> — это отмена последнего действия. В LifeUndo это быстрый откат текста, закрытых вкладок и буфера обмена, когда что-то пошло не так.</p>
-  </article>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FAQ — LifeUndo</title>
+  <meta name="description" content="Часто задаваемые вопросы о расширении LifeUndo. Как работает откат текста, вкладок и буфера обмена.">
+  <link rel="icon" href="../assets/lifeundo-round.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="canonical" href="https://lifeundo.ru/faq/">
+  <link rel="alternate" hreflang="en" href="https://lifeundo.ru/en/faq/">
+  <link rel="alternate" hreflang="ru" href="https://lifeundo.ru/faq/">
+  <meta property="og:title" content="FAQ — LifeUndo">
+  <meta property="og:description" content="Часто задаваемые вопросы о расширении LifeUndo. Как работает откат текста, вкладок и буфера обмена.">
+  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+  <meta property="og:type" content="website">
+</head>
+<body>
 
-  <article class="card">
-    <h2>Какие лимиты у Free и Pro?</h2>
-    <p><b>Free:</b> 20 состояний текста, 10 вкладок, 10 элементов буфера.<br>
-    <b>Pro:</b> 200 состояний текста, 50 вкладок, 50 элементов буфера.</p>
-  </article>
+<header class="header">
+  <div class="container nav">
+    <a href="/" class="logo"><img src="../assets/lifeundo-round.png" alt=""><span>LifeUndo</span></a>
+    <a class="btn ghost" href="/">Главная</a>
+    <a class="btn ghost" href="/faq/">FAQ</a>
+    <a class="btn ghost" href="/news/">Новости</a>
+    <a class="btn ghost" href="/changelog/">Изменения</a>
+    <a class="btn ghost" href="/privacy/">Приватность</a>
+    <a class="btn ghost" href="/pricing/">Тарифы</a>
+    <a class="btn ghost" href="/support/">Поддержка</a>
+    <a class="btn ghost" href="/fund/">Фонд</a>
+    <a class="btn ghost" href="/en/faq/">EN</a>
+  </div>
+</header>
 
-  <article class="card">
-    <h2>Где хранятся мои данные?</h2>
-    <p>Все данные хранятся локально в браузере (<code>browser.storage.local</code>). Никаких серверов, никаких сетевых запросов. Данные остаются только на вашем устройстве.</p>
-  </article>
+<section class="page">
+  <div class="container">
+    <div class="card card-xl">
+      <h1>Часто задаваемые вопросы</h1>
+      
+      <h3>Что такое LifeUndo?</h3>
+      <p>Сервис «второго шанса» в браузере: быстрое восстановление последних текстов, вкладок и буфера обмена. Всё работает локально без отправки данных.</p>
+      
+      <h3>Как работает откат текста?</h3>
+      <p>LifeUndo сохраняет историю ввода в текстовых полях. Если вы случайно удалили текст, нажмите кнопку отката или используйте горячие клавиши для восстановления.</p>
+      
+      <h3>Как восстановить закрытые вкладки?</h3>
+      <p>В попапе расширения отображается список недавно закрытых вкладок. Просто нажмите на нужную вкладку для восстановления.</p>
+      
+      <h3>Как работает откат буфера обмена?</h3>
+      <p>Расширение отслеживает копирование текста и сохраняет историю буфера. Вы можете вернуться к предыдущим скопированным фрагментам.</p>
+      
+      <h3>Передаются ли мои данные?</h3>
+      <p>Нет. Всё хранится локально в браузере. Никакой телеметрии, аналитики или отправки данных на серверы.</p>
+      
+      <h3>Как активировать VIP-лицензию?</h3>
+      <p>Откройте попап → «Активировать VIP» → на странице «Лицензия» импортируйте файл .lifelic. Проверка происходит офлайн через ECDSA.</p>
+      
+      <h3>Как переключить язык интерфейса?</h3>
+      <p>В попапе расширения нажмите кнопки EN/RU. Язык сохраняется и применяется ко всем элементам интерфейса.</p>
+      
+      <h3>Чем Free отличается от Pro/VIP?</h3>
+      <p><strong>Free:</strong> Базовые лимиты (текст 20, вкладки 5, буфер 5)<br>
+      <strong>Pro:</strong> Расширенные лимиты (текст 200, вкладки 50, буфер 50)<br>
+      <strong>VIP:</strong> Без ограничений + пожизненная лицензия</p>
+      
+      <h3>Как получить поддержку?</h3>
+      <p>Напишите нам в Telegram: <a href="https://t.me/LifeUndoSupport" target="_blank">@LifeUndoSupport</a> или на email: developer@lifeundo.ru</p>
+      
+      <h3>На каких платформах работает?</h3>
+      <p><strong>Firefox:</strong> Доступно в AMO<br>
+      <strong>Chrome/Edge:</strong> В разработке<br>
+      <strong>Mobile:</strong> В планах на 2025 год</p>
+      
+      <h3>Что такое GetLifeUndo Fund?</h3>
+      <p>Мы направляем 10% от чистой выручки на поддержку проектов цифровой грамотности и приватности. Подробнее: <a href="/fund/">lifeundo.ru/fund</a></p>
+    </div>
+  </div>
+</section>
 
-  <article class="card">
-    <h2>Работает ли без интернета?</h2>
-    <p>Да! LifeUndo работает полностью офлайн. Интернет нужен только для установки расширения и обновлений.</p>
-  </article>
+<footer class="footer">
+  <div class="container center">
+    <div class="links">
+      <a href="/">Главная</a> ·
+      <a href="/changelog/">Изменения</a> ·
+      <a href="/privacy/">Приватность</a> ·
+      <a href="/news/">Новости</a> ·
+      <a href="/pricing/">Тарифы</a> ·
+      <a href="/fund/">Фонд</a>
+    </div>
+    <div style="margin-top: 16px;">
+      <a href="https://vc.ru/lifeundo" target="_blank" rel="noopener">vc.ru</a> ·
+      <a href="https://habr.com/ru/users/lifeundo" target="_blank" rel="noopener">Habr</a> ·
+      <a href="https://t.me/LifeUndoSupport" target="_blank" rel="noopener">Telegram</a> ·
+      <a href="https://youtube.com/@lifeundo" target="_blank" rel="noopener">YouTube</a> ·
+      <a href="https://reddit.com/r/lifeundo" target="_blank" rel="noopener">Reddit</a> ·
+      <a href="https://x.com/lifeundo" target="_blank" rel="noopener">X</a> ·
+      <a href="https://dzen.ru/lifeundo" target="_blank" rel="noopener">Dzen</a> ·
+      <a href="https://vk.com/lifeundo" target="_blank" rel="noopener">VK</a>
+    </div>
+    <div style="margin-top: 16px;">
+      <img src="../assets/fund/we_give_10.svg" height="28" alt="We give 10%">
+      <img src="../assets/freekassa/fk_badge_ru.svg" height="28" alt="FreeKassa" style="margin-left: 10px;">
+    </div>
+    <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
+  </div>
+</footer>
 
-  <article class="card">
-    <h2>Можно ли вернуть письмо или платёж?</h2>
-    <p>Нет, LifeUndo работает только с локальным контентом в браузере. Мы не можем восстановить отправленные письма или отменить платежи — только то, что вы набирали в формах на сайтах.</p>
-  </article>
-
-  <article class="card">
-    <h2>Как получить Pro-версию?</h2>
-    <p>Pro-лицензии продаются через Gumroad. После покупки вы получите файл <code>.lifelic</code> для активации в настройках расширения.</p>
-  </article>
-
-  <article class="card">
-    <h2>Безопасно ли это?</h2>
-    <p>Да, полностью безопасно. Все данные остаются на вашем устройстве, мы не собираем никакой информации. Расширение прошло проверку Mozilla AMO.</p>
-  </article>
-
-</div></main>
-<footer class="footer"><div class="container center">
-  <div class="links"><a href="/">Главная</a> · <a href="/changelog.html">Изменения</a> · <a href="/privacy/">Приватность</a> · <a href="/news/">Новости</a></div>
-  <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
-</div></footer>
-</body></html>
-
+</body>
+</html>
