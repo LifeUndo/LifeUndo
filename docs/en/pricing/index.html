@@ -2,61 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Pricing — LifeUndo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing — LifeUndo</title>
+  <meta name="description" content="LifeUndo Pricing: Free, Pro, VIP (Lifetime), Team. 100% local, privacy-first." />
+
+  <link rel="canonical" href="https://lifeundo.ru/en/pricing/" />
+  <link rel="alternate" href="https://lifeundo.ru/en/pricing/" hreflang="en" />
+  <link rel="alternate" href="https://lifeundo.ru/pricing/" hreflang="ru" />
+  <link rel="alternate" href="https://lifeundo.ru/en/pricing/" hreflang="x-default" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pricing — LifeUndo" />
+  <meta property="og:description" content="Free, Pro, VIP (Lifetime), Team. 100% local, privacy-first." />
+  <meta property="og:url" content="https://lifeundo.ru/en/pricing/" />
+  <meta property="og:image" content="https://lifeundo.ru/assets/og/lifeundo_og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Product","name":"LifeUndo","description":"Ctrl+Z for your online life: forms, tabs, clipboard. 100% local.","brand":{"@type":"Brand","name":"LifeUndo"},"offers":{"@type":"AggregateOffer","lowPrice":"0","priceCurrency":"USD"}}
+  </script>
+
   <style>
-    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--radius:14px}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
-    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
-    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
-    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
-    .wrap{max-width:1040px;margin:0 auto;padding:0 14px} nav a{margin-right:16px}.lang{float:right;opacity:.9}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px}
-    .cta{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:12px;background:#3b82f6;color:#fff}
+    :root{--bg1:#0b1020;--bg2:#0f172a;--line:#1f2937;--card:#0b1224;--pri:#0ea5e9;--pri2:#0284c7;--ink:#e2e8f0;--muted:#94a3b8}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;margin:0;color:#fff;background:linear-gradient(180deg,var(--bg1),var(--bg2) 40%,var(--bg1))}
+    .wrap{max-width:1024px;margin:0 auto;padding:24px}
+    header,footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header a.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+    header img{height:36px;width:36px;border-radius:12px}
+    nav a{color:#a3b3d3;text-decoration:none;margin:0 10px}
+    nav a:hover{text-decoration:underline;color:#fff}
+    h1{font-size:28px;margin:24px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .plan{border:1px solid var(--line);background:rgba(15,23,42,.6);border-radius:16px;padding:18px}
+    .plan h3{margin:0 0 8px}
+    .price{font-size:22px;margin:8px 0 12px}
+    ul{margin:0 0 12px 18px}
+    .btn{display:inline-block;padding:12px 16px;border-radius:12px;border:1px solid var(--pri2);background:var(--pri);color:#001019;text-decoration:none;font-weight:600}
+    .muted{color:var(--muted)}
+    .note{margin-top:6px;color:#cbd5e1}
+    footer{margin-top:36px;padding-top:16px;border-top:1px dashed #1e293b;color:var(--muted)}
   </style>
 </head>
 <body>
-<header>
   <div class="wrap">
-    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
-    <nav style="display:inline-block;vertical-align:middle">
-      <a href="/en/index.html">Home</a>
-      <a href="/faq/en.html">FAQ</a>
-      <a href="/en/news/index.html">News</a>
-      <a href="/changelog/en.html">Changelog</a>
-      <a href="/privacy/en.html">Privacy</a>
-      <a href="/en/pricing/index.html">Pricing</a>
-      <span class="lang">Language: <a href="/pricing/index.html">RU</a> · <strong>EN</strong></span>
-    </nav>
-  </div>
-</header>
+    <header>
+      <a class="logo" href="/en/"><img src="/assets/logo-lifeundo-round.png" alt="LifeUndo"/><strong>LifeUndo</strong></a>
+      <nav>
+        <a href="/en/">Home</a>
+        <a href="/en/faq/">FAQ</a>
+        <a href="/en/news/">News</a>
+        <a href="/en/changelog/">Changelog</a>
+        <a href="/en/privacy/">Privacy</a>
+        <a href="/en/pricing/" aria-current="page">Pricing</a>
+        <a href="/pricing/">RU</a>
+      </nav>
+    </header>
 
-<main class="wrap">
-  <h1>Pricing</h1>
-  <div class="grid">
-    <div class="card"><h3>Free</h3><p>Basic limits.</p><a class="cta" href="#">Get</a></div>
-    <div class="card"><h3>Pro</h3><p>1/6/12 months. Increased limits.</p><a class="cta" href="#">Buy</a></div>
-    <div class="card"><h3>Team</h3><p>5/10/50/100 seats.</p><a class="cta" href="#">Contact</a></div>
-    <div class="card"><h3>VIP</h3><p>Unlimited (lifetime).</p><a class="cta" href="#">Activate</a></div>
-  </div>
-</main>
+    <main>
+      <h1>Pricing</h1>
+      <div class="grid">
+        <section class="plan">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>Up to 20 items per section</li>
+            <li>Forms, tabs, clipboard</li>
+            <li>100% local</li>
+          </ul>
+          <p class="muted">Available right in the extension.</p>
+        </section>
 
-<footer>
-  <div class="wrap">
-    <nav>
-      <a href="/en/index.html">Website</a>
-      <a href="/privacy/en.html">Privacy</a>
-      <a href="/">Support</a>
-      · <a href="/"><img src="/free-icon-telegram-2111646.png" alt="Telegram" height="18"></a>
-      <a href="/"><img src="/free-icon-vk-3670055.png" alt="VK" height="18"></a>
-      <a href="/"><img src="/free-icon-odnoklassniki-3670250.png" alt="OK" height="18"></a>
-      <a href="/"><img src="/free-icon-youtube-4494485.png" alt="YouTube" height="18"></a>
-      <a href="/"><img src="/rutube.svg" alt="RuTube" height="18"></a>
-      <a href="/"><img src="/icons8-dzen.png" alt="Dzen" height="18"></a>
-      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
-    </nav>
+        <section class="plan">
+          <h3>Pro</h3>
+          <div class="price">$3.99 /mo or $29 /yr</div>
+          <ul>
+            <li>Up to 500 items/section</li>
+            <li>Fast search, hotkeys</li>
+            <li>Import/Export</li>
+          </ul>
+          <!-- Placeholder links until Stripe/Paddle -->
+          <p><a class="btn" href="/en/pay/stripe/pro-month" rel="nofollow">Buy Pro (Monthly)</a></p>
+          <p class="note"><a class="btn" href="/en/pay/stripe/pro-year" rel="nofollow" style="background:#22c55e;border-color:#16a34a;color:#06210d">Buy Pro (Yearly)</a></p>
+        </section>
+
+        <section class="plan">
+          <h3>VIP (Lifetime)</h3>
+          <div class="price">$49 · one-time</div>
+          <ul>
+            <li>All Pro features</li>
+            <li>Early access to new features</li>
+            <li>Priority support</li>
+          </ul>
+          <p><a class="btn" href="/en/pay/stripe/vip-lifetime" rel="nofollow">Buy VIP</a></p>
+        </section>
+
+        <section class="plan">
+          <h3>Team</h3>
+          <div class="price">from $2.5 /seat/month (min 5)</div>
+          <ul>
+            <li>Shared collections (Phase I — browser)</li>
+            <li>Access control</li>
+          </ul>
+          <p class="muted">Contact support to get started.</p>
+        </section>
+      </div>
+
+      <p class="note">After payment you’ll receive a license key by email. Activate it on the “License” page inside the extension.</p>
+    </main>
+
+    <footer>
+      <div>© <span id="y">2025</span> LifeUndo · <a href="/en/support/">Support</a></div>
+      <div>
+        <a href="https://pay.freekassa.ru/" target="_blank" rel="noopener"><img src="/assets/freekassa-badges/fk_badge_en.svg" alt="FreeKassa" height="28"></a>
+      </div>
+    </footer>
   </div>
-</footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
