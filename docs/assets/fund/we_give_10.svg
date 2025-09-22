@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="32" viewBox="0 0 124 32">
+  <rect width="124" height="32" rx="8" fill="#121826"/>
+  <text x="14" y="20" font-family="system-ui,-apple-system,Segoe UI,Roboto" font-size="12" fill="#E2E8F0">We give 10%</text>
+  <circle cx="10" cy="16" r="5" fill="#0EA5E9"/>
+</svg>

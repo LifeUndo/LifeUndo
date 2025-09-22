@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>LifeUndo — Ctrl+Z for your browser</title>
@@ -53,21 +54,99 @@
     <p><a class="btn primary" href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank" rel="noopener">Install on Firefox</a></p>
   </div>
 </section>
+=======
+  <meta charset="utf-8" />
+  <title>LifeUndo — your second chance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="LifeUndo — your second-chance service. Bring back lost tabs, text, and clipboard. What feels trivial today may save your project tomorrow." />
+  <link rel="canonical" href="https://lifeundo.ru/en/" />
+  <style>
+    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--radius:14px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
+    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
+    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
+    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 14px}
+    nav a{margin-right:16px}
+    .lang{float:right;opacity:.9}
+    .hero{padding:56px 0}
+    .hero h1{font-size:44px;line-height:1.1;margin:0 0 12px}
+    .hero p{font-size:18px;max-width:820px;color:var(--muted)}
+    .cta{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:12px;background:#3b82f6;color:#fff;transition:.2s box-shadow}
+    .cta:hover{box-shadow:0 0 0 4px rgba(147,197,253,.25)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:22px 0}
+    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px}
+    h2{margin:28px 0 12px}
+    .muted{color:var(--muted)}
+    .socials{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .socials img{height:22px;vertical-align:middle;opacity:.9}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
+    <nav style="display:inline-block;vertical-align:middle">
+      <a href="/en/index.html">Home</a>
+      <a href="/faq/en.html">FAQ</a>
+      <a href="/en/news/index.html">News</a>
+      <a href="/changelog/en.html">Changelog</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/en/pricing/index.html">Pricing</a>
+      <span class="lang">Language: <a href="/index.html">RU</a> · <strong>EN</strong></span>
+    </nav>
+  </div>
+</header>
 
-<section class="section" id="features">
-  <div class="container">
-    <h2>What LifeUndo does</h2>
+<main class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Mistakes aren’t final. Step back safely.</h1>
+    <p>Lost a tab, text, or clipboard? LifeUndo brings it back. What feels trivial today may save your project — or even your safety — tomorrow.</p>
+    <a class="cta" href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" target="_blank" rel="noopener">Get for Firefox</a>
+    <p class="muted">Chrome/Edge — in progress. Android/iOS — planned.</p>
+>>>>>>> d27045fa3a6481d2df4b924e9710996b551e5e93
+
+    <div class="socials" aria-label="Social links">
+      <a href="/"><img src="/free-icon-telegram-2111646.png" alt="Telegram"></a>
+      <a href="/"><img src="/free-icon-vk-3670055.png" alt="VK"></a>
+      <a href="/"><img src="/free-icon-odnoklassniki-3670250.png" alt="OK"></a>
+      <a href="/"><img src="/free-icon-youtube-4494485.png" alt="YouTube"></a>
+      <a href="/"><img src="/icons8-dzen.png" alt="Dzen"></a>
+      <a href="/"><img src="/rutube.svg" alt="RuTube" style="height:22px"></a>
+    </div>
+  </section>
+
+  <!-- WHAT IS UNDO -->
+  <section>
+    <h2>What is Undo</h2>
+    <div class="card">
+      <p><strong>Undo</strong> means reversing the last action — a quick way to go one step back. LifeUndo is your “time machine for a few seconds back” for text, tabs, and clipboard.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <h2>How it works</h2>
     <div class="grid">
+<<<<<<< HEAD
       <div class="card"><h3>✍️ Text Undo</h3><p>Stores last <b>20</b> (Free) / <b>200</b> (Pro) text states.</p></div>
       <div class="card"><h3>🧩 Tabs Undo</h3><p>Restores last <b>10</b> (Free) / <b>50</b> (Pro) closed tabs.</p></div>
       <div class="card"><h3>📋 Clipboard Undo</h3><p>Clipboard history: <b>10</b> / <b>50</b>.</p></div>
       <div class="card"><h3>📊 Local stats</h3><p>Action counters — no network, no telemetry.</p></div>
       <div class="card"><h3>🔐 Privacy</h3><p>Data lives in <code>browser.storage.local</code>.</p></div>
       <div class="card"><h3>🔑 Licensing</h3><p>Offline Pro activation. 7-day trial.</p></div>
+=======
+      <div class="card"><strong>Undo Text</strong><p>Recover typed text after a crash, reload, or accidental overwrite.</p></div>
+      <div class="card"><strong>Undo Tabs</strong><p>Reopen accidentally closed or lost tabs from recent actions.</p></div>
+      <div class="card"><strong>Undo Clipboard</strong><p>Bring back what you copied moments ago from your clipboard history.</p></div>
+>>>>>>> d27045fa3a6481d2df4b924e9710996b551e5e93
     </div>
-  </div>
-</section>
+    <p class="muted">Free — basic limits. Pro — increased limits. VIP — unlimited (offline ECDSA license).</p>
+  </section>
 
+<<<<<<< HEAD
 <section class="section" id="undo">
   <div class="container">
     <h2>What is "Undo"?</h2>
@@ -88,10 +167,26 @@
       <div class="card"><h3>HR</h3><p>Recover a filled form after accidental close.</p></div>
       <div class="card"><h3>Research</h3><p>Quickly reopen closed sources/articles.</p></div>
       <div class="card"><h3>Home</h3><p>Bring back a coupon from clipboard history.</p></div>
+=======
+  <!-- 9 REAL SCENARIOS -->
+  <section>
+    <h2>Where it saves the day — 9 real scenarios</h2>
+    <div class="grid">
+      <div class="card">🎓 <strong>Student</strong><p>Accidentally wiped a thesis paragraph? Roll back the previous state and keep going.</p></div>
+      <div class="card">📰 <strong>Journalist / Editor</strong><p>Draft overwritten? Text/clipboard history restores the exact phrasing.</p></div>
+      <div class="card">⚖️ <strong>Lawyer</strong><p>Need the precise clause you copied earlier? Fetch it from clipboard history.</p></div>
+      <div class="card">💻 <strong>Developer</strong><p>Lost a payload or a doc tab? Restore the tab and the last input.</p></div>
+      <div class="card">🧑‍💼 <strong>HR / Recruiter</strong><p>Closed a set of candidate tabs? Reopen them from the recent list.</p></div>
+      <div class="card">🛟 <strong>Support</strong><p>Chat reloaded? Recover your prepared reply from text history.</p></div>
+      <div class="card">🏢 <strong>Manager / PM / CFO</strong><p>Browser crashed? Bring back notes and links — continue without loss.</p></div>
+      <div class="card">🔬 <strong>Research / Teaching</strong><p>Lost browsing context? Restore tabs and your notes.</p></div>
+      <div class="card">🛍️ <strong>E-commerce</strong><p>Form refreshed and your description vanished? Pull it from history.</p></div>
+>>>>>>> d27045fa3a6481d2df4b924e9710996b551e5e93
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
+<<<<<<< HEAD
 <section class="section" id="install">
   <div class="container">
     <h2>Install & Pro</h2>
@@ -126,8 +221,17 @@
       <a href="/en/news/">News</a>
     </div>
     <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
+=======
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/en/index.html">Website</a>
+      <a href="/privacy/en.html">Privacy</a>
+      <a href="/">Support</a>
+      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
+    </nav>
+>>>>>>> d27045fa3a6481d2df4b924e9710996b551e5e93
   </div>
 </footer>
-
 </body>
 </html>
