@@ -3,176 +3,169 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>GetLifeUndo Fund — LifeUndo</title>
-  <meta name="description" content="GetLifeUndo Fund — 10% of revenue for digital literacy and privacy. Supporting education, research and open-source projects.">
-  <link rel="icon" href="../../assets/lifeundo-round.png">
-  <link rel="stylesheet" href="../../assets/site.css">
+  <title>GetLifeUndo Fund — 10% for Digital Literacy & Privacy</title>
+  <meta name="description" content="We commit: 10% of our net revenue goes to education and privacy-focused engineering initiatives. Transparent reports, clear rules.">
+
   <link rel="canonical" href="https://lifeundo.ru/en/fund/">
-  <link rel="alternate" hreflang="ru" href="https://lifeundo.ru/fund/">
-  <link rel="alternate" hreflang="en" href="https://lifeundo.ru/en/fund/">
-  <meta property="og:title" content="GetLifeUndo Fund — 10% for digital literacy">
-  <meta property="og:description" content="10% of LifeUndo revenue goes to education and privacy projects.">
-  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+  <link rel="alternate" href="https://lifeundo.ru/en/fund/" hreflang="en">
+  <link rel="alternate" href="https://lifeundo.ru/fund/" hreflang="ru">
+  <link rel="alternate" href="https://lifeundo.ru/en/fund/" hreflang="x-default">
+
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GetLifeUndo Fund — 10% for digital literacy">
-  <meta name="twitter:description" content="10% of LifeUndo revenue goes to education and privacy projects.">
-  <meta name="twitter:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"GetLifeUndo Fund",
-    "url":"https://lifeundo.ru/en/fund/",
-    "description":"LifeUndo corporate social program: 10% of revenue for digital literacy and privacy"
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="LifeUndo">
+  <meta property="og:title" content="GetLifeUndo Fund — 10% for Digital Literacy & Privacy">
+  <meta property="og:description" content="10% of net revenue to education and privacy-first engineering. Transparent reporting.">
+  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+
+  <style>
+    :root{--bg1:#0b1020;--bg2:#0f172a;--line:#1f2937;--ink:#e2e8f0;--muted:#94a3b8;--pri:#0ea5e9;--pri2:#0284c7}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;margin:0;line-height:1.65;color:#fff;background:linear-gradient(180deg,var(--bg1),var(--bg2) 40%,var(--bg1))}
+    .wrap{max-width:1024px;margin:0 auto;padding:24px}
+    header,footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header a.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+    header img{width:36px;height:36px;border-radius:12px}
+    nav a{color:#a3b3d3;text-decoration:none;margin:0 10px}
+    nav a:hover{text-decoration:underline;color:#fff}
+    .hero{margin:28px 0;padding:22px;border:1px solid var(--line);border-radius:16px;background:rgba(15,23,42,.6)}
+    .hero h1{margin:0 0 10px;font-size:28px}
+    .hero p{margin:6px 0;color:#cbd5e1}
+    .badge{display:inline-flex;align-items:center;gap:8px;margin-top:10px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .card{border:1px solid var(--line);border-radius:16px;background:rgba(2,6,23,.6);padding:16px}
+    .card h3{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .note{margin-top:10px;color:#cbd5e1}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--pri2);background:var(--pri);color:#001019;text-decoration:none;font-weight:600}
+    details{border:1px dashed #263041;border-radius:12px;padding:12px;background:rgba(2,6,23,.45)}
+    details summary{cursor:pointer;font-weight:600}
+    .totals{margin:14px 0;padding:12px;border:1px dashed #364255;border-radius:12px;background:rgba(2,6,23,.45)}
+    footer{margin-top:36px;padding-top:16px;border-top:1px dashed #1e293b;color:var(--muted)}
+  </style>
+  <script>
+  async function drawTotals(){
+    try{
+      const r = await fetch('/assets/fund/totals.json', {cache:'no-store'});
+      const j = await r.json();
+      const net = j.net_revenue||0, p = Math.round(net*0.10);
+      document.getElementById('fundTotals').textContent =
+        `Period ${j.period||'-'}: net revenue ${net.toLocaleString('en-US')} ${j.currency||'RUB'} → 10% = ${p.toLocaleString('en-US')} ${j.currency||'RUB'}`;
+    }catch(e){
+      document.getElementById('fundTotals').textContent = 'Period: TBA. Net revenue: 0 → 10% = 0';
+    }
   }
+  document.addEventListener('DOMContentLoaded', drawTotals);
   </script>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="/en/"><img src="/assets/lifeundo-round.png" alt="LifeUndo"><strong>LifeUndo</strong></a>
+    <nav>
+      <a href="/en/">Home</a>
+      <a href="/en/faq/">FAQ</a>
+      <a href="/en/news/">News</a>
+      <a href="/en/changelog/">Changelog</a>
+      <a href="/en/privacy/">Privacy</a>
+      <a href="/en/pricing/">Pricing</a>
+      <a href="/en/support/">Support</a>
+      <a href="/fund/">RU</a>
+    </nav>
+  </header>
 
-<header class="header">
-  <div class="container nav">
-    <a href="/en/" class="logo"><img src="../../assets/lifeundo-round.png" alt=""><span>LifeUndo</span></a>
-    <a class="btn ghost" href="/en/">Home</a>
-    <a class="btn ghost" href="/en/faq/">FAQ</a>
-    <a class="btn ghost" href="/en/news/">News</a>
-    <a class="btn ghost" href="/en/changelog/">Changelog</a>
-    <a class="btn ghost" href="/en/privacy/">Privacy</a>
-    <a class="btn ghost" href="/en/pricing/">Pricing</a>
-    <a class="btn ghost" href="/en/support/">Support</a>
-    <a class="btn ghost" href="/fund/">RU</a>
-  </div>
-</header>
+  <main>
+    <section class="hero">
+      <h1>GetLifeUndo Fund — 10% for Digital Literacy & Privacy</h1>
+      <p>We commit to allocate <b>10% of our net revenue</b> to education and privacy-first engineering initiatives. No politics. Transparent reporting.</p>
+      <div class="badge">
+        <img src="/assets/fund/we_give_10.svg" alt="We give 10%" height="28">
+      </div>
+      <div class="totals" id="fundTotals">Loading…</div>
+      <p class="muted">"Net revenue" = gross revenue minus payment processor fees, taxes and refunds.</p>
+    </section>
 
-<section class="page">
-  <div class="container">
-    <div class="card card-xl center">
-      <h1>GetLifeUndo Fund</h1>
-      <p class="lead">10% of revenue for digital literacy and privacy</p>
-      <p>We commit in our brand policy: 10% of our revenue goes to education and engineering projects that make digital life clearer and more private.</p>
-    </div>
-
-    <div class="card card-xl">
-      <h2>How it works</h2>
-      <ul class="list">
-        <li>10% calculated from <strong>revenue after payment processor fees and taxes/refunds</strong>.</li>
-        <li>Quarterly <strong>reports and amounts</strong> published (PDF and brief summary).</li>
-        <li>Funds distributed through official contracts: schools/universities/NPOs/developers.</li>
+    <section class="card">
+      <h3>How it works</h3>
+      <ul>
+        <li>10% of net revenue, calculated quarterly.</li>
+        <li><b>Quarterly reports</b> (PDF) plus a short summary on this page.</li>
+        <li>Support via official agreements (schools/universities/NGOs/developers).</li>
         <li>No politics — only education, research and open-source.</li>
       </ul>
+      <p class="note"><a class="btn" href="/en/fund/apply/">Apply</a></p>
+    </section>
+
+    <h2 style="margin:22px 0 10px">Focus areas</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Privacy for students</h3>
+        <p class="muted">Short lessons for kids and parents: passwords, phishing, cookies, why "local first" is safer.</p>
+        <details><summary>What we fund</summary>
+          <ul>
+            <li>Mini-course (4–6 lessons) with decks and short videos</li>
+            <li>Posters/handouts for schools</li>
+            <li>Guides for classroom talks</li>
+          </ul>
+        </details>
+        <details><summary>Who & outcomes</summary>
+          <p>Schools, after-school programs, NGOs. Outcomes: PDF guide, 6 short videos, 3 A3 posters, pilot report.</p>
+        </details>
+      </article>
+
+      <article class="card">
+        <h3>UI/UX for privacy</h3>
+        <p class="muted">We support projects designing interfaces without tracking and heavy telemetry.</p>
+        <details><summary>What we fund</summary>
+          <ul>
+            <li>Course/graduate projects</li>
+            <li>Interfaces that work without tracking</li>
+            <li>Research on wording/iconography explaining privacy</li>
+          </ul>
+        </details>
+        <details><summary>Who & outcomes</summary>
+          <p>Students/researchers, UX labs. Outcomes: Figma prototype, article, open "privacy-by-design for forms" guide.</p>
+        </details>
+      </article>
+
+      <article class="card">
+        <h3>Open-source for offline data</h3>
+        <p class="muted">Tools that work without the cloud: fewer leaks, less third-party dependency.</p>
+        <details><summary>What we fund</summary>
+          <ul>
+            <li>Local clipboard/notes managers</li>
+            <li>Offline encryption and local backups</li>
+            <li>Input-recovery tools for offline use</li>
+          </ul>
+        </details>
+        <details><summary>Who & outcomes</summary>
+          <p>OSS developers/teams (MIT/BSD/Apache). Outcomes: GitHub repo, release, video demo, local test guide.</p>
+        </details>
+      </article>
     </div>
 
-    <div class="grid" style="margin-top: 40px;">
-      <div class="card">
-        <h3>🎓 Privacy for Students</h3>
-        <p><strong>Why:</strong> children and parents quickly understand basic risks: passwords, phishing, what "cookies" are, why "local is safer".</p>
-        
-        <h4>What we fund:</h4>
-        <ul class="list">
-          <li>mini-course of 4–6 lessons (presentations + videos up to 3 min)</li>
-          <li>school posters</li>
-          <li>local handbooks for classroom hours</li>
-        </ul>
-        
-        <p><strong>Who it's for:</strong> schools, additional education, NPOs in education.</p>
-        <p><strong>Example results:</strong> PDF manual, 6 short videos, 3 A3 posters, pilot implementation report in school N.</p>
-      </div>
+    <section class="card" style="margin-top:16px">
+      <h3>How to apply</h3>
+      <p>Prepare a short description (up to 1000 chars), plan/budget, timeline, what will be public (code/materials), link to your profile/organization.</p>
+      <p class="note"><a class="btn" href="/en/fund/apply/">Apply</a></p>
+      <p class="muted">Evaluation criteria: usefulness and clarity, openness, realistic budget/timing, fit with "local & private", no politics.</p>
+    </section>
 
-      <div class="card">
-        <h3>🎨 UI/UX Privacy Scholarships</h3>
-        <p><strong>Why:</strong> interfaces without tracking are harder to design — we encourage research and prototypes.</p>
-        
-        <h4>What we fund:</h4>
-        <ul class="list">
-          <li>diploma/course work</li>
-          <li>"telemetry-free" interface prototypes</li>
-          <li>research on clear texts/iconography about privacy</li>
-        </ul>
-        
-        <p><strong>Who it's for:</strong> students/graduate students/researchers, UX labs.</p>
-        <p><strong>Example results:</strong> Figma prototype, article on Habr/VC, open manual "Privacy-by-design for forms".</p>
-      </div>
+    <section class="card" style="margin-top:16px">
+      <h3>Reporting</h3>
+      <p>Each quarter we publish a PDF report and a short summary: amounts, supported projects, links to outcomes. No personal data.</p>
+      <p class="muted" style="font-size:13px">Disclaimer: this is a CSR info page, not a public offer/pledge. Support decisions are made via our internal process.</p>
+    </section>
+  </main>
 
-      <div class="card">
-        <h3>🔧 Open-source for Offline Data</h3>
-        <p><strong>Why:</strong> tools that work <strong>without</strong> cloud reduce leaks and third-party dependencies.</p>
-        
-        <h4>What we fund:</h4>
-        <ul class="list">
-          <li>local clipboard/notes managers</li>
-          <li>offline encryption and local backup</li>
-          <li>offline input recovery tools</li>
-        </ul>
-        
-        <p><strong>Who it's for:</strong> OSS developers/teams with open code (MIT/BSD/Apache).</p>
-        <p><strong>Example results:</strong> GitHub repository, release with release notes, video demo, local verification guide.</p>
-      </div>
+  <footer>
+    <div>© <span id="y">2025</span> LifeUndo · <a href="/en/support/">Support</a> · <a href="/en/pricing/">Pricing</a> · <a href="/en/fund/">Fund</a></div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="/en/fund/"><img src="/assets/fund/we_give_10.svg" alt="We give 10%" height="28"></a>
+      <a href="https://pay.freekassa.ru/" target="_blank" rel="noopener"><img src="/assets/freekassa/fk_badge_en.svg" alt="FreeKassa" height="28"></a>
     </div>
-
-    <div class="card card-xl center" style="margin-top: 40px;">
-      <h2>How to Apply</h2>
-      <p>Required: brief description (up to 1000 characters), plan/budget, timeline, what will be public (code/educational materials), link to profile/organization.</p>
-      <p><a class="btn primary" href="/en/fund/apply">Apply Now</a></p>
-      
-      <h3 style="margin-top: 32px;">Selection Criteria</h3>
-      <ul class="list" style="text-align: left;">
-        <li>usefulness and clarity</li>
-        <li>openness of results</li>
-        <li>realistic budget/timeline</li>
-        <li>no politics</li>
-        <li>alignment with our "local and private" focus</li>
-      </ul>
-    </div>
-
-    <div class="card card-xl center" style="margin-top: 40px;">
-      <h2>Reporting</h2>
-      <p>Quarterly PDF + page summary (contribution amounts, list of supported projects, links to results).</p>
-      <p>No personal data — only aggregates and public artifacts.</p>
-      
-      <div id="fund-counter" style="margin-top: 24px; padding: 20px; background: var(--card); border-radius: var(--radius);">
-        <h3>For period 2025-Q4</h3>
-        <p>Will contribute 10% = <span id="pledge-amount">$0</span></p>
-        <p class="small">(revenue after fees and taxes: <span id="net-revenue">$0</span>)</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container center">
-    <div class="links">
-      <a href="/en/">Home</a> ·
-      <a href="/en/faq/">FAQ</a> ·
-      <a href="/en/news/">News</a> ·
-      <a href="/en/changelog/">Changelog</a> ·
-      <a href="/en/privacy/">Privacy</a> ·
-      <a href="/en/pricing/">Pricing</a> ·
-      <a href="/en/support/">Support</a> ·
-      <a href="/en/fund/">Fund</a>
-    </div>
-    <div style="margin-top: 16px;">
-      <img src="../../assets/fund/we_give_10.svg" height="28" alt="We give 10%" style="margin-right: 16px;">
-      <img src="../../assets/freekassa/fk_badge_en.svg" height="28" alt="FreeKassa">
-    </div>
-    <div class="small" style="margin-top:10px">
-      © 2025 LifeUndo · 
-      <span style="color: var(--muted);">This is an informational CSR page. Not a public offer/promise of donation under legislation. Funding decisions made by fund/company through internal procedures.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-// Load fund totals
-fetch('../../assets/fund/totals.json')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('pledge-amount').textContent = '$' + data.pledge_10pct.toLocaleString();
-    document.getElementById('net-revenue').textContent = '$' + data.net_revenue.toLocaleString();
-  })
-  .catch(error => {
-    console.log('Fund totals not available yet');
-  });
-</script>
-
+  </footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>

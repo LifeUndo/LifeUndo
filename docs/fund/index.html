@@ -3,176 +3,172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>GetLifeUndo Fund — LifeUndo</title>
-  <meta name="description" content="GetLifeUndo Fund — 10% от выручки на цифровую грамотность и приватность. Поддержка образования, исследований и open-source проектов.">
-  <link rel="icon" href="../assets/lifeundo-round.png">
-  <link rel="stylesheet" href="../assets/site.css">
+  <title>GetLifeUndo Fund — 10% на цифровую грамотность и приватность</title>
+  <meta name="description" content="Мы фиксируем: 10% от нашей выручки идут на образование и инженерные инициативы в области цифровой грамотности и приватности. Прозрачные отчёты, понятные правила.">
+
+  <!-- Canonical & hreflang -->
   <link rel="canonical" href="https://lifeundo.ru/fund/">
-  <link rel="alternate" hreflang="en" href="https://lifeundo.ru/en/fund/">
-  <link rel="alternate" hreflang="ru" href="https://lifeundo.ru/fund/">
-  <meta property="og:title" content="GetLifeUndo Fund — 10% на цифровую грамотность">
-  <meta property="og:description" content="10% от выручки LifeUndo идут на образование и проекты приватности.">
-  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+  <link rel="alternate" href="https://lifeundo.ru/fund/" hreflang="ru">
+  <link rel="alternate" href="https://lifeundo.ru/en/fund/" hreflang="en">
+  <link rel="alternate" href="https://lifeundo.ru/fund/" hreflang="x-default">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GetLifeUndo Fund — 10% на цифровую грамотность">
-  <meta name="twitter:description" content="10% от выручки LifeUndo идут на образование и проекты приватности.">
-  <meta name="twitter:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"GetLifeUndo Fund",
-    "url":"https://lifeundo.ru/fund/",
-    "description":"Корпоративная социальная программа LifeUndo: 10% от выручки на цифровую грамотность и приватность"
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="LifeUndo">
+  <meta property="og:title" content="GetLifeUndo Fund — 10% на цифровую грамотность и приватность">
+  <meta property="og:description" content="10% от выручки — на образование и инженерные инициативы по приватности. Прозрачная отчётность, понятные правила.">
+  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+
+  <style>
+    :root{--bg1:#0b1020;--bg2:#0f172a;--line:#1f2937;--ink:#e2e8f0;--muted:#94a3b8;--pri:#0ea5e9;--pri2:#0284c7}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;margin:0;line-height:1.65;color:#fff;background:linear-gradient(180deg,var(--bg1),var(--bg2) 40%,var(--bg1))}
+    .wrap{max-width:1024px;margin:0 auto;padding:24px}
+    header,footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header a.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+    header img{width:36px;height:36px;border-radius:12px}
+    nav a{color:#a3b3d3;text-decoration:none;margin:0 10px}
+    nav a:hover{text-decoration:underline;color:#fff}
+    .hero{margin:28px 0;padding:22px;border:1px solid var(--line);border-radius:16px;background:rgba(15,23,42,.6)}
+    .hero h1{margin:0 0 10px;font-size:28px}
+    .hero p{margin:6px 0;color:#cbd5e1}
+    .badge{display:inline-flex;align-items:center;gap:8px;margin-top:10px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .card{border:1px solid var(--line);border-radius:16px;background:rgba(2,6,23,.6);padding:16px}
+    .card h3{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .note{margin-top:10px;color:#cbd5e1}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--pri2);background:var(--pri);color:#001019;text-decoration:none;font-weight:600}
+    details{border:1px dashed #263041;border-radius:12px;padding:12px;background:rgba(2,6,23,.45)}
+    details summary{cursor:pointer;font-weight:600}
+    .totals{margin:14px 0;padding:12px;border:1px dashed #364255;border-radius:12px;background:rgba(2,6,23,.45)}
+    footer{margin-top:36px;padding-top:16px;border-top:1px dashed #1e293b;color:var(--muted)}
+  </style>
+  <script>
+  // Тянем агрегаты (если файл есть); безопасный фолбэк на 0
+  async function drawTotals(){
+    try{
+      const r = await fetch('/assets/fund/totals.json', {cache:'no-store'});
+      const j = await r.json();
+      const net = j.net_revenue||0, p = Math.round(net*0.10);
+      document.getElementById('fundTotals').textContent =
+        `Период ${j.period||'-'}: чистая выручка ${net.toLocaleString('ru-RU')} ${j.currency||'RUB'} → отчисляем 10% = ${p.toLocaleString('ru-RU')} ${j.currency||'RUB'}`;
+    }catch(e){
+      document.getElementById('fundTotals').textContent = 'Период: скоро. Чистая выручка: 0 → 10% = 0';
+    }
   }
+  document.addEventListener('DOMContentLoaded', drawTotals);
   </script>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="/"><img src="/assets/lifeundo-round.png" alt="LifeUndo"><strong>LifeUndo</strong></a>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/faq/ru.html">FAQ</a>
+      <a href="/news/">Новости</a>
+      <a href="/changelog/">Список изменений</a>
+      <a href="/privacy/ru.html">Приватность</a>
+      <a href="/pricing/">Тарифы</a>
+      <a href="/support/">Поддержка</a>
+      <a href="/en/fund/">EN</a>
+    </nav>
+  </header>
 
-<header class="header">
-  <div class="container nav">
-    <a href="/" class="logo"><img src="../assets/lifeundo-round.png" alt=""><span>LifeUndo</span></a>
-    <a class="btn ghost" href="/">Главная</a>
-    <a class="btn ghost" href="/faq/">FAQ</a>
-    <a class="btn ghost" href="/news/">Новости</a>
-    <a class="btn ghost" href="/changelog/">Изменения</a>
-    <a class="btn ghost" href="/privacy/">Приватность</a>
-    <a class="btn ghost" href="/pricing/">Цены</a>
-    <a class="btn ghost" href="/support/">Поддержка</a>
-    <a class="btn ghost" href="/en/fund/">EN</a>
-  </div>
-</header>
+  <main>
+    <section class="hero">
+      <h1>GetLifeUndo Fund — 10% на цифровую грамотность и приватность</h1>
+      <p>Мы фиксируем в политике бренда: <b>10% от чистой выручки</b> LifeUndo направляются на образование и инженерные инициативы, которые делают цифровую жизнь понятнее и приватнее. Без политики. С прозрачной отчётностью.</p>
+      <div class="badge">
+        <img src="/assets/fund/we_give_10.svg" alt="We give 10%" height="28">
+      </div>
+      <div class="totals" id="fundTotals">Загрузка…</div>
+      <p class="muted">«Чистая выручка» = выручка минус комиссии платёжных систем, налоги и возвраты.</p>
+    </section>
 
-<section class="page">
-  <div class="container">
-    <div class="card card-xl center">
-      <h1>GetLifeUndo Fund</h1>
-      <p class="lead">10% от выручки на цифровую грамотность и приватность</p>
-      <p>Мы фиксируем в политике бренда: 10% от нашей выручки идут на образование и инженерные проекты, которые делают цифровую жизнь понятнее и приватнее.</p>
-    </div>
-
-    <div class="card card-xl">
-      <h2>Как это работает</h2>
-      <ul class="list">
-        <li>10% считаем от <strong>выручки после комиссий платёжных систем и налогов/возвратов</strong>.</li>
-        <li>Раз в квартал публикуем <strong>отчёт и суммы</strong> (PDF и краткая сводка).</li>
-        <li>Деньги идут по официальным договорам: школы/вузы/ОНКО/разработчики.</li>
+    <section class="card">
+      <h3>Как это работает</h3>
+      <ul>
+        <li>Считаем 10% от чистой выручки по итогам квартала.</li>
+        <li>Публикуем <b>квартальные отчёты</b> (PDF) и краткую сводку на этой странице.</li>
+        <li>Поддержка осуществляется по официальным договорам (школы/вузы/НКО/разработчики).</li>
         <li>Никакой политики — только образование, исследования и open-source.</li>
       </ul>
+      <p class="note"><a class="btn" href="/fund/apply/">Подать заявку</a></p>
+    </section>
+
+    <h2 style="margin:22px 0 10px">Направления поддержки</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Приватность для школьников</h3>
+        <p class="muted">Короткие уроки и материалы для детей и родителей: пароли, фишинг, куки, почему «локально» — безопаснее.</p>
+        <details><summary>Что финансируем</summary>
+          <ul>
+            <li>Мини-курс (4–6 уроков) с презентациями и роликами до 3 минут</li>
+            <li>Плакаты/памятки для школы</li>
+            <li>Методички для классных часов</li>
+          </ul>
+        </details>
+        <details><summary>Кому подходит и результаты</summary>
+          <p>Школы, допобразование, НКО. Результаты: PDF-пособие, 6 коротких видео, 3 плаката А3, отчёт о пилоте в школе.</p>
+        </details>
+      </article>
+
+      <article class="card">
+        <h3>Стипендии по UI/UX приватности</h3>
+        <p class="muted">Поддерживаем проекты, где интерфейсы проектируются без трекинга и сложной телеметрии.</p>
+        <details><summary>Что финансируем</summary>
+          <ul>
+            <li>Курсовые/дипломные работы</li>
+            <li>Прототипы интерфейсов «без телеметрии»</li>
+            <li>Исследования текстов/иконографии про приватность</li>
+          </ul>
+        </details>
+        <details><summary>Кому подходит и результаты</summary>
+          <p>Студенты/исследователи, UX-лаборатории. Результаты: Figma-прототип, статья, открытая методичка «Privacy-by-design для форм».</p>
+        </details>
+      </article>
+
+      <article class="card">
+        <h3>Open-source для оффлайн-данных</h3>
+        <p class="muted">Инструменты, которые работают без облака: меньше утечек и зависимости от третьих лиц.</p>
+        <details><summary>Что финансируем</summary>
+          <ul>
+            <li>Локальные менеджеры буфера/заметок</li>
+            <li>Оффлайн-шифрование и локальный бэкап</li>
+            <li>Инструменты восстановления ввода в оффлайне</li>
+          </ul>
+        </details>
+        <details><summary>Кому подходит и результаты</summary>
+          <p>OSS-разработчики/команды (MIT/BSD/Apache). Результаты: GitHub-репозиторий, релиз, видео-демо, инструкция по локальному тесту.</p>
+        </details>
+      </article>
     </div>
 
-    <div class="grid" style="margin-top: 40px;">
-      <div class="card">
-        <h3>🎓 Приватность для школьников</h3>
-        <p><strong>Зачем:</strong> ребёнок и родитель быстро понимают базовые риски: пароли, фишинг, что такое «куки», почему «локально — безопаснее».</p>
-        
-        <h4>Что финансируем:</h4>
-        <ul class="list">
-          <li>мини-курс на 4–6 уроков (презентации + ролики до 3 мин)</li>
-          <li>плакаты для школ</li>
-          <li>локальные методички для классных часов</li>
-        </ul>
-        
-        <p><strong>Кому подходит:</strong> школы, допобразование, НКО в сфере образования.</p>
-        <p><strong>Примеры результатов:</strong> PDF-пособие, 6 коротких видео, 3 плаката А3, отчёт о пилотном внедрении в школе N.</p>
-      </div>
+    <section class="card" style="margin-top:16px">
+      <h3>Как подать заявку</h3>
+      <p>Подготовьте краткое описание (до 1000 символов), план/смету, сроки, что именно будет публичным (код/материалы), ссылку на профиль/организацию.</p>
+      <p class="note"><a class="btn" href="/fund/apply/">Подать заявку</a></p>
+      <p class="muted">Заявки рассматриваются по критериям: польза и понятность, открытость результата, реалистичный бюджет/сроки, соответствие фокусу «локально и приватно», отсутствие политики.</p>
+    </section>
 
-      <div class="card">
-        <h3>🎨 Стипендии по UI/UX приватности</h3>
-        <p><strong>Зачем:</strong> интерфейсы без трекинга сложнее проектировать — поощряем исследования и прототипы.</p>
-        
-        <h4>Что финансируем:</h4>
-        <ul class="list">
-          <li>дипломные/курсовые работы</li>
-          <li>прототипы интерфейсов «без телеметрии»</li>
-          <li>исследования понятных текстов/иконографии про приватность</li>
-        </ul>
-        
-        <p><strong>Кому подходит:</strong> студенты/аспиранты/исследователи, UX-лаборатории.</p>
-        <p><strong>Примеры результатов:</strong> Figma-прототип, статья на Хабр/VC, открытая методичка «Privacy-by-design для форм».</p>
-      </div>
+    <section class="card" style="margin-top:16px">
+      <h3>Отчётность</h3>
+      <p>Раз в квартал публикуем PDF-отчёт и краткую сводку: суммы, список поддержанных проектов, ссылки на результаты. Без персональных данных.</p>
+      <p class="muted" style="font-size:13px">Дисклеймер: это информационная CSR-страница и не является публичной офертой/обещанием пожертвования. Решения о поддержке принимаются по внутренней процедуре компании.</p>
+    </section>
+  </main>
 
-      <div class="card">
-        <h3>🔧 Open-source для оффлайн-данных</h3>
-        <p><strong>Зачем:</strong> инструменты, которые работают <strong>без</strong> облака, уменьшают утечки и зависимость от третьих лиц.</p>
-        
-        <h4>Что финансируем:</h4>
-        <ul class="list">
-          <li>локальные менеджеры буфера/заметок</li>
-          <li>оффлайн-шифрование и локальный бэкап</li>
-          <li>инструменты восстановления ввода в оффлайн-режиме</li>
-        </ul>
-        
-        <p><strong>Кому подходит:</strong> OSS-разработчики/команды с открытым кодом (MIT/BSD/Apache).</p>
-        <p><strong>Примеры результатов:</strong> GitHub-репозиторий, релиз с релиз-нотами, видео-демо, инструкция по локальной проверке.</p>
-      </div>
+  <footer>
+    <div>© <span id="y">2025</span> LifeUndo · <a href="/support/">Поддержка</a> · <a href="/pricing/">Тарифы</a> · <a href="/fund/">Фонд</a></div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="/fund/"><img src="/assets/fund/we_give_10.svg" alt="We give 10%" height="28"></a>
+      <a href="https://pay.freekassa.ru/" target="_blank" rel="noopener"><img src="/assets/freekassa/fk_badge_ru.svg" alt="FreeKassa" height="28"></a>
     </div>
-
-    <div class="card card-xl center" style="margin-top: 40px;">
-      <h2>Как подать заявку</h2>
-      <p>Нужны: краткое описание (до 1000 символов), план/смета, таймлайн, что именно будет публичным (код/учебные материалы), ссылка на профиль/организацию.</p>
-      <p><a class="btn primary" href="/fund/apply">Подать заявку</a></p>
-      
-      <h3 style="margin-top: 32px;">Критерии отбора</h3>
-      <ul class="list" style="text-align: left;">
-        <li>польза и понятность</li>
-        <li>открытость результата</li>
-        <li>реалистичный бюджет/сроки</li>
-        <li>отсутствие политики</li>
-        <li>уместность под нашим фокусом «локально и приватно»</li>
-      </ul>
-    </div>
-
-    <div class="card card-xl center" style="margin-top: 40px;">
-      <h2>Отчётность</h2>
-      <p>Квартальные PDF + сводка на странице (сумма отчислений, список поддержанных проектов, ссылки на результаты).</p>
-      <p>Нет персональных данных — только агрегаты и публичные артефакты.</p>
-      
-      <div id="fund-counter" style="margin-top: 24px; padding: 20px; background: var(--card); border-radius: var(--radius);">
-        <h3>За период 2025-Q4</h3>
-        <p>Отчислим 10% = <span id="pledge-amount">0</span> ₽</p>
-        <p class="small">(выручка после комиссий и налогов: <span id="net-revenue">0</span> ₽)</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container center">
-    <div class="links">
-      <a href="/">Главная</a> ·
-      <a href="/faq/">FAQ</a> ·
-      <a href="/news/">Новости</a> ·
-      <a href="/changelog/">Изменения</a> ·
-      <a href="/privacy/">Приватность</a> ·
-      <a href="/pricing/">Цены</a> ·
-      <a href="/support/">Поддержка</a> ·
-      <a href="/fund/">Фонд</a>
-    </div>
-    <div style="margin-top: 16px;">
-      <img src="../assets/fund/we_give_10.svg" height="28" alt="We give 10%" style="margin-right: 16px;">
-      <img src="../assets/freekassa/fk_badge_ru.svg" height="28" alt="FreeKassa">
-    </div>
-    <div class="small" style="margin-top:10px">
-      © 2025 LifeUndo · 
-      <span style="color: var(--muted);">Это информационная страница CSR. Не является публичной офертой/обещанием пожертвования в смысле законодательства. Решения о поддержке принимает фонд/компания по внутренней процедуре.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-// Load fund totals
-fetch('../assets/fund/totals.json')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('pledge-amount').textContent = data.pledge_10pct.toLocaleString();
-    document.getElementById('net-revenue').textContent = data.net_revenue.toLocaleString();
-  })
-  .catch(error => {
-    console.log('Fund totals not available yet');
-  });
-</script>
-
+  </footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
