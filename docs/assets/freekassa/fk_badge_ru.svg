@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="160" height="36" viewBox="0 0 160 36">
-  <rect width="160" height="36" rx="8" fill="#0EA5E9"/>
-  <rect x="2" y="2" width="156" height="32" rx="6" fill="#001019"/>
-  <text x="20" y="22" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu" font-size="13" font-weight="bold" fill="#0EA5E9">💳 ОПЛАТА • FREEKASSA</text>
-  <circle cx="12" cy="18" r="4" fill="#0EA5E9"/>
+  <rect width="160" height="36" rx="8" fill="#DC2626"/>
+  <rect x="2" y="2" width="156" height="32" rx="6" fill="#1F2937"/>
+  <text x="20" y="22" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu" font-size="13" font-weight="bold" fill="#FFFFFF">💳 ОПЛАТА • FREEKASSA</text>
+  <circle cx="12" cy="18" r="4" fill="#FFFFFF"/>
 </svg>
