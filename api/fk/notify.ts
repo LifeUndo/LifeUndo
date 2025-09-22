@@ -11,17 +11,35 @@ function clientIp(req: VercelRequest): string {
   return h('x-real-ip') || h('x-forwarded-for')?.split(',')[0]?.trim() || (req.socket as any).remoteAddress || '';
 }
 
-// Проверка подписи FreeKassa (заглушка - нужно обновить по документации кабинета)
+// Таблица планов (та же, что в create.ts)
+const PLANS = {
+  pro_month:     { amount: 149,  currency: 'RUB', label: 'Pro (месяц)' },
+  pro_year:      { amount: 1490, currency: 'RUB', label: 'Pro (год)' },
+  vip_lifetime:  { amount: 2490, currency: 'RUB', label: 'VIP (Lifetime)' },
+  team:          { amount: 150,  currency: 'RUB', label: 'Team (за место, от)' }
+} as const;
+
+// Хранилище обработанных заказов (в памяти, позже можно заменить на KV/Blob)
+const processedOrders = new Set<string>();
+
+// Проверка подписи FreeKassa (точно такая же формула, как в create.ts)
 function verifySignature(payload: Record<string, any>): boolean {
   const crypto = require('crypto');
   const sign = String(payload.sign || payload.signature || '');
   
-  // ВНИМАНИЕ: у FreeKassa есть несколько версий подписей. Сверь поля/порядок по документации кабинета!
-  // Пример для схемы "SHA256 от отсортированных полей + секрет"
+  // Точная формула: SHA256(merchant_id:amount:currency:order_id:secret)
   const base = `${payload.merchant_id}:${payload.amount}:${payload.currency}:${payload.order_id}:${FK_SECRET}`;
   const digest = crypto.createHash('sha256').update(base).digest('hex');
   
   return digest.toLowerCase() === sign.toLowerCase();
+}
+
+// Валидация плана и суммы
+function validatePlanAndAmount(plan: string, amount: number, currency: string): boolean {
+  if (!plan || !(plan in PLANS)) return false;
+  
+  const expectedPlan = PLANS[plan as keyof typeof PLANS];
+  return expectedPlan.amount === amount && expectedPlan.currency === currency;
 }
 
 function jsonLine(o: any) {
@@ -163,18 +181,36 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // 3) Проверка подписи
   const signatureOk = verifySignature(body);
 
-  // 4) Подготовим запись
+  // 4) Идемпотентность - проверяем, не обрабатывали ли уже этот заказ
+  const orderId = String(body.order_id);
+  if (processedOrders.has(orderId)) {
+    console.log('Order already processed:', orderId);
+    return res.status(200).send('OK'); // Уже обработан, возвращаем OK
+  }
+
+  // 5) Валидация плана и суммы
+  const plan = String(body.us_plan || '');
+  const amount = Number(body.amount);
+  const currency = String(body.currency);
+  
+  if (!validatePlanAndAmount(plan, amount, currency)) {
+    console.error('Invalid plan/amount for order:', orderId, { plan, amount, currency });
+    return res.status(400).send('Invalid plan or amount');
+  }
+
+  // 6) Подготовим запись
   const record = {
     ts: new Date().toISOString(),
     provider: 'freekassa',
     merchant_id: String(body.merchant_id),
-    order_id: String(body.order_id),
-    amount: Number(body.amount),
-    currency: String(body.currency),
-    plan: String(body.us_plan || ''),
+    order_id: orderId,
+    amount,
+    currency,
+    plan,
     email: String(body.us_email || ''),
     locale: String(body.us_locale || 'ru'),
     signature_ok: signatureOk,
+    processed: true,
     raw: body
   };
 
@@ -187,9 +223,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Если подпись неверная - возвращаем ошибку
   if (!signatureOk) {
-    console.error('Bad signature for order:', body.order_id);
+    console.error('Bad signature for order:', orderId);
     return res.status(400).send('Bad signature');
   }
+
+  // Помечаем заказ как обработанный
+  processedOrders.add(orderId);
 
   // 5) Отправляем письмо покупателю
   const email = String(body.us_email || '');

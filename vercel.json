@@ -4,6 +4,9 @@
     "api/fk/notify.ts": {
       "maxDuration": 30
     },
+    "api/fk/create.ts": {
+      "maxDuration": 15
+    },
     "api/health.ts": {
       "maxDuration": 10
     }

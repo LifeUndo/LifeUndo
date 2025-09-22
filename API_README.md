@@ -41,7 +41,17 @@ vercel --prod
 curl https://your-project.vercel.app/api/health
 ```
 
+#### Тест создания платежа
+```bash
+node test-webhook.js create https://your-project.vercel.app/api/fk/create
+```
+
 #### Тестовый webhook
+```bash
+node test-webhook.js notify https://your-project.vercel.app/api/fk/notify
+```
+
+#### Ручной тест webhook
 ```bash
 curl -X POST https://your-project.vercel.app/api/fk/notify \
   -H "Content-Type: application/json" \
@@ -62,12 +72,48 @@ curl -X POST https://your-project.vercel.app/api/fk/notify \
 ```
 api/
 ├── fk/
-│   └── notify.ts      # FreeKassa webhook
+│   ├── notify.ts      # FreeKassa webhook (обработка уведомлений)
+│   └── create.ts      # Создание платежных ссылок
 ├── health.ts          # Health check
 ├── package.json       # Зависимости
 ├── vercel.json        # Конфигурация Vercel
+├── test-webhook.js    # Тестовый скрипт
 └── API_README.md      # Эта инструкция
 ```
+
+## API Endpoints
+
+### POST /api/fk/create
+Создает платежную ссылку FreeKassa.
+
+**Request:**
+```json
+{
+  "email": "user@example.com",
+  "plan": "pro_year",
+  "locale": "ru"
+}
+```
+
+**Response:**
+```json
+{
+  "url": "https://pay.freekassa.ru/?merchant_id=...",
+  "order_id": "LU-1234567890-abc123"
+}
+```
+
+### POST /api/fk/notify
+Webhook для обработки уведомлений от FreeKassa.
+
+**Features:**
+- Проверка подписи
+- Идемпотентность (защита от повторной обработки)
+- Валидация плана и суммы
+- Автоматическая отправка email уведомлений
+
+### GET /api/health
+Health check endpoint.
 
 ## Важные замечания
 

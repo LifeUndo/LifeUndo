@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
 /**
- * Тестовый скрипт для проверки FreeKassa webhook
- * Использование: node test-webhook.js <webhook-url>
+ * Тестовый скрипт для проверки FreeKassa API
+ * Использование: 
+ *   node test-webhook.js create <api-url> - тест создания платежа
+ *   node test-webhook.js notify <webhook-url> - тест webhook
  */
 
 const https = require('https');
 const crypto = require('crypto');
 
-// Тестовые данные
-const testData = {
+// Тестовые данные для webhook
+const testWebhookData = {
   merchant_id: 'TEST_MERCHANT',
   order_id: 'LU-TEST-' + Date.now(),
   amount: '1490',
@@ -20,68 +22,134 @@ const testData = {
   sign: '' // Будет заполнено ниже
 };
 
+// Тестовые данные для создания платежа
+const testCreateData = {
+  email: 'test@example.com',
+  plan: 'pro_year',
+  locale: 'ru'
+};
+
 // Секретный ключ (для теста)
 const secretKey = 'TEST_SECRET_KEY';
 
-// Генерируем подпись
+// Генерируем подпись для webhook
 function generateSignature(data, secret) {
   const base = `${data.merchant_id}:${data.amount}:${data.currency}:${data.order_id}:${secret}`;
   return crypto.createHash('sha256').update(base).digest('hex');
 }
 
 // Устанавливаем подпись
-testData.sign = generateSignature(testData, secretKey);
+testWebhookData.sign = generateSignature(testWebhookData, secretKey);
 
-function testWebhook(url) {
-  const postData = JSON.stringify(testData);
+function makeRequest(url, data, method = 'POST') {
+  const postData = JSON.stringify(data);
   
   const options = {
-    method: 'POST',
+    method,
     headers: {
       'Content-Type': 'application/json',
       'Content-Length': Buffer.byteLength(postData)
     }
   };
 
-  console.log('🚀 Отправляем тестовый webhook на:', url);
-  console.log('📦 Данные:', JSON.stringify(testData, null, 2));
-  console.log('🔐 Подпись:', testData.sign);
+  return new Promise((resolve, reject) => {
+    const req = https.request(url, options, (res) => {
+      let responseData = '';
+      
+      res.on('data', (chunk) => {
+        responseData += chunk;
+      });
+      
+      res.on('end', () => {
+        resolve({
+          statusCode: res.statusCode,
+          data: responseData,
+          headers: res.headers
+        });
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.write(postData);
+    req.end();
+  });
+}
+
+async function testCreatePayment(url) {
+  console.log('🚀 Тестируем создание платежа на:', url);
+  console.log('📦 Данные:', JSON.stringify(testCreateData, null, 2));
   console.log('---');
 
-  const req = https.request(url, options, (res) => {
-    let data = '';
+  try {
+    const response = await makeRequest(url, testCreateData);
     
-    res.on('data', (chunk) => {
-      data += chunk;
-    });
+    console.log(`📊 Статус: ${response.statusCode}`);
+    console.log(`📝 Ответ: ${response.data}`);
     
-    res.on('end', () => {
-      console.log(`📊 Статус: ${res.statusCode}`);
-      console.log(`📝 Ответ: ${data}`);
-      
-      if (res.statusCode === 200) {
-        console.log('✅ Webhook работает корректно!');
+    if (response.statusCode === 200) {
+      const data = JSON.parse(response.data);
+      if (data.url && data.order_id) {
+        console.log('✅ Создание платежа работает корректно!');
+        console.log(`🔗 URL: ${data.url}`);
+        console.log(`🆔 Order ID: ${data.order_id}`);
       } else {
-        console.log('❌ Webhook вернул ошибку');
+        console.log('❌ Неверный формат ответа');
       }
-    });
-  });
-
-  req.on('error', (error) => {
+    } else {
+      console.log('❌ Создание платежа вернуло ошибку');
+    }
+  } catch (error) {
     console.error('❌ Ошибка запроса:', error.message);
-  });
+  }
+}
 
-  req.write(postData);
-  req.end();
+async function testWebhook(url) {
+  console.log('🚀 Тестируем webhook на:', url);
+  console.log('📦 Данные:', JSON.stringify(testWebhookData, null, 2));
+  console.log('🔐 Подпись:', testWebhookData.sign);
+  console.log('---');
+
+  try {
+    const response = await makeRequest(url, testWebhookData);
+    
+    console.log(`📊 Статус: ${response.statusCode}`);
+    console.log(`📝 Ответ: ${response.data}`);
+    
+    if (response.statusCode === 200) {
+      console.log('✅ Webhook работает корректно!');
+    } else {
+      console.log('❌ Webhook вернул ошибку');
+    }
+  } catch (error) {
+    console.error('❌ Ошибка запроса:', error.message);
+  }
 }
 
 // Проверяем аргументы
-const webhookUrl = process.argv[2];
-if (!webhookUrl) {
-  console.log('Использование: node test-webhook.js <webhook-url>');
-  console.log('Пример: node test-webhook.js https://your-project.vercel.app/api/fk/notify');
+const command = process.argv[2];
+const url = process.argv[3];
+
+if (!command || !url) {
+  console.log('Использование:');
+  console.log('  node test-webhook.js create <api-url>     - тест создания платежа');
+  console.log('  node test-webhook.js notify <webhook-url> - тест webhook');
+  console.log('');
+  console.log('Примеры:');
+  console.log('  node test-webhook.js create https://your-project.vercel.app/api/fk/create');
+  console.log('  node test-webhook.js notify https://your-project.vercel.app/api/fk/notify');
   process.exit(1);
 }
 
 // Запускаем тест
-testWebhook(webhookUrl);
+if (command === 'create') {
+  testCreatePayment(url);
+} else if (command === 'notify') {
+  testWebhook(url);
+} else {
+  console.log('❌ Неизвестная команда:', command);
+  console.log('Используйте: create или notify');
+  process.exit(1);
+}
