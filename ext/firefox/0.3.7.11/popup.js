@@ -24,6 +24,7 @@ const i18n = {
     footer_website: "Website",
     footer_privacy: "Privacy", 
     footer_support: "Support",
+    footer_fund: "Fund",
     footer_license: "License",
     whats_new: "What's new",
     status_importing: "Importing...",
@@ -38,7 +39,8 @@ const i18n = {
     btn_upgrade_pro: "Перейти на Pro",
     footer_website: "Сайт",
     footer_privacy: "Приватность",
-    footer_support: "Поддержка", 
+    footer_support: "Поддержка",
+    footer_fund: "Фонд", 
     footer_license: "Лицензия",
     whats_new: "Что нового",
     status_importing: "Импорт...",
@@ -60,11 +62,13 @@ function applyLang() {
   const linkWebsite = document.getElementById('linkWebsite');
   const linkPrivacy = document.getElementById('linkPrivacy');
   const linkSupport = document.getElementById('linkSupport');
+  const linkFund = document.getElementById('linkFund');
   const linkSettings = document.getElementById('linkSettings');
   
   if (linkWebsite) linkWebsite.textContent = t('footer_website');
   if (linkPrivacy) linkPrivacy.textContent = t('footer_privacy');
   if (linkSupport) linkSupport.textContent = t('footer_support');
+  if (linkFund) linkFund.textContent = t('footer_fund');
   if (linkSettings) linkSettings.textContent = t('footer_license');
   
   refreshVipUi();
@@ -168,6 +172,14 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Footer links
+document.getElementById('linkFund')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  const fundUrl = currentLang === 'ru' 
+    ? 'https://lifeundo.ru/fund/'
+    : 'https://lifeundo.ru/en/fund/';
+  api.tabs.create({ url: fundUrl });
+});
+
 document.getElementById('linkSettings')?.addEventListener('click', (e) => {
   e.preventDefault();
   api.runtime.openOptionsPage();
