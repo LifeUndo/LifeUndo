@@ -1,88 +1,152 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Privacy — LifeUndo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root{--bg:#0b1220;--card:#111a2e;--muted:#95a3c3;--text:#e8eefc;--accent:#3b82f6;--accent-2:#60a5fa;--radius:14px}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0b1220,#0c1530 60%,#0b1220)}
-    a{color:var(--accent);text-decoration:none} a:hover{color:var(--accent-2)}
-    header,footer{padding:14px 20px;backdrop-filter:blur(6px);background:rgba(11,18,32,0.6);border-bottom:1px solid rgba(147,197,253,.15)}
-    footer{border-top:1px solid rgba(147,197,253,.15);border-bottom:none;margin-top:40px}
-    .wrap{max-width:1040px;margin:0 auto;padding:0 14px} nav a{margin-right:16px}.lang{float:right;opacity:.9}
-    .card{background:var(--card);border:1px solid rgba(147,197,253,.15);border-radius:var(--radius);padding:16px;margin:20px 0}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy — LifeUndo</title>
+  <meta name="description" content="LifeUndo doesn't collect your data. Everything is stored locally in your browser. No telemetry, no analytics.">
+  <link rel="icon" href="../assets/lifeundo-round.png">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="canonical" href="https://lifeundo.ru/en/privacy/">
+  <link rel="alternate" hreflang="ru" href="https://lifeundo.ru/privacy/">
+  <link rel="alternate" hreflang="en" href="https://lifeundo.ru/en/privacy/">
+  <meta property="og:title" content="Privacy Policy — LifeUndo">
+  <meta property="og:description" content="LifeUndo doesn't collect your data. Everything is stored locally in your browser. No telemetry, no analytics.">
+  <meta property="og:image" content="https://lifeundo.ru/assets/lifeundo_og.png">
+  <meta property="og:type" content="website">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <img src="/logo.png" alt="LifeUndo" height="40" style="vertical-align:middle;margin-right:10px">
-    <nav style="display:inline-block;vertical-align:middle">
-      <a href="/en/index.html">Home</a>
-      <a href="/faq/en.html">FAQ</a>
-      <a href="/en/news/index.html">News</a>
-      <a href="/changelog/en.html">Changelog</a>
-      <a href="/privacy/en.html">Privacy</a>
-      <a href="/en/pricing/index.html">Pricing</a>
-      <span class="lang">Language: <a href="/privacy/ru.html">RU</a> · <strong>EN</strong></span>
-    </nav>
+
+<header class="header">
+  <div class="container nav">
+    <a href="/en/" class="logo"><img src="../assets/lifeundo-round.png" alt="LifeUndo" width="32" height="32"><span>LifeUndo</span></a>
+    <a class="btn ghost" href="/en/">Home</a>
+    <a class="btn ghost" href="/en/faq/">FAQ</a>
+    <a class="btn ghost" href="/en/changelog/">Changelog</a>
+    <a class="btn ghost" href="/en/news/">News</a>
+    <a class="btn ghost" href="/en/pricing/">Pricing</a>
+    <a class="btn ghost" href="/en/support/">Support</a>
+    <a class="btn ghost" href="/en/fund/" style="background: #0ea5e9; color: #001019; font-weight: bold;">Fund</a>
+    <a class="btn ghost" href="/privacy/">RU</a>
   </div>
 </header>
 
-<main class="wrap">
-  <h1>Privacy Policy</h1>
-  <div class="card">
-    <p><em>Updated: 2025-01-15</em></p>
-    
-    <h3>Privacy Principles</h3>
-    <ul>
-      <li><strong>Local Data Storage:</strong> All your data (text, tabs, clipboard) is stored only in your browser</li>
-      <li><strong>No Telemetry:</strong> The extension does not send any usage data</li>
-      <li><strong>No Analytics:</strong> We do not collect usage statistics or personal information</li>
-      <li><strong>Offline Licenses:</strong> VIP licenses are validated locally via ECDSA P-256 without server requests</li>
-    </ul>
+<section class="page">
+  <div class="container">
+    <div class="card card-xl center">
+      <h1>Privacy Policy</h1>
+      <p class="lead"><em>Updated: 2025-01-15</em></p>
+    </div>
 
-    <h3>What We DON'T Collect</h3>
-    <ul>
-      <li>Content of your text or clipboard</li>
-      <li>URLs of visited pages</li>
-      <li>Usage time or frequency of actions</li>
-      <li>Device or browser information</li>
-      <li>IP addresses or geolocation</li>
-    </ul>
+    <div class="card" style="margin-top: 40px;">
+      <h2>Privacy Principles</h2>
+      
+      <div class="grid" style="margin-top: 24px;">
+        <div class="card">
+          <h3>🏠 Local Data Storage</h3>
+          <p>All your data (text, tabs, clipboard) is stored only in your browser</p>
+        </div>
+        
+        <div class="card">
+          <h3>🚫 No Telemetry</h3>
+          <p>The extension does not send any usage data</p>
+        </div>
+        
+        <div class="card">
+          <h3>📊 No Analytics</h3>
+          <p>We do not collect usage statistics or personal information</p>
+        </div>
+        
+        <div class="card">
+          <h3>🔐 Offline Licenses</h3>
+          <p>VIP licenses are validated locally via ECDSA P-256 without server requests</p>
+        </div>
+      </div>
+    </div>
 
-    <h3>Data Storage</h3>
-    <p>All data is stored in browser's local storage (localStorage/sessionStorage) and can be cleared:</p>
-    <ul>
-      <li>Through extension settings (Delete Key button)</li>
-      <li>Through browser settings (Clear Site Data)</li>
-      <li>When uninstalling the extension</li>
-    </ul>
+    <div class="card" style="margin-top: 40px;">
+      <h2>What We DON'T Collect</h2>
+      
+      <div class="grid" style="margin-top: 24px;">
+        <div class="card">
+          <h3>📝 Content</h3>
+          <p>Content of your text or clipboard</p>
+        </div>
+        
+        <div class="card">
+          <h3>🌐 URLs</h3>
+          <p>URLs of visited pages</p>
+        </div>
+        
+        <div class="card">
+          <h3>⏰ Usage Time</h3>
+          <p>Usage time or frequency of actions</p>
+        </div>
+        
+        <div class="card">
+          <h3>💻 Device Info</h3>
+          <p>Device or browser information</p>
+        </div>
+        
+        <div class="card">
+          <h3>📍 Geolocation</h3>
+          <p>IP addresses or geolocation</p>
+        </div>
+      </div>
+    </div>
 
-    <h3>GetLifeUndo Fund</h3>
-    <p>10% of our net revenue goes to the digital literacy fund. This does not affect user privacy — the fund works with educational initiatives unrelated to user data.</p>
+    <div class="card" style="margin-top: 40px;">
+      <h2>Data Storage</h2>
+      <p>All data is stored in browser's local storage (localStorage/sessionStorage) and can be cleared:</p>
+      
+      <ul class="list" style="margin-top: 16px;">
+        <li>Through extension settings (Delete Key button)</li>
+        <li>Through browser settings (Clear Site Data)</li>
+        <li>When uninstalling the extension</li>
+      </ul>
+    </div>
 
-    <h3>Policy Changes</h3>
-    <p>We will update this page for significant changes. Current version is always available on the website.</p>
+    <div class="card" style="margin-top: 40px;">
+      <h2>GetLifeUndo Fund</h2>
+      <p>10% of our net revenue goes to the digital literacy fund. This does not affect user privacy — the fund works with educational initiatives unrelated to user data.</p>
+      <p style="margin-top: 16px;"><a href="/en/fund/" class="btn ghost">Learn more about the fund</a></p>
+    </div>
+
+    <div class="card" style="margin-top: 40px;">
+      <h2>Policy Changes</h2>
+      <p>We will update this page for significant changes. Current version is always available on the website.</p>
+    </div>
   </div>
-</main>
+</section>
 
-<footer>
-  <div class="wrap">
-    <nav>
-      <a href="/en/index.html">Website</a>
-      <a href="/privacy/en.html">Privacy</a>
-      <a href="/">Support</a>
-      · <a href="/"><img src="/free-icon-telegram-2111646.png" alt="Telegram" height="18"></a>
-      <a href="/"><img src="/free-icon-vk-3670055.png" alt="VK" height="18"></a>
-      <a href="/"><img src="/free-icon-odnoklassniki-3670250.png" alt="OK" height="18"></a>
-      <a href="/"><img src="/free-icon-youtube-4494485.png" alt="YouTube" height="18"></a>
-      <a href="/"><img src="/rutube.svg" alt="RuTube" height="18"></a>
-      <a href="/"><img src="/icons8-dzen.png" alt="Dzen" height="18"></a>
-      <span class="lang" aria-hidden="true" style="float:right">© LifeUndo</span>
-    </nav>
+<footer class="footer">
+  <div class="container center">
+    <div class="links">
+      <a href="/en/">Home</a> ·
+      <a href="/en/changelog/">Changelog</a> ·
+      <a href="/en/privacy/">Privacy</a> ·
+      <a href="/en/news/">News</a> ·
+      <a href="/en/pricing/">Pricing</a> ·
+      <a href="/en/support/">Support</a> ·
+      <a href="/en/fund/" style="color: #0ea5e9; font-weight: bold;">Fund</a>
+    </div>
+    <div class="social-links" style="margin-top: 16px; display: flex; gap: 8px; justify-content: center; align-items: center;">
+      <a href="https://vc.ru/lifeundo" target="_blank" rel="noopener" title="vc.ru"><img src="../assets/social/vc.svg" alt="vc.ru" height="24" style="border-radius: 4px;"></a>
+      <a href="https://habr.com/en/users/lifeundo" target="_blank" rel="noopener" title="Habr"><img src="../assets/social/habr.svg" alt="Habr" height="24" style="border-radius: 4px;"></a>
+      <a href="https://t.me/LifeUndoSupport" target="_blank" rel="noopener" title="Telegram"><img src="../assets/social/telegram.png" alt="Telegram" height="24" style="border-radius: 4px;"></a>
+      <a href="https://youtube.com/@lifeundo" target="_blank" rel="noopener" title="YouTube"><img src="../assets/social/youtube.png" alt="YouTube" height="24" style="border-radius: 4px;"></a>
+      <a href="https://reddit.com/r/lifeundo" target="_blank" rel="noopener" title="Reddit"><img src="../assets/social/reddit.svg" alt="Reddit" height="24" style="border-radius: 4px;"></a>
+      <a href="https://x.com/lifeundo" target="_blank" rel="noopener" title="X (Twitter)"><img src="../assets/social/x.svg" alt="X" height="24" style="border-radius: 4px;"></a>
+      <a href="https://dzen.ru/lifeundo" target="_blank" rel="noopener" title="Dzen"><img src="../assets/social/dzen.png" alt="Dzen" height="24" style="border-radius: 4px;"></a>
+      <a href="https://vk.com/lifeundo" target="_blank" rel="noopener" title="VK"><img src="../assets/social/vk.png" alt="VK" height="24" style="border-radius: 4px;"></a>
+    </div>
+    <div style="margin-top: 16px;">
+      <img src="../assets/fund/we_give_10.svg" height="32" alt="We give 10%" style="margin-right: 16px;">
+      <img src="../assets/freekassa/fk_badge_en.svg" height="32" alt="FreeKassa">
+    </div>
+    <div class="small" style="margin-top:10px">© 2025 LifeUndo</div>
   </div>
 </footer>
+
 </body>
 </html>
