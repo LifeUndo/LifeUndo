@@ -191,7 +191,7 @@ fetch('/assets/fund/totals.json')
   .then(response => response.json())
   .then(data => {
     document.getElementById('fundTotals').innerHTML = 
-      `💰 Всего направлено: <strong>${data.total.toLocaleString()} ₽</strong> | 🎯 Проектов: <strong>${data.projects}</strong>`;
+      `💰 Период: <strong>${data.period}</strong> | 10% = <strong>${data.fund_amount.toLocaleString()} ${data.currency}</strong> | 🎯 Проектов: <strong>${data.projects_supported}</strong>`;
   })
   .catch(() => {
     document.getElementById('fundTotals').innerHTML = '💰 Фонд запущен в сентябре 2025';
