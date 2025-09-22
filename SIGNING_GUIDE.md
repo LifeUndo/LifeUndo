@@ -43,3 +43,4 @@ node sign-license.js
 ## 4) Импорт лицензии
 
 Options → «Импортировать .lifelic». Статус отображается из License.humanStatus().
+

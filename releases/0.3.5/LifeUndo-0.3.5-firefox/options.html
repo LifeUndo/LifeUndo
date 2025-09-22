@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>LifeUndo — Лицензия</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font:14px/1.5 system-ui,Segoe UI,Roboto,Arial,sans-serif;color:#e7e7e7;background:#0f141a;margin:0}
+    .wrap{max-width:980px;margin:24px auto;padding:0 16px}
+    .card{background:#0b1016;border:1px solid #202833;border-radius:12px;padding:16px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn{background:#111827;border:1px solid #2b3644;border-radius:8px;padding:8px 14px;color:#e7e7e7;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,#4f46e5,#7c3aed);border:none}
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+    #status{margin-top:12px;min-height:20px}
+    #status.ok{color:#43d17d} #status.err{color:#ff6b6b}
+    ul.hint{margin:12px 0 0 18px;padding:0;color:#93a1af}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Лицензия</h1>
+    <div class="card">
+      <p>Импорт файла <code>.lifelic</code>. Проверка офлайн (ECDSA P-256 / SHA-256).</p>
+
+      <input id="vipFile" type="file" accept=".lifelic,application/json" hidden />
+      <div class="row" style="margin:8px 0 6px">
+        <button id="btnChoose" class="btn">Выбрать .lifelic</button>
+        <button id="btnImport" class="btn primary">Импортировать</button>
+        <button id="btnVerify" class="btn">Проверить</button>
+        <button id="btnRemove" class="btn">Удалить</button>
+      </div>
+
+      <div id="status"></div>
+
+      <ul class="hint">
+        <li>Скачайте файл .lifelic с сайта после покупки</li>
+        <li>Нажмите «Выбрать .lifelic» и укажите файл</li>
+        <li>Нажмите «Импортировать» — проверка пройдёт офлайн</li>
+      </ul>
+    </div>
+    <p style="opacity:.75;margin-top:18px">Website · Privacy · Firefox Add-ons</p>
+  </div>
+  <script src="options.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LifeUndo — Новости</title>
+    <description>Новости и обновления браузерного расширения LifeUndo</description>
+    <link>https://lifeundo.ru/news/</link>
+    <atom:link href="https://lifeundo.ru/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>ru</language>
+    <lastBuildDate>Wed, 11 Sep 2025 12:00:00 GMT</lastBuildDate>
+    
+    <item>
+      <title>Одобрение Firefox AMO</title>
+      <description>Расширение опубликовано в каталоге AMO. Ставьте из официальной карточки.</description>
+      <link>https://lifeundo.ru/news/</link>
+      <pubDate>Wed, 11 Sep 2025 12:00:00 GMT</pubDate>
+      <guid>https://lifeundo.ru/news/#amo-approved</guid>
+    </item>
+    
+    <item>
+      <title>v0.2.0: Pro и триал</title>
+      <description>Добавили Pro-лимиты, 7-дневный триал, офлайн-лицензирование.</description>
+      <link>https://lifeundo.ru/news/</link>
+      <pubDate>Wed, 11 Sep 2025 12:00:00 GMT</pubDate>
+      <guid>https://lifeundo.ru/news/#v0-2-0</guid>
+    </item>
+  </channel>
+</rss>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="color-scheme" content="dark light" />
+  <title>LifeUndo</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    /* мини-добивка стилей, чтоб не трогать остальное */
+    .row{display:flex;align-items:center;justify-content:space-between;margin:8px 0;padding:12px;border-radius:10px;background:#1f232b}
+    .pill{font-size:12px;padding:2px 8px;border-radius:999px;background:#2b3040;opacity:.8}
+    .btn{display:flex;align-items:center;justify-content:center;width:100%;padding:14px;border-radius:12px;background:linear-gradient(90deg,#4f5bd5,#7b61ff);color:#fff;font-weight:700;cursor:pointer;border:0}
+    .btn.secondary{margin-top:10px;background:#171a21;color:#cfd7e3;border:1px solid #2b3040}
+    .btn.is-disabled{opacity:.45;cursor:default}
+    .footer{display:flex;gap:14px;justify-content:center;margin-top:10px;font-size:13px;color:#9aa5b1}
+    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+    .lang{display:flex;gap:8px}
+    .lang button{border:1px solid #2b3040;background:#171a21;color:#cfd7e3;border-radius:8px;padding:6px 10px;cursor:pointer}
+    .lang .on{outline:2px solid #6b6fff}
+    #flash{min-height:18px;margin:6px 0 2px;font-size:13px}
+    #flash.ok{color:#49d38a} #flash.err{color:#ff7a7a}
+    .badge{font-size:12px;background:#2b3040;border-radius:8px;padding:2px 6px;margin-left:6px}
+    /* модал «что нового» */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5)}
+    .modal.on{display:flex}
+    .card{background:#12161d;border:1px solid #2b3040;border-radius:12px;max-width:380px;padding:16px}
+    .card h3{margin:0 0 8px}
+    .card ul{margin:8px 0 0 18px}
+  </style>
+</head>
+<body>
+  <div style="width:330px;padding:10px">
+    <div class="header">
+      <div style="font-weight:700">LifeUndo <span id="planBadge" class="badge" style="display:none">VIP</span></div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <a id="whatsNew" href="#" style="font-size:12px;color:#9aa5b1;text-decoration:none">Что нового</a>
+        <div class="lang">
+          <button id="btnEN">EN</button>
+          <button id="btnRU">RU</button>
+        </div>
+      </div>
+    </div>
+    <div id="subTitle" style="font-size:13px;color:#9aa5b1;margin-bottom:8px"></div>
+
+    <div class="row"><div id="t1"></div><span class="pill pro">PRO</span></div>
+    <div class="row"><div id="t2"></div><span class="pill pro">PRO</span></div>
+    <div class="row"><div id="t3"></div><span class="pill pro">PRO</span></div>
+
+    <button id="btnVip" class="btn" type="button"></button>
+    <button id="btnPro" class="btn secondary" type="button"></button>
+
+    <div id="flash"></div>
+    <div class="footer">
+      <a id="lnkSite"     href="#">Сайт</a> ·
+      <a id="lnkPrivacy"  href="#">Приватность</a> ·
+      <a id="lnkSupport"  href="#">Поддержка</a> ·
+      <a id="lnkLicense"  href="#">Лицензия</a>
+    </div>
+  </div>
+
+  <!-- скрытый input для импорта VIP -->
+  <input id="vipFile" type="file" accept=".lifelic,application/json" style="display:none" />
+
+  <!-- модал "что нового" -->
+  <div id="wnModal" class="modal">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="wnTitle">Что нового</h3>
+        <button id="wnClose" class="lang" style="border:0;background:transparent;color:#9aa5b1;cursor:pointer">✕</button>
+      </div>
+      <div id="wnBody">
+        <ul>
+          <li>Импорт VIP прямо из попапа</li>
+          <li>Живое обновление статуса</li>
+          <li>RU/EN переключение</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

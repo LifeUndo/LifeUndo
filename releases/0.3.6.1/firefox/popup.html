@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LifeUndo</title>
+  <style>
+    /* фиксируем нормальную ширину попапа */
+    html,body{margin:0;padding:0}
+    .wrap{width:360px;min-width:360px;background:#0b0f16;color:#fff;font:14px/1.4 system-ui,Segoe UI,Arial}
+    .row{padding:10px 12px}
+    .title{display:flex;align-items:center;gap:8px;font-weight:600}
+    .badge{font-size:12px;padding:2px 6px;border-radius:8px;background:#262b36;color:#bfc7d6}
+    .badge.vip{background:#334155;color:#b3ffe3}
+    .lang{margin-left:auto;display:flex;gap:6px}
+    .pill{font-size:12px;padding:2px 6px;border-radius:8px;border:1px solid #3b4252;cursor:pointer}
+    .pill.active{background:#1f2937}
+    .btn{display:block;width:calc(100% - 24px);margin:10px 12px;padding:12px 0;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.grad{background:linear-gradient(90deg,#5b7bff,#8b5bfd);color:#fff}
+    .btn.secondary{background:#1a1f2b;color:#fff}
+    .btn.is-disabled{opacity:.5;cursor:default}
+    .tile{background:#101623;border:1px solid #212a3a;border-radius:12px;margin:8px 12px;padding:10px;color:#aeb7c6;display:flex;justify-content:space-between;align-items:center}
+    .pro{font-size:11px;padding:2px 6px;border-radius:8px;background:#2a3142;color:#bfc7d6}
+    .footer{padding:10px 12px;border-top:1px solid #1b2332;color:#aeb7c6}
+    .footer a{color:#aeb7c6;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    #flash{min-height:18px;margin:6px 12px 0;color:#9ecbff}
+    #flash.err{color:#ff9e9e}
+    #flash.ok{color:#b7ffbf}
+    input[type=file]{display:none}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="row title">
+    <span>LifeUndo</span>
+    <span id="planBadge" class="badge">Free</span>
+    <div class="lang">
+      <button id="btnEN" class="pill">EN</button>
+      <button id="btnRU" class="pill active">RU</button>
+    </div>
+  </div>
+
+  <div class="tile"><span id="t1">Недавние вводы текста</span><span class="pro">PRO</span></div>
+  <div class="tile"><span id="t2">Недавно закрытые вкладки</span><span class="pro">PRO</span></div>
+  <div class="tile"><span id="t3">История буфера</span><span class="pro">PRO</span></div>
+
+  <button id="btnVip" class="btn grad">Активировать VIP</button>
+  <div id="flash"></div>
+  <button id="btnPro" class="btn secondary">Перейти на Pro</button>
+
+  <div class="footer">
+    <a href="#" id="lnkWebsite">Website</a> ·
+    <a href="#" id="lnkPrivacy">Privacy</a> ·
+    <a href="#" id="lnkSupport">Support</a> ·
+    <a href="#" id="lnkLicense">License</a>
+  </div>
+</div>
+
+<!-- скрытый input для выбора .lifelic -->
+<input id="vipFile" type="file" accept=".lifelic,.json">
+<script src="popup.js"></script>
+</body>
+</html>

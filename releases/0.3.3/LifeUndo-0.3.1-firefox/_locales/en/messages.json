@@ -1,0 +1,25 @@
+{
+  "whats_new_link": { "message": "What’s new" },
+  "whats_new_title": { "message": "What’s New in v0.3.3" },
+  "wn_item_1": { "message": "Inline VIP verifier in popup (no dynamic imports)" },
+  "wn_item_2": { "message": "Clear statuses: Importing / VIP activated / Error" },
+  "wn_item_3": { "message": "Full RU/EN + restored links" },
+
+  "free_version": { "message": "Free Version" },
+  "feat_latest_inputs": { "message": "Latest text inputs" },
+  "feat_recent_tabs": { "message": "Recently closed tabs" },
+  "feat_clipboard": { "message": "Clipboard history" },
+
+  "popup_activate_vip": { "message": "Activate VIP" },
+  "popup_vip_active": { "message": "VIP active" },
+  "popup_upgrade_pro": { "message": "Upgrade to Pro" },
+
+  "footer_website": { "message": "Website" },
+  "footer_privacy": { "message": "Privacy" },
+  "footer_support": { "message": "Support" },
+  "footer_settings": { "message": "Settings" },
+
+  "status_importing": { "message": "Importing…" },
+  "status_vip_ok": { "message": "VIP activated ✅" },
+  "status_vip_err": { "message": "Import error" }
+}

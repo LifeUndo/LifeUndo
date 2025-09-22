@@ -1,80 +1,197 @@
-import { t, getLang, setLang } from './i18n.js';
-import { verifyToken, daysLeft, TRIAL_DAYS } from './license.js';
+// LifeUndo Options - v0.3.7
+// Unified license core, UTF-8 support, RU/EN localization
 
-const CHECKOUT_EN = 'https://lifeundo.gumroad.com/l/lifeundo-pro?variant=Pro';
-const CHECKOUT_RU = 'https://lifeundo.gumroad.com/l/lifeundo-pro?locale=ru&variant=Pro';
+const api = window.browser || window.chrome;
 
-async function fillTexts() {
-  document.title = t('opt_title');
-  document.getElementById('opt-title').textContent = t('opt_title');
-  document.getElementById('h-import').textContent = t('opt_import_license');
-  document.getElementById('lbl-token').textContent = t('opt_paste_token');
-  document.getElementById('btn-verify').textContent = t('opt_verify');
-  document.getElementById('h-buy').textContent = t('opt_buy');
-  document.getElementById('hint').textContent = t('checkout_hint');
-  document.getElementById('open-checkout').textContent = t('opt_open_checkout');
+// ==== DOM Elements ====
+const vipFile = document.getElementById('vipFile');
+const btnChoose = document.getElementById('btnChoose');
+const btnImport = document.getElementById('btnImport');
+const btnVerify = document.getElementById('btnVerify');
+const btnRemove = document.getElementById('btnRemove');
+const statusEl = document.getElementById('status');
+const hintsEl = document.getElementById('hints');
 
-  const lang = await getLang();
-  document.getElementById('lang').value = lang;
-
-  const st = await browser.storage.local.get(['trialStartedAt','license','plan','email']);
-  const planLine = document.getElementById('plan-line');
-  const trialLine = document.getElementById('trial-line');
-
-  if (st.license) {
-    planLine.textContent = `${t('opt_current_plan')}: ${st.plan || 'Pro'} (${st.email || ''})`;
-    trialLine.textContent = '';
-  } else if (st.trialStartedAt) {
-    const left = daysLeft(st.trialStartedAt);
-    trialLine.textContent = left > 0 ? `${t('opt_trial_left')}: ${left}` : t('ui_trial_ended');
-    planLine.textContent = `${t('opt_current_plan')}: ${t('opt_plan_free')}`;
-  } else {
-    planLine.textContent = `${t('opt_current_plan')}: ${t('opt_plan_free')}`;
-    trialLine.textContent = `${t('opt_trial_left')}: ${TRIAL_DAYS}`;
+// ==== I18n ====
+let currentLang = 'en';
+const i18n = {
+  en: {
+    options_title: "LifeUndo Settings",
+    opt_choose: "Choose .lifelic",
+    opt_import: "Import",
+    opt_verify: "Verify",
+    opt_remove: "Remove",
+    opt_hint1: "Download .lifelic file from website after purchase",
+    opt_hint2: "Click 'Choose .lifelic' and select the file",
+    opt_hint3: "Click 'Import' to activate the license",
+    status_no_license: "No license installed",
+    status_license_installed: "License installed ✅",
+    status_signature_valid: "Signature valid ✅",
+    status_signature_invalid: "Signature invalid ❌",
+    status_license_removed: "License removed",
+    status_importing: "Importing...",
+    status_verifying: "Verifying..."
+  },
+  ru: {
+    options_title: "Настройки LifeUndo",
+    opt_choose: "Выбрать .lifelic",
+    opt_import: "Импортировать",
+    opt_verify: "Проверить",
+    opt_remove: "Удалить",
+    opt_hint1: "Скачайте файл .lifelic с сайта после покупки",
+    opt_hint2: "Нажмите 'Выбрать .lifelic' и выберите файл",
+    opt_hint3: "Нажмите 'Импортировать' для активации лицензии",
+    status_no_license: "Лицензия не установлена",
+    status_license_installed: "Лицензия установлена ✅",
+    status_signature_valid: "Подпись корректна ✅",
+    status_signature_invalid: "Подпись некорректна ❌",
+    status_license_removed: "Лицензия удалена",
+    status_importing: "Импорт...",
+    status_verifying: "Проверка..."
   }
+};
 
-  const checkout = document.getElementById('checkout');
-  checkout.src = (lang === 'ru') ? CHECKOUT_RU : CHECKOUT_EN;
+// ==== Functions ====
+
+function t(key) {
+  return i18n[currentLang][key] || key;
 }
 
-async function importFile(file) {
-  const txt = await file.text();
-  await verifyAndStore(txt);
+function applyLang() {
+  // Update title
+  document.title = t('options_title');
+  
+  // Update buttons
+  if (btnChoose) btnChoose.textContent = t('opt_choose');
+  if (btnImport) btnImport.textContent = t('opt_import');
+  if (btnVerify) btnVerify.textContent = t('opt_verify');
+  if (btnRemove) btnRemove.textContent = t('opt_remove');
+  
+  // Update hints
+  if (hintsEl) {
+    hintsEl.innerHTML = `
+      <li>${t('opt_hint1')}</li>
+      <li>${t('opt_hint2')}</li>
+      <li>${t('opt_hint3')}</li>
+    `;
+  }
+  
+  // Update status
+  updateStatus();
 }
 
-async function verifyAndStore(txt) {
-  const st = document.getElementById('status');
+function updateStatus() {
+  // Check current license status and update UI
+  api.storage.local.get(['lu_plan', 'license']).then(({ lu_plan, license }) => {
+    if (lu_plan === 'vip' && license) {
+      if (statusEl) statusEl.textContent = `${t('status_license_installed')} (plan: ${license.plan || 'vip'})`;
+    } else {
+      if (statusEl) statusEl.textContent = t('status_no_license');
+    }
+  });
+}
+
+function setStatus(message, type = '') {
+  if (statusEl) {
+    statusEl.textContent = message;
+    statusEl.className = type ? `status ${type}` : 'status';
+  }
+}
+
+async function handleFile(file) {
+  if (!file) return;
+  
   try {
-    const info = await verifyToken(txt.trim());
-    await browser.storage.local.set({ license: info.token, plan: info.plan, email: info.email, licenseExp: info.expires });
-    st.textContent = t('opt_status_valid');
-    st.className = 'ok';
-    await fillTexts();
+    setStatus(t('status_importing'));
+    const lic = await LicenseCore.importFromFile(file, null);
+    setStatus(`${t('status_license_installed')} (plan: ${lic.license.plan})`, 'success');
+    
+    // Notify popup about license update
+    try {
+      await api.runtime.sendMessage({ type: 'license-updated' });
+    } catch (e) {
+      // Popup might not be open, ignore
+    }
   } catch (e) {
-    st.textContent = t('opt_status_invalid');
-    st.className = 'bad';
-    console.error(e);
+    console.error('License import error:', e);
+    setStatus(t('status_signature_invalid') + ': ' + e.message, 'error');
   }
 }
 
-document.getElementById('file').addEventListener('change', (e) => {
-  const f = e.target.files?.[0];
-  if (f) importFile(f);
+async function verifyCurrentLicense() {
+  try {
+    setStatus(t('status_verifying'));
+    const { lu_license } = await api.storage.local.get('lu_license');
+    
+    if (!lu_license) {
+      setStatus(t('status_no_license'));
+      return;
+    }
+    
+    const isValid = await LicenseCore.verifyLicenseFlexible(lu_license, null);
+    if (isValid) {
+      setStatus(t('status_signature_valid'));
+    } else {
+      setStatus(t('status_signature_invalid'));
+    }
+  } catch (e) {
+    console.error('License verification error:', e);
+    setStatus(t('status_signature_invalid') + ': ' + e.message, 'error');
+  }
+}
+
+async function removeLicense() {
+  await api.storage.local.remove(['lu_plan', 'lu_license', 'license', 'signature']);
+  setStatus(t('status_license_removed'));
+  
+  // Notify popup about license removal
+  try {
+    await api.runtime.sendMessage({ type: 'license-updated' });
+  } catch (e) {
+    // Popup might not be open, ignore
+  }
+}
+
+// ==== Event Listeners ====
+
+// Choose file button
+btnChoose?.addEventListener('click', () => {
+  vipFile?.click();
 });
 
-document.getElementById('btn-verify').onclick = async () => {
-  const txt = document.getElementById('ta').value;
-  await verifyAndStore(txt);
-};
+// File input change
+vipFile?.addEventListener('change', async (ev) => {
+  const file = ev.target.files?.[0];
+  await handleFile(file);
+  ev.target.value = ''; // Reset input
+});
 
-document.getElementById('open-checkout').onclick = async () => {
-  const lang = await getLang();
-  const url = (lang === 'ru') ? CHECKOUT_RU : CHECKOUT_EN;
-  document.getElementById('checkout').src = url;
-};
+// Import button
+btnImport?.addEventListener('click', async () => {
+  const file = vipFile?.files?.[0];
+  await handleFile(file);
+});
 
-document.getElementById('lang').onchange = async (e) => {
-  await setLang(e.target.value);
-};
+// Verify button
+btnVerify?.addEventListener('click', verifyCurrentLicense);
 
-fillTexts();
+// Remove button
+btnRemove?.addEventListener('click', removeLicense);
+
+// Language switching (Ctrl+L)
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 'l') {
+    e.preventDefault();
+    currentLang = currentLang === 'en' ? 'ru' : 'ru';
+    localStorage.setItem('lu_lang', currentLang);
+    applyLang();
+  }
+});
+
+// ==== Initialize ====
+// Load saved language
+currentLang = localStorage.getItem('lu_lang') || 'en';
+
+// Initialize UI
+applyLang();
+updateStatus();

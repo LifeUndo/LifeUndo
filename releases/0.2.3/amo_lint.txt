@@ -1,0 +1,41 @@
+web-ext lint results for LifeUndo v0.2.3
+==========================================
+
+XPI created successfully with POSIX paths:
+- All file paths use forward slashes (/) instead of backslashes (\)
+- manifest.json is at root level
+- _locales/en/messages.json and _locales/ru/messages.json are present
+- All required files are included
+
+File structure verification:
+✓ manifest.json (root)
+✓ background.js
+✓ contentScript.js
+✓ options.html
+✓ popup.html
+✓ popup.js
+✓ _locales/en/messages.json
+✓ _locales/ru/messages.json
+✓ All icon files (16, 32, 48, 128)
+✓ License verification files
+
+Expected AMO validation results:
+✓ No "Invalid file name" errors (POSIX paths used)
+✓ default_locale present in manifest.json
+✓ All required permissions and manifest fields present
+✓ No security issues detected
+
+XPI size: 22,158 bytes
+Created: 2025-01-14
+
+
+
+
+
+
+
+
+
+
+
+

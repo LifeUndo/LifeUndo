@@ -1,0 +1,8 @@
+{
+  "app_name": { "message": "LifeUndo" },
+  "whats_new": { "message": "Что нового" },
+  "free": { "message": "Бесплатная версия" },
+  "link_website": { "message": "Сайт" },
+  "link_privacy": { "message": "Приватность" },
+  "link_support": { "message": "Поддержка" }
+}

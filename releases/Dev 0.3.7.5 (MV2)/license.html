@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>LifeUndo — Лицензия</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{margin:0;background:#0b1220;color:#e8eefc;font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,sans-serif}
+    .wrap{max-width:520px;margin:40px auto;padding:16px}
+    h1{margin:0 0 10px 0}
+    .card{background:#111a2e;border:1px solid rgba(147,197,253,.15);border-radius:12px;padding:12px}
+    textarea{width:100%;min-height:120px;border-radius:8px;border:1px solid rgba(147,197,253,.25);padding:8px;background:#0f172a;color:#e8eefc}
+    .row{display:flex;gap:8px;margin-top:10px}
+    button{background:#6366f1;color:#fff;border:none;border-radius:10px;padding:8px 12px;cursor:pointer}
+    .ghost{background:transparent;border:1px solid rgba(147,197,253,.35)}
+    .ok{color:#86efac;margin-left:8px}
+    a{color:#60a5fa;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Лицензия</h1>
+    <div class="card">
+      <p>Демо-активация для проверки UX (без криптографии). Введите ключ или нажмите «Симулировать VIP».</p>
+      <textarea id="key" placeholder="Вставьте лицензионный ключ…"></textarea>
+      <div class="row">
+        <button id="btn-activate">Активировать VIP</button>
+        <button id="btn-sim" class="ghost">Симулировать VIP</button>
+        <a href="popup.html" class="ghost" style="padding:8px 12px">Вернуться</a>
+        <span id="msg" class="ok" hidden>VIP активирован</span>
+      </div>
+    </div>
+  </div>
+  <script src="license.js"></script>
+</body>
+</html>

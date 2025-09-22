@@ -1,0 +1,20 @@
+{
+  "footer_website": {
+    "message": "Сайт"
+  },
+  "footer_privacy": {
+    "message": "Приватность"
+  },
+  "footer_support": {
+    "message": "Поддержка"
+  },
+  "whats_new_title": {
+    "message": "Что нового"
+  },
+  "vip_active": {
+    "message": "VIP активен"
+  },
+  "cta_activate_vip": {
+    "message": "Активировать VIP"
+  }
+}

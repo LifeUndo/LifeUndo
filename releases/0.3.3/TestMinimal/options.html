@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LifeUndo Settings</title>
+<style>
+  :root { color-scheme: dark; }
+  body{font:14px/1.45 system-ui,Segoe UI,Arial;color:#e6e6e6;background:#0e1420;margin:24px}
+  .card{background:#0b111c;border:1px solid #1a2639;border-radius:12px;padding:16px;max-width:760px}
+  .row{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+  .btn{padding:8px 12px;border-radius:8px;border:1px solid #2a3b59;background:#121a2a;color:#e6e6e6;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,#5a79ff,#8a4dff);border:0;color:#fff;font-weight:600}
+  #status{min-height:20px;margin-top:6px}
+  #status.ok{color:#35dd7d} #status.err{color:#ff6d6d}
+  .muted{opacity:.75}
+  ul.help{margin:8px 0 0 18px}
+  input[type="file"]{display:none}
+  .file-name{opacity:.75;font-size:12px}
+</style>
+
+<h2 id="title">License</h2>
+<p id="subtitle" class="muted">Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).</p>
+
+<div class="card">
+  <div class="row">
+    <button id="btnSelect" class="btn">Select .lifelic</button>
+    <span id="fileName" class="file-name"></span>
+  </div>
+  <div class="row">
+    <button id="btnImport" class="btn primary">Import</button>
+    <button id="btnVerify" class="btn">Verify</button>
+    <button id="btnRemove" class="btn">Remove</button>
+    <span id="status"></span>
+  </div>
+
+  <ul class="help" id="helpList">
+    <li>Click “Select .lifelic” and choose your license file</li>
+    <li>Press “Import” — license will be verified offline</li>
+    <li>Use “Verify” to re-check or “Remove” to delete it</li>
+  </ul>
+
+  <!-- скрытый системный инпут -->
+  <input id="file" type="file" accept=".lifelic,application/json">
+</div>
+
+<script src="options.js"></script>

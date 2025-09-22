@@ -1,0 +1,38 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LifeUndo</title>
+<style>
+  body{font:14px/1.4 system-ui,Segoe UI,Arial;color:#ddd;background:#111;margin:12px;width:340px}
+  .row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .btn{background:linear-gradient(90deg,#5a79ff,#8a4dff);border:0;border-radius:8px;padding:10px 12px;color:#fff;font-weight:600;cursor:pointer;text-align:center}
+  .btn.secondary{background:#222;color:#ddd;border:1px solid #333}
+  #flash{margin-top:8px;min-height:20px}
+  #flash.ok{color:#35dd7d} #flash.err{color:#ff6d6d}
+  .pill{font-size:12px;padding:2px 8px;border-radius:999px;background:#333;margin-left:auto}
+  .pro{display:inline-block}
+  header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .lang button{margin-left:6px}
+</style>
+
+<header>
+  <div>LifeUndo <span id="planLabel" class="pill">Free</span></div>
+  <div class="lang">
+    <button id="btnEN">EN</button>
+    <button id="btnRU">RU</button>
+  </div>
+</header>
+
+<div class="row pro"><div class="pill">PRO</div><div style="flex:1"></div></div>
+<div class="row pro"><div class="pill">PRO</div><div style="flex:1"></div></div>
+<div class="row pro"><div class="pill">PRO</div><div style="flex:1"></div></div>
+
+<input id="vipFile" type="file" accept=".lifelic,application/json" style="display:none">
+<div class="row"><button id="btnVip" class="btn" style="width:100%">Activate VIP</button></div>
+<div class="row"><button id="btnPro" class="btn secondary" style="width:100%">Upgrade to Pro</button></div>
+
+<div id="flash"></div>
+
+<hr style="border:0;border-top:1px solid #222;margin:10px 0">
+<div style="font-size:12px;opacity:.7">Website · Privacy · Support · <a id="linkSettings" href="#" style="color:#8aa8ff">Settings</a></div>
+
+<script src="popup.js"></script>

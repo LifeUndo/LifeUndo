@@ -9,22 +9,40 @@
     .card { background:#161616; border:1px solid #262626; border-radius:14px; padding:16px; margin-bottom:14px; }
     .row { display:flex; gap:12px; align-items:center; }
     .row > * { flex:1 }
-    textarea { width:100%; min-height:120px; background:#111; color:#ddd; border:1px solid #333; border-radius:10px; padding:8px; }
-    .ok { color:#99ffa4 } .bad { color:#ff8a8a }
-    iframe.checkout { width:100%; height:520px; border:0; background:#0c0c0c; border-radius:12px; }
+    #license{max-width:640px}
+    #btnImport{padding:8px 14px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;cursor:pointer}
+    .link{margin-left:8px;background:transparent;border:0;color:#2563eb;cursor:pointer}
+    #status{margin-top:10px}
+    .muted{color:#6b7280}
+    .ok{color:#065f46}
+    .err{color:#b91c1c}
   </style>
-  <script type="module" src="options.js"></script>
 </head>
 <body>
   <div class="page">
-    <h2 id="opt-title"></h2>
+    <h2>LifeUndo Settings</h2>
 
-    <div class="card">
-      <h3>Лицензия</h3>
-      <p id="licStatus">Загрузка…</p>
-      <input id="licFileInput" type="file" accept=".lifelic,application/json" hidden>
-      <button id="licImportBtn" class="btn">Импортировать .lifelic</button>
-    </div>
+    <!-- ЕДИНСТВЕННЫЙ блок лицензии с локализацией -->
+    <section class="card" id="license">
+      <h2 data-i18n="lic_title">License</h2>
+      <p class="muted" data-i18n="lic_hint">Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).</p>
+
+      <input id="vipFile" type="file" accept=".lifelic,.json" hidden>
+      <div class="row">
+        <button id="btnChoose" data-i18n="btn_choose">Выбрать .lifelic</button>
+        <button id="btnImport" data-i18n="btn_import">Импортировать</button>
+        <button id="btnVerify" data-i18n="btn_verify">Проверить</button>
+        <button id="btnRemove" data-i18n="btn_remove">Удалить</button>
+      </div>
+
+      <div id="status" class="muted" data-i18n="status_empty">No license installed</div>
+      
+      <ul id="hints" class="muted">
+        <li>Скачайте файл .lifelic с сайта после покупки</li>
+        <li>Нажмите "Выбрать .lifelic" и выберите файл</li>
+        <li>Нажмите "Импортировать" для активации лицензии</li>
+      </ul>
+    </section>
 
     <div class="card">
       <div id="plan-line"></div>
@@ -32,47 +50,18 @@
     </div>
 
     <div class="card">
-      <h3 id="h-import"></h3>
+      <h3>Links</h3>
       <div class="row">
-        <input type="file" id="file" accept=".lifelic">
-        <button id="btn-verify"></button>
-      </div>
-      <div style="margin-top:8px">
-        <label id="lbl-token" for="ta"></label>
-        <textarea id="ta" placeholder="-----BEGIN LIFEUNDO LICENSE----- ..."></textarea>
-      </div>
-      <div id="status" style="margin-top:8px"></div>
-    </div>
-
-    <div class="card">
-      <h3 id="h-buy"></h3>
-      <p id="hint"></p>
-      <iframe class="checkout" id="checkout" src="about:blank" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
-      <div class="row" style="margin-top:10px">
-        <select id="lang">
-          <option value="en">English</option>
-          <option value="ru">Русский</option>
-        </select>
-        <button id="open-checkout"></button>
+        <a href="https://lifeundo.ru" target="_blank">Website</a>
+        <a href="https://lifeundo.ru/privacy" target="_blank">Privacy</a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Firefox Add-ons</a>
       </div>
     </div>
   </div>
 
+  <script src="i18n.js"></script>
   <script src="license.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const importBtn = document.getElementById('licImportBtn');
-      const fileInput = document.getElementById('licFileInput');
-      const statusEl  = document.getElementById('licStatus');
-      const refresh = async () => { const lic = await License.loadFromStorage(); statusEl.textContent = License.humanStatus(lic); };
-      importBtn?.addEventListener('click', () => fileInput?.click());
-      fileInput?.addEventListener('change', async (e) => {
-        const f = e.target.files?.[0]; if (!f) return;
-        try { const obj = JSON.parse(await f.text()); await License.importAndSave(obj); await refresh(); alert('Лицензия импортирована.'); }
-        catch(err){ console.error(err); alert('Ошибка проверки лицензии.'); }
-      });
-      await refresh();
-    });
-  </script>
+  <script src="shared/licenseCore.js"></script>
+  <script src="options.js"></script>
 </body>
 </html>

@@ -2,6 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://lifeundo.ru/sitemap.xml
-
-
-

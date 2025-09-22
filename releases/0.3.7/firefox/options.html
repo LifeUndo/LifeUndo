@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeUndo • Лицензия</title>
+  <link rel="stylesheet" href="popup.css" />
+  <style>
+    .wrap { max-width: 980px; margin: 24px auto; padding: 16px; }
+    .box  { background:#0e1217; border:1px solid #232a35; border-radius:12px; padding:16px; }
+    .row  { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .hint { margin-top:12px; color:#9fb0c3; }
+    .ok   { color:#27d17f; }
+    .err  { color:#ff6b6b; }
+    .btn  { padding:10px 14px; border-radius:10px; border:1px solid #2a3340; background:#151c24; color:#e6e6e6; cursor:pointer; }
+    .btn:disabled { opacity:.5; cursor:default; }
+    .step-on { box-shadow:0 0 0 2px #6da0ff inset; }
+    .status { margin-left:16px; }
+    .btn.red { background:#2b0f15; border:1px solid #5b1a25; color:#ff8b8b; }
+    ul { margin:0; padding:0 0 0 20px; }
+    li { margin:6px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 id="ttl">Лицензия</h1>
+    <p class="muted" id="sub">Импорт файла <code>.lifelic</code>. Проверка лицензии полностью офлайн (ECDSA P-256 / SHA-256).</p>
+
+    <div class="row">
+      <button id="btnChoose" class="btn step-on"></button>
+      <button id="btnImport" class="btn" disabled></button>
+      <button id="btnVerify" class="btn" disabled></button>
+      <button id="btnRemove" class="btn red"></button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <input id="file" type="file" accept=".lifelic,application/json" style="display:none" />
+
+    <ul class="help" id="helpList"></ul>
+
+    <div class="footer">
+      <span id="linksLabel"></span>
+      <a id="lnkSite" href="https://lifeundo.ru" rel="noopener" target="_blank"></a> ·
+      <a id="lnkPriv" href="https://lifeundo.ru/privacy/" rel="noopener" target="_blank"></a> ·
+      <a id="lnkSupp" href="https://t.me/LifeUndo" rel="noopener" target="_blank"></a>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

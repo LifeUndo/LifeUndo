@@ -1,0 +1,20 @@
+{
+  "footer_website": {
+    "message": "Website"
+  },
+  "footer_privacy": {
+    "message": "Privacy"
+  },
+  "footer_support": {
+    "message": "Support"
+  },
+  "whats_new_title": {
+    "message": "What’s new"
+  },
+  "vip_active": {
+    "message": "VIP active"
+  },
+  "cta_activate_vip": {
+    "message": "Activate VIP"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "currency": "TBD",
+  "plans": [
+    {
+      "id": "free",
+      "name": {
+        "en": "Free",
+        "ru": "Free"
+      },
+      "limits": {
+        "tabs": 10,
+        "clipboard": 10,
+        "texts": 10
+      },
+      "price": null,
+      "billing": "free",
+      "cta": {
+        "en": "Get Free",
+        "ru": "Получить Free"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "pro-1m",
+      "name": {
+        "en": "Pro",
+        "ru": "Pro"
+      },
+      "limits": {
+        "tabs": 50,
+        "clipboard": 50,
+        "texts": 50
+      },
+      "price": null,
+      "billing": "monthly",
+      "cta": {
+        "en": "Buy Pro — 1 month",
+        "ru": "Купить Pro — 1 месяц"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "pro-6m",
+      "name": {
+        "en": "Pro",
+        "ru": "Pro"
+      },
+      "limits": {
+        "tabs": 50,
+        "clipboard": 50,
+        "texts": 50
+      },
+      "price": null,
+      "billing": "semiannual",
+      "cta": {
+        "en": "Buy Pro — 6 months",
+        "ru": "Купить Pro — 6 месяцев"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "pro-12m",
+      "name": {
+        "en": "Pro",
+        "ru": "Pro"
+      },
+      "limits": {
+        "tabs": 50,
+        "clipboard": 50,
+        "texts": 50
+      },
+      "price": null,
+      "billing": "annual",
+      "cta": {
+        "en": "Buy Pro — 12 months",
+        "ru": "Купить Pro — 12 месяцев"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "team-5",
+      "name": {
+        "en": "Team",
+        "ru": "Team"
+      },
+      "limits": {
+        "tabs": "team",
+        "clipboard": "team",
+        "texts": "team"
+      },
+      "seats": 5,
+      "price": null,
+      "billing": "monthly",
+      "cta": {
+        "en": "Team — 5 seats",
+        "ru": "Team — 5 устройств"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "team-10",
+      "name": {
+        "en": "Team",
+        "ru": "Team"
+      },
+      "limits": {
+        "tabs": "team",
+        "clipboard": "team",
+        "texts": "team"
+      },
+      "seats": 10,
+      "price": null,
+      "billing": "monthly",
+      "cta": {
+        "en": "Team — 10 seats",
+        "ru": "Team — 10 устройств"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "team-50",
+      "name": {
+        "en": "Team",
+        "ru": "Team"
+      },
+      "limits": {
+        "tabs": "team",
+        "clipboard": "team",
+        "texts": "team"
+      },
+      "seats": 50,
+      "price": null,
+      "billing": "monthly",
+      "cta": {
+        "en": "Team — 50 seats",
+        "ru": "Team — 50 устройств"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "team-100",
+      "name": {
+        "en": "Team",
+        "ru": "Team"
+      },
+      "limits": {
+        "tabs": "team",
+        "clipboard": "team",
+        "texts": "team"
+      },
+      "seats": 100,
+      "price": null,
+      "billing": "monthly",
+      "cta": {
+        "en": "Team — 100 seats",
+        "ru": "Team — 100 устройств"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    },
+    {
+      "id": "vip",
+      "name": {
+        "en": "VIP (Lifetime)",
+        "ru": "VIP (пожизненно)"
+      },
+      "limits": {
+        "tabs": "unlimited",
+        "clipboard": "unlimited",
+        "texts": "unlimited"
+      },
+      "price": null,
+      "billing": "lifetime",
+      "cta": {
+        "en": "Activate VIP",
+        "ru": "Активировать VIP"
+      },
+      "checkout": {
+        "en": "#",
+        "ru": "#"
+      }
+    }
+  ],
+  "notes": {
+    "en": "Prices & checkout links are placeholders. Replace with Gumroad product links/variants.",
+    "ru": "Цены и ссылки — заглушки. Замените на ссылки/варианты товаров Gumroad."
+  }
+}

@@ -3,43 +3,84 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="popup.css">
-  <script type="module" src="popup.js"></script>
 </head>
 <body>
   <div class="wrap">
     <div class="hdr">
       <div class="title">LifeUndo</div>
+      <div class="version-info">
+        <span id="version" class="version"></span>
+        <button id="btnWhatsNew" class="pill" data-wn-open data-i18n="popup_whatsnew">What's new</button>
+      </div>
       <div class="lang">
-        <button id="lang-en">EN</button>
-        <button id="lang-ru">RU</button>
+        <button id="btnEN">EN</button>
+        <button id="btnRU">RU</button>
       </div>
     </div>
 
-    <div id="trial" class="trial"></div>
+    <div id="planLabel" class="trial">Free Version</div>
 
     <div class="list">
       <div class="row disabled">
-        <span id="lbl-inputs"></span>
+        <span id="lbl-inputs" data-i18n="ui_latest_inputs"></span>
         <span class="badge" id="b1">PRO</span>
       </div>
       <div class="row disabled">
-        <span id="lbl-tabs"></span>
+        <span id="lbl-tabs" data-i18n="ui_recent_tabs"></span>
         <span class="badge" id="b2">PRO</span>
       </div>
       <div class="row disabled">
-        <span id="lbl-clip"></span>
+        <span id="lbl-clip" data-i18n="ui_clipboard"></span>
         <span class="badge" id="b3">PRO</span>
       </div>
     </div>
 
     <div class="cta">
-      <button id="btn-upgrade" class="primary"></button>
+      <input id="vipFile" type="file" accept=".lifelic,application/json,text/plain" hidden>
+      <button id="btnVip" class="primary" data-i18n="popup_activate_vip">Activate VIP</button>
+      <button id="btnPro" class="primary outline" data-i18n="popup_upgrade_pro">Upgrade to Pro</button>
+      <div id="flash" role="status" aria-live="polite" class="flash"></div>
       <div class="links">
-        <a id="lnk-website" target="_blank" rel="noopener"></a> ·
-        <a id="lnk-privacy" target="_blank" rel="noopener"></a> ·
-        <a id="lnk-firefox" target="_blank" rel="noopener"></a>
+        <a id="linkWebsite" href="https://lifeundo.github.io/LifeUndo/" target="_blank" data-i18n="footer_website">Website</a>
+        · <a id="linkPrivacy" href="https://lifeundo.github.io/LifeUndo/privacy/" target="_blank" data-i18n="footer_privacy">Privacy</a>
+        · <a id="linkSupport" href="https://t.me/lifeundo" target="_blank" data-i18n="footer_support">Support</a>
+        · <a id="linkSettings" href="#" data-i18n="footer_settings">License</a>
       </div>
     </div>
   </div>
+
+  <!-- Кнопка открытия -->
+  <button id="btnWhatsNew" class="pill" data-wn-open>What's new</button>
+
+  <!-- Модалка -->
+  <div id="wnModal" class="wn hidden" aria-modal="true" role="dialog">
+    <div class="wn-backdrop" data-wn-close></div>
+    <div class="wn-dialog" role="document">
+      <button class="wn-close" type="button" aria-label="Close" data-wn-close>✕</button>
+      <h3>What's new (v0.3.7)</h3>
+      <ul>
+        <li>VIP activation from popup</li>
+        <li>Stable RU/EN switching</li>
+        <li>UI polish</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pro Stub Modal -->
+  <div id="proStub" class="modal hidden">
+    <div id="proBackdrop" class="backdrop"></div>
+    <div class="modal-content">
+      <button id="closeProStub" class="close-btn">×</button>
+      <h3 data-i18n="pro_stub_title">Payment system connecting</h3>
+      <p data-i18n="pro_stub_text">Leave email/go to website</p>
+      <div class="modal-buttons">
+        <button id="openPricing" class="primary" data-i18n="pro_stub_open_pricing">Open pricing</button>
+        <button id="closeProStubBtn" class="secondary" data-i18n="pro_stub_close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared/licenseCore.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>

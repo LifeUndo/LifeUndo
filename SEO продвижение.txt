@@ -1,0 +1,238 @@
+Отличный вопрос — без базовой SEO-подготовки и сайт, и листинг аддона теряют «бесплатный» трафик. Я сделал компактный план + дал готовые «копи-паст» вставки для сайта и листинга, а ещё собрал ключевые фразы RU/EN.
+
+# Что важно (коротко)
+
+* **`meta keywords` не нужны и даже вредны** (Google их не использует; лучше не плодить «спам-сигнал») ([Official Google Webmaster Central Blog][1])
+* **Разметь локализацию RU/EN через `hreflang` (+ `x-default`)** — это основа для двух языков. Эту схему понимают Google и Яндекс. ([Google for Developers][2])
+* **FAQ размечай JSON-LD `FAQPage`** — даёт шанс на расширенные сниппеты. Используй `FAQPage` (а не `QAPage`). ([Google for Developers][3])
+* **AMO-листинг:** теги, заголовок, саммари и ключи — основа находчивости в каталоге. ([Firefox Extension Workshop][4])
+
+---
+
+# 1) Ключевые фразы (ядро)
+
+## RU (кластерно)
+
+* **Формы/текст:** восстановление текста в форме, вернуть введённый текст, пропал текст в браузере, автосохранение форм, аналог Lazarus, замена Typio. ([Reddit][5])
+* **Вкладки:** вернуть закрытую вкладку, недавно закрытые вкладки, восстановить вкладку Firefox.
+* **Буфер:** история буфера обмена, менеджер буфера, clipboard история.
+* **Позиционирование:** второй шанс в браузере, офлайн, приватно, без серверов.
+* **Бренд:** LifeUndo — второй шанс, LifeUndo расширение.
+
+## EN
+
+* **Forms/Text:** form recovery, restore typed text, recover form data, auto-save forms, Lazarus alternative, Typio replacement. ([AlternativeTo][6])
+* **Tabs:** restore closed tab, recently closed tabs (Firefox).
+* **Clipboard:** clipboard history, clipboard manager (Firefox).
+* **Positioning:** privacy-first, offline, no network, second chance.
+* **Brand:** LifeUndo extension.
+
+> Эти фразы **не** кладём в `meta keywords` (их не учитывают), а используем в: title/description, h1–h3, anchor-текстах, alt изображений, FAQ, changelog-нотах, листинге AMO. ([Official Google Webmaster Central Blog][1])
+
+---
+
+# 2) Сайт: готовая «голова» для всех страниц (RU/EN)
+
+ВСТАВЬ в `<head>` каждой страницы СРАЗУ ПОСЛЕ `<meta charset="utf-8">` и подставь `{{...}}`.
+
+```html
+<!-- Canonical -->
+<link rel="canonical" href="{{CANONICAL_URL}}" />
+
+<!-- Hreflang RU/EN (+ x-default) -->
+<link rel="alternate" href="https://lifeundo.ru{{PATH_RU}}" hreflang="ru" />
+<link rel="alternate" href="https://lifeundo.ru{{PATH_EN}}" hreflang="en" />
+<link rel="alternate" href="https://lifeundo.ru{{PATH_EN}}" hreflang="x-default" />
+
+<!-- Title / Description -->
+<title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{PAGE_DESCRIPTION}}">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{CANONICAL_URL}}">
+<meta property="og:title" content="{{PAGE_TITLE}}">
+<meta property="og:description" content="{{PAGE_DESCRIPTION}}">
+<meta property="og:image" content="https://lifeundo.ru/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Icons / theming -->
+<link rel="icon" href="/assets/icon32.png">
+<meta name="theme-color" content="#0b1220">
+
+<!-- JSON-LD Organization + WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "LifeUndo",
+  "url": "https://lifeundo.ru/",
+  "logo": "https://lifeundo.ru/assets/logo.png",
+  "sameAs": ["https://t.me/LifeUndo","https://vk.com/lifeundo"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "url":"https://lifeundo.ru/",
+  "name":"LifeUndo",
+  "inLanguage":"{{ru|en}}",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://lifeundo.ru/search?q={query}",
+    "query-input":"required name=query"
+  }
+}
+</script>
+```
+
+`hreflang`/`x-default` — именно так и надо для RU/EN. ([Google for Developers][2])
+
+### Титлы/описания — подставь по страницам
+
+**RU**
+
+* Главная:
+  `PAGE_TITLE` = `LifeUndo — второй шанс для вкладок, текста и буфера`
+  `PAGE_DESCRIPTION` = `Возвращает недавно закрытые вкладки, восстанавливает введённый текст и историю буфера. Всё локально и приватно — без сети.`
+* FAQ:
+  `LifeUndo — ответы на частые вопросы (FAQ)` / `Как работает восстановление текста, вкладок и буфера. Приватность, поддержка, лицензии.`
+* Новости:
+  `Новости LifeUndo` / `Апдейты, анонсы и советы по восстановлению текста, вкладок и буфера обмена.`
+* Список изменений:
+  `Список изменений — LifeUndo` / `Все версии и улучшения: восстановление форм, закрытых вкладок и истории буфера.`
+* Приватность:
+  `Приватность — LifeUndo` / `Данные хранятся только локально в браузере. Нет сетевых запросов и аналитики.`
+* Тарифы:
+  `Тарифы — Free, Pro, VIP` / `Выберите план: базовый бесплатно или расширенные лимиты Pro/VIP.`
+
+**EN**
+
+* Home:
+  `LifeUndo — second chance for forms, tabs & clipboard` /
+  `Restore recently closed tabs, typed text and clipboard history. 100% local & private.`
+* FAQ:
+  `LifeUndo — FAQ` / `How text, tabs and clipboard recovery works. Privacy, support, licensing.`
+* News:
+  `LifeUndo News` / `Updates, releases and tips for form/text recovery and closed tabs.`
+* Changelog:
+  `Changelog — LifeUndo` / `Version history and improvements for form, tabs and clipboard recovery.`
+* Privacy:
+  `Privacy — LifeUndo` / `All data stays local in your browser. No network requests, no analytics.`
+* Pricing:
+  `Pricing — Free, Pro, VIP` / `Choose a plan: free basics or extended Pro/VIP limits.`
+
+---
+
+# 3) Разметка FAQ (только на /faq/ru.html и /faq/en.html)
+
+В самый низ страницы, перед `</body>`:
+
+```html
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"Что делает LifeUndo?",
+   "acceptedAnswer":{"@type":"Answer","text":"Восстанавливает недавние вводы текста, закрытые вкладки и историю буфера. Все данные локальны."}},
+  {"@type":"Question","name":"Где хранятся мои данные?",
+   "acceptedAnswer":{"@type":"Answer","text":"Только в браузере, в storage.local. Сетевых запросов и аналитики нет."}},
+  {"@type":"Question","name":"Работает ли на приватных вкладках?",
+   "acceptedAnswer":{"@type":"Answer","text":"Да, если дать разрешение «Запуск в приватных окнах»."}},
+  {"@type":"Question","name":"Поддерживается Android/Chrome?",
+   "acceptedAnswer":{"@type":"Answer","text":"Firefox Desktop — полностью. Chrome/Edge — в работе; мобильные версии рассматриваем."}},
+  {"@type":"Question","name":"Чем LifeUndo отличается от Lazarus/Typio?",
+   "acceptedAnswer":{"@type":"Answer","text":"LifeUndo современный, приватный и офлайн. Альтернативы Lazarus/Typio часто заброшены."}}
+ ]
+}
+</script>
+```
+
+`FAQPage` — верный тип для наших «вопрос→единственный ответ» блоков. ([Google for Developers][3])
+
+---
+
+# 4) robots.txt и sitemap.xml
+
+**/robots.txt**
+
+```
+User-agent: *
+Allow: /
+Sitemap: https://lifeundo.ru/sitemap.xml
+```
+
+**/sitemap.xml** (обновляй раз в релиз)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://lifeundo.ru/index.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://lifeundo.ru/faq/ru.html</loc></url>
+  <url><loc>https://lifeundo.ru/faq/en.html</loc></url>
+  <url><loc>https://lifeundo.ru/news/index.html</loc></url>
+  <url><loc>https://lifeundo.ru/en/news/index.html</loc></url>
+  <url><loc>https://lifeundo.ru/changelog/ru.html</loc></url>
+  <url><loc>https://lifeundo.ru/changelog/en.html</loc></url>
+  <url><loc>https://lifeundo.ru/privacy/ru.html</loc></url>
+  <url><loc>https://lifeundo.ru/privacy/en.html</loc></url>
+  <url><loc>https://lifeundo.ru/pricing/index.html</loc></url>
+  <url><loc>https://lifeundo.ru/en/pricing/index.html</loc></url>
+</urlset>
+```
+
+---
+
+# 5) AMO-листинг (Firefox Add-ons)
+
+**Название (EN):** `LifeUndo — Form/Text Recovery & Closed Tabs`
+**Название (RU):** `LifeUndo — второй шанс: формы, вкладки и буфер`
+**Краткое описание (≤250 знаков):**
+
+* EN: `Restore typed text, recently closed tabs, and clipboard history. 100% local & private.`
+* RU: `Восстановление текста, закрытых вкладок и истории буфера. Полностью локально и приватно.`
+
+**Теги (AMO):** `form recovery, undo, closed tabs, clipboard, privacy, offline, firefox` (EN) / `восстановление форм, закрытые вкладки, буфер обмена, приватность` (RU).
+**Почему теги важны:** именно по ним и тексту описаний вас ищут в каталоге AMO. ([Firefox Extension Workshop][4])
+
+**Длинное описание — используем ключевые фразы, но без переспама.**
+**Release notes** — кратко и по делу (акценты: privacy-first; offline; RU/EN).
+**Категории:** Productivity / Privacy & Security (если релевантно политикам). ([Firefox Extension Workshop][7])
+
+---
+
+# 6) GitHub (чтобы тоже ранжировался)
+
+* **Repo description:** `LifeUndo — restore typed text, recently closed tabs & clipboard history. Privacy-first, offline.`
+* **Topics:** `firefox-extension, form-recovery, closed-tabs, clipboard-history, privacy-first, offline-first, webextension`.
+* **README**: первые 160–180 символов — как meta-description.
+* **OpenGraph preview**: `logo.png` с подписью «Second chance for your browser».
+
+---
+
+# 7) Контент-план (быстро)
+
+* **Статьи под ключи:**
+  RU: «Как вернуть случайно закрытую вкладку», «Пропал текст в форме — 5 способов восстановить», «Аналоги Lazarus/Typio в 2025» (завершаем CTA на LifeUndo). EN — зеркально. ([AlternativeTo][6])
+* **Площадки:** VC.ru, Dzen, Pikabu — лонгрид + гифки/видео (RuTube), кейсы «спасения текста», UTM-ссылки на сайт/AMO.
+* **FAQ/Changelog** — расширяем под ключи («восстановить введённый текст», «история буфера», «recently closed tabs»).
+
+---
+
+## Что дальше я предлагаю
+
+1. Я могу **проставить эти head-вставки и мета-пары** во все RU/EN-страницы (дам готовые куски с уже подставленными `CANONICAL_URL/PATH_*`).
+2. Для FAQ — **впишу JSON-LD** (RU/EN).
+3. Сформирую **draft описаний AMO (RU/EN)** + теги.
+
+Скажи «давай», и я пришью **готовые блоки для каждого файла** (index, faq, news, changelog, privacy, pricing — RU/EN), чтобы ты просто скопировал/вставил.
+
+[1]: https://webmasters.googleblog.com/2009/09/google-does-not-use-keywords-meta-tag.html?utm_source=chatgpt.com "Google does not use the keywords meta tag in web ranking"
+[2]: https://developers.google.com/search/docs/specialty/international/localized-versions?utm_source=chatgpt.com "Localized Versions of your Pages | Google Search Central"
+[3]: https://developers.google.com/search/docs/appearance/structured-data/faqpage?utm_source=chatgpt.com "Mark Up FAQs with Structured Data | Google Search Central"
+[4]: https://extensionworkshop.com/documentation/develop/create-an-appealing-listing/?utm_source=chatgpt.com "Create an appealing listing"
+[5]: https://www.reddit.com/r/firefox/comments/h78gky/replacement_for_lazarus_form_recovery/?utm_source=chatgpt.com "Replacement for Lazarus Form Recovery : r/firefox"
+[6]: https://alternativeto.net/software/lazarus-form-recovery/?utm_source=chatgpt.com "Lazarus Form Recovery Alternatives and Similar Apps"
+[7]: https://extensionworkshop.com/documentation/publish/add-on-policies/?utm_source=chatgpt.com "Add-on Policies"

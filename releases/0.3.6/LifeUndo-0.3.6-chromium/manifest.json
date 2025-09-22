@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "LifeUndo",
+  "description": "Undo last actions: text input, closed tabs, clipboard history.",
+  "version": "0.3.6",
+  "homepage_url": "https://lifeundo.github.io/LifeUndo/",
+  "action": {
+    "default_title": "LifeUndo",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "sessions"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "default_locale": "en"
+}
+

@@ -1,0 +1,27 @@
+{
+  "name": "lifeundo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build-xpi.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LifeUndo/LifeUndo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LifeUndo/LifeUndo/issues"
+  },
+  "homepage": "https://github.com/LifeUndo/LifeUndo#readme",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "yauzl": "^3.2.0"
+  }
+}

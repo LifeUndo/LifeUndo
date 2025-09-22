@@ -1,0 +1,25 @@
+{
+  "whats_new_link": { "message": "Что нового" },
+  "whats_new_title": { "message": "Что нового в v0.3.3" },
+  "wn_item_1": { "message": "Проверка VIP прямо в попапе (без импортов)" },
+  "wn_item_2": { "message": "Понятные статусы: Импорт / VIP активирован / Ошибка" },
+  "wn_item_3": { "message": "Полная локализация RU/EN и восстановленные ссылки" },
+
+  "free_version": { "message": "Free Version" },
+  "feat_latest_inputs": { "message": "Недавние вводы текста" },
+  "feat_recent_tabs": { "message": "Недавно закрытые вкладки" },
+  "feat_clipboard": { "message": "История буфера" },
+
+  "popup_activate_vip": { "message": "Активировать VIP" },
+  "popup_vip_active": { "message": "VIP активен" },
+  "popup_upgrade_pro": { "message": "Перейти на Pro" },
+
+  "footer_website": { "message": "Сайт" },
+  "footer_privacy": { "message": "Приватность" },
+  "footer_support": { "message": "Поддержка" },
+  "footer_settings": { "message": "Настройки" },
+
+  "status_importing": { "message": "Импорт…" },
+  "status_vip_ok": { "message": "VIP активирован ✅" },
+  "status_vip_err": { "message": "Ошибка импорта" }
+}

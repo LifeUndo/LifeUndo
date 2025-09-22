@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "LifeUndo",
+  "short_name": "LifeUndo",
+  "version": "0.3.7.10",
+  "description": "Ctrl+Z for your browser: undo recent text inputs, restore closed tabs, clipboard history. RU/EN, Trial, Pro & VIP plans.",
+  "homepage_url": "https://lifeundo.ru/",
+  "author": "LifeUndo",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "LifeUndo",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "sessions",
+    "clipboardRead",
+    "clipboardWrite",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["bg.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["cs/main.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "lifeundo@example.com",
+      "strict_min_version": "88.0"
+    }
+  }
+}

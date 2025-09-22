@@ -1,0 +1,1 @@
+LifeUndo 0.3.7 — “Activate VIP” opens built-in License page (offline ECDSA). RU/EN toggle fixed (incl. What’s new & footer). UI polish: stable popup size, correct VIP/PRO states.

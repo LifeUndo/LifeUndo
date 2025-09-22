@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LifeUndo — License & Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    .page { max-width:720px; margin:24px auto; }
+    .card { background:#161616; border:1px solid #262626; border-radius:14px; padding:16px; margin-bottom:14px; }
+    .row { display:flex; gap:12px; align-items:center; }
+    .row > * { flex:1 }
+    textarea { width:100%; min-height:120px; background:#111; color:#ddd; border:1px solid #333; border-radius:10px; padding:8px; }
+    .ok { color:#99ffa4 } .bad { color:#ff8a8a }
+    iframe.checkout { width:100%; height:520px; border:0; background:#0c0c0c; border-radius:12px; }
+    #btnImport { padding:8px 14px; border-radius:10px; border:1px solid #111827; background:#111827; color:#fff; cursor:pointer; }
+    .link { margin-left:8px; background:transparent; border:0; color:#2563eb; cursor:pointer; }
+    #status { margin-top:10px; }
+    .muted { color:#6b7280; }
+  </style>
+  <script src="options.js"></script>
+</head>
+<body>
+  <div class="page">
+    <h2 id="opt-title"></h2>
+
+    <div class="card">
+      <h3>License</h3>
+      <p class="muted">Import a <code>.lifelic</code> file. Verification is offline (ECDSA P-256 / SHA-256).</p>
+      
+      <input id="lifelic" type="file" accept=".lifelic,application/json" hidden>
+      <button id="btnImport">Import .lifelic</button>
+      <button id="btnVerify" class="link">Verify</button>
+      <button id="btnClear" class="link">Remove</button>
+      
+      <div id="status" class="muted">No license installed</div>
+    </div>
+
+    <div class="card">
+      <div id="plan-line"></div>
+      <div id="trial-line" class="small" style="margin-top:6px"></div>
+    </div>
+
+
+    <div class="card">
+      <h3 id="h-buy"></h3>
+      <p id="hint"></p>
+      <iframe class="checkout" id="checkout" src="about:blank" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+      <div class="row" style="margin-top:10px">
+        <select id="lang">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+        </select>
+        <button id="open-checkout"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="license.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const $ = s => document.querySelector(s);
+      const file = $('#lifelic'), st = $('#status');
+      const ok = m => { st.textContent = m; st.className = 'ok'; };
+      const err = m => { st.textContent = m; st.className = 'err'; };
+      const info = m => { st.textContent = m; st.className = 'muted'; };
+
+      function parseLifelic(txt) {
+        const t = txt.trim();
+        if (t.startsWith('{')) return JSON.parse(t); // JSON
+        const m = t.match(/BEGIN\s+LIFEUNDO\s+LICENSE-----([\s\S]*?)-----END/i);
+        if (!m) throw new Error('Unknown license format');
+        const b64 = m[1].replace(/[^A-Za-z0-9+/=]/g, '');
+        return JSON.parse(atob(b64)); // armored -> JSON
+      }
+
+      async function loadSaved() {
+        const { license, signature } = await browser.storage.local.get(['license', 'signature']);
+        if (license && signature) ok(`Found license (plan: ${license.plan}, exp: ${license.expiry || '—'})`);
+        else info('No license installed');
+      }
+
+      async function handleFile(f) {
+        try {
+          const obj = parseLifelic(await f.text());
+          const passed = await License.verifyToken(JSON.stringify(obj));
+          if (!passed) throw new Error('Signature check failed. Verify public key and format.');
+          await License.importAndSave(obj);
+          ok(`License installed ✅ (plan: ${obj.license.plan})`);
+        } catch (e) { err(e.message); }
+      }
+
+      function bind() {
+        $('#btnImport').addEventListener('click', () => file.click());
+        file.addEventListener('change', () => file.files[0] && handleFile(file.files[0]));
+        $('#btnVerify').addEventListener('click', async () => {
+          const obj = await browser.storage.local.get(['license', 'signature']);
+          if (!obj.license) return err('No license found');
+          const valid = await License.verifyToken(JSON.stringify(obj));
+          ok(valid ? 'Signature valid ✅' : 'Signature invalid ❌');
+        });
+        $('#btnClear').addEventListener('click', async () => {
+          await browser.storage.local.remove(['license', 'signature']);
+          info('License removed');
+        });
+        loadSaved();
+      }
+
+      bind();
+    });
+  </script>
+</body>
+</html>
