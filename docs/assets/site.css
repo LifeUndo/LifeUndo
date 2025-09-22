@@ -74,6 +74,20 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 @media(max-width:980px){.screens-grid{grid-template-columns:1fr}}
 
 /* footer */
-.footer{border-top:1px solid color-mix(in oklab, var(--fg) 10%, transparent);padding:24px 0;color:var(--muted)}
+.footer{border-top:1px solid color-mix(in oklab, var(--fg) 10%, transparent);padding:24px 0;color:var(--muted);text-align:center}
 .footer .links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.footer .nav, .footer .links, .footer .menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+.footer .copyright { text-align: center; }
 .center{text-align:center}
+
+/* На узких экранах не ломаемся */
+@media (max-width: 600px) {
+  .footer .nav, .footer .links, .footer .menu { gap: 8px; }
+}
