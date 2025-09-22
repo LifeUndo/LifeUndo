@@ -192,7 +192,9 @@ async function buyPlan(planCode) {
     const data = await response.json();
     
     if (!response.ok || !data.url) {
-      throw new Error(data.error || 'Ошибка создания платежа');
+      const errorText = data.error || `HTTP ${response.status}`;
+      console.error('Payment creation failed:', response.status, errorText);
+      throw new Error(errorText);
     }
     
     // Переходим на FreeKassa
