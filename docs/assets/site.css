@@ -76,7 +76,7 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 /* footer */
 .footer{border-top:1px solid color-mix(in oklab, var(--fg) 10%, transparent);padding:24px 0;color:var(--muted);text-align:center}
 .footer .links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-.footer .nav, .footer .links, .footer .menu {
+.footer .nav, .footer .links, .footer .menu, .footer .footer-menu {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -89,5 +89,28 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 
 /* На узких экранах не ломаемся */
 @media (max-width: 600px) {
-  .footer .nav, .footer .links, .footer .menu { gap: 8px; }
+  .footer .nav, .footer .links, .footer .menu, .footer .footer-menu { gap: 8px; }
+}
+
+/* Footer badges styling */
+.footer-badges {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 4px;
+}
+.footer-badges img { 
+  display: block; 
+  height: 42px; 
+  width: auto; 
+}
+.badge-pledge { 
+  display: inline-block; 
+  padding: 8px 12px; 
+  border-radius: 10px; 
+  background: #1a2233; 
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
 }
