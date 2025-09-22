@@ -74,7 +74,7 @@
           <li>Все возможности Free</li>
           <li>7-дневный триал</li>
         </ul>
-        <p><a class="btn primary" href="#" onclick="buyPro()">Купить Pro</a></p>
+        <p><a class="btn primary" href="#" onclick="buyPlan('pro_month')">Купить Pro</a></p>
       </div>
     </div>
 
@@ -92,7 +92,7 @@
           <li>Один платеж навсегда</li>
           <li>7-дневный триал</li>
         </ul>
-        <p><a class="btn primary" href="#" onclick="buyVIP()">Купить VIP</a></p>
+        <p><a class="btn primary" href="#" onclick="buyPlan('vip_lifetime')">Купить VIP</a></p>
       </div>
 
       <!-- Team Plan -->
@@ -179,15 +179,70 @@
 </footer>
 
 <script>
-function buyPro() {
-  // TODO: Интеграция с FreeKassa
-  alert('Оплата Pro-плана будет доступна в ближайшее время. Следите за обновлениями!');
+// FreeKassa integration
+function buyPlan(planCode) {
+  // Получаем email пользователя
+  const email = prompt('Введите ваш email для получения лицензии:');
+  if (!email) return;
+  
+  // Проверяем email
+  if (!email.includes('@')) {
+    alert('Пожалуйста, введите корректный email');
+    return;
+  }
+  
+  // Генерируем order_id
+  const orderId = 'LU-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4);
+  
+  // Определяем сумму и валюту
+  let amount, currency = 'RUB';
+  switch(planCode) {
+    case 'pro_month':
+      amount = 149;
+      break;
+    case 'pro_year':
+      amount = 1490;
+      break;
+    case 'vip_lifetime':
+      amount = 2490;
+      break;
+    case 'team':
+      amount = 750; // 150 * 5 пользователей
+      break;
+    default:
+      amount = 149;
+  }
+  
+  // Формируем URL для FreeKassa
+  // ВАЖНО: Замените на реальные данные из кабинета FreeKassa
+  const merchantId = 'YOUR_MERCHANT_ID'; // Замените на реальный
+  const secretKey = 'YOUR_SECRET_KEY';   // Замените на реальный
+  
+  // Формируем подпись (пример для FreeKassa)
+  const signString = `${merchantId}:${amount}:${currency}:${orderId}:${secretKey}`;
+  const sign = btoa(signString).replace(/[+/=]/g, function(match) {
+    return {'+': '-', '/': '_', '=': ''}[match];
+  });
+  
+  // Параметры для FreeKassa
+  const params = new URLSearchParams({
+    m: merchantId,
+    oa: amount,
+    o: orderId,
+    c: currency,
+    s: sign,
+    us_email: email,
+    us_plan: planCode,
+    us_locale: 'ru'
+  });
+  
+  // Переходим на FreeKassa
+  window.open(`https://pay.freekassa.net/?${params.toString()}`, '_blank');
 }
 
-function buyVIP() {
-  // TODO: Интеграция с FreeKassa
-  alert('Оплата VIP-плана будет доступна в ближайшее время. Следите за обновлениями!');
-}
+// Старые функции для совместимости
+function buyPro() { buyPlan('pro_month'); }
+function buyVIP() { buyPlan('vip_lifetime'); }
 </script>
 
 </body>
