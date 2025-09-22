@@ -1,0 +1,175 @@
+держу темп. Вот короткий, чёткий чек-лист для Cursor: **куда именно вставлять `<head>`-блоки, какие файлы правим, какие зеркала указываем в `hreflang`**, и что проверить после.
+
+---
+
+# Чек-лист для Cursor: вставка `<head>` и зеркала RU/EN
+
+## 0) Общие правила
+
+* Вставлять блоки **сразу после** `<meta charset>` и `<meta name="viewport">`.
+* `canonical` указывает на **ту же локаль** (RU → RU, EN → EN).
+* `alternate hreflang` всегда тройкой: `ru`, `en`, `x-default` (и указывать зеркальный URL).
+* `og:image` везде: `https://lifeundo.ru/assets/lifeundo_og.png`.
+* Логотип в разметке JSON-LD `Organization.logo`: `https://lifeundo.ru/assets/lifeundo-round.png`.
+
+---
+
+## 1) Главная
+
+* RU: `docs/index.html` → блок **“RU Home”**.
+
+  * `canonical`: `https://lifeundo.ru/`
+  * `alternate ru`: `https://lifeundo.ru/`
+  * `alternate en`: `https://lifeundo.ru/en/`
+* EN: `docs/en/index.html` → блок **“EN Home”**.
+
+  * `canonical`: `https://lifeundo.ru/en/`
+  * `alternate en`: `https://lifeundo.ru/en/`
+  * `alternate ru`: `https://lifeundo.ru/`
+
+---
+
+## 2) Тарифы (Pricing)
+
+* RU: `docs/pricing/index.html` → блок **“RU Pricing”**.
+
+  * `canonical`: `https://lifeundo.ru/pricing/`
+  * `alternate ru`: `https://lifeundo.ru/pricing/`
+  * `alternate en`: `https://lifeundo.ru/en/pricing/`
+* EN: `docs/en/pricing/index.html` → блок **“EN Pricing”**.
+
+  * `canonical`: `https://lifeundo.ru/en/pricing/`
+  * `alternate en`: `https://lifeundo.ru/en/pricing/`
+  * `alternate ru`: `https://lifeundo.ru/pricing/`
+
+---
+
+## 3) Поддержка (Support)
+
+* RU: `docs/support/index.html` → блок **“RU Support”**.
+
+  * `canonical`: `https://lifeundo.ru/support/`
+  * `alternate ru`: `https://lifeundo.ru/support/`
+  * `alternate en`: `https://lifeundo.ru/en/support/`
+* EN: `docs/en/support/index.html` → блок **“EN Support”**.
+
+  * `canonical`: `https://lifeundo.ru/en/support/`
+  * `alternate en`: `https://lifeundo.ru/en/support/`
+  * `alternate ru`: `https://lifeundo.ru/support/`
+
+---
+
+## 4) Фонд (Fund)
+
+* RU: `docs/fund/index.html` → блок **“RU Fund”**.
+
+  * `canonical`: `https://lifeundo.ru/fund/`
+  * `alternate ru`: `https://lifeundo.ru/fund/`
+  * `alternate en`: `https://lifeundo.ru/en/fund/`
+* EN: `docs/en/fund/index.html` → блок **“EN Fund”**.
+
+  * `canonical`: `https://lifeundo.ru/en/fund/`
+  * `alternate en`: `https://lifeundo.ru/en/fund/`
+  * `alternate ru`: `https://lifeundo.ru/fund/`
+
+---
+
+## 5) FAQ
+
+* RU: `docs/faq/ru.html` → блок **“FAQ RU”**.
+
+  * `canonical`: `https://lifeundo.ru/faq/ru.html`
+  * `alternate ru`: `https://lifeundo.ru/faq/ru.html`
+  * `alternate en`: `https://lifeundo.ru/en/faq/`
+* EN: `docs/en/faq/index.html` → блок **“FAQ EN”**.
+
+  * `canonical`: `https://lifeundo.ru/en/faq/`
+  * `alternate en`: `https://lifeundo.ru/en/faq/`
+  * `alternate ru`: `https://lifeundo.ru/faq/ru.html`
+
+---
+
+## 6) Privacy
+
+* RU: `docs/privacy/ru.html` → блок **“Privacy RU”**.
+
+  * `canonical`: `https://lifeundo.ru/privacy/ru.html`
+  * `alternate ru`: `https://lifeundo.ru/privacy/ru.html`
+  * `alternate en`: `https://lifeundo.ru/en/privacy/`
+* EN: `docs/en/privacy/index.html` → блок **“Privacy EN”**.
+
+  * `canonical`: `https://lifeundo.ru/en/privacy/`
+  * `alternate en`: `https://lifeundo.ru/en/privacy/`
+  * `alternate ru`: `https://lifeundo.ru/privacy/ru.html`
+
+---
+
+## 7) Changelog
+
+* RU: `docs/changelog/index.html` → блок **“Changelog RU”**.
+
+  * `canonical`: `https://lifeundo.ru/changelog/`
+  * `alternate ru`: `https://lifeundo.ru/changelog/`
+  * `alternate en`: `https://lifeundo.ru/en/changelog/`
+* EN: `docs/en/changelog/index.html` → блок **“Changelog EN”**.
+
+  * `canonical`: `https://lifeundo.ru/en/changelog/`
+  * `alternate en`: `https://lifeundo.ru/en/changelog/`
+  * `alternate ru`: `https://lifeundo.ru/changelog/`
+
+---
+
+## 8) News/Blog
+
+* RU: `docs/news/index.html` → блок **“News RU”**.
+
+  * `canonical`: `https://lifeundo.ru/news/`
+  * `alternate ru`: `https://lifeundo.ru/news/`
+  * `alternate en`: `https://lifeundo.ru/en/news/`
+* EN: `docs/en/news/index.html` → блок **“News EN”**.
+
+  * `canonical`: `https://lifeundo.ru/en/news/`
+  * `alternate en`: `https://lifeundo.ru/en/news/`
+  * `alternate ru`: `https://lifeundo.ru/news/`
+
+---
+
+## 9) Success / Fail
+
+* RU: `docs/success.html` + `docs/fail.html` → вставить соответствующие блоки **“Success RU / Fail RU”**.
+
+  * `canonical`: `https://lifeundo.ru/success.html` и `https://lifeundo.ru/fail.html`
+  * `og:image`: общий
+
+---
+
+## 10) Техническое
+
+* В корне `docs/` добавить:
+
+  * `robots.txt`:
+
+    ```
+    User-agent: *
+    Allow: /
+    Sitemap: https://lifeundo.ru/sitemap.xml
+    ```
+  * `sitemap.xml` с основными URL (мы давали шаблон).
+  * Пустой файл `docs/.nojekyll` (если ещё нет).
+* Проверить, что **Settings → Pages**: Branch `main`, Folder `/docs`.
+
+---
+
+## 11) Проверка (acceptance)
+
+* Для каждой пары RU/EN открыть страницы и проверить:
+
+  * `canonical` указывает на текущую локаль.
+  * `alternate` зеркала корректны.
+  * `og:image` загружается, 200 OK.
+  * Меню/футер: пункт **Фонд/Fund** присутствует, бейджи FK + “We give 10%” отображаются.
+* Пройтись в инкогнито: `/`, `/en/`, `/pricing`, `/en/pricing`, `/support`, `/en/support`, `/fund`, `/en/fund`, `/changelog`, `/en/changelog`, `/news`, `/en/news`, `/privacy/ru.html`, `/en/privacy/`, `/success.html`, `/fail.html`.
+
+---
+
+надо — пришлю ещё **готовые partial-фрагменты** (мини-шаблоны) для повторяющихся частей `<head>`, чтобы Cursor подключил их автоматом на все страницы.
