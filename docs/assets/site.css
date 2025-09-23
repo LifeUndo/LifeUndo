@@ -134,7 +134,7 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 
 .fund-sprinkles{
   position:absolute; inset:0; z-index:0; pointer-events:none; user-select:none;
-  opacity:.12;    /* общая интенсивность слоя */
+  opacity:.25;    /* увеличили с .12 до .25 для лучшей видимости */
 }
 .fund-sprinkles .spr{
   position:absolute;
@@ -160,7 +160,7 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 /* крупный полупрозрачный центр (водяной знак) */
 .fund-sprinkles .s5{
   top:  120px; left: 50%; transform: translateX(-50%);
-  width: clamp(110px, 9vw, 180px); opacity:.10;
+  width: clamp(110px, 9vw, 180px); opacity:.20;  /* увеличили с .10 до .20 */
   --tx: 0px; --ty: 0px; animation-duration: 18s;
 }
 
@@ -180,14 +180,14 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 
 /* Планшет: слегка меньше/мягче и ближе к краям */
 @media (max-width: 1200px){
-  .fund-sprinkles { opacity:.10; }
+  .fund-sprinkles { opacity:.20; }  /* увеличили с .10 до .20 */
   .fund-sprinkles .s1{ left: 24px; } .fund-sprinkles .s2{ right: 24px; }
   .fund-sprinkles .s3{ left: 72px; } .fund-sprinkles .s4{ right: 64px; }
 }
 
 /* Мобилка ≤640px: 6 логотипов, ещё мягче и не мешают тексту */
 @media (max-width: 640px){
-  .fund-sprinkles { opacity:.08; }
+  .fund-sprinkles { opacity:.15; }  /* увеличили с .08 до .15 */
   .fund-sprinkles .spr{ width: clamp(56px, 14vw, 96px); }
   /* скрываем 4 самых лишних в центре/середине */
   .fund-sprinkles .s3,
