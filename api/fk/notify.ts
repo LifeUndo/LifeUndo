@@ -71,6 +71,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).send('Bad signature');
     }
 
+    // Валидация суммы (защита от рассинхронизации)
+    const priceMap: Record<string, number> = {
+      'pro_month': 149,
+      'pro_year': 1490,
+      'vip_lifetime': 2490,
+    };
+    const expectedAmount = priceMap[us_plan || ''];
+    if (expectedAmount && Number(amount) !== expectedAmount) {
+      console.warn('[FK][notify] amount mismatch', { 
+        order_id, 
+        expected: expectedAmount, 
+        received: Number(amount),
+        plan: us_plan 
+      });
+      return res.status(400).send('Bad amount');
+    }
+
     // Идемпотентность: проверяем, не обработан ли уже заказ
     if (await isOrderProcessed(order_id)) {
       console.log('[FK][notify] Already processed', { order_id });

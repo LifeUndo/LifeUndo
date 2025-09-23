@@ -23,7 +23,7 @@ export async function isOrderProcessed(order_id: string): Promise<boolean> {
 /**
  * Отмечает заказ как обработанный
  * Для MVP: просто логируем
- * В продакшене здесь будет запись в KV/Redis
+ * В продакшене здесь будет запись в KV/Redis с TTL
  */
 export async function markOrderProcessed(
   order_id: string, 
@@ -37,11 +37,18 @@ export async function markOrderProcessed(
     amount: Number(amount),
     plan,
     email: email ? email.replace(/(.{2}).+(@.*)/, '$1***$2') : undefined,
-    processed_at: new Date().toISOString()
+    processed_at: new Date().toISOString(),
+    ttl_days: 30 // TTL для очистки старых записей
   });
   
   // В продакшене здесь будет:
-  // await kv.set(`order:${order_id}`, { paid: true, processed_at: new Date().toISOString(), amount, plan, email });
+  // await kv.set(`order:${order_id}`, { 
+  //   paid: true, 
+  //   processed_at: new Date().toISOString(), 
+  //   amount, 
+  //   plan, 
+  //   email 
+  // }, { ttl: 30 * 24 * 60 * 60 }); // 30 дней
 }
 
 /**
