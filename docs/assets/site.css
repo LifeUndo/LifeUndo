@@ -128,72 +128,58 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
   opacity: .95;
 }
 
-/* === Fund: branded scatter, tuned for visibility === */
-.fund-wall { position: relative; isolation: isolate; }
+/* === Fund page: 10 visible logos layer === */
+.fund-wall { position: relative; }
+.fund-wall > *:not(.fund-sprinkles) { position: relative; z-index: 1; }
 
-/* крупный «водяной знак» по центру */
-.fund-wall::before{
-  content:"";
-  position:absolute; inset:8% 10% auto 10%;
-  height: clamp(220px, 36vw, 480px);
-  background: url("/assets/GetLifeUndo-Logo-Round.png") center/contain no-repeat;
-  opacity: .10;            /* была .06–.08 — усилили */
-  filter: contrast(1.05) saturate(.9);
-  pointer-events:none; z-index:0;
+/* decorative layer */
+.fund-sprinkles {
+  position: absolute; inset: 0;
+  z-index: 0; pointer-events: none; user-select: none;
+  opacity: .12; /* общая интенсивность слоя */
+}
+.fund-sprinkles .spr {
+  position: absolute;
+  width: clamp(72px, 7.2vw, 140px);
+  aspect-ratio: 1/1;
+  filter: saturate(.9) contrast(1.02);
+  opacity: 1;
 }
 
-/* рассыпанная сетка из 8 эмблем по краям, чтобы не лезли на текст */
-.fund-wall::after{
-  content:"";
-  position:absolute; inset:-6% -2% -10% -2%;
-  pointer-events:none; z-index:0;
-  opacity:.12;             /* была .06–.08 — усилили */
-  filter: saturate(.9);
-  background-repeat:no-repeat;
+/* расстановка ~по краям, избегаем центрального текста */
+.fund-sprinkles .s1  { top:   4%; left:   3%; }
+.fund-sprinkles .s2  { top:   6%; right:  4%; width: clamp(84px, 8vw, 160px); }
+.fund-sprinkles .s3  { top:  18%; left:  10%; }
+.fund-sprinkles .s4  { top:  20%; right:  8%; }
+.fund-sprinkles .s5  { top:  10%; left:  50%; transform: translateX(-50%); width: clamp(96px, 9vw, 180px); opacity:.10; }
+.fund-sprinkles .s6  { bottom: 28%; left:  8%; }
+.fund-sprinkles .s7  { bottom: 24%; right: 10%; }
+.fund-sprinkles .s8  { bottom: 10%; left:  46%; transform: translateX(-50%); width: clamp(86px, 7.5vw, 150px); }
+.fund-sprinkles .s9  { top:   58%; left:  82%; }
+.fund-sprinkles .s10 { top:   64%; left:  6%; }
 
-  /* логотипы разные по размеру */
-  background-image:
-    url("/assets/lifeundo-round.png"),
-    url("/assets/getlifeundo-round.png"),
-    url("/assets/GetLifeUndo-Logo-Light.png"),
-    url("/assets/GetLifeUndo-Logo-Dark.png"),
-    url("/assets/lifeundo-round.png"),
-    url("/assets/GetLifeUndo-Logo-Round.png"),
-    url("/assets/getlifeundo-round.png"),
-    url("/assets/lifeundo-round.png");
-  background-size:
-    120px, 140px, 110px, 110px, 95px, 150px, 105px, 90px;
-
-  /* позиции выведены в «пустые зоны» вокруг основного текста */
-  background-position:
-    4%   8%,   /* левый верх */
-    88%  10%,  /* правый верх */
-    8%   42%,  /* левый центр */
-    92%  46%,  /* правый центр */
-    14%  78%,  /* левый низ */
-    50%  8%,   /* верхняя середина (под шапкой) */
-    82%  82%,  /* правый низ */
-    46%  90%;  /* нижняя середина */
-}
-
-/* контент над паттерном */
-.fund-wall > * { position: relative; z-index: 1; }
-
-/* тёмным темам — мягкий режим смешивания, чтобы не слепило */
+/* тёмная тема — мягкое смешивание */
 @media (prefers-color-scheme: dark){
-  .fund-wall::before,
-  .fund-wall::after { mix-blend-mode: soft-light; }
+  .fund-sprinkles .spr { mix-blend-mode: soft-light; }
 }
 
-/* Мобилка: меньше, мягче, не перекрывать текст */
+/* планшет: чуть мягче */
+@media (max-width: 1024px){
+  .fund-sprinkles { opacity: .10; }
+  .fund-sprinkles .s5 { opacity:.08; }
+}
+
+/* мобилка: оставляем 5–6 штук, мягче и поменьше */
 @media (max-width: 640px){
-  .fund-wall::before{ opacity:.08; height: clamp(180px, 48vw, 280px); }
-  .fund-wall::after{
-    opacity:.08;
-    background-size: 80px, 96px, 84px, 84px, 0, 100px, 0, 0; /* оставим 4-5 шт */
-    background-position:
-      6% 10%, 92% 12%, 10% 62%, 90% 60%, 0 0, 50% 14%, 0 0, 0 0;
-  }
+  .fund-sprinkles { opacity: .08; }
+  .fund-sprinkles .spr { width: clamp(60px, 14vw, 96px); }
+  .fund-sprinkles .s3, .fund-sprinkles .s6, .fund-sprinkles .s9, .fund-sprinkles .s10 { display:none; }
+  .fund-sprinkles .s1  { top:  6%; left: 5%; }
+  .fund-sprinkles .s2  { top: 10%; right: 6%; }
+  .fund-sprinkles .s4  { top: 58%; right: 6%; }
+  .fund-sprinkles .s5  { top: 16%; left: 50%; transform:translateX(-50%); }
+  .fund-sprinkles .s7  { bottom: 14%; right: 8%; }
+  .fund-sprinkles .s8  { bottom: 10%; left: 50%; transform:translateX(-50%); }
 }
 
 /* Footer badges styling */
