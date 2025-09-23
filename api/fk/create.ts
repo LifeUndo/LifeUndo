@@ -1,58 +1,89 @@
+// /api/fk/create.ts
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
 
-const FK_MERCHANT_ID = process.env.FK_MERCHANT_ID!;
-const FK_SECRET = process.env.FK_SECRET!;
+const allowCors = (req: VercelRequest, res: VercelResponse) => {
+  const origin = process.env.ALLOWED_ORIGIN || '*';
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Vary', 'Origin');
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(204).end();
+    return true;
+  }
+  return false;
+};
 
-// Таблица планов в рублях (RU-витрина)
-const PLANS = {
-  pro_month:     { amount: 149,  currency: 'RUB', label: 'Pro (месяц)' },
-  pro_year:      { amount: 1490, currency: 'RUB', label: 'Pro (год)' },
-  vip_lifetime:  { amount: 2490, currency: 'RUB', label: 'VIP (Lifetime)' },
-  team:          { amount: 150,  currency: 'RUB', label: 'Team (за место, от)' }
-} as const;
+function md5(s: string) {
+  return crypto.createHash('md5').update(s, 'utf8').digest('hex');
+}
 
-// ❗ Подставить точную формулу подписи из FreeKassa (проверь в кабинете)
-// Ниже — шаблон под sha256(merchant_id:amount:currency:order_id:secret)
-function signPayment(merchant_id: string, amount: number, currency: string, order_id: string) {
-  const base = `${merchant_id}:${amount}:${currency}:${order_id}:${FK_SECRET}`;
-  return crypto.createHash('sha256').update(base).digest('hex');
+/**
+ * ВАЖНО: точная формула подписи должна соответствовать схеме, выбранной в кабинете FK.
+ * Наиболее частая для ссылки оплаты:
+ * sign = md5(`${merchant_id}:${amount}:${secret1}:${order_id}`)
+ * Если в твоей схеме участвует валюта/описание — добавь их в том порядке, как в кабинете.
+ */
+function buildCreateSignature({
+  merchant_id, amount, order_id, secret1,
+}: { merchant_id: string; amount: string; order_id: string; secret1: string; }) {
+  return md5(`${merchant_id}:${amount}:${secret1}:${order_id}`);
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // CORS (разрешаем только сайт)
-  res.setHeader('Access-Control-Allow-Origin', 'https://lifeundo.ru');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (allowCors(req, res)) return;
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const { email, plan, locale = 'ru' } = req.body || {};
-  if (!email || typeof email !== 'string' || !email.includes('@')) {
-    return res.status(400).json({ error: 'Bad email' });
+  try {
+    const { email, plan, locale } = req.body || {};
+    if (!email || !plan) return res.status(400).json({ error: 'email and plan are required' });
+
+    // Подбираем сумму по плану (RU-прейскурант из нашего плана)
+    // Можно вынести в ENV/JSON.
+    const priceMap: Record<string, number> = {
+      'pro_month': 149,
+      'pro_year': 1490,
+      'vip_lifetime': 2490,
+    };
+    const rub = priceMap[plan];
+    if (!rub) return res.status(400).json({ error: 'unknown plan' });
+
+    const merchant_id = process.env.FK_MERCHANT_ID!;
+    const secret1 = process.env.FK_SECRET1!;
+    const currency = process.env.CURRENCY || 'RUB';
+
+    // Уникальный order_id
+    const order_id = `LU-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+    // Сумму в строку с точкой (FK любит 2 знака, но для RUB часто допускает целое)
+    const amount = rub.toFixed(2);
+
+    // Подпись по выбранной схеме
+    const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1 });
+
+    // Ссылка на платёж (вариант с прямым переходом)
+    // Базовая форма для новых кабинетов: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
+    // При необходимости добавь параметры email/desc/… согласно докам FK.
+    const params = new URLSearchParams({
+      m: merchant_id,
+      oa: amount,
+      o: order_id,
+      s: sign,
+      currency,
+      us_email: email,              // user field — попадет в детали заказа
+      us_plan: plan,
+      lang: (locale === 'en' ? 'en' : 'ru'),
+    });
+
+    const url = `https://pay.freekassa.ru/?${params.toString()}`;
+
+    // Можно логировать без секретов:
+    console.log('[FK][create]', { order_id, emailMasked: email.replace(/(.{2}).+(@.*)/, '$1***$2'), plan, amount, currency });
+
+    return res.status(200).json({ url, order_id });
+  } catch (err: any) {
+    console.error('[FK][create][error]', { message: err?.message });
+    return res.status(500).json({ error: 'internal_error', message: err?.message || 'unknown' });
   }
-  if (!plan || !(plan in PLANS)) {
-    return res.status(400).json({ error: 'Bad plan' });
-  }
-
-  const meta = PLANS[plan as keyof typeof PLANS];
-  const order_id = `LU-${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
-  const sign = signPayment(FK_MERCHANT_ID, meta.amount, meta.currency, order_id);
-
-  const params = new URLSearchParams({
-    merchant_id: FK_MERCHANT_ID,
-    amount: String(meta.amount),
-    currency: meta.currency,
-    order_id,
-    sign,
-    us_email: email,
-    us_plan: String(plan),
-    us_locale: String(locale).toLowerCase() === 'en' ? 'en' : 'ru'
-  });
-
-  // Уточнить актуальный URL оплаты в FreeKassa (при необходимости заменить)
-  const payUrl = `https://pay.freekassa.ru/?${params.toString()}`;
-
-  return res.status(200).json({ url: payUrl, order_id });
 }

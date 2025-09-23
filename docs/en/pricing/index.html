@@ -72,7 +72,7 @@
           <li>All Free features</li>
           <li>7-day trial</li>
         </ul>
-        <p><a class="btn primary" href="/en/support/" style="opacity: 0.6; cursor: not-allowed;" title="Coming soon - contact support">Buy Pro (Soon)</a></p>
+        <p><a class="btn primary" href="#" onclick="buyPlan('pro_month')">Buy Pro</a></p>
       </div>
     </div>
 
@@ -90,7 +90,7 @@
           <li>One payment forever</li>
           <li>7-day trial</li>
         </ul>
-        <p><a class="btn primary" href="/en/support/" style="opacity: 0.6; cursor: not-allowed;" title="Coming soon - contact support">Buy VIP (Soon)</a></p>
+        <p><a class="btn primary" href="#" onclick="buyPlan('vip_lifetime')">Buy VIP</a></p>
       </div>
 
       <!-- Team Plan -->
@@ -167,15 +167,43 @@
 </footer>
 
 <script>
-function buyPro() {
-  // TODO: Integration with Stripe/Paddle
-  alert('Pro plan payment will be available soon. Stay tuned for updates!');
+// Безопасная интеграция с FreeKassa через серверный API
+const API_BASE = ''; // Используем относительный путь к нашему API
+
+async function buyPlan(planCode) {
+  const email = prompt('Enter your email for license key:');
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email — confirmation will be sent there.');
+    return;
+  }
+  
+  try {
+    const response = await fetch(`${API_BASE}/api/fk/create`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, plan: planCode, locale: 'en' })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok || !data.url) {
+      const errorText = data.error || `HTTP ${response.status}`;
+      console.error('Payment creation failed:', response.status, errorText);
+      throw new Error(errorText);
+    }
+    
+    // Переходим на FreeKassa
+    window.location.href = data.url;
+    
+  } catch (error) {
+    console.error('Payment error:', error);
+    alert('Failed to create payment. Please try again later or contact support.');
+  }
 }
 
-function buyVIP() {
-  // TODO: Integration with Stripe/Paddle
-  alert('VIP plan payment will be available soon. Stay tuned for updates!');
-}
+// Старые функции для совместимости
+function buyPro() { buyPlan('pro_month'); }
+function buyVIP() { buyPlan('vip_lifetime'); }
 </script>
 
 </body>

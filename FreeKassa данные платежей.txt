@@ -1,0 +1,16 @@
+FreeKassa
+
+Название сайта
+LifeUndo
+
+URL сайта
+https://lifeundo.ru
+
+*API ключ кассы
+7b11ad5311cc3bbeb608b3cb9c8404a6
+
+*Секретное слово 1
+HU/B%o]RgX=Tq@}
+
+*Секретное слово 2
+M!{iW=7dr*xua(L
