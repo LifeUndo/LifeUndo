@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="42" viewBox="0 0 160 42">
+  <rect width="160" height="42" rx="8" fill="#DC2626"/>
+  <rect x="2" y="2" width="156" height="38" rx="6" fill="#1F2937"/>
+  <text x="80" y="18" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">WE ACCEPT</text>
+  <text x="80" y="32" font-family="system-ui, -apple-system, Segoe UI, Roboto, Ubuntu" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FREEKASSA</text>
+</svg>
