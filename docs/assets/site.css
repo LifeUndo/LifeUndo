@@ -101,6 +101,87 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
   margin: 8px 0;
 }
 
+/* === Branding: header logo === */
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--fg, #e8ecf3);
+}
+.site-logo img {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.08);
+  image-rendering: -webkit-optimize-contrast;
+}
+@media (min-width: 640px){
+  .site-logo img { 
+    width: 36px; 
+    height: 36px; 
+  }
+}
+.site-logo .brand-text {
+  font-weight: 700;
+  letter-spacing: .2px;
+  opacity: .95;
+}
+
+/* === Branding: scattered logos wall (Fund page only) === */
+.fund-wall { 
+  position: relative; 
+  isolation: isolate; 
+}
+.fund-wall::after{
+  content: "";
+  position: absolute; 
+  inset: -10% -5%;
+  pointer-events: none; 
+  z-index: 0;
+  opacity: .08; /* интенсивность паттерна */
+  filter: saturate(0.9);
+  background-repeat: no-repeat;
+  /* 8–10 логотипов разного размера */
+  background-image:
+    url("/assets/lifeundo-round.png"),
+    url("/assets/getlifeundo-round.png"),
+    url("/assets/GetLifeUndo-Logo-Light.png"),
+    url("/assets/GetLifeUndo-Logo-Dark.png"),
+    url("/assets/GetLifeUndo-Logo-Round.png"),
+    url("/assets/lifeundo-round.png"),
+    url("/assets/getlifeundo-round.png"),
+    url("/assets/GetLifeUndo-Logo-Round.png");
+  background-size:
+    140px, 160px, 120px, 120px, 180px, 110px, 130px, 150px;
+  background-position:
+    4%   6%,
+    78%  10%,
+    12%  42%,
+    86%  46%,
+    52%  14%,
+    24%  78%,
+    75%  82%,
+    48%  88%;
+}
+
+/* контент над паттерном */
+.fund-wall > * { 
+  position: relative; 
+  z-index: 1; 
+}
+
+/* мобильная адаптация: приглушить и упростить */
+@media (max-width: 640px){
+  .fund-wall::after{
+    opacity: .06;
+    background-size:
+      95px, 110px, 90px,  90px, 120px, 0, 0, 0; /* оставим 4 штуки */
+    background-position:
+      6% 8%, 76% 12%, 12% 56%, 84% 62%, 50% 22%;
+  }
+}
+
 /* Footer badges styling */
 .footer-badges {
   display: flex;
