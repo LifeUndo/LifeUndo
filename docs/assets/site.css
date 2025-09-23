@@ -150,12 +150,12 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 
 /* ===== Раскладка под отмеченные крестиками места ===== */
 /* верхняя зона под навбаром */
-.fund-sprinkles .s1{ top:  86px; left:  32px;  --tx:  2px; --ty: -1px; animation-duration: 14s; }
-.fund-sprinkles .s2{ top:  78px; right: 36px;  --tx: -2px; --ty: -1px; animation-duration: 16s; width: clamp(84px, 8vw, 160px); }
+.fund-sprinkles .s1{ top:  86px; left:  32px;  --tx:  3px; --ty: -2px; animation-duration: 14s; }
+.fund-sprinkles .s2{ top:  78px; right: 36px;  --tx: -3px; --ty: -2px; animation-duration: 16s; width: clamp(84px, 8vw, 160px); }
 
 /* левый сектор над карточками "Направления" */
-.fund-sprinkles .s3{ top:  180px; left:  96px;  --tx:  1px; --ty:  1px; animation-duration: 15s; }
-.fund-sprinkles .s4{ top:  220px; right: 80px;  --tx: -1px; --ty:  1px; animation-duration: 13s; }
+.fund-sprinkles .s3{ top:  180px; left:  96px;  --tx:  2px; --ty:  2px; animation-duration: 15s; }
+.fund-sprinkles .s4{ top:  220px; right: 80px;  --tx: -2px; --ty:  2px; animation-duration: 13s; }
 
 /* крупный полупрозрачный центр (водяной знак) */
 .fund-sprinkles .s5{
@@ -165,13 +165,13 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
 }
 
 /* нижняя половина страницы (до футера) */
-.fund-sprinkles .s6{ bottom: 200px; left:  96px;  --tx:  1px; --ty:  1px; animation-duration: 17s; }
-.fund-sprinkles .s7{ bottom: 180px; right: 96px;  --tx: -1px; --ty:  1px; animation-duration: 15s; }
+.fund-sprinkles .s6{ bottom: 200px; left:  96px;  --tx:  2px; --ty:  2px; animation-duration: 17s; }
+.fund-sprinkles .s7{ bottom: 180px; right: 96px;  --tx: -2px; --ty:  2px; animation-duration: 15s; }
 
 /* прямо над футером — центр и края */
-.fund-sprinkles .s8{ bottom: 80px;  left: 50%; transform: translateX(-50%); width: clamp(86px, 7.5vw, 150px); --tx: .5px; --ty: -.5px; animation-duration: 14s; }
-.fund-sprinkles .s9{  bottom: 64px;  left:  48px;  --tx:  1px; --ty:  0px; animation-duration: 12s; }
-.fund-sprinkles .s10{ bottom: 64px;  right: 48px;  --tx: -1px; --ty:  0px; animation-duration: 12.5s; }
+.fund-sprinkles .s8{ bottom: 80px;  left: 50%; transform: translateX(-50%); width: clamp(86px, 7.5vw, 150px); --tx: 1px; --ty: -1px; animation-duration: 14s; }
+.fund-sprinkles .s9{  bottom: 64px;  left:  48px;  --tx:  2px; --ty:  0px; animation-duration: 12s; }
+.fund-sprinkles .s10{ bottom: 64px;  right: 48px;  --tx: -2px; --ty:  0px; animation-duration: 12.5s; }
 
 /* Тёмные темы — смешивание помягче */
 @media (prefers-color-scheme: dark){
@@ -213,9 +213,9 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
   }
   50%{
     transform:
-      translate(calc(var(--tx, 0) * 1.2), calc(var(--ty, 0) * 1.2))
-      scale(1.015); /* +1.5% */
-    opacity: .96;  /* -4% */
+      translate(calc(var(--tx, 0) * 1.5), calc(var(--ty, 0) * 1.5))
+      scale(1.025); /* увеличили с 1.015 до 1.025 */
+    opacity: .94;  /* увеличили изменение с .96 до .94 */
   }
 }
 /* Уважать системную настройку «уменьшить анимацию» */
