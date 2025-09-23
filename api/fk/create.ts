@@ -10,6 +10,7 @@ const allowCors = (req: VercelRequest, res: VercelResponse) => {
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Max-Age', '600'); // Кеш префлайта для Safari
     res.status(204).end();
     return true;
   }
@@ -58,7 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const order_id = `LU-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
     // Сумму в строку с точкой (FK любит 2 знака, но для RUB часто допускает целое)
-    const amount = rub.toFixed(2);
+    const amount = rub.toFixed(2).replace(',', '.'); // На всякий случай
 
     // Подпись по выбранной схеме
     const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1 });
@@ -80,7 +81,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const url = `https://pay.freekassa.ru/?${params.toString()}`;
 
     // Логируем без секретов:
-    console.log('[FK][create]', { order_id, emailMasked: email.replace(/(.{2}).+(@.*)/, '$1***$2'), plan, amount, currency });
+    console.log('[FK][create]', { 
+      order_id, 
+      email: email.replace(/(.{2}).+(@.*)/, '$1***$2'), 
+      plan, 
+      amount: Number(amount), 
+      currency 
+    });
 
     return res.status(200).json({ url, order_id });
   } catch (err: any) {

@@ -3,6 +3,8 @@
 // ВАЖНО: После ротации секретов обновите ENV переменные в Vercel!
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
+import { timingSafeEq } from '../../utils/timingSafeEq';
+import { isOrderProcessed, markOrderProcessed } from '../../utils/idempotency';
 
 function md5(s: string) {
   return crypto.createHash('md5').update(s, 'utf8').digest('hex');
@@ -62,18 +64,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const secret2 = process.env.FK_SECRET2!;
     const expected = buildNotifySignature({ merchant_id, amount, order_id, secret2 });
 
-    if (expected.toLowerCase() !== sign.toLowerCase()) {
+    if (!timingSafeEq(expected.toLowerCase(), sign.toLowerCase())) {
       console.warn('[FK][notify] bad signature', { order_id });
       return res.status(400).send('Bad signature');
     }
 
-    // Идемпотентность: храним статус order_id где-то (kv/db); для MVP — просто лог
+    // Идемпотентность: проверяем, не обработан ли уже заказ
+    if (await isOrderProcessed(order_id)) {
+      console.log('[FK][notify] Already processed', { order_id });
+      return res.status(200).send('OK');
+    }
+
+    // Отмечаем заказ как обработанный
+    await markOrderProcessed(order_id, amount, us_plan, us_email);
+
     console.log('[FK][notify] OK', {
       order_id,
-      amount,
+      amount: Number(amount),
       intid,
       plan: us_plan,
-      emailMasked: us_email ? String(us_email).replace(/(.{2}).+(@.*)/, '$1***$2') : undefined
+      email: us_email ? String(us_email).replace(/(.{2}).+(@.*)/, '$1***$2') : undefined
     });
 
     // Здесь: выдать/отправить ключ лицензии на email (MVP: вручную/через Google Sheets),

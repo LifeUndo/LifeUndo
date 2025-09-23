@@ -77,6 +77,12 @@ Write-Host "   Success URL: https://lifeundo.ru/success.html" -ForegroundColor G
 Write-Host "   Fail URL: https://lifeundo.ru/fail.html" -ForegroundColor Gray
 Write-Host "5. Тест 'Проверить статус' в кабинете FK → 200" -ForegroundColor Yellow
 Write-Host "6. Живая оплата с /pricing на iPhone" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "🔒 Боевая надёжность включена:" -ForegroundColor Green
+Write-Host "   ✅ Timing-safe сравнение подписей" -ForegroundColor Gray
+Write-Host "   ✅ CORS кеш для Safari" -ForegroundColor Gray
+Write-Host "   ✅ Идемпотентность" -ForegroundColor Gray
+Write-Host "   ✅ Улучшенное маскирование логов" -ForegroundColor Gray
 
 Write-Host ""
 Write-Host "🎯 Готово к тестированию!" -ForegroundColor Green
