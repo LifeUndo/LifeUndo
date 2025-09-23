@@ -128,58 +128,99 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
   opacity: .95;
 }
 
-/* === Fund page: 10 visible logos layer === */
+/* FUND: видимый слой логотипов (10 шт) + мягкая анимация */
 .fund-wall { position: relative; }
 .fund-wall > *:not(.fund-sprinkles) { position: relative; z-index: 1; }
 
-/* decorative layer */
-.fund-sprinkles {
-  position: absolute; inset: 0;
-  z-index: 0; pointer-events: none; user-select: none;
-  opacity: .12; /* общая интенсивность слоя */
+.fund-sprinkles{
+  position:absolute; inset:0; z-index:0; pointer-events:none; user-select:none;
+  opacity:.12;    /* общая интенсивность слоя */
 }
-.fund-sprinkles .spr {
-  position: absolute;
+.fund-sprinkles .spr{
+  position:absolute;
   width: clamp(72px, 7.2vw, 140px);
   aspect-ratio: 1/1;
   filter: saturate(.9) contrast(1.02);
-  opacity: 1;
+  will-change: transform, opacity;
+  /* дыхательная анимация (индивидуальные длительности ниже) */
+  animation-name: fund-breathe;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
-/* расстановка ~по краям, избегаем центрального текста */
-.fund-sprinkles .s1  { top:   4%; left:   3%; }
-.fund-sprinkles .s2  { top:   6%; right:  4%; width: clamp(84px, 8vw, 160px); }
-.fund-sprinkles .s3  { top:  18%; left:  10%; }
-.fund-sprinkles .s4  { top:  20%; right:  8%; }
-.fund-sprinkles .s5  { top:  10%; left:  50%; transform: translateX(-50%); width: clamp(96px, 9vw, 180px); opacity:.10; }
-.fund-sprinkles .s6  { bottom: 28%; left:  8%; }
-.fund-sprinkles .s7  { bottom: 24%; right: 10%; }
-.fund-sprinkles .s8  { bottom: 10%; left:  46%; transform: translateX(-50%); width: clamp(86px, 7.5vw, 150px); }
-.fund-sprinkles .s9  { top:   58%; left:  82%; }
-.fund-sprinkles .s10 { top:   64%; left:  6%; }
+/* ===== Раскладка под отмеченные крестиками места ===== */
+/* верхняя зона под навбаром */
+.fund-sprinkles .s1{ top:  86px; left:  32px;  --tx:  2px; --ty: -1px; animation-duration: 14s; }
+.fund-sprinkles .s2{ top:  78px; right: 36px;  --tx: -2px; --ty: -1px; animation-duration: 16s; width: clamp(84px, 8vw, 160px); }
 
-/* тёмная тема — мягкое смешивание */
+/* левый сектор над карточками "Направления" */
+.fund-sprinkles .s3{ top:  180px; left:  96px;  --tx:  1px; --ty:  1px; animation-duration: 15s; }
+.fund-sprinkles .s4{ top:  220px; right: 80px;  --tx: -1px; --ty:  1px; animation-duration: 13s; }
+
+/* крупный полупрозрачный центр (водяной знак) */
+.fund-sprinkles .s5{
+  top:  120px; left: 50%; transform: translateX(-50%);
+  width: clamp(110px, 9vw, 180px); opacity:.10;
+  --tx: 0px; --ty: 0px; animation-duration: 18s;
+}
+
+/* нижняя половина страницы (до футера) */
+.fund-sprinkles .s6{ bottom: 200px; left:  96px;  --tx:  1px; --ty:  1px; animation-duration: 17s; }
+.fund-sprinkles .s7{ bottom: 180px; right: 96px;  --tx: -1px; --ty:  1px; animation-duration: 15s; }
+
+/* прямо над футером — центр и края */
+.fund-sprinkles .s8{ bottom: 80px;  left: 50%; transform: translateX(-50%); width: clamp(86px, 7.5vw, 150px); --tx: .5px; --ty: -.5px; animation-duration: 14s; }
+.fund-sprinkles .s9{  bottom: 64px;  left:  48px;  --tx:  1px; --ty:  0px; animation-duration: 12s; }
+.fund-sprinkles .s10{ bottom: 64px;  right: 48px;  --tx: -1px; --ty:  0px; animation-duration: 12.5s; }
+
+/* Тёмные темы — смешивание помягче */
 @media (prefers-color-scheme: dark){
-  .fund-sprinkles .spr { mix-blend-mode: soft-light; }
+  .fund-sprinkles .spr{ mix-blend-mode: soft-light; }
 }
 
-/* планшет: чуть мягче */
-@media (max-width: 1024px){
-  .fund-sprinkles { opacity: .10; }
-  .fund-sprinkles .s5 { opacity:.08; }
+/* Планшет: слегка меньше/мягче и ближе к краям */
+@media (max-width: 1200px){
+  .fund-sprinkles { opacity:.10; }
+  .fund-sprinkles .s1{ left: 24px; } .fund-sprinkles .s2{ right: 24px; }
+  .fund-sprinkles .s3{ left: 72px; } .fund-sprinkles .s4{ right: 64px; }
 }
 
-/* мобилка: оставляем 5–6 штук, мягче и поменьше */
+/* Мобилка ≤640px: 6 логотипов, ещё мягче и не мешают тексту */
 @media (max-width: 640px){
-  .fund-sprinkles { opacity: .08; }
-  .fund-sprinkles .spr { width: clamp(60px, 14vw, 96px); }
-  .fund-sprinkles .s3, .fund-sprinkles .s6, .fund-sprinkles .s9, .fund-sprinkles .s10 { display:none; }
-  .fund-sprinkles .s1  { top:  6%; left: 5%; }
-  .fund-sprinkles .s2  { top: 10%; right: 6%; }
-  .fund-sprinkles .s4  { top: 58%; right: 6%; }
-  .fund-sprinkles .s5  { top: 16%; left: 50%; transform:translateX(-50%); }
-  .fund-sprinkles .s7  { bottom: 14%; right: 8%; }
-  .fund-sprinkles .s8  { bottom: 10%; left: 50%; transform:translateX(-50%); }
+  .fund-sprinkles { opacity:.08; }
+  .fund-sprinkles .spr{ width: clamp(56px, 14vw, 96px); }
+  /* скрываем 4 самых лишних в центре/середине */
+  .fund-sprinkles .s3,
+  .fund-sprinkles .s6,
+  .fund-sprinkles .s9,
+  .fund-sprinkles .s10{ display:none; }
+  /* подвинуть оставшиеся */
+  .fund-sprinkles .s1{ top: 72px; left: 16px; }
+  .fund-sprinkles .s2{ top: 72px; right:16px; }
+  .fund-sprinkles .s4{ top: 56%; right: 16px; }
+  .fund-sprinkles .s5{ top: 14%; left: 50%; transform: translateX(-50%); }
+  .fund-sprinkles .s7{ bottom: 12%; right: 20px; }
+  .fund-sprinkles .s8{ bottom: 10%; left: 50%; transform: translateX(-50%); }
+}
+
+/* ===== Анимация «дыхания» ===== */
+@keyframes fund-breathe{
+  0%,100%{
+    transform:
+      translate(var(--tx, 0), var(--ty, 0))
+      scale(1);
+    opacity: 1;
+  }
+  50%{
+    transform:
+      translate(calc(var(--tx, 0) * 1.2), calc(var(--ty, 0) * 1.2))
+      scale(1.015); /* +1.5% */
+    opacity: .96;  /* -4% */
+  }
+}
+/* Уважать системную настройку «уменьшить анимацию» */
+@media (prefers-reduced-motion: reduce){
+  .fund-sprinkles .spr{ animation: none !important; }
 }
 
 /* Footer badges styling */
