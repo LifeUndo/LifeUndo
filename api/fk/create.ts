@@ -59,23 +59,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const order_id = `LU-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
     // Сумму в строку с точкой (FK любит 2 знака, но для RUB часто допускает целое)
-    const amount = rub.toFixed(2).replace(',', '.'); // На всякий случай
+    const amount = Number(rub).toFixed(2).replace(',', '.');
 
     // Подпись по выбранной схеме
     const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1 });
 
     // Ссылка на платёж (вариант с прямым переходом)
     // Базовая форма для новых кабинетов: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
-    // При необходимости добавь параметры email/desc/… согласно докам FK.
+    const desc = `LifeUndo ${plan} for ${email}`;
     const params = new URLSearchParams({
       m: merchant_id,
-      oa: amount,
+      oa: amount,                         // 2490.00
       o: order_id,
       s: sign,
       currency,
-      us_email: email,              // user field — попадет в детали заказа
+      us_email: email,
       us_plan: plan,
       lang: (locale === 'en' ? 'en' : 'ru'),
+      em: email,                          // часть кабинетов показывает в UI
+      description: desc                   // если поддерживается
     });
 
     const url = `https://pay.freekassa.ru/?${params.toString()}`;

@@ -40,7 +40,23 @@
 # macOS/Linux
 bash smoke-test-freekassa.sh https://<project>.vercel.app
 ```
-**Ожидаемо:** `create 200`, CORS ок
+
+### 4.1. 🔬 Эмулятор Notify (тестирование подписей)
+```bash
+# Windows
+.\fk-notify-sim.ps1 https://<project>.vercel.app MERCHANT_ID 2490.00 LU-test-123 SECRET2
+
+# macOS/Linux
+./fk-notify-sim.sh https://<project>.vercel.app MERCHANT_ID 2490.00 LU-test-123 SECRET2
+```
+**Ожидаемо:** `OK` + лог `[FK][notify] OK`
+
+### 4.2. 🧪 Негативные тесты
+```bash
+# macOS/Linux
+./negative-tests.sh https://<project>.vercel.app MERCHANT_ID SECRET2
+```
+**Ожидаемо:** Все тесты проходят (Bad signature, идемпотентность, Bad Request)
 
 ### 5. 📱 Живой платёж на iPhone
 - [ ] Открыть `/pricing` на iPhone

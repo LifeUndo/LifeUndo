@@ -5,6 +5,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
 import { timingSafeEq } from '../../utils/timingSafeEq';
 import { isOrderProcessed, markOrderProcessed } from '../../utils/idempotency';
+import { readBody } from '../../utils/readBody';
 
 function md5(s: string) {
   return crypto.createHash('md5').update(s, 'utf8').digest('hex');
@@ -40,17 +41,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const {
-      MERCHANT_ID, AMOUNT, intid, SIGN, PAYMENT_ID, // частые имена из FK
-      // Параллельно прими наши кастомные (если FK присылает их как us_*):
-      us_email, us_plan,
-    } = req.body || {};
+    // Универсальный парсер тела (JSON, x-www-form-urlencoded, querystring)
+    const body = await readBody(req);
 
-    // Нормализуем (FK иногда шлёт в другом регистре)
-    const merchant_id = String(MERCHANT_ID ?? req.body?.merchant_id ?? '');
-    const amount = String(AMOUNT ?? req.body?.amount ?? '');
-    const order_id = String(PAYMENT_ID ?? req.body?.order_id ?? '');
-    const sign = String(SIGN ?? req.body?.sign ?? '');
+    // Нормализуем ключи (верхний/нижний регистр)
+    const pick = (k: string) => body[k] ?? body[k.toUpperCase()] ?? body[k.toLowerCase()];
+    const merchant_id = String(pick('MERCHANT_ID') ?? '');
+    const amount = String(pick('AMOUNT') ?? '');
+    const order_id = String(pick('PAYMENT_ID') ?? pick('order_id') ?? '');
+    const sign = String(pick('SIGN') ?? pick('sign') ?? '');
+    const intid = pick('intid');
+    const us_email = pick('us_email');
+    const us_plan = pick('us_plan');
 
     if (!merchant_id || !amount || !order_id || !sign) {
       console.warn('[FK][notify] missing fields', req.body);
