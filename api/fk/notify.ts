@@ -1,4 +1,6 @@
 // /api/fk/notify.ts
+// ВАЖНО: Notify URL должен указывать на Vercel-домен: https://<project>.vercel.app/api/fk/notify
+// ВАЖНО: После ротации секретов обновите ENV переменные в Vercel!
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
 

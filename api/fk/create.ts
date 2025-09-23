@@ -1,4 +1,5 @@
 // /api/fk/create.ts
+// ВАЖНО: После ротации секретов в кабинете FK обновите ENV переменные в Vercel!
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
 
@@ -78,7 +79,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const url = `https://pay.freekassa.ru/?${params.toString()}`;
 
-    // Можно логировать без секретов:
+    // Логируем без секретов:
     console.log('[FK][create]', { order_id, emailMasked: email.replace(/(.{2}).+(@.*)/, '$1***$2'), plan, amount, currency });
 
     return res.status(200).json({ url, order_id });
