@@ -181,7 +181,12 @@ async function buyPlan(planCode) {
     const response = await fetch(`${API_BASE}/api/fk/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, plan: planCode, locale: 'en' })
+      body: JSON.stringify({ 
+        email, 
+        plan: planCode, 
+        locale: 'en',
+        honeypot: '' // Honeypot поле (пустое для людей)
+      })
     });
     
     const data = await response.json();

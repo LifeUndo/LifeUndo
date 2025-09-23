@@ -2,6 +2,8 @@
 // ВАЖНО: После ротации секретов в кабинете FK обновите ENV переменные в Vercel!
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
+import { checkRateLimit } from '../../utils/rateLimiter';
+import { generateCorrelationId, getClientIP } from '../../utils/correlationId';
 
 const allowCors = (req: VercelRequest, res: VercelResponse) => {
   const origin = process.env.ALLOWED_ORIGIN || '*';
@@ -38,8 +40,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
   try {
-    const { email, plan, locale } = req.body || {};
+    // Rate limiting (анти-спам)
+    const clientIP = getClientIP(req);
+    if (!checkRateLimit(clientIP, 10, 60 * 1000)) { // 10 запросов в минуту
+      console.warn('[FK][create] Rate limit exceeded', { ip: clientIP });
+      return res.status(429).json({ error: 'Too Many Requests' });
+    }
+
+    const { email, plan, locale, honeypot } = req.body || {};
+    
+    // Honeypot защита от ботов
+    if (honeypot) {
+      console.warn('[FK][create] Honeypot triggered', { ip: clientIP });
+      return res.status(400).json({ error: 'Bad Request' });
+    }
+    
     if (!email || !plan) return res.status(400).json({ error: 'email and plan are required' });
+
+    // Генерируем Correlation ID для трассировки
+    const correlationId = generateCorrelationId();
 
     // Подбираем сумму по плану (RU-прейскурант из нашего плана)
     // Можно вынести в ENV/JSON.
@@ -75,6 +94,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       currency,
       us_email: email,
       us_plan: plan,
+      us_cid: correlationId,              // Correlation ID для трассировки
       lang: (locale === 'en' ? 'en' : 'ru'),
       em: email,                          // часть кабинетов показывает в UI
       description: desc                   // если поддерживается
@@ -88,7 +108,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       email: email.replace(/(.{2}).+(@.*)/, '$1***$2'), 
       plan, 
       amount: Number(amount), 
-      currency 
+      currency,
+      correlation_id: correlationId,
+      ip: clientIP
     });
 
     return res.status(200).json({ url, order_id });

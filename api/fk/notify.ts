@@ -53,6 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const intid = pick('intid');
     const us_email = pick('us_email');
     const us_plan = pick('us_plan');
+    const us_cid = pick('us_cid'); // Correlation ID для трассировки
 
     if (!merchant_id || !amount || !order_id || !sign) {
       console.warn('[FK][notify] missing fields', req.body);
@@ -102,7 +103,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       amount: Number(amount),
       intid,
       plan: us_plan,
-      email: us_email ? String(us_email).replace(/(.{2}).+(@.*)/, '$1***$2') : undefined
+      email: us_email ? String(us_email).replace(/(.{2}).+(@.*)/, '$1***$2') : undefined,
+      correlation_id: us_cid
     });
 
     // Здесь: выдать/отправить ключ лицензии на email (MVP: вручную/через Google Sheets),
