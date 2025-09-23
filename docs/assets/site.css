@@ -92,6 +92,15 @@ radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--brand-2) 14%, tr
   .footer .nav, .footer .links, .footer .menu, .footer .footer-menu { gap: 8px; }
 }
 
+/* Footer social icons styling */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
 /* Footer badges styling */
 .footer-badges {
   display: flex;
