@@ -184,15 +184,18 @@
 
 <script>
 // Fund totals counter
-fetch('/assets/fund/totals.json')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('fundTotals').innerHTML = 
-      `💰 Период: <strong>${data.period}</strong> | Чистая выручка: <strong>${data.net_revenue.toLocaleString()} ${data.currency}</strong> | 10% в фонд: <strong>${data.pledge_10pct.toLocaleString()} ${data.currency}</strong>`;
-  })
-  .catch(() => {
-    document.getElementById('fundTotals').innerHTML = '💰 Фонд запущен в сентябре 2025';
-  });
+(async () => {
+  const el = document.getElementById('fundTotals');
+  try {
+    const r = await fetch('/assets/fund/totals.json?v=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const j = await r.json();
+    el.innerHTML = `💰 Период: <strong>${j.period}</strong> | Чистая выручка: <strong>${j.net_revenue.toLocaleString()} ${j.currency}</strong> | 10% в фонд: <strong>${j.pledge_10pct.toLocaleString()} ${j.currency}</strong>`;
+  } catch(e) {
+    el.innerHTML = '💰 Фонд запущен в сентябре 2025';
+    console.error('Fund totals error:', e);
+  }
+})();
 </script>
 
 </body>
