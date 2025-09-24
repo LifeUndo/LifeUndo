@@ -24,14 +24,14 @@ function md5(s: string) {
 }
 
 /**
- * Формула подписи для FreeKassa (с валютой):
- * md5(m:oa:currency:SECRET1:o)
- * Валюту включаем в подпись
+ * Формула подписи для FreeKassa (правильный порядок):
+ * md5(merchant_id:amount:secret1:currency:order_id)
+ * Секрет ПЕРЕД валютой
  */
 function buildCreateSignature({
   merchant_id, amount, order_id, secret1, currency
 }: { merchant_id: string; amount: string; order_id: string; secret1: string; currency: string; }) {
-  return md5(`${merchant_id}:${amount}:${currency}:${secret1}:${order_id}`);
+  return md5(`${merchant_id}:${amount}:${secret1}:${currency}:${order_id}`);
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

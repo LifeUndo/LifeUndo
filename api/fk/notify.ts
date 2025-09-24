@@ -12,14 +12,14 @@ function md5(s: string) {
 }
 
 /**
- * Формула подписи для notify (с валютой):
- * md5(m:oa:currency:SECRET2:o)
- * Валюту включаем в подпись
+ * Формула подписи для notify (правильный порядок):
+ * md5(merchant_id:amount:secret2:currency:order_id)
+ * Секрет ПЕРЕД валютой
  */
 function buildNotifySignature({
   merchant_id, amount, order_id, secret2, currency
 }: { merchant_id: string; amount: string; order_id: string; secret2: string; currency: string; }) {
-  return md5(`${merchant_id}:${amount}:${currency}:${secret2}:${order_id}`);
+  return md5(`${merchant_id}:${amount}:${secret2}:${currency}:${order_id}`);
 }
 
 function isAllowedIp(ip?: string) {
