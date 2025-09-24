@@ -24,18 +24,14 @@ function md5(s: string) {
 }
 
 /**
- * Формула подписи для FreeKassa с учетом валюты:
- * Если есть currency: md5(m:oa:currency:SECRET1:o)
- * Если нет currency: md5(m:oa:SECRET1:o)
+ * Формула подписи для FreeKassa (без валюты):
+ * md5(m:oa:SECRET1:o)
+ * Валюту передаем в URL, но в подпись не включаем
  */
 function buildCreateSignature({
-  merchant_id, amount, order_id, secret1, currency
-}: { merchant_id: string; amount: string; order_id: string; secret1: string; currency?: string; }) {
-  if (currency) {
-    return md5(`${merchant_id}:${amount}:${currency}:${secret1}:${order_id}`);
-  } else {
-    return md5(`${merchant_id}:${amount}:${secret1}:${order_id}`);
-  }
+  merchant_id, amount, order_id, secret1
+}: { merchant_id: string; amount: string; order_id: string; secret1: string; }) {
+  return md5(`${merchant_id}:${amount}:${secret1}:${order_id}`);
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -83,8 +79,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Сумму в строку с точкой (FK любит 2 знака, но для RUB часто допускает целое)
     const amount = Number(rub).toFixed(2).replace(',', '.');
 
-    // Подпись по выбранной схеме (с учетом валюты)
-    const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1, currency });
+    // Подпись по выбранной схеме (без валюты)
+    const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1 });
 
     // Ссылка на платёж (вариант с прямым переходом)
     // Базовая форма для новых кабинетов: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
