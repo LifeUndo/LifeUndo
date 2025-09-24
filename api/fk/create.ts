@@ -82,14 +82,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Подпись по выбранной схеме (с валютой)
     const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1, currency });
 
-    // Ссылка на платёж (минимальный набор параметров)
-    // Базовая форма: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
+    // Ссылка на платёж с us_* параметрами для трассировки
     const params = new URLSearchParams({
       m: merchant_id,
       oa: amount,                         // 2490.00
       o: order_id,
       s: sign,
-      currency
+      currency,
+      us_email: email,                    // Передаем email для вебхука
+      us_plan: plan,                      // Передаем план для валидации
+      us_cid: correlationId               // Correlation ID для трассировки
     });
 
     const url = `https://pay.freekassa.ru/?${params.toString()}`;

@@ -104,14 +104,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Отмечаем заказ как обработанный
     await markOrderProcessed(order_id, amount, us_plan, us_email);
 
-    console.log(`[FK][notify] OK order_id=${order_id}`, {
-      order_id,
-      amount: Number(amount),
-      intid,
-      plan: us_plan,
-      email: us_email ? String(us_email).replace(/(.{2}).+(@.*)/, '$1***$2') : undefined,
-      correlation_id: us_cid
-    });
+    // Логируем одной строкой согласно ТЗ
+    console.log(`[FK][notify] OK order_id=${order_id} amount=${amount} currency=${currency}`);
 
     // Здесь: выдать/отправить ключ лицензии на email (MVP: вручную/через Google Sheets),
     // или пометить заказ оплаченным для кабинета.
