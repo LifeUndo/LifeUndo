@@ -12,14 +12,18 @@ function md5(s: string) {
 }
 
 /**
- * Для notify обычно требуется:
- * md5(`${merchant_id}:${amount}:${secret2}:${order_id}`)
- * НО! Ориентируйся на «Секретное слово 2» и порядок полей из кабинета FK.
+ * Формула подписи для notify с учетом валюты:
+ * Если есть currency: md5(m:oa:currency:SECRET2:o)
+ * Если нет currency: md5(m:oa:SECRET2:o)
  */
 function buildNotifySignature({
-  merchant_id, amount, order_id, secret2,
-}: { merchant_id: string; amount: string; order_id: string; secret2: string; }) {
-  return md5(`${merchant_id}:${amount}:${secret2}:${order_id}`);
+  merchant_id, amount, order_id, secret2, currency
+}: { merchant_id: string; amount: string; order_id: string; secret2: string; currency?: string; }) {
+  if (currency) {
+    return md5(`${merchant_id}:${amount}:${currency}:${secret2}:${order_id}`);
+  } else {
+    return md5(`${merchant_id}:${amount}:${secret2}:${order_id}`);
+  }
 }
 
 function isAllowedIp(ip?: string) {
@@ -32,6 +36,11 @@ function isAllowedIp(ip?: string) {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Поддержка GET/HEAD для кнопки "Проверить статус"
+  if (req.method === 'GET' || req.method === 'HEAD') {
+    return res.status(200).send('OK');
+  }
+  
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
   const fwd = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '';
@@ -50,6 +59,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const amount = String(pick('AMOUNT') ?? '');
     const order_id = String(pick('PAYMENT_ID') ?? pick('order_id') ?? '');
     const sign = String(pick('SIGN') ?? pick('sign') ?? '');
+    const currency = String(pick('CURRENCY') ?? pick('currency') ?? '');
     const intid = pick('intid');
     const us_email = pick('us_email');
     const us_plan = pick('us_plan');
@@ -65,7 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const secret2 = process.env.FK_SECRET2!;
-    const expected = buildNotifySignature({ merchant_id, amount, order_id, secret2 });
+    const expected = buildNotifySignature({ merchant_id, amount, order_id, secret2, currency });
 
     if (!timingSafeEq(expected.toLowerCase(), sign.toLowerCase())) {
       console.warn('[FK][notify] bad signature', { order_id });
@@ -98,7 +108,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Отмечаем заказ как обработанный
     await markOrderProcessed(order_id, amount, us_plan, us_email);
 
-    console.log('[FK][notify] OK', {
+    console.log(`[FK][notify] OK order_id=${order_id}`, {
       order_id,
       amount: Number(amount),
       intid,
@@ -110,7 +120,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Здесь: выдать/отправить ключ лицензии на email (MVP: вручную/через Google Sheets),
     // или пометить заказ оплаченным для кабинета.
     // Ответ в формате успеха для FK (обычно 'YES' или 'OK').
-    return res.status(200).send('OK');
+    return res.status(200).send('YES');
   } catch (e: any) {
     console.error('[FK][notify][error]', e?.message);
     return res.status(500).send('ERROR');
