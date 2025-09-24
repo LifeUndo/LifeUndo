@@ -92,7 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       currency
     });
 
-    const url = `https://pay.freekassa.ru/?${params.toString()}`;
+    const url = `https://pay.fk.money/?${params.toString()}`;
 
     // Логируем без секретов:
     console.log('[FK][create]', { 
