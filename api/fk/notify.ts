@@ -12,14 +12,14 @@ function md5(s: string) {
 }
 
 /**
- * Формула подписи для notify (без валюты):
- * md5(m:oa:SECRET2:o)
- * Валюту передаем в URL, но в подпись не включаем
+ * Формула подписи для notify (с валютой):
+ * md5(m:oa:currency:SECRET2:o)
+ * Валюту включаем в подпись
  */
 function buildNotifySignature({
-  merchant_id, amount, order_id, secret2
-}: { merchant_id: string; amount: string; order_id: string; secret2: string; }) {
-  return md5(`${merchant_id}:${amount}:${secret2}:${order_id}`);
+  merchant_id, amount, order_id, secret2, currency
+}: { merchant_id: string; amount: string; order_id: string; secret2: string; currency: string; }) {
+  return md5(`${merchant_id}:${amount}:${currency}:${secret2}:${order_id}`);
 }
 
 function isAllowedIp(ip?: string) {
@@ -71,7 +71,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const secret2 = process.env.FK_SECRET2!;
-    const expected = buildNotifySignature({ merchant_id, amount, order_id, secret2 });
+    const expected = buildNotifySignature({ merchant_id, amount, order_id, secret2, currency });
 
     if (!timingSafeEq(expected.toLowerCase(), sign.toLowerCase())) {
       console.warn('[FK][notify] bad signature', { order_id });
