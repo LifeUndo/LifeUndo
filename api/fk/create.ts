@@ -82,21 +82,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Подпись по выбранной схеме (без валюты)
     const sign = buildCreateSignature({ merchant_id, amount, order_id, secret1 });
 
-    // Ссылка на платёж (вариант с прямым переходом)
-    // Базовая форма для новых кабинетов: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
-    const desc = `LifeUndo ${plan} for ${email}`;
+    // Ссылка на платёж (минимальный набор параметров)
+    // Базовая форма: https://pay.freekassa.ru/?m=<id>&oa=<amount>&o=<order_id>&s=<sign>&currency=<RUB>
     const params = new URLSearchParams({
       m: merchant_id,
       oa: amount,                         // 2490.00
       o: order_id,
       s: sign,
-      currency,
-      us_email: email,
-      us_plan: plan,
-      us_cid: correlationId,              // Correlation ID для трассировки
-      lang: (locale === 'en' ? 'en' : 'ru'),
-      em: email,                          // часть кабинетов показывает в UI
-      description: desc                   // если поддерживается
+      currency
     });
 
     const url = `https://pay.freekassa.ru/?${params.toString()}`;
