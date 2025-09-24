@@ -1,0 +1,16 @@
+Это ваше URL-адрес имен в Vercel.
+vercel.com/lifeundo
+
+Это ваш идентификатор пользователя в Vercel.
+
+Rg0n76PL5EnpPlY4PQplaxTU
+
+Используется при взаимодействии с Vercel API.
+
+Вы создали команду alexs-projects-ef5d9b64
+
+Почта авторизации через GutHub
+developer@lifeundo.ru
+
+Вирт телефон
++447561654186

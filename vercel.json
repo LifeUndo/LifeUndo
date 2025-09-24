@@ -1,25 +1,8 @@
 {
-  "version": 2,
   "functions": {
-    "api/fk/notify.ts": {
-      "maxDuration": 30
-    },
-    "api/fk/create.ts": {
-      "maxDuration": 15
-    },
-    "api/health.ts": {
-      "maxDuration": 10
-    }
+    "api/fk/notify.ts": { "maxDuration": 30 },
+    "api/fk/create.ts": { "maxDuration": 15 },
+    "api/health.ts": { "maxDuration": 10 }
   },
-  "env": {
-    "FK_MERCHANT_ID": "@fk_merchant_id",
-    "FK_SECRET": "@fk_secret",
-    "FK_ALLOWED_IPS": "@fk_allowed_ips",
-    "MAIL_FROM": "@mail_from",
-    "SMTP_HOST": "@smtp_host",
-    "SMTP_PORT": "@smtp_port",
-    "SMTP_SECURE": "@smtp_secure",
-    "SMTP_USER": "@smtp_user",
-    "SMTP_PASS": "@smtp_pass"
-  }
+  "outputDirectory": "public"
 }
