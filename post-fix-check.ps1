@@ -1,77 +1,34 @@
-# Быстрая проверка после Cloudflare + Vercel фиксов
+# post-fix-check.ps1
+# Простой curl-чек 200/401
 
-Write-Host "🔍 Post-Fix Check - Проверка после DNS/SSL фиксов" -ForegroundColor Green
-Write-Host "=================================================" -ForegroundColor Green
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$Url
+)
 
-# 1. Проверка getlifeundo.com
-Write-Host "`n1. Проверка getlifeundo.com..." -ForegroundColor Blue
-try {
-    $response = Invoke-WebRequest -Uri "https://getlifeundo.com/" -Method Head -TimeoutSec 10 -UseBasicParsing
-    Write-Host "✅ HTTPS: $($response.StatusCode) $($response.StatusDescription)" -ForegroundColor Green
-    Write-Host "   Server: $($response.Headers.Server)" -ForegroundColor Gray
-    Write-Host "   SSL: ВАЛИДНЫЙ" -ForegroundColor Green
-} catch {
-    Write-Host "❌ HTTPS Error: $($_.Exception.Message)" -ForegroundColor Red
-    Write-Host "   Требуется Cloudflare DNS fix" -ForegroundColor Yellow
-}
+Write-Host "🧪 Запуск HTTP проверки для $Url" -ForegroundColor Cyan
 
-# 2. Проверка www.getlifeundo.com
-Write-Host "`n2. Проверка www.getlifeundo.com..." -ForegroundColor Blue
-try {
-    $response = Invoke-WebRequest -Uri "https://www.getlifeundo.com/" -Method Head -TimeoutSec 10 -UseBasicParsing
-    Write-Host "✅ HTTPS: $($response.StatusCode) $($response.StatusDescription)" -ForegroundColor Green
-    Write-Host "   Server: $($response.Headers.Server)" -ForegroundColor Gray
-} catch {
-    Write-Host "❌ HTTPS Error: $($_.Exception.Message)" -ForegroundColor Red
-}
+$pages = @(
+    @{ path = "/"; expected = 200; name = "Главная" },
+    @{ path = "/fund"; expected = 200; name = "Фонд" },
+    @{ path = "/ok"; expected = 200; name = "Маркер" },
+    @{ path = "/admin"; expected = 401; name = "Админка" }
+)
 
-# 3. DNS проверка
-Write-Host "`n3. DNS проверка..." -ForegroundColor Blue
-try {
-    $dns = nslookup getlifeundo.com 8.8.8.8
-    if ($dns -match "Address:\s+(\d+\.\d+\.\d+\.\d+)") {
-        $ip = $matches[1]
-        Write-Host "   IP: $ip" -ForegroundColor Gray
-        if ($ip -eq "76.76.21.21") {
-            Write-Host "   ✅ Правильный Vercel IP" -ForegroundColor Green
-        } else {
-            Write-Host "   ❌ Должен быть 76.76.21.21" -ForegroundColor Red
-        }
-    }
-} catch {
-    Write-Host "❌ DNS Error" -ForegroundColor Red
-}
-
-# 4. Проверка новых страниц
-Write-Host "`n4. Проверка новых страниц..." -ForegroundColor Blue
-$pages = @("/fund", "/gov", "/edu")
 foreach ($page in $pages) {
+    $testUrl = "$Url$($page.path)"
+    Write-Host "Проверка $($page.name) ($testUrl)..." -NoNewline -ForegroundColor Green
+    
     try {
-        $response = Invoke-WebRequest -Uri "https://getlifeundo.com$page" -Method Head -TimeoutSec 10 -UseBasicParsing
-        Write-Host "✅ $page: $($response.StatusCode)" -ForegroundColor Green
+        $response = Invoke-WebRequest -Uri $testUrl -Method HEAD -MaximumRedirection 0 -ErrorAction Stop
+        if ($response.StatusCode -eq $page.expected) {
+            Write-Host " ✅ $($response.StatusCode) OK" -ForegroundColor Green
+        } else {
+            Write-Host " ❌ Ошибка: $($response.StatusCode) (ожидался $($page.expected))" -ForegroundColor Red
+        }
     } catch {
-        Write-Host "⚠️  $page: $($_.Exception.Message)" -ForegroundColor Yellow
+        Write-Host " ❌ Ошибка: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
-# 5. Итоговый статус
-Write-Host "`n🎯 ИТОГОВЫЙ СТАТУС:" -ForegroundColor Green
-Write-Host "==================" -ForegroundColor Green
-
-try {
-    $healthCheck = Invoke-WebRequest -Uri "https://getlifeundo.com/" -Method Head -TimeoutSec 5 -UseBasicParsing
-    if ($healthCheck.StatusCode -eq 200) {
-        Write-Host "getlifeundo.com РАБОТАЕТ!" -ForegroundColor Green
-        Write-Host "SSL сертификат валидный" -ForegroundColor Green
-        Write-Host "Готово к применению миграций" -ForegroundColor Green
-        Write-Host "`nСЛЕДУЮЩИЙ ШАГ:" -ForegroundColor Cyan
-        Write-Host ".\apply-migrations-ready.ps1" -ForegroundColor White
-    } else {
-        Write-Host "getlifeundo.com недоступен" -ForegroundColor Red
-    }
-} catch {
-    Write-Host "getlifeundo.com недоступен" -ForegroundColor Red
-    Write-Host "Требуется Cloudflare + Vercel fix" -ForegroundColor Yellow
-}
-
-Write-Host "`nГотово!" -ForegroundColor Green
+Write-Host "✅ HTTP проверка завершена." -ForegroundColor Green
