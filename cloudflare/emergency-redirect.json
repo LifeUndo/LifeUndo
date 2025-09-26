@@ -1,0 +1,16 @@
+{
+  "redirect_rules": [
+    {
+      "name": "Emergency Redirect lifeundo.ru to getlifeundo.com",
+      "expression": "http.host eq \"lifeundo.ru\"",
+      "action": "redirect",
+      "redirect": {
+        "status_code": 301,
+        "url": "https://getlifeundo.com/$1",
+        "preserve_query_string": true
+      },
+      "description": "Temporary redirect until domain is properly configured on Beget"
+    }
+  ]
+}
+

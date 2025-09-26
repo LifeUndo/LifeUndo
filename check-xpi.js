@@ -50,3 +50,7 @@ yauzl.open(xpiPath, { lazyEntries: true }, (err, zipfile) => {
 
 
 
+
+
+
+
