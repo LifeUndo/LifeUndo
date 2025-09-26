@@ -3,6 +3,8 @@ import { statusBanners, tenants } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { currentTenant } from "@/lib/tenant";
 
+export const dynamic = 'force-dynamic'; // запрет SSG/ISR -> рендер только на рантайме
+
 export default async function Status() {
   const version = process.env.NEXT_PUBLIC_APP_VERSION || "0.4.0";
   const t = await currentTenant();
