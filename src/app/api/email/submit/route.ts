@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
       })),
     };
 
-    const ruleResult = await evaluateEmailRules(tenant.id, emailMessage);
+    const ruleResult = await evaluateEmailRules(tenant.id.toString(), emailMessage);
 
     // Определяем статус и TTL
     let status: 'HOLD' | 'APPROVED' | 'DENIED';

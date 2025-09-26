@@ -21,6 +21,8 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vercel/node": "^5.3.24",
+    "axios": "^1.12.2",
     "drizzle-kit": "^0.20.7",
     "drizzle-orm": "^0.29.3",
     "mailparser": "^3.7.4",

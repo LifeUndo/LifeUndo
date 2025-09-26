@@ -1,5 +1,4 @@
 import { pgTable, serial, varchar, text, integer, boolean, timestamp, decimal, json } from 'drizzle-orm/pg-core';
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 // Users table
 export const users = pgTable('users', {
@@ -106,11 +105,11 @@ export const webhooks = pgTable('webhooks', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
-// Export schemas for validation
-export const insertUserSchema = createInsertSchema(users);
-export const selectUserSchema = createSelectSchema(users);
-export const insertOrderSchema = createInsertSchema(orders);
-export const selectOrderSchema = createSelectSchema(orders);
-export const insertLicenseSchema = createInsertSchema(licenses);
-export const selectLicenseSchema = createSelectSchema(licenses);
+// Export schemas for validation - temporarily disabled
+// export const insertUserSchema = createInsertSchema(users);
+// export const selectUserSchema = createSelectSchema(users);
+// export const insertOrderSchema = createInsertSchema(orders);
+// export const selectOrderSchema = createSelectSchema(orders);
+// export const insertLicenseSchema = createInsertSchema(licenses);
+// export const selectLicenseSchema = createSelectSchema(licenses);
 

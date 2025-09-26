@@ -8,12 +8,12 @@ export interface RBACContext {
     name: string;
     isActive: boolean;
   };
-  org?: {
+  org: {
     id: string;
     name: string;
     slug: string;
     type: 'internal' | 'partner' | 'customer';
-  };
+  } | null;
   membership?: {
     id: string;
     orgId: string;
@@ -42,8 +42,11 @@ export async function requireAuth(req: NextRequest): Promise<RBACContext> {
   const apiKey = await getApiKeyFromRequest(req);
   if (apiKey) {
     return {
-      org: apiKey.org,
-      apiKey,
+      org: apiKey.org || null,
+      apiKey: {
+        ...apiKey,
+        org: apiKey.org || null
+      },
       actorType: 'api',
       isAuthenticated: true,
     };
@@ -62,6 +65,7 @@ export async function requireAuth(req: NextRequest): Promise<RBACContext> {
   }
 
   return {
+    org: null,
     isAuthenticated: false,
     actorType: null,
   };

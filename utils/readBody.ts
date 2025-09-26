@@ -23,8 +23,8 @@ export async function readBody(req: VercelRequest): Promise<Record<string, any>>
   if (ct.includes('application/x-www-form-urlencoded')) {
     const p = new URLSearchParams(raw);
     const obj: Record<string, string> = {};
-    for (const [k, v] of p) {
-      obj[k] = v;
+    for (const key of Array.from(p.keys())) {
+      obj[key] = p.get(key) || '';
     }
     return obj;
   }
@@ -41,8 +41,8 @@ export async function readBody(req: VercelRequest): Promise<Record<string, any>>
   try {
     const p = new URLSearchParams(raw);
     const obj: Record<string, string> = {};
-    for (const [k, v] of p) {
-      obj[k] = v;
+    for (const key of Array.from(p.keys())) {
+      obj[key] = p.get(key) || '';
     }
     return obj;
   } catch {

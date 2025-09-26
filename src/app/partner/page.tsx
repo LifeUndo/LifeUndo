@@ -129,7 +129,7 @@ function OverviewTab({ usage, activeKeys, webhooks }: any) {
               </div>
               <div className={`text-sm ${
                 metric.changeType === 'positive' ? 'text-green-600' :
-                metric.changeType === 'negative' ? 'text-red-600' : 'text-gray-600'
+                (metric.changeType as any) === 'negative' ? 'text-red-600' : 'text-gray-600'
               }`}>
                 {metric.change}
               </div>

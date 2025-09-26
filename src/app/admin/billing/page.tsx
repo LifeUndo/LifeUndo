@@ -115,7 +115,7 @@ export default function AdminBillingPage() {
               {limitsData?.subscription?.isOverLimit ? 'Over Limit' : 'Within Limits'}
             </div>
             <div className="text-sm text-gray-500">
-              {limits.filter(l => l.isOverLimit).length} quotas exceeded
+              {limits.filter((l: any) => l.isOverLimit).length} quotas exceeded
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function AdminBillingPage() {
           <div className="mt-4">
             <div className="text-2xl font-bold text-gray-900">{invoices.length}</div>
             <div className="text-sm text-gray-500">
-              {invoices.filter(i => i.status === 'paid').length} paid
+              {invoices.filter((i: any) => i.status === 'paid').length} paid
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function AdminBillingPage() {
               <div className="flex justify-between items-center mb-2">
                 <div>
                   <h4 className="font-medium text-gray-900">
-                    {limit.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                    {limit.name.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())}
                   </h4>
                   <p className="text-sm text-gray-500">
                     {limit.used} / {limit.limit} used ({limit.window})

@@ -30,7 +30,7 @@ export class EmailRelayService {
 
   private async getTransporter(): Promise<nodemailer.Transporter> {
     if (!this.transporter) {
-      this.transporter = nodemailer.createTransporter({
+      this.transporter = nodemailer.createTransport({
         host: this.config.host,
         port: this.config.port,
         secure: this.config.secure,

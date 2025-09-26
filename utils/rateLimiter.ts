@@ -52,8 +52,9 @@ export function checkRateLimit(
  */
 export function cleanupRateLimit(): void {
   const now = Date.now();
-  for (const [key, entry] of rateLimitStore.entries()) {
-    if (now > entry.resetTime) {
+  for (const key of Array.from(rateLimitStore.keys())) {
+    const entry = rateLimitStore.get(key);
+    if (entry && now > entry.resetTime) {
       rateLimitStore.delete(key);
     }
   }

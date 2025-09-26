@@ -47,7 +47,7 @@ export default function PercentilesCards() {
     
     // Если это массив групп, агрегируем
     if (Array.isArray(data.result)) {
-      const total = data.result.reduce((acc, group) => ({
+      const total = data.result.reduce((acc: any, group: any) => ({
         count: acc.count + group.count,
         count_4xx: acc.count_4xx + group.count_4xx,
         count_5xx: acc.count_5xx + group.count_5xx,

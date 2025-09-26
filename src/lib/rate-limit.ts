@@ -96,8 +96,9 @@ export async function checkRateLimit(
 // Очистка старых записей (вызывать периодически)
 export function cleanupRateLimit(): void {
   const now = Date.now();
-  for (const [key, entry] of rateLimitStore.entries()) {
-    if (entry.resetTime < now) {
+  for (const key of Array.from(rateLimitStore.keys())) {
+    const entry = rateLimitStore.get(key);
+    if (entry && entry.resetTime < now) {
       rateLimitStore.delete(key);
     }
   }

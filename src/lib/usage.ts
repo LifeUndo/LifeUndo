@@ -1,4 +1,5 @@
 import { db } from "@/db/client";
+import { sql } from 'drizzle-orm';
 
 function ymNow(){
   const d = new Date();
@@ -9,10 +10,9 @@ export async function incrUsage(apiKeyId: number, n = 1){
   const ym = ymNow();
   try {
     await db.execute(
-      `INSERT INTO api_usage(api_key_id, ym, calls) VALUES($1,$2,$3)
+      sql`INSERT INTO api_usage(api_key_id, ym, calls) VALUES(${apiKeyId},${ym},${n})
        ON CONFLICT (api_key_id, ym)
-       DO UPDATE SET calls = api_usage.calls + EXCLUDED.calls, updated_at = now()`,
-      [apiKeyId, ym, n]
+       DO UPDATE SET calls = api_usage.calls + EXCLUDED.calls, updated_at = now()`
     );
   } catch (error) {
     console.error('Error incrementing API usage:', error);
@@ -23,8 +23,7 @@ export async function getUsage(apiKeyId: number){
   const ym = ymNow();
   try {
     const rows = await db.execute<{ calls: number }>(
-      `SELECT calls FROM api_usage WHERE api_key_id=$1 AND ym=$2`,
-      [apiKeyId, ym]
+      sql`SELECT calls FROM api_usage WHERE api_key_id=${apiKeyId} AND ym=${ym}`
     );
     // @ts-ignore drizzle execute returns array-like
     return rows?.[0]?.calls ?? 0;
