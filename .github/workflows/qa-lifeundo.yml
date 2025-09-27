@@ -1,0 +1,16 @@
+name: QA lifeundo.ru
+on:
+  workflow_dispatch:
+  push:
+    paths: ["public/**", "src/**", "scripts/**", "tests/**"]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm i playwright @playwright/test jsdom node-fetch
+      - run: node scripts/audit-lifeundo.mjs
+      - run: npx playwright install --with-deps
+      - run: npx playwright test tests/e2e/lifeundo.spec.ts

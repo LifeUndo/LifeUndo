@@ -1,7 +1,6 @@
 {
   "redirects": [
     { "source": "/fund", "destination": "https://www.getlifeundo.com/fund", "permanent": false },
-    { "source": "/ok", "destination": "https://www.getlifeundo.com/ok", "permanent": false },
     { "source": "/buy", "destination": "/", "permanent": false }
   ]
 }
