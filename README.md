@@ -74,10 +74,24 @@
 ## 📚 Documentation
 
 All documentation is organized in the `docs/` directory:
-- Setup guides in `docs/setup/`
-- Checklists in `docs/checklists/`
-- Release notes in `docs/releases/`
-- Scripts in `docs/scripts/`
+- **Setup guides** in `docs/setup/` - Configuration, deployment, environment setup
+- **Checklists** in `docs/checklists/` - Project checklists, plans, verification steps
+- **Release notes** in `docs/releases/` - Changelogs, release notes, version history
+- **Scripts** in `docs/scripts/` - Build scripts, utilities, automation tools
+- **Patches** in `docs/patches/` - Patch documentation and implementation guides
+- **Temp files** in `docs/temp/` - Temporary files, archives, old configs
+
+### 📁 File Placement Rules
+
+**New files should be placed in:**
+- `docs/setup/` - New setup guides, configuration instructions
+- `docs/checklists/` - New project checklists, verification steps
+- `docs/releases/` - New release notes, changelog entries
+- `docs/scripts/` - New build scripts, utility scripts
+- `docs/patches/` - New patch documentation
+- `docs/temp/` - Temporary files, old archives, deprecated configs
+
+**DO NOT** place new documentation files in the root directory - they belong in `docs/` subdirectories.
 
 ## 🏗️ Architecture
 
