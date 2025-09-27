@@ -1,5 +1,18 @@
-<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LifeUndo — оплата</title>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LifeUndo — VIP лицензия</title>
+  <meta name="description" content="LifeUndo — VIP лицензия на всю жизнь. Единовременный платеж 2 490 ₽. Восстановление ввода, вкладок, буфера обмена.">
+  <meta property="og:title" content="LifeUndo — VIP лицензия">
+  <meta property="og:description" content="LifeUndo — VIP лицензия на всю жизнь. Единовременный платеж 2 490 ₽. Восстановление ввода, вкладок, буфера обмена.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lifeundo.ru/">
+  <meta property="og:image" content="https://lifeundo.ru/lifeundo_logo_round.png">
+  <link rel="canonical" href="https://lifeundo.ru/">
+  <link rel="icon" type="image/png" href="/favicon.ico">
+</head>
 <style>
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;margin:0;background:#0b0f16;color:#e6edf3}
   .wrap{max-width:560px;margin:7vh auto;padding:24px}
@@ -22,10 +35,16 @@
       <input id="email" type="email" placeholder="you@example.com" required>
       <button id="go">Оплатить 2 490 ₽</button>
       <div class="note">Оплата через FreeKassa · тестовый режим можно включить в кабинете FK.</div>
+      <div class="note" style="margin-top: 16px;">
+        <a href="https://www.getlifeundo.com/success" style="color: #10b981;">После оплаты вы попадёте на страницу успеха</a> · 
+        <a href="https://www.getlifeundo.com/fail" style="color: #f59e0b;">или на страницу ошибки</a>
+      </div>
       <div class="err" id="err" hidden></div>
     </form>
   </div>
 </div>
+</body>
+</html>
 <script>
 const f=document.getElementById('pay'), btn=document.getElementById('go'), err=document.getElementById('err');
 f.addEventListener('submit', async (e)=>{

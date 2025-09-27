@@ -1,0 +1,19 @@
+name: Lighthouse CI (lifeundo.ru)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            https://lifeundo.ru/
+            https://lifeundo.ru/fund
+            https://lifeundo.ru/ok
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

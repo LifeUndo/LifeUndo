@@ -19,26 +19,29 @@ async function head(url){
 }
 
 function checkSocials(document){
-  const selects = [
-    { name: "Telegram", sel: 'a[href^="https://t.me/"]' },
-    { name: "X", sel: 'a[href*="x.com"]' },
-    { name: "Reddit", sel: 'a[href*="reddit.com"]' },
-    { name: "YouTube", sel: 'a[href*="youtube.com"]' },
-    { name: "VK", sel: 'a[href*="vk.com"]' },
-    { name: "Dzen", sel: 'a[href*="dzen.ru"]' },
-    { name: "Habr", sel: 'a[href*="habr.com"]' },
-    { name: "vc.ru", sel: 'a[href*="vc.ru"]' },
-    { name: "TenChat", sel: 'a[href*="tenchat.ru"]' },
+  const socials = [
+    { name: "Telegram", ariaLabel: "Telegram" },
+    { name: "X", ariaLabel: "X (Twitter)" },
+    { name: "Reddit", ariaLabel: "Reddit" },
+    { name: "YouTube", ariaLabel: "YouTube" },
+    { name: "VK", ariaLabel: "VK" },
+    { name: "Dzen", ariaLabel: "Dzen" },
+    { name: "Habr", ariaLabel: "Habr" },
+    { name: "vc.ru", ariaLabel: "vc.ru" },
+    { name: "TenChat", ariaLabel: "TenChat" },
   ];
   const problems = [];
-  for (const {name, sel} of selects){
-    const a = document.querySelector(sel);
-    if(!a) problems.push(`social missing: ${name}`);
+  for (const {name, ariaLabel} of socials){
+    const a = document.querySelector(`a[aria-label="${ariaLabel}"]`);
+    if(!a) problems.push(`social icon missing: ${name}`);
     else {
       if (a.getAttribute("target") === "_blank" && EXT_LINKS_TARGET_BLANK_NEEDS_NOOPENER) {
         const rel = (a.getAttribute("rel")||"").toLowerCase();
         if (!rel.includes("noopener")) problems.push(`noopener missing: ${name}`);
       }
+      // Check if it's an SVG icon
+      const svg = a.querySelector("svg");
+      if (!svg) problems.push(`social icon not SVG: ${name}`);
     }
   }
   return problems;
@@ -55,7 +58,30 @@ function checkFKBadge(document){
 
 function checkFundBadge(document){
   const text = document.body.textContent || "";
-  return /10%\s*(net|чистой)\s*revenue/i.test(text) ? [] : ["10% Fund text missing"];
+  return /10%\s*(net|чистой|отдаём|give)/i.test(text) ? [] : ["10% Fund text missing"];
+}
+
+function checkMeta(document){
+  const problems = [];
+  
+  // Check canonical link
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) problems.push("canonical link missing");
+  else if (!canonical.href.startsWith(BASE)) problems.push("canonical link incorrect");
+  
+  // Check og:title
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (!ogTitle) problems.push("og:title missing");
+  
+  // Check og:description
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (!ogDesc) problems.push("og:description missing");
+  
+  // Check meta description
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) problems.push("meta description missing");
+  
+  return problems;
 }
 
 function listLinks(document){
@@ -87,6 +113,7 @@ function listLinks(document){
       ...checkSocials(doc),
       ...checkFKBadge(doc),
       ...checkFundBadge(doc),
+      ...checkMeta(doc),
     ];
     if (problems.length) console.log(`[WARN] ${path}: ${problems.join(" | ")}`);
     const { internal, external } = listLinks(doc);
