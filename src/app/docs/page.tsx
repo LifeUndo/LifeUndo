@@ -10,7 +10,31 @@ export default function DocsPage() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">API Документация</h1>
-          <p className="text-xl text-gray-600">Интеграция с платформой LifeUndo</p>
+          <p className="text-xl text-gray-600 mb-6">Интеграция с платформой LifeUndo</p>
+          <div className="flex justify-center space-x-4">
+            <a 
+              href="/api-docs" 
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Интерактивная документация
+            </a>
+            <a 
+              href="/api/openapi.json" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
+            >
+              OpenAPI JSON
+            </a>
+            <a 
+              href="/api/README.md" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            >
+              Markdown версия
+            </a>
+          </div>
         </div>
 
         <div className="space-y-8">

@@ -13,6 +13,7 @@ export default function Home() {
               <Link href="/features" className="text-gray-600 hover:text-gray-900">Возможности</Link>
               <Link href="/pricing" className="text-gray-600 hover:text-gray-900">Цены</Link>
               <Link href="/fund" className="text-gray-600 hover:text-gray-900">Финансирование</Link>
+              <Link href="/docs" className="text-gray-600 hover:text-gray-900">API Docs</Link>
               <Link href="/faq" className="text-gray-600 hover:text-gray-900">FAQ</Link>
               <Link href="/contacts" className="text-gray-600 hover:text-gray-900">Контакты</Link>
             </nav>
