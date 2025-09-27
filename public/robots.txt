@@ -1,3 +1,8 @@
 User-agent: *
-Disallow: /admin
+Disallow: /admin/
+Disallow: /partner/
+Disallow: /api/admin/
+Disallow: /api/private/
+Allow: /
 
+Sitemap: https://www.getlifeundo.com/sitemap.xml

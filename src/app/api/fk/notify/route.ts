@@ -32,28 +32,82 @@ function verifyFK(params: URLSearchParams) {
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const params = url.searchParams;
+  
+  // Log all incoming webhooks for debugging
+  console.log('[FK][notify] Received webhook:', Object.fromEntries(params.entries()));
+  
+  // Verify signature first
   const ok = verifyFK(params);
-  // store webhook raw payload
-  await db.insert(webhooks).values({ provider: "fk", event: "notify", payload: Object.fromEntries(params as any) });
-  if (!ok) return NextResponse.json({ ok: false }, { status: 400 });
+  if (!ok) {
+    console.error('[FK][notify] Signature verification failed');
+    await db.insert(webhooks).values({ 
+      provider: "fk", 
+      event: "notify_failed", 
+      payload: Object.fromEntries(params as any) 
+    });
+    return NextResponse.json({ ok: false, error: 'Invalid signature' }, { status: 400 });
+  }
 
-  // replay protection: rely on provider intid or merchant_order_id + check duplicates
+  // Extract and validate required parameters
   const intid = params.get('intid');
-  const orderId = Number(params.get("MERCHANT_ORDER_ID"));
-  const amount = Math.round(Number(params.get("AMOUNT")) * 100);
+  const orderIdStr = params.get("MERCHANT_ORDER_ID");
+  const amountStr = params.get("AMOUNT");
   const currency = params.get("CUR_ID") || "RUB";
+  
+  if (!orderIdStr || !amountStr) {
+    console.error('[FK][notify] Missing required parameters');
+    return NextResponse.json({ ok: false, error: 'Missing required parameters' }, { status: 400 });
+  }
+
+  const orderId = Number(orderIdStr);
+  const amount = Math.round(Number(amountStr) * 100);
   const txnId = intid || undefined;
 
+  // Check for duplicate transactions (idempotency)
   if (txnId) {
     const dup = await db.select().from(payments).where(eq(payments.providerTxnId, txnId)).limit(1);
     if (dup.length) {
+      console.log('[FK][notify] Duplicate transaction detected:', txnId);
       return new NextResponse("DUPLICATE", { status: 200 });
     }
   }
 
-  // mark order paid
-  await db.update(orders).set({ status: "paid", paidAt: new Date() }).where(eq(orders.id, orderId));
-  await db.insert(payments).values({ orderId, provider: "fk", providerTxnId: txnId, amount, currency, status: "success", payload: Object.fromEntries(params as any) });
+  // Check if order exists and is in correct state
+  const existingOrder = await db.select().from(orders).where(eq(orders.id, orderId)).limit(1);
+  if (!existingOrder.length) {
+    console.error('[FK][notify] Order not found:', orderId);
+    return NextResponse.json({ ok: false, error: 'Order not found' }, { status: 404 });
+  }
 
-  return new NextResponse("YES");
+  if (existingOrder[0].status === 'paid') {
+    console.log('[FK][notify] Order already paid:', orderId);
+    return new NextResponse("ALREADY_PAID", { status: 200 });
+  }
+
+  // Process payment
+  try {
+    await db.update(orders).set({ status: "paid", paidAt: new Date() }).where(eq(orders.id, orderId));
+    await db.insert(payments).values({ 
+      orderId, 
+      provider: "fk", 
+      providerTxnId: txnId, 
+      amount, 
+      currency, 
+      status: "success", 
+      payload: Object.fromEntries(params as any) 
+    });
+
+    // Log successful webhook
+    await db.insert(webhooks).values({ 
+      provider: "fk", 
+      event: "notify_success", 
+      payload: Object.fromEntries(params as any) 
+    });
+
+    console.log('[FK][notify] Payment processed successfully:', { orderId, amount, currency, txnId });
+    return new NextResponse("YES");
+  } catch (error) {
+    console.error('[FK][notify] Database error:', error);
+    return NextResponse.json({ ok: false, error: 'Database error' }, { status: 500 });
+  }
 }
