@@ -151,6 +151,19 @@ function toggleWhatsNew() {
 
 // ==== Event Listeners ====
 
+// Pro button → /pricing (RU) or /en/pricing (EN)
+(function() {
+  const el = document.getElementById('btnPro');
+  if (!el) return;
+  try {
+    const lang = (navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en';
+    const href = lang === 'ru' ? '/pricing' : '/en/pricing';
+    el.addEventListener('click', () => { try { browser.tabs.create({ url: href }); } catch(_) { window.open(href, '_blank'); } });
+  } catch (e) {
+    el.addEventListener('click', () => window.open('/en/pricing', '_blank'));
+  }
+})();
+
 // Language switching
 document.getElementById('btnEN')?.addEventListener('click', () => {
   currentLang = 'en';
