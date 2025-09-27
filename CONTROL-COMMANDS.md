@@ -33,3 +33,4 @@ curl -I -H "Cache-Control: no-cache" -L "https://getlifeundo.com/?cb=$(date +%s)
 
 **Две строки — и я скажу «зелено»! 🚀**
 
+

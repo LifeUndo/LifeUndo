@@ -59,3 +59,4 @@ curl -sX PATCH "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/settings/sec
 
 **Финальный штрих завершён! Система готова к продакшену! 🚀**
 
+

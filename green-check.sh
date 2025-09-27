@@ -45,3 +45,4 @@ echo
 [[ "$EXIT" == "0" ]] && echo "${GREEN}ALL GREEN — 0.4.2 принято ✅${NC}" || echo "${RED}Есть проблемы — см. FAIL выше ⛑️${NC}"
 exit $EXIT
 
+

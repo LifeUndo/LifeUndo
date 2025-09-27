@@ -47,3 +47,4 @@ curl -I -L https://lifeundo.ru/ | grep -Ei "server|cf-cache-status|x-vercel"
 
 **ПРОБЛЕМА РЕШЕНА:** Домен теперь на Beget!
 
+

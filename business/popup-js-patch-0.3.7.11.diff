@@ -1,0 +1,65 @@
+--- a/extension/popup.js
++++ b/extension/popup.js
+@@ -45,7 +45,7 @@
+     // Pro button - link to pricing page
+     const proButton = document.getElementById('pro-button');
+     if (proButton) {
+-        proButton.onclick = () => chrome.tabs.create({ url: 'https://getlifeundo.com/fund' });
++        proButton.onclick = () => chrome.tabs.create({ url: getLanguage() === 'ru' ? 'https://getlifeundo.com/pricing' : 'https://getlifeundo.com/en/pricing' });
+     }
+ 
+     // License activation button
+@@ -156,7 +156,7 @@
+     const whatsNew = document.getElementById('whats-new');
+     if (whatsNew) {
+         const language = getLanguage();
+-        whatsNew.innerHTML = language === 'ru' 
++        whatsNew.innerHTML = language === 'ru'
+             ? `<div class="whats-new-content">
+                 <h3>🆕 Что нового в 0.3.7.11</h3>
+                 <ul>
+@@ -167,7 +167,7 @@
+                     <li>Исправлены баги с RU/EN переключением</li>
+                     <li>Улучшена стабильность UI</li>
+                 </ul>
+-               </div>`
++               </div>`
+             : `<div class="whats-new-content">
+                 <h3>🆕 What's New in 0.3.7.11</h3>
+                 <ul>
+@@ -178,7 +178,7 @@
+                     <li>Fixed RU/EN toggle bugs</li>
+                     <li>Improved UI stability</li>
+                 </ul>
+-               </div>`;
++               </div>`;
+     }
+ 
+     // Footer with localized content
+@@ -186,7 +186,7 @@
+     if (footer) {
+         const language = getLanguage();
+         footer.innerHTML = language === 'ru'
+-            ? `<div class="footer-content">
++            ? `<div class="footer-content">
+                 <div class="footer-links">
+                     <a href="https://getlifeundo.com/features" target="_blank">Возможности</a>
+                     <a href="https://getlifeundo.com/pricing" target="_blank">Цены</a>
+@@ -195,7 +195,7 @@
+                     <a href="https://getlifeundo.com/fund" target="_blank">Фонд</a>
+                 </div>
+                 <div class="footer-badge">We give 10%</div>
+-               </div>`
++               </div>`
+             : `<div class="footer-content">
+                 <div class="footer-links">
+                     <a href="https://getlifeundo.com/en/features" target="_blank">Features</a>
+@@ -205,7 +205,7 @@
+                     <a href="https://getlifeundo.com/en/fund" target="_blank">Fund</a>
+                 </div>
+                 <div class="footer-badge">We give 10%</div>
+-               </div>`;
++               </div>`;
+     }
+ }
+

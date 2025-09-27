@@ -70,3 +70,4 @@ curl -sX PATCH "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/settings/dev
 
 **Все блокеры устранены! DNS исправлен! 🚀**
 
+

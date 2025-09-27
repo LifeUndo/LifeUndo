@@ -2,3 +2,4 @@ Type,Name,Content,Proxy,TTL
 A,@,<BEGET_ORIGIN_IP>,Proxied,Auto
 CNAME,www,lifeundo.ru,Proxied,Auto
 
+

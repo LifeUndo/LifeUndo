@@ -83,3 +83,4 @@ X-Vercel-Cache: HIT
 ## 📞 СЛЕДУЮЩИЙ ШАГ:
 После успешного DNS фикса → **Vercel → Refresh Domains → Issue Certificate → Redeploy**
 
+

@@ -41,3 +41,4 @@ CREATE INDEX IF NOT EXISTS idx_tenant_plans_tenant_id ON tenant_plans(tenant_id)
 CREATE INDEX IF NOT EXISTS idx_status_banners_tenant_id ON status_banners(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_email_templates_tenant_id ON email_templates(tenant_id);
 
+

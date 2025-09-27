@@ -60,3 +60,4 @@ curl -s -u admin:****** \
 
 **Хочешь добавить фильтр по «классу метода» (read/write), duration_ms в CSV (если поле есть), и preset-кнопки (2xx OK / 4xx Errors / 5xx Incidents)? Скажи: «method-class + duration + presets — одним постом» 🚀**
 
+

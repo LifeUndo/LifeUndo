@@ -44,3 +44,4 @@ Write-Host "🚀 Готово! Можно запускать SMTP сервисы
 Write-Host "npm run smtp:start" -ForegroundColor Cyan
 Write-Host "npm run relay:start" -ForegroundColor Cyan
 
+

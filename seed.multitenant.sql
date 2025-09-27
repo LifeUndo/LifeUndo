@@ -19,3 +19,4 @@ INSERT INTO status_banners (tenant_id,active,title,message)
 SELECT a.id, true, 'Техработы', 'ACME биллинг обновляется' FROM a
 ON CONFLICT DO NOTHING;
 
+

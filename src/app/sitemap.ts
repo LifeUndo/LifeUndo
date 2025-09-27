@@ -7,3 +7,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return pages.map((p) => ({ url: base + p, lastModified: now }));
 }
 
+

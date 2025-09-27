@@ -7,3 +7,4 @@ export function checkBasicAuth(header?: string) {
   return u === user && p === pass;
 }
 
+

@@ -76,3 +76,4 @@ curl.exe -I https://www.getlifeundo.com/
 2. Проверь статус зоны в Cloudflare
 3. Обратись в поддержку Cloudflare
 
+

@@ -22,3 +22,4 @@ UPDATE orders SET tenant_id = (SELECT id FROM tenants WHERE slug = 'lifeundo') W
 UPDATE payments SET tenant_id = (SELECT id FROM tenants WHERE slug = 'lifeundo') WHERE tenant_id IS NULL;
 UPDATE webhooks SET tenant_id = (SELECT id FROM tenants WHERE slug = 'lifeundo') WHERE tenant_id IS NULL;
 
+

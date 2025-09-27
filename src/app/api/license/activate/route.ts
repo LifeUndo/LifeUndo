@@ -17,3 +17,4 @@ export async function POST(req: NextRequest){
   return NextResponse.json({ ok:true, plan: lic.planCode, expiresAt: lic.expiresAt });
 }
 
+

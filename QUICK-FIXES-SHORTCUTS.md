@@ -64,3 +64,4 @@ curl -sX PATCH "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/settings/ssl
 
 **Все быстрые шпаргалки готовы! 🚀**
 
+

@@ -115,3 +115,4 @@ EMAIL_DOMAINS_BLACKLIST=casino.*,*.binomo.*,temp-mail.*
 
 **Версия: 0.4.5-EP** — Email Pause Gateway готов к деплою! 📧🔒
 
+

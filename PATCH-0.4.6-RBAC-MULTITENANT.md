@@ -153,3 +153,4 @@ BASIC_AUTH_PASS=admin
 
 **Версия: 0.4.6-RBAC** — Multi-tenant RBAC + Partner Portal готов к деплою! 🔐👥
 
+

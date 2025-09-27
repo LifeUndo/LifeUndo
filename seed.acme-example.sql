@@ -32,3 +32,4 @@ FROM tenants t
 WHERE t.slug = 'acme'
 ON CONFLICT (key) DO NOTHING;
 
+

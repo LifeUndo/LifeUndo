@@ -17,3 +17,4 @@ CREATE INDEX IF NOT EXISTS idx_tenant_api_keys_active ON tenant_api_keys(active)
 ALTER TABLE plans        ADD COLUMN IF NOT EXISTS monthly_limit int;
 ALTER TABLE tenant_plans ADD COLUMN IF NOT EXISTS monthly_limit int;
 
+

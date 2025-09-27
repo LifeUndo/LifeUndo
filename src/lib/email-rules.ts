@@ -220,3 +220,4 @@ export async function getEmailRules(tenantId: string): Promise<EmailRule[]> {
   });
 }
 
+

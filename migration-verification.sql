@@ -157,3 +157,4 @@ FROM (
         CASE WHEN to_regclass('public.usage_counters') IS NOT NULL THEN 'EXISTS' ELSE 'MISSING' END as status
 ) t;
 
+

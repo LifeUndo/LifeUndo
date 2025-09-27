@@ -12,3 +12,4 @@ INSERT INTO licenses (key,plan_code,issued_to,devices_limit,expires_at,meta)
 VALUES ('LIFE-TEST-0000-0000','pro_m','qa@getlifeundo.com',2,now() + interval '90 days','{}')
 ON CONFLICT (key) DO NOTHING;
 
+

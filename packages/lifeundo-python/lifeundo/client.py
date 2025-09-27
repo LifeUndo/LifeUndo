@@ -76,3 +76,4 @@ def create_client(api_key: str, base_url: str = "https://getlifeundo.com", **kwa
     config = LifeUndoConfig(api_key, base_url, **kwargs)
     return LifeUndoClient(config)
 
+

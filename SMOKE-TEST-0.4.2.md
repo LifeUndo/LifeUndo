@@ -64,3 +64,4 @@ curl -s -X POST https://getlifeundo.com/api/admin/email-templates/test \
 
 **Я сразу зафиксирую 0.4.2 — зелёный релиз! 🚀**
 
+

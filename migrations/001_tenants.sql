@@ -33,3 +33,4 @@ CREATE INDEX idx_licenses_tenant_id ON licenses(tenant_id);
 CREATE INDEX idx_api_keys_tenant_id ON api_keys(tenant_id);
 CREATE INDEX idx_orders_tenant_id ON orders(tenant_id);
 
+

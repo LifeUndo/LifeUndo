@@ -1,5 +1,9 @@
 -- SMTP Relay: логирование попыток отправки и расширение email_outbox
-CREATE TYPE relay_status AS ENUM ('SENT', 'FAILED', 'RETRY', 'PENDING');
+DO $$ BEGIN
+    CREATE TYPE relay_status AS ENUM ('SENT', 'FAILED', 'RETRY', 'PENDING');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
 
 -- Лог попыток релэя
 CREATE TABLE IF NOT EXISTS email_relay_log (
@@ -134,4 +138,5 @@ BEGIN
     AND erl.attempted_at >= now() - (days_param || ' days')::interval;
 END;
 $$ LANGUAGE plpgsql;
+
 

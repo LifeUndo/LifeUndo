@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
             LifeUndo
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Управление лицензиями для разработчиков
+            Восстановление текста, закрытых вкладок и буфера обмена для разработчиков
           </p>
           <div className="bg-white rounded-lg shadow p-6 max-w-md mx-auto">
             <h2 className="text-lg font-semibold mb-4">Статус системы</h2>
@@ -56,8 +57,18 @@ export default function Home() {
               Выбрать план
             </Link>
           </div>
+
+          {/* Fund Badge */}
+          <div className="mt-8">
+            <div className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-full text-lg font-medium">
+              <span className="mr-2">💚</span>
+              We give 10% — поддерживаем IT-сообщество
+            </div>
+          </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

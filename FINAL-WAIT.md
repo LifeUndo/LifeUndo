@@ -47,3 +47,4 @@ curl -sX POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets" \
 
 **Жду вывод `green-check` по .com и .ru — добиваем, ставим печать «0.4.2 принято ✅» и полетим к 0.4.3! 🚀**
 
+

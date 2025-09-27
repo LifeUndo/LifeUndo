@@ -57,3 +57,4 @@ dig NS getlifeundo.com +short
 - ✅ Vercel для превью
 - ✅ FreeKassa без изменений
 
+

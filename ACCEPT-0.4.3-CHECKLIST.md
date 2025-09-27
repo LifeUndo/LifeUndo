@@ -73,3 +73,4 @@ curl -s -u admin:****** https://getlifeundo.com/api/admin/usage/summary | jq
 
 **Если что-то потребуется подправить — скажи «фиксанём точечно», и я дам мини-патч в одном посте! 🚀**
 
+

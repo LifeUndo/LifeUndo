@@ -52,3 +52,4 @@ echo | openssl s_client -servername getlifeundo.com -connect getlifeundo.com:443
 
 **TLS цепочка проверена! Сертификат валиден! 🚀**
 
+

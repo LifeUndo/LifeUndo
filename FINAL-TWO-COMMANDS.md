@@ -56,3 +56,4 @@ curl -s -X POST https://getlifeundo.com/api/admin/email-templates/test \
 
 **Две строки — и я скажу «зелено»! 🚀**
 
+

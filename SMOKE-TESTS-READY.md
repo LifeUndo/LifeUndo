@@ -36,3 +36,4 @@ curl -s -X POST https://getlifeundo.com/api/admin/email-templates/test \
 
 **Все тесты проходят — 0.4.2 работает! 🚀**
 
+

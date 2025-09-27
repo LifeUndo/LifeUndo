@@ -86,3 +86,4 @@ curl -sX POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" 
 
 **Все анти-залипы устранены! DNS исправлен! 🚀**
 
+

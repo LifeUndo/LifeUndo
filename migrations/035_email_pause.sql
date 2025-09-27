@@ -1,6 +1,15 @@
 -- Email Pause Gateway: схема для перехвата и модерации исходящих писем
-CREATE TYPE email_status AS ENUM ('HOLD', 'APPROVED', 'DENIED', 'SENT', 'FAILED', 'EXPIRED');
-CREATE TYPE email_action AS ENUM ('AUTO_HOLD', 'AUTO_ALLOW', 'AUTO_DENY');
+DO $$ BEGIN
+    CREATE TYPE email_status AS ENUM ('HOLD', 'APPROVED', 'DENIED', 'SENT', 'FAILED', 'EXPIRED');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE email_action AS ENUM ('AUTO_HOLD', 'AUTO_ALLOW', 'AUTO_DENY');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
 
 -- Основная таблица исходящих писем
 CREATE TABLE IF NOT EXISTS email_outbox (
@@ -21,9 +30,9 @@ CREATE TABLE IF NOT EXISTS email_outbox (
   status email_status NOT NULL DEFAULT 'HOLD',
   hold_reason text,
   expires_at timestamptz,
-  approved_by uuid REFERENCES tenants(id),
+  approved_by uuid REFERENCES orgs(id),
   approved_at timestamptz,
-  denied_by uuid REFERENCES tenants(id),
+  denied_by uuid REFERENCES orgs(id),
   denied_at timestamptz,
   
   -- Relay & Delivery
@@ -36,7 +45,7 @@ CREATE TABLE IF NOT EXISTS email_outbox (
   fingerprint char(64) NOT NULL, -- SHA-256 hash of content
   
   -- Tenant isolation
-  tenant_id uuid NOT NULL REFERENCES tenants(id) ON DELETE CASCADE
+  org_id uuid NOT NULL REFERENCES orgs(id) ON DELETE CASCADE
 );
 
 -- Вложения
@@ -53,7 +62,7 @@ CREATE TABLE IF NOT EXISTS email_attachments (
 -- Правила автоматической модерации
 CREATE TABLE IF NOT EXISTS email_rules (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  tenant_id uuid NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  org_id uuid NOT NULL REFERENCES orgs(id) ON DELETE CASCADE,
   enabled boolean NOT NULL DEFAULT true,
   name text NOT NULL,
   priority int NOT NULL DEFAULT 100,
@@ -81,13 +90,13 @@ CREATE INDEX IF NOT EXISTS email_outbox_status_idx ON email_outbox(status);
 CREATE INDEX IF NOT EXISTS email_outbox_created_at_idx ON email_outbox(created_at DESC);
 CREATE INDEX IF NOT EXISTS email_outbox_expires_at_idx ON email_outbox(expires_at) WHERE status = 'HOLD';
 CREATE INDEX IF NOT EXISTS email_outbox_from_created_idx ON email_outbox("from", created_at DESC);
-CREATE INDEX IF NOT EXISTS email_outbox_tenant_status_idx ON email_outbox(tenant_id, status);
+CREATE INDEX IF NOT EXISTS email_outbox_org_status_idx ON email_outbox(org_id, status);
 CREATE INDEX IF NOT EXISTS email_outbox_fingerprint_idx ON email_outbox(fingerprint);
 
 CREATE INDEX IF NOT EXISTS email_attachments_outbox_idx ON email_attachments(outbox_id);
 CREATE INDEX IF NOT EXISTS email_attachments_size_idx ON email_attachments(size_bytes DESC);
 
-CREATE INDEX IF NOT EXISTS email_rules_tenant_enabled_idx ON email_rules(tenant_id, enabled, priority);
+CREATE INDEX IF NOT EXISTS email_rules_org_enabled_idx ON email_rules(org_id, enabled, priority);
 CREATE INDEX IF NOT EXISTS email_rules_priority_idx ON email_rules(priority);
 
 -- Функция для обновления updated_at
@@ -99,10 +108,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS email_outbox_updated_at ON email_outbox;
 CREATE TRIGGER email_outbox_updated_at
   BEFORE UPDATE ON email_outbox
   FOR EACH ROW EXECUTE FUNCTION update_email_updated_at();
 
+DROP TRIGGER IF EXISTS email_rules_updated_at ON email_rules;
 CREATE TRIGGER email_rules_updated_at
   BEFORE UPDATE ON email_rules
   FOR EACH ROW EXECUTE FUNCTION update_email_updated_at();
@@ -118,4 +129,5 @@ BEGIN
     AND expires_at < now();
 END;
 $$ LANGUAGE plpgsql;
+
 

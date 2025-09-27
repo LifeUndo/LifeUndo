@@ -8,3 +8,4 @@ CREATE TABLE IF NOT EXISTS usage_events (
 CREATE INDEX IF NOT EXISTS idx_usage_events_tenant_ts ON usage_events(tenant_id, ts);
 CREATE INDEX IF NOT EXISTS idx_usage_events_endpoint ON usage_events(endpoint);
 
+

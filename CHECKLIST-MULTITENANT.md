@@ -105,3 +105,4 @@ SELECT * FROM status_banners WHERE tenant_id=(SELECT id FROM tenants WHERE slug=
 
 **🎉 Multi-tenant system fully operational! 🚀**
 
+
