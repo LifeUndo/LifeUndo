@@ -1,5 +1,0 @@
-Type,Name,Content,TTL,Proxy
-A,getlifeundo.com,<BEGET_IP>,Auto,Proxied
-CNAME,www,getlifeundo.com,Auto,Proxied
-
-

@@ -1,7 +1,0 @@
-{
-  "redirects": [
-    { "source": "/(.*)", "destination": "https://getlifeundo.com/$1", "permanent": true }
-  ]
-}
-
-
