@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LifeUndo — License & Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    .page { max-width:720px; margin:24px auto; }
+    .card { background:#161616; border:1px solid #262626; border-radius:14px; padding:16px; margin-bottom:14px; }
+    .row { display:flex; gap:12px; align-items:center; }
+    .row > * { flex:1 }
+    #license{max-width:640px}
+    #btnImport{padding:8px 14px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;cursor:pointer}
+    .link{margin-left:8px;background:transparent;border:0;color:#2563eb;cursor:pointer}
+    #status{margin-top:10px}
+    .muted{color:#6b7280}
+    .ok{color:#065f46}
+    .err{color:#b91c1c}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h2>LifeUndo Settings</h2>
+
+    <!-- ЕДИНСТВЕННЫЙ блок лицензии с локализацией -->
+    <section class="card" id="license">
+      <h2 data-i18n="lic_title">License</h2>
+      <p class="muted" data-i18n="lic_hint">Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).</p>
+
+      <input id="vipFile" type="file" accept=".lifelic,.json" hidden>
+      <div class="row">
+        <button id="btnChoose" data-i18n="btn_choose">Выбрать .lifelic</button>
+        <button id="btnImport" data-i18n="btn_import">Импортировать</button>
+        <button id="btnVerify" data-i18n="btn_verify">Проверить</button>
+        <button id="btnRemove" data-i18n="btn_remove">Удалить</button>
+      </div>
+
+      <div id="status" class="muted" data-i18n="status_empty">No license installed</div>
+      
+      <ul id="hints" class="muted">
+        <li>Скачайте файл .lifelic с сайта после покупки</li>
+        <li>Нажмите "Выбрать .lifelic" и выберите файл</li>
+        <li>Нажмите "Импортировать" для активации лицензии</li>
+      </ul>
+    </section>
+
+    <div class="card">
+      <div id="plan-line"></div>
+      <div id="trial-line" class="small" style="margin-top:6px"></div>
+    </div>
+
+    <div class="card">
+      <h3>Links</h3>
+      <div class="row">
+        <a href="https://lifeundo.ru" target="_blank">Website</a>
+        <a href="https://lifeundo.ru/privacy" target="_blank">Privacy</a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Firefox Add-ons</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="license.js"></script>
+  <script src="shared/licenseCore.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
