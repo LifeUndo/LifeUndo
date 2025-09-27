@@ -22,16 +22,30 @@ jobs:
           cat > "$FILE" <<'HTML'
 <!doctype html><html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GetLifeUndo — Оплата VIP</title>
-</head><body>
-<h1>VIP лицензия (Lifetime)</h1>
+<title>LifeUndo — VIP лицензия</title>
+<style>
+body{margin:0;background:#0b1220;color:#e5e7eb;font-family:Inter,system-ui,Arial}
+.wrap{max-width:720px;margin:48px auto;padding:0 16px}
+.card{background:#111827;border:1px solid #1f2937;border-radius:16px;padding:24px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+h1{margin:0 0 8px;font-size:28px}
+label{display:block;margin:18px 0 8px;color:#cbd5e1}
+input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #374151;background:#0f172a;color:#e5e7eb;outline:none}
+button{margin-top:18px;display:block;width:100%;padding:14px 16px;border-radius:12px;border:0;background:#6366f1;color:#fff;font-weight:700}
+p.muted{margin-top:10px;color:#94a3b8;font-size:13px}
+</style>
+</head><body><div class="wrap">
+<div class="card">
+<h1>LifeUndo — VIP лицензия</h1>
+<p>Единовременный платёж · <b>2 490 ₽</b></p>
 <form method="POST" action="/api/fk/create">
-  <input type="hidden" name="plan" value="vip_life">
-  <label>Email для ключа:<br><input name="email" type="email" required></label><br><br>
-  <button type="submit">Оплатить через FreeKassa</button>
+<input type="hidden" name="plan" value="vip_life">
+<label>E-mail для получения ключа</label>
+<input name="email" type="email" placeholder="you@example.com" required>
+<button type="submit">Оплатить 2 490 ₽</button>
+<p class="muted">Оплата через FreeKassa · тестовый режим включается в кабинете FK.</p>
 </form>
-<p><a href="/success">После оплаты вы попадёте на эту страницу</a> • <a href="/fail">или эта при ошибке</a></p>
-</body></html>
+</div>
+</div></body></html>
 HTML
       - name: Commit & push
         run: |

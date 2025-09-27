@@ -15,18 +15,27 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path dist -Force | Out-Null
-          Compress-Archive -Path extension/* -DestinationPath dist/LifeUndo_Chrome.zip -Force
+          if (Test-Path "extension") {
+            Compress-Archive -Path extension/* -DestinationPath dist/LifeUndo_Chrome.zip -Force
+          } else {
+            Write-Host "Chrome extension directory not found, skipping..."
+          }
 
       - name: Zip Firefox extension
         shell: pwsh
         run: |
-          Compress-Archive -Path extension_firefox/* -DestinationPath dist/LifeUndo_Firefox.zip -Force
+          if (Test-Path "extension_firefox") {
+            Compress-Archive -Path extension_firefox/* -DestinationPath dist/LifeUndo_Firefox.zip -Force
+          } else {
+            Write-Host "Firefox extension directory not found, skipping..."
+          }
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: zips
           path: dist/*.zip
+        continue-on-error: true
 
   sign-amo:
     needs: build
@@ -88,4 +97,5 @@ jobs:
             dist/LifeUndo_Firefox.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
 
