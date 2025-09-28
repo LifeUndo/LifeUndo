@@ -45,7 +45,7 @@ export default function LocaleLayout({
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
         <ModernHeader />
-        <main className="min-h-dvh">{children}</main>
+        <main className="min-h-dvh pt-20">{children}</main>
         <ModernFooter />
       </body>
     </html>

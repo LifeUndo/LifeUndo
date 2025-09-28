@@ -6,3 +6,4 @@ CREATE INDEX IF NOT EXISTS usage_events_duration_ms_idx
 
 
 
+
