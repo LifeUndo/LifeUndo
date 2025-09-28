@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lifeundo.ru';
   return {
     rules: [{ userAgent: '*', allow: '/' }],
-    sitemap: 'https://getlifeundo.com/sitemap.xml',
+    sitemap: [`${base}/sitemap.xml`],
+    host: base.replace(/^https?:\/\//,''),
   };
 }
 

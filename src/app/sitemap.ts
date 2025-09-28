@@ -1,10 +1,15 @@
 import type { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://getlifeundo.com';
-  const pages = ['', '/partners', '/developers', '/status'];
-  const now = new Date().toISOString();
-  return pages.map((p) => ({ url: base + p, lastModified: now }));
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lifeundo.ru';
+  return [
+    { url: `${base}/ru`, changeFrequency: 'weekly', priority: 1 },
+    { url: `${base}/ru/pricing`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${base}/ru/support`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/ru/use-cases`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/ru/fund/apply`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/ru/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+  ];
 }
 
 

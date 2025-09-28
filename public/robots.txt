@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://lifeundo.ru/sitemap.xml
-
-# Disallow admin areas
-Disallow: /admin
-Disallow: /api/

@@ -1,100 +1,194 @@
-# Скрипт для финальных проверок продакшена после исправления middleware
+# Скрипт для проверки исправления продакшена lifeundo.ru
+# Запускать после исправления настроек в Vercel
 
-Write-Host "🚀 Финальные проверки продакшена lifeundo.ru..." -ForegroundColor Cyan
+Write-Host "🚀 Проверка исправления продакшена lifeundo.ru" -ForegroundColor Green
 Write-Host ""
 
-$prodDomain = "lifeundo.ru"
-
-Write-Host "📋 Проверка продакшн домена ($prodDomain):" -ForegroundColor Yellow
-Write-Host ""
-
-$urls = @(
-    "/ru",
-    "/ru/pricing", 
-    "/ru/support",
-    "/ru/use-cases",
-    "/ru/fund/apply",
-    "/ru/privacy",
-    "/ok"
-)
-
-foreach ($url in $urls) {
-    $fullUrl = "https://$prodDomain" + $url
-    Write-Host "==== $url" -ForegroundColor Green
+# Функция для проверки URL
+function Test-Url {
+    param(
+        [string]$Url,
+        [string]$ExpectedStatus,
+        [string]$Description
+    )
+    
+    Write-Host "Проверяю: $Description" -ForegroundColor Yellow
+    Write-Host "URL: $Url" -ForegroundColor Gray
     
     try {
-        # Используем curl.exe для Windows
-        $result = & curl.exe -I $fullUrl 2>&1
-        $statusLine = $result | Where-Object { $_ -match "HTTP/" }
+        $response = Invoke-WebRequest -Uri $Url -Method Head -UseBasicParsing -TimeoutSec 10
+        $status = $response.StatusCode
+        $headers = $response.Headers
         
-        if ($statusLine) {
-            if ($statusLine -match "200") {
-                Write-Host "  Status: ✅ $statusLine" -ForegroundColor Green
-                
-                # Проверка кэширования для /ok
-                if ($url -eq "/ok") {
-                    $cacheLine = $result | Where-Object { $_ -match "Cache-Control:" }
-                    if ($cacheLine -and $cacheLine -match "no-store") {
-                        Write-Host "  Cache-Control: ✅ $cacheLine" -ForegroundColor Green
-                    } else {
-                        Write-Host "  Cache-Control: ❌ $cacheLine" -ForegroundColor Red
-                    }
-                }
-                
-                # Проверка security headers для /ru
-                if ($url -eq "/ru") {
-                    $securityHeaders = @("X-Frame-Options", "X-Content-Type-Options", "Referrer-Policy", "Strict-Transport-Security")
-                    foreach ($header in $securityHeaders) {
-                        $headerLine = $result | Where-Object { $_ -match "$header:" }
-                        if ($headerLine) {
-                            Write-Host "  $header: ✅ $headerLine" -ForegroundColor Green
-                        } else {
-                            Write-Host "  $header: ❌ Missing" -ForegroundColor Red
-                        }
-                    }
-                }
-                
-            } else {
-                Write-Host "  Status: ❌ $statusLine" -ForegroundColor Red
-            }
+        if ($status -eq $ExpectedStatus) {
+            Write-Host "✅ $Description - OK ($status)" -ForegroundColor Green
+            return $true
         } else {
-            Write-Host "  ❌ No HTTP status found" -ForegroundColor Red
+            Write-Host "❌ $Description - ОШИБКА ($status, ожидался $ExpectedStatus)" -ForegroundColor Red
+            return $false
         }
-        
-    } catch {
-        Write-Host "  ❌ Error: $($_.Exception.Message)" -ForegroundColor Red
     }
-    
+    catch {
+        Write-Host "❌ $Description - ОШИБКА: $($_.Exception.Message)" -ForegroundColor Red
+        return $false
+    }
     Write-Host ""
 }
 
-Write-Host "📋 Проверка корня (должен редиректить на /ru):" -ForegroundColor Yellow
-try {
-    $result = & curl.exe -I "https://$prodDomain/" 2>&1
-    $statusLine = $result | Where-Object { $_ -match "HTTP/" }
-    $locationLine = $result | Where-Object { $_ -match "Location:" }
+# Функция для проверки редиректа
+function Test-Redirect {
+    param(
+        [string]$Url,
+        [string]$ExpectedLocation,
+        [string]$Description
+    )
     
-    if ($statusLine) {
-        Write-Host "  Status: $statusLine" -ForegroundColor $(if ($statusLine -match "30[0-9]") { "Green" } else { "Red" })
+    Write-Host "Проверяю редирект: $Description" -ForegroundColor Yellow
+    Write-Host "URL: $Url" -ForegroundColor Gray
+    
+    try {
+        $response = Invoke-WebRequest -Uri $Url -Method Head -UseBasicParsing -TimeoutSec 10 -MaximumRedirection 0
+        Write-Host "❌ Редирект не сработал (статус: $($response.StatusCode))" -ForegroundColor Red
+        return $false
     }
-    if ($locationLine) {
-        Write-Host "  Redirect: $locationLine" -ForegroundColor Cyan
+    catch {
+        if ($_.Exception.Response) {
+            $status = $_.Exception.Response.StatusCode.value__
+            $location = $_.Exception.Response.Headers.Location
+            
+            if ($status -eq 308 -or $status -eq 301 -or $status -eq 302) {
+                if ($location -like "*$ExpectedLocation*") {
+                    Write-Host "✅ $Description - OK ($status -> $location)" -ForegroundColor Green
+                    return $true
+                } else {
+                    Write-Host "❌ $Description - ОШИБКА (редирект на $location, ожидался $ExpectedLocation)" -ForegroundColor Red
+                    return $false
+                }
+            } else {
+                Write-Host "❌ $Description - ОШИБКА (статус: $status)" -ForegroundColor Red
+                return $false
+            }
+        } else {
+            Write-Host "❌ $Description - ОШИБКА: $($_.Exception.Message)" -ForegroundColor Red
+            return $false
+        }
     }
-} catch {
-    Write-Host "  ❌ Error checking root redirect" -ForegroundColor Red
+    Write-Host ""
+}
+
+# Функция для проверки заголовков
+function Test-Headers {
+    param(
+        [string]$Url,
+        [hashtable]$ExpectedHeaders,
+        [string]$Description
+    )
+    
+    Write-Host "Проверяю заголовки: $Description" -ForegroundColor Yellow
+    Write-Host "URL: $Url" -ForegroundColor Gray
+    
+    try {
+        $response = Invoke-WebRequest -Uri $Url -Method Head -UseBasicParsing -TimeoutSec 10
+        $headers = $response.Headers
+        $allGood = $true
+        
+        foreach ($headerName in $ExpectedHeaders.Keys) {
+            $expectedValue = $ExpectedHeaders[$headerName]
+            $actualValue = $headers[$headerName]
+            
+            if ($actualValue -like "*$expectedValue*") {
+                Write-Host "✅ $headerName: $actualValue" -ForegroundColor Green
+            } else {
+                Write-Host "❌ $headerName: $actualValue (ожидался: $expectedValue)" -ForegroundColor Red
+                $allGood = $false
+            }
+        }
+        
+        if ($allGood) {
+            Write-Host "✅ $Description - Все заголовки OK" -ForegroundColor Green
+            return $true
+        } else {
+            Write-Host "❌ $Description - Проблемы с заголовками" -ForegroundColor Red
+            return $false
+        }
+    }
+    catch {
+        Write-Host "❌ $Description - ОШИБКА: $($_.Exception.Message)" -ForegroundColor Red
+        return $false
+    }
+    Write-Host ""
+}
+
+# Основные проверки
+Write-Host "=== ОСНОВНЫЕ ПРОВЕРКИ ===" -ForegroundColor Cyan
+
+$results = @()
+
+# 1. Проверка редиректа корня
+$results += Test-Redirect -Url "https://lifeundo.ru/" -ExpectedLocation "/ru" -Description "Редирект корня на /ru"
+
+# 2. Проверка главной страницы
+$results += Test-Url -Url "https://lifeundo.ru/ru" -ExpectedStatus 200 -Description "Главная страница /ru"
+
+# 3. Проверка страницы тарифов
+$results += Test-Url -Url "https://lifeundo.ru/ru/pricing" -ExpectedStatus 200 -Description "Страница тарифов /ru/pricing"
+
+# 4. Проверка страницы поддержки
+$results += Test-Url -Url "https://lifeundo.ru/ru/support" -ExpectedStatus 200 -Description "Страница поддержки /ru/support"
+
+# 5. Проверка /ok с заголовками
+$okHeaders = @{
+    "Cache-Control" = "no-store, no-cache, must-revalidate"
+    "Pragma" = "no-cache"
+}
+$results += Test-Headers -Url "https://lifeundo.ru/ok" -ExpectedHeaders $okHeaders -Description "Страница /ok с правильными заголовками"
+
+# 6. Проверка API healthz
+$results += Test-Url -Url "https://lifeundo.ru/api/healthz" -ExpectedStatus 200 -Description "API healthz"
+
+# 7. Проверка тестовой страницы
+$results += Test-Url -Url "https://lifeundo.ru/ping" -ExpectedStatus 200 -Description "Тестовая страница /ping"
+
+Write-Host "=== ДОПОЛНИТЕЛЬНЫЕ ПРОВЕРКИ ===" -ForegroundColor Cyan
+
+# 8. Проверка других важных страниц
+$additionalPages = @(
+    @{Url="https://lifeundo.ru/ru/use-cases"; Description="Страница кейсов"},
+    @{Url="https://lifeundo.ru/ru/fund/apply"; Description="Страница фонда"},
+    @{Url="https://lifeundo.ru/ru/privacy"; Description="Страница приватности"},
+    @{Url="https://lifeundo.ru/ru/terms"; Description="Страница условий"},
+    @{Url="https://lifeundo.ru/ru/faq"; Description="Страница FAQ"}
+)
+
+foreach ($page in $additionalPages) {
+    $results += Test-Url -Url $page.Url -ExpectedStatus 200 -Description $page.Description
+}
+
+# Итоговый результат
+Write-Host "=== ИТОГОВЫЙ РЕЗУЛЬТАТ ===" -ForegroundColor Cyan
+$successCount = ($results | Where-Object { $_ -eq $true }).Count
+$totalCount = $results.Count
+
+Write-Host "Успешно: $successCount из $totalCount проверок" -ForegroundColor $(if ($successCount -eq $totalCount) { "Green" } else { "Yellow" })
+
+if ($successCount -eq $totalCount) {
+    Write-Host ""
+    Write-Host "🎉 ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ! Продакшен работает корректно." -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Пруфы для релиза:" -ForegroundColor Cyan
+    Write-Host "✅ Редирект / → /ru работает" -ForegroundColor Green
+    Write-Host "✅ Все страницы /ru/* возвращают 200 OK" -ForegroundColor Green
+    Write-Host "✅ /ok возвращает правильные Cache-Control заголовки" -ForegroundColor Green
+    Write-Host "✅ API и тестовые роуты работают" -ForegroundColor Green
+} else {
+    Write-Host ""
+    Write-Host "⚠️ ЕСТЬ ПРОБЛЕМЫ! Проверьте настройки в Vercel." -ForegroundColor Red
+    Write-Host ""
+    Write-Host "Возможные причины:" -ForegroundColor Yellow
+    Write-Host "• Домен не привязан к правильному проекту" -ForegroundColor Yellow
+    Write-Host "• Последний деплой не получил прод-алиас" -ForegroundColor Yellow
+    Write-Host "• Проблемы с DNS или SSL" -ForegroundColor Yellow
 }
 
 Write-Host ""
-Write-Host "✅ Финальная проверка завершена!" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "📋 Что проверить дополнительно:" -ForegroundColor Yellow
-Write-Host "1. Открыть https://$prodDomain/ в браузере - должен перенаправить на /ru" -ForegroundColor White
-Write-Host "2. Открыть https://$prodDomain/ru в браузере - должна открыться главная" -ForegroundColor White
-Write-Host "3. Проверить все страницы навигации" -ForegroundColor White
-Write-Host "4. Убедиться, что нет ошибок в консоли браузера" -ForegroundColor White
-Write-Host ""
-Write-Host "🎯 Ожидаемые результаты:" -ForegroundColor Yellow
-Write-Host "- ✅ /ru и /ru/pricing → 200 OK" -ForegroundColor Green
-Write-Host "- ✅ /ok → 200 OK + Cache-Control: no-store" -ForegroundColor Green
-Write-Host "- ✅ / → 301/308 на /ru" -ForegroundColor Green
-Write-Host "- ✅ Security headers присутствуют" -ForegroundColor Green
+Write-Host "Скрипт завершен. Время: $(Get-Date)" -ForegroundColor Gray
