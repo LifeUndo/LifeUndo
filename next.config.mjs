@@ -9,7 +9,9 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   async redirects() {
-    return [];
+    return [
+      { source: '/', destination: '/ru', permanent: true }
+    ];
   },
   async headers() {
     return [
