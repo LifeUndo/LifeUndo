@@ -10,7 +10,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/', destination: '/ru', permanent: true }
+      { source: '/', destination: '/ru', permanent: false }
     ];
   },
   async headers() {
