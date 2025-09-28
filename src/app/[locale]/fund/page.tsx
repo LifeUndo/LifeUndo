@@ -1,12 +1,6 @@
-import ModernHeader from '@/components/ModernHeader';
-import ModernFooter from '@/components/ModernFooter';
-
 export default function FundPage() {
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
-      <ModernHeader />
-      
-      <main className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
             Фонд LifeUndo
@@ -101,9 +95,6 @@ export default function FundPage() {
             </a>
           </div>
         </div>
-      </main>
-      
-      <ModernFooter />
     </div>
   );
 }

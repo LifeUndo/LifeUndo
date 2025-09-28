@@ -27,25 +27,27 @@ export default function Hero() {
         </div>
         <div className="md:w-6/12 grid grid-cols-1 gap-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-1">
-              <ServiceCard
-                title="Сохранение"
-                description="Быстро сохраняет рабочие сеты"
-                price=""
-                period=""
-                ctaText="Подробнее"
-                ctaLink="/ru/features"
-              />
+            <div className="col-span-1 h-full">
+              <GlassCard className="h-full flex flex-col justify-between">
+                <div>
+                  <h4 className="text-lg font-semibold gradient-text mb-2">Сохранение</h4>
+                  <p className="text-sm text-white/80">Быстро сохраняет рабочие сеты</p>
+                </div>
+                <a href="/ru/features" className="inline-block px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded text-sm mt-4">
+                  Подробнее
+                </a>
+              </GlassCard>
             </div>
-            <div className="col-span-1">
-              <ServiceCard
-                title="Откат"
-                description="Верните любую версию одним кликом"
-                price=""
-                period=""
-                ctaText="Подробнее"
-                ctaLink="/ru/features"
-              />
+            <div className="col-span-1 h-full">
+              <GlassCard className="h-full flex flex-col justify-between">
+                <div>
+                  <h4 className="text-lg font-semibold gradient-text mb-2">Откат</h4>
+                  <p className="text-sm text-white/80">Верните любую версию одним кликом</p>
+                </div>
+                <a href="/ru/use-cases" className="inline-block px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded text-sm mt-4">
+                  Подробнее
+                </a>
+              </GlassCard>
             </div>
           </div>
           <GlassCard>
