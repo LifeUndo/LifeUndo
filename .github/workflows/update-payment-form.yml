@@ -1,9 +1,10 @@
 name: Update index.html with payment form
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
+  # Временно отключаем автоматический запуск
+  # push:
+  #   tags:
+  #     - 'v*'
 permissions:
   contents: write
 

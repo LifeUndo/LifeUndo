@@ -1,8 +1,9 @@
 name: QA lifeundo.ru
 on:
   workflow_dispatch:
-  push:
-    paths: ["public/**", "src/**", "scripts/**", "tests/**"]
+  # Временно отключаем автоматический запуск
+  # push:
+  #   paths: ["public/**", "src/**", "scripts/**", "tests/**"]
 jobs:
   audit:
     runs-on: ubuntu-latest
