@@ -5,6 +5,9 @@ const nextConfig = {
   // experimental: {
   //   typedRoutes: true,
   // },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
   async headers() {
     return [
       {

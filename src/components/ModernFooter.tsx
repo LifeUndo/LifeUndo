@@ -21,28 +21,39 @@ export default function ModernFooter() {
                 alt="FreeKassa" 
                 className="h-6 opacity-75 hover:opacity-100 transition-opacity"
               />
-              <a 
-                href="https://freekassa.ru" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-gray-300"
-              >
-                Платежный провайдер
-              </a>
+              <span className="text-sm text-gray-400">
+                Оплата через FreeKassa
+              </span>
             </div>
 
             {/* Social Links */}
             <div className="flex gap-4">
-              <a href="#" aria-label="Telegram" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a 
+                href={process.env.NEXT_PUBLIC_TG_URL || "#"} 
+                aria-label="Telegram" 
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <img src="/brand/tg.svg" alt="Telegram" className="w-6 h-6" />
               </a>
-              <a href="#" aria-label="X (Twitter)" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a 
+                href={process.env.NEXT_PUBLIC_X_URL || "#"} 
+                aria-label="X (Twitter)" 
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <img src="/brand/x.svg" alt="X" className="w-6 h-6" />
               </a>
-              <a href="#" aria-label="YouTube" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a 
+                href={process.env.NEXT_PUBLIC_YT_URL || "#"} 
+                aria-label="YouTube" 
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <img src="/brand/yt.svg" alt="YouTube" className="w-6 h-6" />
               </a>
-              <a href="#" aria-label="GitHub" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a 
+                href={process.env.NEXT_PUBLIC_GH_URL || "#"} 
+                aria-label="GitHub" 
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
                 <img src="/brand/github.svg" alt="GitHub" className="w-6 h-6" />
               </a>
             </div>
