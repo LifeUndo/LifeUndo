@@ -1,0 +1,20 @@
+Маркетинг и PR
+
+Стратегия выхода:
+- Сначала RU (lifeundo.ru), потом EN (getlifeundo.com)
+- Соцсети: Telegram, X, Reddit, VK, YouTube
+- Посты 3–5 раз в неделю, YouTube-демо 1–2 в месяц
+
+Ключевые слоганы:
+- RU: "Ctrl+Z для вашей онлайн-жизни"
+- EN: "Ctrl+Z for your online life"
+
+PR-инструменты:
+- Пресс-релизы (Habrahabr, vc.ru, TechCrunch)
+- Партнёрские посты в соцсетях
+- Баннеры (FreeKassa, фонд)
+
+Реклама:
+- Таргет Telegram/VK
+- Google Ads (EN)
+- Reddit Ads (EN)

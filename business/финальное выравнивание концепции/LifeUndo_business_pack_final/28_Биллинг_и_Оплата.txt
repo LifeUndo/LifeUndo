@@ -1,0 +1,21 @@
+Биллинг и оплата (FreeKassa)
+
+ENV:
+- FK_MERCHANT_ID, FK_SECRET1, FK_SECRET2
+- NEXT_PUBLIC_SITE_URL
+- DATABASE_URL
+
+Роуты:
+- POST /api/fk/create — создание платежа (plan: pro_month/pro_year/vip_life/team_seat)
+- POST /api/fk/notify — вебхук (подпись по SECRET2, идемпотентность)
+- GET  /api/fk/notify — 405
+
+Кабинет FK:
+- Result (webhook): https://www.getlifeundo.com/api/fk/notify
+- Success: https://www.getlifeundo.com/success
+- Fail: https://www.getlifeundo.com/fail
+- Secrets 1/2 = как в Vercel
+
+E2E:
+- Прогон реального платежа (минималка) → проверка webhook 200 и единичной обработки
+- Письмо с ключом (если включён relay)

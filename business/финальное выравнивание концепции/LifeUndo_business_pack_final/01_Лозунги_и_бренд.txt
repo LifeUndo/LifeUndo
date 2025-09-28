@@ -1,0 +1,22 @@
+Лозунг:
+- RU: "Ctrl+Z для вашей онлайн-жизни"
+- EN: "Ctrl+Z for your online life"
+
+Тема: тёмная
+Фон: #0B1220 (почти-чёрный), карточки #111827 / #0F172A
+Основной цвет (кнопки/градиент): от #6366F1 (indigo-500) к #7C3AED (violet-600)
+Акцент текста: #E5E7EB (основной), #94A3B8 (вторичный)
+Шрифт: Inter, fallback system-ui
+
+Футер: SVG-иконки соцсетей, оригинальный бейдж FreeKassa, бейдж "We give 10% — GetLifeUndo Fund"
+
+Соцсети (бренд @GetLifeUndo):
+- Telegram: https://t.me/LifeUndoSupport
+- X (Twitter): https://x.com/GetLifeUndo
+- Reddit: https://www.reddit.com/r/GetLifeUndo
+- YouTube: https://www.youtube.com/@GetLifeUndo
+- VK: https://vk.com/GetLifeUndo
+- Dzen: https://dzen.ru/GetLifeUndo
+- Habr: https://habr.com/ru/users/GetLifeUndo
+- vc.ru: https://vc.ru/u/GetLifeUndo
+- TenChat: https://tenchat.ru/a/GetLifeUndo

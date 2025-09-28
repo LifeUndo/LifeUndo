@@ -1,0 +1,25 @@
+Release Notes (финальное выравнивание)
+
+v0.3.7.11 (Firefox Extension)
+- Добавлена кнопка Pro → /pricing (RU) или /en/pricing (EN)
+- Улучшена локализация RU/EN
+- Исправлены дубликаты ключей в локалях
+- Оптимизирован popup.js
+
+v0.4.7-SMTP
+- Запущен SMTP Listener (порт 2525)
+- Добавлен Email Relay
+- Интеграция с Neon PostgreSQL для логирования писем
+
+v0.4.8-BILLING
+- Интеграция с FreeKassa (create, notify, demo-*)
+- Проверка подписи и идемпотентность
+- Billing core: subscriptions, invoices, quotas
+- Миграции 035–038 применены (orgs, memberships, plans)
+
+v0.4.9-FUND
+- Запуск фонда (10% net revenue → Schools/UX/OSS)
+- Страницы /gov, /edu, /fund (RU/EN)
+- FundBanner «We give 10%» на сайте и в расширении
+- FreeKassa e2e тесты и интеграция с billing
+- Презентации для пилотов GLU_Pilots_2025Q4 (RU/EN)

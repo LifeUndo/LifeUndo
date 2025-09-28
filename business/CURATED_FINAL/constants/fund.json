@@ -1,0 +1,10 @@
+{
+  "net_revenue_share": 0.10,
+  "allocation": {
+    "schools": 0.40,
+    "ux": 0.30,
+    "oss": 0.30
+  },
+  "reporting": "annual",
+  "quarterly": true
+}

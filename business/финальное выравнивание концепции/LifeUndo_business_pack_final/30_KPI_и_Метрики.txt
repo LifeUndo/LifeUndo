@@ -1,0 +1,18 @@
+KPI и Метрики
+
+Продукт:
+- WAU/MAU, Retention D7/D30
+- Undo success rate, avg. time-to-undo
+- Conversion Free→Pro, Pro→VIP, Churn
+
+Биллинг:
+- MRR, ARR, ARPU, LTV, CAC
+- Refund rate, Chargeback rate
+- Fund 10% (валюта, отчётность)
+
+Тех:
+- Uptime, p95 latency /api/fk/*
+- Webhook success rate
+- Error rate (Sentry/Logtail)
+
+Дашборды: метрики сводятся в Notion/Grafana (по желанию)

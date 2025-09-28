@@ -1,0 +1,23 @@
+Техническая архитектура (итоговая)
+
+Стек:
+- Frontend: Next.js 14 + TypeScript + Tailwind CSS (getlifeundo.com)
+- RU-сайт: статика на Vercel (lifeundo.ru)
+- Расширение: Firefox (MV2/MV3-совместимая логика popup.js), Chrome (в разработке)
+- БД: Neon PostgreSQL (PITR включается), роль app_user (CRUD), владелец для DDL
+- Интеграции: FreeKassa (FK), Sentry/Logtail (опционально)
+
+Инфраструктура:
+- Cloudflare DNS: Zone активна, SSL/TLS = Full (Strict), A/CNAME = DNS Only
+- Vercel: проект getlifeundo (Production + Preview), SSL от Vercel
+- ENV (Vercel): NEXT_PUBLIC_SITE_URL, FK_MERCHANT_ID, FK_SECRET1, FK_SECRET2, ADMIN_TOKEN, DATABASE_URL, EMAIL_RELAY_USER/PASS, SENTRY_DSN, LOGTAIL_TOKEN
+
+Безопасность/сеть:
+- middleware.ts: BasicAuth для /admin, CORS (только наши домены), rate-limit 10 req/min на /api/fk/* /api/email/*
+- Headers: HSTS, X-Content-Type-Options, Referrer-Policy, X-Frame-Options, CSP (строгий режим без inline)
+- /api/fk/notify: POST only (GET → 405), проверка подписи, идемпотентность
+
+Развёртывания:
+- GitHub → Vercel (auto) + deploy hook (опционально)
+- Force redeploy без кэша при смене ENV или публичных страниц
+- Rollback: через Vercel Deployments

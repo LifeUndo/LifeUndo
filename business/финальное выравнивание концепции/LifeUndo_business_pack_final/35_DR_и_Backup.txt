@@ -1,0 +1,13 @@
+Disaster Recovery и Backup
+
+Neon PostgreSQL:
+- PITR включён, точка восстановления: T-5min
+- Процедура восстановления: создать branch от нужного времени, переключить DATABASE_URL
+
+Vercel:
+- Rollback на предыдущий deployment
+- Проверка /ok и ключевых маршрутов
+
+Cloudflare:
+- Проверка записей A/CNAME, SSL Full (Strict)
+- В случае инцидента — временно поставить заглушку /ok

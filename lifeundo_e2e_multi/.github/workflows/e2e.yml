@@ -1,0 +1,33 @@
+name: E2E (RU + EN)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'public/**'
+      - 'src/**'
+      - '.github/workflows/e2e.yml'
+      - 'tests/**'
+
+jobs:
+  e2e-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site:
+          - name: ru
+            base: https://lifeundo.ru
+            spec: tests/lifeundo.spec.ts
+          - name: en
+            base: https://www.getlifeundo.com
+            spec: tests/getlifeundo.spec.ts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i
+      - run: npx playwright install --with-deps
+      - name: Run tests for ${{ matrix.site.name }}
+        run: BASE_URL=${{ matrix.site.base }} npx playwright test ${{ matrix.site.spec }} --reporter=line

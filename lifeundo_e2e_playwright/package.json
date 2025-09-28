@@ -1,0 +1,14 @@
+{
+  "name": "lifeundo-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:pw": "npx playwright install --with-deps",
+    "test": "npx playwright test --reporter=list",
+    "test:headed": "npx playwright test --headed",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2"
+  }
+}

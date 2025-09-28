@@ -1,0 +1,16 @@
+Локализация и терминология
+
+Правила:
+- messages.json без дубликатов ключей
+- Ключи lower_snake_case (footer_website, opt_verify)
+- Проверка jq/web-ext lint в CI
+
+Стили:
+- RU: кратко и по делу, без канцелярита
+- EN: нейтрально, без сленга
+
+Глоссарий:
+- Undo = Отмена
+- Fund = Фонд
+- Lifetime = Пожизненно
+- Subscription = Подписка

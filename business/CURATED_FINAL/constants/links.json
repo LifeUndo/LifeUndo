@@ -1,0 +1,20 @@
+{
+  "site_ru": "https://lifeundo.ru/",
+  "site_en_global": "https://www.getlifeundo.com/",
+  "support_telegram": "https://t.me/LifeUndoSupport",
+  "support_email": "support@getlifeundo.com",
+  "press_email": "press@getlifeundo.com",
+  "legal_email": "legal@getlifeundo.com",
+  "social": {
+    "telegram": "https://t.me/LifeUndoSupport",
+    "x": "https://x.com/GetLifeUndo",
+    "reddit": "https://www.reddit.com/r/GetLifeUndo",
+    "youtube": "https://www.youtube.com/@GetLifeUndo",
+    "vk": "https://vk.com/GetLifeUndo",
+    "dzen": "https://dzen.ru/GetLifeUndo",
+    "habr": "https://habr.com/ru/users/GetLifeUndo",
+    "vc_ru": "https://vc.ru/u/GetLifeUndo",
+    "tenchat": "https://tenchat.ru/a/GetLifeUndo"
+  },
+  "freekassa_badge": "https://www.free-kassa.ru/img/fk_btn/16.png"
+}

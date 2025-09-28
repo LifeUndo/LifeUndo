@@ -1,0 +1,17 @@
+CI/CD и QA (итоговая)
+
+Workflows (GitHub Actions):
+- update-payment-form.yml — обновляет public/index.html при создании тега v*
+- qa-lifeundo.yml — audit + Playwright e2e для lifeundo.ru
+- lhci.yml — Lighthouse CI ежедневно 06:00
+
+Инструменты:
+- Playwright: e2e smoke (страницы, футер, соц-иконки, /ok=200)
+- Audit script (Node+JSDOM): мета, canonical, ссылки, бейджи
+- Lighthouse: performance ≥0.70, accessibility ≥0.90
+- web-ext: lint/build/sign для Firefox XPI
+
+Релизы:
+- Теги вида v0.4.9-FUND
+- Автообновление index.html (опционально), ручная загрузка XPI в AMO
+- Чек-лист перед релизом: тест FK, /success|/fail=200, /admin=401, GET /api/fk/notify=405

@@ -1,0 +1,194 @@
+Окей, беру это жёстко в руки. Ниже — финальное выравнивание концепции (дизайн/лозунги/цены/фонд), объяснение ролей GitHub/Vercel/Neon/Cloudflare, и готовое ТЗ для Cursor: что починить на сайтах (.ru/.com) и в расширении 0.3.7.11, чтобы «всё работало как раньше» — без вопросов.
+
+---
+
+# 0) Единые правила бренда (фиксируем и больше не «плаваем»)
+
+* **Тема**: тёмная.
+* **Фон**: `#0B1220` (почти-чёрный), карточки `#111827`/`#0F172A`.
+* **Основной цвет** (кнопки/градиент): от `#6366F1` (indigo-500) к `#7C3AED` (violet-600).
+* **Акцент текста**: `#E5E7EB` (заголовки), вторичный `#94A3B8`.
+* **Шрифт**: Inter, запас — system-ui.
+* **Лозунг** (RU/EN):
+
+  * RU: «Ctrl+Z для вашей онлайн-жизни».
+  * EN: “Ctrl+Z for your online life”.
+* **Кнопки**: полные, закругление 12px, текст в верхнем регистре.
+* **Футер**: SVG-иконки соцсетей + **оригинальный** бейдж FreeKassa + бейдж «We give 10% — GetLifeUndo Fund». Только RU на .ru; EN — на .com.
+* **Баннеры типа “Поддержите нас”** — **убираем везде**, это экспериментальный контент.
+
+---
+
+# 1) Цены и тарифы (финально)
+
+* **RU (lifeundo.ru/.com RU-страницы)**
+
+  * Free — 0 ₽
+  * Pro — **149 ₽/мес** или **1 490 ₽/год**
+  * VIP — **2 490 ₽** lifetime
+  * Team — **от 150 ₽/место/мес**
+* **EN (.com EN-страницы)**
+
+  * Free — $0
+  * Pro — **$3.99/mo** or **$29/yr**
+  * VIP — **$49** lifetime
+  * Team — **from $2.5/seat/mo**
+
+---
+
+# 2) Фонд (фикс-политика, что / кому / как)
+
+* **Отчисления**: 10% **чистой выручки** (net revenue).
+* **Куда**:
+
+  1. «Privacy for Schools» — мини-гранты на уроки цифровой гигиены, плакаты/методички.
+  2. «UX for Privacy» — стипендии студентам/джунам за лучшие UX-кейсы приватности.
+  3. «Open-Source Privacy» — донаты в OSS-проекты, повышающие приватность/контроль данных.
+* **Как работает**:
+
+  * **Отчёт** — раз в год на `/fund` (с PDF/CSV).
+  * **Пул** — ежеквартально распределяем в пропорции 40/30/30 (Schools/UX/OSS).
+  * **Заявки** — форма `/fund/apply` (ФИО/команда, страна, краткая суть, бюджет, результат, ссылка/репозиторий). Ответ в 14 дней.
+  * **Конфликт интересов** — заявитель не может быть аффилирован с LifeUndo/GetLifeUndo (декларация в форме).
+* **Юр. оговорка**: фонд — внутренний грантовый пул компании; это **не** НКО, деньги распределяются по публичным критериям; список получателей публикуется.
+
+---
+
+# 3) Роли платформ (чтобы было понятно «кто за что»)
+
+* **GitHub** — исходники, issue/PR, Actions (линт/сборки/аудиты, теги на релизы).
+* **Vercel** — деплой сайтов (.ru и .com), статика/Next.js, ENV.
+* **Neon** — PostgreSQL (прод/превью), роль `app_user` (CRUD), PITR.
+* **Cloudflare** — **DNS-зона** (Apex/WWW), SSL/TLS **Full (Strict)**, записи A/CNAME — **DNS Only** (без прокси).
+
+---
+
+# 4) Почему «сейчас ни черта не работает» — краткий разбор
+
+* **lifeundo.ru главная = «баннер оплаты»** — потому что мы сознательно сделали **минимальную VIP-врезку**. Сейчас это выглядит как «баннер». Исправляем: добавляем нормальную шапку/футер/секции, а форму — как блок, а не весь экран.
+* **Страница “Поддержите нас” на скрине** — это **старый белый шаблон** (исторический /fund/support). Удаляем/скрываем.
+* **Кнопки в расширении 0.3.7.11** — ранее были дубляжи ключей в локалях и ненадёжный код обработчиков; после чистки локалей нужно **пересобрать** и убедиться, что `popup.js` и DOM-идентификаторы совпадают для MV2/MV3. Ещё частая причина: нет элемента `#btnPro` → обработчик не вешается; либо CSP блокирует `window.open`. Чиним патчем ниже и валидируем `web-ext lint` + ручной smoke.
+
+---
+
+# 5) ТЗ для Cursor — «поставить на рельсы»
+
+## 5.1 lifeundo.ru — привести главную и навигацию к нормальному виду
+
+1. **Новая главная** (`public/index.html`), структура:
+
+   * Hero: логотип, лозунг, 2 кнопки — «Скачать» (ссылка на AMO) и «Купить VIP».
+   * Блок «Как это работает» — 3 карточки.
+   * Блок тарифов (Free/Pro/VIP/Team) — цены как выше, кнопки: Pro → `/api/fk/create?plan=pro_month`, VIP → `vip_life`.
+   * Блок фонда (бейдж 10%, ссылка `/fund`).
+   * Футер (иконки соцсетей + FK badge).
+2. **Скрыть/удалить** старые страницы/меню «Поддержите нас». Любые белые/минималистичные заготовки — удалить.
+3. **Форма на главной** оставить **как блок**, не заглушая страницу целиком.
+
+## 5.2 lifeundo.ru — страницы
+
+* `/fund` — заменить контент на политику из раздела «Фонд» выше + кнопка «Подать заявку» → `/fund/apply`.
+* `/fund/apply` — форма (имя/организация/страна/email/категория/описание/бюджет/ссылки/сроки/подтверждение неаффилированности). POST — пока в `mailto:` или дроп в `email_outbox` (если хотим собирать на .com API — укажи эндпоинт).
+* `/ok` — 200, без редиректов, `Cache-Control: no-store`.
+* `/privacy` — короткая политика (RU) или редирект на .com/privacy EN (если готов).
+* `/support` — Telegram @LifeUndoSupport, FAQ 3–5 пункта (оплата/ключ/поддержка).
+
+## 5.3 getlifeundo.com — довести до работающего состояния
+
+* Заполнить ENV в Vercel (Production+Preview) и сделать **redeploy без кэша**, чтобы `/support`/`/success`/`/fail` стали 200, `/admin` — 401, `GET /api/fk/notify` — 405.
+* В кабинете FreeKassa прописать Result/Success/Fail и сверить Secret1/2.
+
+## 5.4 Расширение 0.3.7.11 — починить клики и меню
+
+* В `extension_firefox/popup.html` **гарантировать** наличие элементов с id:
+
+  * `btnVip`, `btnPro`, `lnkWebsite`, `lnkPrivacy`, `lnkSupport`, `lnkLicense`.
+* В `popup.js` заменить обработчики на «железобетонные» (MV2/MV3-совместимые, без зависимости от `browser.*`):
+
+```js
+(function(){
+  const open = (url) => {
+    try { chrome.tabs.create({ url }); } catch { window.open(url, '_blank'); }
+  };
+
+  const byId = (id) => document.getElementById(id);
+  const lang = ((navigator.language||'en').toLowerCase().startsWith('ru')) ? 'ru' : 'en';
+
+  // VIP → /pricing (RU)/en/pricing (EN) или сразу форма VIP на .ru
+  const pricing = (lang === 'ru') ? 'https://www.getlifeundo.com/pricing' : 'https://www.getlifeundo.com/en/pricing';
+  const vipForm = 'https://lifeundo.ru/#vip'; // якорь блока на главной .ru
+
+  const map = [
+    ['btnVip',   () => open(vipForm)],
+    ['btnPro',   () => open(pricing)],
+    ['lnkWebsite', () => open('https://lifeundo.ru/')],
+    ['lnkPrivacy', () => open((lang==='ru')? 'https://lifeundo.ru/privacy' : 'https://www.getlifeundo.com/en/privacy')],
+    ['lnkSupport', () => open('https://t.me/LifeUndoSupport')],
+    ['lnkLicense', () => open('https://www.getlifeundo.com/docs#license')]
+  ];
+
+  map.forEach(([id, fn]) => { const el = byId(id); if (el) el.addEventListener('click', fn, { passive:true }); });
+})();
+```
+
+* Пройти `npx web-ext lint` и пересобрать XPI.
+* Release notes — как утвердили, без расхождений.
+
+## 5.5 QA/автопроверки
+
+* Обновить Playwright e2e под новую главную: проверка кнопок «Скачать/Купить VIP», наличие тарифов и кликабельность ссылок футера, `img[src*="fk_btn"]`.
+* Оставить Lighthouse CI и скрипт аудита (сохранение отчётов в артефакты).
+
+---
+
+# 6) Что именно делать прямо сейчас (команды)
+
+1. **.ru** — главная и страницы:
+
+```
+git rm -r public/support-old public/donate* || true
+# заменить public/index.html на нормальную главную с блоком VIP, а не «баннером»
+# добавить /fund, /fund/apply, /privacy, /support
+git add public
+git commit -m "feat(ru): proper dark homepage + pricing block + fund/apply + footer"
+git push
+vercel deploy --prod --force
+```
+
+2. **.com** — ENV и деплой:
+
+* Внести ENV (FK_*, ADMIN_TOKEN, DATABASE_URL и т.д.) → Redeploy (без кэша).
+* Проверка:
+
+```
+curl -I https://www.getlifeundo.com/support/
+curl -I https://www.getlifeundo.com/success
+curl -I https://www.getlifeundo.com/fail
+curl -I https://www.getlifeundo.com/admin      # 401
+curl -I https://www.getlifeundo.com/api/fk/notify # 405
+```
+
+3. **Расширение**:
+
+```
+npx web-ext lint --source-dir=extension_firefox --warnings-as-errors
+npx web-ext build --source-dir=extension_firefox --artifacts-dir=dist --overwrite-dest
+# загрузить XPI в AMO как 0.3.7.11
+```
+
+4. **FK e2e** (после деплоя .com):
+
+* Провести **реальный платёж Pro Month** (минималка).
+* Проверить, что вебхук обрабатывается один раз и Success/Fail открываются.
+
+---
+
+# 7) Итог
+
+* Мы **фиксируем** единую визуальную концепцию (тёмная тема, синие кнопки, Inter, лозунг).
+* Приводим .ru к нормальной главной (а не «баннеру»), чиним страницы, футер, фонд и форму заявки.
+* Доводим .com до 200/401/405 после ENV + redeploy.
+* Чиним расширение кликами и повторно сдаём в AMO.
+* Вешаем QA-сетку (аудит/e2e/Lighthouse), чтобы **больше не было расхождений**.
+
+Готов двигать дальше без пауз. Если хочешь — могу сразу сгенерить готовые HTML для `/fund`, `/fund/apply`, `/privacy`, новую главную и внести их PR-патчем (как делали с пакетом для .com).

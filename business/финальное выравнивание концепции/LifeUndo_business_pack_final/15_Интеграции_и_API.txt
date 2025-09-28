@@ -1,0 +1,17 @@
+Интеграции и API
+
+API (REST, JSON):
+- /api/undo — откат действий
+- /api/fk/* — интеграция FreeKassa
+- /api/email/* — Email Pause Gateway
+
+SDK:
+- JS SDK для сайтов
+- Browser Extension API
+- CLI-утилита (в разработке)
+
+Документация: https://www.getlifeundo.com/docs
+
+Партнёрские интеграции:
+- FreeKassa (платежи)
+- Sentry/Logtail (мониторинг)

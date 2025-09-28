@@ -1,0 +1,15 @@
+{
+  "name": "lifeundo-e2e-multi",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "install:pw": "npx playwright install --with-deps",
+    "test:ru": "BASE_URL=https://lifeundo.ru npx playwright test tests/lifeundo.spec.ts --reporter=list",
+    "test:en": "BASE_URL=https://www.getlifeundo.com npx playwright test tests/getlifeundo.spec.ts --reporter=list",
+    "test:all": "npm run test:ru && npm run test:en",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2"
+  }
+}

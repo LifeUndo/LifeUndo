@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Тарифы LifeUndo — Выберите подходящий план</title>
-  <meta name="description" content="Тарифы LifeUndo: Free, Pro, VIP, Team. Восстановление данных на любых устройствах. Начните бесплатно, переходите на премиум когда будете готовы.">
-  <meta property="og:title" content="Тарифы LifeUndo — Выберите подходящий план">
-  <meta property="og:description" content="Тарифы LifeUndo: Free, Pro, VIP, Team. Восстановление данных на любых устройствах.">
+  <title>GetLifeUndo Fund — Мы отдаём 10% чистой прибыли</title>
+  <meta name="description" content="GetLifeUndo Fund направляет 10% чистой прибыли на развитие образования и технологий: Privacy for Schools, UX for Privacy, Open-Source Privacy.">
+  <meta property="og:title" content="GetLifeUndo Fund — Мы отдаём 10% чистой прибыли">
+  <meta property="og:description" content="Направляем 10% чистой прибыли на развитие образования и технологий">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lifeundo.ru/pricing">
+  <meta property="og:url" content="https://lifeundo.ru/fund">
   <meta property="og:image" content="https://lifeundo.ru/lifeundo_logo_round.png">
-  <link rel="canonical" href="https://lifeundo.ru/pricing">
+  <link rel="canonical" href="https://lifeundo.ru/fund">
   <link rel="icon" type="image/png" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +146,54 @@
     padding: 80px 0;
   }
 
+  .hero {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fund-stats {
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary-color);
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
   .section-title {
     font-size: 36px;
     font-weight: 700;
@@ -160,112 +208,130 @@
     margin-bottom: 64px;
   }
 
-  .pricing-cards {
+  .directions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
     margin-bottom: 64px;
   }
 
-  .pricing-card {
+  .direction-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 32px;
     text-align: center;
-    position: relative;
     transition: all 0.3s ease;
     box-shadow: var(--shadow);
   }
 
-  .pricing-card:hover {
+  .direction-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
   }
 
-  .pricing-card.popular {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px var(--primary-color);
-  }
-
-  .popular-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-color);
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  .plan-name {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .plan-price {
-    font-size: 36px;
+  .direction-percentage {
+    font-size: 48px;
     font-weight: 800;
     color: var(--primary-color);
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
-  .plan-description {
+  .direction-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .direction-description {
     color: var(--text-secondary);
     margin-bottom: 24px;
   }
 
-  .plan-features {
+  .direction-examples {
     list-style: none;
-    margin-bottom: 32px;
+    text-align: left;
   }
 
-  .plan-features li {
+  .direction-examples li {
     padding: 8px 0;
     color: var(--text-secondary);
   }
 
-  .plan-features li:before {
+  .direction-examples li:before {
     content: "✅ ";
     margin-right: 8px;
   }
 
-  .pricing-table {
+  .how-it-works {
     background: var(--bg-secondary);
     border-radius: var(--border-radius);
-    overflow: hidden;
+    padding: 48px;
     margin-bottom: 64px;
     box-shadow: var(--shadow);
   }
 
-  .pricing-table table {
-    width: 100%;
-    border-collapse: collapse;
+  .how-it-works h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
   }
 
-  .pricing-table th,
-  .pricing-table td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
   }
 
-  .pricing-table th {
-    background: var(--bg-tertiary);
+  .step {
+    text-align: center;
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-size: 18px;
     font-weight: 600;
-    color: var(--text-primary);
+    margin-bottom: 8px;
   }
 
-  .pricing-table td {
+  .step-description {
     color: var(--text-secondary);
   }
 
-  .pricing-table tr:last-child td {
-    border-bottom: none;
+  .cta-section {
+    text-align: center;
+    padding: 64px 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--border-radius);
+    margin-bottom: 64px;
+  }
+
+  .cta-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: white;
+  }
+
+  .cta-description {
+    font-size: 16px;
+    margin-bottom: 32px;
+    color: white;
+    opacity: 0.9;
   }
 
   /* Footer */
@@ -395,7 +461,20 @@
 
   /* Responsive */
   @media (max-width: 768px) {
-    .pricing-cards {
+    .hero-title {
+      font-size: 36px;
+    }
+    
+    .fund-stats {
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .directions-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .steps {
       grid-template-columns: 1fr;
     }
     
@@ -433,121 +512,107 @@
   <!-- Main Content -->
   <main class="main">
     <div class="container">
-      <h1 class="section-title">Выберите подходящий тариф</h1>
-      <p class="section-subtitle">Начните бесплатно, переходите на премиум когда будете готовы</p>
-      
-      <div class="pricing-cards">
-        <div class="pricing-card">
-          <h3 class="plan-name">Free</h3>
-          <div class="plan-price">0 ₽</div>
-          <p class="plan-description">Для личного использования</p>
-          <ul class="plan-features">
-            <li>До 1 ГБ хранения</li>
-            <li>Восстановление документов</li>
-            <li>Базовая поддержка</li>
-            <li>Мобильное приложение</li>
-          </ul>
-          <a href="https://addons.mozilla.org/ru/firefox/addon/lifeundo/" class="btn btn-secondary">Начать бесплатно</a>
-        </div>
+      <div class="hero">
+        <h1 class="hero-title">GetLifeUndo Fund</h1>
+        <p class="hero-subtitle">Мы отдаём 10% чистой прибыли на развитие образования и технологий</p>
         
-        <div class="pricing-card popular">
-          <div class="popular-badge">Популярный</div>
-          <h3 class="plan-name">Pro</h3>
-          <div class="plan-price">149 ₽<span style="font-size: 16px; color: var(--text-secondary);">/мес</span></div>
-          <p class="plan-description">Для профессионалов</p>
-          <ul class="plan-features">
-            <li>До 100 ГБ хранения</li>
-            <li>Все типы файлов</li>
-            <li>Приоритетная поддержка</li>
-            <li>API доступ</li>
-          </ul>
-          <a href="/buy?plan=pro_month" class="btn btn-primary">Выбрать Pro</a>
-        </div>
-        
-        <div class="pricing-card">
-          <h3 class="plan-name">VIP</h3>
-          <div class="plan-price">2 490 ₽<span style="font-size: 16px; color: var(--text-secondary);"> навсегда</span></div>
-          <p class="plan-description">Пожизненный доступ</p>
-          <ul class="plan-features">
-            <li>Неограниченное хранение</li>
-            <li>Все возможности Pro</li>
-            <li>Персональный менеджер</li>
-            <li>Участие в фонде</li>
-          </ul>
-          <a href="/buy?plan=vip_lifetime" class="btn btn-primary">Выбрать VIP</a>
-        </div>
-        
-        <div class="pricing-card">
-          <h3 class="plan-name">Team</h3>
-          <div class="plan-price">от 150 ₽<span style="font-size: 16px; color: var(--text-secondary);">/место/мес</span></div>
-          <p class="plan-description">Для команд</p>
-          <ul class="plan-features">
-            <li>Управление командой</li>
-            <li>Централизованная админка</li>
-            <li>Корпоративная поддержка</li>
-            <li>Интеграции</li>
-          </ul>
-          <a href="mailto:support@getlifeundo.com?subject=Team%20Plan%20Inquiry" class="btn btn-secondary">Связаться с нами</a>
+        <div class="fund-stats">
+          <div class="stat">
+            <span class="stat-number">10%</span>
+            <span class="stat-label">чистой прибыли</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">40/30/30</span>
+            <span class="stat-label">распределение</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">Ежеквартально</span>
+            <span class="stat-label">отчётность</span>
+          </div>
         </div>
       </div>
 
-      <!-- Pricing Table -->
-      <div class="pricing-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Функция</th>
-              <th>Free</th>
-              <th>Pro</th>
-              <th>VIP</th>
-              <th>Team</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Восстановление данных</td>
-              <td>Базовое</td>
-              <td>Неограниченное</td>
-              <td>Неограниченное</td>
-              <td>Неограниченное</td>
-            </tr>
-            <tr>
-              <td>Хранение</td>
-              <td>1 ГБ</td>
-              <td>100 ГБ</td>
-              <td>Неограниченное</td>
-              <td>100 ГБ</td>
-            </tr>
-            <tr>
-              <td>Поддержка</td>
-              <td>Email</td>
-              <td>Приоритетная</td>
-              <td>Персональный менеджер</td>
-              <td>Корпоративная</td>
-            </tr>
-            <tr>
-              <td>API доступ</td>
-              <td>Нет</td>
-              <td>Да</td>
-              <td>Да</td>
-              <td>Да</td>
-            </tr>
-            <tr>
-              <td>Участие в фонде</td>
-              <td>Нет</td>
-              <td>Нет</td>
-              <td>Да</td>
-              <td>Нет</td>
-            </tr>
-          </tbody>
-        </table>
+      <h2 class="section-title">Направления финансирования</h2>
+      <p class="section-subtitle">Средства фонда распределяются по трём ключевым направлениям</p>
+      
+      <div class="directions-grid">
+        <div class="direction-card">
+          <div class="direction-percentage">40%</div>
+          <h3 class="direction-title">Privacy for Schools</h3>
+          <p class="direction-description">Мини-гранты на уроки цифровой гигиены для школ и образовательных учреждений</p>
+          <ul class="direction-examples">
+            <li>Обучение детей основам приватности</li>
+            <li>Защита персональных данных в школах</li>
+            <li>Цифровая грамотность для учителей</li>
+            <li>Безопасность в социальных сетях</li>
+          </ul>
+        </div>
+        
+        <div class="direction-card">
+          <div class="direction-percentage">30%</div>
+          <h3 class="direction-title">UX for Privacy</h3>
+          <p class="direction-description">Стипендии студентам за UX-кейсы, связанные с приватностью и безопасностью данных</p>
+          <ul class="direction-examples">
+            <li>Исследования пользовательского опыта</li>
+            <li>Дизайн приватных интерфейсов</li>
+            <li>Тестирование доступности</li>
+            <li>Методологии UX-исследований</li>
+          </ul>
+        </div>
+        
+        <div class="direction-card">
+          <div class="direction-percentage">30%</div>
+          <h3 class="direction-title">Open-Source Privacy</h3>
+          <p class="direction-description">Донаты в Open-Source проекты, связанные с приватностью и защитой данных</p>
+          <ul class="direction-examples">
+            <li>Криптографические библиотеки</li>
+            <li>Инструменты анонимизации</li>
+            <li>Безопасные мессенджеры</li>
+            <li>VPN и Tor проекты</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="how-it-works">
+        <h2>Как работает фонд</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Сбор средств</h3>
+            <p class="step-description">10% от чистой прибыли LifeUndo автоматически направляется в фонд</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Распределение</h3>
+            <p class="step-description">Средства распределяются ежеквартально в пропорции 40/30/30</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Отчётность</h3>
+            <p class="step-description">Ежегодный отчёт публикуется на странице /fund</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Прозрачность</h3>
+            <p class="step-description">Все расходы фонда открыты и доступны для проверки</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <h2 class="cta-title">Подать заявку на финансирование</h2>
+        <p class="cta-description">У вас есть проект в области приватности, образования или Open-Source? Подайте заявку на финансирование</p>
+        <a href="/fund/apply" class="btn btn-secondary">Подать заявку</a>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-  <div class="container">
+    <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
           <a href="/" class="footer-logo">LifeUndo</a>
@@ -619,13 +684,13 @@
           <a href="/terms">Условия</a>
           <a href="/cookies">Cookies</a>
         </div>
-</div>
-
+      </div>
+      
       <div class="freekassa-badge">
         <img src="https://www.free-kassa.ru/img/fk_btn/16.png" alt="FreeKassa" height="24">
         <span class="fund-text">Мы отдаём 10% — GetLifeUndo Fund</span>
       </div>
-  </div>
+    </div>
   </footer>
 </body>
 </html>

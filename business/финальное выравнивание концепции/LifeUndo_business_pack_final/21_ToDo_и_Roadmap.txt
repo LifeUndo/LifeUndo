@@ -1,0 +1,44 @@
+ToDo и Roadmap (оперативный, на неделю)
+
+День 1–2
+- Настроить ENV в Vercel (NEXT_PUBLIC_SITE_URL, FreeKassa ключи, DB_URL, ADMIN_TOKEN)
+- Force-redeploy getlifeundo.com без build cache
+- Smoke-тесты: /support, /success, /fail, /admin, /api/fk/notify
+- Провести реальный платёж (Pro Monthly) через FreeKassa
+
+День 2–3
+- lifeundo.ru:
+  - Заменить главную (убрать баннер → Hero + тарифы + фонд)
+  - Добавить страницы /fund, /fund/apply, /privacy, /support
+  - Проверить футер (SVG-иконки, бейдж FK, 10%)
+- Firefox расширение 0.3.7.11:
+  - Проверить клики в popup.js
+  - Пересобрать XPI, пройти web-ext lint
+  - Загрузить в AMO
+
+День 3–4
+- CI/QA:
+  - Запустить e2e Playwright тесты (lifeundo.ru и getlifeundo.com)
+  - Проверить Lighthouse CI (performance ≥70, accessibility ≥90)
+  - Проверить audit-скрипт (мета, иконки, ссылки)
+
+День 4–5
+- Фонд:
+  - /fund → политика фонда (10%, направления, отчёты)
+  - /fund/apply → форма заявок (через email-relay)
+  - Пример заявки (Schools/UX/OSS)
+
+День 5–6
+- Соцсети:
+  - Telegram, X/Twitter, VK, Reddit, Dzen, YouTube → стартовые посты
+  - Посты: лонч, фонд, тарифы
+- Маркетинг:
+  - Проверка UTM-разметки
+  - Запуск первых баннеров (FreeKassa + Fund)
+
+День 7
+- Финальная ревизия:
+  - Проверка lifeundo.ru, getlifeundo.com и AMO
+  - Проверка автоплатежа, ключей активации
+  - Проверка всех ссылок и страниц
+  - Выпуск релиза (PATCH 0.4.9-FUND)

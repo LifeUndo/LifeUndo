@@ -1,0 +1,16 @@
+Контент-календарь и UTM
+
+Календарь (неделя):
+- Пн: Лонч-пост (RU/EN)
+- Вт: Кейс «вернуть вкладки»
+- Ср: Пост про фонд (10%)
+- Чт: Видео-демо (YouTube Shorts)
+- Пт: VIP-промо
+- Сб: Ответы на вопросы
+- Вс: Резюме недели
+
+UTM-соглашение:
+- utm_source: telegram|vk|x|reddit|dzen|youtube|habr|vc
+- utm_medium: post|banner|reply|video
+- utm_campaign: launch|fund|vip|pro|team
+- utm_content: короткий slug

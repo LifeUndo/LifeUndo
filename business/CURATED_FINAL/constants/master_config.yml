@@ -1,0 +1,61 @@
+# LifeUndo Master Configuration - Single Source of Truth
+# Версия: 1.0
+# Дата: 27 сентября 2025
+
+brand:
+  theme: dark
+  colors:
+    background: "#0B1220"
+    cards: ["#111827", "#0F172A"]
+    buttons_gradient: ["#6366F1", "#7C3AED"]
+    text_primary: "#E5E7EB"
+    text_secondary: "#94A3B8"
+  font: "Inter, system-ui"
+  slogans:
+    ru: "Ctrl+Z для вашей онлайн-жизни"
+    en: "Ctrl+Z for your online life"
+
+links:
+  site:
+    ru: "https://lifeundo.ru/"
+    en_global: "https://www.getlifeundo.com/"
+  support: "https://t.me/LifeUndoSupport"
+  support_email: "support@getlifeundo.com"
+  press_email: "press@getlifeundo.com"
+  legal_email: "legal@getlifeundo.com"
+  social:
+    telegram: "https://t.me/LifeUndoSupport"
+    x: "https://x.com/GetLifeUndo"
+    reddit: "https://www.reddit.com/r/GetLifeUndo"
+    youtube: "https://www.youtube.com/@GetLifeUndo"
+    vk: "https://vk.com/GetLifeUndo"
+    dzen: "https://dzen.ru/GetLifeUndo"
+    habr: "https://habr.com/ru/users/GetLifeUndo"
+    vc_ru: "https://vc.ru/u/GetLifeUndo"
+    tenchat: "https://tenchat.ru/a/GetLifeUndo"
+  freekassa_badge: "https://www.free-kassa.ru/img/fk_btn/16.png"
+
+pricing:
+  ru:
+    free: 0
+    pro_month: 149
+    pro_year: 1490
+    vip_lifetime: 2490
+    team_seat_from: 150
+    family_5_devices: 499
+  en:
+    free: 0
+    pro_month: 3.99
+    pro_year: 29
+    vip_lifetime: 49
+    team_seat_from: 2.5
+
+fund:
+  net_revenue_share: 0.10
+  allocation:
+    schools: 0.40
+    ux: 0.30
+    oss: 0.30
+  reporting: "annual"
+  quarterly_distribution: true
+  conflict_of_interest_policy: "Prohibition of affiliation (declaration in form)"

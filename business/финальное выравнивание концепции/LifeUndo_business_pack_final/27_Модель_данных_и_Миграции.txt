@@ -1,0 +1,18 @@
+Модель данных и миграции (035–038)
+
+Ключевые таблицы:
+- orgs, memberships
+- plans, plan_quotas, org_subscriptions, invoices, quotas, usage_counters
+- api_keys (hash), webhooks
+- email_outbox, email_rules, email_attachments, email_relay_log
+- audit_log
+
+Политики ключей:
+- users.id (int), orgs.id (uuid|int — выбрать единообразно), plan_id (int)
+- Внешние ключи приведены к существующим типам; пересоздание конфликтных таблиц исключено
+
+Миграции 035–038:
+- Созданы недостающие таблицы
+- Убраны ссылки на несуществующие usage_events/tenant_api_keys
+- Исправлены зарезервированные слова (window → "window")
+- Добавлены IF NOT EXISTS для типов и триггеров

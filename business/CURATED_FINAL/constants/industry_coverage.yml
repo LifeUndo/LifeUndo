@@ -1,0 +1,536 @@
+# Industry Coverage Configuration
+# Полное покрытие всех отраслей экономики
+# Version: 1.0.0
+# Date: 2025-09-27
+
+industry_coverage:
+  # Государственные службы
+  government_services:
+    customs:
+      name: "Таможенная служба"
+      priority: "high"
+      pricing: 800  # ₽/инспектор/месяц
+      features:
+        - "customs_declarations"
+        - "goods_lists"
+        - "duty_calculations"
+        - "document_flow"
+      requirements:
+        - "state_secrets"
+        - "audit_trail"
+        - "EAEU_compliance"
+        - "FTS_integration"
+        
+    border_service:
+      name: "Пограничная служба"
+      priority: "high"
+      pricing: 1000  # ₽/офицер/месяц
+      features:
+        - "passport_control"
+        - "border_protocols"
+        - "prohibited_lists"
+        - "operational_plans"
+      requirements:
+        - "critical_security"
+        - "offline_mode"
+        - "emergency_recovery"
+        - "quantum_crypto"
+        
+    tax_service:
+      name: "Налоговая служба"
+      priority: "high"
+      pricing: 800  # ₽/инспектор/месяц
+      features:
+        - "tax_declarations"
+        - "tax_calculations"
+        - "payment_history"
+        - "audit_results"
+      requirements:
+        - "tax_legislation"
+        - "state_standards"
+        - "security_audit"
+        - "government_backup"
+
+  # Транспорт и логистика
+  transportation:
+    maritime:
+      name: "Морской флот"
+      priority: "high"
+      pricing: 600  # ₽/судно/месяц
+      features:
+        - "navigation_routes"
+        - "nautical_charts"
+        - "weather_data"
+        - "port_information"
+      requirements:
+        - "IMO_standards"
+        - "satellite_communication"
+        - "critical_reliability"
+        - "multilingual_support"
+        
+    aviation:
+      name: "Авиация"
+      priority: "high"
+      pricing: 500  # ₽/место/месяц
+      features:
+        - "flight_plans"
+        - "air_traffic_control"
+        - "passenger_data"
+        - "airport_services"
+      requirements:
+        - "ICAO_standards"
+        - "FAA_compliance"
+        - "EASA_standards"
+        - "Rosaviation_requirements"
+        
+    railway:
+      name: "Железнодорожный транспорт"
+      priority: "medium"
+      pricing: 400  # ₽/состав/месяц
+      features:
+        - "train_schedules"
+        - "routes"
+        - "passenger_data"
+        - "freight_transport"
+      requirements:
+        - "RZD_integration"
+        - "transport_legislation"
+        - "critical_support"
+        - "staff_training"
+        
+    automotive:
+      name: "Автомобильный транспорт"
+      priority: "medium"
+      pricing: 300  # ₽/транспорт/месяц
+      features:
+        - "delivery_routes"
+        - "cargo_data"
+        - "driver_information"
+        - "vehicle_specs"
+      requirements:
+        - "GPS_integration"
+        - "mobile_sync"
+        - "offline_mode"
+        - "multilingual_support"
+
+  # Курьерские службы
+  courier_services:
+    international:
+      name: "Международные курьеры"
+      priority: "medium"
+      pricing: 200  # ₽/курьер/месяц
+      features:
+        - "shipment_data"
+        - "delivery_routes"
+        - "recipient_info"
+        - "customs_declarations"
+      requirements:
+        - "UPU_standards"
+        - "IATA_compliance"
+        - "multilingual_support"
+        - "customs_integration"
+        
+    local:
+      name: "Локальные курьеры"
+      priority: "medium"
+      pricing: 150  # ₽/курьер/месяц
+      features:
+        - "city_addresses"
+        - "route_optimization"
+        - "delivery_schedules"
+        - "contact_info"
+      requirements:
+        - "city_navigation"
+        - "traffic_integration"
+        - "parking_data"
+        - "security_tracking"
+        
+    postal:
+      name: "Почтовые службы"
+      priority: "medium"
+      pricing: 100  # ₽/отделение/месяц
+      features:
+        - "mail_items"
+        - "address_database"
+        - "delivery_routes"
+        - "financial_operations"
+      requirements:
+        - "UPU_standards"
+        - "financial_security"
+        - "document_flow"
+        - "bank_integration"
+
+  # Семейная жизнь
+  family_life:
+    housewives:
+      name: "Домохозяйки"
+      priority: "high"
+      pricing: 299  # ₽/семья/месяц
+      features:
+        - "family_schedules"
+        - "shopping_lists"
+        - "recipes"
+        - "family_budget"
+      requirements:
+        - "simple_interface"
+        - "voice_control"
+        - "family_sync"
+        - "child_mode"
+        
+    home_management:
+      name: "Домашнее хозяйство"
+      priority: "medium"
+      pricing: 199  # ₽/дом/месяц
+      features:
+        - "cooking_recipes"
+        - "shopping_lists"
+        - "family_plans"
+        - "home_budget"
+      requirements:
+        - "voice_commands"
+        - "smart_lists"
+        - "family_access"
+        - "mobile_sync"
+        
+    children_education:
+      name: "Образование детей"
+      priority: "medium"
+      pricing: 99  # ₽/ребенок/месяц
+      features:
+        - "homework"
+        - "child_schedules"
+        - "achievements"
+        - "hobbies"
+      requirements:
+        - "parental_control"
+        - "child_interface"
+        - "educational_content"
+        - "gamification"
+
+  # Трудовые ресурсы
+  labor_resources:
+    job_center:
+      name: "Биржа труда"
+      priority: "high"
+      pricing: 100  # ₽/соискатель/месяц
+      features:
+        - "resumes"
+        - "skills"
+        - "work_experience"
+        - "education"
+      requirements:
+        - "AI_matching"
+        - "market_analytics"
+        - "training_programs"
+        - "social_support"
+        
+    employment_center:
+      name: "Центры занятости"
+      priority: "high"
+      pricing: 50  # ₽/безработный/месяц
+      features:
+        - "registration"
+        - "unemployment_benefits"
+        - "retraining"
+        - "job_placement"
+      requirements:
+        - "state_standards"
+        - "social_protection"
+        - "bank_integration"
+        - "audit_operations"
+        
+    recruitment_agencies:
+      name: "Кадровые агентства"
+      priority: "medium"
+      pricing: 200  # ₽/кандидат/месяц
+      features:
+        - "candidates"
+        - "clients"
+        - "vacancies"
+        - "processes"
+      requirements:
+        - "CRM_integration"
+        - "analytics"
+        - "automation"
+        - "mobility"
+
+  # Промышленность
+  industry:
+    factories:
+      name: "Заводы и фабрики"
+      priority: "high"
+      pricing: 500  # ₽/рабочее место/месяц
+      features:
+        - "production_processes"
+        - "technical_drawings"
+        - "specifications"
+        - "quality_control"
+      requirements:
+        - "industrial_standards"
+        - "safety_regulations"
+        - "environmental_compliance"
+        - "energy_efficiency"
+        
+    mechanical_engineering:
+      name: "Машиностроение"
+      priority: "high"
+      pricing: 600  # ₽/инженер/месяц
+      features:
+        - "technical_drawings"
+        - "engineering_calculations"
+        - "material_specs"
+        - "production_processes"
+      requirements:
+        - "CAD_integration"
+        - "calculation_modules"
+        - "version_control"
+        - "collaboration"
+        
+    chemical_industry:
+      name: "Химическая промышленность"
+      priority: "high"
+      pricing: 700  # ₽/химик/месяц
+      features:
+        - "chemical_formulations"
+        - "process_schemes"
+        - "safety_measures"
+        - "environmental_aspects"
+      requirements:
+        - "chemical_safety"
+        - "environmental_standards"
+        - "chemical_regulation"
+        - "safety_audit"
+
+  # Сельское хозяйство
+  agriculture:
+    farms:
+      name: "Фермерские хозяйства"
+      priority: "medium"
+      pricing: 300  # ₽/хозяйство/месяц
+      features:
+        - "crop_plans"
+        - "yield_statistics"
+        - "weather_data"
+        - "equipment"
+      requirements:
+        - "GPS_integration"
+        - "weather_data"
+        - "yield_analytics"
+        - "mobile_support"
+        
+    livestock:
+      name: "Животноводство"
+      priority: "medium"
+      pricing: 250  # ₽/ферма/месяц
+      features:
+        - "livestock_data"
+        - "veterinary_records"
+        - "feeding_rations"
+        - "breeding_plans"
+      requirements:
+        - "veterinary_integration"
+        - "genetic_data"
+        - "productivity_stats"
+        - "farm_mobility"
+
+  # Сфера услуг
+  service_sector:
+    restaurants:
+      name: "Рестораны и кафе"
+      priority: "medium"
+      pricing: 400  # ₽/точка/месяц
+      features:
+        - "menus"
+        - "recipes"
+        - "ingredients"
+        - "pricing"
+      requirements:
+        - "POS_integration"
+        - "mobile_orders"
+        - "sales_analytics"
+        - "inventory_management"
+        
+    hotels:
+      name: "Гостиницы и отели"
+      priority: "medium"
+      pricing: 500  # ₽/отель/месяц
+      features:
+        - "bookings"
+        - "guest_data"
+        - "services"
+        - "payments"
+      requirements:
+        - "PMS_integration"
+        - "mobile_management"
+        - "occupancy_analytics"
+        - "personalization"
+        
+    beauty_salons:
+      name: "Салоны красоты"
+      priority: "low"
+      pricing: 300  # ₽/салон/месяц
+      features:
+        - "clients"
+        - "services"
+        - "appointments"
+        - "procedures"
+      requirements:
+        - "online_booking"
+        - "mobile_app"
+        - "client_analytics"
+        - "inventory_management"
+
+  # Здравоохранение (расширение)
+  healthcare:
+    clinics:
+      name: "Поликлиники"
+      priority: "high"
+      pricing: 400  # ₽/врач/месяц
+      features:
+        - "patients"
+        - "appointments"
+        - "diagnoses"
+        - "treatments"
+      requirements:
+        - "medical_secrecy"
+        - "medical_licensing"
+        - "MIS_integration"
+        - "access_audit"
+        
+    hospitals:
+      name: "Больницы"
+      priority: "high"
+      pricing: 600  # ₽/отделение/месяц
+      features:
+        - "patients"
+        - "departments"
+        - "staff"
+        - "equipment"
+      requirements:
+        - "critical_reliability"
+        - "emergency_recovery"
+        - "multi_level_security"
+        - "equipment_integration"
+        
+    dentistry:
+      name: "Стоматологии"
+      priority: "medium"
+      pricing: 350  # ₽/стоматолог/месяц
+      features:
+        - "patients"
+        - "treatments"
+        - "x_rays"
+        - "prosthetics"
+      requirements:
+        - "3D_models"
+        - "dental_equipment"
+        - "treatment_planning"
+        - "financial_calculations"
+
+  # Образование (расширение)
+  education:
+    kindergartens:
+      name: "Детские сады"
+      priority: "medium"
+      pricing: 200  # ₽/группа/месяц
+      features:
+        - "children"
+        - "parents"
+        - "health"
+        - "development"
+      requirements:
+        - "parent_access"
+        - "educational_programs"
+        - "nutrition"
+        - "security"
+        
+    schools:
+      name: "Школы"
+      priority: "medium"
+      pricing: 150  # ₽/класс/месяц
+      features:
+        - "students"
+        - "teachers"
+        - "schedules"
+        - "grades"
+      requirements:
+        - "electronic_diary"
+        - "distance_learning"
+        - "library"
+        - "school_meals"
+        
+    universities:
+      name: "Университеты"
+      priority: "medium"
+      pricing: 300  # ₽/факультет/месяц
+      features:
+        - "students"
+        - "faculty"
+        - "courses"
+        - "research"
+      requirements:
+        - "LMS_integration"
+        - "research_data"
+        - "publications"
+        - "grants"
+
+# Специальные тарифы
+special_pricing:
+  # Образовательные скидки
+  education_discounts:
+    students: 0.5  # 50% скидка
+    schoolchildren: 0.7  # 70% скидка
+    teachers: 0.75  # 25% скидка
+    universities: 0.8  # 20% скидка
+    
+  # Корпоративные скидки
+  corporate_discounts:
+    small_business: 0.15  # 15% скидка от 10 штук
+    medium_business: 0.25  # 25% скидка от 50 штук
+    large_business: 0.35  # 35% скидка от 100 штук
+    
+  # Государственные скидки
+  government_discounts:
+    federal: 0.4  # 40% скидка
+    regional: 0.3  # 30% скидка
+    municipal: 0.2  # 20% скидка
+
+# Приоритеты развития
+development_priorities:
+  phase_1:  # 6 месяцев
+    - "government_services"
+    - "transportation"
+    - "family_life"
+    - "labor_resources"
+    
+  phase_2:  # 12 месяцев
+    - "industry"
+    - "agriculture"
+    - "service_sector"
+    - "healthcare"
+    
+  phase_3:  # 24 месяца
+    - "education"
+    - "international_expansion"
+    - "innovative_solutions"
+    - "ecosystem_integration"
+
+# Ключевые особенности
+key_features:
+  universal_accessibility:
+    - "all_age_groups"
+    - "physical_limitations"
+    - "cognitive_limitations"
+    - "language_barriers"
+    
+  industry_specific:
+    - "custom_requirements"
+    - "specialized_functions"
+    - "compliance_standards"
+    - "integration_systems"
+    
+  future_ready:
+    - "digital_currencies"
+    - "quantum_crypto"
+    - "AI_integration"
+    - "IoT_expansion"

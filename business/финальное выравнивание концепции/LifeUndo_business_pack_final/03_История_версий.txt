@@ -1,0 +1,5 @@
+История релизов:
+- 0.3.7.11: Firefox расширение, кнопка PRO → /pricing, фиксы RU/EN
+- 0.4.7-SMTP: запуск SMTP Listener + Email Relay
+- 0.4.8-BILLING: интеграция FreeKassa, billing core
+- 0.4.9-FUND: запуск фонда (10%), страницы gov/edu/fund

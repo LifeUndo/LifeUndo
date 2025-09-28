@@ -1,0 +1,52 @@
+# LifeUndo — Migration Note (для нового чата)
+
+## 0) Контекст
+- Проект: LifeUndo (lifeundo.ru / getlifeundo.com)
+- Текущий релиз расширения: Firefox 0.3.7.12 (XPI собран, кнопки починены, готов к AMO)
+- Основной пакет документов: business/LifeUndo_business_pack_final (00–40 файлов + новые 23–40)
+- CURATED_FINAL: Cursor создал финальную структуру (51 файл), site_copy_ru/en.md и constants/*.json|yml
+
+## 1) Ключевые проблемы
+- **lifeundo.ru**: /privacy и /fund/apply → 404 (Next.js, нужны page.tsx)
+- **/ok**: Cache-Control неверный (должен быть no-store, сейчас public, max-age=0)
+- Статика из public не работает, т.к. проект на Next.js (App Router)
+- Решение: создать src/app/privacy/page.tsx, src/app/fund/apply/page.tsx, src/app/ok/page.tsx, добавить headers() в next.config.mjs
+
+## 2) Последнее ТЗ для Cursor (исправление lifeundo.ru)
+- Создать Next.js страницы:
+  - src/app/privacy/page.tsx (политика конфиденциальности)
+  - src/app/fund/apply/page.tsx (форма заявки в фонд)
+  - src/app/ok/page.tsx (OK)
+- В next.config.mjs → headers(): для /ok → Cache-Control: no-store, no-cache, must-revalidate
+- Удалить старые privacy.html и fund-apply.html из public/
+- Redeploy Vercel проекта life-undo без кэша, Framework Preset: Next.js
+- Проверить curl -I: все 200, /ok → правильный Cache-Control
+
+## 3) Последние шаги Cursor
+- Cursor создал CURATED_FINAL (51 файл), constants/master_config.yml, pricing_ru.json, fund.json, links.json
+- Cursor интегрировал site_copy_ru.md → страницы (но нужны правки под Next.js)
+- Cursor подтвердил: Extension 0.3.7.12 собрано и готово, AMO release notes есть
+
+## 4) Следующие шаги после фикса .ru
+- Проверить lifeundo.ru по чек-листу (все страницы 200, /ok → no-store)
+- Если зелёный GATE → загружаем расширение 0.3.7.12 в AMO
+- После этого → интеграция site_copy_en.md в getlifeundo.com (с ENV и FK Success/Fail/Result)
+- Дальше → релиз 0.4.1 (или выше), собрать багфиксы, подключить биллинг и фонд
+
+## 5) Папки/процесс
+- business/LifeUndo_business_pack_final → мастер файлы (00–40 + новые 23–40)
+- business/CURATED_FINAL → итоговая структура (51 файл)
+- extension_firefox → расширение 0.3.7.12 (popup.js исправлен, manifest.json обновлен)
+- releases/LifeUndo_Firefox_v0.3.7.12.xpi → готовый XPI
+
+## 6) Приёмочный чек-лист (жёсткий GATE)
+- https://lifeundo.ru/, /pricing, /fund, /fund/apply, /privacy, /support, /ok → все 200
+- /ok → Cache-Control: no-store, no-cache, must-revalidate
+- На /pricing цены из pricing_ru.json: 149 ₽/мес, 1 490 ₽/год, 2 490 ₽ VIP
+- На /fund: текст фонда, 10%, 40/30/30, ссылка на /fund/apply
+- На /fund/apply: форма заявки (имя, email, категория, описание, согласия)
+- Расширение popup: кнопки Pro/VIP работают, футер ссылки правильные
+
+---
+
+Этот файл — для нового чата. Достаточно загрузить его, и я продолжу работу с того места, где мы остановились.
