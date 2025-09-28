@@ -23,26 +23,23 @@ export default function ModernHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">L</span>
-            </div>
-            <span className="text-xl font-bold text-white">LifeUndo</span>
+          <Link href="/ru" className="flex items-center space-x-3">
+            <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/ru/features" className="text-gray-300 hover:text-white transition-colors">
+              Функции
+            </Link>
+            <Link href="/ru/use-cases" className="text-gray-300 hover:text-white transition-colors">
+              Кейсы
+            </Link>
+            <Link href="/ru/pricing" className="text-gray-300 hover:text-white transition-colors">
               Тарифы
             </Link>
-            <Link href="/fund" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/ru/fund" className="text-gray-300 hover:text-white transition-colors">
               Фонд
-            </Link>
-            <Link href="/support" className="text-gray-300 hover:text-white transition-colors">
-              Поддержка
-            </Link>
-            <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
-              Приватность
             </Link>
           </nav>
 
@@ -50,7 +47,7 @@ export default function ModernHeader() {
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
             <Link 
-              href="/download" 
+              href="/ru/download" 
               className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
             >
               Скачать
@@ -82,22 +79,22 @@ export default function ModernHeader() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-800">
             <nav className="flex flex-col space-y-4">
-              <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="/ru/features" className="text-gray-300 hover:text-white transition-colors">
+                Функции
+              </Link>
+              <Link href="/ru/use-cases" className="text-gray-300 hover:text-white transition-colors">
+                Кейсы
+              </Link>
+              <Link href="/ru/pricing" className="text-gray-300 hover:text-white transition-colors">
                 Тарифы
               </Link>
-              <Link href="/fund" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="/ru/fund" className="text-gray-300 hover:text-white transition-colors">
                 Фонд
-              </Link>
-              <Link href="/support" className="text-gray-300 hover:text-white transition-colors">
-                Поддержка
-              </Link>
-              <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
-                Приватность
               </Link>
               <div className="pt-4 space-y-2">
                 <LanguageSwitcher />
                 <Link 
-                  href="/download" 
+                  href="/ru/download" 
                   className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 >
                   Скачать

@@ -1,0 +1,237 @@
+*** Begin Patch
+*** Add File: src/components/GlassCard.tsx
++export default function GlassCard({
++  children,
++  className = '',
++}: {
++  children: React.ReactNode;
++  className?: string;
++}) {
++  return (
++    <div className={`rounded-2xl p-6 border border-white/8 bg-white/5 backdrop-blur-md ${className}`}>
++      {children}
++    </div>
++  );
++}
++
+*** End Patch
+*** Begin Patch
+*** Add File: src/components/ServiceCard.tsx
++import GlassCard from './GlassCard';
++
++export default function ServiceCard({
++  title,
++  desc,
++  cta,
++}: {
++  title: string;
++  desc: string;
++  cta?: { href: string; label: string };
++}) {
++  return (
++    <GlassCard className="hover:scale-105 transition-transform duration-300">
++      <h4 className="text-lg font-semibold gradient-text mb-2">{title}</h4>
++      <p className="text-sm text-white/80 mb-4">{desc}</p>
++      {cta && (
++        <a
++          href={cta.href}
++          className="inline-block px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded"
++        >
++          {cta.label}
++        </a>
++      )}
++    </GlassCard>
++  );
++}
++
+*** End Patch
+*** Begin Patch
+*** Add File: src/components/Hero.tsx
++import ServiceCard from './ServiceCard';
++import GlassCard from './GlassCard';
++
++export default function Hero() {
++  return (
++    <section className="min-h-[60vh] flex items-center pt-20">
++      <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-center">
++        <div className="md:w-6/12">
++          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
++            LifeUndo —{' '}
++            <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
++              Ctrl+Z
++            </span>{' '}
++            для вашей жизни в сети
++          </h1>
++          <p className="mt-4 text-white/80">
++            Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.
++          </p>
++          <div className="mt-6 flex gap-3">
++            <a href="/ru/download" className="px-4 py-2 rounded bg-gradient-to-r from-purple-600 to-blue-600">
++              Установить
++            </a>
++            <a href="/ru/pricing" className="px-4 py-2 rounded border border-white/10">
++              Тарифы
++            </a>
++          </div>
++        </div>
++        <div className="md:w-6/12 grid grid-cols-1 gap-4">
++          <div className="grid grid-cols-2 gap-4">
++            <div className="col-span-1">
++              <ServiceCard
++                title="Сохранение"
++                desc="Быстро сохраняет рабочие сеты"
++                cta={{ href: '/ru/features', label: 'Подробнее' }}
++              />
++            </div>
++            <div className="col-span-1">
++              <ServiceCard
++                title="Откат"
++                desc="Верните любую версию одним кликом"
++                cta={{ href: '/ru/features', label: 'Подробнее' }}
++              />
++            </div>
++          </div>
++          <GlassCard>
++            <div className="text-sm text-white/80">
++              Популярные кейсы: студенты, разработчики, блогеры, бухгалтеры.
++            </div>
++          </GlassCard>
++        </div>
++      </div>
++    </section>
++  );
++}
++
+*** End Patch
+*** Begin Patch
+*** Update File: src/components/ModernHeader.tsx
+@@
+-'use client';
+-import Link from 'next/link';
+-import LanguageSwitcher from './LanguageSwitcher';
+-
+-export default function ModernHeader(){
+-  return (
+-    <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm bg-black/20 border-b border-white/6">
+-      <div className="container mx-auto px-4 py-3 flex items-center gap-6">
+-        <Link href="/ru">
+-          <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
+-        </Link>
+-        <nav className="ml-6 flex gap-4 items-center text-sm text-white/80">
+-          <Link href="/ru/features" className="hover:text-white">Функции</Link>
+-          <Link href="/ru/use-cases" className="hover:text-white">Кейсы</Link>
+-          <Link href="/ru/pricing" className="hover:text-white">Тарифы</Link>
+-          <Link href="/ru/fund" className="hover:text-white">Фонд</Link>
+-        </nav>
+-        <div className="ml-auto flex items-center gap-3">
+-          <a href="/ru/download" className="hidden md:inline-block px-3 py-1 rounded-md text-sm border border-white/10 bg-white/5">Скачать</a>
+-          <LanguageSwitcher />
+-        </div>
+-      </div>
+-    </header>
+-  );
+-}
++'use client';
++import Link from 'next/link';
++import LanguageSwitcher from './LanguageSwitcher';
++
++export default function ModernHeader() {
++  return (
++    <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm bg-black/20 border-b border-white/6">
++      <div className="container mx-auto px-4 py-3 flex items-center gap-6">
++        <Link href="/ru">
++          <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
++        </Link>
++        <nav className="ml-6 flex gap-4 items-center text-sm text-white/80">
++          <Link href="/ru/features" className="hover:text-white">Функции</Link>
++          <Link href="/ru/use-cases" className="hover:text-white">Кейсы</Link>
++          <Link href="/ru/pricing" className="hover:text-white">Тарифы</Link>
++          <Link href="/ru/fund" className="hover:text-white">Фонд</Link>
++        </nav>
++        <div className="ml-auto flex items-center gap-3">
++          <a
++            href="/ru/download"
++            className="hidden md:inline-block px-3 py-1 rounded-md text-sm border border-white/10 bg-white/5"
++          >
++            Скачать
++          </a>
++          <LanguageSwitcher />
++        </div>
++      </div>
++    </header>
++  );
++}
+*** End Patch
+*** Begin Patch
+*** Update File: src/components/ModernFooter.tsx
+@@
+-export default function ModernFooter(){
++export default function ModernFooter() {
+   return (
+     <footer className="bg-[#111827] border-t border-white/6 py-8 mt-12">
+       <div className="container mx-auto px-4">
+         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+           <div>
+             <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8 mb-4" />
+             <p className="text-sm text-white/60">Ctrl+Z для вашей жизни в сети</p>
+           </div>
+@@
+         <div className="border-t border-white/6 mt-8 pt-6 text-center text-sm text-white/60">
+-          <p>&copy; {new Date().getFullYear()} LifeUndo. Все права защищены.</p>
++          <p>&copy; {new Date().getFullYear()} LifeUndo. Все права защищены.</p>
+         </div>
+       </div>
+     </footer>
+   );
+ }
+*** End Patch
+*** Begin Patch
+*** Update File: src/app/[locale]/page.tsx
+@@
+-import ModernHeader from '@/components/ModernHeader';
+-import Hero from '@/components/Hero';
+-import ModernFooter from '@/components/ModernFooter';
+-
+-export default function HomePage() {
+-  return (
+-    <>
+-      <ModernHeader />
+-      <main className="min-h-screen bg-[#0B1220] text-white pt-20">
+-        <Hero />
+-        {/* TODO: add Features, Use-cases, Pricing sections */}
+-      </main>
+-      <ModernFooter />
+-    </>
+-  );
+-}
++import Hero from '@/components/Hero';
++
++export default function HomePage() {
++  // ВНИМАНИЕ: Header/Footer рендерятся в layout.tsx — здесь только контент страницы.
++  return (
++    <main className="min-h-screen bg-[#0B1220] text-white pt-20">
++      <Hero />
++      {/* TODO: add Features, Use-cases, Pricing sections */}
++    </main>
++  );
++}
+*** End Patch
+*** Begin Patch
+*** Update File: src/app/globals.css
+@@
+ /* existing content */
+ 
+ /* --- SberDevices-style helpers --- */
+ .gradient-text {
+   background: linear-gradient(135deg, #6366F1 0%, #7C3AED 50%, #8B5CF6 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+ }
+ 
+ .glass-card {
+   background: rgba(255, 255, 255, 0.05);
+   backdrop-filter: blur(10px);
+   border: 1px solid rgba(255, 255, 255, 0.1);
+ }
+*** End Patch
