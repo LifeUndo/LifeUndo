@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lifeundo.ru';
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
   return [
     { url: `${base}/ru`, changeFrequency: 'weekly', priority: 1 },
     { url: `${base}/ru/pricing`, changeFrequency: 'weekly', priority: 0.9 },
