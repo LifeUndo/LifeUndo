@@ -1,0 +1,53 @@
+# Дополнительный патч для iOS Safari (если LanguageSwitcher залипает)
+
+## Проблема
+На iOS Safari dropdown с `backdrop-blur` может "залипать" поверх контента.
+
+## Решение
+Заменить blur на обычный фон и добавить hardware acceleration.
+
+## Патч для LanguageSwitcher.tsx
+
+```tsx
+// Заменить строку 102-104 в src/components/LanguageSwitcher.tsx
+// БЫЛО:
+className="md:hidden absolute right-0 top-9 z-[60] min-w-[8rem]
+           bg-black/70 backdrop-blur-md border border-white/10 rounded-xl p-1
+           shadow-lg"
+
+// СТАЛО:
+className="md:hidden absolute right-0 top-9 z-[60] min-w-[8rem]
+           bg-black/80 border border-white/10 rounded-xl p-1
+           shadow-lg [transform:translateZ(0)]"
+```
+
+## Применение патча
+
+1. Открыть `src/components/LanguageSwitcher.tsx`
+2. Найти строки 102-104
+3. Заменить `backdrop-blur-md` на `bg-black/80`
+4. Добавить `[transform:translateZ(0)]` в конец className
+
+## Альтернативное решение (если не помогает)
+
+```tsx
+// Ещё более агрессивный фикс для iOS
+className="md:hidden absolute right-0 top-9 z-[60] min-w-[8rem]
+           bg-gray-900 border border-white/10 rounded-xl p-1
+           shadow-lg [transform:translateZ(0)] [will-change:transform]"
+```
+
+## Проверка
+
+После применения патча:
+1. Открыть сайт на iPhone Safari
+2. Нажать на языковой переключатель
+3. Убедиться, что dropdown не залипает
+4. Проверить закрытие по всем триггерам
+
+## Коммит
+
+```bash
+git add src/components/LanguageSwitcher.tsx
+git commit -m "fix: iOS Safari dropdown залипание - убран backdrop-blur"
+```
