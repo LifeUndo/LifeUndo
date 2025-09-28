@@ -1,6 +1,4 @@
-import ModernHeader from '@/components/ModernHeader';
 import ServiceCard from '@/components/ServiceCard';
-import ModernFooter from '@/components/ModernFooter';
 
 export default function HomePage() {
   const services = [
@@ -70,8 +68,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      <ModernHeader />
-      
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -184,8 +180,6 @@ export default function HomePage() {
           </a>
         </div>
       </section>
-
-      <ModernFooter />
     </div>
   );
 }
