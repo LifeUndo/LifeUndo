@@ -1,5 +1,5 @@
-// LifeUndo Popup - v0.3.7
-// One-click VIP activation, unified license core, stable RU/EN
+// LifeUndo Popup - v0.3.7.12
+// Fixed button clicks, updated footer links, no functional changes
 
 const api = window.browser || window.chrome;
 
@@ -157,10 +157,10 @@ function toggleWhatsNew() {
   if (!el) return;
   try {
     const lang = (navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en';
-    const href = lang === 'ru' ? '/pricing' : '/en/pricing';
+    const href = lang === 'ru' ? 'https://lifeundo.ru/pricing' : 'https://www.getlifeundo.com/pricing';
     el.addEventListener('click', () => { try { browser.tabs.create({ url: href }); } catch(_) { window.open(href, '_blank'); } });
   } catch (e) {
-    el.addEventListener('click', () => window.open('/en/pricing', '_blank'));
+    el.addEventListener('click', () => window.open('https://www.getlifeundo.com/pricing', '_blank'));
   }
 })();
 
@@ -180,7 +180,22 @@ document.getElementById('btnRU')?.addEventListener('click', () => {
 // VIP activation
 btnVip?.addEventListener('click', () => {
   if (btnVip.disabled) return;
-  vipFile?.click();
+  
+  // Check if VIP is already active
+  const { lu_plan } = api.storage.local.get('lu_plan');
+  if (lu_plan === 'vip') {
+    // VIP is active, open buy page
+    const lang = (navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en';
+    const href = lang === 'ru' ? 'https://lifeundo.ru/buy' : 'https://www.getlifeundo.com/buy';
+    try { 
+      browser.tabs.create({ url: href }); 
+    } catch(_) { 
+      window.open(href, '_blank'); 
+    }
+  } else {
+    // VIP not active, show file picker
+    vipFile?.click();
+  }
 });
 
 // VIP file import
@@ -229,17 +244,21 @@ document.addEventListener('keydown', (e) => {
 // Footer links
 document.getElementById('linkWebsite')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://lifeundo.ru', '_blank');
+  const lang = (navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en';
+  const href = lang === 'ru' ? 'https://lifeundo.ru' : 'https://www.getlifeundo.com';
+  window.open(href, '_blank');
 });
 
 document.getElementById('linkPrivacy')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://lifeundo.ru/privacy/', '_blank');
+  const lang = (navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en';
+  const href = lang === 'ru' ? 'https://lifeundo.ru/privacy' : 'https://www.getlifeundo.com/privacy';
+  window.open(href, '_blank');
 });
 
 document.getElementById('linkSupport')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://t.me/lifeundo', '_blank');
+  window.open('https://t.me/LifeUndoSupport', '_blank');
 });
 
 document.getElementById('linkSettings')?.addEventListener('click', (e) => {
