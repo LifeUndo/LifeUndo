@@ -5,3 +5,4 @@ CREATE INDEX IF NOT EXISTS usage_events_duration_ms_idx
   ON usage_events (duration_ms);
 
 
+

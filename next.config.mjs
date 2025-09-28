@@ -1,24 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: false,
+  reactStrictMode: true,
+  // ВАЖНО: НЕ ставить output:'export'
+  // experimental: {
+  //   typedRoutes: true,
+  // },
   async headers() {
     return [
       {
-        source: '/ok',
+        source: "/ok",
         headers: [
-          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' }
-        ]
+          { key: "Cache-Control", value: "no-store, no-cache, must-revalidate" },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+        ],
       },
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }
-        ]
-      }
     ];
-  }
+  },
 };
 
 export default nextConfig;

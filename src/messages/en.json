@@ -1,0 +1,89 @@
+{
+  "navigation": {
+    "pricing": "Pricing",
+    "fund": "Fund", 
+    "support": "Support",
+    "privacy": "Privacy",
+    "download": "Download",
+    "useCases": "Use Cases",
+    "features": "Features",
+    "contact": "Contact",
+    "terms": "Terms"
+  },
+  "hero": {
+    "title": "Ctrl+Z for your online life",
+    "subtitle": "Restore any deleted data on any devices anywhere in the world",
+    "downloadButton": "Download Extension",
+    "buyVipButton": "Buy VIP"
+  },
+  "pricing": {
+    "title": "Choose your plan",
+    "subtitle": "Start free or choose a plan that suits you",
+    "free": {
+      "title": "Free (7 days)",
+      "description": "Basic data recovery features for personal use",
+      "price": "$0",
+      "period": "forever"
+    },
+    "pro": {
+      "title": "Pro",
+      "description": "Advanced features for active users",
+      "monthly": "$6",
+      "yearly": "$60",
+      "monthlyPeriod": "per month",
+      "yearlyPeriod": "per year",
+      "recommended": "Recommended"
+    },
+    "vip": {
+      "title": "VIP (Lifetime)",
+      "description": "Full access to all features forever",
+      "price": "$100",
+      "period": "forever"
+    },
+    "team": {
+      "title": "Team (5 seats)",
+      "description": "Corporate solutions for teams",
+      "monthly": "$30",
+      "period": "for 5 seats per month",
+      "extraSeat": "+$5 per seat"
+    },
+    "starterBundle": {
+      "title": "Starter Bundle",
+      "price": "$30",
+      "period": "6 months",
+      "note": "More stable with payment provider"
+    },
+    "notes": [
+      "If monthly payment failed: try again or choose Starter Bundle (6 months for $30).",
+      "Annual savings ~17% from monthly payment."
+    ]
+  },
+  "fund": {
+    "title": "GetLifeUndo Fund",
+    "subtitle": "10% of LifeUndo's net revenue goes to support open source projects and IT education",
+    "distribution": "Fund Distribution",
+    "education": "Education",
+    "ux": "UX & Accessibility", 
+    "opensource": "Open Source",
+    "educationPercent": "40%",
+    "uxPercent": "30%",
+    "opensourcePercent": "30%"
+  },
+  "support": {
+    "title": "LifeUndo Support",
+    "subtitle": "We'll help you with any questions",
+    "knownIssues": "Known Issues",
+    "faq": "Frequently Asked Questions",
+    "status": "System Status"
+  },
+  "useCases": {
+    "title": "Use Cases",
+    "subtitle": "How LifeUndo helps in different fields"
+  },
+  "footer": {
+    "description": "Ctrl+Z for your online life. Restore accidentally deleted data on any devices anywhere in the world.",
+    "product": "Product",
+    "company": "Company",
+    "copyright": "© 2024 LifeUndo. All rights reserved."
+  }
+}

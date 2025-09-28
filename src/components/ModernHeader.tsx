@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function ModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,8 +46,9 @@ export default function ModernHeader() {
             </Link>
           </nav>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons and Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             <Link 
               href="/download" 
               className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
@@ -93,6 +95,7 @@ export default function ModernHeader() {
                 Приватность
               </Link>
               <div className="pt-4 space-y-2">
+                <LanguageSwitcher />
                 <Link 
                   href="/download" 
                   className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"

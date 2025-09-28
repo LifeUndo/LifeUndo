@@ -1,9 +1,8 @@
-import "./globals.css";
+import "./[locale]/globals.css";
 import type { Metadata } from 'next';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://getlifeundo.com'),
+  metadataBase: new URL('https://lifeundo.ru'),
   title: {
     default: 'LifeUndo — Ctrl+Z для онлайн-жизни',
     template: '%s — LifeUndo',
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    url: 'https://getlifeundo.com/',
+    url: 'https://lifeundo.ru/',
     title: 'LifeUndo — Ctrl+Z для онлайн-жизни',
     description: 'Локальная история ввода и буфера. Без телеметрии.',
   },
@@ -21,10 +20,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html>
       <body>
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
