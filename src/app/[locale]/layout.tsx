@@ -1,6 +1,33 @@
 import "./globals.css";
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+  description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно. Расширение для Firefox с восстановлением вкладок.',
+  keywords: 'LifeUndo, восстановление вкладок, Firefox, расширение, Ctrl+Z, откат',
+  openGraph: {
+    title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+    description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
+    type: 'website',
+    url: 'https://lifeundo.ru',
+    siteName: 'LifeUndo',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+    description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+};
 
 export default function LocaleLayout({
   children,
