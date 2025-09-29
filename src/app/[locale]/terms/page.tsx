@@ -11,14 +11,14 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
             <p className="text-gray-300 leading-relaxed">
               Настоящие Условия использования регулируют отношения между пользователями 
-              и сервисом LifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
+              и сервисом GetLifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">2. Описание сервиса</h2>
             <p className="text-gray-300 leading-relaxed">
-              LifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
+              GetLifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
               случайно закрытые вкладки и управлять историей браузера. Сервис предоставляется 
               "как есть" без гарантий.
             </p>
@@ -90,13 +90,10 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">8. Контакты</h2>
-            <p className="text-gray-300 leading-relaxed">
-              По вопросам условий использования обращайтесь:
-            </p>
-            <div className="mt-4 p-4 bg-white/5 rounded-lg">
-              <p className="text-gray-300">Email: legal@lifeundo.ru</p>
-              <p className="text-gray-300">Telegram: @lifeundo_support</p>
-            </div>
+              <p className="text-gray-300 leading-relaxed">
+                Вопросы по условиям: <a href="mailto:legal@getlifeundo.com">legal@getlifeundo.com</a> ·
+                Быстрая связь: <a href="https://t.me/LifeUndoRU" target="_blank" rel="noopener noreferrer">t.me/LifeUndoRU</a>
+              </p>
           </section>
 
           <div className="text-sm text-gray-400 mt-8 pt-6 border-t border-white/10">
