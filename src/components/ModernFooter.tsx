@@ -1,6 +1,25 @@
 import Link from 'next/link';
 
-export default function ModernFooter() {
+interface ModernFooterProps {
+  locale?: string;
+}
+
+export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
+  const nav = [
+    { title: 'Возможности', href: `/${locale}/features` },
+    { title: 'Тарифы', href: `/${locale}/pricing` },
+    { title: 'Скачать', href: `/${locale}/download` },
+    { title: 'Кейсы', href: `/${locale}/use-cases` },
+  ];
+
+  const company = [
+    { title: 'Фонд', href: `/${locale}/fund` },
+    { title: 'Поддержка', href: `/${locale}/support` },
+    { title: 'Контакты', href: `/${locale}/contacts` },
+    { title: 'Приватность', href: `/${locale}/privacy` },
+    { title: 'Условия', href: `/${locale}/terms` },
+  ];
+
   return (
     <footer className="bg-gray-900/50 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -63,10 +82,13 @@ export default function ModernFooter() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Продукт</h3>
             <ul className="space-y-2">
-              <li><Link href="/features" className="text-gray-400 hover:text-white transition-colors">Возможности</Link></li>
-              <li><Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">Тарифы</Link></li>
-              <li><Link href="/download" className="text-gray-400 hover:text-white transition-colors">Скачать</Link></li>
-              <li><Link href="/use-cases" className="text-gray-400 hover:text-white transition-colors">Кейсы</Link></li>
+              {nav.map(item => (
+                <li key={item.title}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -74,11 +96,13 @@ export default function ModernFooter() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Компания</h3>
             <ul className="space-y-2">
-              <li><Link href="/fund" className="text-gray-400 hover:text-white transition-colors">Фонд</Link></li>
-              <li><Link href="/support" className="text-gray-400 hover:text-white transition-colors">Поддержка</Link></li>
-              <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors">Контакты</Link></li>
-              <li><Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">Приватность</Link></li>
-              <li><Link href="/terms" className="text-gray-400 hover:text-white transition-colors">Условия</Link></li>
+              {company.map(item => (
+                <li key={item.title}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -89,10 +113,10 @@ export default function ModernFooter() {
             © 2024 GetLifeUndo. Все права защищены.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white text-sm transition-colors">
               Политика конфиденциальности
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white text-sm transition-colors">
               Условия использования
             </Link>
           </div>

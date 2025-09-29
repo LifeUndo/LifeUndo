@@ -7,39 +7,17 @@ const nextConfig = {
   // },
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.freekassa.net',
+      },
+    ],
   },
-  async redirects() {
-    return [
-      // Основной редирект корня
-      { source: '/', destination: '/ru', permanent: false },
-      
-      // Хостовые редиректы .ru -> .com
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'lifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.lifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'getlifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.getlifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-    ];
-  },
+  // Убираем ВСЕ хост-редиректы - они только в Vercel Domains
+  // async redirects() {
+  //   return [];
+  // },
   async headers() {
     return [
       {

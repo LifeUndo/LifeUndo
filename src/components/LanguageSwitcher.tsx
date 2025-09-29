@@ -19,6 +19,18 @@ export default function LanguageSwitcher() {
   const pathname = usePathname() || '/ru';
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  
+  // Вариант А: скрываем переключатель пока нет EN контента
+  const hasEN = false; // пока EN контента нет
+  const useNewFeatures = process.env.NEWSITE_MODE === 'true';
+  
+  if (!hasEN || !useNewFeatures) {
+    return (
+      <div className="px-2 py-1 rounded-md border border-white/10 bg-white/5 text-sm">
+        RU
+      </div>
+    );
+  }
 
   const current = (() => {
     const seg = pathname.split('/')[1];
