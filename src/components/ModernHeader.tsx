@@ -7,6 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 export default function ModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const USE_NEW_FEATURES = process.env.NEWSITE_MODE === 'true';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,36 @@ export default function ModernHeader() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Закрытие меню при клике вне его или навигации
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen && !(event.target as Element).closest('header')) {
+        setIsMenuOpen(false);
+      }
+    };
+    
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+      // Запрещаем скролл фона
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -25,7 +56,14 @@ export default function ModernHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/ru" className="flex items-center space-x-3">
-            <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
+            <img 
+              src={USE_NEW_FEATURES ? "/brand/getlifeundo-logo.svg" : "/brand/getlifeundo-logo.svg"} 
+              alt="GetLifeUndo" 
+              className="h-7 w-7" 
+            />
+            <span className="text-xl font-bold text-white">
+              {USE_NEW_FEATURES ? "GetLifeUndo" : "LifeUndo"}
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -76,9 +114,14 @@ export default function ModernHeader() {
           </button>
         </div>
 
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setIsMenuOpen(false)} />
+        )}
+        
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-800">
+          <div className="md:hidden py-4 border-t border-gray-800 relative z-50 bg-[#0B1220]">
             <nav className="flex flex-col space-y-4">
               <Link href="/ru/features" className="text-gray-300 hover:text-white transition-colors">
                 Функции

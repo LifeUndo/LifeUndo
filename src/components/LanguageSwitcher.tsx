@@ -6,12 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 const LOCALES = [
   { code: 'ru', label: 'RU' },
   { code: 'en', label: 'EN' },
-  { code: 'zh', label: '中文' },
-  { code: 'hi', label: 'हिंदी' },
-  { code: 'ar', label: 'العربية' },
-  { code: 'kk', label: 'KK' },
-  { code: 'uz', label: 'UZ' },
-  { code: 'az', label: 'AZ' },
 ];
 
 export default function LanguageSwitcher() {
@@ -19,6 +13,16 @@ export default function LanguageSwitcher() {
   const pathname = usePathname() || '/ru';
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const USE_NEW_FEATURES = process.env.NEWSITE_MODE === 'true';
+
+  // Если фича-флаг выключен, показываем только RU
+  if (!USE_NEW_FEATURES) {
+    return (
+      <div className="px-2 py-1 rounded-md border border-white/10 bg-white/5 text-sm">
+        RU
+      </div>
+    );
+  }
 
   const current = (() => {
     const seg = pathname.split('/')[1];
