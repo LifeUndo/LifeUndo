@@ -10,7 +10,7 @@ export default function UseCasesPage() {
             Кейсы использования
           </h1>
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Как LifeUndo помогает в разных сферах
+            Как GetLifeUndo помогает в разных сферах
           </p>
         </div>
       </section>
@@ -45,7 +45,7 @@ export default function UseCasesPage() {
             Готовы попробовать?
           </h2>
           <p className="text-xl text-gray-300 mb-8">
-            Присоединяйтесь к тысячам пользователей, которые уже используют LifeUndo
+            Присоединяйтесь к тысячам пользователей, которые уже используют GetLifeUndo
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

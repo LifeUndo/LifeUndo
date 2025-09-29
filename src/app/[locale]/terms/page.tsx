@@ -11,14 +11,14 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
             <p className="text-gray-300 leading-relaxed">
               Настоящие Условия использования регулируют отношения между пользователями 
-              и сервисом LifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
+              и сервисом GetLifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">2. Описание сервиса</h2>
             <p className="text-gray-300 leading-relaxed">
-              LifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
+              GetLifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
               случайно закрытые вкладки и управлять историей браузера. Сервис предоставляется 
               "как есть" без гарантий.
             </p>

@@ -8,7 +8,7 @@ export default function ModernFooter() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
+              <img src="/brand/getlifeundo-round.png" alt="GetLifeUndo" className="h-8 w-8 rounded-full" />
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
               Ctrl+Z для вашей онлайн-жизни. Восстанавливаем случайно удаленные данные на любых устройствах в любой точке мира.
@@ -86,7 +86,7 @@ export default function ModernFooter() {
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 LifeUndo. Все права защищены.
+            © 2024 GetLifeUndo. Все права защищены.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">

@@ -17,7 +17,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
               <p className="text-gray-300 leading-relaxed">
                 Настоящая Политика конфиденциальности определяет порядок обработки персональных данных 
-                пользователей сервиса LifeUndo. Мы серьезно относимся к защите вашей конфиденциальности 
+                пользователей сервиса GetLifeUndo. Мы серьезно относимся к защите вашей конфиденциальности 
                 и обеспечиваем безопасность ваших данных.
               </p>
             </section>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
                 Ваши данные используются исключительно для:
               </p>
               <ul className="list-disc list-inside text-gray-300 mt-4 space-y-2">
-                <li>Предоставления услуг LifeUndo</li>
+                <li>Предоставления услуг GetLifeUndo</li>
                 <li>Обработки платежей и подписок</li>
                 <li>Отправки важных уведомлений</li>
                 <li>Улучшения качества сервиса</li>

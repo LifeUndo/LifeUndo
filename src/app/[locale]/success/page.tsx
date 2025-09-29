@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 export const metadata = { 
-  title: "Платеж успешен — LifeUndo",
-  description: "Ваш платеж обработан успешно. Спасибо за покупку LifeUndo!"
+  title: "Платеж успешен — GetLifeUndo",
+  description: "Ваш платеж обработан успешно. Спасибо за покупку GetLifeUndo!"
 };
 
 export default function SuccessPage() {
@@ -19,7 +19,7 @@ export default function SuccessPage() {
 
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Платеж успешно обработан!</h1>
           <p className="text-xl text-gray-600 mb-6">
-            Спасибо за покупку LifeUndo. Ваша лицензия активирована и готова к использованию.
+            Спасибо за покупку GetLifeUndo. Ваша лицензия активирована и готова к использованию.
           </p>
 
           {/* Next Steps */}
@@ -28,7 +28,7 @@ export default function SuccessPage() {
             <div className="space-y-3">
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-3">1</span>
-                <p className="text-gray-700">Откройте расширение LifeUndo в браузере</p>
+                <p className="text-gray-700">Откройте расширение GetLifeUndo в браузере</p>
               </div>
               <div className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium mr-3">2</span>

@@ -25,7 +25,7 @@ export default function SupportPage() {
                   Кнопка скрыта в тулбаре Firefox
                 </p>
                 <p className="text-gray-400 text-xs">
-                  Решение: Firefox → Customize Toolbar → перетащить кнопку LifeUndo
+                  Решение: Firefox → Customize Toolbar → перетащить кнопку GetLifeUndo
                 </p>
               </div>
               <div className="border-l-4 border-blue-500 pl-4">
@@ -34,7 +34,7 @@ export default function SupportPage() {
                   Запрет скриптов/доменов блокировщиками
                 </p>
                 <p className="text-gray-400 text-xs">
-                  Решение: Добавить LifeUndo в исключения или разрешить необходимые домены
+                  Решение: Добавить GetLifeUndo в исключения или разрешить необходимые домены
                 </p>
               </div>
             </div>
