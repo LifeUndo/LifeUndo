@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function ModernHeader() {
@@ -24,8 +25,16 @@ export default function ModernHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/ru" className="flex items-center space-x-3">
-            <img src="/brand/getlifeundo-logo.svg" alt="LifeUndo" className="h-8" />
+          <Link href="/ru" className="flex items-center gap-2" aria-label="GetLifeUndo">
+            <Image
+              src="/brand/getlifeundo-round.png"
+              width={28}
+              height={28}
+              alt="GetLifeUndo logo"
+              className="rounded-full"
+              priority
+            />
+            <span className="font-semibold">GetLifeUndo</span>
           </Link>
 
           {/* Desktop Navigation */}
