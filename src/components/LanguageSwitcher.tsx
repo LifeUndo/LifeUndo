@@ -15,6 +15,10 @@ const LOCALES = [
 ];
 
 export default function LanguageSwitcher() {
+  // Вариант А: скрываем переключатель пока нет EN контента
+  const hasEN = false; // TODO: включим когда будет контент
+  if (!hasEN) return null;
+
   const router = useRouter();
   const pathname = usePathname() || '/ru';
   const [open, setOpen] = useState(false);
