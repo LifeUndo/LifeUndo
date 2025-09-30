@@ -11,21 +11,28 @@ export default function DownloadPage() {
         </p>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <a 
-            className="btn btn-primary disabled:opacity-60 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-200 text-center" 
-            href="https://addons.mozilla.org/ru/firefox/addon/getlifeundo/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Firefox (AMO)
-          </a>
           <button 
-            className="btn btn-secondary px-6 py-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-center" 
+            className="btn btn-primary disabled:opacity-60 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 transition-all duration-200 text-center cursor-not-allowed" 
+            disabled
+            title="Публикация в AMO в процессе"
+          >
+            Firefox (AMO) — скоро
+          </button>
+          <button 
+            className="btn btn-secondary px-6 py-3 rounded-lg border border-white/10 bg-white/5 transition-colors text-center cursor-not-allowed" 
             disabled 
             title="Скоро"
           >
             Chrome Web Store — скоро
           </button>
+        </div>
+
+        <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+          <h3 className="text-sm font-semibold text-blue-300 mb-2">📋 Статус публикации</h3>
+          <p className="text-xs text-blue-200">
+            Расширение находится на модерации в Firefox Add-ons (AMO). 
+            Как только оно будет одобрено, здесь появится ссылка для скачивания.
+          </p>
         </div>
 
         <p className="text-xs opacity-70 mt-2">
