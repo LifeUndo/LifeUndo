@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "GetLifeUndo",
+  "description": "Ctrl+Z для вашей жизни в сети",
+  "version": "0.3.8",
+  "action": {
+    "default_popup": "src/ui/popup.html",
+    "default_title": "GetLifeUndo",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "96": "icons/96.png",
+      "128": "icons/128.png",
+      "256": "icons/256.png"
+    }
+  },
+  "background": {
+    "type": "module",
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://getlifeundo.com/*",
+    "https://api.getlifeundo.com/*"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "96": "icons/96.png",
+    "128": "icons/128.png",
+    "256": "icons/256.png"
+  },
+  "homepage_url": "https://getlifeundo.com",
+  "developer": {
+    "name": "GetLifeUndo Team",
+    "url": "https://getlifeundo.com"
+  }
+}

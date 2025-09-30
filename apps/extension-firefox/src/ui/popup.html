@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GetLifeUndo</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="header">
+      <img src="../../icons/32.png" alt="GetLifeUndo" class="logo">
+      <h1>GetLifeUndo</h1>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button id="undo-btn" class="action-btn primary">
+          <span class="icon">↶</span>
+          Отменить последнее действие
+        </button>
+        
+        <button id="redo-btn" class="action-btn secondary">
+          <span class="icon">↷</span>
+          Повторить действие
+        </button>
+      </div>
+      
+      <!-- Status -->
+      <div class="status">
+        <div class="status-item">
+          <span class="label">Отслеживаемые вкладки:</span>
+          <span id="tabs-count" class="value">0</span>
+        </div>
+        <div class="status-item">
+          <span class="label">Сохранённые состояния:</span>
+          <span id="states-count" class="value">0</span>
+        </div>
+      </div>
+      
+      <!-- Recent Actions -->
+      <div class="recent-actions">
+        <h3>Последние действия</h3>
+        <div id="actions-list" class="actions-list">
+          <div class="empty-state">
+            <p>Пока нет сохранённых действий</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <a href="https://getlifeundo.com/ru/pricing" target="_blank" class="upgrade-link">
+        ⭐ Обновить до Pro
+      </a>
+      <div class="links">
+        <a href="https://getlifeundo.com/ru/support" target="_blank">Поддержка</a>
+        <a href="https://getlifeundo.com/ru/settings" target="_blank">Настройки</a>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
