@@ -1,0 +1,63 @@
+Build log for 2025-01-30
+========================
+
+> lifeundo-ru@0.3.7.12 build
+> next build
+
+  ▲ Next.js 14.2.33
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/12) ...
+   Generating static pages (3/12) 
+   Generating static pages (6/12) 
+   Generating static pages (9/12) 
+ ✓ Generating static pages (12/12)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    180 B          87.4 kB
+├ ○ /_not-found                          873 B          88.1 kB
+├ ƒ /[locale]                            180 B          87.4 kB
+├ ƒ /[locale]/admin                      5.11 kB         106 kB
+├ ƒ /[locale]/api-docs                   1.07 kB        88.3 kB
+├ ƒ /[locale]/contact                    2.03 kB        89.3 kB
+├ ƒ /[locale]/contacts                   180 B          87.4 kB
+├ ƒ /[locale]/docs                       180 B          87.4 kB
+├ ƒ /[locale]/download                   180 B          87.4 kB
+├ ƒ /[locale]/fail                       177 B          96.1 kB
+├ ƒ /[locale]/faq                        180 B          87.4 kB
+├ ƒ /[locale]/features                   180 B          87.4 kB
+├ ƒ /[locale]/fund                       180 B          87.4 kB
+├ ƒ /[locale]/fund/apply                 2.04 kB        89.3 kB
+├ ƒ /[locale]/pricing                    180 B          87.4 kB
+├ ƒ /[locale]/privacy                    180 B          87.4 kB
+├ ƒ /[locale]/success                    177 B          96.1 kB
+├ ƒ /[locale]/support                    180 B          87.4 kB
+├ ƒ /[locale]/terms                      180 B          87.4 kB
+├ ƒ /[locale]/test                       180 B          87.4 kB
+├ ƒ /[locale]/test-new                   180 B          87.4 kB
+├ ƒ /[locale]/use-cases                  180 B          87.4 kB
+├ ƒ /api/admin/2fa/confirm               0 B                0 B
+├ ○ /api/admin/2fa/setup                 0 B                0 B
+├ ƒ /api/admin/2fa/verify                0 B                0 B
+├ ○ /api/healthz                         0 B                0 B
+├ ○ /ok                                  0 B                0 B
+├ ○ /ping                                180 B          87.4 kB
+├ ○ /robots.txt                          0 B                0 B
+└ ○ /sitemap.xml                         0 B                0 B
++ First Load JS shared by all            87.2 kB
+  ├ chunks/117-36a8ed0a82415c85.js       31.7 kB
+  ├ chunks/fd9d1056-9f91b5e418130764.js  53.6 kB
+  └ other shared chunks (total)          1.89 kB
+
+
+ƒ Middleware                             25.7 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+Build completed successfully at 2025-01-30
