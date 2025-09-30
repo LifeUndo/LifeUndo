@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   metadataBase: new URL('https://lifeundo.ru'),
   title: {
-    default: 'LifeUndo — Ctrl+Z для онлайн-жизни',
-    template: '%s — LifeUndo',
+    default: 'GetLifeUndo — Ctrl+Z для онлайн-жизни',
+    template: '%s — GetLifeUndo',
   },
   description:
     'Возвращайте случайно удалённый текст и прошлые версии ввода. Локально, без телеметрии.',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://lifeundo.ru/',
-    title: 'LifeUndo — Ctrl+Z для онлайн-жизни',
+    title: 'GetLifeUndo — Ctrl+Z для онлайн-жизни',
     description: 'Локальная история ввода и буфера. Без телеметрии.',
   },
 };

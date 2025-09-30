@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = { 
-  title: "Ошибка платежа — LifeUndo",
+  title: "Ошибка платежа — GetLifeUndo",
   description: "Произошла ошибка при обработке платежа. Попробуйте еще раз или обратитесь в поддержку."
 };
 
@@ -75,7 +75,7 @@ export default function FailPage() {
               </a>
               <span className="hidden sm:inline text-gray-400">•</span>
               <a 
-                href="https://t.me/LifeUndoSupport" 
+                href="https://t.me/GetLifeUndoSupport" 
                 className="text-blue-600 hover:underline"
               >
                 Telegram поддержка
@@ -87,7 +87,7 @@ export default function FailPage() {
           <div className="mt-8 bg-blue-50 rounded-lg p-6">
             <h3 className="font-semibold text-blue-900 mb-2">Пока можно использовать бесплатную версию</h3>
             <p className="text-blue-700 text-sm mb-4">
-              LifeUndo Free включает основные функции: восстановление текста, закрытых вкладок и буфера обмена.
+              GetLifeUndo Free включает основные функции: восстановление текста, закрытых вкладок и буфера обмена.
             </p>
             <Link 
               href="/features" 

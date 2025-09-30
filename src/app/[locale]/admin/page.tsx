@@ -160,7 +160,7 @@ export default function AdminPage() {
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8">
-            Админ-панель LifeUndo
+            Админ-панель GetLifeUndo
           </h1>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

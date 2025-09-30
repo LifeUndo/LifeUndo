@@ -59,8 +59,8 @@
     ]
   },
   "fund": {
-    "title": "GetLifeUndo Fund",
-    "subtitle": "10% of LifeUndo's net revenue goes to support open source projects and IT education",
+    "title": "GetGetLifeUndo Fund",
+    "subtitle": "10% of GetLifeUndo's net revenue goes to support open source projects and IT education",
     "distribution": "Fund Distribution",
     "education": "Education",
     "ux": "UX & Accessibility", 
@@ -70,7 +70,7 @@
     "opensourcePercent": "30%"
   },
   "support": {
-    "title": "LifeUndo Support",
+    "title": "GetLifeUndo Support",
     "subtitle": "We'll help you with any questions",
     "knownIssues": "Known Issues",
     "faq": "Frequently Asked Questions",
@@ -78,12 +78,12 @@
   },
   "useCases": {
     "title": "Use Cases",
-    "subtitle": "How LifeUndo helps in different fields"
+    "subtitle": "How GetLifeUndo helps in different fields"
   },
   "footer": {
     "description": "Ctrl+Z for your online life. Restore accidentally deleted data on any devices anywhere in the world.",
     "product": "Product",
     "company": "Company",
-    "copyright": "© 2024 LifeUndo. All rights reserved."
+    "copyright": "© 2024 GetLifeUndo. All rights reserved."
   }
 }

@@ -53,7 +53,7 @@ export default function ApiDocsPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            LifeUndo API Documentation
+            GetLifeUndo API Documentation
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Интерактивная документация API с возможностью тестирования

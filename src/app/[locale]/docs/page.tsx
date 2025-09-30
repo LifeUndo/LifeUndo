@@ -1,7 +1,7 @@
 // src/app/docs/page.tsx
 export const metadata = { 
-  title: "API Документация — LifeUndo",
-  description: "Полная документация API для интеграции с платформой LifeUndo."
+  title: "API Документация — GetLifeUndo",
+  description: "Полная документация API для интеграции с платформой GetLifeUndo."
 };
 
 export default function DocsPage() {
@@ -10,7 +10,7 @@ export default function DocsPage() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">API Документация</h1>
-          <p className="text-xl text-gray-600 mb-6">Интеграция с платформой LifeUndo</p>
+          <p className="text-xl text-gray-600 mb-6">Интеграция с платформой GetLifeUndo</p>
           <div className="flex justify-center space-x-4">
             <a 
               href="/api-docs" 
