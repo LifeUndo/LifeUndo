@@ -1,4 +1,6 @@
 import ServiceCard from '@/components/ServiceCard';
+import FreeKassaButton from '@/components/payments/FreeKassaButton';
+import { fkPublic } from '@/lib/fk-public';
 import pricingData from '@/data/pricing_ru.json';
 
 export default function PricingPage() {
@@ -52,6 +54,7 @@ export default function PricingPage() {
               isPopular={true}
               ctaText="Оформить Pro"
               ctaLink="/buy?plan=pro"
+              customCTA={<FreeKassaButton productId="getlifeundo_pro" />}
             />
 
             {/* VIP */}
@@ -71,6 +74,7 @@ export default function PricingPage() {
               period="навсегда"
               ctaText="Купить VIP"
               ctaLink="/buy?plan=vip"
+              customCTA={<FreeKassaButton productId="getlifeundo_vip" />}
             />
 
             {/* Team */}
@@ -89,6 +93,7 @@ export default function PricingPage() {
               period="за 5 мест в месяц"
               ctaText="Заказать Team"
               ctaLink="/buy?plan=team"
+              customCTA={<FreeKassaButton productId="getlifeundo_team" />}
             />
           </div>
 
@@ -155,6 +160,8 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+      
+      {/* FK_STATUS: enabled={fkPublic.enabled} env={process.env.VERCEL_ENV} */}
     </div>
   );
 }

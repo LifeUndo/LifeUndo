@@ -9,6 +9,7 @@ export default function ServiceCard({
   period,
   ctaText,
   ctaLink,
+  customCTA,
   isPopular = false,
 }: {
   icon?: string;
@@ -19,6 +20,7 @@ export default function ServiceCard({
   period: string;
   ctaText: string;
   ctaLink: string;
+  customCTA?: React.ReactNode;
   isPopular?: boolean;
 }) {
   return (
@@ -45,12 +47,14 @@ export default function ServiceCard({
         <div className="text-sm text-white/60">{period}</div>
       </div>
       
-      <a
-        href={ctaLink}
-        className="block w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded text-center hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
-      >
-        {ctaText}
-      </a>
+      {customCTA || (
+        <a
+          href={ctaLink}
+          className="block w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded text-center hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
+        >
+          {ctaText}
+        </a>
+      )}
     </GlassCard>
   );
 }
