@@ -4,8 +4,6 @@ import ModernFooter from '@/components/ModernFooter';
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      <ModernHeader />
-      
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8">
@@ -89,8 +87,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </main>
-      
-      <ModernFooter locale="ru" />
     </div>
   );
 }

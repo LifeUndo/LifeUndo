@@ -36,7 +36,7 @@ export default function FeaturesPage() {
     <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
-          Возможности LifeUndo
+          Возможности GetLifeUndo
         </h1>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -56,7 +56,7 @@ export default function FeaturesPage() {
               <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
               <h3 className="text-lg font-semibold mb-2">Установите расширение</h3>
               <p className="text-gray-300 text-sm">
-                Скачайте LifeUndo из Firefox Add-ons и активируйте
+                Скачайте GetLifeUndo из Firefox Add-ons и активируйте
               </p>
             </div>
             <div className="text-center">

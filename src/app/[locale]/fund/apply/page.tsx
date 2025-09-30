@@ -1,7 +1,5 @@
 'use client';
 import { useState } from 'react';
-import ModernHeader from '@/components/ModernHeader';
-import ModernFooter from '@/components/ModernFooter';
 
 export default function FundApplyPage() {
   const [formData, setFormData] = useState({
@@ -37,8 +35,6 @@ export default function FundApplyPage() {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-[#0B1220] text-white">
-        <ModernHeader />
-        
         <main className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
             <div className="glass-card p-8">
@@ -59,16 +55,12 @@ export default function FundApplyPage() {
             </div>
           </div>
         </main>
-        
-        <ModernFooter />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      <ModernHeader />
-      
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
@@ -143,7 +135,7 @@ export default function FundApplyPage() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-                  placeholder="Расскажите о вашем проекте, его целях и том, как LifeUndo поможет в его реализации..."
+                  placeholder="Расскажите о вашем проекте, его целях и том, как GetLifeUndo поможет в его реализации..."
                 />
               </div>
 
@@ -174,15 +166,13 @@ export default function FundApplyPage() {
             <div className="mt-8 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
               <h3 className="font-semibold text-blue-300 mb-2">Информация о фонде</h3>
               <p className="text-sm text-gray-300">
-                Фонд LifeUndo выделяет 10% от всех доходов на поддержку проектов пользователей. 
+                Фонд GetLifeUndo выделяет 10% от всех доходов на поддержку проектов пользователей. 
                 Средства распределяются: 40% на образование, 30% на исследования, 30% на социальные проекты.
               </p>
             </div>
           </div>
         </div>
       </main>
-      
-      <ModernFooter />
     </div>
   );
 }

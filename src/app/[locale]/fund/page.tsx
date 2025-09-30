@@ -3,14 +3,14 @@ export default function FundPage() {
     <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
-            Фонд LifeUndo
+            Фонд GetLifeUndo
           </h1>
           
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="glass-card p-8">
               <h2 className="text-2xl font-semibold mb-4">Наша миссия</h2>
               <p className="text-gray-300 leading-relaxed">
-                Фонд LifeUndo создан для поддержки проектов наших пользователей. 
+                Фонд GetLifeUndo создан для поддержки проектов наших пользователей. 
                 Мы верим, что каждый человек может внести вклад в развитие общества, 
                 и готовы помочь в реализации ваших идей.
               </p>
@@ -20,7 +20,7 @@ export default function FundPage() {
               <h2 className="text-2xl font-semibold mb-4">Финансирование</h2>
               <p className="text-gray-300 leading-relaxed">
                 Мы выделяем <span className="text-purple-400 font-semibold">10%</span> от всех доходов 
-                LifeUndo на поддержку проектов пользователей. Это наш способ вернуть 
+                GetLifeUndo на поддержку проектов пользователей. Это наш способ вернуть 
                 сообществу часть того, что оно дает нам.
               </p>
             </div>
