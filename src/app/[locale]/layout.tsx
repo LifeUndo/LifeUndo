@@ -4,19 +4,19 @@ import ModernFooter from '@/components/ModernFooter';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+  title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
   description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно. Расширение для Firefox с восстановлением вкладок.',
-  keywords: 'LifeUndo, восстановление вкладок, Firefox, расширение, Ctrl+Z, откат',
+  keywords: 'GetLifeUndo, восстановление вкладок, Firefox, расширение, Ctrl+Z, откат',
   openGraph: {
-    title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+    title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
     description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
     type: 'website',
     url: 'https://getlifeundo.com',
-    siteName: 'LifeUndo',
+    siteName: 'GetLifeUndo',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LifeUndo — Ctrl+Z для вашей жизни в сети',
+    title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
     description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
   },
   robots: {
@@ -56,7 +56,7 @@ export default function LocaleLayout({
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
         <ModernHeader />
         <main className="min-h-dvh pt-20">{children}</main>
-        <ModernFooter />
+        <ModernFooter locale={locale} />
       </body>
     </html>
   );
