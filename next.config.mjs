@@ -7,6 +7,12 @@ const nextConfig = {
   // },
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.freekassa.net',
+      },
+    ],
   },
   async redirects() {
     return [
@@ -59,7 +65,7 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { 
             key: 'Content-Security-Policy', 
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.getlifeundo.com https://*.getlifeundo.com https://*.lifeundo.ru; frame-ancestors 'self' https://*.getlifeundo.com https://*.lifeundo.ru;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://cdn.freekassa.net; connect-src 'self' https://api.getlifeundo.com https://*.getlifeundo.com https://*.lifeundo.ru; frame-ancestors 'self' https://*.getlifeundo.com https://*.lifeundo.ru;"
           },
         ],
       },
