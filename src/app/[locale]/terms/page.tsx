@@ -7,18 +7,25 @@ export default function TermsPage() {
         </h1>
         
         <div className="glass-card p-8 space-y-6">
+          <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+            <h2 className="text-lg font-semibold text-yellow-300 mb-2">⚠️ Важное уточнение</h2>
+            <p className="text-gray-300 text-sm">
+              GetLifeUndo помогает выполнять «Undo» в сторонних сервисах только в рамках их правил и публичных API. 
+              Мы не гарантируем отмену действий в системах третьих лиц, если это не предусмотрено ими.
+            </p>
+          </div>
           <section>
             <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
             <p className="text-gray-300 leading-relaxed">
               Настоящие Условия использования регулируют отношения между пользователями 
-              и сервисом LifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
+              и сервисом GetLifeUndo. Используя наш сервис, вы соглашаетесь с данными условиями.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">2. Описание сервиса</h2>
             <p className="text-gray-300 leading-relaxed">
-              LifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
+              GetLifeUndo — это расширение для браузера Firefox, которое позволяет восстанавливать 
               случайно закрытые вкладки и управлять историей браузера. Сервис предоставляется 
               "как есть" без гарантий.
             </p>
@@ -94,8 +101,8 @@ export default function TermsPage() {
               По вопросам условий использования обращайтесь:
             </p>
             <div className="mt-4 p-4 bg-white/5 rounded-lg">
-              <p className="text-gray-300">Email: legal@lifeundo.ru</p>
-              <p className="text-gray-300">Telegram: @lifeundo_support</p>
+              <p className="text-gray-300">Email: legal@getlifeundo.com</p>
+              <p className="text-gray-300">Telegram: @LifeUndoRU</p>
             </div>
           </section>
 

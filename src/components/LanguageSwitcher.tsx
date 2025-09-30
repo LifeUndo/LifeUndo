@@ -15,6 +15,10 @@ const LOCALES = [
 ];
 
 export default function LanguageSwitcher() {
+  // Показываем переключатель только в Preview режиме
+  const showLangSwitch = process.env.NEXT_PUBLIC_SHOW_LANG_SWITCH === 'true';
+  if (!showLangSwitch) return null;
+
   const router = useRouter();
   const pathname = usePathname() || '/ru';
   const [open, setOpen] = useState(false);

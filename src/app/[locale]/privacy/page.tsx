@@ -13,11 +13,18 @@ export default function PrivacyPage() {
           </h1>
           
           <div className="glass-card p-8 space-y-6">
+            <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+              <h2 className="text-lg font-semibold text-yellow-300 mb-2">⚠️ Важное уточнение</h2>
+              <p className="text-gray-300 text-sm">
+                GetLifeUndo помогает выполнять «Undo» в сторонних сервисах только в рамках их правил и публичных API. 
+                Мы не гарантируем отмену действий в системах третьих лиц, если это не предусмотрено ими.
+              </p>
+            </div>
             <section>
               <h2 className="text-2xl font-semibold mb-4">1. Общие положения</h2>
               <p className="text-gray-300 leading-relaxed">
                 Настоящая Политика конфиденциальности определяет порядок обработки персональных данных 
-                пользователей сервиса LifeUndo. Мы серьезно относимся к защите вашей конфиденциальности 
+                пользователей сервиса GetLifeUndo. Мы серьезно относимся к защите вашей конфиденциальности 
                 и обеспечиваем безопасность ваших данных.
               </p>
             </section>
@@ -41,7 +48,7 @@ export default function PrivacyPage() {
                 Ваши данные используются исключительно для:
               </p>
               <ul className="list-disc list-inside text-gray-300 mt-4 space-y-2">
-                <li>Предоставления услуг LifeUndo</li>
+                <li>Предоставления услуг GetLifeUndo</li>
                 <li>Обработки платежей и подписок</li>
                 <li>Отправки важных уведомлений</li>
                 <li>Улучшения качества сервиса</li>
@@ -81,8 +88,8 @@ export default function PrivacyPage() {
                 По вопросам конфиденциальности обращайтесь:
               </p>
               <div className="mt-4 p-4 bg-white/5 rounded-lg">
-                <p className="text-gray-300">Email: privacy@lifeundo.ru</p>
-                <p className="text-gray-300">Telegram: @lifeundo_support</p>
+                <p className="text-gray-300">Email: privacy@getlifeundo.com</p>
+                <p className="text-gray-300">Telegram: @LifeUndoRU</p>
               </div>
             </section>
 
