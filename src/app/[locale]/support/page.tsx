@@ -100,19 +100,19 @@ export default function SupportPage() {
             <div>
               <h3 className="font-semibold mb-2">Telegram</h3>
               <a 
-                href="https://t.me/lifeundo_support" 
+                href="https://t.me/LifeUndoSupport" 
                 className="text-purple-400 hover:text-purple-300 transition-colors"
               >
-                @lifeundo_support
+                @LifeUndoSupport
               </a>
             </div>
             <div>
               <h3 className="font-semibold mb-2">Email</h3>
               <a 
-                href="mailto:support@lifeundo.ru" 
+                href="mailto:support@getlifeundo.com" 
                 className="text-purple-400 hover:text-purple-300 transition-colors"
               >
-                support@lifeundo.ru
+                support@getlifeundo.com
               </a>
             </div>
           </div>

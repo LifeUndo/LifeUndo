@@ -1,7 +1,7 @@
 // src/app/contacts/page.tsx
 export const metadata = { 
-  title: "Контакты — LifeUndo",
-  description: "Свяжитесь с командой LifeUndo. Мы всегда готовы помочь."
+  title: "Контакты — GetLifeUndo",
+  description: "Свяжитесь с командой GetLifeUndo. Мы всегда готовы помочь."
 };
 
 export default function ContactsPage() {
@@ -17,15 +17,15 @@ export default function ContactsPage() {
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h3 className="text-xl font-semibold mb-4">📧 Email</h3>
             <p className="text-gray-600 mb-2">Общие вопросы:</p>
-            <a href="mailto:info@lifeundo.com" className="text-blue-600 hover:underline">info@lifeundo.com</a>
+            <a href="mailto:info@getlifeundo.com" className="text-blue-600 hover:underline">info@getlifeundo.com</a>
             <p className="text-gray-600 mb-2 mt-4">Техническая поддержка:</p>
-            <a href="mailto:support@lifeundo.com" className="text-blue-600 hover:underline">support@lifeundo.com</a>
+            <a href="mailto:support@getlifeundo.com" className="text-blue-600 hover:underline">support@getlifeundo.com</a>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h3 className="text-xl font-semibold mb-4">💬 Telegram</h3>
             <p className="text-gray-600 mb-2">Быстрая связь:</p>
-            <a href="https://t.me/lifeundo" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">@lifeundo</a>
+            <a href="https://t.me/LifeUndoRU" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">@LifeUndoRU</a>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm border p-6">
@@ -37,7 +37,7 @@ export default function ContactsPage() {
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h3 className="text-xl font-semibold mb-4">📺 YouTube</h3>
             <p className="text-gray-600 mb-2">Видео и туториалы:</p>
-            <a href="https://youtube.com/lifeundo" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">youtube.com/lifeundo</a>
+            <a href="https://www.youtube.com/@GetLifeUndo" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">youtube.com/@GetLifeUndo</a>
           </div>
         </div>
 

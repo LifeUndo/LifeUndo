@@ -1,4 +1,5 @@
 import ServiceCard from '@/components/ServiceCard';
+import FreeKassaButton from '@/components/FreeKassaButton';
 import pricingData from '@/data/pricing_ru.json';
 
 export default function PricingPage() {
@@ -52,6 +53,7 @@ export default function PricingPage() {
               isPopular={true}
               ctaText="Оформить Pro"
               ctaLink="/buy?plan=pro"
+              customCTA={<FreeKassaButton plan="pro" amount={599} />}
             />
 
             {/* VIP */}
@@ -71,6 +73,7 @@ export default function PricingPage() {
               period="навсегда"
               ctaText="Купить VIP"
               ctaLink="/buy?plan=vip"
+              customCTA={<FreeKassaButton plan="vip" amount={9990} />}
             />
 
             {/* Team */}
@@ -89,6 +92,7 @@ export default function PricingPage() {
               period="за 5 мест в месяц"
               ctaText="Заказать Team"
               ctaLink="/buy?plan=team"
+              customCTA={<FreeKassaButton plan="team" amount={2990} />}
             />
           </div>
 
