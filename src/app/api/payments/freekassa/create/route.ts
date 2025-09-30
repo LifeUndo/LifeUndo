@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     // Формируем URL для редиректа
     const url = new URL(FK_PAYMENT_URL);
     url.searchParams.set('m', FK_MERCHANT_ID);
-    url.searchParams.set('oa', String(finalAmount));
+    url.searchParams.set('oa', finalAmount); // Убираем String(), так как finalAmount уже строка
     url.searchParams.set('o', orderId);
     url.searchParams.set('s', signature);
     if (email) url.searchParams.set('email', email);
@@ -41,7 +41,9 @@ export async function POST(req: Request) {
       productId,
       amount: finalAmount,
       email: email ? 'provided' : 'not provided',
-      signature: signature.substring(0, 8) + '...'
+      signature: signature.substring(0, 8) + '...',
+      signatureString: `${FK_MERCHANT_ID}:${finalAmount}:${FK_SECRET1.substring(0, 4)}***:${orderId}`,
+      url: url.toString()
     });
     
     return NextResponse.json({ 
