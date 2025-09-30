@@ -106,3 +106,4 @@ Available for Firefox and Chrome/Edge. Download links in the GitHub release.
 
 
 
+

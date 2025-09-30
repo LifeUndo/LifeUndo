@@ -1,0 +1,9 @@
+/
+/ru
+/ru/pricing
+/ru/download
+/ru/support
+/ru/contacts
+/ok
+/robots.txt
+/sitemap.xml
