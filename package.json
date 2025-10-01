@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build:ext": "echo 'Extension build ready in extension/ folder' && echo 'Run: npm run build:ext:zip to create downloadable package'",
-    "build:ext:zip": "powershell -Command \"Compress-Archive -Path 'extension\\*' -DestinationPath 'public\\extension-dev-0.4.0.zip' -Force\""
+    "build:ext:zip": "powershell -Command \"Compress-Archive -Path 'extension\\*' -DestinationPath 'public\\extension-dev-0.4.0.zip' -Force\"",
+    "test:e2e": "node scripts/run-e2e.mjs"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.15.0",
@@ -27,6 +28,7 @@
     "swr": "^2.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.1",
     "@types/node": "20.11.30",
     "@types/nodemailer": "^7.0.2",
     "@types/react": "^18.3.0",

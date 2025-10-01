@@ -1,29 +1,17 @@
 import GrantForm from './GrantForm';
 
 export default function DownloadsPage() {
-  // Check if we're in Preview/Dev environment (server-side)
-  const isDevMode = process.env.VERCEL_ENV !== 'production' && 
-                   process.env.DEV_SIMULATE_WEBHOOK_ENABLED === 'true';
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-white mb-8 text-center">
-            Download LifeUndo Extension
-          </h1>
-          
-          {/* Test License Card - Only in Preview/Dev */}
-          {isDevMode ? (
+  try {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl font-bold text-white mb-8 text-center">
+              Download LifeUndo Extension
+            </h1>
+            
+            {/* Test License Card - Client-side check */}
             <GrantForm />
-          ) : (
-            <div className="bg-yellow-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
-              <h2 className="text-2xl font-bold text-yellow-300 mb-4">⚠️ Testing Disabled</h2>
-              <p className="text-gray-300">
-                Test license activation is only available in Preview/Development environment.
-              </p>
-            </div>
-          )}
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {/* Chrome */}
@@ -33,12 +21,14 @@ export default function DownloadsPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Chrome</h3>
               <p className="text-gray-300 mb-4">Install as unpacked extension</p>
-              <button 
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
-                onClick={() => window.open('chrome://extensions/', '_blank')}
+              <a 
+                href="chrome://extensions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all inline-block text-center"
               >
                 Get for Chrome
-              </button>
+              </a>
             </div>
 
             {/* Firefox */}
@@ -48,12 +38,14 @@ export default function DownloadsPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Firefox</h3>
               <p className="text-gray-300 mb-4">Load temporary add-on</p>
-              <button 
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 px-4 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all"
-                onClick={() => window.open('about:debugging#/runtime/this-firefox', '_blank')}
+              <a 
+                href="about:debugging#/runtime/this-firefox"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 px-4 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all inline-block text-center"
               >
                 Get for Firefox
-              </button>
+              </a>
             </div>
 
             {/* Edge */}
@@ -63,12 +55,14 @@ export default function DownloadsPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Edge</h3>
               <p className="text-gray-300 mb-4">Install as unpacked extension</p>
-              <button 
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all"
-                onClick={() => window.open('edge://extensions/', '_blank')}
+              <a 
+                href="edge://extensions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all inline-block text-center"
               >
                 Get for Edge
-              </button>
+              </a>
             </div>
           </div>
 
@@ -107,24 +101,33 @@ export default function DownloadsPage() {
                 Run <code className="bg-gray-800 px-2 py-1 rounded">npm run build:ext</code> to prepare the extension for installation.
               </p>
               
-              {isDevMode && (
-                <div className="mt-4">
-                  <a 
-                    href="/extension-dev-0.4.0.zip" 
-                    download
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
-                  >
-                    📦 Download Extension ZIP
-                  </a>
-                  <p className="text-xs text-gray-400 mt-2">
-                    Run <code className="bg-gray-800 px-1 py-0.5 rounded">npm run build:ext:zip</code> to generate this file
-                  </p>
-                </div>
-              )}
+              <div className="mt-4">
+                <a 
+                  href="/extension-dev-0.4.0.zip" 
+                  download
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
+                >
+                  📦 Download Extension ZIP
+                </a>
+                <p className="text-xs text-gray-400 mt-2">
+                  Run <code className="bg-gray-800 px-1 py-0.5 rounded">npm run build:ext:zip</code> to generate this file
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+    );
+  } catch (e) {
+    console.error('[downloads] render error', e);
+    return (
+      <main style={{padding: 24}} className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center text-white">
+          <h1 className="text-2xl font-bold mb-4">We're preparing the downloads page…</h1>
+          <p className="text-gray-300">Please try again in a moment.</p>
+        </div>
+      </main>
+    );
+  }
 }

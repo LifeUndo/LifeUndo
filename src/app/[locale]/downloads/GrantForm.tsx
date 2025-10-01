@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function GrantForm() {
   const [testEmail, setTestEmail] = useState('');
@@ -8,6 +8,38 @@ export default function GrantForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [testResult, setTestResult] = useState<any>(null);
   const [error, setError] = useState('');
+  const [devEnabled, setDevEnabled] = useState<boolean | null>(null);
+
+  // Check if dev mode is enabled
+  useEffect(() => {
+    fetch('/api/dev/license/_status')
+      .then(res => res.json())
+      .then(data => setDevEnabled(data.enabled))
+      .catch(() => setDevEnabled(false));
+  }, []);
+
+  // Show loading while checking dev status
+  if (devEnabled === null) {
+    return (
+      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <div className="text-center text-white">
+          <p>Checking testing availability...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show disabled message if not in dev mode
+  if (!devEnabled) {
+    return (
+      <div className="bg-yellow-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <h2 className="text-2xl font-bold text-yellow-300 mb-4">⚠️ Testing Disabled</h2>
+        <p className="text-gray-300">
+          Test license activation is only available in Preview/Development environment.
+        </p>
+      </div>
+    );
+  }
 
   const handleGrantTestLicense = async () => {
     if (!testEmail.trim()) {
