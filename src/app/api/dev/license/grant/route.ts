@@ -42,39 +42,30 @@ export async function POST(request: NextRequest) {
 
     // Create payment record
     await db.insert(payments).values({
-      orderId,
-      userEmail: email,
+      order_id: orderId,
+      user_email: email,
       amount: planConfig.amount,
       currency: planConfig.currency,
       plan: plan,
       status: 'paid',
-      paymentMethod: 'admin_grant',
-      createdAt: new Date(),
+      created_at: new Date(),
     });
 
     // Activate license
     const licenseResult = await activateLicense({
       orderId,
-      userEmail: email,
-      plan: plan,
-      amount: planConfig.amount,
-      currency: planConfig.currency,
+      email,
+      plan: plan as any,
     });
-
-    if (!licenseResult.success) {
-      return NextResponse.json({ 
-        error: 'Failed to activate license', 
-        details: licenseResult.error 
-      }, { status: 500 });
-    }
 
     return NextResponse.json({
       ok: true,
-      orderId,
+      order_id: orderId,
       email,
-      level: licenseResult.level,
-      expiresAt: licenseResult.expiresAt,
-      bonusFlag: licenseResult.bonusFlag,
+      level: licenseResult.license.level,
+      expires_at: licenseResult.license.expires_at,
+      plan: plan,
+      bonus_flag: licenseResult.flags?.[0]?.key || null,
     });
 
   } catch (error) {
