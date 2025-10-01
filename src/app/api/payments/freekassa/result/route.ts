@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { FK_MERCHANT_ID, FK_SECRET2, FK_CONFIGURED } from '@/lib/fk-env';
+import { FK_MERCHANT_ID, FK_SECRET2, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
 
 export async function POST(req: Request) {
   try {
@@ -24,8 +24,9 @@ export async function POST(req: Request) {
       return new Response('Invalid merchant', { status: 400 });
     }
     
-    // Проверяем подпись (стандартная схема FreeKassa для callback)
-    const signatureString = `${merchantId}:${amount}:${FK_SECRET2}:${orderId}`;
+    // Проверяем подпись (исправленная схема FreeKassa для callback)
+    // Правильный порядок: MERCHANT_ID:AMOUNT:SECRET2:CURRENCY:ORDER_ID
+    const signatureString = `${merchantId}:${amount}:${FK_SECRET2}:${FK_CURRENCY}:${orderId}`;
     const expectedSignature = crypto.createHash('md5').update(signatureString).digest('hex');
     
     if (signature !== expectedSignature) {

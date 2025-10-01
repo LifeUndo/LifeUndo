@@ -49,8 +49,9 @@ export async function POST(req: Request) {
     const random = Math.random().toString(36).slice(2, 8);
     const orderId = `${timestamp}-${random}`;
     
-    // Создаем подпись (стандартная схема FreeKassa)
-    const signatureString = `${FK_MERCHANT_ID}:${finalAmount}:${FK_SECRET1}:${orderId}`;
+    // Создаем подпись (исправленная схема FreeKassa по ответу поддержки)
+    // Правильный порядок: MERCHANT_ID:AMOUNT:SECRET1:CURRENCY:ORDER_ID
+    const signatureString = `${FK_MERCHANT_ID}:${finalAmount}:${FK_SECRET1}:${FK_CURRENCY}:${orderId}`;
     const signature = crypto.createHash('md5').update(signatureString).digest('hex');
     
     // Формируем URL для редиректа
