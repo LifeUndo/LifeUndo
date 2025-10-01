@@ -21,7 +21,8 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
   ];
 
   const socials = [
-    { name: 'Telegram', href: 'https://t.me/LifeUndoSupport', icon: '/brand/tg.svg' },
+    { name: 'Telegram Channel', href: 'https://t.me/GetLifeUndo', icon: '/brand/tg.svg' },
+    { name: 'Telegram Support', href: 'https://t.me/GetLifeUndoSupport', icon: '/brand/tg.svg' },
     { name: 'X', href: 'https://x.com/GetLifeUndo', icon: '/brand/x.svg' },
     { name: 'YouTube', href: 'https://www.youtube.com/@GetLifeUndo', icon: '/brand/yt.svg' },
     { name: 'GitHub', href: 'https://github.com/LifeUndo', icon: '/brand/github.svg' },

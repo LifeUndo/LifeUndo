@@ -2,8 +2,11 @@ import ServiceCard from '@/components/ServiceCard';
 import FreeKassaButton from '@/components/payments/FreeKassaButton';
 import { fkPublic } from '@/lib/fk-public';
 import pricingData from '@/data/pricing_ru.json';
+import { useTranslations } from 'next-intl';
 
 export default function PricingPage() {
+  const t = useTranslations('pricing');
+  const tCommon = useTranslations('common');
   const tiers = pricingData.tiers;
   const bundles = pricingData.bundles;
 
@@ -13,10 +16,10 @@ export default function PricingPage() {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
-            Выберите свой план
+            {t('title')}
           </h1>
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Начните бесплатно или выберите план, который подходит именно вам
+            {t('subtitle')}
           </p>
         </div>
       </section>

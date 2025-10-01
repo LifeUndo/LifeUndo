@@ -1,0 +1,42 @@
+{
+  "title": "Support",
+  "faq.title": "Frequently asked questions",
+  "faq.items": [
+    {
+      "q": "I didn’t receive the license email. What should I do?",
+      "a": "Check the Spam/Promotions folders and make sure the email in your order is correct. If there’s no email, submit a ticket with your order_id and we’ll resend the key."
+    },
+    {
+      "q": "How do I activate Pro?",
+      "a": "Open the GetLifeUndo browser extension → Settings → License → paste your key. Restart the browser after activation."
+    },
+    {
+      "q": "What is the Starter Bundle?",
+      "a": "It’s a package: Pro for 6 months + a bonus feature flag (“starter_bonus”) for the same term. The end date is shown in your account."
+    },
+    {
+      "q": "Can I get a refund?",
+      "a": "We follow a fair refund policy in reasonable cases. Describe your situation in a ticket, include your email and order_id — we’ll sort it out."
+    },
+    {
+      "q": "Can I change my plan?",
+      "a": "Yes. Tell us your current plan and the desired one. We’ll propose the most beneficial option."
+    }
+  ],
+  "form.title": "Contact support",
+  "form.email": "Email",
+  "form.orderId": "Order ID",
+  "form.topic": "Topic",
+  "form.message": "Message",
+  "form.send": "Send request",
+  "form.sent": "Thanks! We’ve received your request and will reply to {email}.",
+  "form.placeholder.message": "Describe the situation. You can include links to screenshots.",
+  "form.topic.general": "General question",
+  "form.topic.payment": "Payment & license",
+  "form.topic.refund": "Refund / exchange",
+  "form.topic.bug": "Bug / issue",
+  "form.topic.feature": "Feature request",
+  "banner.testMode": "Test mode is enabled. For payment questions, include your order_id: {order_id}.",
+  "links.channel": "Telegram channel",
+  "links.support": "Support chat"
+}
