@@ -16,6 +16,30 @@ async function tryUiFlow(base) {
   const page = await browser.newPage();
   let ok = false, details = {};
   try {
+    // 1. Проверяем healthz
+    const healthResp = await page.goto(`${base}/api/healthz`, { waitUntil: 'domcontentloaded', timeout: 10000 });
+    if (!healthResp || !healthResp.ok()) {
+      throw new Error(`Health check failed: ${healthResp ? healthResp.status() : 'no response'}`);
+    }
+
+    // 2. Проверяем dev status API
+    const statusResp = await page.evaluate(async (baseUrl) => {
+      try {
+        const res = await fetch(`${baseUrl}/api/dev/license/_status`);
+        if (res.status === 404) {
+          return { enabled: false, error: 'API not found (404)' };
+        }
+        return await res.json();
+      } catch (error) {
+        return { enabled: false, error: error.message };
+      }
+    }, base);
+    
+    if (!statusResp.enabled) {
+      throw new Error(`Dev mode disabled (status: ${JSON.stringify(statusResp)})`);
+    }
+
+    // 3. Открываем downloads страницу
     const url = `${base}/ru/downloads`;
     const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     if (!resp || !resp.ok()) throw new Error(`GET ${url} => ${resp ? resp.status() : 'no response'}`);
@@ -26,22 +50,8 @@ async function tryUiFlow(base) {
       throw new Error('Page shows fallback error message');
     }
 
-    // Ждём загрузки формы (может быть скрыта если dev отключен)
+    // Ждём загрузки формы
     await page.waitForTimeout(2000);
-    
-    // Проверяем статус dev-режима через API
-    const statusResp = await page.evaluate(async () => {
-      try {
-        const res = await fetch('/api/dev/license/_status');
-        return await res.json();
-      } catch {
-        return { enabled: false };
-      }
-    });
-    
-    if (!statusResp.enabled) {
-      throw new Error(`Dev mode disabled (status: ${JSON.stringify(statusResp)})`);
-    }
 
     // Форма должна быть видна
     const hasForm = await page.locator('input[type="email"]').isVisible().catch(()=>false);
@@ -133,6 +143,8 @@ async function tryApiFlow(base) {
   lines.push(`# E2E Downloads/Grant Report`);
   lines.push(`- Email: ${EMAIL}`);
   lines.push(`- Plan: ${PLAN}`);
+  lines.push(`- Tested at: ${new Date().toISOString()}`);
+  
   for (const r of results) {
     lines.push(`\n## Base: ${r.base}`);
     if (r.ui?.ok) {
@@ -146,6 +158,13 @@ async function tryApiFlow(base) {
       lines.push(`- API: **FAIL** → ${r.api?.error || 'no details'}`);
     }
   }
+  
+  // Summary
+  const totalTests = results.length * 2; // UI + API for each
+  const passedTests = results.reduce((sum, r) => sum + (r.ui?.ok ? 1 : 0) + (r.api?.ok ? 1 : 0), 0);
+  lines.push(`\n## Summary`);
+  lines.push(`- Tests passed: ${passedTests}/${totalTests}`);
+  lines.push(`- Success rate: ${Math.round((passedTests / totalTests) * 100)}%`);
 
   await fs.mkdir('ARTIFACTS', { recursive: true });
   await fs.writeFile('ARTIFACTS/e2e_downloads_grant_report.md', lines.join('\n'), 'utf8');

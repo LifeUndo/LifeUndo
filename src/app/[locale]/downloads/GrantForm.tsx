@@ -12,10 +12,19 @@ export default function GrantForm() {
 
   // Check if dev mode is enabled
   useEffect(() => {
-    fetch('/api/dev/license/_status')
-      .then(res => res.json())
+    fetch('/api/dev/license/_status', { cache: 'no-store' })
+      .then(res => {
+        if (res.status === 404) {
+          console.error('API path was prefixed with locale — use /api/dev/license/_status');
+          return { enabled: false };
+        }
+        return res.json();
+      })
       .then(data => setDevEnabled(data.enabled))
-      .catch(() => setDevEnabled(false));
+      .catch((error) => {
+        console.error('Failed to check dev status:', error);
+        setDevEnabled(false);
+      });
   }, []);
 
   // Show loading while checking dev status
