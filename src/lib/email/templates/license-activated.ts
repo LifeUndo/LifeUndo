@@ -15,8 +15,8 @@ export function renderLicenseActivatedEmail(data: LicenseEmailData): { subject: 
     ? `Активна до: <strong>${expiresAt.toLocaleDateString('ru-RU')}</strong>`
     : `Активна: <strong>навсегда</strong>`;
   
-  const bonusText = planConfig.bonusFlag 
-    ? `<br>Бонус: <strong>${planConfig.bonusFlag}</strong> до ${expiresAt?.toLocaleDateString('ru-RU')}`
+  const bonusText = (planConfig as any).bonusFlag 
+    ? `<br>Бонус: <strong>${(planConfig as any).bonusFlag}</strong> до ${expiresAt?.toLocaleDateString('ru-RU')}`
     : '';
 
   const subject = `GetLifeUndo — лицензия активирована (заказ #${orderId})`;
