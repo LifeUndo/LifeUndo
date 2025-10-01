@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function LocaleLayout({
+export default function LocaleLayout({
   children,
   params: { locale }
 }: {
@@ -38,7 +38,6 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
-  const messages = await getMessages();
   
   return (
     <html lang={locale}>
