@@ -3,8 +3,11 @@ import { fkPlans } from '@/lib/payments/fk-plans';
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if dev mode is enabled
-    if (process.env.DEV_SIMULATE_WEBHOOK_ENABLED !== 'true') {
+    // Check if we're in Preview/Dev environment
+    const isPreviewOrDev = process.env.VERCEL_ENV !== 'production';
+    const isDevEnabled = process.env.DEV_SIMULATE_WEBHOOK_ENABLED === 'true';
+    
+    if (!(isDevEnabled && isPreviewOrDev)) {
       return NextResponse.json({ error: 'Dev simulation disabled' }, { status: 403 });
     }
 

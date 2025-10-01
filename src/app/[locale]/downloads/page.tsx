@@ -9,11 +9,10 @@ export default function DownloadsPage() {
     }
 
     try {
-      const response = await fetch('/api/dev/license/grant', {
+      const response = await fetch('/api/dev/license/grant-ui', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Admin-Token': process.env.NEXT_PUBLIC_ADMIN_GRANT_TOKEN || 'dev_token',
         },
         body: JSON.stringify({
           email,

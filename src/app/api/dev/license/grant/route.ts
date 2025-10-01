@@ -6,17 +6,20 @@ import { fkPlans } from '@/lib/payments/fk-plans';
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if we're in Preview/Dev environment
+    const isPreviewOrDev = process.env.VERCEL_ENV !== 'production';
+    const isDevEnabled = process.env.DEV_SIMULATE_WEBHOOK_ENABLED === 'true';
+    
+    if (!(isDevEnabled && isPreviewOrDev)) {
+      return NextResponse.json({ error: 'Dev mode disabled' }, { status: 403 });
+    }
+
     // Check admin token
     const adminToken = request.headers.get('X-Admin-Token');
     const expectedToken = process.env.ADMIN_GRANT_TOKEN;
     
     if (!adminToken || !expectedToken || adminToken !== expectedToken) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    // Check if dev mode is enabled
-    if (process.env.DEV_SIMULATE_WEBHOOK_ENABLED !== 'true') {
-      return NextResponse.json({ error: 'Dev mode disabled' }, { status: 403 });
     }
 
     const body = await request.json();
