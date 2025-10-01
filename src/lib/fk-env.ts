@@ -9,7 +9,8 @@ export const FK_SECRET1 = process.env.FREEKASSA_SECRET1 || "";
 
 export const FK_SECRET2 = process.env.FREEKASSA_SECRET2 || "";
 
-export const FK_PAYMENT_URL = process.env.FREEKASSA_PAYMENT_URL || "https://pay.freekassa.ru/";
+// Новый URL согласно документации FreeKassa
+export const FK_PAYMENT_URL = process.env.FREEKASSA_PAYMENT_URL || "https://pay.freekassa.com/";
 
 export const FK_CURRENCY = process.env.FREEKASSA_CURRENCY || "RUB";
 
