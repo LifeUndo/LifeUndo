@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/client';
-import { payments, licenses, featureFlags } from '@/db/schema';
+import { payments, licenses, feature_flags } from '@/db/schema';
 import { activateLicense } from '@/lib/payments/license';
 import { FK_PLANS } from '@/lib/payments/fk-plans';
 
