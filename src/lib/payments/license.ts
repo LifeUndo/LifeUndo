@@ -38,8 +38,8 @@ export async function activateLicense(params: {
   }
 
   const now = new Date();
-  const expiresAt = planConfig.periodDays 
-    ? new Date(now.getTime() + planConfig.periodDays * 24 * 60 * 60 * 1000)
+  const expiresAt = (planConfig as any).periodDays 
+    ? new Date(now.getTime() + (planConfig as any).periodDays * 24 * 60 * 60 * 1000)
     : undefined;
 
   let level: string;
@@ -82,10 +82,10 @@ export async function activateLicense(params: {
 
   // Если есть бонусный флаг - создать
   const flags: FeatureFlag[] = [];
-  if (planConfig.bonusFlag) {
+  if ((planConfig as any).bonusFlag) {
     const [flagRow] = await db.insert(feature_flags).values({
       user_email: email,
-      key: planConfig.bonusFlag,
+      key: (planConfig as any).bonusFlag,
       value: true,
       expires_at: expiresAt || null
     }).returning();
@@ -93,7 +93,7 @@ export async function activateLicense(params: {
     const flag: FeatureFlag = {
       id: flagRow.id,
       email,
-      key: planConfig.bonusFlag,
+      key: (planConfig as any).bonusFlag,
       value: true,
       expires_at: expiresAt
     };
@@ -135,7 +135,7 @@ export async function extendLicense(params: {
   const { email, plan, currentExpiresAt } = params;
   const planConfig = FK_PLANS[plan];
   
-  if (!planConfig || !planConfig.periodDays) {
+  if (!planConfig || !(planConfig as any).periodDays) {
     throw new Error(`Plan ${plan} cannot be extended`);
   }
 
@@ -145,7 +145,7 @@ export async function extendLicense(params: {
     : now;
   
   const newExpiresAt = new Date(
-    baseDate.getTime() + planConfig.periodDays * 24 * 60 * 60 * 1000
+    baseDate.getTime() + (planConfig as any).periodDays * 24 * 60 * 60 * 1000
   );
 
   console.log('[license.extend]', { email, plan, currentExpiresAt, newExpiresAt });
