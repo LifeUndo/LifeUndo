@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:ext": "echo 'Extension build ready in extension/ folder'"
+    "build:ext": "echo 'Extension build ready in extension/ folder' && echo 'Run: npm run build:ext:zip to create downloadable package'",
+    "build:ext:zip": "powershell -Command \"Compress-Archive -Path 'extension\\*' -DestinationPath 'public\\extension-dev-0.4.0.zip' -Force\""
   },
   "dependencies": {
     "@sentry/nextjs": "^10.15.0",

@@ -35,7 +35,15 @@ export async function POST(request: NextRequest) {
     const grantData = await grantResponse.json();
     
     if (grantResponse.ok) {
-      return NextResponse.json(grantData);
+      return NextResponse.json({
+        ok: true,
+        order_id: grantData.order_id,
+        email: grantData.email,
+        level: grantData.level,
+        expires_at: grantData.expires_at,
+        plan: grantData.plan || body.plan,
+        bonus_flag: grantData.bonusFlag
+      });
     } else {
       return NextResponse.json(grantData, { status: grantResponse.status });
     }
