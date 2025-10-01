@@ -1,0 +1,46 @@
+import nodemailer from 'nodemailer';
+
+const SMTP_HOST = process.env.SMTP_HOST || 'smtp.sendgrid.net';
+const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587');
+const SMTP_USER = process.env.SMTP_USER || '';
+const SMTP_PASS = process.env.SMTP_PASS || '';
+const SMTP_FROM = process.env.SMTP_FROM || 'GetLifeUndo <noreply@lifeundo.ru>';
+
+export const transporter = nodemailer.createTransport({
+  host: SMTP_HOST,
+  port: SMTP_PORT,
+  secure: SMTP_PORT === 465,
+  auth: {
+    user: SMTP_USER,
+    pass: SMTP_PASS
+  }
+});
+
+export interface EmailParams {
+  to: string;
+  subject: string;
+  html: string;
+  text?: string;
+}
+
+export async function sendEmail(params: EmailParams) {
+  const { to, subject, html, text } = params;
+  
+  try {
+    const info = await transporter.sendMail({
+      from: SMTP_FROM,
+      to,
+      subject,
+      html,
+      text: text || html.replace(/<[^>]*>/g, '')
+    });
+    
+    console.log('[email] Sent:', { to, subject, messageId: info.messageId });
+    return { ok: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('[email] Failed:', error);
+    return { ok: false, error };
+  }
+}
+
+

@@ -1,5 +1,8 @@
 // License Management Utilities
 import { FK_PLANS, type PlanId } from './fk-plans';
+import { db } from '@/db/client';
+import { licenses, feature_flags } from '@/db/schema';
+import { eq, and, gt } from 'drizzle-orm';
 
 export interface License {
   id: number;
@@ -55,9 +58,18 @@ export async function activateLicense(params: {
       level = 'pro';
   }
 
-  // TODO: Сохранить в БД
+  // Сохранить в БД
+  const [licenseRow] = await db.insert(licenses).values({
+    user_email: email,
+    level,
+    plan,
+    expires_at: expiresAt || null,
+    seats: planConfig.seats || null,
+    activated_at: now
+  }).returning();
+
   const license: License = {
-    id: 0, // будет из БД
+    id: licenseRow.id,
     email,
     level,
     plan,
@@ -71,8 +83,15 @@ export async function activateLicense(params: {
   // Если есть бонусный флаг - создать
   const flags: FeatureFlag[] = [];
   if (planConfig.bonusFlag) {
+    const [flagRow] = await db.insert(feature_flags).values({
+      user_email: email,
+      key: planConfig.bonusFlag,
+      value: true,
+      expires_at: expiresAt || null
+    }).returning();
+    
     const flag: FeatureFlag = {
-      id: 0, // будет из БД
+      id: flagRow.id,
       email,
       key: planConfig.bonusFlag,
       value: true,
@@ -82,8 +101,27 @@ export async function activateLicense(params: {
     console.log('[license.activate] bonus flag:', flag);
   }
 
-  // TODO: Отправить email с лицензией
-  // await sendLicenseEmail({ email, plan, expires_at: expiresAt });
+  // Отправить email с лицензией
+  try {
+    const { sendEmail } = await import('@/lib/email/client');
+    const { renderLicenseActivatedEmail } = await import('@/lib/email/templates/license-activated');
+    
+    const emailContent = renderLicenseActivatedEmail({
+      email,
+      plan,
+      orderId,
+      expiresAt
+    });
+    
+    await sendEmail({
+      to: email,
+      subject: emailContent.subject,
+      html: emailContent.html
+    });
+  } catch (emailError) {
+    console.error('[license.activate] Email send failed:', emailError);
+    // Не падаем - лицензия уже активирована
+  }
 
   return { license, flags: flags.length > 0 ? flags : undefined };
 }
@@ -112,9 +150,17 @@ export async function extendLicense(params: {
 
   console.log('[license.extend]', { email, plan, currentExpiresAt, newExpiresAt });
 
-  // TODO: Обновить в БД
+  // Обновить в БД
+  const [licenseRow] = await db.update(licenses)
+    .set({ 
+      expires_at: newExpiresAt,
+      updated_at: now 
+    })
+    .where(eq(licenses.user_email, email))
+    .returning();
+
   const license: License = {
-    id: 0,
+    id: licenseRow?.id || 0,
     email,
     level: 'pro',
     plan,

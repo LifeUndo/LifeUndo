@@ -1,17 +1,11 @@
 {
-  "cta": {
-    "learnMore": "Узнать о возможностях",
-    "needHelp": "Нужна помощь?",
-    "download": "Скачать расширение"
-  },
-  "nav": {
-    "pricing": "Тарифы",
-    "features": "Возможности",
-    "support": "Поддержка"
-  },
-  "badge": {
-    "popular": "Популярно",
-    "bestValue": "Выгодно"
-  }
+  "cta.learnMore": "Learn more",
+  "cta.needHelp": "Need help?",
+  "cta.download": "Download the extension",
+  "nav.pricing": "Pricing",
+  "nav.features": "Features",
+  "nav.support": "Support",
+  "badge.popular": "Popular",
+  "badge.bestValue": "Best value"
 }
 

@@ -3,6 +3,9 @@ import crypto from 'crypto';
 import { FK_MERCHANT_ID, FK_SECRET2, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
 import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
 import { activateLicense, extendLicense } from '@/lib/payments/license';
+import { db } from '@/db/client';
+import { payments } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 
 export async function POST(req: Request) {
   try {
@@ -51,31 +54,32 @@ export async function POST(req: Request) {
         : null;
     }
     
-    // TODO: Проверить идемпотентность - не обработан ли уже этот платеж
-    // const existing = await db.payment.findUnique({ where: { order_id: orderId } });
-    // if (existing && existing.status === 'paid') {
-    //   console.log('[webhook] Already processed:', orderId);
-    //   return new Response('YES', { status: 200 });
-    // }
+    // Проверить идемпотентность - не обработан ли уже этот платеж
+    const existing = await db.query.payments.findFirst({
+      where: eq(payments.order_id, orderId)
+    });
     
-    // TODO: Сохранить платеж в БД
-    // await db.payment.create({
-    //   data: {
-    //     order_id: orderId,
-    //     plan: plan || 'unknown',
-    //     amount: parseFloat(amount),
-    //     currency: 'RUB',
-    //     status: 'paid',
-    //     paid_at: new Date(),
-    //     raw: { merchantId, amount, orderId, status, signature }
-    //   }
-    // });
+    if (existing && existing.status === 'paid') {
+      console.log('[webhook] Already processed:', orderId);
+      return new Response('YES', { status: 200 });
+    }
+    
+    // Сохранить платеж в БД
+    await db.insert(payments).values({
+      order_id: orderId,
+      plan: plan || 'unknown',
+      amount: amount,
+      currency: 'RUB',
+      status: 'paid',
+      paid_at: new Date(),
+      raw: { merchantId, amount, orderId, status, signature }
+    });
     
     // Активация лицензии если есть план
     if (plan) {
       try {
-        // TODO: Получить email из formData или из БД по orderId
-        const email = formData.get('PAYER_EMAIL') as string || 'unknown@example.com';
+        // Получить email из formData FreeKassa
+        const email = (formData.get('PAYER_EMAIL') as string) || (formData.get('email') as string) || 'unknown@example.com';
         
         await activateLicense({
           email,

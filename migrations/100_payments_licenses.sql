@@ -22,8 +22,7 @@ CREATE INDEX idx_payments_created_at ON payments(created_at);
 -- Таблица лицензий
 CREATE TABLE IF NOT EXISTS licenses (
   id SERIAL PRIMARY KEY,
-  user_id VARCHAR(255),
-  email VARCHAR(255),
+  user_email VARCHAR(255) NOT NULL,
   level VARCHAR(50) NOT NULL,
   plan VARCHAR(50),
   expires_at TIMESTAMP,
@@ -33,16 +32,14 @@ CREATE TABLE IF NOT EXISTS licenses (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX idx_licenses_user_id ON licenses(user_id);
-CREATE INDEX idx_licenses_email ON licenses(email);
+CREATE INDEX idx_licenses_user_email ON licenses(user_email);
 CREATE INDEX idx_licenses_level ON licenses(level);
 CREATE INDEX idx_licenses_expires_at ON licenses(expires_at);
 
 -- Таблица фича-флагов
 CREATE TABLE IF NOT EXISTS feature_flags (
   id SERIAL PRIMARY KEY,
-  user_id VARCHAR(255),
-  email VARCHAR(255),
+  user_email VARCHAR(255) NOT NULL,
   key VARCHAR(100) NOT NULL,
   value JSONB,
   expires_at TIMESTAMP,
@@ -50,8 +47,7 @@ CREATE TABLE IF NOT EXISTS feature_flags (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX idx_feature_flags_user_id ON licenses(user_id);
-CREATE INDEX idx_feature_flags_email ON feature_flags(email);
+CREATE INDEX idx_feature_flags_user_email ON feature_flags(user_email);
 CREATE INDEX idx_feature_flags_key ON feature_flags(key);
 CREATE INDEX idx_feature_flags_expires_at ON feature_flags(expires_at);
 

@@ -1,0 +1,18 @@
+{
+  "title": "Pricing",
+  "pro.month": "per month",
+  "vip.lifetime": "lifetime",
+  "team.perMonth": "for 5 seats / month",
+  "starter.title": "Starter Bundle",
+  "starter.caption": "6 months for 3000 ₽",
+  "starter.details": "Pro access for 6 months + bonus features for the same term",
+  "button.payFreekassa": "Pay with FreeKassa",
+  "button.chooseStarter": "Choose Starter Bundle",
+  "secure.note": "FreeKassa · Secure payment",
+  "included.title": "What you get with Pro",
+  "included.clipboard": "Clipboard history: up to 50 recent items with instant search",
+  "included.tabs": "Undo for closed tabs and sessions",
+  "included.forms": "Autosave for input fields (forms, posts, comments)",
+  "included.export": "Data export (JSON/CSV), local backup",
+  "included.support": "Priority support"
+}

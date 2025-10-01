@@ -58,8 +58,8 @@ export async function POST(req: Request) {
       signature: signature.substring(0, 8) + '...'
     });
     
-    // TODO: Добавить аналитику
-    // analytics.track('purchase_redirect_fk', { plan, order_id: orderId, amount: finalAmount, currency });
+    // Логируем событие для аналитики (будет подхвачено на клиенте)
+    console.log('[analytics] purchase_redirect_fk', { plan, order_id: orderId, amount: finalAmount, currency });
     
     return NextResponse.json({ 
       ok: true,

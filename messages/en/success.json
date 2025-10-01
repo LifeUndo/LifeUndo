@@ -1,15 +1,14 @@
 {
-  "title": "Платёж успешно обработан!",
-  "lead": "Спасибо за покупку GetLifeUndo. Ваша лицензия активирована и готова к использованию.",
-  "steps": {
-    "title": "Что делать дальше:",
-    "step1": "Откройте расширение GetLifeUndo в браузере",
-    "step2": "Перейдите в настройки расширения",
-    "step3": "Введите лицензионный ключ (отправлен на email)",
-    "step4": "Наслаждайтесь всеми Pro функциями!"
-  },
-  "hint": {
-    "starterUntil": "Доступ Pro активен до {date}. Бонус включён на тот же срок."
-  }
+  "title": "Payment successful!",
+  "lead": "Thank you for your purchase of GetLifeUndo. Your license is activated and ready to use.",
+  "steps.title": "What to do next:",
+  "step1": "Open the GetLifeUndo browser extension",
+  "step2": "Go to the extension settings",
+  "step3": "Enter your license key (sent to your email)",
+  "step4": "Enjoy all Pro features!",
+  "hint.starterUntil": "Pro access is active until {date}. Bonus features are enabled for the same term.",
+  "cta.learnMore": "Learn more",
+  "cta.needHelp": "Need help?",
+  "cta.download": "Download the extension"
 }
 
