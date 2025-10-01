@@ -81,9 +81,9 @@
 
 ### Production + Preview
 ```bash
-FREEKASSA_MERCHANT_ID=66046
-FREEKASSA_SECRET1=ponOk=W5^2W9t][
-FREEKASSA_SECRET2=1rF!PSuEpvj,MJL  
+FREEKASSA_MERCHANT_ID=<your_merchant_id>
+FREEKASSA_SECRET1=<your_secret1>
+FREEKASSA_SECRET2=<your_secret2>
 FREEKASSA_PAYMENT_URL=https://pay.freekassa.com/
 FREEKASSA_CURRENCY=RUB
 ```
