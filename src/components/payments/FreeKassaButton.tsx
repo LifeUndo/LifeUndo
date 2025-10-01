@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { fkPublic } from '@/lib/fk-public';
-import { FK_PRODUCTS, type FKProductId } from '@/lib/fk-env';
+import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
 
 interface FreeKassaButtonProps {
-  productId: FKProductId;
+  productId: PlanId | string; // Поддержка старых продуктов и новых планов
   email?: string;
   className?: string;
 }
@@ -14,7 +14,9 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const amount = FK_PRODUCTS[productId];
+  // Проверяем, это старый productId или новый plan
+  const isNewFormat = productId in FK_PLANS;
+  const plan = isNewFormat ? productId : null;
   
   // Показываем кнопку только если FreeKassa включен
   if (!fkPublic.enabled) {
@@ -39,7 +41,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          productId,
+          plan: plan || productId,
           email: email || '',
         }),
       });

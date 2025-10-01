@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { FK_MERCHANT_ID, FK_SECRET1, FK_PAYMENT_URL, FK_PRODUCTS, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
+import { FK_MERCHANT_ID, FK_SECRET1, FK_PAYMENT_URL, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
+import { FK_PLANS, getPlan, getOrderPrefix, type PlanId } from '@/lib/payments/fk-plans';
 
 export async function POST(req: Request) {
   try {
@@ -12,42 +13,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'FreeKassa not configured' }, { status: 500 });
     }
     
-    let finalAmount: string;
-    let productId: string;
+    // Получаем план из запроса
+    const { plan, email } = body;
     
-    // Поддержка двух форматов запроса:
-    // 1. Новый формат: { productId: "getlifeundo_pro", email: "..." }
-    // 2. Альтернативный формат: { currency: "RUB", order_id: "100500", description: "Pro plan" }
-    if (body.productId) {
-      // Новый формат - используем productId
-      productId = body.productId;
-      if (!FK_PRODUCTS[productId as keyof typeof FK_PRODUCTS]) {
-        return NextResponse.json({ error: 'Invalid product ID' }, { status: 400 });
-      }
-      finalAmount = FK_PRODUCTS[productId as keyof typeof FK_PRODUCTS];
-    } else if (body.description) {
-      // Альтернативный формат - определяем план по описанию
-      const description = body.description.toLowerCase();
-      if (description.includes('pro')) {
-        productId = 'getlifeundo_pro';
-        finalAmount = FK_PRODUCTS.getlifeundo_pro;
-      } else if (description.includes('vip')) {
-        productId = 'getlifeundo_vip';
-        finalAmount = FK_PRODUCTS.getlifeundo_vip;
-      } else if (description.includes('team')) {
-        productId = 'getlifeundo_team';
-        finalAmount = FK_PRODUCTS.getlifeundo_team;
-      } else {
-        return NextResponse.json({ error: 'Invalid product description' }, { status: 400 });
-      }
-    } else {
-      return NextResponse.json({ error: 'Missing productId or description' }, { status: 400 });
+    if (!plan) {
+      return NextResponse.json({ error: 'Missing plan parameter' }, { status: 400 });
     }
     
-    // Генерируем безопасный ASCII order ID
+    // Проверяем валидность плана
+    const planConfig = getPlan(plan);
+    if (!planConfig) {
+      return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
+    }
+    
+    const { amount: finalAmount, currency } = planConfig;
+    
+    // Генерируем order ID с префиксом плана
     const timestamp = Date.now();
     const random = Math.random().toString(36).slice(2, 8);
-    const orderId = `${timestamp}-${random}`;
+    const prefix = getOrderPrefix(plan as PlanId);
+    const orderId = `${prefix}-${timestamp}-${random}`;
     
     // Создаем подпись (исправленная схема FreeKassa по ответу поддержки)
     // Правильный порядок: MERCHANT_ID:AMOUNT:SECRET1:CURRENCY:ORDER_ID
@@ -60,20 +45,21 @@ export async function POST(req: Request) {
     url.searchParams.set('oa', finalAmount);
     url.searchParams.set('o', orderId);
     url.searchParams.set('s', signature);
-    url.searchParams.set('currency', FK_CURRENCY); // Используем валюту из конфигурации
-    if (body.email) url.searchParams.set('email', body.email);
+    url.searchParams.set('currency', currency);
+    if (email) url.searchParams.set('email', email);
     
-    // Логируем для отладки (без секретов)
+    // Логируем для отладки (без секретов) + аналитика
     console.log('FreeKassa payment created:', {
+      plan,
       orderId,
-      productId,
       amount: finalAmount,
-      currency: FK_CURRENCY,
-      email: body.email ? 'provided' : 'not provided',
-      signature: signature.substring(0, 8) + '...',
-      signatureString: `${FK_MERCHANT_ID}:${finalAmount}:${FK_SECRET1.substring(0, 4)}***:${orderId}`,
-      url: url.toString()
+      currency,
+      email: email ? 'provided' : 'not provided',
+      signature: signature.substring(0, 8) + '...'
     });
+    
+    // TODO: Добавить аналитику
+    // analytics.track('purchase_redirect_fk', { plan, order_id: orderId, amount: finalAmount, currency });
     
     return NextResponse.json({ 
       ok: true,

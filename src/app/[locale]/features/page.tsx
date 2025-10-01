@@ -1,90 +1,97 @@
+import Head from "next/head";
+import Link from "next/link";
+
 export default function FeaturesPage() {
-  const features = [
-    {
-      icon: "🔄",
-      title: "Откат вкладок",
-      description: "Восстановите случайно закрытые вкладки одним кликом"
-    },
-    {
-      icon: "📚",
-      title: "Сохранение сессий",
-      description: "Сохраняйте наборы вкладок для быстрого доступа"
-    },
-    {
-      icon: "🔍",
-      title: "Поиск по истории",
-      description: "Найдите нужную вкладку среди сотен закрытых"
-    },
-    {
-      icon: "⚡",
-      title: "Быстрая работа",
-      description: "Минимальное потребление ресурсов браузера"
-    },
-    {
-      icon: "🔒",
-      title: "Безопасность",
-      description: "Все данные хранятся локально на вашем устройстве"
-    },
-    {
-      icon: "🎨",
-      title: "Настройка",
-      description: "Персонализируйте интерфейс под свои потребности"
-    }
-  ];
-
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
-          Возможности GetLifeUndo
-        </h1>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {features.map((feature, index) => (
-            <div key={index} className="glass-card p-6 hover:bg-white/10 transition-colors">
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-300">{feature.description}</p>
-            </div>
-          ))}
-        </div>
+    <>
+      <Head>
+        <title>Возможности — GetLifeUndo</title>
+        <meta name="description" content="Что умеет GetLifeUndo: расширенная история буфера обмена, восстановление закрытых вкладок и сессий, экспорт, безопасность и ещё десятки удобных функций." />
+      </Head>
 
-        <div className="glass-card p-8 mb-8">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Как это работает</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="text-lg font-semibold mb-2">Установите расширение</h3>
-              <p className="text-gray-300 text-sm">
-                Скачайте GetLifeUndo из Firefox Add-ons и активируйте
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-              <h3 className="text-lg font-semibold mb-2">Работайте как обычно</h3>
-              <p className="text-gray-300 text-sm">
-                Расширение автоматически отслеживает ваши вкладки
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="text-lg font-semibold mb-2">Восстанавливайте легко</h3>
-              <p className="text-gray-300 text-sm">
-                Нажмите кнопку и верните любую закрытую вкладку
-              </p>
-            </div>
+      <main className="mx-auto max-w-5xl px-4 py-12">
+        <header className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Возможности GetLifeUndo</h1>
+          <p className="text-lg text-gray-300">
+            «Ctrl+Z» для онлайн-жизни: восстанавливайте потерянный текст, вкладки, историю буфера,
+            быстрые заметки и целые рабочие сессии — аккуратно и безопасно.
+          </p>
+        </header>
+
+        <section className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h2 className="text-xl font-semibold mb-3">Что входит в <span className="text-indigo-300">Pro</span></h2>
+            <ul className="space-y-2 list-disc ml-5 text-gray-300">
+              <li>История буфера обмена: до <strong>50</strong> последних элементов с быстрым поиском</li>
+              <li>«Отмена» для закрытых вкладок и сессий</li>
+              <li>Автосохранение полей ввода (формы, посты, комментарии)</li>
+              <li>Экспорт данных (JSON/CSV), локальный бэкап</li>
+              <li>Приоритетная поддержка</li>
+            </ul>
           </div>
-        </div>
 
-        <div className="text-center">
-          <a 
-            href="/ru/download"
-            className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-          >
-            Установить расширение
-          </a>
-        </div>
-      </div>
-    </div>
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h2 className="text-xl font-semibold mb-3">Почему это безопасно</h2>
+            <ul className="space-y-2 list-disc ml-5 text-gray-300">
+              <li>Локальное хранение по умолчанию, шифрование при синхронизации</li>
+              <li>Гранулярные разрешения: только то, что действительно нужно</li>
+              <li>Опции авто-очистки и ручного удаления следов</li>
+              <li>Прозрачная политика: никакой продажи данных</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-2xl p-6 bg-white/5 border border-white/10 mb-12">
+          <h2 className="text-xl font-semibold mb-3">Как начать</h2>
+          <ol className="list-decimal ml-5 space-y-2 text-gray-300">
+            <li>Установите расширение для браузера (Chrome / Firefox / Edge)</li>
+            <li>Откройте настройки расширения и активируйте лицензию</li>
+            <li>Включите автосохранение полей и историю буфера</li>
+            <li>Проверьте «панель отмены» на часто используемых сайтах</li>
+          </ol>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="https://chrome.google.com/webstore" className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-600 transition-colors">
+              Скачать для Chrome
+            </a>
+            <a href="https://addons.mozilla.org" className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-600 transition-colors">
+              Для Firefox
+            </a>
+            <a href="https://microsoftedge.microsoft.com/addons" className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-600 transition-colors">
+              Для Edge
+            </a>
+            <Link href="/ru/support" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 transition-colors">
+              Нужна помощь?
+            </Link>
+          </div>
+        </section>
+
+        <section className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h3 className="font-semibold mb-2">Автосохранение форм</h3>
+            <p className="text-gray-300">
+              Защититесь от случайного обновления страницы и вылета браузера — текст не потеряется.
+            </p>
+          </div>
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h3 className="font-semibold mb-2">Умная история</h3>
+            <p className="text-gray-300">
+              Фильтры по сайту, дате и типу: текст, ссылка, заметка, фрагмент.
+            </p>
+          </div>
+          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
+            <h3 className="font-semibold mb-2">Экспорт & перенос</h3>
+            <p className="text-gray-300">
+              Выгрузите данные, перенесите профиль или создайте бэкап в один клик.
+            </p>
+          </div>
+        </section>
+
+        <footer className="text-center">
+          <Link href="/ru/pricing" className="px-6 py-3 rounded-2xl bg-indigo-500 hover:bg-indigo-600 inline-block transition-colors">
+            Выбрать тариф
+          </Link>
+        </footer>
+      </main>
+    </>
   );
 }

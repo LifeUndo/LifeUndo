@@ -99,19 +99,23 @@ export default function PricingPage() {
 
           {/* Starter Bundle */}
           <div className="max-w-md mx-auto mb-12">
-            <div className="glass-card p-8 text-center">
+            <div className="glass-card p-8 text-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-xs font-bold">
+                ПОПУЛЯРНО
+              </div>
               <h3 className="text-2xl font-bold mb-4 gradient-text">
-                {bundles[0].label}
+                Starter Bundle
               </h3>
               <p className="text-gray-300 mb-4">
-                {bundles[0].months} месяцев за {bundles[0].price} ₽
+                6 месяцев Pro за 3 000 ₽
               </p>
               <p className="text-sm text-gray-400 mb-6">
-                {bundles[0].note}
+                Стабильнее проходит у провайдера. Выгода 594 ₽ за пакет!
               </p>
-              <button className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200">
-                Выбрать Starter Bundle
-              </button>
+              <FreeKassaButton productId="starter_6m" />
+              <p className="text-xs text-gray-500 mt-3">
+                + бонусный флаг starter_bonus на 6 месяцев
+              </p>
             </div>
           </div>
 

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { FK_MERCHANT_ID, FK_SECRET2, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
+import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
+import { activateLicense, extendLicense } from '@/lib/payments/license';
 
 export async function POST(req: Request) {
   try {
@@ -37,17 +39,66 @@ export async function POST(req: Request) {
       return new Response('Invalid sign', { status: 400 });
     }
     
+    // Извлекаем план из order_id (префикс)
+    const planMatch = orderId.match(/^(S6M|PROM|VIPL|TEAM5)-/);
+    let plan: PlanId | null = null;
+    if (planMatch) {
+      const prefix = planMatch[1];
+      plan = prefix === 'S6M' ? 'starter_6m' 
+        : prefix === 'PROM' ? 'pro_month'
+        : prefix === 'VIPL' ? 'vip_lifetime'
+        : prefix === 'TEAM5' ? 'team_5'
+        : null;
+    }
+    
+    // TODO: Проверить идемпотентность - не обработан ли уже этот платеж
+    // const existing = await db.payment.findUnique({ where: { order_id: orderId } });
+    // if (existing && existing.status === 'paid') {
+    //   console.log('[webhook] Already processed:', orderId);
+    //   return new Response('YES', { status: 200 });
+    // }
+    
+    // TODO: Сохранить платеж в БД
+    // await db.payment.create({
+    //   data: {
+    //     order_id: orderId,
+    //     plan: plan || 'unknown',
+    //     amount: parseFloat(amount),
+    //     currency: 'RUB',
+    //     status: 'paid',
+    //     paid_at: new Date(),
+    //     raw: { merchantId, amount, orderId, status, signature }
+    //   }
+    // });
+    
+    // Активация лицензии если есть план
+    if (plan) {
+      try {
+        // TODO: Получить email из formData или из БД по orderId
+        const email = formData.get('PAYER_EMAIL') as string || 'unknown@example.com';
+        
+        await activateLicense({
+          email,
+          plan,
+          orderId
+        });
+        
+        console.log('[webhook] License activated:', { orderId, plan, email });
+      } catch (error) {
+        console.error('[webhook] License activation error:', error);
+        // Не падаем - платеж уже прошел
+      }
+    }
+    
     // Логируем успешную оплату (без секретов)
     console.log('FreeKassa payment confirmed:', {
       orderId,
+      plan,
       amount,
       status,
       merchantId: merchantId.substring(0, 4) + '***',
       sign_ok: true
     });
-    
-    // TODO: Здесь добавить логику обновления статуса пользователя
-    // Например, активация VIP-статуса, отправка уведомления и т.д.
     
     return new Response('YES', { status: 200 });
     
