@@ -74,7 +74,7 @@ export async function activateLicense(params: {
     level,
     plan,
     expires_at: expiresAt,
-    seats: planConfig.seats,
+    seats: (planConfig as any).seats,
     activated_at: now
   };
 
