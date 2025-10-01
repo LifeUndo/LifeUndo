@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { locales } from "@/i18n/config";
+
+const locales = ["ru", "en"];
 
 export default function LanguageSwitcher() {
   const pathname = usePathname();

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { locales, defaultLocale } from "@/i18n/config";
+
+const locales = ["ru", "en"];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -27,7 +28,7 @@ export function middleware(req: NextRequest) {
   
   // Редиректим на дефолтную локаль
   const url = req.nextUrl.clone();
-  url.pathname = `/${defaultLocale}${pathname}`;
+  url.pathname = `/ru${pathname}`;
   return NextResponse.redirect(url);
 }
 
