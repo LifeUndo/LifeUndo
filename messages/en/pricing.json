@@ -1,0 +1,25 @@
+{
+  "title": "Тарифы",
+  "pro": {
+    "month": "в месяц"
+  },
+  "vip": {
+    "lifetime": "навсегда"
+  },
+  "team": {
+    "perMonth": "за 5 мест в месяц"
+  },
+  "starter": {
+    "title": "Starter Bundle",
+    "caption": "6 месяцев за 3000 ₽",
+    "bonus": "+ бонусный флаг starter_bonus на 6 месяцев"
+  },
+  "button": {
+    "payFreekassa": "Оплатить через FreeKassa",
+    "chooseStarter": "Выбрать Starter Bundle"
+  },
+  "secure": {
+    "note": "FreeKassa · Безопасная оплата"
+  }
+}
+
