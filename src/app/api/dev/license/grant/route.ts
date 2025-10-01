@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/client';
 import { payments, licenses, featureFlags } from '@/db/schema';
 import { activateLicense } from '@/lib/payments/license';
-import { fkPlans } from '@/lib/payments/fk-plans';
+import { FK_PLANS } from '@/lib/payments/fk-plans';
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate plan
-    const planConfig = fkPlans[plan as keyof typeof fkPlans];
+    const planConfig = FK_PLANS[plan as keyof typeof FK_PLANS];
     if (!planConfig) {
       return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
     }

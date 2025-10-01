@@ -24,5 +24,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "lifeundo_e2e_*", "tests", "docs/temp", "packages", "business"]
+  "exclude": ["node_modules", "lifeundo_e2e_*", "tests", "docs/temp", "packages", "business", "extension", "extension_firefox", "ext", "scripts"]
 }
