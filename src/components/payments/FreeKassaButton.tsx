@@ -40,7 +40,6 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
         },
         body: JSON.stringify({
           productId,
-          amount,
           email: email || '',
         }),
       });

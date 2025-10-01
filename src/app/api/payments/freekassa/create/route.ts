@@ -4,7 +4,7 @@ import { FK_MERCHANT_ID, FK_SECRET1, FK_PAYMENT_URL, FK_PRODUCTS, FK_CONFIGURED 
 
 export async function POST(req: Request) {
   try {
-    const { productId, amount, email } = await req.json();
+    const { productId, email } = await req.json();
     
     // Проверяем конфигурацию
     if (!FK_CONFIGURED) {

@@ -48,6 +48,72 @@
 ### Testing
 - `tests/` - Test files
 - `test-results/` - Test results
+- `scripts/` - Utility and smoke test scripts
+
+## 💳 FreeKassa Integration (Preview)
+
+### Overview
+FreeKassa payment integration is implemented in the `feature/fk-from-prod-lock` branch and is ready for testing on Preview environments.
+
+### Environment Variables
+Set these variables in your Vercel Preview environment:
+
+```bash
+# Enable FreeKassa UI (Preview only)
+NEXT_PUBLIC_FK_ENABLED=true
+
+# FreeKassa Configuration
+FREEKASSA_MERCHANT_ID=your_merchant_id
+FREEKASSA_SECRET1=your_secret1
+FREEKASSA_SECRET2=your_secret2
+FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/
+```
+
+**⚠️ Important:** 
+- Only use `FREEKASSA_*` variables (no `FK_*` duplicates)
+- `NEXT_PUBLIC_FK_ENABLED` should only be `true` in Preview
+- Never enable in Production until fully tested
+
+### API Endpoints
+
+#### Debug API (Preview only)
+```bash
+GET /api/debug/fk
+```
+Returns configuration status without exposing secrets.
+
+#### Create Payment
+```bash
+POST /api/payments/freekassa/create
+Content-Type: application/json
+
+{
+  "productId": "getlifeundo_pro|getlifeundo_vip|getlifeundo_team",
+  "email": "optional@example.com"
+}
+```
+
+### Smoke Testing
+Run the smoke test script on your Preview deployment:
+
+```powershell
+.\scripts\freekassa-smoke-test.ps1 -PreviewUrl "https://your-preview-url.vercel.app"
+```
+
+### Products & Pricing
+- **Pro Plan**: `getlifeundo_pro` - 599.00 RUB/month
+- **VIP Plan**: `getlifeundo_vip` - 9990.00 RUB (lifetime)
+- **Team Plan**: `getlifeundo_team` - 2990.00 RUB/month (5 seats)
+
+### Release Checklist
+- [ ] Preview smoke tests pass
+- [ ] Payment URLs generate correctly
+- [ ] UI shows FreeKassa buttons only when enabled
+- [ ] Debug API returns proper configuration
+- [ ] Error handling works for invalid requests
+- [ ] Promote to Production
+- [ ] Set Production environment variables
+- [ ] Run final smoke test on Production
 
 ## 🚀 Quick Start
 
