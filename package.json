@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:ext": "echo 'Extension build ready in extension/ folder'"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.15.0",
