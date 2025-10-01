@@ -56,10 +56,10 @@
 FreeKassa payment integration is implemented in the `feature/fk-from-prod-lock` branch and is ready for testing on Preview environments.
 
 ### Environment Variables
-Set these variables in your Vercel Preview environment:
+Set these variables in your Vercel environment:
 
 ```bash
-# Enable FreeKassa UI (Preview only)
+# Enable FreeKassa UI (Preview only - CRITICAL!)
 NEXT_PUBLIC_FK_ENABLED=true
 
 # FreeKassa Configuration
@@ -67,12 +67,15 @@ FREEKASSA_MERCHANT_ID=your_merchant_id
 FREEKASSA_SECRET1=your_secret1
 FREEKASSA_SECRET2=your_secret2
 FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/
+FREEKASSA_CURRENCY=RUB
 ```
 
-**⚠️ Important:** 
+**⚠️ CRITICAL Security Settings:** 
+- `NEXT_PUBLIC_FK_ENABLED` → Scope: **Preview only** (NEVER All Environments!)
+- `FREEKASSA_*` variables → Scope: Preview + Production (safe)
 - Only use `FREEKASSA_*` variables (no `FK_*` duplicates)
-- `NEXT_PUBLIC_FK_ENABLED` should only be `true` in Preview
-- Never enable in Production until fully tested
+
+📋 **Detailed setup:** See `VERCEL_ENV_SETUP_INSTRUCTIONS.md`
 
 ### API Endpoints
 
@@ -87,9 +90,17 @@ Returns configuration status without exposing secrets.
 POST /api/payments/freekassa/create
 Content-Type: application/json
 
+# Format 1: Product ID
 {
   "productId": "getlifeundo_pro|getlifeundo_vip|getlifeundo_team",
   "email": "optional@example.com"
+}
+
+# Format 2: Alternative (for testing)
+{
+  "currency": "RUB",
+  "order_id": "100500", 
+  "description": "Pro plan|VIP plan|Team plan"
 }
 ```
 

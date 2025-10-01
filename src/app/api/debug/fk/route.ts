@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { FK_ENABLED, FK_MERCHANT_ID, FK_PAYMENT_URL, FK_CONFIGURED, FK_PRODUCTS } from "@/lib/fk-env";
+import { FK_ENABLED, FK_MERCHANT_ID, FK_PAYMENT_URL, FK_CONFIGURED, FK_PRODUCTS, FK_CURRENCY } from "@/lib/fk-env";
 
 export async function GET() {
   // Только в Preview/Development — на проде отвечаем 404
@@ -17,6 +17,7 @@ export async function GET() {
     fkConfigured: FK_CONFIGURED,
     merchantIdMasked: masked,
     paymentUrl: FK_PAYMENT_URL,
+    currency: FK_CURRENCY,
     products: FK_PRODUCTS,
     timestamp: new Date().toISOString()
   });

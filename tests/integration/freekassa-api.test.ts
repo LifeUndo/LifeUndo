@@ -21,6 +21,7 @@ vi.mock('@/lib/fk-env', () => ({
   FK_SECRET1: 'test-secret1',
   FK_SECRET2: 'test-secret2',
   FK_PAYMENT_URL: 'https://pay.freekassa.ru/',
+  FK_CURRENCY: 'RUB',
   FK_CONFIGURED: true,
   FK_PRODUCTS: {
     getlifeundo_pro: "599.00",
@@ -114,6 +115,28 @@ describe('FreeKassa API Integration', () => {
       expect(data.ok).toBe(true);
       expect(data.pay_url).toContain('oa=9990.00');
     });
+
+    it('should support alternative format with description', async () => {
+      const request = new NextRequest('http://localhost/api/payments/freekassa/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          currency: 'RUB',
+          order_id: '100500',
+          description: 'Pro plan'
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const response = await createPayment(request);
+      const data = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(data.ok).toBe(true);
+      expect(data.pay_url).toContain('oa=599.00');
+      expect(data.pay_url).toContain('currency=RUB');
+    });
   });
 
   describe('GET /api/debug/fk', () => {
@@ -130,6 +153,7 @@ describe('FreeKassa API Integration', () => {
       expect(data.fkConfigured).toBe(true);
       expect(data.merchantIdMasked).toBe('test***');
       expect(data.paymentUrl).toBe('https://pay.freekassa.ru/');
+      expect(data.currency).toBe('RUB');
       expect(data.products).toHaveProperty('getlifeundo_pro');
       expect(data.products).toHaveProperty('getlifeundo_vip');
       expect(data.products).toHaveProperty('getlifeundo_team');

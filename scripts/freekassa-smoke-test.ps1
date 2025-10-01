@@ -30,8 +30,8 @@ try {
 
 Write-Host ""
 
-# Test 2: Create Payment (Pro Plan)
-Write-Host "2️⃣ Testing payment creation for Pro plan..." -ForegroundColor Cyan
+# Test 2: Create Payment (Pro Plan) - New Format
+Write-Host "2️⃣ Testing payment creation for Pro plan (new format)..." -ForegroundColor Cyan
 try {
     $paymentBody = @{
         productId = "getlifeundo_pro"
@@ -66,6 +66,28 @@ try {
 } catch {
     Write-Host "❌ Payment API failed: $($_.Exception.Message)" -ForegroundColor Red
     exit 1
+}
+
+Write-Host ""
+
+# Test 2.5: Create Payment (Alternative Format)
+Write-Host "2️⃣.5️⃣ Testing payment creation with alternative format..." -ForegroundColor Cyan
+try {
+    $paymentBody = @{
+        currency = "RUB"
+        order_id = "100500"
+        description = "Pro plan"
+    } | ConvertTo-Json
+    
+    $paymentResponse = Invoke-RestMethod -Method Post -Uri "$PreviewUrl/api/payments/freekassa/create" -Body $paymentBody -ContentType "application/json"
+    
+    if ($paymentResponse.ok -and $paymentResponse.pay_url -match "oa=599\.00") {
+        Write-Host "✅ Alternative format works correctly (599.00 RUB)" -ForegroundColor Green
+    } else {
+        Write-Host "❌ Alternative format failed or incorrect amount" -ForegroundColor Red
+    }
+} catch {
+    Write-Host "❌ Alternative format test failed: $($_.Exception.Message)" -ForegroundColor Red
 }
 
 Write-Host ""
