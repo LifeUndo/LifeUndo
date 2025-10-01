@@ -9,22 +9,28 @@ export default function GrantForm() {
   const [testResult, setTestResult] = useState<any>(null);
   const [error, setError] = useState('');
   const [devEnabled, setDevEnabled] = useState<boolean | null>(null);
+  const [diagInfo, setDiagInfo] = useState<any>(null);
 
-  // Check if dev mode is enabled
+  // Check dev status and diagnostics
   useEffect(() => {
-    fetch('/api/dev/license/status', { cache: 'no-store' })
-      .then(res => {
-        if (!res.ok) {
-          console.error(`Dev status API failed: ${res.status} ${res.statusText}`);
-          return { enabled: false };
-        }
-        return res.json();
-      })
-      .then(data => setDevEnabled(data.enabled))
-      .catch((error) => {
+    const checkStatus = async () => {
+      try {
+        // Check dev status
+        const statusRes = await fetch('/api/dev/license/status', { cache: 'no-store' });
+        const statusData = await statusRes.json();
+        setDevEnabled(statusData.enabled);
+
+        // Check diagnostics
+        const diagRes = await fetch('/api/dev/diag', { cache: 'no-store' });
+        const diagData = await diagRes.json();
+        setDiagInfo(diagData);
+      } catch (error) {
         console.error('Failed to check dev status:', error);
         setDevEnabled(false);
-      });
+      }
+    };
+
+    checkStatus();
   }, []);
 
   // Show loading while checking dev status
@@ -46,6 +52,26 @@ export default function GrantForm() {
         <p className="text-gray-300">
           Test license activation is only available in Preview/Development environment.
         </p>
+      </div>
+    );
+  }
+
+  // Show database warning if no DATABASE_URL
+  if (diagInfo && !diagInfo.hasDbUrl) {
+    return (
+      <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <h2 className="text-2xl font-bold text-orange-300 mb-4">🗄️ Database Not Connected</h2>
+        <p className="text-gray-300 mb-4">
+          БД не подключена в Preview. Для выдачи тестовых лицензий подключите DATABASE_URL и примените миграцию.
+        </p>
+        <div className="bg-white/10 rounded-lg p-4">
+          <p className="text-sm text-gray-300 mb-2">Для подключения БД:</p>
+          <ol className="text-sm text-gray-300 list-decimal list-inside space-y-1">
+            <li>Добавьте DATABASE_URL в Vercel Preview ENV</li>
+            <li>Выполните миграцию: <code className="bg-gray-800 px-2 py-1 rounded">\i migrations/100_payments_licenses.sql</code></li>
+            <li>Перезапустите Preview деплой</li>
+          </ol>
+        </div>
       </div>
     );
   }
@@ -77,7 +103,16 @@ export default function GrantForm() {
       if (data.ok) {
         setTestResult(data);
       } else {
-        setError(data.error || 'Unknown error');
+        // Handle specific error codes
+        if (data.code === 'NO_DATABASE_URL') {
+          setError(`🔴 ${data.message}`);
+        } else if (data.code === 'FORBIDDEN') {
+          setError('🟣 Доступ только в Preview');
+        } else if (data.code === 'DEV_DISABLED') {
+          setError('🟡 Dev mode disabled');
+        } else {
+          setError(data.message || data.error || 'Unknown error');
+        }
       }
     } catch (error) {
       setError('Network error: ' + (error instanceof Error ? error.message : 'Unknown error'));

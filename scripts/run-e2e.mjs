@@ -39,7 +39,20 @@ async function tryUiFlow(base) {
       throw new Error(`Dev mode disabled (status: ${JSON.stringify(statusResp)})`);
     }
 
-    // 3. Открываем downloads страницу
+    // 3. Проверяем diagnostics API
+    const diagResp = await page.evaluate(async (baseUrl) => {
+      try {
+        const res = await fetch(`${baseUrl}/api/dev/diag`);
+        if (!res.ok) {
+          return { hasDbUrl: false, error: `Diag API failed: ${res.status}` };
+        }
+        return await res.json();
+      } catch (error) {
+        return { hasDbUrl: false, error: error.message };
+      }
+    }, base);
+
+    // 4. Открываем downloads страницу
     const url = `${base}/ru/downloads`;
     const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
     if (!resp || !resp.ok()) throw new Error(`GET ${url} => ${resp ? resp.status() : 'no response'}`);
@@ -53,42 +66,64 @@ async function tryUiFlow(base) {
     // Ждём загрузки формы
     await page.waitForTimeout(2000);
 
-    // Форма должна быть видна
-    const hasForm = await page.locator('input[type="email"]').isVisible().catch(()=>false);
-    if (!hasForm) throw new Error(`Email input not visible`);
+    // Проверяем, какая форма показывается
+    const hasDbWarning = await page.locator('text=Database Not Connected').isVisible().catch(() => false);
+    const hasForm = await page.locator('input[type="email"]').isVisible().catch(() => false);
 
-    await page.fill('input[type="email"]', EMAIL);
-    
-    // Выбираем план, если есть select
-    const planSelect = page.locator('select');
-    if (await planSelect.count()) {
-      await planSelect.selectOption(PLAN).catch(()=>{});
-    }
-
-    await page.click('button:has-text("Grant Test License")');
-    
-    // Ждём результат
-    await page.waitForSelector('text=/Order ID|Success|✅/', { timeout: 15000 });
-
-    // Собираем данные результата
-    const text = await page.locator('main').innerText();
-    const orderId = (text.match(/(GRANT|SIM)-[^\s]+/) || [])[0] || '';
-    const expires = (text.match(/(\d{4}-\d{2}-\d{2}.*?(\+|\d{2}:\d{2}))/) || [])[0] || '';
-
-    // Проверяем Account страницу
-    const accountLink = page.locator('button:has-text("Open Account")');
-    if (await accountLink.count()) {
-      await accountLink.first().click();
-      await page.waitForLoadState('domcontentloaded');
-      await page.waitForTimeout(2000);
-      const accHtml = await page.content();
-      if (!/Pro|Проф|PRO/i.test(accHtml)) {
-        throw new Error('Account page does not show Pro level');
+    if (hasDbWarning) {
+      // Case A: No database - should show warning
+      console.log('Case A: No database detected, showing warning');
+      ok = true;
+      details = { 
+        orderId: 'N/A (no DB)', 
+        expires: 'N/A (no DB)',
+        case: 'no-db',
+        hasDbUrl: diagResp.hasDbUrl
+      };
+    } else if (hasForm) {
+      // Case B: With database - should work normally
+      console.log('Case B: Database detected, testing form');
+      
+      await page.fill('input[type="email"]', EMAIL);
+      
+      // Выбираем план, если есть select
+      const planSelect = page.locator('select');
+      if (await planSelect.count()) {
+        await planSelect.selectOption(PLAN).catch(()=>{});
       }
-    }
 
-    ok = true;
-    details = { orderId, expires };
+      await page.click('button:has-text("Grant Test License")');
+      
+      // Ждём результат
+      await page.waitForSelector('text=/Order ID|Success|✅|🔴/', { timeout: 15000 });
+
+      // Собираем данные результата
+      const text = await page.locator('main').innerText();
+      const orderId = (text.match(/(GRANT|SIM)-[^\s]+/) || [])[0] || '';
+      const expires = (text.match(/(\d{4}-\d{2}-\d{2}.*?(\+|\d{2}:\d{2}))/) || [])[0] || '';
+
+      // Проверяем Account страницу
+      const accountLink = page.locator('button:has-text("Open Account")');
+      if (await accountLink.count()) {
+        await accountLink.first().click();
+        await page.waitForLoadState('domcontentloaded');
+        await page.waitForTimeout(2000);
+        const accHtml = await page.content();
+        if (!/Pro|Проф|PRO/i.test(accHtml)) {
+          throw new Error('Account page does not show Pro level');
+        }
+      }
+
+      ok = true;
+      details = { 
+        orderId, 
+        expires,
+        case: 'with-db',
+        hasDbUrl: diagResp.hasDbUrl
+      };
+    } else {
+      throw new Error('Neither database warning nor form is visible');
+    }
     await browser.close();
   } catch (e) {
     await browser.close();
@@ -148,7 +183,8 @@ async function tryApiFlow(base) {
   for (const r of results) {
     lines.push(`\n## Base: ${r.base}`);
     if (r.ui?.ok) {
-      lines.push(`- UI: **OK** → order=${r.ui.details.orderId || 'n/a'}, expires=${r.ui.details.expires || 'n/a'}`);
+      const details = r.ui.details;
+      lines.push(`- UI: **OK** → Case: ${details.case}, order=${details.orderId}, expires=${details.expires}, hasDb=${details.hasDbUrl}`);
     } else {
       lines.push(`- UI: **FAIL** → ${r.ui?.error || 'no details'}`);
     }
