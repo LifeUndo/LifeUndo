@@ -12,10 +12,10 @@ export default function GrantForm() {
 
   // Check if dev mode is enabled
   useEffect(() => {
-    fetch('/api/dev/license/_status', { cache: 'no-store' })
+    fetch('/api/dev/license/status', { cache: 'no-store' })
       .then(res => {
-        if (res.status === 404) {
-          console.error('API path was prefixed with locale — use /api/dev/license/_status');
+        if (!res.ok) {
+          console.error(`Dev status API failed: ${res.status} ${res.statusText}`);
           return { enabled: false };
         }
         return res.json();

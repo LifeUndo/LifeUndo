@@ -25,9 +25,9 @@ async function tryUiFlow(base) {
     // 2. Проверяем dev status API
     const statusResp = await page.evaluate(async (baseUrl) => {
       try {
-        const res = await fetch(`${baseUrl}/api/dev/license/_status`);
-        if (res.status === 404) {
-          return { enabled: false, error: 'API not found (404)' };
+        const res = await fetch(`${baseUrl}/api/dev/license/status`);
+        if (!res.ok) {
+          return { enabled: false, error: `API failed: ${res.status} ${res.statusText}` };
         }
         return await res.json();
       } catch (error) {
