@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 interface AccountData {
   email?: string;
@@ -20,8 +19,6 @@ interface AccountData {
 }
 
 export default function AccountPage() {
-  const t = useTranslations('account');
-  const tCommon = useTranslations('common');
   const searchParams = useSearchParams();
   const orderId = searchParams.get('order_id') || '';
   
@@ -69,13 +66,13 @@ export default function AccountPage() {
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6">{t('title')}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold mb-6">Личный кабинет</h1>
 
       {!orderId ? (
         <div className="glass-card p-8">
-          <h2 className="text-xl font-semibold mb-4">{t('bind.title')}</h2>
+          <h2 className="text-xl font-semibold mb-4">Привязать покупку</h2>
           <p className="text-gray-300 mb-4">
-            {t('bind.desc')}
+            Введите Order ID из письма или страницы успешной оплаты
           </p>
           <form onSubmit={(e) => { e.preventDefault(); window.location.href = `/ru/account?order_id=${email}`; }} className="flex gap-3">
             <input

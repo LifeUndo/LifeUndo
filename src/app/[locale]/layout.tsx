@@ -3,8 +3,6 @@ import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
 import { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
@@ -116,12 +114,10 @@ export default async function LocaleLayout({
         }} />
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <Analytics />
-          <ModernHeader />
-          <main className="min-h-dvh pt-20">{children}</main>
-          <ModernFooter locale={locale} />
-        </NextIntlClientProvider>
+        <Analytics />
+        <ModernHeader />
+        <main className="min-h-dvh pt-20">{children}</main>
+        <ModernFooter locale={locale} />
       </body>
     </html>
   );
