@@ -160,6 +160,17 @@
       .modal-buttons .primary { background: linear-gradient(135deg, #5b8cff, #7b5bff); border: none; color: #fff; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
       .modal-buttons .secondary { background: transparent; border: 1px solid #ccc; color: #333; border-radius: 8px; padding: 8px 16px; cursor: pointer; }
       .modal-buttons .secondary:hover { background: #f5f5f5; }
+      
+      /* License Modal Styles */
+      .license-status { margin: 15px 0; }
+      .status-item { margin: 8px 0; padding: 8px; background: #f8f9fa; border-radius: 6px; }
+      .license-actions { margin: 15px 0; }
+      .license-actions button { margin: 5px 0; width: 100%; }
+      .license-bind { margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+      .license-bind h4 { margin: 0 0 10px 0; }
+      .license-input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; }
+      .license-links { margin: 15px 0; text-align: center; }
+      .license-links a { margin: 0 10px; color: #007bff; }
     </style>
   </head>
   <body>
@@ -209,7 +220,7 @@
         <a id="linkWebsite" href="https://lifeundo.github.io/LifeUndo/" target="_blank" data-i18n="footer_website">Website</a>
         · <a id="linkPrivacy" href="https://lifeundo.github.io/LifeUndo/privacy/" target="_blank" data-i18n="footer_privacy">Privacy</a>
         · <a id="linkSupport" href="https://t.me/lifeundo" target="_blank" data-i18n="footer_support">Support</a>
-        · <a id="linkSettings" href="#" data-i18n="footer_settings">License</a>
+        · <a id="linkLicense" href="#" data-i18n="footer_license">License</a>
       </div>
       <div id="tierInfo" class="tier-info"></div>
     </div>
@@ -234,21 +245,51 @@
       </div>
     </div>
 
-    <!-- Pro Stub Modal -->
-    <div id="proStub" class="modal hidden">
-      <div id="proBackdrop" class="backdrop"></div>
+    <!-- License Modal -->
+    <div id="licenseModal" class="modal hidden">
+      <div id="licenseBackdrop" class="backdrop"></div>
       <div class="modal-content">
-        <button id="closeProStub" class="close-btn">×</button>
-        <h3 data-i18n="pro_stub_title">Payment system connecting</h3>
-        <p data-i18n="pro_stub_text">Leave email/go to website</p>
-        <div class="modal-buttons">
-          <button id="openPricing" class="primary" data-i18n="pro_stub_open_pricing">Open pricing</button>
-          <button id="closeProStubBtn" class="secondary" data-i18n="pro_stub_close">Close</button>
+        <button id="closeLicenseModal" class="close-btn">×</button>
+        <h3>License Status</h3>
+        
+        <!-- Status Block -->
+        <div id="licenseStatus" class="license-status">
+          <div class="status-item">
+            <strong>Level:</strong> <span id="licenseLevel">No active license</span>
+          </div>
+          <div class="status-item">
+            <strong>Active until:</strong> <span id="licenseExpires">-</span>
+          </div>
+          <div class="status-item" id="bonusStatus" style="display: none;">
+            <strong>Starter Bonus:</strong> <span id="bonusExpires">-</span>
+          </div>
+        </div>
+
+        <!-- Actions Block -->
+        <div class="license-actions">
+          <button id="resendEmailBtn" class="primary">Resend activation email</button>
+          <button id="openAccountBtn" class="secondary">Open Account</button>
+        </div>
+
+        <!-- Bind Purchase Block -->
+        <div class="license-bind">
+          <h4>Bind Purchase</h4>
+          <input type="email" id="bindEmail" placeholder="Email" class="license-input">
+          <input type="text" id="bindOrderId" placeholder="Order ID" class="license-input">
+          <button id="bindPurchaseBtn" class="primary">Bind</button>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="license-links">
+          <a href="https://getlifeundo.com/ru/features" target="_blank">Features</a>
+          <a href="https://getlifeundo.com/ru/support" target="_blank">Support</a>
+          <a href="https://getlifeundo.com/ru/pricing" target="_blank">Pricing</a>
         </div>
       </div>
     </div>
 
     <script src="shared/licenseCore.js"></script>
+    <script src="telemetry.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

@@ -14,6 +14,21 @@ const wnModal = document.getElementById('wnModal');
 const wnClose = document.getElementById('wnClose');
 const versionTag = document.getElementById('versionTag');
 
+// License Modal Elements
+const linkLicense = document.getElementById('linkLicense');
+const licenseModal = document.getElementById('licenseModal');
+const closeLicenseModal = document.getElementById('closeLicenseModal');
+const licenseBackdrop = document.getElementById('licenseBackdrop');
+const licenseLevel = document.getElementById('licenseLevel');
+const licenseExpires = document.getElementById('licenseExpires');
+const bonusStatus = document.getElementById('bonusStatus');
+const bonusExpires = document.getElementById('bonusExpires');
+const resendEmailBtn = document.getElementById('resendEmailBtn');
+const openAccountBtn = document.getElementById('openAccountBtn');
+const bindEmail = document.getElementById('bindEmail');
+const bindOrderId = document.getElementById('bindOrderId');
+const bindPurchaseBtn = document.getElementById('bindPurchaseBtn');
+
 // ==== I18n ====
 let currentLang = 'en';
 const i18n = {
@@ -233,6 +248,152 @@ document.getElementById('linkSettings')?.addEventListener('click', (e) => {
   e.preventDefault();
   api.runtime.openOptionsPage();
 });
+
+// ==== License Modal Functions ====
+function openLicenseModal() {
+  licenseModal.classList.remove('hidden');
+  loadLicenseStatus();
+  // Track telemetry
+  if (window.LifeUndoTelemetry) {
+    window.LifeUndoTelemetry.trackLicenseViewed();
+  }
+}
+
+function closeLicenseModal() {
+  licenseModal.classList.add('hidden');
+}
+
+function loadLicenseStatus() {
+  // Get stored license info
+  api.storage.local.get(['lu_plan', 'lu_email', 'lu_expires', 'lu_bonus_expires'], (result) => {
+    const plan = result.lu_plan || 'free';
+    const email = result.lu_email || '';
+    const expires = result.lu_expires || '';
+    const bonusExpires = result.lu_bonus_expires || '';
+
+    // Update UI
+    licenseLevel.textContent = plan === 'free' ? 'No active license' : plan.toUpperCase();
+    licenseExpires.textContent = expires || '-';
+    
+    if (bonusExpires) {
+      bonusStatus.style.display = 'block';
+      bonusExpires.textContent = bonusExpires;
+    } else {
+      bonusStatus.style.display = 'none';
+    }
+
+    // Pre-fill email if available
+    if (email) {
+      bindEmail.value = email;
+    }
+  });
+}
+
+function resendActivationEmail() {
+  // Track telemetry
+  if (window.LifeUndoTelemetry) {
+    window.LifeUndoTelemetry.trackResendClicked();
+  }
+
+  api.storage.local.get(['lu_email'], (result) => {
+    const email = result.lu_email;
+    if (!email) {
+      showFlash('Please enter your email first', 'err');
+      return;
+    }
+
+    fetch('https://getlifeundo.com/api/account/resend-license', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        showFlash('Activation email sent!', 'ok');
+      } else {
+        showFlash('Error: ' + (data.error || 'Unknown error'), 'err');
+      }
+    })
+    .catch(error => {
+      showFlash('Network error: ' + error.message, 'err');
+    });
+  });
+}
+
+function openAccountPage() {
+  // Track telemetry
+  if (window.LifeUndoTelemetry) {
+    window.LifeUndoTelemetry.trackAccountOpened();
+  }
+
+  api.storage.local.get(['lu_email'], (result) => {
+    const email = result.lu_email || '';
+    const url = `https://getlifeundo.com/ru/account${email ? '?email=' + encodeURIComponent(email) : ''}`;
+    window.open(url, '_blank');
+  });
+}
+
+function bindPurchase() {
+  const email = bindEmail.value.trim();
+  const orderId = bindOrderId.value.trim();
+
+  if (!email || !orderId) {
+    showFlash('Please enter both email and order ID', 'err');
+    return;
+  }
+
+  // Call payment summary API
+  fetch(`https://getlifeundo.com/api/payment/summary?order_id=${encodeURIComponent(orderId)}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok && data.email === email) {
+        // Store license info
+        api.storage.local.set({
+          lu_plan: data.level || 'pro',
+          lu_email: email,
+          lu_expires: data.expires_at || '',
+          lu_bonus_expires: data.bonus_expires_at || ''
+        });
+        
+        showFlash('Purchase bound successfully!', 'ok');
+        loadLicenseStatus();
+        refreshVipUi();
+        
+        // Track successful bind
+        if (window.LifeUndoTelemetry) {
+          window.LifeUndoTelemetry.trackBindAttempted(true);
+        }
+      } else {
+        showFlash('Order not found or email mismatch', 'err');
+        
+        // Track failed bind
+        if (window.LifeUndoTelemetry) {
+          window.LifeUndoTelemetry.trackBindAttempted(false);
+        }
+      }
+    })
+    .catch(error => {
+      showFlash('Error: ' + error.message, 'err');
+      
+      // Track failed bind
+      if (window.LifeUndoTelemetry) {
+        window.LifeUndoTelemetry.trackBindAttempted(false);
+      }
+    });
+}
+
+// ==== Event Listeners ====
+linkLicense?.addEventListener('click', (e) => {
+  e.preventDefault();
+  openLicenseModal();
+});
+
+closeLicenseModal?.addEventListener('click', closeLicenseModal);
+licenseBackdrop?.addEventListener('click', closeLicenseModal);
+resendEmailBtn?.addEventListener('click', resendActivationEmail);
+openAccountBtn?.addEventListener('click', openAccountPage);
+bindPurchaseBtn?.addEventListener('click', bindPurchase);
 
 // Storage change listener for live VIP updates
 api.storage.onChanged.addListener((changes, area) => {
