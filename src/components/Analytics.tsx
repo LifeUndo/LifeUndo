@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 declare global {
   interface Window {
-    plausible?: (event: string, options?: { props: Record<string, string | number | undefined> }) => void;
+    plausible?: (event: string, options?: { props?: Record<string, any> }) => void;
   }
 }
 
