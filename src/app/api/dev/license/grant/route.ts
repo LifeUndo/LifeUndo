@@ -43,11 +43,11 @@ export async function POST(request: NextRequest) {
     // Create payment record
     await db.insert(payments).values({
       order_id: orderId,
-      user_email: email,
+      plan: plan,
       amount: planConfig.amount,
       currency: planConfig.currency,
-      plan: plan,
       status: 'paid',
+      paid_at: new Date(),
       created_at: new Date(),
     });
 
