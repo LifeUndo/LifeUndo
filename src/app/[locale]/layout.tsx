@@ -8,18 +8,17 @@ import { Analytics } from '@/components/Analytics';
 
 export const dynamic = 'force-dynamic';
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children, params: {locale},
-}: {children: React.ReactNode, params: {locale: string}}) {
+}: {
+  children: React.ReactNode, params: {locale: string}
+}) {
   unstable_setRequestLocale(locale);
 
-  let messages = {};
+  let messages: any = {};
   try {
-    messages = getMessagesFor(locale, ['common','pricing','downloads','account','support','features','success']);
-  } catch (e) {
-    console.error('[i18n] load messages failed', e);
-    messages = {};
-  }
+    messages = getMessagesFor(locale, ['common','downloads']);
+  } catch {}
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
@@ -97,12 +96,20 @@ export default async function RootLayout({
         }} />
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Analytics />
-          <ModernHeader />
-          <main className="min-h-dvh pt-20">{children}</main>
-          <ModernFooter locale={locale} />
-        </NextIntlClientProvider>
+        {messages?.common
+          ? <NextIntlClientProvider locale={locale} messages={messages}>
+              <Analytics />
+              <ModernHeader />
+              <main className="min-h-dvh pt-20">{children}</main>
+              <ModernFooter locale={locale} />
+            </NextIntlClientProvider>
+          : <>
+              <Analytics />
+              <ModernHeader />
+              <main className="min-h-dvh pt-20">{children}</main>
+              <ModernFooter locale={locale} />
+            </>
+        }
       </body>
     </html>
   );

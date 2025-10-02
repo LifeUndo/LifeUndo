@@ -3,11 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 
-interface DownloadsClientProps {
-  locale: string;
-}
-
-export default function DownloadsClient({ locale }: DownloadsClientProps) {
+export default function DownloadsClient() {
   const t = useTranslations('downloads');
   const [testEmail, setTestEmail] = useState('');
   const [testPlan, setTestPlan] = useState('starter_6m');
@@ -112,7 +108,7 @@ export default function DownloadsClient({ locale }: DownloadsClientProps) {
 
   const openAccount = () => {
     if (testResult?.email) {
-      window.open(`/${locale}/account?email=${encodeURIComponent(testResult.email)}`, '_blank');
+      window.open(`/ru/account?email=${encodeURIComponent(testResult.email)}`, '_blank');
     }
   };
 
