@@ -1,13 +1,13 @@
 {
   "functions": {
     "app/**": {
-      "includeFiles": ["next-intl.config.mjs"]
+      "includeFiles": ["next-intl.config.mjs", "next-intl.config.js"]
     },
     "api/**": {
-      "includeFiles": ["next-intl.config.mjs"]
+      "includeFiles": ["next-intl.config.mjs", "next-intl.config.js"]
     },
     "middleware": {
-      "includeFiles": ["next-intl.config.mjs"]
+      "includeFiles": ["next-intl.config.mjs", "next-intl.config.js"]
     }
   }
 }
