@@ -1,25 +1,33 @@
-import "./globals.css";
+import type {Metadata} from 'next';
+import {NextIntlClientProvider} from 'next-intl';
+import {unstable_setRequestLocale} from 'next-intl/server';
+import '../globals.css';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
-import { Metadata } from 'next';
-import { NextIntlClientProvider } from 'next-intl';
 
-export const metadata: Metadata = {
-  title: 'GetLifeUndo',
+export const metadata: Metadata = { 
+  title: 'GetLifeUndo' 
 };
 
+async function loadNs(locale: string, ns: string) {
+  try {
+    // Путь от layout.tsx до /messages — ДВЕ точки вверх: ../../messages
+    const mod = await import(`../../messages/${locale}/${ns}.json`);
+    return mod.default;
+  } catch {
+    return {};
+  }
+}
+
 async function loadMessages(locale: string) {
-  // Лёгкий загрузчик только нужных нам неймспейсов
-  const safe = async (path: string) => {
-    try { return (await import(`../../../messages/${locale}/${path}.json`)).default; }
-    catch { return {}; }
-  };
-  return {
-    common: await safe('common'),
-    pricing: await safe('pricing'),
-    downloads: await safe('downloads'),
-  };
+  const [common, pricing, downloads] = await Promise.all([
+    loadNs(locale, 'common'),
+    loadNs(locale, 'pricing'),
+    loadNs(locale, 'downloads'),
+  ]);
+  // next-intl ждёт объект с неймспейсами
+  return { common, pricing, downloads };
 }
 
 export default async function LocaleLayout({
@@ -29,6 +37,7 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const messages = await loadMessages(locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
   
