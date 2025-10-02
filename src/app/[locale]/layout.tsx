@@ -3,40 +3,33 @@ import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
 import { Metadata } from 'next';
+import { NextIntlClientProvider } from 'next-intl';
 
 export const metadata: Metadata = {
-  title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
-  description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно. Расширение для Firefox с восстановлением вкладок.',
-  keywords: 'GetLifeUndo, восстановление вкладок, Firefox, расширение, Ctrl+Z, откат',
-  openGraph: {
-    title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
-    description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
-    type: 'website',
-    url: 'https://getlifeundo.com',
-    siteName: 'GetLifeUndo',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
-    description: 'Сохраняйте состояния, откатывайте ошибки и возвращайте важные версии мгновенно.',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
+  title: 'GetLifeUndo',
 };
 
-export default function LocaleLayout({
+async function loadMessages(locale: string) {
+  // Лёгкий загрузчик только нужных нам неймспейсов
+  const safe = async (path: string) => {
+    try { return (await import(`../../../messages/${locale}/${path}.json`)).default; }
+    catch { return {}; }
+  };
+  return {
+    common: await safe('common'),
+    pricing: await safe('pricing'),
+    downloads: await safe('downloads'),
+  };
+}
+
+export default async function LocaleLayout({
   children,
   params: { locale }
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const messages = await loadMessages(locale);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
   
   return (
@@ -113,10 +106,12 @@ export default function LocaleLayout({
         }} />
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <Analytics />
-        <ModernHeader />
-        <main className="min-h-dvh pt-20">{children}</main>
-        <ModernFooter locale={locale} />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Analytics />
+          <ModernHeader />
+          <main className="min-h-dvh pt-20">{children}</main>
+          <ModernFooter locale={locale} />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
