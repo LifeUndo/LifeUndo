@@ -1,11 +1,7 @@
 // middleware.ts
 import createMiddleware from 'next-intl/middleware';
-import intlConfig from './next-intl.config';
+import intlConfig from './next-intl.config.js';
 
 export default createMiddleware(intlConfig);
-
-// исключаем api/статику, чтобы не было /ru/api/...
-export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)']
-};
+export const config = { matcher: ['/((?!api|_next|.*\\..*).*)'] };
 
