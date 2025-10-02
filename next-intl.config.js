@@ -1,4 +1,4 @@
-module.exports = { 
-  locales: ['ru','en'], 
-  defaultLocale: 'ru' 
+module.exports = {
+  locales: ['ru', 'en'],
+  defaultLocale: 'ru'
 };
