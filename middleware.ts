@@ -1,7 +1,15 @@
-// middleware.ts
 import createMiddleware from 'next-intl/middleware';
-import intlConfig from './next-intl.config.js';
 
-export default createMiddleware(intlConfig);
-export const config = { matcher: ['/((?!api|_next|.*\\..*).*)'] };
+// ВАЖНО: конфиг — прямо здесь, без импортов из файлов.
+const intl = createMiddleware({
+  locales: ['ru', 'en'],
+  defaultLocale: 'ru',
+});
+
+export default intl;
+
+// Роуты для i18n, исключая статику и API
+export const config = {
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
+};
 
