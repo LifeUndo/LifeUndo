@@ -1,49 +1,26 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {unstable_setRequestLocale} from 'next-intl/server';
-import type {ReactNode} from 'react';
+import {getMessagesFor} from '@/lib/messages';
 import '../globals.css';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
-import * as messages from '@/lib/messages';
-
-type Locale = 'ru' | 'en';
-const DEFAULT_LOCALE: Locale = 'ru';
-const NAMESPACES = ['common','pricing','downloads','support','account'] as const;
-
-async function loadMessages(locale: string) {
-  const l = (locale === 'en' ? 'en' : 'ru') as Locale;
-  
-  const messageMap = {
-    ru: {
-      common: messages.ruCommon,
-      pricing: messages.ruPricing,
-      downloads: messages.ruDownloads,
-      support: messages.ruSupport,
-      account: messages.ruAccount,
-    },
-    en: {
-      common: messages.enCommon,
-      pricing: messages.enPricing,
-      downloads: messages.enDownloads,
-      support: messages.enSupport,
-      account: messages.enAccount,
-    }
-  };
-
-  const entries = NAMESPACES.map(ns => [ns, messageMap[l][ns]] as const);
-  return Object.fromEntries(entries);
-}
 
 export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({
-  params, children
-}: { params: { locale: string }, children: ReactNode }) {
-  const locale = params?.locale || DEFAULT_LOCALE;
+  children, params: {locale},
+}: {children: React.ReactNode, params: {locale: string}}) {
   unstable_setRequestLocale(locale);
 
-  const messages = await loadMessages(locale);
+  let messages = {};
+  try {
+    messages = getMessagesFor(locale, ['common','pricing','downloads','account','support','features','success']);
+  } catch (e) {
+    console.error('[i18n] load messages failed', e);
+    messages = {};
+  }
+
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   return (

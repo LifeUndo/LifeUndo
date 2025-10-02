@@ -1,0 +1,338 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+
+interface DownloadsClientProps {
+  locale: string;
+}
+
+export default function DownloadsClient({ locale }: DownloadsClientProps) {
+  const t = useTranslations('downloads');
+  const [testEmail, setTestEmail] = useState('');
+  const [testPlan, setTestPlan] = useState('starter_6m');
+  const [isLoading, setIsLoading] = useState(false);
+  const [testResult, setTestResult] = useState<any>(null);
+  const [error, setError] = useState('');
+  const [devEnabled, setDevEnabled] = useState<boolean | null>(null);
+  const [diagInfo, setDiagInfo] = useState<any>(null);
+
+  // Check dev status and diagnostics
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        // Check dev status
+        const statusRes = await fetch('/api/dev/license/status', { cache: 'no-store' });
+        const statusData = await statusRes.json();
+        setDevEnabled(statusData.enabled);
+
+        // Check diagnostics
+        const diagRes = await fetch('/api/dev/diag', { cache: 'no-store' });
+        const diagData = await diagRes.json();
+        setDiagInfo(diagData);
+      } catch (error) {
+        console.error('Failed to check dev status:', error);
+        setDevEnabled(false);
+      }
+    };
+
+    checkStatus();
+  }, []);
+
+  // Show loading while checking dev status
+  if (devEnabled === null) {
+    return (
+      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <div className="text-center text-white">
+          <p>Checking testing availability...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show disabled message if not in dev mode
+  if (!devEnabled) {
+    return (
+      <div className="bg-yellow-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <h2 className="text-2xl font-bold text-yellow-300 mb-4">⚠️ {t('testing.disabled')}</h2>
+        <p className="text-gray-300">
+          {t('testing.disabled.desc')}
+        </p>
+      </div>
+    );
+  }
+
+  // Show database warning if no DATABASE_URL (but still show form)
+  const showDbWarning = diagInfo && !diagInfo.hasDbUrl;
+
+  const handleGrantTestLicense = async () => {
+    if (!testEmail.trim()) {
+      setError('Please enter your email');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    setTestResult(null);
+
+    try {
+      const r = await fetch('/api/dev/license/grant-ui', { 
+        method: 'POST', 
+        body: JSON.stringify({ email: testEmail.trim(), plan: testPlan }), 
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (r.status >= 500) {
+        setError(t('alert.unexpected'));
+        return;
+      }
+
+      const data = await r.json();
+      
+      if (data.ok) {
+        setTestResult(data);
+      } else {
+        // Маппинг кодов ошибок
+        if (data.code === 'FORBIDDEN') {
+          setError(t('alert.forbidden'));
+        } else if (data.code === 'DEV_DISABLED') {
+          setError(t('alert.devDisabled'));
+        } else if (data.code === 'NO_DATABASE_URL') {
+          setError(t('alert.noDb'));
+        } else {
+          setError(t('alert.unexpected'));
+        }
+      }
+    } catch (error) {
+      setError(t('alert.unexpected'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const openAccount = () => {
+    if (testResult?.email) {
+      window.open(`/${locale}/account?email=${encodeURIComponent(testResult.email)}`, '_blank');
+    }
+  };
+
+  const openExtensionInstructions = () => {
+    // Scroll to extension instructions
+    document.getElementById('extension-instructions')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold text-white mb-8 text-center">
+            {t('title')}
+          </h1>
+          
+          {/* Test License Card - Client-side check */}
+          <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+            {/* Database warning banner */}
+            {showDbWarning && (
+              <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-6 mb-6">
+                <h2 className="text-xl font-bold text-orange-300 mb-2">🗄️ {t('db.missing.title')}</h2>
+                <p className="text-gray-300 text-sm">
+                  {t('db.missing.desc')}
+                </p>
+              </div>
+            )}
+
+            <h2 className="text-2xl font-bold text-white mb-4">🧪 {t('grant.title')}</h2>
+            <p className="text-gray-300 mb-6">
+              Test the full license flow without any payment. Perfect for development and testing.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-white mb-2">{t('grant.email')}</label>
+                <input
+                  type="email"
+                  value={testEmail}
+                  onChange={(e) => setTestEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-white mb-2">{t('grant.plan')}</label>
+                <select
+                  value={testPlan}
+                  onChange={(e) => setTestPlan(e.target.value)}
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500"
+                >
+                  <option value="starter_6m">Starter Bundle (6 months)</option>
+                  <option value="pro_month">Pro Monthly</option>
+                  <option value="vip_lifetime">VIP Lifetime</option>
+                  <option value="team_5">Team (5 seats)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div className="mt-6">
+              <button
+                onClick={handleGrantTestLicense}
+                disabled={isLoading}
+                className="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-8 rounded-lg hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Granting...' : t('grant.button')}
+              </button>
+            </div>
+
+            {error && (
+              <div className="mt-4 p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
+                <p className="text-red-300">❌ {error}</p>
+              </div>
+            )}
+
+            {testResult && (
+              <div className="mt-6 p-6 bg-green-500/20 border border-green-500/30 rounded-lg">
+                <h3 className="text-lg font-semibold text-green-300 mb-4">✅ {t('grant.success')}</h3>
+                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <strong className="text-white">Order ID:</strong>
+                    <p className="text-gray-300 font-mono">{testResult.order_id}</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Level:</strong>
+                    <p className="text-gray-300">{testResult.level?.toUpperCase()}</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Expires:</strong>
+                    <p className="text-gray-300">{new Date(testResult.expires_at).toLocaleDateString()}</p>
+                  </div>
+                  <div>
+                    <strong className="text-white">Plan:</strong>
+                    <p className="text-gray-300">{testResult.plan}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-6 flex gap-4">
+                  <button
+                    onClick={openAccount}
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
+                  >
+                    Open Account
+                  </button>
+                  <button
+                    onClick={openExtensionInstructions}
+                    className="bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 px-6 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all"
+                  >
+                    Extension Instructions
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Chrome */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">C</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('browsers.chrome.title')}</h3>
+              <p className="text-gray-300 mb-4">{t('browsers.chrome.desc')}</p>
+              <a 
+                href="chrome://extensions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all inline-block text-center"
+              >
+                {t('browsers.chrome.button')}
+              </a>
+            </div>
+
+            {/* Firefox */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">F</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('browsers.firefox.title')}</h3>
+              <p className="text-gray-300 mb-4">{t('browsers.firefox.desc')}</p>
+              <a 
+                href="about:debugging#/runtime/this-firefox"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-2 px-4 rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all inline-block text-center"
+              >
+                {t('browsers.firefox.button')}
+              </a>
+            </div>
+
+            {/* Edge */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">E</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('browsers.edge.title')}</h3>
+              <p className="text-gray-300 mb-4">{t('browsers.edge.desc')}</p>
+              <a 
+                href="edge://extensions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all inline-block text-center"
+              >
+                {t('browsers.edge.button')}
+              </a>
+            </div>
+          </div>
+
+          {/* Manual Installation Instructions */}
+          <div id="extension-instructions" className="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8">
+            <h2 className="text-2xl font-bold text-white mb-6">📦 {t('instructions.title')}</h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-3">{t('instructions.chrome.title')}</h3>
+                <ol className="text-gray-300 space-y-2">
+                  <li>1. {t('instructions.chrome.step1')} <code className="bg-gray-800 px-2 py-1 rounded">chrome://extensions/</code></li>
+                  <li>2. {t('instructions.chrome.step2')}</li>
+                  <li>3. {t('instructions.chrome.step3')}</li>
+                  <li>4. {t('instructions.chrome.step4')} <code className="bg-gray-800 px-2 py-1 rounded">extension/</code></li>
+                </ol>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-3">{t('instructions.firefox.title')}</h3>
+                <ol className="text-gray-300 space-y-2">
+                  <li>1. {t('instructions.firefox.step1')} <code className="bg-gray-800 px-2 py-1 rounded">about:debugging</code></li>
+                  <li>2. {t('instructions.firefox.step2')}</li>
+                  <li>3. {t('instructions.firefox.step3')}</li>
+                  <li>4. {t('instructions.firefox.step4')} <code className="bg-gray-800 px-2 py-1 rounded">extension/manifest.json</code></li>
+                </ol>
+              </div>
+            </div>
+
+            <div className="mt-8 p-4 bg-blue-500/20 border border-blue-500/30 rounded-lg">
+              <h4 className="text-lg font-semibold text-blue-300 mb-2">📁 {t('instructions.path.title')}</h4>
+              <p className="text-gray-300 mb-2">
+                {t('instructions.path.desc')} <code className="bg-gray-800 px-2 py-1 rounded">extension/</code>
+              </p>
+              <p className="text-sm text-gray-400 mb-4">
+                {t('instructions.path.build')} <code className="bg-gray-800 px-2 py-1 rounded">npm run build:ext</code>
+              </p>
+              
+              <div className="mt-4">
+                <a 
+                  href="/extension-dev-0.4.0.zip" 
+                  download
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all"
+                >
+                  {t('instructions.download.button')}
+                </a>
+                <p className="text-xs text-gray-400 mt-2">
+                  {t('instructions.download.desc')} <code className="bg-gray-800 px-1 py-0.5 rounded">npm run build:ext:zip</code>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
