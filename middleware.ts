@@ -1,13 +1,22 @@
-import createMiddleware from 'next-intl/middleware';
+// middleware.ts  (корень)
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-const intl = createMiddleware({
-  locales: ['ru', 'en'],
-  defaultLocale: 'ru'
-});
-
-export default intl;
-
+// Матчим корень и все страницы, кроме статики и /api
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: ['/', '/((?!api|_next|.*\\..*).*)'],
 };
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // Корень -> /ru (можно поменять на /en)
+  if (pathname === '/') {
+    const url = req.nextUrl.clone();
+    url.pathname = '/ru';
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
+}
 
