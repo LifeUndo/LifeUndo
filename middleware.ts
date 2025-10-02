@@ -1,38 +1,11 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// middleware.ts
+import createMiddleware from 'next-intl/middleware';
+import intlConfig from './next-intl.config';
 
-const locales = ["ru", "en"];
+export default createMiddleware(intlConfig);
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-  
-  // Пропускаем API, статику, файлы
-  if (
-    pathname.startsWith('/api') ||
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/favicon') ||
-    pathname.match(/\.(ico|png|jpg|jpeg|svg|webp|gif|css|js|json|xml|txt)$/)
-  ) {
-    return NextResponse.next();
-  }
-  
-  // Проверяем наличие локали в пути
-  const pathnameHasLocale = locales.some(
-    locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
-  );
-  
-  // Если локаль есть - пропускаем
-  if (pathnameHasLocale) {
-    return NextResponse.next();
-  }
-  
-  // Редиректим на дефолтную локаль
-  const url = req.nextUrl.clone();
-  url.pathname = `/ru${pathname}`;
-  return NextResponse.redirect(url);
-}
-
+// исключаем api/статику, чтобы не было /ru/api/...
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|api).*)"]
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };
 

@@ -1,5 +1,4 @@
 import {NextIntlClientProvider} from 'next-intl';
-import {unstable_setRequestLocale} from 'next-intl/server';
 import {getMessagesFor} from '@/lib/messages';
 import '../globals.css';
 import ModernHeader from '@/components/ModernHeader';
@@ -13,8 +12,6 @@ export default async function LocaleLayout({
 }: {
   children: React.ReactNode, params: {locale: string}
 }) {
-  unstable_setRequestLocale(locale);
-
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   try {
