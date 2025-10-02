@@ -1,0 +1,16 @@
+{
+  "title": "Download LifeUndo Extension",
+  "testing.disabled": "Testing Disabled",
+  "testing.disabled.desc": "Test license activation is available only in Preview/Development environment.",
+  "db.missing.title": "Database Not Connected",
+  "db.missing.desc": "To grant test licenses, set DATABASE_URL in Preview and run the migration.",
+  "grant.title": "Test License Activation",
+  "grant.email": "Email",
+  "grant.plan": "Plan",
+  "grant.button": "Grant Test License",
+  "grant.success": "Done! License activated.",
+  "alert.forbidden": "Dev mode is forbidden in Production.",
+  "alert.devDisabled": "Turn on DEV_SIMULATE_WEBHOOK_ENABLED=true in Preview.",
+  "alert.noDb": "DATABASE_URL is not set in Preview.",
+  "alert.unexpected": "Unexpected error. Please try again."
+}

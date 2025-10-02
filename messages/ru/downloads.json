@@ -1,0 +1,16 @@
+{
+  "title": "Скачать расширение GetLifeUndo",
+  "testing.disabled": "Тестирование отключено",
+  "testing.disabled.desc": "Активация тестовой лицензии доступна только в Preview/Dev окружении.",
+  "db.missing.title": "База данных не подключена",
+  "db.missing.desc": "Для выдачи тестовых лицензий подключите DATABASE_URL в Preview и примените миграцию.",
+  "grant.title": "Тестовая активация лицензии",
+  "grant.email": "Email",
+  "grant.plan": "Тариф",
+  "grant.button": "Выдать тестовую лицензию",
+  "grant.success": "Готово! Лицензия активирована.",
+  "alert.forbidden": "Dev-режим запрещён в продакшене.",
+  "alert.devDisabled": "Включите DEV_SIMULATE_WEBHOOK_ENABLED=true в Preview.",
+  "alert.noDb": "DATABASE_URL не задан в Preview.",
+  "alert.unexpected": "Непредвиденная ошибка. Попробуйте ещё раз."
+}

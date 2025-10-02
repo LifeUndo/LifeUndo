@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const isProd = process.env.VERCEL_ENV === 'production';
   return NextResponse.json({
-    vercelEnv: process.env.VERCEL_ENV ?? 'unknown',
+    vercelEnv: process.env.VERCEL_ENV ?? 'local',
     devEnabled: process.env.DEV_SIMULATE_WEBHOOK_ENABLED === 'true',
-    emailEnabled: process.env.NEXT_EMAIL_ENABLED === 'true',
-    hasDbUrl: Boolean(process.env.DATABASE_URL),
-    isProd
+    emailEnabled: process.env.NEXT_EMAIL_ENABLED !== 'false',
+    hasDbUrl: !!process.env.DATABASE_URL
   });
 }

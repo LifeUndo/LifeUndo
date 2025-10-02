@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function GrantForm() {
+  const t = useTranslations('downloads');
   const [testEmail, setTestEmail] = useState('');
   const [testPlan, setTestPlan] = useState('starter_6m');
   const [isLoading, setIsLoading] = useState(false);
@@ -48,9 +50,9 @@ export default function GrantForm() {
   if (!devEnabled) {
     return (
       <div className="bg-yellow-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
-        <h2 className="text-2xl font-bold text-yellow-300 mb-4">⚠️ Testing Disabled</h2>
+        <h2 className="text-2xl font-bold text-yellow-300 mb-4">⚠️ {t('testing.disabled')}</h2>
         <p className="text-gray-300">
-          Test license activation is only available in Preview/Development environment.
+          {t('testing.disabled.desc')}
         </p>
       </div>
     );
@@ -60,9 +62,9 @@ export default function GrantForm() {
   if (diagInfo && !diagInfo.hasDbUrl) {
     return (
       <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
-        <h2 className="text-2xl font-bold text-orange-300 mb-4">🗄️ Database Not Connected</h2>
+        <h2 className="text-2xl font-bold text-orange-300 mb-4">🗄️ {t('db.missing.title')}</h2>
         <p className="text-gray-300 mb-4">
-          БД не подключена в Preview. Для выдачи тестовых лицензий подключите DATABASE_URL и примените миграцию.
+          {t('db.missing.desc')}
         </p>
         <div className="bg-white/10 rounded-lg p-4">
           <p className="text-sm text-gray-300 mb-2">Для подключения БД:</p>
@@ -87,35 +89,35 @@ export default function GrantForm() {
     setTestResult(null);
 
     try {
-      const response = await fetch('/api/dev/license/grant-ui', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: testEmail.trim(),
-          plan: testPlan
-        })
+      const r = await fetch('/api/dev/license/grant-ui', { 
+        method: 'POST', 
+        body: JSON.stringify({ email: testEmail.trim(), plan: testPlan }), 
+        headers: { 'Content-Type': 'application/json' }
       });
 
-      const data = await response.json();
+      if (r.status >= 500) {
+        setError(t('alert.unexpected'));
+        return;
+      }
+
+      const data = await r.json();
       
       if (data.ok) {
         setTestResult(data);
       } else {
-        // Handle specific error codes
-        if (data.code === 'NO_DATABASE_URL') {
-          setError(`🔴 ${data.message}`);
-        } else if (data.code === 'FORBIDDEN') {
-          setError('🟣 Доступ только в Preview');
+        // Маппинг кодов ошибок
+        if (data.code === 'FORBIDDEN') {
+          setError(t('alert.forbidden'));
         } else if (data.code === 'DEV_DISABLED') {
-          setError('🟡 Dev mode disabled');
+          setError(t('alert.devDisabled'));
+        } else if (data.code === 'NO_DATABASE_URL') {
+          setError(t('alert.noDb'));
         } else {
-          setError(data.message || data.error || 'Unknown error');
+          setError(t('alert.unexpected'));
         }
       }
     } catch (error) {
-      setError('Network error: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      setError(t('alert.unexpected'));
     } finally {
       setIsLoading(false);
     }
@@ -132,49 +134,49 @@ export default function GrantForm() {
     document.getElementById('extension-instructions')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
-      <h2 className="text-2xl font-bold text-white mb-4">🧪 Test License Activation</h2>
-      <p className="text-gray-300 mb-6">
-        Test the full license flow without any payment. Perfect for development and testing.
-      </p>
-      
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-white mb-2">Email</label>
-          <input
-            type="email"
-            value={testEmail}
-            onChange={(e) => setTestEmail(e.target.value)}
-            placeholder="your@email.com"
-            className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-white mb-2">Plan</label>
-          <select
-            value={testPlan}
-            onChange={(e) => setTestPlan(e.target.value)}
-            className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500"
-          >
-            <option value="starter_6m">Starter Bundle (6 months)</option>
-            <option value="pro_month">Pro Monthly</option>
-            <option value="vip_lifetime">VIP Lifetime</option>
-            <option value="team_5">Team (5 seats)</option>
-          </select>
-        </div>
-      </div>
-      
-      <div className="mt-6">
-        <button
-          onClick={handleGrantTestLicense}
-          disabled={isLoading}
-          className="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-8 rounded-lg hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isLoading ? 'Granting...' : 'Grant Test License'}
-        </button>
-      </div>
+      return (
+        <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-4">🧪 {t('grant.title')}</h2>
+          <p className="text-gray-300 mb-6">
+            Test the full license flow without any payment. Perfect for development and testing.
+          </p>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-white mb-2">{t('grant.email')}</label>
+              <input
+                type="email"
+                value={testEmail}
+                onChange={(e) => setTestEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-white mb-2">{t('grant.plan')}</label>
+              <select
+                value={testPlan}
+                onChange={(e) => setTestPlan(e.target.value)}
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500"
+              >
+                <option value="starter_6m">Starter Bundle (6 months)</option>
+                <option value="pro_month">Pro Monthly</option>
+                <option value="vip_lifetime">VIP Lifetime</option>
+                <option value="team_5">Team (5 seats)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div className="mt-6">
+            <button
+              onClick={handleGrantTestLicense}
+              disabled={isLoading}
+              className="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-8 rounded-lg hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? 'Granting...' : t('grant.button')}
+            </button>
+          </div>
 
       {error && (
         <div className="mt-4 p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
@@ -182,9 +184,9 @@ export default function GrantForm() {
         </div>
       )}
 
-      {testResult && (
-        <div className="mt-6 p-6 bg-green-500/20 border border-green-500/30 rounded-lg">
-          <h3 className="text-lg font-semibold text-green-300 mb-4">✅ Test License Granted!</h3>
+          {testResult && (
+            <div className="mt-6 p-6 bg-green-500/20 border border-green-500/30 rounded-lg">
+              <h3 className="text-lg font-semibold text-green-300 mb-4">✅ {t('grant.success')}</h3>
           <div className="grid md:grid-cols-2 gap-4 text-sm">
             <div>
               <strong className="text-white">Order ID:</strong>

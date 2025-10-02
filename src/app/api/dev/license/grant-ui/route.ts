@@ -2,39 +2,55 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    // Guard: production check
-    if (process.env.VERCEL_ENV === 'production') {
-      return NextResponse.json({ ok: false, code: 'FORBIDDEN' }, { status: 403 });
+    // Вычисляем флаги
+    const isProd = process.env.VERCEL_ENV === 'production';
+    const devEnabled = process.env.DEV_SIMULATE_WEBHOOK_ENABLED === 'true';
+    const hasDb = !!process.env.DATABASE_URL;
+
+    // Возвращаем 200 с JSON для всех предсказуемых кейсов
+    if (isProd) {
+      return NextResponse.json({ 
+        ok: false, 
+        code: 'FORBIDDEN', 
+        message: 'Dev grant is disabled in Production.' 
+      }, { status: 200 });
     }
 
-    // Guard: dev mode check
-    if (process.env.DEV_SIMULATE_WEBHOOK_ENABLED !== 'true') {
-      return NextResponse.json({ ok: false, code: 'DEV_DISABLED' }, { status: 400 });
+    if (!devEnabled) {
+      return NextResponse.json({ 
+        ok: false, 
+        code: 'DEV_DISABLED', 
+        message: 'Enable DEV_SIMULATE_WEBHOOK_ENABLED=true' 
+      }, { status: 200 });
     }
 
-    // Guard: database check
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        { 
-          ok: false, 
-          code: 'NO_DATABASE_URL', 
-          message: 'DATABASE_URL is not set for Preview. Connect a DB to use test license.' 
-        }, 
-        { status: 400 }
-      );
+    if (!hasDb) {
+      return NextResponse.json({ 
+        ok: false, 
+        code: 'NO_DATABASE_URL', 
+        message: 'DATABASE_URL is not set for Preview.' 
+      }, { status: 200 });
     }
 
     const body = await request.json();
     const { email, plan } = body;
 
     if (!email || !plan) {
-      return NextResponse.json({ ok: false, code: 'MISSING_PARAMS', message: 'Missing email or plan' }, { status: 400 });
+      return NextResponse.json({ 
+        ok: false, 
+        code: 'MISSING_PARAMS', 
+        message: 'Missing email or plan' 
+      }, { status: 200 });
     }
 
     // Call the actual grant API with server-side token
     const adminToken = process.env.ADMIN_GRANT_TOKEN;
     if (!adminToken) {
-      return NextResponse.json({ ok: false, code: 'NO_ADMIN_TOKEN', message: 'Admin token not configured' }, { status: 500 });
+      return NextResponse.json({ 
+        ok: false, 
+        code: 'NO_ADMIN_TOKEN', 
+        message: 'Admin token not configured' 
+      }, { status: 200 });
     }
 
     try {
@@ -64,22 +80,22 @@ export async function POST(request: NextRequest) {
           ok: false, 
           code: 'GRANT_FAILED', 
           message: grantData.error || 'Grant failed' 
-        }, { status: grantResponse.status });
+        }, { status: 200 });
       }
     } catch (dbError) {
       console.error('[DevGrant] Database error:', dbError);
       return NextResponse.json(
         { ok: false, code: 'DB_ERROR', message: 'Database error in Preview.' },
-        { status: 500 }
+        { status: 200 }
       );
     }
 
   } catch (error) {
-    console.error('[DevGrant] Unexpected error:', error);
+    console.error('[grant-ui]', error);
     return NextResponse.json({ 
       ok: false,
-      code: 'INTERNAL_ERROR',
-      message: 'Internal server error'
+      code: 'UNEXPECTED',
+      message: 'Unexpected error'
     }, { status: 500 });
   }
 }
