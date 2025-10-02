@@ -58,25 +58,8 @@ export default function GrantForm() {
     );
   }
 
-  // Show database warning if no DATABASE_URL
-  if (diagInfo && !diagInfo.hasDbUrl) {
-    return (
-      <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
-        <h2 className="text-2xl font-bold text-orange-300 mb-4">🗄️ {t('db.missing.title')}</h2>
-        <p className="text-gray-300 mb-4">
-          {t('db.missing.desc')}
-        </p>
-        <div className="bg-white/10 rounded-lg p-4">
-          <p className="text-sm text-gray-300 mb-2">Для подключения БД:</p>
-          <ol className="text-sm text-gray-300 list-decimal list-inside space-y-1">
-            <li>Добавьте DATABASE_URL в Vercel Preview ENV</li>
-            <li>Выполните миграцию: <code className="bg-gray-800 px-2 py-1 rounded">\i migrations/100_payments_licenses.sql</code></li>
-            <li>Перезапустите Preview деплой</li>
-          </ol>
-        </div>
-      </div>
-    );
-  }
+  // Show database warning if no DATABASE_URL (but still show form)
+  const showDbWarning = diagInfo && !diagInfo.hasDbUrl;
 
   const handleGrantTestLicense = async () => {
     if (!testEmail.trim()) {
@@ -136,6 +119,16 @@ export default function GrantForm() {
 
       return (
         <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+          {/* Database warning banner */}
+          {showDbWarning && (
+            <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-6 mb-6">
+              <h2 className="text-xl font-bold text-orange-300 mb-2">🗄️ {t('db.missing.title')}</h2>
+              <p className="text-gray-300 text-sm">
+                {t('db.missing.desc')}
+              </p>
+            </div>
+          )}
+
           <h2 className="text-2xl font-bold text-white mb-4">🧪 {t('grant.title')}</h2>
           <p className="text-gray-300 mb-6">
             Test the full license flow without any payment. Perfect for development and testing.
