@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "app/**": {
+      "includeFiles": "next-intl.config.mjs"
+    },
+    "middleware": {
+      "includeFiles": "next-intl.config.mjs"
+    }
+  }
+}
