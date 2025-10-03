@@ -1,0 +1,122 @@
+GetLifeUndo — HANDOVER / CHECKLIST (TXT)
+Дата: 2025‑09‑30
+
+-----------------------------
+1) ТЕКУЩЕЕ СОСТОЯНИЕ
+-----------------------------
+• Прод (Production): стабилен, брендинг "GetLifeUndo", корректные редиректы .ru → .com.
+• Рабочий прод-деплой (на момент передачи): ветка maintenance/release-lock-20250130-02, коммит 4f7e919.
+• lifeundo.ru: FreeKassa деактивирована/удалена (не мешает).
+• Основной сайт: https://getlifeundo.com/ (www редиректится на apex; .ru домены 301 → https://getlifeundo.com/ru).
+
+-----------------------------
+2) ВЕТКИ/PR ДЛЯ ОПЛАТЫ (FreeKassa)
+-----------------------------
+• Корректная Preview-ветка (на базе прода): feature/fk-from-prod-lock  (основана от коммита 4f7e919).
+• Диагностическая ветка (старее, НЕ использовать в работе): hotfix/fk-pricing-diagnostics-01 — в ней местами старый брендинг “LifeUndo”.
+
+Почему важно:
+— Все тесты FreeKassa выполнять ТОЛЬКО на превью, собранном из feature/fk-from-prod-lock,
+  чтобы не смешивать старый контент и не ловить конфликт ENV.
+
+-----------------------------
+3) ENV (ТОЛЬКО ДЛЯ PREVIEW)
+-----------------------------
+В Vercel → Project: getlifeundo → Settings → Environment Variables
+Добавить со Scope = Preview (и включить только Preview):
+  NEXT_PUBLIC_FK_ENABLED = true
+  FREEKASSA_MERCHANT_ID  = <значение из ЛК FK>
+  FREEKASSA_SECRET1      = <секрет1>
+  FREEKASSA_SECRET2      = <секрет2>
+  FREEKASSA_PAYMENT_URL  = https://pay.freekassa.ru/
+
+ВАЖНО: Любые переменные формата FK_* (без префикса FREEKASSA_) — выключить/удалить,
+      чтобы не было конфликта имён.
+
+После добавления ENV → открой нужный Preview-деплой → ⋯ → Redeploy (без очистки кэша достаточно).
+
+-----------------------------
+4) КАК ПРАВИЛЬНО ВЫБИРАТЬ PREVIEW
+-----------------------------
+Из карточки деплоя берём домен вида:
+  • git‑alias: https://getlifeundo-git-<branch-name>-<hash>.vercel.app
+      (для ветки feature/fk-from-prod-lock он начинается на getlifeundo-git-feature-fk-from-prod-lock-...)
+ИЛИ второй домен (случайный алиас):
+  • https://getlifeundo-<rand>-alexs-projects-ef5d9b64.vercel.app
+
+Используем ЛЮБОЙ из этих двух — это один и тот же деплой. Главное — без “XXXXX” в URL :)
+
+-----------------------------
+5) БЫСТРЫЕ ПРОВЕРКИ (PowerShell)
+-----------------------------
+# ВСТАВЬ СВОЙ ПРЕВЬЮ-ДОМЕН БЕЗ КАВЫЧЕК “XXXXX”
+$P = "https://<твой-preview>.vercel.app"
+
+# 1) Диагностика конфигурации FK (должно быть ok:true, fkEnabled:true)
+$r = Invoke-WebRequest -Uri "$P/api/debug/fk" -UseBasicParsing
+$r.Content
+($r.Content | ConvertFrom-Json) | Format-List
+
+# 2) Создание платежа (Pro) — получим pay_url
+$body = @{ productId = "getlifeundo_pro" } | ConvertTo-Json
+$r = Invoke-WebRequest -Method POST `
+  -Uri "$P/api/payments/freekassa/create" `
+  -ContentType "application/json" `
+  -Body $body -UseBasicParsing
+$r.Content
+$resp = $r.Content | ConvertFrom-Json
+
+# 3) Открыть форму оплаты в браузере
+Start-Process $resp.pay_url
+
+Ожидаемо:
+— /api/debug/fk → {"ok":true,"fkEnabled":true,...}
+— pay_url ведёт на https://pay.freekassa.ru/?... БЕЗ ошибки «Неправильные параметры ссылки».
+
+-----------------------------
+6) ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ ПО ПОДПИСИ
+-----------------------------
+• Формула подписи для ссылки: MD5(MERCHANT_ID:AMOUNT:SECRET1:ORDER_ID)
+• AMOUNT строго строкой с двумя знаками после точки: "599.00", "9990.00", "2990.00"
+• ORDER_ID — ASCII, без пробелов/кириллицы (пример: 1706630400000-abc123)
+• В URL явно указывать currency=RUB
+• Для callback используется SECRET2 (валидация на /api/payments/freekassa/result)
+
+-----------------------------
+7) UI / ПОВЕДЕНИЕ
+-----------------------------
+• Кнопки «Оплатить через FreeKassa» показывать на /ru/pricing ТОЛЬКО при NEXT_PUBLIC_FK_ENABLED=true.
+• Страницы /ru/success и /ru/fail доступны.
+• Брендинг: «GetLifeUndo»; локализованные ссылки в футере; соц.иконки не “слипаются”.
+
+-----------------------------
+8) ПОСЛЕ ЗЕЛЁНОЙ ПРИЁМКИ
+-----------------------------
+1) Promote Preview → Production
+2) Скопировать ENV в Production (тем же именем, без FK_* дублей)
+3) Повторить smoke-тесты на проде
+4) Protect прод-деплой
+
+-----------------------------
+9) ЧТО ПРИСЫЛАТЬ ДЛЯ ДИАГНОСТИКИ, ЕСЛИ ЧТО-ТО НЕ ТАК
+-----------------------------
+• Полный URL превью ($P)
+• Текст /api/debug/fk (как есть)
+• Полный pay_url, который вернул /api/payments/freekassa/create
+
+-----------------------------
+10) КРАТКИЕ ССЫЛКИ / СПРАВКА
+-----------------------------
+• Прод: https://getlifeundo.com/
+• Превью: брать домен из карточки ветки feature/fk-from-prod-lock (git‑alias или второй алиас)
+• Док.смоки: ops/checks/fk_smoke.ps1 (если присутствует в репо — запускать в PowerShell)
+• Ключевая база: коммит 4f7e919 (maintenance/release-lock-20250130-02)
+
+-----------------------------
+11) ВАЖНЫЕ ЗАМЕТКИ
+-----------------------------
+• lifeundo.ru — FK отключена/удалена (подтверждено).
+• Не смешивать старые ветки с брендингом “LifeUndo” (hotfix/fk-pricing-diagnostics-01) — только для прошлых тестов.
+• Все новые работы по оплате — вести от ветки feature/fk-from-prod-lock.
+
+Конец файла.

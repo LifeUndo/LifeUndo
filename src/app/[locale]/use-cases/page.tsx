@@ -29,9 +29,17 @@ export default function UseCasesPage() {
                 <h3 className="text-xl font-semibold mb-3 text-white">
                   {useCase.title}
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 mb-4">
                   {useCase.summary}
                 </p>
+                <div className="mt-4">
+                  <a
+                    href={useCase.cta === "Узнать о GLU" ? "/ru/email-pause" : "/ru/downloads"}
+                    className="inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
+                  >
+                    {useCase.cta}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -49,13 +57,13 @@ export default function UseCasesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/download"
+              href="/ru/downloads"
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
             >
               Скачать бесплатно
             </a>
             <a
-              href="/pricing"
+              href="/ru/pricing"
               className="px-8 py-4 border-2 border-purple-500 text-purple-400 rounded-lg font-semibold hover:bg-purple-500 hover:text-white transition-all duration-200"
             >
               Посмотреть тарифы
