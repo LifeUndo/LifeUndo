@@ -1,0 +1,21 @@
+# Vercel ignore file
+# This file is used to ignore files and directories from being deployed to Vercel
+
+# Node modules
+node_modules
+
+# Build output
+.next
+out
+
+# Cache
+.turbo
+.swc
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+
