@@ -1,22 +1,17 @@
-// middleware.ts  (корень)
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import type {NextRequest} from 'next/server';
+import {NextResponse} from 'next/server';
 
-// Матчим корень и все страницы, кроме статики и /api
+// Только редирект c "/" на "/ru". НИЧЕГО больше.
 export const config = {
-  matcher: ['/', '/((?!api|_next|.*\\..*).*)'],
+  matcher: ['/']  // важно: не матчим /ru и прочее
 };
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-
-  // Корень -> /ru (можно поменять на /en)
-  if (pathname === '/') {
+  if (req.nextUrl.pathname === '/') {
     const url = req.nextUrl.clone();
     url.pathname = '/ru';
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, 308);
   }
-
   return NextResponse.next();
 }
 

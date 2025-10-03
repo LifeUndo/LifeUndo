@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useT } from '@/lib/i18n-react';
 
 export default function DownloadsClient() {
-  const t = useTranslations('downloads');
+  const t = useT('downloads');
   const [testEmail, setTestEmail] = useState('');
   const [testPlan, setTestPlan] = useState('starter_6m');
   const [isLoading, setIsLoading] = useState(false);

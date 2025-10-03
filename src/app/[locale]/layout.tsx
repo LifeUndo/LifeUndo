@@ -1,43 +1,33 @@
-// src/app/[locale]/layout.tsx
-import { ReactNode } from 'react';
-import { NextIntlClientProvider } from 'next-intl';
-import '../globals.css';
+import './globals.css';
+import type {ReactNode} from 'react';
+import {BUNDLE, safeLocale} from '@/lib/i18n';
+import {I18nProvider} from '@/lib/i18n-react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
 
-// импортируем только нужные неймспейсы
-import ru_common from '../../../messages/ru/common.json';
-import ru_downloads from '../../../messages/ru/downloads.json';
-import en_common from '../../../messages/en/common.json';
-import en_downloads from '../../../messages/en/downloads.json';
+export const dynamic = 'force-static';
 
-export const dynamic = 'force-static'; // безопасно для layout
-
-type Props = {
+export default function LocaleLayout({
+  children,
+  params
+}: {
   children: ReactNode;
-  params: { locale: 'ru' | 'en' | string };
-};
-
-const BUNDLE: Record<string, Record<string, unknown>> = {
-  ru: { common: ru_common, downloads: ru_downloads },
-  en: { common: en_common, downloads: en_downloads },
-};
-
-export default function LocaleLayout({ children, params: { locale } }: Props) {
-  const lang = (locale === 'en' || locale === 'ru') ? locale : 'ru';
-  const messages = BUNDLE[lang] ?? BUNDLE.ru;
+  params: {locale: string};
+}) {
+  const locale = safeLocale(params?.locale);
+  const messages = BUNDLE[locale];
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   return (
-    <html lang={lang}>
+    <html lang={locale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href={`${baseUrl}/${lang}`} />
+        <link rel="canonical" href={`${baseUrl}/${locale}`} />
         
         {/* Hreflang */}
         <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/`} />
@@ -103,12 +93,12 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
         }} />
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <NextIntlClientProvider messages={messages} locale={lang}>
+        <I18nProvider messages={messages}>
           <Analytics />
           <ModernHeader />
           <main className="min-h-dvh pt-20">{children}</main>
-          <ModernFooter locale={lang} />
-        </NextIntlClientProvider>
+          <ModernFooter locale={locale} />
+        </I18nProvider>
       </body>
     </html>
   );
