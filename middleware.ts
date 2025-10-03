@@ -27,7 +27,7 @@ export function middleware(req: NextRequest) {
 
   // любой путь без локали → /ru/<остальной-путь>
   const url = req.nextUrl.clone();
-  url.pathname = `/ru${pathname.startsWith('/') ? '' : '/'}${pathname}`;
+  url.pathname = `/ru${pathname}`;
   return NextResponse.redirect(url);
 }
 
