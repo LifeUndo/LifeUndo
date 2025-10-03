@@ -11,9 +11,23 @@ export function I18nProvider({messages, children}: {messages: Record<string, Dic
   const value = useMemo(() => ({
     t(ns: string, key: string) {
       try {
+        // Простая обработка - ищем ключ напрямую в namespace
         const nsObj = (messages as any)[ns] ?? {};
-        const val = key.split('.').reduce((acc, k) => (acc && acc[k]) ?? undefined, nsObj);
-        return (typeof val === 'string') ? val : key; // fallback на ключ, если не найдено
+        
+        // Если ключ содержит точки, разбиваем его
+        if (key.includes('.')) {
+          const keys = key.split('.');
+          let val = nsObj;
+          for (const k of keys) {
+            val = val?.[k];
+            if (val === undefined) break;
+          }
+          return (typeof val === 'string') ? val : key;
+        } else {
+          // Простой ключ без точек
+          const val = nsObj[key];
+          return (typeof val === 'string') ? val : key;
+        }
       } catch (error) {
         console.error('i18n error:', error);
         return key; // fallback на ключ при ошибке
