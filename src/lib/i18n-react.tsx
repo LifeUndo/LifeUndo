@@ -10,9 +10,14 @@ const I18nCtx = createContext<Ctx>({ t: () => '' });
 export function I18nProvider({messages, children}: {messages: Record<string, Dict>, children: React.ReactNode}) {
   const value = useMemo(() => ({
     t(ns: string, key: string) {
-      const nsObj = (messages as any)[ns] ?? {};
-      const val = key.split('.').reduce((acc, k) => (acc && acc[k]) ?? undefined, nsObj);
-      return (typeof val === 'string') ? val : '';
+      try {
+        const nsObj = (messages as any)[ns] ?? {};
+        const val = key.split('.').reduce((acc, k) => (acc && acc[k]) ?? undefined, nsObj);
+        return (typeof val === 'string') ? val : key; // fallback на ключ, если не найдено
+      } catch (error) {
+        console.error('i18n error:', error);
+        return key; // fallback на ключ при ошибке
+      }
     }
   }), [messages]);
 

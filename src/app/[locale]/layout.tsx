@@ -17,7 +17,7 @@ export default function LocaleLayout({
   params: {locale: string};
 }) {
   const locale = safeLocale(params?.locale);
-  const messages = BUNDLE[locale];
+  const messages = BUNDLE[locale] || BUNDLE.ru; // fallback на русский
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   return (
