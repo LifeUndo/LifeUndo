@@ -114,13 +114,25 @@ export default function FundApplyPage() {
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   <option value="">Выберите категорию</option>
-                  <option value="education">Образование</option>
-                  <option value="research">Научные исследования</option>
-                  <option value="social">Социальные проекты</option>
-                  <option value="technology">Технологические инновации</option>
-                  <option value="art">Искусство и культура</option>
-                  <option value="other">Другое</option>
+                  <option value="nko">НКО — инициативы гражданского общества</option>
+                  <option value="medicine">Медицина — образовательные проекты для медиков/пациентов</option>
+                  <option value="education">Образование — школы/вузовские кружки</option>
+                  <option value="media">СМИ — локальные медиа и редакции</option>
+                  <option value="individuals">Частные лица — студенты, преподаватели, родители</option>
                 </select>
+                
+                {/* Описания категорий */}
+                {formData.category && (
+                  <div className="mt-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                    <p className="text-sm text-gray-300">
+                      {formData.category === 'nko' && 'Цифровая грамотность, приватность, обучение безопасной работе с данными.'}
+                      {formData.category === 'medicine' && 'Образовательные проекты для медиков/пациентов о защите персональных данных и снижении ошибок коммуникаций.'}
+                      {formData.category === 'education' && 'Гранты на кружки по цифровой гигиене, школьные газеты, студэнсообщества.'}
+                      {formData.category === 'media' && 'Инструменты и тренинги по безопасной публикации и проверке материалов.'}
+                      {formData.category === 'individuals' && 'Микрогранты на софт/обучение, если проект несёт общественную пользу.'}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div>
