@@ -1,7 +1,5 @@
 import './globals.css';
 import type {ReactNode} from 'react';
-import {BUNDLE, safeLocale} from '@/lib/i18n';
-import {I18nProvider} from '@/lib/i18n-react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
@@ -16,8 +14,7 @@ export default function LocaleLayout({
   children: ReactNode;
   params: {locale: string};
 }) {
-  const locale = safeLocale(params?.locale);
-  const messages = BUNDLE[locale] || BUNDLE.ru; // fallback на русский
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   return (
@@ -94,12 +91,10 @@ export default function LocaleLayout({
         }} />
       </head>
       <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <I18nProvider messages={messages}>
-          <Analytics />
-          <ModernHeader />
-          <main className="min-h-dvh pt-20">{children}</main>
-          <ModernFooter locale={locale} />
-        </I18nProvider>
+        <Analytics />
+        <ModernHeader />
+        <main className="min-h-dvh pt-20">{children}</main>
+        <ModernFooter locale={locale} />
       </body>
     </html>
   );
