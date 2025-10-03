@@ -86,7 +86,7 @@ export default function ModernHeader() {
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
             <Link 
-              href="/ru/download" 
+              href="/ru/downloads" 
               className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
             >
               Скачать
@@ -168,7 +168,7 @@ export default function ModernHeader() {
                   <LanguageSwitcher />
                 </div>
                 <Link 
-                  href="/ru/download" 
+                  href="/ru/downloads" 
                   className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >

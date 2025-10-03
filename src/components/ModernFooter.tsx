@@ -8,7 +8,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
   const nav = [
     { title: 'Возможности', href: `/${locale}/features` },
     { title: 'Тарифы', href: `/${locale}/pricing` },
-    { title: 'Скачать', href: `/${locale}/download` },
+    { title: 'Скачать', href: `/${locale}/downloads` },
     { title: 'Кейсы', href: `/${locale}/use-cases` },
   ];
 
@@ -104,14 +104,6 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
           <p className="text-gray-400 text-sm">
             © 2024 GetLifeUndo. Все права защищены.
           </p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white text-sm transition-colors">
-              Политика конфиденциальности
-            </Link>
-            <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white text-sm transition-colors">
-              Условия использования
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
