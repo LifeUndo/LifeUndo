@@ -151,9 +151,9 @@ export default function SupportPage() {
                   Или напишите на{" "}
                   <a 
                     className="underline text-indigo-300 hover:text-indigo-200" 
-                    href={`mailto:support@lifeundo.ru?subject=Покупка%20%23${form.order_id || order_id || ""}`}
+                    href={`mailto:support@getlifeundo.com?subject=Покупка%20%23${form.order_id || order_id || ""}`}
                   >
-                    support@lifeundo.ru
+                    support@getlifeundo.com
                   </a>
                   .
                 </div>

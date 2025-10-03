@@ -173,7 +173,7 @@ export default function SuccessPage() {
             </p>
             <div className="flex gap-4 justify-center">
               <a 
-                href="mailto:support@lifeundo.ru" 
+                href="mailto:support@getlifeundo.com" 
                 className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
               >
                 напишите в поддержку

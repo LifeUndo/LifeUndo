@@ -8,7 +8,7 @@ export default function ContactsPage() {
   const items = [
     { label: 'Общие вопросы', value: 'info@getlifeundo.com', href: 'mailto:info@getlifeundo.com' },
     { label: 'Техническая поддержка', value: 'support@getlifeundo.com', href: 'mailto:support@getlifeundo.com' },
-    { label: 'Быстрая связь', value: 't.me/LifeUndoRU', href: 'https://t.me/LifeUndoRU' },
+    { label: 'Быстрая связь', value: 't.me/GetLifeUndoSupport', href: 'https://t.me/GetLifeUndoSupport' },
     { label: 'Исходный код', value: 'github.com/LifeUndo', href: 'https://github.com/LifeUndo' },
     { label: 'Видео и туториалы', value: 'youtube.com/@GetLifeUndo', href: 'https://youtube.com/@GetLifeUndo' },
   ];

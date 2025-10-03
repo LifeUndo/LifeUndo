@@ -2,7 +2,7 @@ import "./[locale]/globals.css";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lifeundo.ru'),
+  metadataBase: new URL('https://getlifeundo.com'),
   title: {
     default: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
     template: '%s — GetLifeUndo',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    url: 'https://lifeundo.ru/',
+    url: 'https://getlifeundo.com/',
     title: 'GetLifeUndo — Ctrl+Z для вашей жизни в сети',
     description: 'Локальная история ввода и буфера. Без телеметрии.',
   },

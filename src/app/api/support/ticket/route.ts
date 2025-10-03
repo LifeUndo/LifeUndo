@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     // Отправить email уведомление
     try {
       await sendEmail({
-        to: 'support@lifeundo.ru',
+        to: 'support@getlifeundo.com',
         subject: `GetLifeUndo Support: ${topic || 'Обращение'}`,
         html: `
           <h2>Новое обращение в поддержку</h2>

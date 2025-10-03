@@ -11,7 +11,7 @@ const SMTP_HOST = process.env.SMTP_HOST || 'smtp.sendgrid.net';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587');
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const SMTP_FROM = process.env.SMTP_FROM || 'GetLifeUndo <noreply@lifeundo.ru>';
+const SMTP_FROM = process.env.SMTP_FROM || 'GetLifeUndo <noreply@getlifeundo.com>';
 
 export const transporter = isEmailEnabled ? nodemailer.createTransport({
   host: SMTP_HOST,

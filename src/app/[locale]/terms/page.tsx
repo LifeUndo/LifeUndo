@@ -92,7 +92,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mb-4">8. Контакты</h2>
               <p className="text-gray-300 leading-relaxed">
                 Вопросы по условиям: <a href="mailto:legal@getlifeundo.com">legal@getlifeundo.com</a> ·
-                Быстрая связь: <a href="https://t.me/LifeUndoRU" target="_blank" rel="noopener noreferrer">t.me/LifeUndoRU</a>
+                Быстрая связь: <a href="https://t.me/GetLifeUndoSupport" target="_blank" rel="noopener noreferrer">t.me/GetLifeUndoSupport</a>
               </p>
           </section>
 

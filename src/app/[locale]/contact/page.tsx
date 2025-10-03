@@ -178,10 +178,10 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-semibold text-purple-300 mb-2">Email</h4>
                   <a 
-                    href="mailto:support@lifeundo.ru" 
+                    href="mailto:support@getlifeundo.com" 
                     className="text-gray-300 hover:text-purple-300 transition-colors"
                   >
-                    support@lifeundo.ru
+                    support@getlifeundo.com
                   </a>
                 </div>
               </div>

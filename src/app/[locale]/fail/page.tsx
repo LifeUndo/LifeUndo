@@ -68,10 +68,10 @@ export default function FailPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-2 justify-center text-sm">
               <a 
-                href="mailto:support@lifeundo.ru" 
+                href="mailto:support@getlifeundo.com" 
                 className="text-blue-600 hover:underline"
               >
-                support@lifeundo.ru
+                support@getlifeundo.com
               </a>
               <span className="hidden sm:inline text-gray-400">•</span>
               <a 
