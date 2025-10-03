@@ -6,11 +6,10 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-  // Редиректим только корень сайта на /ru
   if (req.nextUrl.pathname === '/') {
     const url = req.nextUrl.clone();
     url.pathname = '/ru';
-    return NextResponse.redirect(url, 308); // постоянный редирект
+    return NextResponse.redirect(url);
   }
   return NextResponse.next();
 }
