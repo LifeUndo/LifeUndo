@@ -6,7 +6,8 @@ import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function LocaleLayout({
   children,

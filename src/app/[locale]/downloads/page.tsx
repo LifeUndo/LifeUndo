@@ -1,8 +1,9 @@
-import dynamicImport from 'next/dynamic';
+'use client';
+
+import DownloadsClient from './DownloadsClient';
 
 export const dynamic = 'force-dynamic';
-
-const DownloadsClient = dynamicImport(() => import('./DownloadsClient'), { ssr: false });
+export const revalidate = 0;
 
 export default function Page() {
   return <DownloadsClient />;
