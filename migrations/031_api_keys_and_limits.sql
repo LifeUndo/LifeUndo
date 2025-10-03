@@ -28,3 +28,6 @@ ALTER TABLE tenant_plans ADD COLUMN IF NOT EXISTS monthly_limit int;
 
 
 
+
+
+
