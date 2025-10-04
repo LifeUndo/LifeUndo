@@ -1,134 +1,33 @@
+'use client';
+
+import { useTranslations } from '@/hooks/useTranslations';
+
 export default function LocaleIndex({ params }: { params: { locale: string } }) {
-  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const { t, locale } = useTranslations();
   
-  if (locale === 'en') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-        {/* Hero Section */}
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Ctrl+Z for your online life
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Forms, tabs, clipboard — 100% local, private. 
-              Install, type, relax.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/en/downloads" 
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
-              >
-                Download extension
-              </a>
-              <a 
-                href="/en/features" 
-                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-colors"
-              >
-                Learn more
-              </a>
-            </div>
-          </div>
-
-          {/* How it works - 3 steps */}
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-              How it works
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Step 1 */}
-              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">1</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Install</h3>
-                <p className="text-gray-300">
-                  Download extension for Chrome, Firefox or Edge. 
-                  One click — protection is active.
-                </p>
-              </div>
-
-              {/* Step 2 */}
-              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">2</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Keep working</h3>
-                <p className="text-gray-300">
-                  Fill forms, copy text, open tabs. 
-                  Everything saves locally in your browser.
-                </p>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl">
-                <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">3</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Restore when needed</h3>
-                <p className="text-gray-300">
-                  Accidentally closed a tab? Lost text? 
-                  Press "Undo" — everything is back in place.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Ready to try?
-              </h3>
-              <p className="text-gray-300 mb-6">
-                7 days free. No limits, no subscriptions.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="/en/downloads" 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
-                >
-                  Download free
-                </a>
-                <a 
-                  href="/en/pricing" 
-                  className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
-                >
-                  View pricing
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
-  // Russian version (default)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Ctrl+Z для твоей онлайн-жизни
+            {t.hero.title}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Формы, вкладки, буфер обмена — всё восстанавливается локально. 
-            Никакой телеметрии, только твой браузер.
+            {t.hero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="/ru/downloads" 
+              href={`/${locale}/downloads`}
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
             >
-              Скачать расширение
+              {t.hero.cta_primary}
             </a>
             <a 
-              href="/ru/features" 
+              href={`/${locale}/features`}
               className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-colors"
             >
-              Узнать больше
+              {t.hero.cta_secondary}
             </a>
           </div>
         </div>
@@ -136,7 +35,7 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
         {/* How it works - 3 steps */}
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-            Как это работает
+            {t.howItWorks.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Step 1 */}
@@ -144,10 +43,9 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Установи</h3>
+              <h3 className="text-xl font-bold text-white mb-4">{t.howItWorks.step1.title}</h3>
               <p className="text-gray-300">
-                Скачай расширение для Chrome, Firefox или Edge. 
-                Один клик — и защита активна.
+                {t.howItWorks.step1.description}
               </p>
             </div>
 
@@ -156,10 +54,9 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
               <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Работай как обычно</h3>
+              <h3 className="text-xl font-bold text-white mb-4">{t.howItWorks.step2.title}</h3>
               <p className="text-gray-300">
-                Заполняй формы, копируй текст, открывай вкладки. 
-                Всё сохраняется локально в твоём браузере.
+                {t.howItWorks.step2.description}
               </p>
             </div>
 
@@ -168,10 +65,9 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
               <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Восстанови когда нужно</h3>
+              <h3 className="text-xl font-bold text-white mb-4">{t.howItWorks.step3.title}</h3>
               <p className="text-gray-300">
-                Случайно закрыл вкладку? Потерял текст? 
-                Нажми "Вернуть" — и всё на месте.
+                {t.howItWorks.step3.description}
               </p>
             </div>
           </div>
@@ -181,23 +77,23 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
         <div className="text-center mt-16">
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Готов попробовать?
+              {t.cta.ready}
             </h3>
             <p className="text-gray-300 mb-6">
-              7 дней бесплатно. Никаких ограничений, никаких подписок.
+              {locale === 'en' ? '7 days free. No limits, no subscriptions.' : '7 дней бесплатно. Без лимитов, без подписок.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/ru/downloads" 
+                href={`/${locale}/downloads`}
                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
               >
-                Скачать бесплатно
+                {locale === 'en' ? 'Download free' : 'Скачать бесплатно'}
               </a>
               <a 
-                href="/ru/pricing" 
+                href={`/${locale}/pricing`}
                 className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors"
               >
-                Посмотреть тарифы
+                {locale === 'en' ? 'View pricing' : 'Посмотреть тарифы'}
               </a>
             </div>
           </div>

@@ -23,6 +23,9 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
     { title: 'Partners', href: `/${locale}/partners` },
     { title: 'Оферта', href: `/${locale}/legal/offer` },
     { title: 'SLA', href: `/${locale}/legal/sla` },
+    { title: 'Договор', href: `/${locale}/legal/contract` },
+    { title: 'DPA', href: `/${locale}/legal/dpa` },
+    { title: 'Политика', href: `/${locale}/legal/pdp` },
   ];
 
   const socials = [

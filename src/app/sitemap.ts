@@ -19,6 +19,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/ru/partners`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/ru/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${base}/ru/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/ru/legal/contract`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/ru/legal/dpa`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/ru/legal/pdp`, changeFrequency: 'yearly', priority: 0.3 },
     
     // English pages
     { url: `${base}/en`, changeFrequency: 'weekly', priority: 0.9 },
@@ -32,6 +35,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/en/partners`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/en/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${base}/en/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/en/legal/contract`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/en/legal/dpa`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/en/legal/pdp`, changeFrequency: 'yearly', priority: 0.3 },
   ];
 }
 
