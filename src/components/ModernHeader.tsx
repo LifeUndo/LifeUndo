@@ -54,7 +54,7 @@ export default function ModernHeader() {
       isScrolled ? 'bg-[#0B1220]/95 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
           <Link href="/ru" className="flex items-center gap-2" aria-label="GetLifeUndo">
             <Image
@@ -62,24 +62,24 @@ export default function ModernHeader() {
               width={32}
               height={32}
               alt="GetLifeUndo logo"
-              className="rounded-full"
+              className="rounded-full h-8 md:h-9"
               priority
             />
-            <span className="font-semibold text-xl">GetLifeUndo</span>
+            <span className="font-semibold text-lg md:text-xl">GetLifeUndo</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/ru/features" className="text-gray-300 hover:text-white transition-colors">
+          <nav className="hidden md:flex items-center gap-x-6 md:gap-x-8">
+            <Link href="/ru/features" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               Функции
             </Link>
-            <Link href="/ru/use-cases" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/ru/use-cases" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               Кейсы
             </Link>
-            <Link href="/ru/pricing" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/ru/pricing" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               Тарифы
             </Link>
-            <Link href="/ru/fund" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/ru/fund" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               Фонд
             </Link>
           </nav>
@@ -90,7 +90,7 @@ export default function ModernHeader() {
             <SocialBar place="header" />
             <Link 
               href="/ru/downloads" 
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+              className="px-4 py-2 text-sm md:text-base text-gray-300 hover:text-white transition-colors"
             >
               Скачать
             </Link>
@@ -127,6 +127,11 @@ export default function ModernHeader() {
               )}
             </svg>
           </button>
+        </div>
+
+        {/* Release Banner - под навигацией */}
+        <div className="mt-2 mb-2 text-sm md:text-base leading-tight">
+          <ReleaseBanner />
         </div>
 
         {/* Mobile Menu Overlay */}
@@ -212,9 +217,6 @@ export default function ModernHeader() {
             </nav>
           </div>
         )}
-        
-        {/* Release Banner - обычный блок внутри header */}
-        <ReleaseBanner />
       </div>
     </header>
   );

@@ -61,8 +61,9 @@ export default function DownloadsClient() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Загружаем latest.json
-    fetch('/app/latest/latest.json')
+    // Загружаем latest.json с версионированием для обхода кэша
+    const buildId = Date.now();
+    fetch(`/app/latest/latest.json?v=${buildId}`)
       .then(res => res.json())
       .then(data => {
         setLatestData(data);
@@ -73,7 +74,9 @@ export default function DownloadsClient() {
         setLatestData({
           version: '0.3.7.12',
           publishedAt: '2025-10-04T10:00:00Z',
-          files: {}
+          files: {
+            firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
+          }
         });
         setLoading(false);
       });

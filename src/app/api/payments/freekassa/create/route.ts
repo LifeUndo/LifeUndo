@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const plan = PLANS[productId];
     const MERCHANT_ID = process.env.FREEKASSA_MERCHANT_ID!;
     const SECRET1 = process.env.FREEKASSA_SECRET1!;
-    const AMOUNT = getPlanAmount(productId); // "149.00"
+    const AMOUNT = getPlanAmount(productId); // "599.00"
     const ORDER_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const CURRENCY = 'RUB';
     
@@ -24,7 +24,9 @@ export async function POST(req: NextRequest) {
     }
     
     // Создаем подпись: MERCHANT_ID:AMOUNT:SECRET1:ORDER_ID
-    const SIGN = crypto.createHash('md5').update(`${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`).digest('hex');
+    // Важно: AMOUNT должен быть строкой с двумя знаками после точки
+    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;
+    const SIGN = crypto.createHash('md5').update(signatureString, 'utf8').digest('hex');
     
     // Формируем URL для редиректа
     const qs = new URLSearchParams({
@@ -43,6 +45,7 @@ export async function POST(req: NextRequest) {
       orderId: ORDER_ID,
       amount: AMOUNT,
       currency: CURRENCY,
+      signatureString: signatureString.replace(SECRET1, '***'),
       signature: SIGN.substring(0, 8) + '...'
     });
     

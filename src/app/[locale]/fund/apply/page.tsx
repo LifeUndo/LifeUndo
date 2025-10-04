@@ -111,14 +111,14 @@ export default function FundApplyPage() {
                   value={formData.category}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white appearance-none cursor-pointer"
                 >
-                  <option value="">Выберите категорию</option>
-                  <option value="nko">НКО — инициативы гражданского общества</option>
-                  <option value="medicine">Медицина — образовательные проекты для медиков/пациентов</option>
-                  <option value="education">Образование — школы/вузовские кружки</option>
-                  <option value="media">СМИ — локальные медиа и редакции</option>
-                  <option value="individuals">Частные лица — студенты, преподаватели, родители</option>
+                  <option value="" disabled className="text-gray-500">Выберите категорию</option>
+                  <option value="nko" className="text-white bg-gray-800">НКО — инициативы гражданского общества</option>
+                  <option value="medicine" className="text-white bg-gray-800">Медицина — образовательные проекты для медиков/пациентов</option>
+                  <option value="education" className="text-white bg-gray-800">Образование — школы/вузовские кружки</option>
+                  <option value="media" className="text-white bg-gray-800">СМИ — локальные медиа и редакции</option>
+                  <option value="individuals" className="text-white bg-gray-800">Частные лица — студенты, преподаватели, родители</option>
                 </select>
                 
                 {/* Описания категорий */}
