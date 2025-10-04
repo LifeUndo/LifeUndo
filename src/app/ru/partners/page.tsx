@@ -17,6 +17,16 @@ export default function PartnersPage() {
               Для организаций от <strong>100 VIP-подписок</strong>. Предоставляем шаблоны документов по запросу.
             </p>
           </div>
+          
+          {/* TXT Templates Button */}
+          <div className="text-center mb-8">
+            <a 
+              href="/ru/legal/downloads"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              📄 Скачать .TXT-шаблоны
+            </a>
+          </div>
         </div>
 
         {/* What's included */}

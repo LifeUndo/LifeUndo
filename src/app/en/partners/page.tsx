@@ -17,6 +17,16 @@ export default function PartnersPageEN() {
               For organizations — <strong>100+ VIP seats</strong>. Templates available upon request.
             </p>
           </div>
+          
+          {/* TXT Templates Button */}
+          <div className="text-center mb-8">
+            <a 
+              href="/en/legal/downloads"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              📄 Download .TXT Templates
+            </a>
+          </div>
         </div>
 
         {/* What's included */}

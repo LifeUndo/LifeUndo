@@ -3,6 +3,20 @@ import LegalDoc from '@/components/LegalDoc';
 export default function ContractPageEN() {
   return (
     <div>
+      {/* TXT Templates Button */}
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <a 
+              href="/en/legal/downloads"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors mb-8"
+            >
+              📄 Download .TXT Templates
+            </a>
+          </div>
+        </div>
+      </div>
+      
       <LegalDoc lang="en" slug="offer" />
       
       {/* B2B Disclaimer */}

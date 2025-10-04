@@ -15,6 +15,7 @@
     "release:latest": "powershell -ExecutionPolicy Bypass -File scripts/release/update_latest.ps1",
     "ff:lint": "web-ext lint -s dist-ff",
     "ff:build": "web-ext build -s dist-ff -o",
+    "legal:sha": "node scripts/legal-sha.mjs",
     "pre-release": "powershell -ExecutionPolicy Bypass -File scripts/release/pre_release_check.ps1"
   },
   "dependencies": {

@@ -87,6 +87,7 @@ Version 0.3.7.12
 - Enhanced security headers
 - Added Developers and Partners pages
 - Expanded legal documentation
+- Added TXT contract templates for B2B clients
 
 Version 0.3.7.11
 - First stable release with core functionality
@@ -111,3 +112,4 @@ Version 0.3.7.11
 - Все URL должны вести на `getlifeundo.com` (не lifeundo.ru)
 - Поддержка на русском и английском языках
 - Приватность — ключевая особенность продукта
+- TXT договоры доступны для B2B клиентов от 100+ VIP
