@@ -57,13 +57,13 @@ export default function ModernHeader() {
           <Link href="/ru" className="flex items-center gap-2" aria-label="GetLifeUndo">
             <Image
               src="/brand/getlifeundo-round.png"
-              width={28}
-              height={28}
+              width={32}
+              height={32}
               alt="GetLifeUndo logo"
               className="rounded-full"
               priority
             />
-            <span className="font-semibold">GetLifeUndo</span>
+            <span className="font-semibold text-xl">GetLifeUndo</span>
           </Link>
 
           {/* Desktop Navigation */}

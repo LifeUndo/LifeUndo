@@ -38,9 +38,9 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 if (Test-Path $zipPath) {
     $fileSize = (Get-Item $zipPath).Length
-    Write-Host "✅ XPI создан: $xpiName ($([math]::Round($fileSize/1KB, 2)) KB)" -ForegroundColor Green
+    Write-Host "XPI создан: $xpiName ($([math]::Round($fileSize/1KB, 2)) KB)" -ForegroundColor Green
 } else {
-    Write-Host "❌ Ошибка создания XPI!" -ForegroundColor Red
+    Write-Host "Ошибка создания XPI!" -ForegroundColor Red
     exit 1
 }
 
