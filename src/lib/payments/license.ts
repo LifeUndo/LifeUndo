@@ -1,5 +1,6 @@
 // License Management Utilities
-import { FK_PLANS, type PlanId } from './fk-plans';
+import { FK_PLANS } from './fk-plans';
+import { type PlanId } from '@/config/plans';
 import { db } from '@/db/client';
 import { licenses, feature_flags } from '@/db/schema';
 import { eq, and, gt } from 'drizzle-orm';

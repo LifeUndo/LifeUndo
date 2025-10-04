@@ -1,4 +1,5 @@
-import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
+import { FK_PLANS } from '@/lib/payments/fk-plans';
+import { type PlanId } from '@/config/plans';
 
 export interface LicenseEmailData {
   email: string;

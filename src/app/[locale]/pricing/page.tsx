@@ -1,6 +1,7 @@
 import ServiceCard from '@/components/ServiceCard';
 import FreeKassaButton from '@/components/payments/FreeKassaButton';
 import { fkPublic } from '@/lib/fk-public';
+import { PLANS } from '@/config/plans';
 import pricingData from '@/data/pricing_ru.json';
 
 export default function PricingPage() {
@@ -49,7 +50,7 @@ export default function PricingPage() {
                 'Приоритетная поддержка',
                 'Экспорт данных'
               ]}
-              price="599 ₽"
+              price={`${PLANS.pro_month.amount} ₽`}
               period="в месяц"
               isPopular={true}
               ctaText="Оформить Pro"
@@ -70,7 +71,7 @@ export default function PricingPage() {
                 'Персональная поддержка',
                 'Ранний доступ к новым функциям'
               ]}
-              price="9 990 ₽"
+              price={`${PLANS.vip_lifetime.amount} ₽`}
               period="навсегда"
               ctaText="Купить VIP"
               ctaLink="/buy?plan=vip"
@@ -89,7 +90,7 @@ export default function PricingPage() {
                 'Аналитика использования',
                 'Интеграция с корпоративными системами'
               ]}
-              price="2 990 ₽"
+              price={`${PLANS.team_5.amount} ₽`}
               period="за 5 мест в месяц"
               ctaText="Заказать Team"
               ctaLink="/buy?plan=team"

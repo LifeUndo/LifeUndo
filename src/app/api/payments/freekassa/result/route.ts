@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { FK_MERCHANT_ID, FK_SECRET2, FK_CONFIGURED, FK_CURRENCY } from '@/lib/fk-env';
-import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
+import { FK_PLANS } from '@/lib/payments/fk-plans';
+import { type PlanId } from '@/config/plans';
 import { activateLicense, extendLicense } from '@/lib/payments/license';
 import { db } from '@/db/client';
 import { payments } from '@/db/schema';
@@ -43,12 +44,11 @@ export async function POST(req: Request) {
     }
     
     // Извлекаем план из order_id (префикс)
-    const planMatch = orderId.match(/^(S6M|PROM|VIPL|TEAM5)-/);
+    const planMatch = orderId.match(/^(PROM|VIPL|TEAM5)-/);
     let plan: PlanId | null = null;
     if (planMatch) {
       const prefix = planMatch[1];
-      plan = prefix === 'S6M' ? 'starter_6m' 
-        : prefix === 'PROM' ? 'pro_month'
+      plan = prefix === 'PROM' ? 'pro_month'
         : prefix === 'VIPL' ? 'vip_lifetime'
         : prefix === 'TEAM5' ? 'team_5'
         : null;

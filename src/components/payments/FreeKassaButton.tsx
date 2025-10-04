@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { fkPublic } from '@/lib/fk-public';
-import { FK_PLANS, type PlanId } from '@/lib/payments/fk-plans';
+import { FK_PLANS } from '@/lib/payments/fk-plans';
+import { type PlanId } from '@/config/plans';
 
 interface FreeKassaButtonProps {
   productId: PlanId | string; // Поддержка старых продуктов и новых планов
@@ -41,18 +42,20 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          plan: plan || productId,
+          productId: productId,
           email: email || '',
         }),
       });
       
       const data = await response.json();
       
-      if (response.ok && data.pay_url) {
+      if (response.ok && data.ok && data.pay_url) {
         // Редирект на FreeKassa
         window.location.href = data.pay_url;
       } else {
-        setError(data.error || 'Ошибка создания платежа');
+        setError(data.error === 'unknown_plan' ? 'Неизвестный тариф' : 
+                data.error === 'fk_not_configured' ? 'Платежи временно недоступны' :
+                data.error || 'Ошибка создания платежа');
       }
     } catch (err) {
       setError('Ошибка соединения');
