@@ -21,7 +21,7 @@ export async function GET() {
       secret1Present,
       secret2Present,
       paymentUrlPresent,
-      paymentUrl: PAYMENT_URL || 'https://pay.freekassa.ru/',
+      paymentUrl: PAYMENT_URL || 'https://pay.freekassa.com/',
       // Не возвращаем секреты и ID для безопасности
       merchantIdMasked: MERCHANT_ID ? `${MERCHANT_ID.substring(0, 3)}***` : null
     });
