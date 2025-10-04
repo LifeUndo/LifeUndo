@@ -1,60 +1,22 @@
 openapi: 3.0.3
 info:
-  title: LifeUndo Public API
-  version: 0.1.0
-  description: |
-    Public endpoints for partners/integration. Auth via Bearer API key. Rate limits per plan.
+  title: GetLifeUndo Public API
+  version: 1.0.0
 servers:
   - url: https://getlifeundo.com
 paths:
-  /api/v1/licenses/validate:
+  /api/healthz:
+    get: { summary: Health check, responses: { '200': { description: OK } } }
+  /api/debug/fk:
+    get: { summary: FreeKassa diagnostics, responses: { '200': { description: OK } } }
+  /api/license/validate:
     post:
       summary: Validate license key
-      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
           application/json:
-            schema:
-              type: object
-              required: [key]
-              properties:
-                key: { type: string }
-      responses:
-        '200':
-          description: OK
-  /api/v1/licenses/activate:
-    post:
-      summary: Activate device
-      security: [{ bearerAuth: [] }]
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [key, deviceId]
-              properties:
-                key: { type: string }
-                deviceId: { type: string }
-                deviceName: { type: string }
-      responses:
-        '200':
-          description: OK
-  /api/v1/usage:
-    get:
-      summary: Current API usage for this key
-      security: [{ bearerAuth: [] }]
+            schema: { type: object, properties: { key: { type: string } }, required: [key] }
       responses:
         '200': { description: OK }
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-
-
-
-
+        '400': { description: Invalid license }

@@ -2,14 +2,10 @@
   "schema_version": "v1",
   "name_for_human": "GetLifeUndo",
   "name_for_model": "getlifeundo",
-  "description_for_human": "Ctrl+Z для браузера: восстановление текста форм, закрытых вкладок и истории буфера. 100% локально.",
-  "description_for_model": "Browser extension and service for restoring form text, reopening recently closed tabs, and clipboard history. 100% local, privacy first. Provide docs endpoints and health checks.",
+  "description_for_human": "Health/debug + license validate endpoints for GetLifeUndo.",
+  "description_for_model": "Check service health, diagnose FreeKassa config, validate license.",
   "auth": { "type": "none" },
-  "api": {
-    "type": "openapi",
-    "url": "https://getlifeundo.com/api/openapi.yaml",
-    "is_user_authenticated": false
-  },
+  "api": { "type": "openapi", "url": "https://getlifeundo.com/openapi.yaml" },
   "logo_url": "https://getlifeundo.com/icon-512.png",
   "contact_email": "support@getlifeundo.com",
   "legal_info_url": "https://getlifeundo.com/ru/legal/offer"
