@@ -4,7 +4,7 @@ import { LEGAL } from '@/config/legal';
 
 function applyPlaceholders(text: string): string {
   return Object.entries(LEGAL).reduce((acc, [k, v]) => 
-    acc.replaceAll(`{{${k}}}`, String(v)), text);
+    acc.replace(new RegExp(`\\{\\{${k}\\}\\}`, 'g'), String(v)), text);
 }
 
 export default function LegalDoc({ lang, slug }: { lang: 'ru' | 'en'; slug: string }) {
