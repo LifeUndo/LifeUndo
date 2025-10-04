@@ -68,10 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "logo": "https://getlifeundo.com/logo512.png",
             "sameAs": [
               "https://t.me/GetLifeUndoSupport",
-              "https://www.reddit.com/r/GetLifeUndo",
               "https://x.com/GetLifeUndo",
+              "https://www.reddit.com/r/GetLifeUndo",
               "https://www.youtube.com/@GetLifeUndo",
               "https://github.com/GetLifeUndo"
+              // VC/Habr добавим, когда появятся боевые URL
             ]
           })}} />
       </head>
