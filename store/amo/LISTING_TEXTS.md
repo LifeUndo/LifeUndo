@@ -1,42 +1,69 @@
-# AMO Listing Texts
+# AMO Listing Texts - GetLifeUndo
 
-## Basic Information
-- **Name (EN):** GetLifeUndo
-- **Name (RU):** GetLifeUndo
-- **Categories:** Productivity, Privacy & Security
-- **Tags:** undo, forms, clipboard, privacy, restore
-- **Homepage URL:** https://getlifeundo.com
-- **Support URL:** mailto:support@getlifeundo.com
-- **License:** All Rights Reserved
+## Summary (RU)
+Ctrl+Z для жизни в интернете. Возврат текста форм, буфера, вкладок — локально.
 
-## Summary / Краткое резюме
+## Summary (EN)
+Ctrl+Z for your online life. Forms, tabs, clipboard — 100% local and private.
 
-### English
-Ctrl+Z for your online life. Restore lost form text, clipboard history and closed tabs — 100% local, private.
+## Description (RU)
+GetLifeUndo — это браузерное расширение, которое возвращает потерянный текст форм, содержимое буфера обмена и недавно закрытые вкладки. Всё работает локально в вашем браузере, без отправки данных на серверы.
 
-### Русский
-Ctrl+Z для жизни в интернете. Верни потерянный текст форм, историю буфера и закрытые вкладки — 100% локально, приватно.
+### Основные функции:
+• **Восстановление форм** — автоматическое сохранение текста в полях ввода
+• **История буфера** — локальное хранение скопированного текста
+• **Недавно закрытые вкладки** — быстрый доступ к случайно закрытым страницам
+• **100% приватность** — все данные остаются в вашем браузере
+• **Без телеметрии** — никакой отправки данных на серверы
 
-## Description / Полное описание
+### Поддерживаемые браузеры:
+• Firefox 109.0+
+• Chrome 88+
+• Microsoft Edge 88+
 
-### English
-```
-GetLifeUndo keeps a local safety copy of what you type in forms, your clipboard snippets and recently closed tabs. When a tab crashes or you accidentally close a page — bring your text back in one click. No cloud, no telemetry: everything stays on your device.
+### Тарифы:
+• **Pro** — 599 ₽/месяц (неограниченное использование)
+• **VIP** — 9 990 ₽ навсегда (пожизненная лицензия)
+• **Team** — 2 990 ₽/месяц (для организаций)
 
-Highlights:
-• Restore form text after reloads/timeouts
-• Local clipboard history
-• Recently closed tabs list
-• Privacy by design: 100% local
-```
+Идеально подходит для студентов, редакторов, офисных работников и всех, кто часто работает с текстом в интернете.
 
-### Русский
-```
-GetLifeUndo хранит локальные копии введённого в формы текста, «журнал буфера» и список недавно закрытых вкладок. Если вкладка зависла или вы её закрыли — верните текст одним кликом. Без облаков и телеметрии: всё остаётся на вашем устройстве.
+## Description (EN)
+GetLifeUndo is a browser extension that restores lost form text, clipboard content, and recently closed tabs. Everything works locally in your browser without sending data to servers.
 
-Основное:
-• Восстановление текста форм после перезагрузок/таймаутов
-• Локальная история буфера обмена
-• Список недавно закрытых вкладок
-• Приватность по умолчанию: 100% локально
-```
+### Key Features:
+• **Form Recovery** — automatic saving of input field text
+• **Clipboard History** — local storage of copied text
+• **Recently Closed Tabs** — quick access to accidentally closed pages
+• **100% Privacy** — all data stays in your browser
+• **No Telemetry** — no data sent to servers
+
+### Supported Browsers:
+• Firefox 109.0+
+• Chrome 88+
+• Microsoft Edge 88+
+
+### Pricing:
+• **Pro** — 599 ₽/month (unlimited usage)
+• **VIP** — 9 990 ₽ lifetime (permanent license)
+• **Team** — 2 990 ₽/month (for organizations)
+
+Perfect for students, editors, office workers, and anyone who frequently works with text online.
+
+## Release Notes
+### Version 0.3.7.12
+- Fixed gecko.id for AMO compatibility
+- Added full English localization
+- Improved banner positioning
+- Added social media integration
+- Enhanced security headers
+- Added Developers and Partners pages
+- Expanded legal documentation
+
+### Version 0.3.7.11
+- First stable release with core functionality
+- Form text recovery
+- Clipboard history
+- Recently closed tabs
+- Local data storage
+- Privacy-focused design

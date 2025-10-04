@@ -10,6 +10,13 @@ export default function PartnersPageEN() {
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Brand GetLifeUndo under your company
           </p>
+          
+          {/* B2B Disclaimer */}
+          <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-4 max-w-2xl mx-auto mb-8">
+            <p className="text-yellow-200 font-semibold">
+              For organizations — <strong>100+ VIP seats</strong>. Templates available upon request.
+            </p>
+          </div>
         </div>
 
         {/* What's included */}
@@ -74,6 +81,13 @@ export default function PartnersPageEN() {
           >
             Get brief and quote
           </a>
+          
+          {/* Legal Disclaimer */}
+          <div className="mt-8 max-w-2xl mx-auto">
+            <p className="text-gray-400 text-sm">
+              This is a template. Not a public offer. Final version provided upon request and signed by parties.
+            </p>
+          </div>
         </div>
       </div>
     </div>

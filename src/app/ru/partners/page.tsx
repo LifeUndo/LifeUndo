@@ -10,6 +10,13 @@ export default function PartnersPage() {
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Брендируйте GetLifeUndo под вашу компанию
           </p>
+          
+          {/* B2B Disclaimer */}
+          <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-4 max-w-2xl mx-auto mb-8">
+            <p className="text-yellow-200 font-semibold">
+              Для организаций от <strong>100 VIP-подписок</strong>. Предоставляем шаблоны документов по запросу.
+            </p>
+          </div>
         </div>
 
         {/* What's included */}
@@ -74,6 +81,13 @@ export default function PartnersPage() {
           >
             Получить бриф и расчёт
           </a>
+          
+          {/* Legal Disclaimer */}
+          <div className="mt-8 max-w-2xl mx-auto">
+            <p className="text-gray-400 text-sm">
+              Это шаблон. Не является публичной офертой. Финальная версия предоставляется по запросу и подписывается сторонами.
+            </p>
+          </div>
         </div>
       </div>
     </div>

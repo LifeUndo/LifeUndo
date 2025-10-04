@@ -2,8 +2,8 @@
   "version": "0.3.7.12",
   "publishedAt": "2025-10-04T10:00:00Z",
   "files": {
-    "firefox": "https://cdn.getlifeundo.com/app/latest/lifeundo-latest.xpi",
-    "win": "https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe",
-    "mac": "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"
+    "firefox": "/app/0.3.7.12/lifeundo-0.3.7.12.xpi",
+    "win": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-setup-0.3.7.12.exe",
+    "mac": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-0.3.7.12.dmg"
   }
 }
