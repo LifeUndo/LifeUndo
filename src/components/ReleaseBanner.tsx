@@ -8,14 +8,20 @@ export default function ReleaseBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white py-2 px-4 text-center relative">
-      <div className="container mx-auto flex items-center justify-center">
+    <div className="bg-gradient-to-r from-emerald-500 to-sky-600 text-white py-2 px-4 text-center sticky top-0 z-30">
+      <div className="container mx-auto flex items-center justify-center gap-3">
         <span className="text-sm font-medium">
           🎉 Релиз 0.3.7.12 — новый платёжный поток, RU/EN локализация, мобильная оптимизация
         </span>
+        <a 
+          href="/ru/downloads" 
+          className="text-white underline underline-offset-2 hover:text-gray-200 transition-colors"
+        >
+          Скачать
+        </a>
         <button 
           onClick={() => setIsVisible(false)}
-          className="ml-4 text-white hover:text-gray-200 transition-colors"
+          className="ml-auto text-white hover:text-gray-200 transition-colors opacity-80 hover:opacity-100"
           aria-label="Закрыть баннер"
         >
           ✕

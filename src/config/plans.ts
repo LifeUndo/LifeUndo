@@ -10,24 +10,24 @@ export const PLANS: Record<PlanId, {
 }> = {
   pro_month: {
     label: 'Pro',
-    amount: 149,
+    amount: 599,
     currency: 'RUB',
     period: 'month',
     description: 'История форм и буфера, локально'
   },
   vip_lifetime: {
     label: 'VIP',
-    amount: 2490,
+    amount: 9990,
     currency: 'RUB',
     period: 'lifetime',
     description: 'Лицензия навсегда, все функции'
   },
   team_5: {
     label: 'Team',
-    amount: 150 * 5, // 750
+    amount: 2990,
     currency: 'RUB',
     period: 'month',
-    description: '5 мест, расширенная поддержка'
+    description: 'Пакетная лицензия для команды'
   }
 };
 
