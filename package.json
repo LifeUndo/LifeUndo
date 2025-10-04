@@ -13,7 +13,9 @@
     "release:xpi": "powershell -ExecutionPolicy Bypass -File scripts/release/pack_firefox.ps1",
     "release:sha": "powershell -ExecutionPolicy Bypass -File scripts/release/checksums.ps1",
     "release:latest": "powershell -ExecutionPolicy Bypass -File scripts/release/update_latest.ps1",
-    "release:prepare": "npm run release:xpi && npm run release:sha && npm run release:latest"
+    "ff:lint": "web-ext lint -s dist-ff",
+    "ff:build": "web-ext build -s dist-ff -o",
+    "pre-release": "powershell -ExecutionPolicy Bypass -File scripts/release/pre_release_check.ps1"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.15.0",
@@ -41,6 +43,7 @@
     "gitleaks": "^1.0.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "web-ext": "^7.12.0"
   }
 }

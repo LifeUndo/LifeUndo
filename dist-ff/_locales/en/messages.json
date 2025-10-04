@@ -1,0 +1,72 @@
+{
+  "extensionName": {
+    "message": "GetLifeUndo",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Ctrl+Z for life on the internet. Restore form text, clipboard, tabs — locally.",
+    "description": "Extension description"
+  },
+  "popupTitle": {
+    "message": "GetLifeUndo",
+    "description": "Popup title"
+  },
+  "undoButton": {
+    "message": "Undo",
+    "description": "Undo button text"
+  },
+  "settingsButton": {
+    "message": "Settings",
+    "description": "Settings button text"
+  },
+  "licenseButton": {
+    "message": "License",
+    "description": "License button text"
+  },
+  "supportButton": {
+    "message": "Support",
+    "description": "Support button text"
+  },
+  "trialStatus": {
+    "message": "Trial: $DAYS$ days left",
+    "description": "Trial status message",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "proStatus": {
+    "message": "Pro License Active",
+    "description": "Pro license status"
+  },
+  "freeStatus": {
+    "message": "Free Version",
+    "description": "Free version status"
+  },
+  "licenseActivated": {
+    "message": "License activated successfully!",
+    "description": "License activation success message"
+  },
+  "invalidLicense": {
+    "message": "Invalid license key format",
+    "description": "Invalid license error message"
+  },
+  "nothingToUndo": {
+    "message": "Nothing to undo",
+    "description": "No undo items available"
+  },
+  "textRestored": {
+    "message": "Text restored",
+    "description": "Text restoration success"
+  },
+  "tabRestored": {
+    "message": "Tab restored",
+    "description": "Tab restoration success"
+  },
+  "clipboardRestored": {
+    "message": "Clipboard restored",
+    "description": "Clipboard restoration success"
+  }
+}
