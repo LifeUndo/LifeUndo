@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
+import ReleaseBanner from '@/components/ReleaseBanner';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -90,12 +91,13 @@ export default function LocaleLayout({
           })
         }} />
       </head>
-      <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
-        <Analytics />
-        <ModernHeader />
-        <main className="min-h-dvh pt-20">{children}</main>
-        <ModernFooter locale={locale} />
-      </body>
+             <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
+                 <Analytics />
+                 <ReleaseBanner />
+                 <ModernHeader />
+                 <main className="min-h-dvh pt-20">{children}</main>
+                 <ModernFooter locale={locale} />
+             </body>
     </html>
   );
 }
