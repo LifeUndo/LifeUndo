@@ -8,7 +8,7 @@ export default function ReleaseBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-emerald-500 to-sky-600 text-white py-2 px-4 text-center">
+    <div className="bg-gradient-to-r from-emerald-500 to-sky-600 text-white py-2 px-4 text-center relative">
       <div className="container mx-auto flex items-center justify-center gap-3 flex-wrap pr-12">
         <span className="text-sm font-medium">
           🎉 Релиз 0.3.7.12 — новый платёжный поток, RU/EN локализация, мобильная оптимизация

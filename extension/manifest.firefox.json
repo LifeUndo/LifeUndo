@@ -5,7 +5,7 @@
   "description": "Ctrl+Z для жизни в интернете. Возврат текста форм, буфера, вкладок — локально.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "getlifeundo@your-domain",
+      "id": "lifeundo@example.com",
       "strict_min_version": "109.0"
     }
   },

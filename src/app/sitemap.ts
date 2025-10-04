@@ -15,6 +15,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/ru/contacts`, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${base}/ru/privacy`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${base}/ru/terms`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/ru/developers`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/ru/partners`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/ru/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/ru/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
     
     // English pages
     { url: `${base}/en`, changeFrequency: 'weekly', priority: 0.9 },
@@ -24,6 +28,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/en/support`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/en/privacy`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${base}/en/terms`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/en/developers`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/en/partners`, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/en/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${base}/en/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
   ];
 }
 

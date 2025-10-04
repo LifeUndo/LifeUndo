@@ -94,7 +94,6 @@ export default function LocaleLayout({
              <body className="min-h-dvh bg-[#0B1220] text-white antialiased">
                  <Analytics />
                  <ModernHeader />
-                 <ReleaseBanner />
                  <main className="min-h-dvh pt-20">{children}</main>
                  <ModernFooter locale={locale} />
              </body>

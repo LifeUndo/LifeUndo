@@ -58,6 +58,25 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
+      <head>
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "GetLifeUndo",
+            "url": "https://getlifeundo.com",
+            "logo": "https://getlifeundo.com/logo512.png",
+            "sameAs": [
+              "https://t.me/GetLifeUndoSupport",
+              "https://www.reddit.com/r/GetLifeUndo",
+              "https://vc.ru/u/xxxx-getlifeundo",
+              "https://habr.com/ru/users/getlifeundo",
+              "https://x.com/GetLifeUndo",
+              "https://www.youtube.com/@GetLifeUndo",
+              "https://github.com/GetLifeUndo"
+            ]
+          })}} />
+      </head>
       <body>
         {children}
       </body>

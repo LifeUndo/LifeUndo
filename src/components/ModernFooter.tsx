@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SocialBar } from './SocialBar';
 
 interface ModernFooterProps {
   locale?: string;
@@ -18,6 +19,10 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
     { title: 'Контакты', href: `/${locale}/contacts` },
     { title: 'Приватность', href: `/${locale}/privacy` },
     { title: 'Условия', href: `/${locale}/terms` },
+    { title: 'Developers', href: `/${locale}/developers` },
+    { title: 'Partners', href: `/${locale}/partners` },
+    { title: 'Оферта', href: `/${locale}/legal/offer` },
+    { title: 'SLA', href: `/${locale}/legal/sla` },
   ];
 
   const socials = [
@@ -104,6 +109,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
           <p className="text-gray-400 text-sm">
             © 2024 GetLifeUndo. Все права защищены.
           </p>
+          <SocialBar place="footer" />
         </div>
       </div>
     </footer>
