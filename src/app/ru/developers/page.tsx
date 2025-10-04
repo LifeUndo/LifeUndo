@@ -27,54 +27,59 @@ export default function DevelopersPage() {
         {/* Endpoints */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
-            <h2 className="text-2xl font-semibold text-white mb-6">Эндпоинты (черновик, REST)</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Публичные эндпоинты (уже есть)</h2>
             <div className="space-y-6">
               <div className="bg-black/20 rounded-lg p-4">
-                <div className="text-green-400 font-mono text-sm mb-2">POST /api/v1/licenses/verify</div>
-                <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
-                <div className="text-gray-300 text-sm mb-2">Body: {`{ "licenseKey": "GLU-XXXX-..." }`}</div>
-                <div className="text-gray-300 text-sm">→ 200 {`{ "ok": true, "plan": "pro|team|vip", "seatsLeft": 12 }`}</div>
+                <div className="text-green-400 font-mono text-sm mb-2">GET /api/healthz</div>
+                <div className="text-gray-300 text-sm mb-2">Пинг сервера</div>
+                <div className="text-gray-300 text-sm">→ 200 OK</div>
               </div>
               
               <div className="bg-black/20 rounded-lg p-4">
-                <div className="text-green-400 font-mono text-sm mb-2">POST /api/v1/undo/restore</div>
-                <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
-                <div className="text-gray-300 text-sm mb-2">Body: {`{ "clientId": "uuid", "scope": "forms|clipboard|tabs" }`}</div>
-                <div className="text-gray-300 text-sm">→ 202 {`{ "ok": true, "accepted": true }`}</div>
-              </div>
-              
-              <div className="bg-black/20 rounded-lg p-4">
-                <div className="text-green-400 font-mono text-sm mb-2">GET /api/v1/events?from=...&to=...</div>
-                <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
-                <div className="text-gray-300 text-sm">→ 200 {`{ "items":[{ "ts":"...", "type":"activation|restore", "clientId":"..." }]}`}</div>
+                <div className="text-green-400 font-mono text-sm mb-2">GET /api/debug/fk</div>
+                <div className="text-gray-300 text-sm mb-2">Диагностика платёжки FreeKassa</div>
+                <div className="text-gray-300 text-sm">→ 200 {`{ "ok": true, "merchantIdPresent": true, ... }`}</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Auth & Limits */}
+        {/* License Validation (HF2) */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
-            <h2 className="text-2xl font-semibold text-white mb-6">Аутентификация и ограничения</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Лицензии (HF2 — готовим и включаем завтра)</h2>
+            <div className="space-y-6">
+              <div className="bg-black/20 rounded-lg p-4">
+                <div className="text-green-400 font-mono text-sm mb-2">POST /api/license/validate</div>
+                <div className="text-gray-300 text-sm mb-2">Body: {`{ "key": "LU-XXXX-XXXX" }`}</div>
+                <div className="text-gray-300 text-sm mb-2">Resp 200: {`{ "ok": true, "tier":"pro|vip", "expAt":"2026-01-01T00:00:00Z", "sign":"<HMAC256>" }`}</div>
+                <div className="text-gray-300 text-sm mb-2">Сигнатура: HMAC-SHA256(base64) по key|tier|expAt с серверным секретом</div>
+                <div className="text-gray-300 text-sm">429 при частом обращении</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Webhooks */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+            <h2 className="text-2xl font-semibold text-white mb-6">Веб-хуки (опционально, позже)</h2>
+            <div className="space-y-6">
+              <div className="bg-black/20 rounded-lg p-4">
+                <div className="text-green-400 font-mono text-sm mb-2">POST /api/webhooks/payments/fk</div>
+                <div className="text-gray-300 text-sm mb-2">События FreeKassa (успех/фейл), idempotent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* OpenAPI */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+            <h2 className="text-2xl font-semibold text-white mb-6">OpenAPI спецификация</h2>
             <div className="space-y-4 text-gray-300">
-              <p><strong>Аутентификация:</strong> Authorization: Bearer &lt;api_key&gt;</p>
-              <p><strong>Rate limit:</strong> 60 req/min/IP (по умолчанию)</p>
-              <p><strong>Статус:</strong> Closed beta. Получите ключи: support@getlifeundo.com или t.me/GetLifeUndoSupport</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Example */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
-            <h2 className="text-2xl font-semibold text-white mb-6">Пример (cURL)</h2>
-            <div className="bg-black/20 rounded-lg p-4">
-              <pre className="text-gray-300 text-sm overflow-x-auto">
-{`curl -H "Authorization: Bearer $KEY" \\
-     -H "Content-Type: application/json" \\
-     -d '{"licenseKey":"GLU-TEST-123"}' \\
-     https://getlifeundo.com/api/v1/licenses/verify`}
-              </pre>
+              <p><strong>Спецификация:</strong> <a href="/api/openapi.yaml" className="text-blue-400 hover:text-blue-300">/api/openapi.yaml</a></p>
+              <p><strong>Rate-Limit:</strong> 10 req/min по IP на /api/license/validate</p>
             </div>
           </div>
         </div>

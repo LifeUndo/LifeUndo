@@ -4,34 +4,31 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   metadataBase: new URL('https://getlifeundo.com'),
   title: {
-    default: 'GetLifeUndo — Восстановление данных и отмена действий в браузере | Ctrl+Z для интернета',
-    template: '%s — GetLifeUndo | Восстановление данных в браузере',
+    default: 'GetLifeUndo — Ctrl+Z для браузера: восстановление текста, вкладок и буфера',
+    template: '%s — GetLifeUndo',
   },
   description:
-    'Восстанавливайте случайно удаленные данные, закрытые вкладки и заполненные формы в браузере. Браузерное расширение для Firefox и Chrome. Локально, без телеметрии, приватно.',
+    'Восстановление текста форм, закрытых вкладок и истории буфера. 100% локально, без облака. Расширение для Firefox/Chrome. RU/EN.',
   keywords: [
-    // Основные ключевые слова
-    'восстановление данных', 'восстановление файлов', 'отмена действий', 'браузерное расширение',
-    'восстановление вкладок', 'история браузера', 'Ctrl+Z', 'откат изменений',
-    
-    // Специфичные для браузеров
-    'Firefox расширение', 'Chrome расширение', 'браузерное расширение восстановление',
-    'расширение для восстановления данных', 'браузерное расширение отмена',
-    
-    // Длинные хвосты
-    'как восстановить случайно закрытую вкладку', 'восстановление заполненной формы',
-    'восстановление случайно удаленных данных', 'локальное восстановление данных',
-    'приватное восстановление файлов', 'восстановление без интернета',
-    
-    // Технические термины
-    'локально', 'приватность', 'без телеметрии', 'история ввода', 'буфер обмена',
-    'восстановление текста', 'отмена в браузере', 'браузерная история'
+    'восстановление текста',
+    'откат действий',
+    'закрытые вкладки',
+    'история буфера',
+    'браузерное расширение',
+    'Firefox',
+    'Chrome',
+    'Ctrl+Z',
+    'приватность',
+    'локально',
+    'restore form text',
+    'reopen closed tabs',
+    'clipboard history',
   ],
   authors: [{ name: 'GetLifeUndo Team' }],
   creator: 'GetLifeUndo',
   publisher: 'GetLifeUndo',
   alternates: { 
-    canonical: '/',
+    canonical: 'https://getlifeundo.com/ru',
     languages: {
       'ru-RU': 'https://getlifeundo.com/ru',
       'en-US': 'https://getlifeundo.com/en',
@@ -39,9 +36,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://getlifeundo.com/',
-    title: 'GetLifeUndo — Восстановление данных и отмена действий в браузере',
-    description: 'Восстанавливайте случайно удаленные данные, закрытые вкладки и заполненные формы в браузере. Браузерное расширение для Firefox и Chrome. Локально, без телеметрии.',
+    title: 'GetLifeUndo — Ctrl+Z для браузера',
+    description: 'Restore form text, closed tabs, clipboard — 100% local.',
+    url: 'https://getlifeundo.com/ru',
     siteName: 'GetLifeUndo',
     images: [
       {
@@ -54,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GetLifeUndo — Восстановление данных в браузере',
-    description: 'Восстанавливайте случайно удаленные данные, закрытые вкладки и заполненные формы. Браузерное расширение для Firefox и Chrome.',
+    title: 'GetLifeUndo — Ctrl+Z for your browser',
+    description: 'Restore form text, tabs and clipboard — 100% local, private.',
     images: ['/brand/getlifeundo-og.png'],
     creator: '@GetLifeUndo',
   },
@@ -79,25 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{__html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
+            "@type": "Organization",
             "name": "GetLifeUndo",
-            "description": "Браузерное расширение для восстановления данных и отмены действий в браузере. Восстанавливает случайно удаленные данные, закрытые вкладки и заполненные формы локально без телеметрии.",
             "url": "https://getlifeundo.com",
-            "logo": "https://getlifeundo.com/logo512.png",
-            "applicationCategory": "BrowserExtension",
-            "operatingSystem": ["Firefox", "Chrome"],
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "RUB",
-              "availability": "https://schema.org/InStock"
-            },
-            "author": {
-              "@type": "Organization",
-              "name": "GetLifeUndo Team",
-              "url": "https://getlifeundo.com"
-            },
-            "keywords": "восстановление данных, браузерное расширение, восстановление вкладок, отмена действий, Firefox расширение, Chrome расширение, локальное восстановление",
             "sameAs": [
               "https://t.me/GetLifeUndoSupport",
               "https://x.com/GetLifeUndo",
@@ -107,6 +88,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "https://vc.ru/id5309084",
               "https://habr.com/ru/users/GetLifeUndo25/"
             ]
+          })}} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "GetLifeUndo",
+            "applicationCategory": "BrowserExtension",
+            "operatingSystem": "Windows, macOS, Linux",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+            "url": "https://getlifeundo.com/ru",
+            "softwareVersion": "0.3.7.12",
+            "description": "Restore form text, closed tabs and clipboard history. 100% local, private."
           })}} />
       </head>
       <body>

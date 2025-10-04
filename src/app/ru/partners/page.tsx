@@ -29,19 +29,63 @@ export default function PartnersPage() {
           </div>
         </div>
 
-        {/* What's included */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
-            <h2 className="text-2xl font-semibold text-white mb-6">Что входит</h2>
-            <ul className="space-y-4 text-gray-300">
-              <li>• Лого/цвета/название; преднастройки (какие виды «UNDO» включить)</li>
-              <li>• Отчёты по активациям и лицензиям (организации)</li>
-              <li>• Опционально: приватный канал обновлений</li>
-            </ul>
+        </div>
+
+        {/* White-label Packages */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <h2 className="text-2xl font-semibold text-white text-center mb-8">Пакеты White-label</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* WL-Starter */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">WL-Starter</h3>
+              <div className="text-2xl font-bold text-green-400 mb-4">100 VIP</div>
+              <ul className="space-y-3 text-gray-300 mb-6">
+                <li>• Брендинг + страница скачивания</li>
+                <li>• Единый ключ лицензии</li>
+                <li>• Базовые настройки</li>
+                <li>• Email поддержка</li>
+              </ul>
+            </div>
+
+            {/* WL-Pro */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">WL-Pro</h3>
+              <div className="text-2xl font-bold text-blue-400 mb-4">250 VIP</div>
+              <ul className="space-y-3 text-gray-300 mb-6">
+                <li>• Отдельный сабдомен</li>
+                <li>• Телеметрия по ключам</li>
+                <li>• SLA 99.9%</li>
+                <li>• Приоритетная поддержка</li>
+              </ul>
+            </div>
+
+            {/* WL-Enterprise */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">WL-Enterprise</h3>
+              <div className="text-2xl font-bold text-purple-400 mb-4">1000+ VIP</div>
+              <ul className="space-y-3 text-gray-300 mb-6">
+                <li>• Выделенный билд</li>
+                <li>• Приватный CDN</li>
+                <li>• Кастомные политики</li>
+                <li>• Персональный менеджер</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Model */}
+        {/* Process */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
+            <h2 className="text-2xl font-semibold text-white mb-6">Процесс</h2>
+            <div className="space-y-4 text-gray-300">
+              <p><strong>1. Бриф</strong> → обсуждение требований и технических деталей</p>
+              <p><strong>2. Макет</strong> → создание дизайна и брендинга</p>
+              <p><strong>3. Тестовый билд</strong> → private AMO/unlisted для тестирования</p>
+              <p><strong>4. Пилот</strong> → ограниченное тестирование с командой</p>
+              <p><strong>5. Прод</strong> → запуск в продакшн</p>
+            </div>
+          </div>
+        </div>
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
             <h2 className="text-2xl font-semibold text-white mb-6">Модель</h2>

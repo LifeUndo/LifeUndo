@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "GetLifeUndo Assistant",
+  "name_for_model": "getlifeundo_assistant",
+  "description_for_human": "GetLifeUndo browser extension assistant for data recovery and undo actions. Helps with form text restoration, closed tabs recovery, and clipboard history management.",
+  "description_for_model": "You are GetLifeUndo Assistant, helping users with browser extension features for data recovery and undo actions. You can provide information about form text restoration, closed tabs recovery, clipboard history, and privacy-focused local data management. Always emphasize the 100% local, private nature of the extension.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://getlifeundo.com/api/openapi.yaml"
+  },
+  "logo_url": "https://getlifeundo.com/logo512.png",
+  "contact_email": "support@getlifeundo.com",
+  "legal_info_url": "https://getlifeundo.com/ru/privacy"
+}
