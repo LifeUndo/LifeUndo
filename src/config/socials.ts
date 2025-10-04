@@ -7,8 +7,6 @@ export const SOCIALS = {
   reddit:   { label: 'Reddit',   url: 'https://www.reddit.com/r/GetLifeUndo', icon: 'reddit' },
   youtube:  { label: 'YouTube',  url: 'https://www.youtube.com/@GetLifeUndo', icon: 'youtube' },
   github:   { label: 'GitHub',   url: 'https://github.com/GetLifeUndo',  icon: 'github' },
-
-  // Пока плейсхолдеры — оставь пустую строку, чтобы не рендерились:
-  vc:       { label: 'VC.ru',    url: '', /* 'https://vc.ru/u/xxxx-getlifeundo' */ icon: 'vcru' },
-  habr:     { label: 'Хабр',     url: '', /* 'https://habr.com/ru/users/getlifeundo' */ icon: 'habr' }
+  vc:       { label: 'VC.ru',    url: 'https://vc.ru/id5309084',         icon: 'vcru' },
+  habr:     { label: 'Хабр',     url: 'https://habr.com/ru/users/GetLifeUndo25/', icon: 'habr' }
 } as const;

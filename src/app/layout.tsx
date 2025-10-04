@@ -71,8 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "https://x.com/GetLifeUndo",
               "https://www.reddit.com/r/GetLifeUndo",
               "https://www.youtube.com/@GetLifeUndo",
-              "https://github.com/GetLifeUndo"
-              // VC/Habr добавим, когда появятся боевые URL
+              "https://github.com/GetLifeUndo",
+              "https://vc.ru/id5309084",
+              "https://habr.com/ru/users/GetLifeUndo25/"
             ]
           })}} />
       </head>
