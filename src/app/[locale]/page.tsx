@@ -98,7 +98,41 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
+
+        {/* Mobile Apps Announcement */}
+        <div className="text-center mt-16">
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              {locale === 'en' ? 'Mobile Apps Coming Soon' : 'Мобильные приложения скоро'}
+            </h3>
+            <p className="text-gray-300 mb-8">
+              {locale === 'en' 
+                ? 'GetLifeUndo will be available on iOS, Android, and RuStore in Q1 2025' 
+                : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
+              }
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href={`/${locale}/news/mobile-ios`}
+                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <span className="text-2xl">📱</span>
+                {locale === 'en' ? 'iOS App Store' : 'App Store'}
+              </a>
+              <a 
+                href={`/${locale}/news/mobile-android`}
+                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <span className="text-2xl">🤖</span>
+                {locale === 'en' ? 'Google Play' : 'Google Play'}
+              </a>
+              <a 
+                href={`/${locale}/news/rustore`}
+                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <span className="text-2xl">🏪</span>
+                RuStore
+              </a>
+            </div>
+          </div>
+        </div>

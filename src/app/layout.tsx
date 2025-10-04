@@ -69,8 +69,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "sameAs": [
               "https://t.me/GetLifeUndoSupport",
               "https://www.reddit.com/r/GetLifeUndo",
-              "https://vc.ru/u/xxxx-getlifeundo",
-              "https://habr.com/ru/users/getlifeundo",
               "https://x.com/GetLifeUndo",
               "https://www.youtube.com/@GetLifeUndo",
               "https://github.com/GetLifeUndo"
