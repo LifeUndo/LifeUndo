@@ -1,8 +1,84 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+interface LatestData {
+  version: string;
+  publishedAt: string;
+  files: {
+    firefox?: string;
+    win?: string;
+    mac?: string;
+  };
+}
+
+interface DownloadCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  href?: string;
+  className?: string;
+  isAvailable?: boolean;
+}
+
+function DownloadCard({ icon, title, description, href, className, isAvailable = true }: DownloadCardProps) {
+  if (!isAvailable) {
+    return (
+      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center opacity-50">
+        <div className="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          {icon}
+        </div>
+        <h3 className="text-xl font-bold text-gray-400 mb-2">{title}</h3>
+        <p className="text-gray-500 mb-4">{description}</p>
+        <div className="bg-gray-600 text-gray-400 font-bold py-2 px-4 rounded-lg cursor-not-allowed">
+          Скоро
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
+      <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+      <p className="text-gray-300 mb-4">{description}</p>
+      <a 
+        href={href} 
+        className={`font-bold py-2 px-4 rounded-lg transition-colors ${className}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Скачать
+      </a>
+    </div>
+  );
+}
 
 export default function DownloadsClient() {
+  const [latestData, setLatestData] = useState<LatestData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Загружаем latest.json
+    fetch('/app/latest/latest.json')
+      .then(res => res.json())
+      .then(data => {
+        setLatestData(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        // Fallback если latest.json недоступен
+        setLatestData({
+          version: '0.3.7.12',
+          publishedAt: '2025-10-04T10:00:00Z',
+          files: {}
+        });
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       <div className="container mx-auto px-4 py-20">
@@ -14,123 +90,105 @@ export default function DownloadsClient() {
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Выберите вашу платформу и получите защиту от потери данных в один клик
           </p>
+          
+          {/* Version Info */}
+          {latestData && (
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto mb-8">
+              <p className="text-gray-300">
+                <span className="font-semibold">Текущая версия:</span> {latestData.version}
+              </p>
+              <p className="text-sm text-gray-400 mt-1">
+                Опубликовано: {new Date(latestData.publishedAt).toLocaleDateString('ru-RU')}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Download Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {/* Chrome */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Chrome</h3>
-            <p className="text-gray-300 mb-4">Для браузера Chrome</p>
-            <a 
-              href="https://chrome.google.com/webstore/detail/getlifeundo/PLACEHOLDER_CHROME_ID" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Установить
-            </a>
-          </div>
+            }
+            title="Chrome"
+            description="Для браузера Chrome"
+            href="https://chrome.google.com/webstore/detail/getlifeundo/PLACEHOLDER_CHROME_ID"
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+            isAvailable={false}
+          />
 
           {/* Firefox */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Firefox</h3>
-            <p className="text-gray-300 mb-4">Для браузера Firefox</p>
-            <a 
-              href="https://addons.mozilla.org/firefox/addon/getlifeundo/" 
-              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Установить
-            </a>
-          </div>
+            }
+            title="Firefox"
+            description="Для браузера Firefox"
+            href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
+            className="bg-orange-600 hover:bg-orange-700 text-white"
+            isAvailable={!!latestData?.files.firefox}
+          />
 
           {/* Edge */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Edge</h3>
-            <p className="text-gray-300 mb-4">Для браузера Edge</p>
-            <a 
-              href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/PLACEHOLDER_EDGE_ID" 
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Установить
-            </a>
-          </div>
+            }
+            title="Edge"
+            description="Для браузера Edge"
+            href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/PLACEHOLDER_EDGE_ID"
+            className="bg-blue-500 hover:bg-blue-600 text-white"
+            isAvailable={false}
+          />
 
           {/* Windows EXE */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Windows</h3>
-            <p className="text-gray-300 mb-4">Настольное приложение</p>
-            <a 
-              href="https://cdn.getlifeundo.com/app/undo-setup-latest.exe" 
-              className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Скачать EXE
-            </a>
-          </div>
+            }
+            title="Windows"
+            description="Настольное приложение"
+            href={latestData?.files.win || "https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"}
+            className="bg-gray-600 hover:bg-gray-700 text-white"
+            isAvailable={!!latestData?.files.win}
+          />
 
           {/* macOS DMG */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">macOS</h3>
-            <p className="text-gray-300 mb-4">Настольное приложение</p>
-            <a 
-              href="https://cdn.getlifeundo.com/app/undo-latest.dmg" 
-              className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Скачать DMG
-            </a>
-          </div>
+            }
+            title="macOS"
+            description="Настольное приложение"
+            href={latestData?.files.mac || "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"}
+            className="bg-gray-700 hover:bg-gray-800 text-white"
+            isAvailable={!!latestData?.files.mac}
+          />
 
           {/* Android RuStore */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors">
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <DownloadCard
+            icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Android</h3>
-            <p className="text-gray-300 mb-4">Мобильное приложение</p>
-            <a 
-              href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID" 
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Скачать из RuStore
-            </a>
-          </div>
+            }
+            title="Android"
+            description="Мобильное приложение"
+            href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID"
+            className="bg-green-600 hover:bg-green-700 text-white"
+            isAvailable={false}
+          />
         </div>
 
         {/* License Key Input */}
@@ -187,6 +245,16 @@ export default function DownloadsClient() {
               <p className="text-gray-300">История скопированного текста</p>
             </div>
           </div>
+        </div>
+
+        {/* Archive Link */}
+        <div className="text-center mt-12">
+          <a 
+            href="/ru/downloads/archive" 
+            className="text-gray-400 hover:text-white transition-colors underline"
+          >
+            Архив предыдущих версий
+          </a>
         </div>
       </div>
     </div>

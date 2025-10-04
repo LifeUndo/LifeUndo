@@ -9,7 +9,11 @@
     "lint": "next lint",
     "build:ext": "echo 'Extension build ready in extension/ folder' && echo 'Run: npm run build:ext:zip to create downloadable package'",
     "build:ext:zip": "powershell -Command \"Compress-Archive -Path 'extension\\*' -DestinationPath 'public\\extension-dev-0.4.0.zip' -Force\"",
-    "test:e2e": "node scripts/run-e2e.mjs"
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "release:xpi": "powershell -ExecutionPolicy Bypass -File scripts/release/pack_firefox.ps1",
+    "release:sha": "powershell -ExecutionPolicy Bypass -File scripts/release/checksums.ps1",
+    "release:latest": "powershell -ExecutionPolicy Bypass -File scripts/release/update_latest.ps1",
+    "release:prepare": "npm run release:xpi && npm run release:sha && npm run release:latest"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.15.0",
