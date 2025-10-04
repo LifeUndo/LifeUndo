@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { PLANS } from '@/config/plans';
 
 interface PaymentData {
   order_id?: string;
@@ -55,10 +56,10 @@ export default function SuccessPage() {
   
   const planTitle = (plan?: string) => {
     if (!plan) return 'Pro';
-    if (plan === 'starter_6m') return 'Starter Bundle (6 месяцев)';
-    if (plan === 'pro_month') return 'Pro (месяц)';
-    if (plan === 'vip_lifetime') return 'VIP (навсегда)';
-    if (plan === 'team_5') return 'Team (5 мест)';
+    const planConfig = PLANS[plan as keyof typeof PLANS];
+    if (planConfig) {
+      return `${planConfig.label} (${planConfig.period === 'lifetime' ? 'навсегда' : 'месяц'})`;
+    }
     return 'Pro';
   };
   
