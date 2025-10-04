@@ -2,10 +2,14 @@
   "schema_version": "v1",
   "name_for_human": "GetLifeUndo",
   "name_for_model": "getlifeundo",
-  "description_for_human": "Health/debug + license validate endpoints for GetLifeUndo.",
-  "description_for_model": "Check service health, diagnose FreeKassa config, validate license.",
+  "description_for_human": "Ctrl+Z for your online life. Check health, payments debug, license validation.",
+  "description_for_model": "Browser-extension service. You can call three GET endpoints: /api/healthz, /api/debug/fk, /api/license/validate?key=... Return JSON as-is.",
   "auth": { "type": "none" },
-  "api": { "type": "openapi", "url": "https://getlifeundo.com/openapi.yaml" },
+  "api": {
+    "type": "openapi",
+    "url": "https://getlifeundo.com/openapi.yaml",
+    "is_user_authenticated": false
+  },
   "logo_url": "https://getlifeundo.com/icon-512.png",
   "contact_email": "support@getlifeundo.com",
   "legal_info_url": "https://getlifeundo.com/ru/legal/offer"

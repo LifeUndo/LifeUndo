@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "LifeUndo",
+  "name": "GetLifeUndo",
   "description": "Undo last actions: text input, closed tabs, clipboard history.",
-  "version": "0.3.7.12",
-  "homepage_url": "https://lifeundo.github.io/LifeUndo/",
+  "version": "0.3.7.13",
+  "homepage_url": "https://getlifeundo.com",
   "browser_action": {
-    "default_title": "LifeUndo",
+    "default_title": "GetLifeUndo",
     "default_popup": "popup.html"
   },
   "icons": {

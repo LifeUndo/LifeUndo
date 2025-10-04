@@ -56,30 +56,49 @@ function DownloadCard({ icon, title, description, href, className, isAvailable =
   );
 }
 
+interface WhatsNewData {
+  version: string;
+  items: string[];
+}
+
 export default function DownloadsClient() {
   const [latestData, setLatestData] = useState<LatestData | null>(null);
+  const [whatsNewData, setWhatsNewData] = useState<WhatsNewData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Загружаем latest.json с версионированием для обхода кэша
+    // Загружаем latest.json и whats-new.json с версионированием для обхода кэша
     const buildId = Date.now();
-    fetch(`/app/latest/latest.json?v=${buildId}`)
-      .then(res => res.json())
-      .then(data => {
-        setLatestData(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        // Fallback если latest.json недоступен
-        setLatestData({
-          version: '0.3.7.12',
-          publishedAt: '2025-10-04T10:00:00Z',
-          files: {
-            firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
-          }
-        });
-        setLoading(false);
+    
+    Promise.all([
+      fetch(`/app/latest/latest.json?v=${buildId}`).then(res => res.json()),
+      fetch(`/app/latest/whats-new.json?v=${buildId}`).then(res => res.json())
+    ])
+    .then(([latest, whatsNew]) => {
+      setLatestData(latest);
+      setWhatsNewData(whatsNew);
+      setLoading(false);
+    })
+    .catch(() => {
+      // Fallback если файлы недоступны
+      setLatestData({
+        version: '0.3.7.13',
+        publishedAt: '2025-10-04T10:00:00Z',
+        files: {
+          firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
+        }
       });
+      setWhatsNewData({
+        version: '0.3.7.13',
+        items: [
+          'Исправлены ссылки в попапе (Website/Privacy/Support → getlifeundo.com)',
+          'Полная синхронизация RU/EN строк',
+          'Баннер и шапка — корректные отступы',
+          'Кнопки оплаты на сайте активированы'
+        ]
+      });
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -96,13 +115,37 @@ export default function DownloadsClient() {
           
           {/* Version Info */}
           {latestData && (
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-md mx-auto mb-8">
-              <p className="text-gray-300">
-                <span className="font-semibold">Текущая версия:</span> {latestData.version}
-              </p>
-              <p className="text-sm text-gray-400 mt-1">
-                Опубликовано: {new Date(latestData.publishedAt).toLocaleDateString('ru-RU')}
-              </p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-gray-300">
+                    <span className="font-semibold">Текущая версия:</span> {latestData.version}
+                  </p>
+                  <p className="text-sm text-gray-400 mt-1">
+                    Опубликовано: {new Date(latestData.publishedAt).toLocaleDateString('ru-RU')}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <div className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    Последняя версия
+                  </div>
+                </div>
+              </div>
+              
+              {/* What's New */}
+              {whatsNewData && whatsNewData.items.length > 0 && (
+                <div className="border-t border-white/20 pt-4">
+                  <h4 className="text-lg font-semibold text-white mb-3">Что нового в {whatsNewData.version}:</h4>
+                  <ul className="space-y-2">
+                    {whatsNewData.items.map((item, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-green-400 mr-2 mt-1">•</span>
+                        <span className="text-gray-300 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -6,7 +6,7 @@ interface ModernFooterProps {
 }
 
 export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
-  const nav = [
+  const product = [
     { title: 'Возможности', href: `/${locale}/features` },
     { title: 'Тарифы', href: `/${locale}/pricing` },
     { title: 'Скачать', href: `/${locale}/downloads` },
@@ -18,9 +18,9 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
     { title: 'Поддержка', href: `/${locale}/support` },
     { title: 'Контакты', href: `/${locale}/contacts` },
     { title: 'Приватность', href: `/${locale}/privacy` },
-    { title: 'Условия', href: `/${locale}/terms` },
-    { title: 'Developers', href: `/${locale}/developers` },
-    { title: 'Partners', href: `/${locale}/partners` },
+  ];
+
+  const legal = [
     { title: 'Оферта', href: `/${locale}/legal/offer` },
     { title: 'SLA', href: `/${locale}/legal/sla` },
     { title: 'Договор', href: `/${locale}/legal/contract` },
@@ -40,50 +40,12 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
   return (
     <footer className="bg-gray-900/50 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <img src="/brand/getlifeundo-round.png" alt="GetLifeUndo" className="h-8 w-8 rounded-full" />
-            </div>
-            <p className="text-gray-400 mb-6 max-w-md">
-              Ctrl+Z для вашей онлайн-жизни. Восстанавливаем случайно удаленные данные на любых устройствах в любой точке мира.
-            </p>
-            
-            {/* FreeKassa Badge */}
-            <div className="flex items-center gap-4 mb-4">
-              <img 
-                src="/brand/freekassa-badge.svg" 
-                alt="FreeKassa" 
-                className="h-6 opacity-75 hover:opacity-100 transition-opacity"
-              />
-              <span className="text-sm text-gray-400">
-                Оплата через FreeKassa
-              </span>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex gap-4">
-              {socials.map((social) => (
-                <a 
-                  key={social.name}
-                  href={social.href} 
-                  aria-label={social.name} 
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={social.icon} alt={social.name} className="w-6 h-6" />
-                </a>
-              ))}
-            </div>
-          </div>
-
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Product Links */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Продукт</h3>
             <ul className="space-y-2">
-              {nav.map(item => (
+              {product.map(item => (
                 <li key={item.title}>
                   <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
                     {item.title}
@@ -106,14 +68,67 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
               ))}
             </ul>
           </div>
+
+          {/* Legal Links */}
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-4">Юридическое</h3>
+            <ul className="space-y-2">
+              {legal.map(item => (
+                <li key={item.title}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Brand Section */}
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="flex items-center space-x-3">
+              <img src="/brand/getlifeundo-round.png" alt="GetLifeUndo" className="h-8 w-8 rounded-full" />
+              <div>
+                <p className="text-gray-400 text-sm max-w-md">
+                  Ctrl+Z для вашей онлайн-жизни. Восстанавливаем случайно удаленные данные на любых устройствах в любой точке мира.
+                </p>
+                <div className="flex items-center gap-4 mt-2">
+                  <img 
+                    src="/brand/freekassa-badge.svg" 
+                    alt="FreeKassa" 
+                    className="h-5 opacity-75 hover:opacity-100 transition-opacity"
+                  />
+                  <span className="text-xs text-gray-500">
+                    Оплата через FreeKassa
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socials.map((social) => (
+                <a 
+                  key={social.name}
+                  href={social.href} 
+                  aria-label={social.name} 
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={social.icon} alt={social.name} className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <p className="text-gray-400 text-sm text-center">
             © 2024 GetLifeUndo. Все права защищены.
           </p>
-          <SocialBar place="footer" />
         </div>
       </div>
     </footer>

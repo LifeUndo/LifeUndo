@@ -1,9 +1,9 @@
 {
-  "version": "0.3.7.12",
+  "version": "0.3.7.13",
   "publishedAt": "2025-10-04T10:00:00Z",
   "files": {
     "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/",
-    "win": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-setup-0.3.7.12.exe",
-    "mac": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-0.3.7.12.dmg"
+    "win": "https://cdn.getlifeundo.com/app/0.3.7.13/undo-setup-0.3.7.13.exe",
+    "mac": "https://cdn.getlifeundo.com/app/0.3.7.13/undo-0.3.7.13.dmg"
   }
 }

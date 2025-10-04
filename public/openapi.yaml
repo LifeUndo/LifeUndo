@@ -1,22 +1,26 @@
 openapi: 3.0.3
 info:
-  title: GetLifeUndo Public API
+  title: GetLifeUndo API
   version: 1.0.0
 servers:
   - url: https://getlifeundo.com
 paths:
   /api/healthz:
-    get: { summary: Health check, responses: { '200': { description: OK } } }
-  /api/debug/fk:
-    get: { summary: FreeKassa diagnostics, responses: { '200': { description: OK } } }
-  /api/license/validate:
-    post:
-      summary: Validate license key
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema: { type: object, properties: { key: { type: string } }, required: [key] }
+    get:
+      summary: Health check
       responses:
         '200': { description: OK }
-        '400': { description: Invalid license }
+  /api/debug/fk:
+    get:
+      summary: FreeKassa debug flags
+      responses:
+        '200': { description: OK }
+  /api/license/validate:
+    get:
+      summary: Validate a license key (stub endpoint)
+      parameters:
+        - in: query
+          name: key
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
