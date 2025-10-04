@@ -1,4 +1,4 @@
-# LifeUndo Project
+# GetLifeUndo Project
 
 ## 📁 Project Structure
 

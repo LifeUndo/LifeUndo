@@ -231,17 +231,17 @@ document.addEventListener('keydown', (e) => {
 // Footer links
 document.getElementById('linkWebsite')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://lifeundo.ru', '_blank');
+  window.open('https://getlifeundo.com', '_blank');
 });
 
 document.getElementById('linkPrivacy')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://lifeundo.ru/privacy/', '_blank');
+  window.open('https://getlifeundo.com/ru/privacy', '_blank');
 });
 
 document.getElementById('linkSupport')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://t.me/lifeundo', '_blank');
+  window.open('https://t.me/GetLifeUndoSupport', '_blank');
 });
 
 document.getElementById('linkSettings')?.addEventListener('click', (e) => {

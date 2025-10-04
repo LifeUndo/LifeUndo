@@ -2,7 +2,7 @@
   "version": "0.3.7.12",
   "publishedAt": "2025-10-04T10:00:00Z",
   "files": {
-    "firefox": "/app/0.3.7.12/lifeundo-0.3.7.12.xpi",
+    "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/",
     "win": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-setup-0.3.7.12.exe",
     "mac": "https://cdn.getlifeundo.com/app/0.3.7.12/undo-0.3.7.12.dmg"
   }

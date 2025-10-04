@@ -4,8 +4,56 @@
     "description": "Extension name"
   },
   "extensionDescription": {
-    "message": "Ctrl+Z for life on the internet. Restore form text, clipboard, tabs — locally.",
+    "message": "Ctrl+Z for your online life. Forms, tabs, clipboard — 100% local and private.",
     "description": "Extension description"
+  },
+  "app_name": {
+    "message": "GetLifeUndo",
+    "description": "App name"
+  },
+  "free_version": {
+    "message": "Free Version",
+    "description": "Free version label"
+  },
+  "whats_new": {
+    "message": "What's new",
+    "description": "What's new button"
+  },
+  "upgrade_title": {
+    "message": "Upgrade to Pro",
+    "description": "Upgrade title"
+  },
+  "upgrade_cta": {
+    "message": "Upgrade to Pro",
+    "description": "Upgrade CTA"
+  },
+  "website": {
+    "message": "Website",
+    "description": "Website link"
+  },
+  "privacy": {
+    "message": "Privacy",
+    "description": "Privacy link"
+  },
+  "support": {
+    "message": "Support",
+    "description": "Support link"
+  },
+  "license": {
+    "message": "License",
+    "description": "License link"
+  },
+  "recent_inputs": {
+    "message": "Latest text inputs",
+    "description": "Recent inputs label"
+  },
+  "recent_tabs": {
+    "message": "Recently closed tabs",
+    "description": "Recent tabs label"
+  },
+  "clipboard": {
+    "message": "Clipboard history",
+    "description": "Clipboard label"
   },
   "popupTitle": {
     "message": "GetLifeUndo",
