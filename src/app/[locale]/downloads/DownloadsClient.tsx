@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface LatestData {
   version: string;
@@ -65,6 +66,7 @@ export default function DownloadsClient() {
   const [latestData, setLatestData] = useState<LatestData | null>(null);
   const [whatsNewData, setWhatsNewData] = useState<WhatsNewData | null>(null);
   const [loading, setLoading] = useState(true);
+  const { locale } = useTranslations();
 
   useEffect(() => {
     // Загружаем latest.json и whats-new.json с версионированием для обхода кэша
@@ -297,26 +299,32 @@ export default function DownloadsClient() {
         <div className="text-center mt-16">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              Мобильные приложения скоро
+              {locale === 'en' 
+                ? 'Mobile apps coming soon'
+                : 'Мобильные приложения скоро'
+              }
             </h3>
             <p className="text-gray-300 mb-8">
-              GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025
+              {locale === 'en' 
+                ? 'GetLifeUndo will be available on iOS, Android and RuStore in Q1 2025'
+                : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
+              }
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
-                href="/ru/news/mobile-ios"
+                href={`/${locale}/news/mobile-ios`}
                 className="inline-block h-14"
               >
                 <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" className="h-14" />
               </a>
               <a 
-                href="/ru/news/mobile-android"
+                href={`/${locale}/news/mobile-android`}
                 className="inline-block h-14"
               >
                 <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-14" />
               </a>
               <a 
-                href="/ru/news/rustore"
+                href={`/${locale}/news/rustore`}
                 className="inline-block h-14"
               >
                 <img src="https://www.rustore.ru/static/rustore_ru.svg" alt="RuStore" className="h-14" />
