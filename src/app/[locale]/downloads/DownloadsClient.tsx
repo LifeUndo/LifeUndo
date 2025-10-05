@@ -307,22 +307,19 @@ export default function DownloadsClient() {
                 href="/ru/news/mobile-ios"
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">📱</span>
-                App Store
+                <img src="/brand/badges/app-store.svg" alt="App Store" className="h-8" />
               </a>
               <a 
                 href="/ru/news/mobile-android"
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">🤖</span>
-                Google Play
+                <img src="/brand/badges/google-play.svg" alt="Google Play" className="h-8" />
               </a>
               <a 
                 href="/ru/news/rustore"
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">🏪</span>
-                RuStore
+                <img src="/brand/badges/rustore.svg" alt="RuStore" className="h-8" />
               </a>
             </div>
           </div>

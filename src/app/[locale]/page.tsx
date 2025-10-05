@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
+import { SocialBar } from '@/components/SocialBar';
 
 export default function LocaleIndex({ params }: { params: { locale: string } }) {
   const { t, locale } = useTranslations();
@@ -30,6 +31,11 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
             >
               {t.hero.cta_secondary}
             </a>
+          </div>
+          
+          {/* Social Links */}
+          <div className="mt-8">
+            <SocialBar place="hero" />
           </div>
         </div>
 
@@ -117,22 +123,19 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
                 href={`/${locale}/news/mobile-ios`}
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">📱</span>
-                {locale === 'en' ? 'iOS App Store' : 'App Store'}
+                <img src="/brand/badges/app-store.svg" alt="App Store" className="h-8" />
               </a>
               <a 
                 href={`/${locale}/news/mobile-android`}
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">🤖</span>
-                {locale === 'en' ? 'Google Play' : 'Google Play'}
+                <img src="/brand/badges/google-play.svg" alt="Google Play" className="h-8" />
               </a>
               <a 
                 href={`/${locale}/news/rustore`}
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
-                <span className="text-2xl">🏪</span>
-                RuStore
+                <img src="/brand/badges/rustore.svg" alt="RuStore" className="h-8" />
               </a>
             </div>
           </div>

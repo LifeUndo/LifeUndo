@@ -1,7 +1,7 @@
 import { SOCIALS } from '@/config/socials';
 import { SocialIcon } from '@/components/icons/SocialIcon';
 
-export function SocialBar({ place = 'footer' }: { place?: 'header'|'footer' }) {
+export function SocialBar({ place = 'footer' }: { place?: 'header'|'footer'|'hero' }) {
   return (
     <div className="flex items-center gap-3">
       {Object.values(SOCIALS).map(s => {
