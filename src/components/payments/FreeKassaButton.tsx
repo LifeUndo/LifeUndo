@@ -20,7 +20,10 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   const plan = isNewFormat ? productId : null;
   
   // Показываем кнопку только если FreeKassa включен
-  if (!fkPublic.enabled) {
+  // Временно активируем для продакшена
+  const isEnabled = fkPublic.enabled || process.env.NODE_ENV === 'production';
+  
+  if (!isEnabled) {
     return (
       <button 
         disabled 

@@ -2,15 +2,16 @@
   "schema_version": "v1",
   "name_for_human": "GetLifeUndo",
   "name_for_model": "getlifeundo",
-  "description_for_human": "Ctrl+Z for your online life. Check health, payments debug, license validation.",
-  "description_for_model": "Browser-extension service. You can call three GET endpoints: /api/healthz, /api/debug/fk, /api/license/validate?key=... Return JSON as-is.",
-  "auth": { "type": "none" },
+  "description_for_human": "Ctrl+Z для вашей онлайн-жизни. Восстанавливает случайно удаленные данные на любых устройствах.",
+  "description_for_model": "GetLifeUndo is a browser extension that provides undo functionality for web forms, tabs, and clipboard. It stores all data locally for privacy. The API provides license validation, payment processing, and health checks.",
+  "auth": {
+    "type": "none"
+  },
   "api": {
     "type": "openapi",
-    "url": "https://getlifeundo.com/openapi.yaml",
-    "is_user_authenticated": false
+    "url": "https://getlifeundo.com/openapi.yaml"
   },
   "logo_url": "https://getlifeundo.com/icon-512.png",
   "contact_email": "support@getlifeundo.com",
-  "legal_info_url": "https://getlifeundo.com/ru/legal/offer"
+  "legal_info_url": "https://getlifeundo.com/ru/privacy"
 }
