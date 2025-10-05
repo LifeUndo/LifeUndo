@@ -11,11 +11,6 @@ export default {
     rel: "Релиз 0.3.7.12 — новый платёжный поток, RU/EN локализация, мобильная оптимизация",
     download: "Скачать",
   },
-  downloads: {
-    current: "Текущая версия",
-    archive: "Открыть архив",
-    openAMO: "Открыть в Firefox Add-ons", 
-  },
   legal: {
     privacy: "Приватность",
     terms: "Условия",
@@ -93,5 +88,22 @@ export default {
     ready: "Готовы попробовать?",
     download: "Скачать расширение",
     learnMore: "Узнать больше"
+  },
+  downloads: {
+    title: "Скачать GetLifeUndo",
+    subtitle: "Выберите вашу платформу и получите защиту от потери данных в один клик",
+    currentVersion: "Текущая версия:",
+    publishedAt: "Опубликовано:",
+    latestVersion: "Последняя версия",
+    whatsNew: "Что нового в",
+    chrome: "Для браузера Chrome",
+    firefox: "Для браузера Firefox", 
+    edge: "Для браузера Edge",
+    windows: "Настольное приложение",
+    macos: "Настольное приложение",
+    android: "Мобильное приложение",
+    licensePlaceholder: "Введите ключ лицензии...",
+    mobileComingSoon: "Мобильные приложения скоро",
+    mobileDescription: "GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025"
   }
 };

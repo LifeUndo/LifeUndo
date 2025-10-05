@@ -11,11 +11,6 @@ export default {
     rel: "Release 0.3.7.12 — new payment flow, RU/EN localization, mobile polish",
     download: "Download",
   },
-  downloads: {
-    current: "Current version",
-    archive: "Open archive", 
-    openAMO: "Open in Firefox Add-ons",
-  },
   legal: { 
     privacy: "Privacy", 
     terms: "Terms", 
@@ -93,5 +88,22 @@ export default {
     ready: "Ready to try?",
     download: "Download extension",
     learnMore: "Learn more"
+  },
+  downloads: {
+    title: "Download GetLifeUndo",
+    subtitle: "Choose your platform and get data loss protection in one click",
+    currentVersion: "Current version:",
+    publishedAt: "Published:",
+    latestVersion: "Latest version",
+    whatsNew: "What's new in",
+    chrome: "For Chrome browser",
+    firefox: "For Firefox browser",
+    edge: "For Edge browser", 
+    windows: "Desktop application",
+    macos: "Desktop application",
+    android: "Mobile application",
+    licensePlaceholder: "Enter license key...",
+    mobileComingSoon: "Mobile apps coming soon",
+    mobileDescription: "GetLifeUndo will be available on iOS, Android and RuStore in Q1 2025"
   }
 };

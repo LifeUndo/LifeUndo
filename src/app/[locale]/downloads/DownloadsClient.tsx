@@ -66,7 +66,7 @@ export default function DownloadsClient() {
   const [latestData, setLatestData] = useState<LatestData | null>(null);
   const [whatsNewData, setWhatsNewData] = useState<WhatsNewData | null>(null);
   const [loading, setLoading] = useState(true);
-  const { locale } = useTranslations();
+  const { t, locale } = useTranslations();
 
   useEffect(() => {
     // Загружаем latest.json и whats-new.json с версионированием для обхода кэша
@@ -109,10 +109,10 @@ export default function DownloadsClient() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Скачать GetLifeUndo
+            {t.downloads.title}
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Выберите вашу платформу и получите защиту от потери данных в один клик
+            {t.downloads.subtitle}
           </p>
           
           {/* Version Info */}
@@ -121,15 +121,15 @@ export default function DownloadsClient() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <p className="text-gray-300">
-                    <span className="font-semibold">Текущая версия:</span> {latestData.version}
+                    <span className="font-semibold">{t.downloads.currentVersion}</span> {latestData.version}
                   </p>
                   <p className="text-sm text-gray-400 mt-1">
-                    Опубликовано: {new Date(latestData.publishedAt).toLocaleDateString('ru-RU')}
+                    {t.downloads.publishedAt} {new Date(latestData.publishedAt).toLocaleDateString(locale === 'en' ? 'en-US' : 'ru-RU')}
                   </p>
                 </div>
                 <div className="text-right">
                   <div className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Последняя версия
+                    {t.downloads.latestVersion}
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function DownloadsClient() {
               {/* What's New */}
               {whatsNewData && whatsNewData.items.length > 0 && (
                 <div className="border-t border-white/20 pt-4">
-                  <h4 className="text-lg font-semibold text-white mb-3">Что нового в {whatsNewData.version}:</h4>
+                  <h4 className="text-lg font-semibold text-white mb-3">{t.downloads.whatsNew} {whatsNewData.version}:</h4>
                   <ul className="space-y-2">
                     {whatsNewData.items.map((item, index) => (
                       <li key={index} className="flex items-start">
@@ -162,7 +162,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Chrome"
-            description="Для браузера Chrome"
+            description={t.downloads.chrome}
             href="https://chrome.google.com/webstore/detail/getlifeundo/PLACEHOLDER_CHROME_ID"
             className="bg-blue-600 hover:bg-blue-700 text-white"
             isAvailable={false}
@@ -176,7 +176,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Firefox"
-            description="Для браузера Firefox"
+            description={t.downloads.firefox}
             href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
             className="bg-orange-600 hover:bg-orange-700 text-white"
             isAvailable={!!latestData?.files.firefox}
@@ -190,7 +190,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Edge"
-            description="Для браузера Edge"
+            description={t.downloads.edge}
             href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/PLACEHOLDER_EDGE_ID"
             className="bg-blue-500 hover:bg-blue-600 text-white"
             isAvailable={false}
@@ -204,7 +204,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Windows"
-            description="Настольное приложение"
+            description={t.downloads.windows}
             href={latestData?.files.win || "https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"}
             className="bg-gray-600 hover:bg-gray-700 text-white"
             isAvailable={!!latestData?.files.win}
@@ -218,7 +218,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="macOS"
-            description="Настольное приложение"
+            description={t.downloads.macos}
             href={latestData?.files.mac || "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"}
             className="bg-gray-700 hover:bg-gray-800 text-white"
             isAvailable={!!latestData?.files.mac}
@@ -232,7 +232,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Android"
-            description="Мобильное приложение"
+            description={t.downloads.android}
             href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID"
             className="bg-green-600 hover:bg-green-700 text-white"
             isAvailable={false}
@@ -250,7 +250,7 @@ export default function DownloadsClient() {
           <div className="flex gap-4">
             <input 
               type="text" 
-              placeholder="Введите ключ лицензии..." 
+                placeholder={t.downloads.licensePlaceholder}
               className="flex-1 px-4 py-3 rounded-lg bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-blue-400 focus:outline-none"
             />
             <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
@@ -299,16 +299,10 @@ export default function DownloadsClient() {
         <div className="text-center mt-16">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              {locale === 'en' 
-                ? 'Mobile apps coming soon'
-                : 'Мобильные приложения скоро'
-              }
+              {t.downloads.mobileComingSoon}
             </h3>
             <p className="text-gray-300 mb-8">
-              {locale === 'en' 
-                ? 'GetLifeUndo will be available on iOS, Android and RuStore in Q1 2025'
-                : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
-              }
+              {t.downloads.mobileDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
