@@ -6,8 +6,10 @@ import Image from 'next/image';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Social } from '@/config/social';
 import ReleaseBanner from './ReleaseBanner';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function ModernHeader() {
+  const { t, locale } = useTranslations();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -55,7 +57,7 @@ export default function ModernHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
-          <Link href="/ru" className="flex items-center gap-2" aria-label="GetLifeUndo">
+          <Link href={`/${locale}`} className="flex items-center gap-2" aria-label="GetLifeUndo">
             <Image
               src="/brand/getlifeundo-round.png"
               width={32}
@@ -69,17 +71,17 @@ export default function ModernHeader() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-x-6 md:gap-x-8">
-            <Link href="/ru/features" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-              Функции
+            <Link href={`/${locale}/features`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.features}
             </Link>
-            <Link href="/ru/use-cases" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-              Кейсы
+            <Link href={`/${locale}/use-cases`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.cases}
             </Link>
-            <Link href="/ru/pricing" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-              Тарифы
+            <Link href={`/${locale}/pricing`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.pricing}
             </Link>
-            <Link href="/ru/fund" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-              Фонд
+            <Link href={`/${locale}/fund`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.fund}
             </Link>
           </nav>
 
@@ -87,16 +89,16 @@ export default function ModernHeader() {
             <div className="hidden md:flex items-center space-x-4">
               <LanguageSwitcher />
               <Link
-                href="/ru/downloads"
+                href={`/${locale}/downloads`}
                 className="px-4 py-2 text-sm md:text-base text-gray-300 hover:text-white transition-colors"
               >
-                Скачать
+                {t.nav.downloads}
               </Link>
               <Link
-                href="/ru/pricing"
+                href={`/${locale}/pricing`}
                 className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
               >
-                Купить VIP
+                {t.nav.buyVip}
               </Link>
               <a
                 href={Social.telegramChannel}
@@ -115,7 +117,7 @@ export default function ModernHeader() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-gray-300 hover:text-white"
-            aria-label="Меню"
+            aria-label={t.nav.menu}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMenuOpen ? (
@@ -142,50 +144,50 @@ export default function ModernHeader() {
           <div className="md:hidden py-4 border-t border-gray-800 relative z-50 bg-[#0B1220]">
             <nav className="flex flex-col space-y-4">
               <Link 
-                href="/ru/features" 
+                href={`/${locale}/features`} 
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Функции
+                {t.nav.features}
               </Link>
               <Link 
-                href="/ru/use-cases" 
+                href={`/${locale}/use-cases`} 
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Кейсы
+                {t.nav.cases}
               </Link>
               <Link 
-                href="/ru/pricing" 
+                href={`/${locale}/pricing`} 
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Тарифы
+                {t.nav.pricing}
               </Link>
               <Link 
-                href="/ru/fund" 
+                href={`/${locale}/fund`} 
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Фонд
+                {t.nav.fund}
               </Link>
               <div className="pt-4 space-y-2">
                 <div className="px-4 py-2">
                   <LanguageSwitcher />
                 </div>
                 <Link 
-                  href="/ru/downloads" 
+                  href={`/${locale}/downloads`} 
                   className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Скачать
+                  {t.nav.downloads}
                 </Link>
                 <Link 
-                  href="/ru/pricing" 
+                  href={`/${locale}/pricing`} 
                   className="block px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Купить VIP
+                  {t.nav.buyVip}
                 </Link>
                 <div className="flex gap-4 px-4 py-2">
                   <a 

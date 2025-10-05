@@ -1,40 +1,35 @@
 import Link from 'next/link';
 import { SocialBar } from './SocialBar';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface ModernFooterProps {
   locale?: string;
 }
 
 export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
+  const { t } = useTranslations();
+  
   const product = [
-    { title: 'Возможности', href: `/${locale}/features` },
-    { title: 'Тарифы', href: `/${locale}/pricing` },
-    { title: 'Скачать', href: `/${locale}/downloads` },
-    { title: 'Кейсы', href: `/${locale}/use-cases` },
+    { title: t.footer.features, href: `/${locale}/features` },
+    { title: t.footer.cases, href: `/${locale}/use-cases` },
+    { title: t.footer.pricing, href: `/${locale}/pricing` },
+    { title: t.footer.downloads, href: `/${locale}/downloads` },
   ];
 
   const company = [
-    { title: 'Фонд', href: `/${locale}/fund` },
-    { title: 'Поддержка', href: `/${locale}/support` },
-    { title: 'Контакты', href: `/${locale}/contacts` },
-    { title: 'Приватность', href: `/${locale}/privacy` },
+    { title: t.footer.fund, href: `/${locale}/fund` },
+    { title: t.footer.support, href: `/${locale}/support` },
+    { title: t.footer.contacts, href: `/${locale}/contacts` },
+    { title: t.footer.privacy, href: `/${locale}/privacy` },
   ];
 
   const legal = [
-    { title: 'Оферта', href: `/${locale}/legal/offer` },
-    { title: 'SLA', href: `/${locale}/legal/sla` },
-    { title: 'Договор', href: `/${locale}/legal/contract` },
-    { title: 'DPA', href: `/${locale}/legal/dpa` },
-    { title: 'Политика', href: `/${locale}/legal/pdp` },
-    { title: 'Скачать договоры .TXT', href: `/${locale}/legal/downloads` },
-  ];
-
-  const socials = [
-    { name: 'Telegram Channel', href: 'https://t.me/GetLifeUndo', icon: '/brand/tg.svg' },
-    { name: 'Telegram Support', href: 'https://t.me/GetLifeUndoSupport', icon: '/brand/tg.svg' },
-    { name: 'X', href: 'https://x.com/GetLifeUndo', icon: '/brand/x.svg' },
-    { name: 'YouTube', href: 'https://www.youtube.com/@GetLifeUndo', icon: '/brand/yt.svg' },
-    { name: 'GitHub', href: 'https://github.com/LifeUndo', icon: '/brand/github.svg' },
+    { title: t.footer.offer, href: `/${locale}/legal/offer` },
+    { title: t.footer.sla, href: `/${locale}/legal/sla` },
+    { title: t.footer.contract, href: `/${locale}/legal/contract` },
+    { title: t.footer.dpa, href: `/${locale}/legal/dpa` },
+    { title: t.footer.policy, href: `/${locale}/legal/pdp` },
+    { title: t.footer.downloadsTxt, href: `/${locale}/legal/downloads` },
   ];
 
   return (
@@ -43,7 +38,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Product Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Продукт</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.product}</h3>
             <ul className="space-y-2">
               {product.map(item => (
                 <li key={item.title}>
@@ -57,7 +52,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Компания</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.company}</h3>
             <ul className="space-y-2">
               {company.map(item => (
                 <li key={item.title}>
@@ -71,7 +66,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
 
           {/* Legal Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Юридическое</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.legal}</h3>
             <ul className="space-y-2">
               {legal.map(item => (
                 <li key={item.title}>
@@ -108,18 +103,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
             
             {/* Social Links */}
             <div className="flex gap-4">
-              {socials.map((social) => (
-                <a 
-                  key={social.name}
-                  href={social.href} 
-                  aria-label={social.name} 
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={social.icon} alt={social.name} className="w-5 h-5" />
-                </a>
-              ))}
+              <SocialBar place="footer" />
             </div>
           </div>
         </div>

@@ -1,11 +1,12 @@
 export default {
   nav: {
     features: "Функции",
-    usecases: "Кейсы",
+    cases: "Кейсы",
     pricing: "Тарифы", 
     downloads: "Скачать",
     fund: "Фонд",
     buyVip: "Купить VIP",
+    menu: "Меню"
   },
   banner: {
     rel: "Релиз 0.3.7.12 — новый платёжный поток, RU/EN локализация, мобильная оптимизация",
@@ -74,5 +75,24 @@ export default {
     ready: "Готовы попробовать?",
     download: "Скачать расширение",
     learnMore: "Узнать больше"
+  },
+  footer: {
+    product: "Продукт",
+    company: "Компания", 
+    legal: "Юридическое",
+    features: "Возможности",
+    cases: "Кейсы",
+    pricing: "Тарифы",
+    downloads: "Скачать",
+    fund: "Фонд",
+    support: "Поддержка",
+    contacts: "Контакты",
+    privacy: "Приватность",
+    offer: "Оферта",
+    sla: "SLA",
+    contract: "Договор",
+    dpa: "DPA",
+    policy: "Политика",
+    downloadsTxt: "Скачать договоры .TXT"
   }
 };

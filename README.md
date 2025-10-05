@@ -1,180 +1,90 @@
-# GetLifeUndo Project
+# GetLifeUndo
 
-## 📁 Project Structure
+**Ctrl+Z для вашей онлайн-жизни**
 
-### Core Application
-- `src/` - Next.js application source code
-- `public/` - Static files and pages
-- `api/` - API routes
-- `migrations/` - Database migrations
-- `utils/` - Utility functions
+GetLifeUndo — это браузерное расширение, которое восстанавливает случайно удаленные данные: текст форм, закрытые вкладки и историю буфера обмена. Все данные хранятся локально в браузере для максимальной приватности.
 
-### Extensions
-- `extension/` - Chrome extension
-- `extension_firefox/` - Firefox extension
-- `ext/` - Additional extension files
+## 🚀 Возможности
 
-### Configuration
-- `drizzle.config.ts` - Database configuration
-- `next.config.mjs` - Next.js configuration
-- `playwright.config.ts` - E2E testing configuration
-- `vercel.json` - Vercel deployment configuration
+- **Восстановление текста форм** — после перезагрузки страницы
+- **История закрытых вкладок** — быстрое восстановление
+- **Локальная история буфера** — без отправки на серверы
+- **100% приватность** — все данные остаются в браузере
 
-### Documentation
-- `docs/` - All documentation organized by category
-  - `checklists/` - Project checklists and plans
-  - `patches/` - Patch documentation
-  - `setup/` - Setup guides and instructions
-  - `releases/` - Release notes and changelogs
-  - `scripts/` - Build and utility scripts
-  - `temp/` - Temporary files and archives
+## 📦 Установка
 
-### Business & Assets
-- `business/` - Business plans and documentation
-- `assets/` - Project assets
-- `icons/` - Extension icons
-- `lifeundo-web-icons/` - Web icons
-- `store/` - Store-related files
+### Firefox (AMO)
+[![Firefox Add-on](https://img.shields.io/badge/Firefox-Add--on-orange?logo=firefox&logoColor=white)](https://addons.mozilla.org/firefox/addon/lifeundo/)
 
-### Releases & Packages
-- `releases/` - Extension release archives
-- `packages/` - NPM packages (lifeundo-js, lifeundo-python)
+### Chrome/Edge
+Скоро будет доступно в Chrome Web Store и Microsoft Edge Add-ons.
 
-### Infrastructure
-- `cloudflare/` - Cloudflare configuration
-- `monitoring/` - Monitoring setup
-- `GetLifeUndo/` - Legacy project files
+### Desktop приложения
+- **Windows**: [Скачать .exe](https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe)
+- **macOS**: [Скачать .dmg](https://cdn.getlifeundo.com/app/latest/undo-latest.dmg)
 
-### Testing
-- `tests/` - Test files
-- `test-results/` - Test results
-- `scripts/` - Utility and smoke test scripts
+## 🛠️ Разработка
 
-## 💳 FreeKassa Integration (Preview)
+### Требования
+- Node.js 18+
+- npm или yarn
 
-### Overview
-FreeKassa payment integration is implemented in the `feature/fk-from-prod-lock` branch and is ready for testing on Preview environments.
-
-### Environment Variables
-Set these variables in your Vercel environment:
-
+### Установка
 ```bash
-# Enable FreeKassa UI (Preview only - CRITICAL!)
-NEXT_PUBLIC_FK_ENABLED=true
-
-# FreeKassa Configuration
-FREEKASSA_MERCHANT_ID=your_merchant_id
-FREEKASSA_SECRET1=your_secret1
-FREEKASSA_SECRET2=your_secret2
-FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/
-FREEKASSA_CURRENCY=RUB
+git clone https://github.com/GetLifeUndo/LifeUndo.git
+cd LifeUndo
+npm install
 ```
 
-**⚠️ CRITICAL Security Settings:** 
-- `NEXT_PUBLIC_FK_ENABLED` → Scope: **Preview only** (NEVER All Environments!)
-- `FREEKASSA_*` variables → Scope: Preview + Production (safe)
-- Only use `FREEKASSA_*` variables (no `FK_*` duplicates)
-
-📋 **Detailed setup:** See `VERCEL_ENV_SETUP_INSTRUCTIONS.md`
-
-### API Endpoints
-
-#### Debug API (Preview only)
+### Запуск сайта
 ```bash
-GET /api/debug/fk
+npm run dev
 ```
-Returns configuration status without exposing secrets.
 
-#### Create Payment
+### Сборка расширения
 ```bash
-POST /api/payments/freekassa/create
-Content-Type: application/json
-
-# Format 1: Product ID
-{
-  "productId": "getlifeundo_pro|getlifeundo_vip|getlifeundo_team",
-  "email": "optional@example.com"
-}
-
-# Format 2: Alternative (for testing)
-{
-  "currency": "RUB",
-  "order_id": "100500", 
-  "description": "Pro plan|VIP plan|Team plan"
-}
+cd extension_firefox
+npx web-ext build -s . -o
 ```
 
-### Smoke Testing
-Run the smoke test script on your Preview deployment:
+## 📋 Требования
 
-```powershell
-.\scripts\freekassa-smoke-test.ps1 -PreviewUrl "https://your-preview-url.vercel.app"
-```
+- **Firefox**: 109.0+
+- **Chrome**: 88+ (планируется)
+- **Edge**: 88+ (планируется)
 
-### Products & Pricing
-- **Pro Plan**: `getlifeundo_pro` - 599.00 RUB/month
-- **VIP Plan**: `getlifeundo_vip` - 9990.00 RUB (lifetime)
-- **Team Plan**: `getlifeundo_team` - 2990.00 RUB/month (5 seats)
+## 🔒 Приватность
 
-### Release Checklist
-- [ ] Preview smoke tests pass
-- [ ] Payment URLs generate correctly
-- [ ] UI shows FreeKassa buttons only when enabled
-- [ ] Debug API returns proper configuration
-- [ ] Error handling works for invalid requests
-- [ ] Promote to Production
-- [ ] Set Production environment variables
-- [ ] Run final smoke test on Production
+- Все данные хранятся локально в браузере
+- Нет телеметрии или отслеживания
+- Данные не передаются на внешние серверы
+- Подробнее: [Политика конфиденциальности](https://getlifeundo.com/ru/privacy)
 
-## 🚀 Quick Start
+## 📞 Поддержка
 
-1. Install dependencies: `npm install`
-2. Set up environment: Copy `env.example` to `.env.local`
-3. Run migrations: `npm run db:migrate`
-4. Start development: `npm run dev`
+- **Email**: support@getlifeundo.com
+- **Telegram**: [@GetLifeUndoSupport](https://t.me/GetLifeUndoSupport)
+- **Сайт**: [getlifeundo.com](https://getlifeundo.com)
 
-## 📋 Current Status
+## 📄 Лицензия
 
-- ✅ AMO upload ready (Firefox 0.3.7.11)
-- ✅ lifeundo.ru pages fixed
-- ⏳ Vercel ENV + redeploy needed for getlifeundo.com
-- ⏳ FreeKassa E2E testing pending
+Copyright © 2024 GetLifeUndo. Все права защищены.
 
-## 🔧 Scripts
+## 🤝 Вклад в проект
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run db:migrate` - Run database migrations
-- `npm run smtp:start` - Start SMTP listener
-- `npm run relay:start` - Start email relay
+Мы приветствуем вклад в развитие проекта! См. [CONTRIBUTING.md](CONTRIBUTING.md) для подробностей.
 
-## 📚 Documentation
+## 🔧 API
 
-All documentation is organized in the `docs/` directory:
-- **Setup guides** in `docs/setup/` - Configuration, deployment, environment setup
-- **Checklists** in `docs/checklists/` - Project checklists, plans, verification steps
-- **Release notes** in `docs/releases/` - Changelogs, release notes, version history
-- **Scripts** in `docs/scripts/` - Build scripts, utilities, automation tools
-- **Patches** in `docs/patches/` - Patch documentation and implementation guides
-- **Temp files** in `docs/temp/` - Temporary files, archives, old configs
+Для разработчиков доступно API для интеграции:
+- [Документация API](https://getlifeundo.com/ru/developers)
+- [OpenAPI спецификация](https://getlifeundo.com/openapi.yaml)
 
-### 📁 File Placement Rules
+## 🏢 White-label / OEM
 
-**New files should be placed in:**
-- `docs/setup/` - New setup guides, configuration instructions
-- `docs/checklists/` - New project checklists, verification steps
-- `docs/releases/` - New release notes, changelog entries
-- `docs/scripts/` - New build scripts, utility scripts
-- `docs/patches/` - New patch documentation
-- `docs/temp/` - Temporary files, old archives, deprecated configs
+Интересуетесь корпоративными решениями? См. [Партнерскую программу](https://getlifeundo.com/ru/partners).
 
-**DO NOT** place new documentation files in the root directory - they belong in `docs/` subdirectories.
+---
 
-## 🏗️ Architecture
-
-- **Frontend**: Next.js with App Router
-- **Database**: PostgreSQL with Drizzle ORM
-- **Extensions**: Chrome (Manifest V2) and Firefox
-- **Deployment**: Vercel for web, AMO for Firefox
-- **Payments**: FreeKassa integration
-- **Email**: SMTP relay system
+**Версия**: 0.3.7.13  
+**Последнее обновление**: 5 октября 2025

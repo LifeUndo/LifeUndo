@@ -1,11 +1,12 @@
 export default {
   nav: {
     features: "Features",
-    usecases: "Use cases", 
+    cases: "Use cases",
     pricing: "Pricing",
     downloads: "Downloads",
     fund: "Fund",
     buyVip: "Buy VIP",
+    menu: "Menu"
   },
   banner: {
     rel: "Release 0.3.7.12 — new payment flow, RU/EN localization, mobile polish",
@@ -74,5 +75,24 @@ export default {
     ready: "Ready to try?",
     download: "Download extension",
     learnMore: "Learn more"
+  },
+  footer: {
+    product: "Product",
+    company: "Company",
+    legal: "Legal",
+    features: "Features",
+    cases: "Use Cases",
+    pricing: "Pricing",
+    downloads: "Downloads",
+    fund: "Fund",
+    support: "Support",
+    contacts: "Contacts",
+    privacy: "Privacy",
+    offer: "Public Offer",
+    sla: "SLA",
+    contract: "Contract",
+    dpa: "DPA",
+    policy: "Policy",
+    downloadsTxt: "Download contracts (.TXT)"
   }
 };
