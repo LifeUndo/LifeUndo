@@ -1,0 +1,29 @@
+GetLifeUndo 0.3.7.14 — Firefox Hotfix v2
+
+=== Что исправлено ===
+• Исправлены ссылки в попапе (Website, Privacy, Support, License)
+• Включены бесплатные функции для Firefox (Latest text inputs, Recently closed tabs, Clipboard history)
+• Добавлена базовая функциональность восстановления вкладок
+• Улучшена локализация RU/EN в попапе
+• Исправлен манифест Firefox (MV2 совместимость)
+
+=== Технические изменения ===
+• Добавлены permissions: sessions, clipboardRead
+• Добавлен content_scripts для отслеживания ввода
+• Убраны PRO-бейджи для Firefox (базовые функции доступны бесплатно)
+• Кнопка Upgrade ведёт на /pricing
+• License ссылается на /legal/offer
+
+=== Безопасность ===
+• Никакой телеметрии
+• Локальное хранение данных
+• Проверка подписей FreeKassa
+
+=== Совместимость ===
+• Firefox 109+
+• Manifest V2 (AMO совместимость)
+
+=== Поддержка ===
+• Сайт: https://getlifeundo.com
+• Поддержка: https://t.me/GetLifeUndoSupport
+• Приватность: https://getlifeundo.com/ru/privacy

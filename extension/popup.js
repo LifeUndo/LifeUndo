@@ -1,4 +1,4 @@
-// LifeUndo Popup - v0.3.7.13
+// LifeUndo Popup - v0.3.7.14
 // Firefox hotfix: enable free features, fix links, add basic functionality
 
 const api = window.browser || window.chrome;
@@ -56,7 +56,7 @@ const i18n = {
     footer_support: "Support",
     footer_license: "License",
     whats_new: "What's new",
-    whats_new_title: "What's new (v0.3.7.13)",
+    whats_new_title: "What's new (v0.3.7.14)",
     whats_new_points: [
       "Fixed popup links and i18n",
       "Enabled free features for Firefox",
@@ -81,7 +81,7 @@ const i18n = {
     footer_support: "Поддержка", 
     footer_license: "Лицензия",
     whats_new: "Что нового",
-    whats_new_title: "Что нового (v0.3.7.13)",
+    whats_new_title: "Что нового (v0.3.7.14)",
     whats_new_points: [
       "Исправлены ссылки в попапе и i18n",
       "Включены бесплатные функции для Firefox",

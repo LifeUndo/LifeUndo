@@ -1,6 +1,6 @@
 {
-  "version": "0.3.7.13",
-  "title": "Firefox Hotfix",
+  "version": "0.3.7.14",
+  "title": "Firefox Hotfix v2",
   "items": [
     "Fixed popup links and i18n",
     "Enabled free features for Firefox", 

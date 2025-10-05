@@ -42,8 +42,8 @@ requiredFiles.forEach(file => {
 // Check latest.json structure
 try {
   const latestJson = JSON.parse(fs.readFileSync(path.join(projectRoot, 'public/app/latest/latest.json'), 'utf8'));
-  if (latestJson.version !== '0.3.7.13') {
-    issues.push(`❌ latest.json version mismatch: expected 0.3.7.13, got ${latestJson.version}`);
+  if (latestJson.version !== '0.3.7.14') {
+    issues.push(`❌ latest.json version mismatch: expected 0.3.7.14, got ${latestJson.version}`);
   }
   if (!latestJson.files.firefox.includes('addons.mozilla.org')) {
     issues.push(`❌ Firefox link should point to AMO`);
@@ -54,11 +54,11 @@ try {
 }
 
 // Check XPI exists
-const xpiPath = path.join(projectRoot, 'release/amo/lifeundo-0.3.7.13.xpi');
+const xpiPath = path.join(projectRoot, 'release/amo/lifeundo-0.3.7.14.xpi');
 if (fs.existsSync(xpiPath)) {
-  console.log(`✅ XPI built: release/amo/lifeundo-0.3.7.13.xpi`);
+  console.log(`✅ XPI built: release/amo/lifeundo-0.3.7.14.xpi`);
 } else {
-  issues.push(`❌ XPI not found: release/amo/lifeundo-0.3.7.13.xpi`);
+  issues.push(`❌ XPI not found: release/amo/lifeundo-0.3.7.14.xpi`);
 }
 
 // Summary
