@@ -1,5 +1,5 @@
-// LifeUndo Popup - v0.3.7.14
-// Firefox hotfix: enable free features, fix links, add basic functionality
+// LifeUndo Popup - v0.3.7.15
+// Firefox hotfix: fix AMO validation issues (remove innerHTML)
 
 const api = window.browser || window.chrome;
 
@@ -56,7 +56,7 @@ const i18n = {
     footer_support: "Support",
     footer_license: "License",
     whats_new: "What's new",
-    whats_new_title: "What's new (v0.3.7.14)",
+    whats_new_title: "What's new (v0.3.7.15)",
     whats_new_points: [
       "Fixed popup links and i18n",
       "Enabled free features for Firefox",
@@ -81,7 +81,7 @@ const i18n = {
     footer_support: "Поддержка", 
     footer_license: "Лицензия",
     whats_new: "Что нового",
-    whats_new_title: "Что нового (v0.3.7.14)",
+    whats_new_title: "Что нового (v0.3.7.15)",
     whats_new_points: [
       "Исправлены ссылки в попапе и i18n",
       "Включены бесплатные функции для Firefox",
@@ -126,7 +126,13 @@ function applyLang() {
   const wnList = document.querySelector('#wnModal ul');
   if (wnTitle) wnTitle.textContent = t('whats_new_title');
   if (wnList) {
-    wnList.innerHTML = t('whats_new_points').map(point => `<li>${point}</li>`).join('');
+    // Clear existing content
+    wnList.textContent = '';
+    t('whats_new_points').forEach(point => {
+      const li = document.createElement('li');
+      li.textContent = point;
+      wnList.appendChild(li);
+    });
   }
   
   // Refresh VIP UI after language change
@@ -182,20 +188,43 @@ async function loadTextInputs() {
     const { recentInputs = [] } = await api.storage.local.get('recentInputs');
     
     if (textList) {
+      // Clear existing content
+      textList.textContent = '';
+      
       if (recentInputs.length === 0) {
-        textList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+        const noDataDiv = document.createElement('div');
+        noDataDiv.className = 'item muted';
+        noDataDiv.textContent = t('no_data');
+        textList.appendChild(noDataDiv);
       } else {
-        textList.innerHTML = recentInputs.slice(0, 5).map((input, i) => `
-          <div class="item" data-index="${i}">
-            <div class="mono">${input.text.substring(0, 50)}${input.text.length > 50 ? '...' : ''}</div>
-            <div class="muted">${new Date(input.timestamp).toLocaleString()}</div>
-          </div>
-        `).join('');
+        recentInputs.slice(0, 5).forEach((input, i) => {
+          const item = document.createElement('div');
+          item.className = 'item';
+          item.setAttribute('data-index', i);
+          
+          const textDiv = document.createElement('div');
+          textDiv.className = 'mono';
+          textDiv.textContent = input.text.substring(0, 50) + (input.text.length > 50 ? '...' : '');
+          
+          const timeDiv = document.createElement('div');
+          timeDiv.className = 'muted';
+          timeDiv.textContent = new Date(input.timestamp).toLocaleString();
+          
+          item.appendChild(textDiv);
+          item.appendChild(timeDiv);
+          textList.appendChild(item);
+        });
       }
     }
   } catch (e) {
     console.error('Error loading text inputs:', e);
-    if (textList) textList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+    if (textList) {
+      textList.textContent = '';
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'item muted';
+      errorDiv.textContent = t('no_data');
+      textList.appendChild(errorDiv);
+    }
   }
 }
 
@@ -204,20 +233,44 @@ async function loadRecentTabs() {
     const sessions = await api.sessions.getRecentlyClosed({ maxResults: 5 });
     
     if (tabList) {
+      // Clear existing content
+      tabList.textContent = '';
+      
       if (sessions.length === 0) {
-        tabList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+        const noDataDiv = document.createElement('div');
+        noDataDiv.className = 'item muted';
+        noDataDiv.textContent = t('no_data');
+        tabList.appendChild(noDataDiv);
       } else {
-        tabList.innerHTML = sessions.map((session, i) => `
-          <div class="item" data-session-id="${session.tab?.sessionId}">
-            <div>${session.tab?.title || 'Untitled'}</div>
-            <div class="muted">${session.tab?.url || ''}</div>
-          </div>
-        `).join('');
+        sessions.forEach((session, i) => {
+          const item = document.createElement('div');
+          item.className = 'item';
+          if (session.tab?.sessionId) {
+            item.setAttribute('data-session-id', session.tab.sessionId);
+          }
+          
+          const titleDiv = document.createElement('div');
+          titleDiv.textContent = session.tab?.title || 'Untitled';
+          
+          const urlDiv = document.createElement('div');
+          urlDiv.className = 'muted';
+          urlDiv.textContent = session.tab?.url || '';
+          
+          item.appendChild(titleDiv);
+          item.appendChild(urlDiv);
+          tabList.appendChild(item);
+        });
       }
     }
   } catch (e) {
     console.error('Error loading recent tabs:', e);
-    if (tabList) tabList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+    if (tabList) {
+      tabList.textContent = '';
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'item muted';
+      errorDiv.textContent = t('no_data');
+      tabList.appendChild(errorDiv);
+    }
   }
 }
 
@@ -226,20 +279,43 @@ async function loadClipboardHistory() {
     const { clipboardHistory = [] } = await api.storage.local.get('clipboardHistory');
     
     if (clipList) {
+      // Clear existing content
+      clipList.textContent = '';
+      
       if (clipboardHistory.length === 0) {
-        clipList.innerHTML = `<div class="item muted">${t('clipboard_empty')}</div>`;
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'item muted';
+        emptyDiv.textContent = t('clipboard_empty');
+        clipList.appendChild(emptyDiv);
       } else {
-        clipList.innerHTML = clipboardHistory.slice(0, 5).map((item, i) => `
-          <div class="item" data-index="${i}">
-            <div class="mono">${item.text.substring(0, 50)}${item.text.length > 50 ? '...' : ''}</div>
-            <div class="muted">${new Date(item.timestamp).toLocaleString()}</div>
-          </div>
-        `).join('');
+        clipboardHistory.slice(0, 5).forEach((item, i) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'item';
+          itemDiv.setAttribute('data-index', i);
+          
+          const textDiv = document.createElement('div');
+          textDiv.className = 'mono';
+          textDiv.textContent = item.text.substring(0, 50) + (item.text.length > 50 ? '...' : '');
+          
+          const timeDiv = document.createElement('div');
+          timeDiv.className = 'muted';
+          timeDiv.textContent = new Date(item.timestamp).toLocaleString();
+          
+          itemDiv.appendChild(textDiv);
+          itemDiv.appendChild(timeDiv);
+          clipList.appendChild(itemDiv);
+        });
       }
     }
   } catch (e) {
     console.error('Error loading clipboard history:', e);
-    if (clipList) clipList.innerHTML = `<div class="item muted">${t('clipboard_empty')}</div>`;
+    if (clipList) {
+      clipList.textContent = '';
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'item muted';
+      errorDiv.textContent = t('clipboard_empty');
+      clipList.appendChild(errorDiv);
+    }
   }
 }
 

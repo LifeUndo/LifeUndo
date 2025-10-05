@@ -1,0 +1,31 @@
+GetLifeUndo 0.3.7.15 — AMO Validation Fix
+
+=== Что исправлено ===
+• Исправлена критическая ошибка AMO: "Unsafe assignment to innerHTML"
+• Заменены все innerHTML на безопасные DOM методы
+• Исправлены ссылки в попапе (Website, Privacy, Support, License)
+• Включены бесплатные функции для Firefox
+• Добавлена базовая функциональность восстановления вкладок
+
+=== Технические изменения ===
+• Убраны все innerHTML присваивания
+• Использованы createElement, textContent, appendChild
+• Добавлены permissions: sessions, clipboardRead
+• Добавлен content_scripts для отслеживания ввода
+• Убраны PRO-бейджи для Firefox
+
+=== Безопасность ===
+• Никакой телеметрии
+• Локальное хранение данных
+• Безопасные DOM методы (без innerHTML)
+• Проверка подписей FreeKassa
+
+=== Совместимость ===
+• Firefox 109+
+• Manifest V2 (AMO совместимость)
+• Проходит AMO валидацию без ошибок
+
+=== Поддержка ===
+• Сайт: https://getlifeundo.com
+• Поддержка: https://t.me/GetLifeUndoSupport
+• Приватность: https://getlifeundo.com/ru/privacy
