@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations } from '@/hooks/useTranslations';
 import MobileBadges from '@/components/ui/MobileBadges';
 
 interface LatestData {
@@ -21,9 +21,10 @@ interface DownloadCardProps {
   href?: string;
   className?: string;
   isAvailable?: boolean;
+  t: any; // Добавляем t как параметр
 }
 
-function DownloadCard({ icon, title, description, href, className, isAvailable = true }: DownloadCardProps) {
+function DownloadCard({ icon, title, description, href, className, isAvailable = true, t }: DownloadCardProps) {
   if (!isAvailable) {
     return (
       <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center opacity-50">
@@ -33,7 +34,7 @@ function DownloadCard({ icon, title, description, href, className, isAvailable =
         <h3 className="text-xl font-bold text-gray-400 mb-2">{title}</h3>
         <p className="text-gray-500 mb-4">{description}</p>
         <div className="bg-gray-600 text-gray-400 font-bold py-2 px-4 rounded-lg cursor-not-allowed">
-          {t('comingSoon')}
+          {t.downloads.comingSoon}
         </div>
       </div>
     );
@@ -52,7 +53,7 @@ function DownloadCard({ icon, title, description, href, className, isAvailable =
         target="_blank"
         rel="noopener noreferrer"
       >
-        {t('download')}
+        {t.downloads.download}
       </a>
     </div>
   );
@@ -67,7 +68,7 @@ export default function DownloadsClient() {
   const [latestData, setLatestData] = useState<LatestData | null>(null);
   const [whatsNewData, setWhatsNewData] = useState<WhatsNewData | null>(null);
   const [loading, setLoading] = useState(true);
-  const t = useTranslations('downloads');
+  const { t, locale } = useTranslations();
 
   useEffect(() => {
     // Загружаем latest.json и whats-new.json с версионированием для обхода кэша
@@ -166,6 +167,7 @@ export default function DownloadsClient() {
             description={t.downloads.chrome}
             href="https://chrome.google.com/webstore/detail/getlifeundo/PLACEHOLDER_CHROME_ID"
             className="bg-blue-600 hover:bg-blue-700 text-white"
+            t={t}
             isAvailable={false}
           />
 
@@ -180,6 +182,7 @@ export default function DownloadsClient() {
             description={t.downloads.firefox}
             href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
             className="bg-orange-600 hover:bg-orange-700 text-white"
+            t={t}
             isAvailable={!!latestData?.files.firefox}
           />
 
@@ -195,6 +198,7 @@ export default function DownloadsClient() {
             href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/PLACEHOLDER_EDGE_ID"
             className="bg-blue-500 hover:bg-blue-600 text-white"
             isAvailable={false}
+            t={t}
           />
 
           {/* Windows EXE */}
@@ -209,6 +213,7 @@ export default function DownloadsClient() {
             href={latestData?.files.win || "https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"}
             className="bg-gray-600 hover:bg-gray-700 text-white"
             isAvailable={!!latestData?.files.win}
+            t={t}
           />
 
           {/* macOS DMG */}
@@ -223,6 +228,7 @@ export default function DownloadsClient() {
             href={latestData?.files.mac || "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"}
             className="bg-gray-700 hover:bg-gray-800 text-white"
             isAvailable={!!latestData?.files.mac}
+            t={t}
           />
 
           {/* Android RuStore */}
@@ -237,25 +243,26 @@ export default function DownloadsClient() {
             href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID"
             className="bg-green-600 hover:bg-green-700 text-white"
             isAvailable={false}
+            t={t}
           />
         </div>
 
         {/* License Key Input */}
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl mx-auto mb-16">
           <h3 className="text-2xl font-bold text-white text-center mb-6">
-            {t('licenseTitle')}
+            {t.downloads.licenseTitle}
           </h3>
           <p className="text-gray-300 text-center mb-6">
-            {t('licenseDescription')}
+            {t.downloads.licenseDescription}
           </p>
           <div className="flex gap-4">
             <input 
               type="text" 
-                placeholder={t('licensePlaceholder')}
+                placeholder={t.downloads.licensePlaceholder}
               className="flex-1 px-4 py-3 rounded-lg bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-blue-400 focus:outline-none"
             />
             <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-              {t('activate')}
+              {t.downloads.activate}
             </button>
           </div>
         </div>
@@ -263,7 +270,7 @@ export default function DownloadsClient() {
         {/* Features Preview */}
         <div className="text-center">
           <h3 className="text-2xl font-bold text-white mb-8">
-            {t('featuresTitle')}
+            {t.downloads.featuresTitle}
           </h3>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="text-center">
@@ -272,8 +279,8 @@ export default function DownloadsClient() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t('feature1Title')}</h4>
-              <p className="text-gray-300">{t('feature1Description')}</p>
+              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature1Title}</h4>
+              <p className="text-gray-300">{t.downloads.feature1Description}</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -281,8 +288,8 @@ export default function DownloadsClient() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t('feature2Title')}</h4>
-              <p className="text-gray-300">{t('feature2Description')}</p>
+              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature2Title}</h4>
+              <p className="text-gray-300">{t.downloads.feature2Description}</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -290,8 +297,8 @@ export default function DownloadsClient() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t('feature3Title')}</h4>
-              <p className="text-gray-300">{t('feature3Description')}</p>
+              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature3Title}</h4>
+              <p className="text-gray-300">{t.downloads.feature3Description}</p>
             </div>
           </div>
         </div>
