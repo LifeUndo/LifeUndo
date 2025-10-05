@@ -2,19 +2,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PLANS, isValidPlan, getPlanAmount } from '@/config/plans';
 import crypto from 'crypto';
 
+// Фиксированные суммы для всех продуктов (включая специальные)
+const PRODUCT_AMOUNTS: Record<string, number> = {
+  pro_month: 599.00,
+  vip_lifetime: 9990.00,
+  team_5: 2990.00,
+  starter_6m: 3000.00, // 6 месяцев Pro за 3000₽
+} as const;
+
 export async function POST(req: NextRequest) {
   try {
     const { productId } = await req.json();
     
-    // Проверяем валидность плана
-    if (!isValidPlan(productId)) {
+    // Проверяем валидность продукта
+    if (!PRODUCT_AMOUNTS[productId]) {
+      console.log('Unknown productId:', productId);
       return NextResponse.json({ ok: false, error: 'unknown_plan' }, { status: 400 });
     }
     
-    const plan = PLANS[productId];
     const MERCHANT_ID = process.env.FREEKASSA_MERCHANT_ID!;
     const SECRET1 = process.env.FREEKASSA_SECRET1!;
-    const AMOUNT = getPlanAmount(productId); // "599.00"
+    const AMOUNT = PRODUCT_AMOUNTS[productId].toFixed(2); // "599.00" - строго две цифры
     const ORDER_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const CURRENCY = 'RUB';
     
@@ -46,7 +54,8 @@ export async function POST(req: NextRequest) {
       amount: AMOUNT,
       currency: CURRENCY,
       signatureString: signatureString.replace(SECRET1, '***'),
-      signature: SIGN.substring(0, 8) + '...'
+      signature: SIGN.substring(0, 8) + '...',
+      payUrl: pay_url.substring(0, 50) + '...'
     });
     
     return NextResponse.json({ 

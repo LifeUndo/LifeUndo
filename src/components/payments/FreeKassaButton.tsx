@@ -11,13 +11,17 @@ interface FreeKassaButtonProps {
   className?: string;
 }
 
+// Фиксированные суммы для FreeKassa
+const PRODUCT_AMOUNTS: Record<string, number> = {
+  pro_month: 599.00,
+  vip_lifetime: 9990.00,
+  team_5: 2990.00,
+  starter_6m: 3000.00, // 6 месяцев Pro за 3000₽
+} as const;
+
 export default function FreeKassaButton({ productId, email, className = '' }: FreeKassaButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
-  // Проверяем, это старый productId или новый plan
-  const isNewFormat = productId in FK_PLANS;
-  const plan = isNewFormat ? productId : null;
   
   // Показываем кнопку только если FreeKassa включен
   // Временно активируем для продакшена
@@ -35,6 +39,12 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   }
   
   const handlePayment = async () => {
+    // Валидация productId
+    if (!PRODUCT_AMOUNTS[productId]) {
+      setError('Неизвестный продукт');
+      return;
+    }
+    
     setIsLoading(true);
     setError(null);
     
@@ -58,7 +68,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
       } else {
         setError(data.error === 'unknown_plan' ? 'Неизвестный тариф' : 
                 data.error === 'fk_not_configured' ? 'Платежи временно недоступны' :
-                data.error || 'Ошибка создания платежа');
+                data.error || 'Ошибка подписи');
       }
     } catch (err) {
       setError('Ошибка соединения');
