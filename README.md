@@ -1,4 +1,60 @@
-# GetLifeUndo Project
+# GetLifeUndo
+
+**Ctrl+Z для вашей онлайн-жизни** — восстанавливает случайно удаленные данные на любых устройствах.
+
+[![Website](https://img.shields.io/badge/Website-getlifeundo.com-blue)](https://getlifeundo.com)
+[![Firefox Add-on](https://img.shields.io/badge/Firefox-Add--on-orange)](https://addons.mozilla.org/firefox/addon/lifeundo/)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](https://getlifeundo.com/ru/privacy)
+
+## 🚀 Features
+
+- **Восстановление форм** — автоматическое сохранение введённого текста
+- **История вкладок** — восстановление случайно закрытых страниц  
+- **Буфер обмена** — история скопированного текста
+- **100% локально** — все данные остаются в вашем браузере
+- **Без телеметрии** — никаких данных не передается на серверы
+
+## 📦 Installation
+
+### Firefox
+[![Download Firefox Add-on](https://img.shields.io/badge/Download-Firefox%20Add--on-orange)](https://addons.mozilla.org/firefox/addon/lifeundo/)
+
+### Desktop Apps
+- **Windows**: [Download EXE](https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe)
+- **macOS**: [Download DMG](https://cdn.getlifeundo.com/app/latest/undo-latest.dmg)
+
+### Mobile Apps (Coming Soon)
+- **iOS**: Q1 2025
+- **Android**: Q1 2025  
+- **RuStore**: Q1 2025
+
+## 💳 Pricing
+
+- **Free**: 7 дней бесплатно, базовые функции
+- **Pro**: 599 ₽/месяц, расширенные возможности
+- **VIP**: 9 990 ₽ (lifetime), все функции без ограничений
+
+[View all plans →](https://getlifeundo.com/ru/pricing)
+
+## 🔧 Development
+
+### Quick Start
+```bash
+npm install
+npm run dev
+```
+
+### Environment Setup
+```bash
+cp .env.example .env.local
+# Configure your environment variables
+```
+
+### Build & Deploy
+```bash
+npm run build
+npm run deploy
+```
 
 ## 📁 Project Structure
 
