@@ -55,7 +55,7 @@ export default function PricingPage() {
               isPopular={true}
               ctaText="Оформить Pro"
               ctaLink="/buy?plan=pro"
-              customCTA={<FreeKassaButton productId="pro_month" />}
+              customCTA={<FreeKassaButton productId="pro_monthly" />}
             />
 
             {/* VIP */}
@@ -94,7 +94,7 @@ export default function PricingPage() {
               period="за 5 мест в месяц"
               ctaText="Заказать Team"
               ctaLink="/buy?plan=team"
-              customCTA={<FreeKassaButton productId="team_5" />}
+              customCTA={<FreeKassaButton productId="team_5_monthly" />}
             />
           </div>
 

@@ -103,6 +103,18 @@ export default {
     macos: "Настольное приложение",
     android: "Мобильное приложение",
     licensePlaceholder: "Введите ключ лицензии...",
+    comingSoon: "Скоро",
+    download: "Скачать",
+    licenseTitle: "У вас есть ключ лицензии?",
+    licenseDescription: "Введите ключ лицензии для активации Pro или VIP функций",
+    activate: "Активировать",
+    featuresTitle: "Что получите после установки",
+    feature1Title: "Восстановление форм",
+    feature1Description: "Автоматическое сохранение введённого текста",
+    feature2Title: "История вкладок",
+    feature2Description: "Восстановление случайно закрытых страниц",
+    feature3Title: "Буфер обмена",
+    feature3Description: "История скопированного текста",
     mobileComingSoon: "Мобильные приложения скоро",
     mobileDescription: "GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025"
   }

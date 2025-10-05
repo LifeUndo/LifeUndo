@@ -103,6 +103,18 @@ export default {
     macos: "Desktop application",
     android: "Mobile application",
     licensePlaceholder: "Enter license key...",
+    comingSoon: "Coming Soon",
+    download: "Download",
+    licenseTitle: "Do you have a license key?",
+    licenseDescription: "Enter license key to activate Pro or VIP features",
+    activate: "Activate",
+    featuresTitle: "What you'll get after installation",
+    feature1Title: "Form Recovery",
+    feature1Description: "Automatic saving of entered text",
+    feature2Title: "Tab History",
+    feature2Description: "Recovery of accidentally closed pages",
+    feature3Title: "Clipboard",
+    feature3Description: "History of copied text",
     mobileComingSoon: "Mobile apps coming soon",
     mobileDescription: "GetLifeUndo will be available on iOS, Android and RuStore in Q1 2025"
   }
