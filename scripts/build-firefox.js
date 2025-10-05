@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-console.log('🔥 Building Firefox extension 0.3.7.15...');
+console.log('🔥 Building Firefox extension 0.3.7.16...');
 
 // Ensure we're in the project root
 const projectRoot = path.resolve(__dirname, '..');
@@ -36,8 +36,8 @@ try {
   // Generate checksums
   console.log('🔐 Generating checksums...');
   const checksumFile = path.join(projectRoot, 'release', 'amo', 'SHA256SUMS.txt');
-  const xpiFile = path.join(projectRoot, 'release', 'amo', 'lifeundo-0.3.7.15.xpi');
-  const changelogFile = path.join(projectRoot, 'release', 'amo', 'CHANGELOG-0.3.7.15.txt');
+  const xpiFile = path.join(projectRoot, 'release', 'amo', 'lifeundo-0.3.7.16.xpi');
+  const changelogFile = path.join(projectRoot, 'release', 'amo', 'CHANGELOG-0.3.7.16.txt');
   
   if (fs.existsSync(xpiFile)) {
     const crypto = require('crypto');
@@ -45,12 +45,12 @@ try {
     const xpiHash = crypto.createHash('sha256').update(xpiContent).digest('hex');
     
     let checksumContent = '';
-    checksumContent += `${xpiHash} *lifeundo-0.3.7.15.xpi\n`;
+    checksumContent += `${xpiHash} *lifeundo-0.3.7.16.xpi\n`;
     
     if (fs.existsSync(changelogFile)) {
       const changelogContent = fs.readFileSync(changelogFile);
       const changelogHash = crypto.createHash('sha256').update(changelogContent).digest('hex');
-      checksumContent += `${changelogHash} *CHANGELOG-0.3.7.15.txt\n`;
+      checksumContent += `${changelogHash} *CHANGELOG-0.3.7.16.txt\n`;
     }
     
     fs.writeFileSync(checksumFile, checksumContent);
@@ -74,5 +74,5 @@ try {
 }
 
 console.log('🎉 Firefox build complete!');
-console.log('📁 XPI location: release/amo/lifeundo-0.3.7.15.xpi');
+console.log('📁 XPI location: release/amo/lifeundo-0.3.7.16.xpi');
 console.log('📋 Next: Upload to AMO and update latest.json');

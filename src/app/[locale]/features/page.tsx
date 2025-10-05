@@ -49,13 +49,13 @@ export default function FeaturesPage({ params }: { params: { locale: string } })
             <li>Check "undo panel" on frequently used sites</li>
           </ol>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="https://chrome.google.com/webstore/detail/getlifeundo/placeholder" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="#" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
               Download for Chrome
             </a>
-            <a href="https://addons.mozilla.org/firefox/addon/getlifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="https://addons.mozilla.org/firefox/addon/lifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
               For Firefox
             </a>
-            <a href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/placeholder" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="#" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
               For Edge
             </a>
             <Link href="/en/support" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 transition-colors">
@@ -152,13 +152,13 @@ export default function FeaturesPage({ params }: { params: { locale: string } })
             <li>Проверьте «панель отмены» на часто используемых сайтах</li>
           </ol>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="https://chrome.google.com/webstore/detail/getlifeundo/placeholder" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="#" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
               Скачать для Chrome
             </a>
-            <a href="https://addons.mozilla.org/firefox/addon/getlifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="https://addons.mozilla.org/firefox/addon/lifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
               Для Firefox
             </a>
-            <a href="https://microsoftedge.microsoft.com/addons/detail/getlifeundo/placeholder" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+            <a href="#" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
               Для Edge
             </a>
             <Link href="/ru/support" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 transition-colors">

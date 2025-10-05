@@ -1,73 +1,85 @@
-// Content script: tracks text input states and clipboard copies
+// LifeUndo Content Script - v0.3.7.15
+// Firefox: collect text input for popup display
 
-function getElementPath(element) {
-  if (!element) return '';
-  const path = [];
-  let el = element;
-  while (el && el.nodeType === 1 && path.length < 10) {
-    let selector = el.nodeName.toLowerCase();
-    if (el.id) selector += `#${el.id}`;
-    if (el.className && typeof el.className === 'string') {
-      const cls = el.className.trim().split(/\s+/).slice(0, 2).join('.');
-      if (cls) selector += `.${cls}`;
-    }
-    path.unshift(selector);
-    el = el.parentElement;
-  }
-  return path.join(' > ');
+const api = window.browser || window.chrome;
+
+// Store recent inputs
+let recentInputs = [];
+
+// Listen for input events
+function handleInput(event) {
+  const target = event.target;
+  
+  // Skip password fields
+  if (target.type === 'password') return;
+  
+  // Skip if no text content
+  if (!target.value || target.value.trim().length === 0) return;
+  
+  // Skip very short inputs
+  if (target.value.length < 3) return;
+  
+  // Create input record
+  const inputRecord = {
+    text: target.value,
+    timestamp: Date.now(),
+    url: window.location.href,
+    selector: getSelector(target)
+  };
+  
+  // Add to recent inputs (keep last 20)
+  recentInputs.unshift(inputRecord);
+  recentInputs = recentInputs.slice(0, 20);
+  
+  // Save to storage
+  saveToStorage();
 }
 
-let lastValueSample = '';
-let lastSentAt = 0;
-
-function maybeSendTextState(target) {
-  if (!target || !(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target.isContentEditable)) return;
-  const value = target.isContentEditable ? target.textContent : target.value;
-  if (typeof value !== 'string') return;
-  const sample = value.slice(0, 1000);
-  const now = Date.now();
-  const throttle = 400; // ms
-  if (sample === lastValueSample && now - lastSentAt < 5000) return;
-  lastValueSample = sample;
-  lastSentAt = now;
-  chrome.runtime.sendMessage({ type: 'LU_PUSH_TEXT_STATE', payload: { value: sample, path: getElementPath(target) } }).catch(() => {});
+// Get CSS selector for element
+function getSelector(element) {
+  if (element.id) return `#${element.id}`;
+  if (element.className) return `.${element.className.split(' ')[0]}`;
+  return element.tagName.toLowerCase();
 }
 
-document.addEventListener('input', (e) => {
-  const target = e.target;
-  maybeSendTextState(target);
-}, { capture: true });
-
-document.addEventListener('keyup', (e) => {
-  const target = e.target;
-  if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') {
-    maybeSendTextState(target);
+// Save to browser storage
+async function saveToStorage() {
+  try {
+    await api.storage.local.set({ recentInputs });
+  } catch (e) {
+    console.error('LifeUndo: Failed to save inputs:', e);
   }
-}, { capture: true });
+}
 
-// Observe copy events
-document.addEventListener('copy', () => {
-  // We cannot read clipboard here reliably without permissions; rely on selection
-  const text = document.getSelection()?.toString() || '';
-  if (text) {
-    chrome.runtime.sendMessage({ type: 'LU_PUSH_CLIPBOARD', payload: { value: text.slice(0, 2000) } }).catch(() => {});
-  }
-}, { capture: true });
-
-// Restore text into focused element on demand
-chrome.runtime.onMessage.addListener((message) => {
-  if (message?.type === 'LU_RESTORE_TEXT') {
-    const active = document.activeElement;
-    const value = message.payload?.value || '';
-    if (active && (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement)) {
-      active.value = value;
-      active.dispatchEvent(new Event('input', { bubbles: true }));
-    } else if (active && active.isContentEditable) {
-      active.textContent = value;
-      active.dispatchEvent(new Event('input', { bubbles: true }));
+// Load from storage on startup
+async function loadFromStorage() {
+  try {
+    const result = await api.storage.local.get('recentInputs');
+    if (result.recentInputs) {
+      recentInputs = result.recentInputs;
     }
+  } catch (e) {
+    console.error('LifeUndo: Failed to load inputs:', e);
   }
-});
+}
 
+// Initialize
+function init() {
+  // Load existing data
+  loadFromStorage();
+  
+  // Listen for input events
+  document.addEventListener('input', handleInput, true);
+  
+  // Listen for textarea changes
+  document.addEventListener('change', handleInput, true);
+  
+  console.log('LifeUndo content script loaded');
+}
 
-
+// Start when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

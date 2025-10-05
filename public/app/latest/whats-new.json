@@ -1,10 +1,9 @@
 {
-  "version": "0.3.7.14",
-  "title": "Firefox Hotfix v2",
+  "version": "0.3.7.15",
+  "title": "Firefox Hotfix v3",
   "items": [
-    "Fixed popup links and i18n",
-    "Enabled free features for Firefox", 
-    "Added basic functionality",
-    "Improved UI consistency"
+    "AMO validation: removed unsafe DOM methods",
+    "Popup links fixed (Website/Privacy/Support/License)",
+    "Enabled free features in Firefox"
   ]
 }

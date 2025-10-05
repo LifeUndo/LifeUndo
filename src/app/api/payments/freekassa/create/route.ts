@@ -4,10 +4,9 @@ import crypto from 'crypto';
 
 // Фиксированные суммы для всех продуктов (включая специальные)
 const PRODUCT_AMOUNTS: Record<string, number> = {
-  pro_month: 599.00,
+  pro_monthly: 599.00,
   vip_lifetime: 9990.00,
-  team_5: 2990.00,
-  starter_6m: 3000.00, // 6 месяцев Pro за 3000₽
+  team_5_monthly: 2990.00,
 } as const;
 
 export async function POST(req: NextRequest) {
@@ -17,7 +16,7 @@ export async function POST(req: NextRequest) {
     // Проверяем валидность продукта
     if (!PRODUCT_AMOUNTS[productId]) {
       console.log('Unknown productId:', productId);
-      return NextResponse.json({ ok: false, error: 'unknown_plan' }, { status: 400 });
+      return NextResponse.json({ ok: false, error: 'invalid_productId' }, { status: 400 });
     }
     
     const MERCHANT_ID = process.env.FREEKASSA_MERCHANT_ID!;
@@ -45,7 +44,7 @@ export async function POST(req: NextRequest) {
       currency: CURRENCY
     });
     
-    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.com/'}?${qs.toString()}`;
+    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.ru/'}?${qs.toString()}`;
     
     // Логируем для отладки (без секретов)
     console.log('FreeKassa payment created:', {

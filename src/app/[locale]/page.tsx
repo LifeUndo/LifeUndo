@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
 import { SocialBar } from '@/components/SocialBar';
+import MobileBadges from '@/components/ui/MobileBadges';
 
 export default function LocaleIndex({ params }: { params: { locale: string } }) {
   const { t, locale } = useTranslations();
@@ -114,26 +115,7 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
                 : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
               }
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a 
-                href={`/${locale}/news/mobile-ios`}
-                className="inline-block h-14"
-              >
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" className="h-14" />
-              </a>
-              <a 
-                href={`/${locale}/news/mobile-android`}
-                className="inline-block h-14"
-              >
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-14" />
-              </a>
-              <a 
-                href={`/${locale}/news/rustore`}
-                className="inline-block h-14"
-              >
-                <img src="https://www.rustore.ru/static/rustore_ru.svg" alt="RuStore" className="h-14" />
-              </a>
-            </div>
+            <MobileBadges />
           </div>
         </div>
       </div>
