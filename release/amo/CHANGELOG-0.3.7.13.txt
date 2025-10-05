@@ -1,8 +1,29 @@
-0.3.7.13 — Maintenance & UX
+GetLifeUndo 0.3.7.13 — Firefox Hotfix
 
-• Fixed: FreeKassa signature and product validation (payments from UI).
-• Fixed: EN/RU i18n for header/footer across all pages.
-• New: Downloads page shows "What's new" and reads latest.json.
-• New: Social icons unified; official mobile badges (App Store / Google Play / RuStore).
-• Improved: Legal pages unified layout, consistent navigation.
-• Security/Infra: No telemetry; local storage only.
+=== Что исправлено ===
+• Исправлены ссылки в попапе (Website, Privacy, Support, License)
+• Включены бесплатные функции для Firefox (Latest text inputs, Recently closed tabs, Clipboard history)
+• Добавлена базовая функциональность восстановления вкладок
+• Улучшена локализация RU/EN в попапе
+• Исправлен манифест Firefox (MV2 совместимость)
+
+=== Технические изменения ===
+• Добавлены permissions: sessions, clipboardRead
+• Добавлен content_scripts для отслеживания ввода
+• Убраны PRO-бейджи для Firefox (базовые функции доступны бесплатно)
+• Кнопка Upgrade ведёт на /pricing
+• License ссылается на /legal/offer
+
+=== Безопасность ===
+• Никакой телеметрии
+• Локальное хранение данных
+• Проверка подписей FreeKassa
+
+=== Совместимость ===
+• Firefox 109+
+• Manifest V2 (AMO совместимость)
+
+=== Поддержка ===
+• Сайт: https://getlifeundo.com
+• Поддержка: https://t.me/GetLifeUndoSupport
+• Приватность: https://getlifeundo.com/ru/privacy

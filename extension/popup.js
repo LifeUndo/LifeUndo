@@ -1,18 +1,28 @@
-// LifeUndo Popup - v0.3.7
-// One-click VIP activation, unified license core, stable RU/EN
+// LifeUndo Popup - v0.3.7.13
+// Firefox hotfix: enable free features, fix links, add basic functionality
 
 const api = window.browser || window.chrome;
 
 // ==== DOM Elements ====
 const btnVip = document.getElementById('btnVip');
 const btnPro = document.getElementById('btnPro');
+const upgradeBtn = document.getElementById('upgradeBtn');
 const vipFile = document.getElementById('vipFile');
 const flashEl = document.getElementById('flash');
 const planTag = document.getElementById('planLabel');
-const whatsNewBtn = document.getElementById('whatsNewBtn');
+const whatsNewBtn = document.getElementById('btnWhatsNew');
 const wnModal = document.getElementById('wnModal');
-const wnClose = document.getElementById('wnClose');
-const versionTag = document.getElementById('versionTag');
+const versionTag = document.getElementById('version');
+
+// Lists
+const textList = document.getElementById('textList');
+const tabList = document.getElementById('tabList');
+const clipList = document.getElementById('clipList');
+
+// Pro badges
+const textProBadge = document.getElementById('textProBadge');
+const tabProBadge = document.getElementById('tabProBadge');
+const clipProBadge = document.getElementById('clipProBadge');
 
 // License Modal Elements
 const linkLicense = document.getElementById('linkLicense');
@@ -29,6 +39,9 @@ const bindEmail = document.getElementById('bindEmail');
 const bindOrderId = document.getElementById('bindOrderId');
 const bindPurchaseBtn = document.getElementById('bindPurchaseBtn');
 
+// ==== Firefox Detection ====
+const IS_FIREFOX = typeof browser !== 'undefined' && /Firefox/i.test(navigator.userAgent);
+
 // ==== I18n ====
 let currentLang = 'en';
 const i18n = {
@@ -43,15 +56,19 @@ const i18n = {
     footer_support: "Support",
     footer_license: "License",
     whats_new: "What's new",
-    whats_new_title: "What's new (v0.3.7)",
+    whats_new_title: "What's new (v0.3.7.13)",
     whats_new_points: [
-      "One-click VIP activation from popup",
-      "Unified license verification core",
-      "Stable RU/EN switching and UI polish"
+      "Fixed popup links and i18n",
+      "Enabled free features for Firefox",
+      "Added basic functionality",
+      "Improved UI consistency"
     ],
     status_importing: "Importing...",
     status_vip_ok: "VIP activated ✅",
-    status_import_err: "Import error: "
+    status_import_err: "Import error: ",
+    no_data: "No data yet",
+    click_to_restore: "Click to restore",
+    clipboard_empty: "Clipboard history will appear here"
   },
   ru: {
     badge_free: "Бесплатная версия",
@@ -64,15 +81,19 @@ const i18n = {
     footer_support: "Поддержка", 
     footer_license: "Лицензия",
     whats_new: "Что нового",
-    whats_new_title: "Что нового (v0.3.7)",
+    whats_new_title: "Что нового (v0.3.7.13)",
     whats_new_points: [
-      "Активация VIP одним кликом из попапа",
-      "Единое ядро проверки лицензий",
-      "Стабильное переключение RU/EN и полировка UI"
+      "Исправлены ссылки в попапе и i18n",
+      "Включены бесплатные функции для Firefox",
+      "Добавлена базовая функциональность",
+      "Улучшена консистентность UI"
     ],
     status_importing: "Импорт...",
     status_vip_ok: "VIP активирован ✅",
-    status_import_err: "Ошибка импорта: "
+    status_import_err: "Ошибка импорта: ",
+    no_data: "Пока нет данных",
+    click_to_restore: "Нажмите для восстановления",
+    clipboard_empty: "История буфера появится здесь"
   }
 };
 
@@ -93,16 +114,16 @@ function applyLang() {
   const linkWebsite = document.getElementById('linkWebsite');
   const linkPrivacy = document.getElementById('linkPrivacy');
   const linkSupport = document.getElementById('linkSupport');
-  const linkSettings = document.getElementById('linkSettings');
+  const linkLicense = document.getElementById('linkLicense');
   
   if (linkWebsite) linkWebsite.textContent = t('footer_website');
   if (linkPrivacy) linkPrivacy.textContent = t('footer_privacy');
   if (linkSupport) linkSupport.textContent = t('footer_support');
-  if (linkSettings) linkSettings.textContent = t('footer_license');
+  if (linkLicense) linkLicense.textContent = t('footer_license');
   
   // Update What's New modal
-  const wnTitle = document.getElementById('wnTitle');
-  const wnList = document.getElementById('wnList');
+  const wnTitle = document.querySelector('#wnModal h3');
+  const wnList = document.querySelector('#wnModal ul');
   if (wnTitle) wnTitle.textContent = t('whats_new_title');
   if (wnList) {
     wnList.innerHTML = t('whats_new_points').map(point => `<li>${point}</li>`).join('');
@@ -155,7 +176,85 @@ function setVipUiOff() {
   if (btnPro) btnPro.style.display = '';
 }
 
-// What's New modal - toggle behavior
+// ==== Firefox Free Features ====
+async function loadTextInputs() {
+  try {
+    const { recentInputs = [] } = await api.storage.local.get('recentInputs');
+    
+    if (textList) {
+      if (recentInputs.length === 0) {
+        textList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+      } else {
+        textList.innerHTML = recentInputs.slice(0, 5).map((input, i) => `
+          <div class="item" data-index="${i}">
+            <div class="mono">${input.text.substring(0, 50)}${input.text.length > 50 ? '...' : ''}</div>
+            <div class="muted">${new Date(input.timestamp).toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+    }
+  } catch (e) {
+    console.error('Error loading text inputs:', e);
+    if (textList) textList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+  }
+}
+
+async function loadRecentTabs() {
+  try {
+    const sessions = await api.sessions.getRecentlyClosed({ maxResults: 5 });
+    
+    if (tabList) {
+      if (sessions.length === 0) {
+        tabList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+      } else {
+        tabList.innerHTML = sessions.map((session, i) => `
+          <div class="item" data-session-id="${session.tab?.sessionId}">
+            <div>${session.tab?.title || 'Untitled'}</div>
+            <div class="muted">${session.tab?.url || ''}</div>
+          </div>
+        `).join('');
+      }
+    }
+  } catch (e) {
+    console.error('Error loading recent tabs:', e);
+    if (tabList) tabList.innerHTML = `<div class="item muted">${t('no_data')}</div>`;
+  }
+}
+
+async function loadClipboardHistory() {
+  try {
+    const { clipboardHistory = [] } = await api.storage.local.get('clipboardHistory');
+    
+    if (clipList) {
+      if (clipboardHistory.length === 0) {
+        clipList.innerHTML = `<div class="item muted">${t('clipboard_empty')}</div>`;
+      } else {
+        clipList.innerHTML = clipboardHistory.slice(0, 5).map((item, i) => `
+          <div class="item" data-index="${i}">
+            <div class="mono">${item.text.substring(0, 50)}${item.text.length > 50 ? '...' : ''}</div>
+            <div class="muted">${new Date(item.timestamp).toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+    }
+  } catch (e) {
+    console.error('Error loading clipboard history:', e);
+    if (clipList) clipList.innerHTML = `<div class="item muted">${t('clipboard_empty')}</div>`;
+  }
+}
+
+// ==== Event Handlers ====
+async function restoreTab(sessionId) {
+  try {
+    await api.sessions.restore(sessionId);
+    flash('Tab restored!', 'ok');
+  } catch (e) {
+    console.error('Error restoring tab:', e);
+    flash('Failed to restore tab', 'err');
+  }
+}
+
+// ==== What's New Modal ====
 let isModalOpen = false;
 function toggleWhatsNew() {
   isModalOpen = !isModalOpen;
@@ -202,15 +301,16 @@ vipFile?.addEventListener('change', async (ev) => {
   }
 });
 
+// Upgrade button
+upgradeBtn?.addEventListener('click', () => {
+  const locale = currentLang === 'ru' ? 'ru' : 'en';
+  api.tabs.create({ url: `https://getlifeundo.com/${locale}/pricing#pro` });
+});
+
 // What's New modal
 whatsNewBtn?.addEventListener('click', (e) => {
   e.preventDefault();
   toggleWhatsNew();
-});
-
-wnClose?.addEventListener('click', () => {
-  isModalOpen = false;
-  if (wnModal) wnModal.classList.add('hidden');
 });
 
 // Close modal on backdrop click or ESC
@@ -231,32 +331,38 @@ document.addEventListener('keydown', (e) => {
 // Footer links
 document.getElementById('linkWebsite')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://getlifeundo.com', '_blank');
+  api.tabs.create({ url: 'https://getlifeundo.com' });
 });
 
 document.getElementById('linkPrivacy')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://getlifeundo.com/ru/privacy', '_blank');
+  const locale = currentLang === 'ru' ? 'ru' : 'en';
+  api.tabs.create({ url: `https://getlifeundo.com/${locale}/privacy` });
 });
 
 document.getElementById('linkSupport')?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open('https://t.me/GetLifeUndoSupport', '_blank');
+  api.tabs.create({ url: 'https://t.me/GetLifeUndoSupport' });
 });
 
-document.getElementById('linkSettings')?.addEventListener('click', (e) => {
+document.getElementById('linkLicense')?.addEventListener('click', (e) => {
   e.preventDefault();
-  api.runtime.openOptionsPage();
+  const locale = currentLang === 'ru' ? 'ru' : 'en';
+  api.tabs.create({ url: `https://getlifeundo.com/${locale}/legal/offer` });
+});
+
+// Tab list click handlers
+tabList?.addEventListener('click', (e) => {
+  const item = e.target.closest('.item');
+  if (item && item.dataset.sessionId) {
+    restoreTab(item.dataset.sessionId);
+  }
 });
 
 // ==== License Modal Functions ====
 function openLicenseModal() {
   licenseModal.classList.remove('hidden');
   loadLicenseStatus();
-  // Track telemetry
-  if (window.LifeUndoTelemetry) {
-    window.LifeUndoTelemetry.trackLicenseViewed();
-  }
 }
 
 function closeLicenseModal() {
@@ -264,41 +370,33 @@ function closeLicenseModal() {
 }
 
 function loadLicenseStatus() {
-  // Get stored license info
   api.storage.local.get(['lu_plan', 'lu_email', 'lu_expires', 'lu_bonus_expires'], (result) => {
     const plan = result.lu_plan || 'free';
     const email = result.lu_email || '';
     const expires = result.lu_expires || '';
     const bonusExpires = result.lu_bonus_expires || '';
 
-    // Update UI
-    licenseLevel.textContent = plan === 'free' ? 'No active license' : plan.toUpperCase();
-    licenseExpires.textContent = expires || '-';
+    if (licenseLevel) licenseLevel.textContent = plan === 'free' ? 'No active license' : plan.toUpperCase();
+    if (licenseExpires) licenseExpires.textContent = expires || '-';
     
-    if (bonusExpires) {
+    if (bonusExpires && bonusStatus) {
       bonusStatus.style.display = 'block';
       bonusExpires.textContent = bonusExpires;
-    } else {
+    } else if (bonusStatus) {
       bonusStatus.style.display = 'none';
     }
 
-    // Pre-fill email if available
-    if (email) {
+    if (email && bindEmail) {
       bindEmail.value = email;
     }
   });
 }
 
 function resendActivationEmail() {
-  // Track telemetry
-  if (window.LifeUndoTelemetry) {
-    window.LifeUndoTelemetry.trackResendClicked();
-  }
-
   api.storage.local.get(['lu_email'], (result) => {
     const email = result.lu_email;
     if (!email) {
-      showFlash('Please enter your email first', 'err');
+      flash('Please enter your email first', 'err');
       return;
     }
 
@@ -310,27 +408,22 @@ function resendActivationEmail() {
     .then(response => response.json())
     .then(data => {
       if (data.ok) {
-        showFlash('Activation email sent!', 'ok');
+        flash('Activation email sent!', 'ok');
       } else {
-        showFlash('Error: ' + (data.error || 'Unknown error'), 'err');
+        flash('Error: ' + (data.error || 'Unknown error'), 'err');
       }
     })
     .catch(error => {
-      showFlash('Network error: ' + error.message, 'err');
+      flash('Network error: ' + error.message, 'err');
     });
   });
 }
 
 function openAccountPage() {
-  // Track telemetry
-  if (window.LifeUndoTelemetry) {
-    window.LifeUndoTelemetry.trackAccountOpened();
-  }
-
   api.storage.local.get(['lu_email'], (result) => {
     const email = result.lu_email || '';
     const url = `https://getlifeundo.com/ru/account${email ? '?email=' + encodeURIComponent(email) : ''}`;
-    window.open(url, '_blank');
+    api.tabs.create({ url });
   });
 }
 
@@ -339,16 +432,14 @@ function bindPurchase() {
   const orderId = bindOrderId.value.trim();
 
   if (!email || !orderId) {
-    showFlash('Please enter both email and order ID', 'err');
+    flash('Please enter both email and order ID', 'err');
     return;
   }
 
-  // Call payment summary API
   fetch(`https://getlifeundo.com/api/payment/summary?order_id=${encodeURIComponent(orderId)}`)
     .then(response => response.json())
     .then(data => {
       if (data.ok && data.email === email) {
-        // Store license info
         api.storage.local.set({
           lu_plan: data.level || 'pro',
           lu_email: email,
@@ -356,34 +447,19 @@ function bindPurchase() {
           lu_bonus_expires: data.bonus_expires_at || ''
         });
         
-        showFlash('Purchase bound successfully!', 'ok');
+        flash('Purchase bound successfully!', 'ok');
         loadLicenseStatus();
         refreshVipUi();
-        
-        // Track successful bind
-        if (window.LifeUndoTelemetry) {
-          window.LifeUndoTelemetry.trackBindAttempted(true);
-        }
       } else {
-        showFlash('Order not found or email mismatch', 'err');
-        
-        // Track failed bind
-        if (window.LifeUndoTelemetry) {
-          window.LifeUndoTelemetry.trackBindAttempted(false);
-        }
+        flash('Order not found or email mismatch', 'err');
       }
     })
     .catch(error => {
-      showFlash('Error: ' + error.message, 'err');
-      
-      // Track failed bind
-      if (window.LifeUndoTelemetry) {
-        window.LifeUndoTelemetry.trackBindAttempted(false);
-      }
+      flash('Error: ' + error.message, 'err');
     });
 }
 
-// ==== Event Listeners ====
+// License Modal Event Listeners
 linkLicense?.addEventListener('click', (e) => {
   e.preventDefault();
   openLicenseModal();
@@ -416,3 +492,16 @@ currentLang = localStorage.getItem('lu_lang') || 'en';
 // Initialize UI
 applyLang();
 refreshVipUi();
+
+// Load data for Firefox (enable free features)
+if (IS_FIREFOX) {
+  // Hide PRO badges for Firefox
+  if (textProBadge) textProBadge.classList.add('hidden');
+  if (tabProBadge) tabProBadge.classList.add('hidden');
+  if (clipProBadge) clipProBadge.classList.add('hidden');
+  
+  // Load data
+  loadTextInputs();
+  loadRecentTabs();
+  loadClipboardHistory();
+}

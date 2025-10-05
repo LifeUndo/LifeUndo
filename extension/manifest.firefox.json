@@ -19,8 +19,15 @@
   "permissions": [
     "storage",
     "tabs",
-    "activeTab",
+    "sessions",
     "clipboardRead"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
   ],
   "icons": {
     "16": "icon16.png",

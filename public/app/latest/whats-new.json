@@ -1,11 +1,10 @@
 {
   "version": "0.3.7.13",
-  "date": "2025-10-05",
-  "highlights": [
-    "Fix: стабильная ссылка оплаты FreeKassa из UI",
-    "Fix: RU/EN i18n в хедере и футере всех страниц", 
-    "UI: единые официальные бейджи App Store / Google Play / RuStore",
-    "Site: legal-страницы приведены к единому layout",
-    "Perf: мелкие оптимизации загрузки"
+  "title": "Firefox Hotfix",
+  "items": [
+    "Fixed popup links and i18n",
+    "Enabled free features for Firefox", 
+    "Added basic functionality",
+    "Improved UI consistency"
   ]
 }
