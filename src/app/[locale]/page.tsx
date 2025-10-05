@@ -114,24 +114,24 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
                 : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
               }
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
                 href={`/${locale}/news/mobile-ios`}
                 className="inline-block"
               >
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" className="h-12" />
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" className="h-14" />
               </a>
               <a 
                 href={`/${locale}/news/mobile-android`}
                 className="inline-block"
               >
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-12" />
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-14" />
               </a>
               <a 
                 href={`/${locale}/news/rustore`}
-                className="inline-block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+                className="inline-block"
               >
-                <span className="text-lg">RuStore</span>
+                <img src="https://cdn.rustore.ru/static/rustore_ru.svg" alt="RuStore" className="h-14" />
               </a>
             </div>
           </div>

@@ -22,6 +22,25 @@ export default {
     offer: "Публичная оферта",
     sla: "SLA"
   },
+  footer: {
+    product: "Продукт",
+    company: "Компания", 
+    legal: "Юридическое",
+    features: "Возможности",
+    cases: "Кейсы",
+    pricing: "Тарифы",
+    downloads: "Скачать",
+    fund: "Фонд",
+    support: "Поддержка",
+    contacts: "Контакты",
+    privacy: "Приватность",
+    offer: "Оферта",
+    sla: "SLA",
+    contract: "Договор",
+    dpa: "DPA",
+    policy: "Политика",
+    downloadsTxt: "Скачать договоры .TXT"
+  },
   common: {
     learnMore: "Узнать больше",
     install: "Установить", 

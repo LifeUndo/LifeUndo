@@ -22,6 +22,25 @@ export default {
     offer: "Public Offer", 
     sla: "SLA" 
   },
+  footer: {
+    product: "Product",
+    company: "Company",
+    legal: "Legal",
+    features: "Features",
+    cases: "Use Cases",
+    pricing: "Pricing",
+    downloads: "Downloads",
+    fund: "Fund",
+    support: "Support",
+    contacts: "Contacts",
+    privacy: "Privacy",
+    offer: "Public Offer",
+    sla: "SLA",
+    contract: "Contract",
+    dpa: "DPA",
+    policy: "Policy",
+    downloadsTxt: "Download contracts (.TXT)"
+  },
   common: { 
     learnMore: "Learn more", 
     install: "Install", 
