@@ -33,10 +33,6 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
             </a>
           </div>
           
-          {/* Social Links */}
-          <div className="mt-8">
-            <SocialBar place="hero" />
-          </div>
         </div>
 
         {/* How it works - 3 steps */}
@@ -121,21 +117,21 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href={`/${locale}/news/mobile-ios`}
-                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="inline-block"
               >
-                <img src="/brand/badges/app-store.svg" alt="App Store" className="h-8" />
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" className="h-12" />
               </a>
               <a 
                 href={`/${locale}/news/mobile-android`}
-                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="inline-block"
               >
-                <img src="/brand/badges/google-play.svg" alt="Google Play" className="h-8" />
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" className="h-12" />
               </a>
               <a 
                 href={`/${locale}/news/rustore`}
-                className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="inline-block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
               >
-                <img src="/brand/badges/rustore.svg" alt="RuStore" className="h-8" />
+                <span className="text-lg">RuStore</span>
               </a>
             </div>
           </div>

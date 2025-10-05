@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SocialBar } from './SocialBar';
+import { SocialIcon } from './icons/SocialIcon';
 
 interface ModernFooterProps {
   locale?: string;
@@ -29,12 +29,12 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
     { title: 'Скачать договоры .TXT', href: `/${locale}/legal/downloads` },
   ];
 
-  const socials = [
-    { name: 'Telegram Channel', href: 'https://t.me/GetLifeUndo', icon: '/brand/tg.svg' },
-    { name: 'Telegram Support', href: 'https://t.me/GetLifeUndoSupport', icon: '/brand/tg.svg' },
-    { name: 'X', href: 'https://x.com/GetLifeUndo', icon: '/brand/x.svg' },
-    { name: 'YouTube', href: 'https://www.youtube.com/@GetLifeUndo', icon: '/brand/yt.svg' },
-    { name: 'GitHub', href: 'https://github.com/LifeUndo', icon: '/brand/github.svg' },
+  const socials: Array<{ name: string; href: string; icon: 'telegram'|'x'|'reddit'|'youtube'|'github'|'vcru'|'habr' }> = [
+    { name: 'Telegram', href: 'https://t.me/GetLifeUndo', icon: 'telegram' },
+    { name: 'X (Twitter)', href: 'https://x.com/GetLifeUndo', icon: 'x' },
+    { name: 'Reddit', href: 'https://www.reddit.com/r/GetLifeUndo', icon: 'reddit' },
+    { name: 'YouTube', href: 'https://www.youtube.com/@GetLifeUndo', icon: 'youtube' },
+    { name: 'GitHub', href: 'https://github.com/LifeUndo', icon: 'github' },
   ];
 
   return (
@@ -113,11 +113,11 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
                   key={social.name}
                   href={social.href} 
                   aria-label={social.name} 
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={social.icon} alt={social.name} className="w-5 h-5" />
+                  <SocialIcon name={social.icon} className="w-6 h-6" />
                 </a>
               ))}
             </div>
