@@ -23,9 +23,8 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  // Показываем кнопку только если FreeKassa включен
-  // Временно активируем для продакшена
-  const isEnabled = fkPublic.enabled || process.env.NODE_ENV === 'production';
+  // Показываем кнопку только если FreeKassa включен через ENV переменную
+  const isEnabled = process.env.NEXT_PUBLIC_FK_ENABLED === 'true';
   
   if (!isEnabled) {
     return (

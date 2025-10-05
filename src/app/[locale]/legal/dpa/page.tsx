@@ -74,6 +74,22 @@ export default function DPAPage() {
                 }
               </p>
 
+              <h2 className="text-2xl font-semibold text-white mb-4">
+                {locale === 'en' ? '5. Evidence and Verification' : '5. Доказательства и верификация'}
+              </h2>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '5.1. Claims regarding data processing require verifiable evidence: logs, timestamps, user consent records.'
+                  : '5.1. Претензии по обработке данных требуют верифицируемых доказательств: логи, таймстемпы, записи согласия пользователя.'
+                }
+              </p>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '5.2. Data processing operates on "best effort" basis with standard exclusions for technical limitations.'
+                  : '5.2. Обработка данных работает по принципу «best effort» со стандартными исключениями для технических ограничений.'
+                }
+              </p>
+
               <p className="text-gray-400 text-sm mt-8">
                 <em>{locale === 'en' ? 'Last updated: 2025-10-04' : 'Дата обновления: 2025-10-04'}</em>
               </p>

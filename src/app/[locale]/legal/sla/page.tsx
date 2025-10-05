@@ -52,6 +52,22 @@ export default function SLAPage() {
               </p>
 
               <h2 className="text-2xl font-semibold text-white mb-4">
+                {locale === 'en' ? 'Evidence Requirements' : 'Требования к доказательствам'}
+              </h2>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? 'Claims regarding data loss require verifiable artifacts: extension logs (with user consent), timestamps, reproducible scenarios.'
+                  : 'Претензии по потере данных требуют верифицируемых артефактов: логи расширения (с согласия пользователя), таймстемпы, воспроизводимые сценарии.'
+                }
+              </p>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? 'Exclusions: force majeure, power/network outages, software/OS issues, third-party actions, standard browser limitations.'
+                  : 'Исключения: форс-мажор, перебои питания/сети, проблемы ПО/ОС, действия третьих лиц, штатные ограничения браузера.'
+                }
+              </p>
+
+              <h2 className="text-2xl font-semibold text-white mb-4">
                 {locale === 'en' ? 'Data Export' : 'Экспорт данных'}
               </h2>
               <p className="text-gray-300 mb-4">

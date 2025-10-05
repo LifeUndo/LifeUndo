@@ -1,0 +1,8 @@
+0.3.7.13 — Maintenance & UX
+
+• Fixed: FreeKassa signature and product validation (payments from UI).
+• Fixed: EN/RU i18n for header/footer across all pages.
+• New: Downloads page shows "What's new" and reads latest.json.
+• New: Social icons unified; official mobile badges (App Store / Google Play / RuStore).
+• Improved: Legal pages unified layout, consistent navigation.
+• Security/Infra: No telemetry; local storage only.

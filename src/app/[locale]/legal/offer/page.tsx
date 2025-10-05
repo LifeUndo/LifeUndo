@@ -117,6 +117,34 @@ export default function OfferPage() {
               </p>
 
               <h2 className="text-2xl font-semibold text-white mb-4">
+                {locale === 'en' ? '7. Liability and Evidence' : '7. Ответственность и доказательства'}
+              </h2>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '7.1. The service operates on a "best effort" basis. No guarantee of data recovery is provided.'
+                  : '7.1. Сервис работает по принципу «best effort». Гарантия восстановления данных не предоставляется.'
+                }
+              </p>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '7.2. Claims regarding "data loss" are accepted only with verifiable artifacts (extension logs with consent, timestamps, reproducibility).'
+                  : '7.2. Претензии по «потере данных» принимаются только при наличии верифицируемых артефактов (логи расширения при согласии, таймстемпы, воспроизводимость).'
+                }
+              </p>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '7.3. Exclusions: force majeure (power/network outages, software/OS issues, third-party actions, standard browser limitations).'
+                  : '7.3. Исключения: форс-мажор (перебои питания/связи, ПО/ОС, действия третьих лиц, штатные ограничения браузера).'
+                }
+              </p>
+              <p className="text-gray-300 mb-4">
+                {locale === 'en' 
+                  ? '7.4. Compensation (if provided by contract) is possible only after verification and within the paid period.'
+                  : '7.4. Возмещение (если предусмотрено договором) возможно лишь после верификации и в пределах оплаченного периода.'
+                }
+              </p>
+
+              <h2 className="text-2xl font-semibold text-white mb-4">
                 {locale === 'en' ? '8. Applicable Law and Disputes' : '8. Применимое право и споры'}
               </h2>
               <p className="text-gray-300 mb-4">
