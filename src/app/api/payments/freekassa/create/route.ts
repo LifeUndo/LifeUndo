@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       currency: CURRENCY
     });
     
-    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.ru/'}?${qs.toString()}`;
+    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.fk.money/'}?${qs.toString()}`;
     
     // Логируем для отладки (без секретов)
     console.log('FreeKassa payment created:', {
