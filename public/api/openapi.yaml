@@ -2,7 +2,6 @@ openapi: 3.0.3
 info:
   title: GetLifeUndo API
   version: 0.1.0
-  description: Minimal public API for license validation & diagnostics.
 servers:
   - url: https://getlifeundo.com
 paths:
@@ -10,36 +9,41 @@ paths:
     get:
       summary: Health check
       responses:
-        '200': { description: OK }
-  /api/debug/fk:
-    get:
-      summary: FreeKassa diagnostics
-      responses:
-        '200': { description: OK }
-  /api/license/validate:
+        '200':
+          description: OK
+  /api/payments/freekassa/create:
     post:
-      summary: Validate license key (HF2)
+      summary: Create FreeKassa payment link
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [key]
               properties:
-                key: { type: string }
+                productId:
+                  type: string
+                  enum: [pro_monthly, vip_lifetime, team_5_monthly, starter_6m]
       responses:
         '200':
-          description: Valid/invalid license
+          description: Payment link created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  pay_url:
+                    type: string
+                  orderId:
+                    type: string
+        '400':
+          description: Invalid product
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   ok: { type: boolean }
-                  tier: { type: string, enum: [pro, vip] }
-                  expAt: { type: string, format: date-time }
-                  sign: { type: string, description: 'HMAC-SHA256(base64) over key|tier|expAt' }
-        '400': { description: Bad request }
-        '401': { description: Invalid/expired key }
-        '429': { description: Rate limited }
+                  error: { type: string }

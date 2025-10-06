@@ -83,6 +83,12 @@ export default function ModernHeader() {
             <Link href={`/${locale}/fund`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               {t.nav.fund}
             </Link>
+            <Link href={`/${locale}/api`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.api}
+            </Link>
+            <Link href={`/${locale}/whitelabel`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              {t.nav.whitelabel}
+            </Link>
           </nav>
 
           {/* CTA Buttons */}
@@ -170,6 +176,20 @@ export default function ModernHeader() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.nav.fund}
+              </Link>
+              <Link 
+                href={`/${locale}/api`} 
+                className="text-gray-300 hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.api}
+              </Link>
+              <Link 
+                href={`/${locale}/whitelabel`} 
+                className="text-gray-300 hover:text-white transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.whitelabel}
               </Link>
               <div className="pt-4 space-y-2">
                 <div className="px-4 py-2">

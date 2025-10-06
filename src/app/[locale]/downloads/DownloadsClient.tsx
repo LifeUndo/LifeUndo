@@ -255,16 +255,19 @@ export default function DownloadsClient() {
           <p className="text-gray-300 text-center mb-6">
             {t.downloads.licenseDescription}
           </p>
-          <div className="flex gap-4">
+          <form className="grid gap-3 md:grid-cols-[1fr_auto] items-stretch">
             <input 
               type="text" 
-                placeholder={t.downloads.licensePlaceholder}
-              className="flex-1 px-4 py-3 rounded-lg bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-blue-400 focus:outline-none"
+              placeholder={t.downloads.licensePlaceholder}
+              className="min-w-0 h-11 text-[16px] md:h-11 px-4 rounded-lg bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-blue-400 focus:outline-none"
             />
-            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+            <button 
+              type="submit"
+              className="h-11 md:h-11 rounded-lg bg-green-500 hover:bg-green-600 text-white w-full md:w-auto"
+            >
               {t.downloads.activate}
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Features Preview */}
