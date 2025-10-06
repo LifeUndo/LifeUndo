@@ -1,4 +1,8 @@
 export default {
+  banner: {
+    rel: "Release 0.3.7.17 — Firefox free mode, RU/EN localization, mobile fixes",
+    download: "Download",
+  },
   nav: {
     features: "Features",
     usecases: "Use cases", 
@@ -9,9 +13,20 @@ export default {
     whitelabel: "White-Label",
     buyVip: "Buy VIP",
   },
-  banner: {
-    rel: "Release 0.3.7.17 — Firefox free mode, RU/EN localization, mobile fixes",
-    download: "Download",
+  hero: {
+    title: "Ctrl+Z for your online life",
+    subtitle: "for your online life",
+    description: "Save states, undo mistakes and restore important versions instantly.",
+    install: "Install",
+    pricing: "Pricing",
+    saveTitle: "Save",
+    saveDescription: "Quickly saves working sets",
+    undoTitle: "Undo",
+    undoDescription: "Restore any version with one click",
+    learnMore: "Learn more",
+    popularCases: "Popular use cases: students, developers, bloggers, accountants.",
+    cta_primary: "Download extension",
+    cta_secondary: "Learn more"
   },
   legal: { 
     privacy: "Privacy", 
@@ -36,18 +51,15 @@ export default {
     contract: "Contract",
     dpa: "DPA",
     policy: "Policy",
-    downloadsTxt: "Download contracts (.TXT)"
+    downloadsTxt: "Download contracts (.TXT)",
+    description: "Ctrl+Z for your online life. We restore accidentally deleted data on any device anywhere in the world.",
+    paymentNote: "Payment via FreeKassa",
+    copyright: "© 2024 GetLifeUndo. All rights reserved."
   },
   common: { 
     learnMore: "Learn more", 
     install: "Install", 
     contactUs: "Contact us" 
-  },
-  hero: {
-    title: "Ctrl+Z for your online life",
-    subtitle: "Forms, tabs, clipboard — 100% local and private.",
-    cta_primary: "Download extension",
-    cta_secondary: "Learn more"
   },
   features: {
     restoreForms: "Restore form text after reloads",
@@ -176,6 +188,27 @@ export default {
     signatureError: "Payment signature error"
   },
   faq: {
+    title: "Frequently Asked Questions",
+    paymentFailed: {
+      question: "Payment failed — what to do?",
+      answer: "Check your card balance and try again. If the problem persists, contact support with your order number."
+    },
+    downloadExtension: {
+      question: "Where to download the extension?",
+      answer: "Go to /downloads page and choose your browser. Firefox is available on AMO, Chrome and Edge — coming soon."
+    },
+    activateLicense: {
+      question: "How to activate Pro/VIP license?",
+      answer: "After payment, the license activates automatically. If it didn't work, enter the license key in the extension."
+    },
+    isSafe: {
+      question: "Is it safe?",
+      answer: "Yes, all data is stored locally in your browser. We don't collect telemetry and don't share data with third parties."
+    },
+    mobileSupport: {
+      question: "Does it work on mobile devices?",
+      answer: "Currently only browser extensions. Mobile app for Android is planned in the roadmap."
+    },
     proVsFree: {
       title: "How is Pro different from Free?",
       body: "More limits, team features, and priority support."
