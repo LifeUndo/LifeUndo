@@ -1,2 +1,2 @@
-bdd63f3bf46f0ffb25ed00f8de19c1a05efe248114de3295b5b45ae537df9d25 *lifeundo-0.3.7.14.xpi
-de0d8c80c69da3e8c7fd832bba45e3571f834461cbb054ccbc69a516550b83af *CHANGELOG-0.3.7.14.txt
+b577e7070be7e5979a874b5fa4bfdd2abccf550ed09e510c79d7c94ef648f0b8 *lifeundo-0.3.7.16.xpi
+06a2dfcecf2b3c6b1157efcb14325f5cc96daa328a3ff7eed6cde49b7a397286 *CHANGELOG-0.3.7.16.txt

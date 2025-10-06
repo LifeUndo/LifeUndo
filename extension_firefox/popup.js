@@ -1,5 +1,5 @@
-// LifeUndo Popup - v0.3.7.12
-// Fixed button clicks, updated footer links, no functional changes
+// LifeUndo Popup - v0.3.7.17
+// Firefox free mode enabled, enhanced content script, fixed data collection
 
 const api = window.browser || window.chrome;
 
@@ -63,6 +63,15 @@ const i18n = {
 
 // ==== Functions ====
 
+async function isFirefox() {
+  try {
+    const info = await (api.runtime.getBrowserInfo?.() || Promise.resolve(null));
+    return !!info && /firefox|gecko/i.test(`${info.name} ${info.vendor || ''}`);
+  } catch { 
+    return /firefox/i.test(navigator.userAgent); 
+  }
+}
+
 function t(key) {
   return i18n[currentLang][key] || key;
 }
@@ -106,9 +115,12 @@ function flash(message, type = '') {
 async function refreshVipUi() {
   const { lu_plan } = await api.storage.local.get('lu_plan');
   const isVip = lu_plan === 'vip';
+  const isFirefoxBrowser = await isFirefox();
   
   if (isVip) {
     setVipUiOn();
+  } else if (isFirefoxBrowser) {
+    setFirefoxFreeUi();
   } else {
     setVipUiOff();
   }
@@ -125,6 +137,24 @@ function setVipUiOn() {
   }
   
   if (btnPro) btnPro.style.display = 'none';
+}
+
+function setFirefoxFreeUi() {
+  if (planTag) planTag.textContent = t('badge_free');
+  
+  // Show all sections for Firefox free mode
+  document.querySelectorAll('.pro').forEach(el => el.style.display = '');
+  
+  if (btnVip) {
+    btnVip.textContent = t('btn_activate_vip');
+    btnVip.classList.remove('is-disabled');
+    btnVip.disabled = false;
+  }
+  
+  if (btnPro) btnPro.style.display = '';
+  
+  // Enable data collection features for Firefox
+  window.LU_FEATURE_LEVEL = 'free-firefox';
 }
 
 function setVipUiOff() {
@@ -284,6 +314,13 @@ try {
 // Load saved language
 currentLang = localStorage.getItem('lu_lang') || 'en';
 
-// Initialize UI
-applyLang();
-refreshVipUi();
+// Initialize UI with Firefox free mode
+(async () => {
+  const isFirefoxBrowser = await isFirefox();
+  if (isFirefoxBrowser) {
+    window.LU_FEATURE_LEVEL = 'free-firefox';
+  }
+  
+  applyLang();
+  refreshVipUi();
+})();

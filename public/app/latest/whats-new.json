@@ -1,10 +1,10 @@
 {
-  "version": "0.3.7.16",
-  "title": "Firefox Hotfix v3",
+  "version": "0.3.7.17",
+  "title": "Firefox Hotfix v4",
   "items": [
-    "Popup UI & i18n fixes; safe DOM",
-    "Free features in Firefox (no paywall)",
-    "Recent inputs/tabs/clipboard lists",
-    "Content script; local-only storage"
+    "Fixed Firefox free mode activation",
+    "Enhanced content script reliability",
+    "Password field protection improved",
+    "Data collection now working in Firefox"
   ]
 }

@@ -1,0 +1,17 @@
+0.3.7.17 — Firefox Hotfix v4
+
+• Fixed: Firefox free mode activation and UI display
+• Enhanced: Content script reliability and password field protection  
+• Improved: Data collection now working properly in Firefox
+• Tech: Better input/change/copy event handling, local storage optimization
+
+Changes:
+- Fixed Firefox detection and free mode activation in popup.js
+- Enhanced contentScript.js with better password field detection
+- Improved input/change/copy event listeners with capture phase
+- Optimized local storage operations for better performance
+- Added proper error handling for storage operations
+
+Compatibility: Firefox 109+
+Storage: 100% local, no telemetry
+Privacy: Password fields never saved
