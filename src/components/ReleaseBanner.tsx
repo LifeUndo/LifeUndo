@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface LatestData {
   version: string;
@@ -13,6 +14,7 @@ interface LatestData {
 }
 
 export default function ReleaseBanner() {
+  const { t, locale } = useTranslations();
   const [isVisible, setIsVisible] = useState(true);
   const [latestData, setLatestData] = useState<LatestData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -45,13 +47,13 @@ export default function ReleaseBanner() {
     <div className="bg-gradient-to-r from-emerald-500 to-sky-600 text-white py-2 px-4 text-center relative">
       <div className="container mx-auto flex items-center justify-center gap-3 flex-wrap pr-12">
         <span className="text-sm font-medium">
-          🎉 Релиз {latestData?.version} — новый платёжный поток, RU/EN локализация, мобильная оптимизация
+          🎉 {t.banner.rel.replace('0.3.7.12', latestData?.version || '0.3.7.15')}
         </span>
         <a 
-          href="/ru/downloads" 
+          href={`/${locale}/downloads`} 
           className="text-white underline underline-offset-2 hover:text-gray-200 transition-colors"
         >
-          Скачать
+          {t.banner.download}
         </a>
         <button 
           onClick={() => setIsVisible(false)}

@@ -14,6 +14,7 @@
     "release:sha": "powershell -ExecutionPolicy Bypass -File scripts/release/checksums.ps1",
     "release:latest": "powershell -ExecutionPolicy Bypass -File scripts/release/update_latest.ps1",
     "build:ff": "node scripts/build-firefox.js",
+    "audit": "node scripts/audit-structure.js",
     "legal:sha": "node scripts/legal-sha.mjs",
     "pre-release": "powershell -ExecutionPolicy Bypass -File scripts/release/pre_release_check.ps1"
   },

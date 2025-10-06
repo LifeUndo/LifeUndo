@@ -8,7 +8,7 @@ export default {
     buyVip: "Buy VIP",
   },
   banner: {
-    rel: "Release 0.3.7.12 — new payment flow, RU/EN localization, mobile polish",
+    rel: "Release 0.3.7.15 — new payment flow, RU/EN localization, mobile optimization",
     download: "Download",
   },
   legal: { 

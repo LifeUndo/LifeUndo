@@ -7,6 +7,7 @@ const PRODUCT_AMOUNTS: Record<string, number> = {
   pro_monthly: 599.00,
   vip_lifetime: 9990.00,
   team_5_monthly: 2990.00,
+  starter_6m: 3000.00,
 } as const;
 
 export async function POST(req: NextRequest) {
@@ -30,9 +31,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: 'fk_not_configured' }, { status: 500 });
     }
     
-    // Создаем подпись: MERCHANT_ID:AMOUNT:SECRET1:ORDER_ID
+    // Создаем подпись по новой документации: MERCHANT_ID:AMOUNT:SECRET1:CURRENCY:ORDER_ID
     // Важно: AMOUNT должен быть строкой с двумя знаками после точки
-    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;
+    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${CURRENCY}:${ORDER_ID}`;
     const SIGN = crypto.createHash('md5').update(signatureString, 'utf8').digest('hex');
     
     // Формируем URL для редиректа
