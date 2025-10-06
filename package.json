@@ -16,6 +16,8 @@
     "build:ff": "node scripts/build-firefox.js",
     "audit": "node scripts/audit-structure.js",
     "legal:sha": "node scripts/legal-sha.mjs",
+    "lint:i18n": "node scripts/lint-i18n.js",
+    "crawl": "node scripts/crawl.js",
     "pre-release": "powershell -ExecutionPolicy Bypass -File scripts/release/pre_release_check.ps1"
   },
   "dependencies": {

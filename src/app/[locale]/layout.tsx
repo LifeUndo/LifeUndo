@@ -4,6 +4,7 @@ import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
 import { Analytics } from '@/components/Analytics';
 import ReleaseBanner from '@/components/ReleaseBanner';
+import Assistant from '@/components/Assistant';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -96,6 +97,7 @@ export default function LocaleLayout({
                  <ModernHeader />
                  <main className="min-h-dvh pt-20">{children}</main>
                  <ModernFooter locale={locale} />
+                 <Assistant />
              </body>
     </html>
   );

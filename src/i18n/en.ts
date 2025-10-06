@@ -10,7 +10,7 @@ export default {
     buyVip: "Buy VIP",
   },
   banner: {
-    rel: "Release 0.3.7.15 — new payment flow, RU/EN localization, mobile optimization",
+    rel: "Release 0.3.7.17 — Firefox free mode, RU/EN localization, mobile fixes",
     download: "Download",
   },
   legal: { 
@@ -165,5 +165,44 @@ export default {
       "We ship a private build and onboarding docs",
     ],
     cta: "Apply via Support and choose the topic \"White-Label\". Please include company name, website and rough MAU.",
+  },
+  freekassa: {
+    paymentNote: "Payment via FreeKassa",
+    securePayment: "Secure payment via FreeKassa",
+    processing: "Processing payment...",
+    success: "Payment successful!",
+    error: "Payment failed. Please try again.",
+    invalidProduct: "Invalid product selected",
+    signatureError: "Payment signature error"
+  },
+  faq: {
+    proVsFree: {
+      title: "How is Pro different from Free?",
+      body: "More limits, team features, and priority support."
+    },
+    teamHowWorks: {
+      title: "How does the Team account work?",
+      body: "5 seats included; +490 ₽ per extra seat."
+    },
+    privacy: {
+      title: "Is my data safe?",
+      body: "Yes, all data is stored locally in your browser. We don't collect any personal information."
+    },
+    installation: {
+      title: "How to install?",
+      body: "Download from Chrome Web Store, Firefox Add-ons, or our website. One-click installation."
+    }
+  },
+  assistant: {
+    title: "Need help?",
+    greeting: "Hi! I can guide you through install, activation and plans — or collect your request for our team.",
+    installExtension: "Install extension",
+    activateLicense: "Activate license", 
+    pricingPlans: "Pricing & Plans",
+    corporateOrder: "Corporate/1000+ VIP",
+    reportIssue: "Report an issue",
+    disclaimer: "No personal data is collected. The assistant uses only on-site documentation. For sensitive issues, contact support.",
+    thanks: "Thanks, we'll reach out",
+    sending: "Sending..."
   }
 };

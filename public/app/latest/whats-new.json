@@ -1,10 +1,11 @@
 {
   "version": "0.3.7.17",
-  "title": "Firefox Hotfix v4",
+  "title": "i18n + UX + AI Assistant",
   "items": [
-    "Fixed Firefox free mode activation",
-    "Enhanced content script reliability",
-    "Password field protection improved",
-    "Data collection now working in Firefox"
+    "Complete RU/EN localization sweep",
+    "Mobile license activation form fixed",
+    "AI assistant widget (feature flagged off)",
+    "FreeKassa text localization",
+    "Navigation cleanup and link checking"
   ]
 }
