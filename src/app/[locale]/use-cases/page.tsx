@@ -1,6 +1,10 @@
+'use client';
+
 import useCasesData from '@/data/use_cases_ru.json';
+import { useTranslations } from '@/hooks/useTranslations';
 
 export default function UseCasesPage() {
+  const { locale } = useTranslations();
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -34,7 +38,7 @@ export default function UseCasesPage() {
                 </p>
                 <div className="mt-4">
                   <a
-                    href={useCase.cta === "Узнать о GLU" ? "/ru/email-pause" : "/ru/downloads"}
+                    href={useCase.cta === "Узнать о GLU" ? `/${locale}/fund#what-is-glu` : `/${locale}/downloads`}
                     className="inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
                   >
                     {useCase.cta}

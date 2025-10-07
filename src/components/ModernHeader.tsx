@@ -81,13 +81,16 @@ export default function ModernHeader() {
               {t.nav.pricing}
             </Link>
             <Link href={`/${locale}/fund`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
-              {t.nav.fund}
+              {t.nav.fundLink}
             </Link>
             <Link href={`/${locale}/api`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               {t.nav.api}
             </Link>
             <Link href={`/${locale}/whitelabel`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
               {t.nav.whitelabel}
+            </Link>
+            <Link href={`/${locale}/creator/apply`} className="text-sm md:text-base text-gray-300 hover:text-white transition-colors">
+              Creators
             </Link>
           </nav>
 
@@ -175,7 +178,7 @@ export default function ModernHeader() {
                 className="text-gray-300 hover:text-white transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t.nav.fund}
+                {t.nav.fundLink}
               </Link>
               <Link 
                 href={`/${locale}/api`} 

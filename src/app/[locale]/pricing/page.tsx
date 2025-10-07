@@ -3,8 +3,13 @@ import FreeKassaButton from '@/components/payments/FreeKassaButton';
 import { fkPublic } from '@/lib/fk-public';
 import { PLANS } from '@/config/plans';
 import pricingData from '@/data/pricing_ru.json';
+import { SUPPORTED } from '@/utils/i18nPath';
 
-export default function PricingPage() {
+export async function generateStaticParams() {
+  return SUPPORTED.map((locale) => ({ locale }));
+}
+
+export default function PricingPage({ params }: { params: { locale: string } }) {
   const tiers = pricingData.tiers;
   const bundles = pricingData.bundles;
 
@@ -163,6 +168,22 @@ export default function PricingPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+      
+      {/* Fund Link */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">Learn about GetLifeUndo</h2>
+          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+            Want to know more about our mission and how we're building the future of productivity?
+          </p>
+          <a 
+            href={`/${params?.locale || 'en'}/fund#what-is-glu`}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all inline-block"
+          >
+            Learn about GLU
+          </a>
         </div>
       </section>
       

@@ -16,23 +16,29 @@ export default function LocaleLayout({
   children: ReactNode;
   params: {locale: string};
 }) {
-  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const locale = params?.locale || 'ru';
+  const isRTL = locale === 'ar';
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href={`${baseUrl}/${locale}`} />
+        <link rel="canonical" href={`${baseUrl}/${locale}${typeof window !== 'undefined' ? window.location.pathname.replace(`/${locale}`, '') || '' : ''}`} />
         
         {/* Hreflang */}
         <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/`} />
         <link rel="alternate" hrefLang="ru-RU" href={`${baseUrl}/ru`} />
         <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
+        <link rel="alternate" hrefLang="hi" href={`${baseUrl}/hi`} />
+        <link rel="alternate" hrefLang="zh" href={`${baseUrl}/zh`} />
+        <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar`} />
+        <link rel="alternate" hrefLang="kk" href={`${baseUrl}/kk`} />
+        <link rel="alternate" hrefLang="tr" href={`${baseUrl}/tr`} />
         
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
@@ -97,7 +103,7 @@ export default function LocaleLayout({
                  <ModernHeader />
                  <main className="min-h-dvh pt-20">{children}</main>
                  <ModernFooter locale={locale} />
-                 <Assistant />
+                 {process.env.NEXT_PUBLIC_AI_ASSISTANT === 'true' && <Assistant />}
              </body>
     </html>
   );

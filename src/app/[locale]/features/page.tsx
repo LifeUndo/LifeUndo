@@ -197,7 +197,7 @@ export default function FeaturesPage({ params }: { params: { locale: string } })
             </Link>
             <Link href="/ru/pricing" className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
               Посмотреть цены
-            </Link>
+          </Link>
           </div>
         </section>
       </main>

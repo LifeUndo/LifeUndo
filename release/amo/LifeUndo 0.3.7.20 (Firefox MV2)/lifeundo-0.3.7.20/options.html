@@ -1,0 +1,31 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LifeUndo — License & Settings</title>
+<style>
+  body{margin:24px;font:14px system-ui;color:#111}
+  h1{margin-top:0}
+  .card{border:1px solid #ddd;border-radius:10px;padding:16px;max-width:720px}
+  button{height:34px;border-radius:8px;border:1px solid #999;background:#f6f6f8;padding:0 12px}
+  .ok{color:#0a7}
+  .warn{color:#a70}
+</style>
+<h1>LifeUndo — License & Settings</h1>
+<div class="card">
+  <p>This page opens from the popup’s “Activate VIP”. Temporary demo switch to reflect status in the popup.</p>
+  <button id="mkvip">Toggle VIP (demo)</button>
+  <p id="status"></p>
+</div>
+<script>
+  async function refresh(){
+    const st = (await browser.storage.local.get('vip')).vip ? 'VIP: ON' : 'VIP: OFF';
+    const el = document.getElementById('status');
+    el.textContent = st;
+    el.className = (st.includes('ON') ? 'ok':'warn');
+  }
+  document.getElementById('mkvip').onclick = async ()=>{
+    const cur = (await browser.storage.local.get('vip')).vip || false;
+    await browser.storage.local.set({vip: !cur});
+    refresh();
+  };
+  refresh();
+</script>

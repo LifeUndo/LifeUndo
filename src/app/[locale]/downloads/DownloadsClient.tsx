@@ -224,7 +224,7 @@ export default function DownloadsClient() {
               </svg>
             }
             title="macOS"
-            description={t.downloads.macos}
+            description={t.downloads.mac}
             href={latestData?.files.mac || "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"}
             className="bg-gray-700 hover:bg-gray-800 text-white"
             isAvailable={!!latestData?.files.mac}

@@ -87,18 +87,12 @@ export default {
   },
   howItWorks: {
     title: "Как это работает",
-    step1: {
-      title: "Установите",
-      description: "Скачайте расширение для Chrome, Firefox или Edge. Один клик — защита активна."
-    },
-    step2: {
-      title: "Работайте как обычно",
-      description: "Заполняйте формы, копируйте текст, открывайте вкладки. Всё сохраняется локально в браузере."
-    },
-    step3: {
-      title: "Восстанавливайте при необходимости", 
-      description: "Случайно закрыли вкладку? Потеряли текст? Нажмите \"Отменить\" — всё вернётся на место."
-    }
+    step1Title: "Установите",
+    step1Description: "Скачайте расширение для Chrome, Firefox или Edge. Один клик — защита активна.",
+    step2Title: "Работайте как обычно",
+    step2Description: "Заполняйте формы, копируйте текст, открывайте вкладки. Всё сохраняется локально в браузере.",
+    step3Title: "Восстанавливайте при необходимости",
+    step3Description: "Случайно закрыли вкладку? Потеряли текст? Нажмите \"Отменить\" — всё вернётся на место."
   },
   cta: {
     ready: "Готовы попробовать?",
@@ -116,7 +110,7 @@ export default {
     firefox: "Для браузера Firefox", 
     edge: "Для браузера Edge",
     windows: "Настольное приложение",
-    macos: "Настольное приложение",
+    mac: "Настольное приложение",
     android: "Мобильное приложение",
     licensePlaceholder: "Введите ключ лицензии...",
     comingSoon: "Скоро",
@@ -153,9 +147,11 @@ export default {
     webhooksText: "Схемы вебхуков (payment.success, payment.fail) опубликуем в ближайшем обновлении. Пока можно опрашивать провайдера или написать в поддержку.",
     errors: "Ошибки",
     examples: "Примеры",
+    examplesTitle: "Примеры",
+    examplesText: "Примеры использования API в различных языках программирования.",
     curl: "Пример curl",
     powershell: "Пример PowerShell",
-    openapi: "Скачать спецификацию OpenAPI",
+    openapi: "OpenAPI спецификация"
   },
   wlPage: {
     h1: "White-Label и реселлеры",
@@ -269,30 +265,5 @@ export default {
     privacyLink: "Политика конфиденциальности",
     supportLink: "Поддержка",
     pricingLink: "Смотреть тарифы"
-  },
-  apiPage: {
-    h1: "API документация",
-    overviewTitle: "Обзор",
-    overviewText: "GetLifeUndo API позволяет интегрировать функциональность отката в ваши приложения.",
-    endpointsTitle: "Эндпоинты",
-    authTitle: "Аутентификация",
-    authText: "Используйте API ключи для доступа к API.",
-    examplesTitle: "Примеры",
-    examplesText: "Примеры использования API в различных языках программирования.",
-    baseUrl: "Базовый URL",
-    rateLimits: "Лимиты запросов",
-    rateLimitsText: "100 запросов в минуту",
-    auth: "Аутентификация",
-    headerExample: "Пример заголовка",
-    endpoints: "Эндпоинты",
-    healthzTitle: "Проверка здоровья",
-    createTitle: "Создание платежа",
-    requestBody: "Тело запроса",
-    responses: "Ответы",
-    curl: "cURL",
-    powershell: "PowerShell",
-    webhooks: "Webhooks",
-    webhooksText: "FreeKassa отправляет уведомления о статусе платежей на указанный URL.",
-    openapi: "OpenAPI спецификация"
   }
 };

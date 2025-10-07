@@ -1,0 +1,187 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>GetLifeUndo — License & Settings</title>
+<style>
+  body{
+    margin:24px;
+    font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+    background:#0e0e12;
+    color:#eaeaf2;
+    max-width:800px;
+  }
+  h1{margin-top:0;font-size:24px}
+  .card{
+    border:1px solid #3a3a50;
+    border-radius:10px;
+    padding:20px;
+    background:#1b1b26;
+    margin-bottom:16px;
+  }
+  label{display:block;margin:12px 0 6px;font-weight:500}
+  select{
+    width:100%;
+    height:38px;
+    border:1px solid #3a3a50;
+    border-radius:8px;
+    background:#2a2a3a;
+    color:#eaeaf2;
+    padding:0 10px;
+    font-size:14px;
+  }
+  button{
+    height:38px;
+    border-radius:8px;
+    border:0;
+    background:linear-gradient(90deg,#6a66ff,#9977ff);
+    color:#fff;
+    font-weight:600;
+    padding:0 20px;
+    cursor:pointer;
+    margin-top:12px;
+    margin-right:8px;
+  }
+  button.secondary{
+    background:#2a2a3a;
+    border:1px solid #3a3a50;
+  }
+  .status{
+    margin-top:12px;
+    padding:10px;
+    border-radius:6px;
+    background:#2a2a3a;
+  }
+  .ok{color:#4ade80}
+  .warn{color:#fbbf24}
+</style>
+
+<h1 id="pageTitle">License & Settings</h1>
+
+<div class="card">
+  <label id="lblLocale">Language</label>
+  <select id="langSelect">
+    <option value="en">English</option>
+    <option value="ru">Русский</option>
+    <option value="hi">हिन्दी</option>
+    <option value="zh">简体中文</option>
+    <option value="ar">العربية</option>
+  </select>
+
+  <label id="lblDemo">VIP Status (Demo)</label>
+  <button id="btnToggle">Toggle VIP (demo)</button>
+  <div id="status" class="status"></div>
+</div>
+
+<div class="card">
+  <button id="btnPricing">Open Pricing</button>
+  <button id="btnSupport" class="secondary">Open Support</button>
+</div>
+
+<script>
+/* global browser */
+const STR = {
+  en: {
+    title: "License & Settings",
+    locale: "Language",
+    demo: "VIP Status (Demo)",
+    toggle: "Toggle VIP (demo)",
+    pricing: "Open Pricing",
+    support: "Open Support",
+    vipOn: "VIP: Active",
+    vipOff: "VIP: Not Active"
+  },
+  ru: {
+    title: "Лицензия и настройки",
+    locale: "Язык",
+    demo: "Статус VIP (Демо)",
+    toggle: "Переключить VIP (демо)",
+    pricing: "Открыть тарифы",
+    support: "Открыть поддержку",
+    vipOn: "VIP: Активен",
+    vipOff: "VIP: Не активен"
+  },
+  hi: {
+    title: "लाइसेंस और सेटिंग्स",
+    locale: "भाषा",
+    demo: "VIP स्थिति (डेमो)",
+    toggle: "VIP टॉगल करें (डेमो)",
+    pricing: "मूल्य निर्धारण खोलें",
+    support: "सहायता खोलें",
+    vipOn: "VIP: सक्रिय",
+    vipOff: "VIP: सक्रिय नहीं"
+  },
+  zh: {
+    title: "许可证和设置",
+    locale: "语言",
+    demo: "VIP 状态（演示）",
+    toggle: "切换 VIP（演示）",
+    pricing: "打开定价",
+    support: "打开支持",
+    vipOn: "VIP：已激活",
+    vipOff: "VIP：未激活"
+  },
+  ar: {
+    title: "الترخيص والإعدادات",
+    locale: "اللغة",
+    demo: "حالة VIP (تجريبي)",
+    toggle: "تبديل VIP (تجريبي)",
+    pricing: "فتح التسعير",
+    support: "فتح الدعم",
+    vipOn: "VIP: نشط",
+    vipOff: "VIP: غير نشط"
+  }
+};
+
+(async function() {
+  // Load saved locale or detect from browser
+  const { uiLocale } = await browser.storage.local.get('uiLocale');
+  const detected = (navigator.language || 'en').slice(0, 2).toLowerCase();
+  const current = uiLocale || (['en','ru','hi','zh','ar'].includes(detected) ? detected : 'en');
+  
+  // Set RTL for Arabic
+  if (current === 'ar') document.documentElement.setAttribute('dir', 'rtl');
+  
+  // Apply locale
+  const s = STR[current] || STR.en;
+  document.getElementById('pageTitle').textContent = s.title;
+  document.getElementById('lblLocale').textContent = s.locale;
+  document.getElementById('lblDemo').textContent = s.demo;
+  document.getElementById('btnToggle').textContent = s.toggle;
+  document.getElementById('btnPricing').textContent = s.pricing;
+  document.getElementById('btnSupport').textContent = s.support;
+  
+  // Set select value
+  document.getElementById('langSelect').value = current;
+  
+  // Language change handler
+  document.getElementById('langSelect').onchange = async (e) => {
+    await browser.storage.local.set({ uiLocale: e.target.value });
+    location.reload();
+  };
+  
+  // VIP toggle handler
+  async function refreshVip() {
+    const { vip } = await browser.storage.local.get('vip');
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = vip ? s.vipOn : s.vipOff;
+    statusEl.className = vip ? 'status ok' : 'status warn';
+  }
+  
+  document.getElementById('btnToggle').onclick = async () => {
+    const { vip } = await browser.storage.local.get('vip');
+    await browser.storage.local.set({ vip: !vip });
+    await refreshVip();
+  };
+  
+  // Open pricing
+  document.getElementById('btnPricing').onclick = () => {
+    browser.tabs.create({ url: `https://getlifeundo.com/${current}/pricing` });
+  };
+  
+  // Open support
+  document.getElementById('btnSupport').onclick = () => {
+    browser.tabs.create({ url: `https://getlifeundo.com/${current}/support` });
+  };
+  
+  await refreshVip();
+})();
+</script>

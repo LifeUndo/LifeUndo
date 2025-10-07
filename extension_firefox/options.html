@@ -87,6 +87,8 @@
           <option value="hi">हिन्दी</option>
           <option value="zh">中文</option>
           <option value="ar">العربية</option>
+          <option value="kk">Қазақша</option>
+          <option value="tr">Türkçe</option>
         </select>
       </div>
     </div>
@@ -239,6 +241,48 @@
         support: "فتح الدعم",
         website: "الموقع",
         privacy: "الخصوصية"
+      },
+      kk: {
+        title: "Лицензия және баптаулар",
+        subtitle: "GetLifeUndo кеңейтуін баптау",
+        language: "Тіл",
+        languageLabel: "Интерфейс тілін таңдаңыз",
+        demo: "Демо режим",
+        demoLabel: "VIP ауыстыру (демо)",
+        demoHint: "Лицензиясыз тестілеу үшін VIP мүмкіндіктерін қосу",
+        license: "Лицензия",
+        licenseHint: ".lifelic файлын импорттау. Тексеру офлайн (ECDSA P-256 / SHA-256).",
+        links: "Жылдам сілтемелер",
+        btn_choose: ".lifelic таңдау",
+        btn_import: "Импорттау",
+        btn_verify: "Тексеру",
+        btn_remove: "Жою",
+        status_empty: "Лицензия орнатылмаған",
+        pricing: "Бағаларды ашу",
+        support: "Қолдауды ашу",
+        website: "Веб-сайт",
+        privacy: "Құпиялылық"
+      },
+      tr: {
+        title: "Lisans ve Ayarlar",
+        subtitle: "GetLifeUndo uzantısı tercihlerini yapılandır",
+        language: "Dil",
+        languageLabel: "Arayüz dilini seç",
+        demo: "Demo Modu",
+        demoLabel: "VIP değiştir (demo)",
+        demoHint: "Lisans olmadan test etmek için VIP özelliklerini etkinleştir",
+        license: "Lisans",
+        licenseHint: ".lifelic dosyasını içe aktar. Doğrulama çevrimdışı (ECDSA P-256 / SHA-256).",
+        links: "Hızlı Bağlantılar",
+        btn_choose: ".lifelic seç",
+        btn_import: "İçe Aktar",
+        btn_verify: "Doğrula",
+        btn_remove: "Kaldır",
+        status_empty: "Lisans yüklü değil",
+        pricing: "Fiyatlandırmayı Aç",
+        support: "Desteği Aç",
+        website: "Web Sitesi",
+        privacy: "Gizlilik"
       }
     };
 
@@ -251,7 +295,7 @@
         if (uiLocale && STR[uiLocale]) return uiLocale;
       } catch (e) {}
       const l = (navigator.language || 'en').slice(0, 2).toLowerCase();
-      return ['en', 'ru', 'hi', 'zh', 'ar'].includes(l) ? l : 'en';
+      return ['en', 'ru', 'hi', 'zh', 'ar', 'kk', 'tr'].includes(l) ? l : 'en';
     }
 
     // Применить переводы
@@ -292,11 +336,14 @@
       document.getElementById('langSelect').value = locale;
       applyTranslations(locale);
 
-      // Обработчик смены языка
+      // Обработчик смены языка (согласно ТЗ)
+      const SUP = ['en','ru','hi','zh','ar','kk','tr'];
       document.getElementById('langSelect').addEventListener('change', async (e) => {
         const newLocale = e.target.value;
-        await browser.storage.local.set({ uiLocale: newLocale });
-        applyTranslations(newLocale);
+        if (SUP.includes(newLocale)) {
+          await browser.storage.local.set({ uiLocale: newLocale });
+          location.reload();
+        }
       });
 
       // Демо режим

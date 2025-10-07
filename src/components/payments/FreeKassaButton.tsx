@@ -25,16 +25,16 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslations();
   
-  // Показываем кнопку только если FreeKassa включен через ENV переменную
-  const isEnabled = process.env.NEXT_PUBLIC_FK_ENABLED === 'true';
+  // Показываем кнопку только если платежи не отключены через ENV переменную
+  const paymentsOn = (process.env.NEXT_PUBLIC_PAYMENTS || 'on') !== 'off';
   
-  if (!isEnabled) {
+  if (!paymentsOn) {
     return (
       <button 
         disabled 
         className={`w-full px-6 py-3 bg-gray-600 text-gray-400 rounded-lg cursor-not-allowed ${className}`}
       >
-        {t.freekassa.paymentNote} — скоро
+        {t.payments.pay_via_fk} — soon
       </button>
     );
   }
@@ -87,7 +87,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
         disabled={isLoading}
         className={`w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       >
-        {isLoading ? t.freekassa.processing : t.freekassa.paymentNote}
+        {isLoading ? t.freekassa.processing : t.payments.pay_via_fk}
       </button>
       
       {error && (
@@ -102,7 +102,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
           alt="FreeKassa" 
           className="h-4 w-auto opacity-75"
         />
-        <span>{t.freekassa.securePayment}</span>
+        <span>{t.payments.secure_fk}</span>
       </div>
     </div>
   );

@@ -1,0 +1,6 @@
+0.3.7.23 (Stable)
+• Restored stable input/clipboard capture from 0.3.7.20
+• Added protected pages hint (about:/AMO)
+• Clean popup without experimental features
+• Fixed locale-aware website links
+No telemetry. Local-only storage.

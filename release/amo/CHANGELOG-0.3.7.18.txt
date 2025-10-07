@@ -1,0 +1,20 @@
+0.3.7.18 — Firefox Hotfix v5 (MUST WORK)
+
+• Fixed: Firefox free mode activation - hardcoded detection
+• Fixed: Content script data collection - reliable input/clipboard tracking  
+• Fixed: Popup UI rendering - no PRO badges, real data display
+• Fixed: Sessions API integration - proper error handling
+
+Changes:
+- Hardcoded Firefox detection in popup.js (no dependency on billing)
+- Simplified content script with reliable event listeners
+- Safe DOM manipulation (no innerHTML, createElement only)
+- Proper error handling for sessions.getRecentlyClosed
+- Fixed popup.html structure with correct IDs
+
+Compatibility: Firefox 109+
+Storage: 100% local, no telemetry
+Privacy: Password fields never saved
+
+
+

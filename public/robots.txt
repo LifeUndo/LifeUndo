@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /whitelabel/
+
+Allow: /
+
+Sitemap: https://getlifeundo.com/sitemap.xml
+
+
+

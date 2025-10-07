@@ -1,5 +1,5 @@
 {
-  "version": "0.3.7.21",
+  "version": "0.3.7.20",
   "publishedAt": "2025-01-30T00:00:00Z",
   "files": {
     "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/",
@@ -7,13 +7,14 @@
     "mac": "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"
   },
   "upcoming": {
-    "version": "0.3.7.21",
-    "title": "Locale & UX polish",
+    "version": "0.3.7.22",
+    "title": "Golden Release",
     "features": [
-      "Multi-language UI (EN/RU/HI/ZH/AR)",
+      "Perfect 7-language localization (EN/RU/HI/ZH/AR/KK/TR)",
+      "Real language switching in extension",
       "Localized website links",
       "7-day upgrade reminder",
-      "New /license page"
+      "AI assistant on all locales"
     ]
   }
 }

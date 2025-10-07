@@ -3,7 +3,7 @@
   "nav.features": "Features",
   "nav.useCases": "Use cases",
   "nav.pricing": "Pricing",
-  "nav.fund": "Fund",
+  "nav.fundLink": "Fund",
   "nav.download": "Download",
   "cta.download": "Download",
   "cta.buy": "Buy VIP",
@@ -34,5 +34,7 @@
   "fund.title": "Fund",
   "fund.mission": "Our mission is to help people recover from digital mistakes",
   "privacy.title": "Privacy Policy",
+  "fund.what_is_glu": "What is GLU?",
+  "fund.what_is_glu_body": "GLU (GetLifeUndo) is our broader initiative: tools, education and a 10% Fund for safer online routines.",
   "terms.title": "Terms of Service"
 }
