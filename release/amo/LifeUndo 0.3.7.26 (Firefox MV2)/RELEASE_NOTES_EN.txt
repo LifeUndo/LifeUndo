@@ -1,10 +1,7 @@
 0.3.7.26 (FINAL+1)
-• Fixed EN/RU i18n with proper persistence
-• Fixed Recently Closed tabs (no undefined/Invalid Date)
-• Enhanced text capture filters (no C:\fakepath/file inputs)
-• Added Quick Snap screenshots (Ctrl+Shift+U hotkey)
-• Screenshots section with thumbnails and storage
-• Protected page CTA for screenshots
-• Improved date/time formatting per locale
-• Better window tab count display
+• Full EN/RU localization toggle fixed and persisted.
+• "Recently Closed" titles and dates corrected; localized formatting.
+• Input capture: stronger filters (no passwords, no file fakepath).
+• NEW: Quick Snap — on-demand screenshots (button + hotkey).
+• Stability and UI polish; localized website links.
 No telemetry. Local-only storage. Ready for production.
