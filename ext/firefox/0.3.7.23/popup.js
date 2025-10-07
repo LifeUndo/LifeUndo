@@ -79,14 +79,38 @@ async function readData() {
     
     let closedTabs = [];
     try {
-      const sessions = await browser.sessions.getRecentlyClosed({ maxResults: 20 });
+      const sessions = await browser.sessions.getRecentlyClosed({ maxResults: 10 });
       closedTabs = sessions
-        .filter(session => session.tab && session.tab.title && session.tab.url)
-        .map(session => ({
-          text: session.tab.title,
-          origin: session.tab.url,
-          ts: session.tab.lastAccessed || Date.now()
-        }));
+        .filter(session => {
+          // Проверяем разные типы сессий
+          if (session.tab && session.tab.title && session.tab.url) {
+            return true;
+          }
+          if (session.window && session.window.tabs) {
+            return session.window.tabs.some(tab => tab.title && tab.url);
+          }
+          return false;
+        })
+        .map(session => {
+          // Обрабатываем разные типы сессий
+          if (session.tab) {
+            return {
+              text: session.tab.title,
+              origin: session.tab.url,
+              ts: session.tab.lastAccessed || Date.now()
+            };
+          }
+          if (session.window && session.window.tabs) {
+            const tab = session.window.tabs.find(t => t.title && t.url);
+            return {
+              text: tab.title,
+              origin: tab.url,
+              ts: tab.lastAccessed || Date.now()
+            };
+          }
+          return null;
+        })
+        .filter(item => item !== null);
     } catch (error) {
       console.error('Error getting closed tabs:', error);
     }
@@ -108,6 +132,7 @@ async function checkProtectedPage() {
       const url = currentTab.url;
       const isProtected = url.startsWith('about:') || 
                          url.startsWith('moz-extension:') || 
+                         url.startsWith('view-source:') ||
                          url.includes('addons.mozilla.org');
       
       const warning = document.getElementById('env-warning');

@@ -1,5 +1,8 @@
 /* global browser */
 
+// Отладочное логирование
+const dbg = (...args) => console && console.debug('[LU]', ...args);
+
 // Защищённые страницы - не пишем и выходим тихо
 const PROTECTED = location.protocol === 'about:' ||
                   location.protocol === 'moz-extension:' ||
@@ -7,7 +10,7 @@ const PROTECTED = location.protocol === 'about:' ||
                   location.hostname.includes('addons.mozilla.org');
 
 if (PROTECTED) {
-  console.log('[LifeUndo] Protected page detected, skipping data collection');
+  dbg('Protected page detected, skipping data collection');
 }
 
 // Дебаунс сохранения
@@ -46,6 +49,7 @@ function onInput(event) {
     origin: location.origin
   };
   
+  dbg('Input captured:', record);
   saveDebounced('lu_inputs', record);
 }
 
@@ -63,6 +67,7 @@ function onCopy(event) {
       origin: location.origin
     };
     
+    dbg('Copy captured:', record);
     saveDebounced('lu_clipboard', record);
   } catch (error) {
     console.error('[LifeUndo] Copy error:', error);
@@ -82,6 +87,7 @@ async function save(key, record) {
     const limited = array.slice(0, 50);
     
     await browser.storage.local.set({ [key]: limited });
+    dbg('Saved to storage:', key, limited.length, 'items');
   } catch (error) {
     console.error('[LifeUndo] Save error:', error);
   }
@@ -93,5 +99,5 @@ if (!PROTECTED) {
   document.addEventListener('change', onInput, true);
   document.addEventListener('copy', onCopy, true);
   
-  console.log('[LifeUndo] Content script loaded successfully');
+  dbg('Content script loaded successfully');
 }

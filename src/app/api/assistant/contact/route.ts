@@ -12,18 +12,18 @@ export async function POST(request: Request) {
     // Логируем сообщение
     console.info('[Assistant] message sent', { 
       locale, 
-      emailLen: message.email?.length || 0,
-      messageLen: message.message?.length || 0,
-      timestamp: new Date().toISOString()
+      messageLen: message.length || 0,
+      timestamp: new Date().toISOString(),
+      userAgent: userAgent?.substring(0, 100) || 'unknown'
     });
 
-    // Здесь можно добавить отправку на:
-    // 1. legal@getlifeundo.com через email API
-    // 2. Telegram Bot через webhook
-    // 3. Slack/Discord webhook
-    // 4. Сохранение в базу данных для обработки
+    // TODO: Реальная отправка на legal@getlifeundo.com
+    // Пока логируем для отладки
+    console.log('Message content:', message);
+    console.log('Target email: legal@getlifeundo.com');
+    console.log('Locale:', locale);
 
-    // Пока просто возвращаем успех
+    // Возвращаем успех
     return NextResponse.json({ 
       success: true, 
       message: 'Message received successfully' 
