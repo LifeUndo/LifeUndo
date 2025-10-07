@@ -366,8 +366,7 @@ function bindUI() {
 
 // Handle language change with full re-render
 async function onLangChange(newLang) {
-  await window.i18n.setLang(newLang);
-  await window.i18n.applyI18n(newLang);
+  await window.i18n.setLang(newLang); // setLang now calls applyI18n internally
   await renderAll(newLang);
 }
 

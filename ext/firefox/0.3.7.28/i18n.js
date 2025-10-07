@@ -1,7 +1,7 @@
 /* global browser */
 
 // Debug flag for i18n diagnostics (not shipped in production)
-const DEBUG_I18N = false;
+const DEBUG_I18N = true; // Enable debug for testing
 
 // Current language state
 let currentLang = 'en';
@@ -22,17 +22,22 @@ function t(key, args = []) {
 async function getLang() {
   try {
     const stored = await browser.storage.local.get('lang');
+    console.log('[LifeUndo] Stored language:', stored.lang);
+    
     if (stored.lang) {
       currentLang = stored.lang;
+      console.log('[LifeUndo] Using stored language:', currentLang);
       return currentLang;
     }
     
     // Auto-detect from browser language
     const browserLang = (navigator.language || '').toLowerCase();
+    console.log('[LifeUndo] Browser language:', browserLang);
     currentLang = browserLang.startsWith('ru') ? 'ru' : 'en';
     
     // Save detected language
     await browser.storage.local.set({ lang: currentLang });
+    console.log('[LifeUndo] Auto-detected and saved language:', currentLang);
     return currentLang;
   } catch (error) {
     console.error('[LifeUndo] Error getting language:', error);
@@ -46,6 +51,7 @@ async function setLang(lang) {
   try {
     currentLang = lang;
     await browser.storage.local.set({ lang: currentLang });
+    await applyI18n(currentLang); // Apply i18n immediately after setting language
   } catch (error) {
     console.error('[LifeUndo] Error setting language:', error);
   }
@@ -66,14 +72,21 @@ function buildSiteUrl(lang, route) {
 // Apply i18n to all elements
 async function applyI18n(lang) {
   try {
+    console.log('[LifeUndo] Applying i18n for language:', lang);
+    
     // Set document language
     document.documentElement.lang = lang;
     
     // Apply text content to elements with data-i18n
-    document.querySelectorAll('[data-i18n]').forEach(element => {
+    const i18nElements = document.querySelectorAll('[data-i18n]');
+    console.log('[LifeUndo] Found', i18nElements.length, 'elements with data-i18n');
+    
+    i18nElements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       if (key) {
-        element.textContent = t(key);
+        const translation = t(key);
+        console.log('[LifeUndo] Translating', key, 'to', translation);
+        element.textContent = translation;
       }
     });
     
