@@ -1,0 +1,7 @@
+0.3.7.27 (FINAL+2)
+• Fix EN/RU toggle: full UI localization with persistence
+• Replace all hardcoded strings by i18n keys; proper re-render on language change
+• Localized links and date formatting (en-US/ru-RU)
+• Diagnostics for missing keys in dev mode (not shipped)
+• Stability and polish
+No telemetry. Local-only storage. Ready for production.
