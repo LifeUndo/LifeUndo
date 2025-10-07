@@ -1,0 +1,10 @@
+0.3.7.25 (Final/Golden)
+• UI: version tag restored; language switcher (EN/RU) with persistence; improved text capture; trial reminders; localized links.
+• Enhanced popup with version display in header center
+• Persistent language selection with auto-detection
+• 7-day trial reminder system with snooze functionality
+• Improved text capture for input/textarea/contenteditable elements
+• Better filtering of junk values (passwords, files, fakepath)
+• Localized links to correct language versions
+• Free version badge display
+No telemetry. Local-only storage. Ready for production.
