@@ -3,7 +3,7 @@
 • Use chrome.i18n.getMessage directly for proper language switching
 • chrome.storage.sync for language persistence with location.reload()
 • Complete translation keys for all dynamic elements
-• Updated to new logo design
+• Updated to new logo design with AMO-compliant square icons
 • Debug logging enabled for testing
 • Stability and polish
 No telemetry. Local-only storage. Ready for production.
