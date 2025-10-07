@@ -1,0 +1,30 @@
+{
+  "app_title": { "message": "GetLifeUndo" },
+  "free_badge": { "message": "Free version" },
+  "version_prefix": { "message": "v" },
+  "lang_en": { "message": "EN" },
+  "lang_ru": { "message": "RU" },
+  "tip_protected_title": { "message": "Tip" },
+  "tip_protected_body": { "message": "Text/clipboard are restricted on this page. Try a regular website." },
+  "tip_protected_cta_snap": { "message": "Take a screenshot" },
+  "latest_inputs": { "message": "Latest inputs" },
+  "clipboard_history": { "message": "Clipboard history" },
+  "recently_closed": { "message": "Recently closed" },
+  "screenshots_title": { "message": "Screenshots" },
+  "btn_take_screenshot": { "message": "Take screenshot" },
+  "clear_btn": { "message": "Clear" },
+  "links_website": { "message": "Website" },
+  "links_privacy": { "message": "Privacy" },
+  "links_support": { "message": "Support" },
+  "links_license": { "message": "License" },
+  "trial_soon_title": { "message": "Free trial ends soon" },
+  "trial_soon_body": { "message": "Your 7-day trial is almost over. Consider activating VIP." },
+  "trial_expired_title": { "message": "Free trial has ended" },
+  "trial_expired_body": { "message": "Activate VIP to keep unlimited history and tabs restore." },
+  "trial_btn_buy": { "message": "Buy VIP" },
+  "recently_closed_window_label": { 
+    "message": "{1} tabs",
+    "placeholders": { "1": { "content": "$1" } }
+  },
+  "no_items_yet": { "message": "No items yet" }
+}
