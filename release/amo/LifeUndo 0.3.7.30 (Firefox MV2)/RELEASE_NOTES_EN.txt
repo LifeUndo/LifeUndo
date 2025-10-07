@@ -1,0 +1,9 @@
+0.3.7.30 (FINAL+5)
+• Full i18n fix: EN switch now translates entire UI
+• Use chrome.i18n.getMessage directly for proper language switching
+• chrome.storage.sync for language persistence with location.reload()
+• Complete translation keys for all dynamic elements
+• Updated to new logo design
+• Debug logging enabled for testing
+• Stability and polish
+No telemetry. Local-only storage. Ready for production.
