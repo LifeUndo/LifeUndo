@@ -1,6 +1,6 @@
 export default {
   banner: {
-    rel: "Release 0.3.7.17 — Firefox free mode, RU/EN localization, mobile fixes",
+    rel: "Release 0.3.7.21 — Multi-language UI (EN/RU/HI/ZH/AR) + New /license page",
     download: "Download",
   },
   nav: {
@@ -8,7 +8,7 @@ export default {
     usecases: "Use cases", 
     pricing: "Pricing",
     downloads: "Downloads",
-    fund: "Fund",
+    fundLink: "Fund",
     api: "API",
     whitelabel: "White-Label",
     buyVip: "Buy VIP",
@@ -66,22 +66,6 @@ export default {
     clipboardHistory: "Local clipboard history", 
     recentTabs: "Recently closed tabs",
     privacy: "Privacy by design: 100% local"
-  },
-  pricing: {
-    pro: "Pro — 599 ₽ / month",
-    vip: "VIP — 9 990 ₽ lifetime", 
-    team: "Team — 2 990 ₽ / month",
-    buy: "Buy",
-    trial: "7-day trial",
-    included: "What's included"
-  },
-  usecases: {
-    students: "Students: bring back lost answers",
-    editors: "Editors: undo unexpected rewrite", 
-    office: "Office: restore closed tab & clipboard",
-    smm: "SMM: clipboard history for posts",
-    managers: "Managers: nothing gets lost",
-    gov: "Gov/Banking: keep your forms"
   },
   howItWorks: {
     title: "How it works",
@@ -226,6 +210,69 @@ export default {
       body: "Download from Chrome Web Store, Firefox Add-ons, or our website. One-click installation."
     }
   },
+  payments: {
+    pay_via_fk: "Pay via FreeKassa",
+    secure_fk: "Secure payment via FreeKassa"
+  },
+  support: {
+    title: "Support",
+    subtitle: "We reply within 24–48 h on business days.",
+    email_title: "Email",
+    email_hint: "For account, billing and technical issues.",
+    form_title: "Describe your issue",
+    form_submit: "Send",
+    disclaimer: "No personal data required. Please avoid sending passwords or secrets."
+  },
+  fund: {
+    title: "GetLifeUndo Fund",
+    mission: "We dedicate 10% of net revenue to digital literacy & safety initiatives.",
+    grants_title: "Grants & partnerships",
+    grants_body: "We co-fund public education projects, workshops and research focused on safer daily computing.",
+    reporting_title: "Transparency",
+    reporting_body: "Annual report with allocations and impact metrics will be published on this page.",
+    what_is_glu: "What is GLU?",
+    what_is_glu_body: "GLU (GetLifeUndo) is our broader initiative: tools, education and a 10% Fund for safer online routines."
+  },
+  pricing: {
+    title: "Pricing",
+    free_title: "Free",
+    pro_title: "Pro",
+    vip_title: "VIP (Lifetime)",
+    team_title: "Team (5 seats)",
+    cta_pay: "Pay via FreeKassa",
+    cta_start: "Start free",
+    note_secure: "Secure payment via FreeKassa"
+  },
+  usecases: {
+    creator: {
+      title: "Creator / SMM: \"Draft history for safer posts\"",
+      body: "Work with multiple draft versions — everything stays locally. Revert the needed version with confidence."
+    },
+    gov: {
+      title: "Manager / Editor: \"Nothing goes out by accident\"",
+      body: "Before publishing or sending, use GLU \"Pause Email\": 30–120 seconds, stop-word list and second glance. Fewer mistakes, fewer reputational risks."
+    },
+    egov: {
+      title: "e-Gov / Banking: \"Don't lose long forms\"",
+      body: "If a long application times out, LifeUndo keeps the entered text locally. Reopen the form and restore with one click."
+    },
+    learn_glu: "Learn about GLU"
+  },
+  contacts: {
+    title: "Contacts",
+    email: "Email: support@getlifeundo.com",
+    telegram: "Telegram: @KillerZalipov (our bot will introduce itself)",
+    address_note: "We are a distributed team; legal details are provided in contract and invoice."
+  },
+  privacy: {
+    title: "Privacy Policy (summary)",
+    local: "The extension works locally in your browser. No telemetry.",
+    payments: "Payments are processed by the payment provider. We do not store card data.",
+    scope: "We do not collect your form texts or clipboard contents — they remain on your device.",
+    contacts: "Contacts: support@getlifeundo.com",
+    full_link: "Full policy (RU): /ru/privacy. An extended EN version is in progress.",
+    updated: "Updated: 2025-10-04"
+  },
   assistant: {
     title: "Need help?",
     greeting: "Hi! I can guide you through install, activation and plans — or collect your request for our team.",
@@ -237,5 +284,43 @@ export default {
     disclaimer: "No personal data is collected. The assistant uses only on-site documentation. For sensitive issues, contact support.",
     thanks: "Thanks, we'll reach out",
     sending: "Sending..."
+  },
+  license: {
+    title: "Extension License",
+    intro: "LifeUndo browser extension is distributed under a proprietary license with free and paid tiers.",
+    freeTitle: "Free Version",
+    freeDesc: "Available on Firefox. Includes basic features: form text recovery, clipboard history, recently closed tabs. 100% local, no telemetry.",
+    proTitle: "PRO/VIP",
+    proDesc: "Advanced features: unlimited history, cloud sync, priority support. Available on Chrome, Edge, and Firefox.",
+    termsTitle: "Terms",
+    termsDesc: "By installing the extension, you agree to our Privacy Policy and Terms of Service.",
+    privacyLink: "Privacy Policy",
+    supportLink: "Support",
+    pricingLink: "View Pricing"
+  },
+  apiPage: {
+    h1: "API Documentation",
+    overviewTitle: "Overview",
+    overviewText: "GetLifeUndo API allows you to integrate undo functionality into your applications.",
+    endpointsTitle: "Endpoints",
+    authTitle: "Authentication",
+    authText: "Use API keys to access the API.",
+    examplesTitle: "Examples",
+    examplesText: "Examples of API usage in various programming languages.",
+    baseUrl: "Base URL",
+    rateLimits: "Rate Limits",
+    rateLimitsText: "100 requests per minute",
+    auth: "Authentication",
+    headerExample: "Header example",
+    endpoints: "Endpoints",
+    healthzTitle: "Health Check",
+    createTitle: "Create Payment",
+    requestBody: "Request Body",
+    responses: "Responses",
+    curl: "cURL",
+    powershell: "PowerShell",
+    webhooks: "Webhooks",
+    webhooksText: "FreeKassa sends payment status notifications to the specified URL.",
+    openapi: "OpenAPI Specification"
   }
 };
