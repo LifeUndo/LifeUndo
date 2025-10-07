@@ -1,6 +1,1 @@
-
-Hash                                                            
-----                                                            
-47B58543262DE6BE47B28E5A9DA1BC57D1A5838D3F23A3DA921279EE2AFFC462
-
-
+FE69499BD88134DD113070568ACD4692F0E3AECA339F18D088CC727B8A697F46  lifeundo-0.3.7.23.xpi
