@@ -1,0 +1,9 @@
+﻿
+200  https://getlifeundo.com/
+200  https://getlifeundo.com/ru
+200  https://getlifeundo.com/en
+200  https://getlifeundo.com/ru/features
+200  https://getlifeundo.com/en/pricing
+200  https://getlifeundo.com/robots.txt
+200  https://getlifeundo.com/sitemap.xml
+200  https://getlifeundo.com/favicon.ico

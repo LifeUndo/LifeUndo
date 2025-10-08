@@ -1,0 +1,22 @@
+# АНАЛИЗ ИСТОЧНИКОВ ЗАГОЛОВКОВ
+
+## 1. vercel.json
+✅ CSP БЕЗ unsafe-eval:
+  script-src 'self' 'unsafe-inline'
+
+## 2. next.config.mjs
+✅ НЕТ CSP заголовков (только Cache-Control для /ok)
+
+## 3. src/middleware.ts
+✅ НЕТ CSP заголовков (только next-intl локализация)
+
+## 4. src/middleware.ts.disabled
+⚠️ ОТКЛЮЧЕН (.disabled), не используется
+
+## 5. public/_headers
+✅ НЕ СУЩЕСТВУЕТ
+
+## ВЫВОД:
+ЕДИНСТВЕННЫЙ источник заголовков - vercel.json
+CSP с unsafe-eval на проде приходит ИЗВНЕ (Vercel Dashboard настройки)
+
