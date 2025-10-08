@@ -1,4 +1,4 @@
-name: Lighthouse CI (lifeundo.ru)
+name: Lighthouse CI (getlifeundo.com)
 on:
   workflow_dispatch:
   schedule:
@@ -11,9 +11,10 @@ jobs:
       - uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
-            https://lifeundo.ru/
-            https://lifeundo.ru/fund
-            https://lifeundo.ru/ok
+            https://getlifeundo.com/ru
+            https://getlifeundo.com/en
+            https://getlifeundo.com/ru/features
+            https://getlifeundo.com/en/downloads
           configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
