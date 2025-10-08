@@ -1,5 +1,6 @@
 {
   "headers": [
+    // Cache-busting comment: 2025-10-08-final-routing-fix
     {
       "source": "/(.*)",
       "headers": [
