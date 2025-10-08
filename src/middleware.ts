@@ -1,15 +1,15 @@
 import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
-  locales: ['en', 'ru'],
+  locales: ['ru', 'en'],
   defaultLocale: 'ru',
-  localeDetection: true,
-  localePrefix: 'always'  // всегда показываем префикс, избегаем redirect loop
+  localePrefix: 'as-needed',
+  localeDetection: true
 });
 
 export const config = {
   matcher: [
-    // не трогаем Next/статику/API/серв-файлы
-    '/((?!_next|api|favicon\\.ico|site\\.webmanifest|robots\\.txt|sitemap\\.xml|.*\\.(?:png|jpg|jpeg|svg|webp|gif|ico)).*)'
+    // не трогаем api, статику, файлы; обрабатываем всё остальное
+    '/((?!api|_next|.*\\..*|favicon.ico|robots.txt|sitemap.xml).*)'
   ]
 };
