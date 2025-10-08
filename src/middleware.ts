@@ -1,17 +1,34 @@
 import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales: ['en', 'ru'],
+const locales = ['en', 'ru'];
+const defaultLocale = 'ru';
 
-  // Used when no locale matches
-  defaultLocale: 'ru',
-
-  // Always show locale in URL
+const intlMiddleware = createMiddleware({
+  locales,
+  defaultLocale,
   localePrefix: 'always'
 });
 
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Handle root path redirect
+  if (pathname === '/') {
+    const acceptLanguage = request.headers.get('accept-language');
+    const userLocale = acceptLanguage?.includes('ru') ? 'ru' : 'en';
+    return NextResponse.redirect(new URL(`/${userLocale}`, request.url));
+  }
+
+  // Handle favicon and static files
+  if (pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
+
+  // Use next-intl middleware for all other paths
+  return intlMiddleware(request);
+}
+
 export const config = {
-  // Match only internationalized pathnames
   matcher: ['/', '/(ru|en)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)']
 };
