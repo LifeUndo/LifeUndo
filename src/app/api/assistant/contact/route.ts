@@ -12,7 +12,10 @@ const contactSchema = z.object({
     (val) => !/<script|javascript:|on\w+=/i.test(val),
     'Message contains invalid content'
   ),
-  locale: z.enum(['en', 'ru'])
+  locale: z.enum(['en', 'ru']),
+  // Honeypot fields
+  website: z.string().optional(), // Hidden field for bots
+  timestamp: z.number().optional() // Form start time
 });
 
 function getRateLimitKey(ip: string): string {
@@ -75,6 +78,21 @@ export async function POST(request: Request) {
     // Parse and validate request body
     const body = await request.json();
     const validatedData = contactSchema.parse(body);
+
+    // Honeypot check
+    if (validatedData.website) {
+      console.warn('[Contact] Honeypot triggered:', { ip: clientIP, website: validatedData.website });
+      return NextResponse.json({ error: 'Invalid submission' }, { status: 400 });
+    }
+
+    // Timing check (minimum 3 seconds)
+    if (validatedData.timestamp) {
+      const formTime = Date.now() - validatedData.timestamp;
+      if (formTime < 3000) { // 3 seconds minimum
+        console.warn('[Contact] Form filled too quickly:', { ip: clientIP, time: formTime });
+        return NextResponse.json({ error: 'Form filled too quickly' }, { status: 400 });
+      }
+    }
 
     // Log the submission (without sensitive data)
     console.info('[Contact] Form submitted', {

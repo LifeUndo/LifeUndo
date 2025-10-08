@@ -16,6 +16,8 @@ export default function Header() {
     { name: t('features'), href: `/${locale}/features` },
     { name: t('pricing'), href: `/${locale}/pricing` },
     { name: t('downloads'), href: `/${locale}/downloads` },
+    { name: locale === 'ru' ? 'Блог' : 'Blog', href: `/${locale}/blog` },
+    { name: locale === 'ru' ? 'Партнёры' : 'Partners', href: `/${locale}/partner` },
     { name: t('support'), href: `/${locale}/support` },
     { name: t('contact'), href: `/${locale}/contact` },
   ];

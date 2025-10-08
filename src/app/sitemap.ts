@@ -10,9 +10,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/features', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/pricing', priority: 0.6, changeFrequency: 'monthly' },
     { path: '/downloads', priority: 0.8, changeFrequency: 'weekly' },
+    { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
+    { path: '/partner', priority: 0.6, changeFrequency: 'monthly' },
+    { path: '/creator/apply', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/support', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/license', priority: 0.3, changeFrequency: 'yearly' },
+  ];
+
+  // Blog posts
+  const blogPosts = [
+    'lifeundo-037x-golden-whats-inside',
+    'roadmap-desktop-10-mvp'
   ];
   
   const sitemap: MetadataRoute.Sitemap = [];
@@ -30,6 +39,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           languages: {
             ru: `${base}/ru${page.path}`,
             en: `${base}/en${page.path}`,
+          },
+        },
+      });
+    });
+
+    // Add blog posts
+    blogPosts.forEach(postSlug => {
+      const url = `${base}/${locale}/blog/${postSlug}`;
+      sitemap.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as any,
+        priority: 0.6,
+        alternates: {
+          languages: {
+            ru: `${base}/ru/blog/${postSlug}`,
+            en: `${base}/en/blog/${postSlug}`,
           },
         },
       });

@@ -4,11 +4,16 @@ import { z } from 'zod';
 // Rate limiting store
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
-// Waitlist schema
-const waitlistSchema = z.object({
+// Creator application schema
+const creatorApplySchema = z.object({
   name: z.string().min(1).max(100).regex(/^[a-zA-Zа-яА-Я\s\-']+$/i),
   email: z.string().email().max(255),
-  platform: z.enum(['desktop', 'mobile']),
+  channel_url: z.string().url().max(500),
+  audience: z.enum(['1k-10k', '10k-100k', '100k-1m', '1m+']),
+  message: z.string().min(20).max(2000).refine(
+    (val) => !/<script|javascript:|on\w+=/i.test(val),
+    'Message contains invalid content'
+  ),
   locale: z.enum(['en', 'ru']),
   // Honeypot fields
   website: z.string().optional(), // Hidden field for bots
@@ -16,7 +21,7 @@ const waitlistSchema = z.object({
 });
 
 function getRateLimitKey(ip: string): string {
-  return `waitlist:${ip}`;
+  return `creator:${ip}`;
 }
 
 function checkRateLimit(ip: string): boolean {
@@ -29,7 +34,7 @@ function checkRateLimit(ip: string): boolean {
     return true;
   }
 
-  if (limit.count >= 3) { // Lower limit for waitlist
+  if (limit.count >= 5) {
     return false;
   }
 
@@ -74,11 +79,11 @@ export async function POST(request: Request) {
 
     // Parse and validate request body
     const body = await request.json();
-    const validatedData = waitlistSchema.parse(body);
+    const validatedData = creatorApplySchema.parse(body);
 
     // Honeypot check
     if (validatedData.website) {
-      console.warn('[Waitlist] Honeypot triggered:', { ip: clientIP, website: validatedData.website });
+      console.warn('[Creator Apply] Honeypot triggered:', { ip: clientIP, website: validatedData.website });
       return NextResponse.json({ error: 'Invalid submission' }, { status: 400 });
     }
 
@@ -86,26 +91,30 @@ export async function POST(request: Request) {
     if (validatedData.timestamp) {
       const formTime = Date.now() - validatedData.timestamp;
       if (formTime < 3000) { // 3 seconds minimum
-        console.warn('[Waitlist] Form filled too quickly:', { ip: clientIP, time: formTime });
+        console.warn('[Creator Apply] Form filled too quickly:', { ip: clientIP, time: formTime });
         return NextResponse.json({ error: 'Form filled too quickly' }, { status: 400 });
       }
     }
 
     // Log the submission (without sensitive data)
-    console.info('[Waitlist] Form submitted', {
+    console.info('[Creator Apply] Application submitted', {
       locale: validatedData.locale,
       emailDomain: validatedData.email.split('@')[1],
-      platform: validatedData.platform,
+      audience: validatedData.audience,
+      channelUrl: validatedData.channel_url,
+      messageLength: validatedData.message.length,
       timestamp: new Date().toISOString(),
       ip: clientIP
     });
 
     // TODO: Store in database or send to email
-    // For now, just log the full submission
-    console.log('[Waitlist] Full submission:', {
+    // For now, just log the full application
+    console.log('[Creator Apply] Full application:', {
       name: validatedData.name,
       email: validatedData.email,
-      platform: validatedData.platform,
+      channel_url: validatedData.channel_url,
+      audience: validatedData.audience,
+      message: validatedData.message,
       locale: validatedData.locale
     });
 
@@ -113,8 +122,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ 
       success: true,
       message: validatedData.locale === 'ru' 
-        ? 'Вы добавлены в список ожидания!'
-        : 'You\'re added to the waitlist!'
+        ? 'Заявка получена! Мы свяжемся с вами по e-mail.'
+        : 'Application received! We\'ll contact you by email.'
     }, { status: 200 });
 
   } catch (error) {
@@ -125,7 +134,7 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
-    console.error('[Waitlist] API error:', error);
+    console.error('[Creator Apply] API error:', error);
     return NextResponse.json({ 
       error: 'Internal server error' 
     }, { status: 500 });
