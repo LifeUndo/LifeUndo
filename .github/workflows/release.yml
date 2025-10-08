@@ -17,6 +17,7 @@ jobs:
           New-Item -ItemType Directory -Path dist -Force | Out-Null
           if (Test-Path "extension") {
             Compress-Archive -Path extension/* -DestinationPath dist/LifeUndo_Chrome.zip -Force
+            Write-Host "Chrome extension zipped successfully"
           } else {
             Write-Host "Chrome extension directory not found, skipping..."
           }
@@ -26,6 +27,7 @@ jobs:
         run: |
           if (Test-Path "extension_firefox") {
             Compress-Archive -Path extension_firefox/* -DestinationPath dist/LifeUndo_Firefox.zip -Force
+            Write-Host "Firefox extension zipped successfully"
           } else {
             Write-Host "Firefox extension directory not found, skipping..."
           }
