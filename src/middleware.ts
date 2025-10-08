@@ -3,13 +3,13 @@ import createMiddleware from 'next-intl/middleware';
 export default createMiddleware({
   locales: ['ru', 'en'],
   defaultLocale: 'ru',
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
   localeDetection: true
 });
 
 export const config = {
   matcher: [
-    // не трогаем api, статику, файлы; обрабатываем всё остальное
+    // обрабатываем все кроме api, _next, статических файлов
     '/((?!api|_next|.*\\..*|favicon.ico|robots.txt|sitemap.xml).*)'
   ]
 };
