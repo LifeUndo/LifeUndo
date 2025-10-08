@@ -1,29 +1,17 @@
-// src/middleware.ts
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export default createMiddleware({
+  // A list of all locales that are supported
+  locales: ['en', 'ru'],
 
-  // пропускаем статику и API
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.includes('.')
-  ) return NextResponse.next();
+  // Used when no locale matches
+  defaultLocale: 'ru',
 
-  // Корень -> /ru
-  if (pathname === '/') {
-    const url = req.nextUrl.clone();
-    url.pathname = '/ru';
-    return NextResponse.redirect(url, 308);
-  }
+  // Always show locale in URL
+  localePrefix: 'always'
+});
 
-  // Всё остальное не трогаем
-  return NextResponse.next();
-}
-
-// Обрабатываем только корень и «всё, кроме статики»
 export const config = {
-  matcher: ['/', '/((?!_next|api|.*\\..*).*)'],
+  // Match only internationalized pathnames
+  matcher: ['/', '/(ru|en)/:path*']
 };

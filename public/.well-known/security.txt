@@ -1,14 +1,10 @@
-Contact: mailto:security@lifeundo.ru
-Contact: https://www.getlifeundo.com/contacts
+Contact: mailto:security@getlifeundo.com
 Expires: 2026-12-31T23:59:59.000Z
-Encryption: https://www.getlifeundo.com/pgp-key.txt
+Encryption: https://getlifeundo.com/pgp-key.txt
 Preferred-Languages: en, ru
-Canonical: https://www.getlifeundo.com/.well-known/security.txt
-Policy: https://www.getlifeundo.com/security-policy
+Canonical: https://getlifeundo.com/.well-known/security.txt
+Policy: https://getlifeundo.com/security-policy
 
 # Security Policy
-# If you discover a security vulnerability, please report it to:
-# - Email: security@lifeundo.ru
-# - Website: https://www.getlifeundo.com/contacts
-#
-# We appreciate responsible disclosure and will respond within 48 hours.
+# If you discover a security vulnerability in GetLifeUndo, please report it responsibly.
+# We appreciate your efforts to keep our users safe.

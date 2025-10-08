@@ -1,22 +1,19 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-// Rate limiting store (in-memory, для продакшена лучше Redis)
+// Rate limiting store
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
-// Contact form schema
-const contactSchema = z.object({
+// Waitlist schema
+const waitlistSchema = z.object({
   name: z.string().min(1).max(100).regex(/^[a-zA-Zа-яА-Я\s\-']+$/i),
   email: z.string().email().max(255),
-  message: z.string().min(10).max(5000).refine(
-    (val) => !/<script|javascript:|on\w+=/i.test(val),
-    'Message contains invalid content'
-  ),
+  platform: z.enum(['desktop', 'mobile']),
   locale: z.enum(['en', 'ru'])
 });
 
 function getRateLimitKey(ip: string): string {
-  return `contact:${ip}`;
+  return `waitlist:${ip}`;
 }
 
 function checkRateLimit(ip: string): boolean {
@@ -29,7 +26,7 @@ function checkRateLimit(ip: string): boolean {
     return true;
   }
 
-  if (limit.count >= 5) {
+  if (limit.count >= 3) { // Lower limit for waitlist
     return false;
   }
 
@@ -74,23 +71,23 @@ export async function POST(request: Request) {
 
     // Parse and validate request body
     const body = await request.json();
-    const validatedData = contactSchema.parse(body);
+    const validatedData = waitlistSchema.parse(body);
 
     // Log the submission (without sensitive data)
-    console.info('[Contact] Form submitted', {
+    console.info('[Waitlist] Form submitted', {
       locale: validatedData.locale,
       emailDomain: validatedData.email.split('@')[1],
-      messageLength: validatedData.message.length,
+      platform: validatedData.platform,
       timestamp: new Date().toISOString(),
       ip: clientIP
     });
 
-    // TODO: Send email to legal@getlifeundo.com
-    // For now, just log the full message for debugging
-    console.log('[Contact] Full message:', {
+    // TODO: Store in database or send to email
+    // For now, just log the full submission
+    console.log('[Waitlist] Full submission:', {
       name: validatedData.name,
       email: validatedData.email,
-      message: validatedData.message,
+      platform: validatedData.platform,
       locale: validatedData.locale
     });
 
@@ -98,8 +95,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ 
       success: true,
       message: validatedData.locale === 'ru' 
-        ? 'Сообщение получено. Ответ придёт на e-mail.'
-        : 'Message received. We\'ll reply by email.'
+        ? 'Вы добавлены в список ожидания!'
+        : 'You\'re added to the waitlist!'
     }, { status: 200 });
 
   } catch (error) {
@@ -110,12 +107,9 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
-    console.error('[Contact] API error:', error);
+    console.error('[Waitlist] API error:', error);
     return NextResponse.json({ 
       error: 'Internal server error' 
     }, { status: 500 });
   }
 }
-
-
-
