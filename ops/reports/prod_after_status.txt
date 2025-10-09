@@ -1,0 +1,6 @@
+﻿
+ERROR  https://getlifeundo.com/
+ERROR  https://getlifeundo.com/ru
+ERROR  https://getlifeundo.com/en
+ERROR  https://getlifeundo.com/ru/features
+ERROR  https://getlifeundo.com/en/pricing

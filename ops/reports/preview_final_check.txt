@@ -1,0 +1,5 @@
+﻿
+вќЊ ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/ru
+вќЊ ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/en
+вќЊ ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/ru/features
+вќЊ ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/en/pricing

@@ -1,0 +1,6 @@
+﻿
+ERROR  https://getlifeundo-cvse9ngfj-alexs-projects-ef5d9b64.vercel.app/ : Status NotFound
+ERROR  https://getlifeundo-cvse9ngfj-alexs-projects-ef5d9b64.vercel.app/ru : Status NotFound
+ERROR  https://getlifeundo-cvse9ngfj-alexs-projects-ef5d9b64.vercel.app/en : Status NotFound
+ERROR  https://getlifeundo-cvse9ngfj-alexs-projects-ef5d9b64.vercel.app/ru/features : Status NotFound
+ERROR  https://getlifeundo-cvse9ngfj-alexs-projects-ef5d9b64.vercel.app/en/pricing : Status NotFound
