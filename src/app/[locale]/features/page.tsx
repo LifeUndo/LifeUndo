@@ -148,6 +148,44 @@ export default function FeaturesPage({ params: { locale } }: Props) {
               </div>
             </div>
           </div>
+
+          {/* Download CTA (direct links) */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+              {locale === 'ru' ? 'Скачать GetLifeUndo' : 'Download GetLifeUndo'}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+              <a
+                href="https://addons.mozilla.org/firefox/addon/lifeundo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                Firefox Add-ons
+              </a>
+              <a
+                href="https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-gray-700 hover:bg-gray-800 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                Windows (.exe)
+              </a>
+              <a
+                href="https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-gray-700 hover:bg-gray-800 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                macOS (.dmg)
+              </a>
+            </div>
+            <p className="text-center text-gray-500 text-sm mt-4">
+              {locale === 'ru'
+                ? 'Chrome/Edge/RuStore — скоро (кнопки скрыты до релиза)'
+                : 'Chrome/Edge/RuStore — coming soon (hidden until release)'}
+            </p>
+          </div>
         </div>
       </div>
     </div>

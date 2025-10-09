@@ -1,16 +1,11 @@
 {
-  "version": "0.3.7.22",
-  "title": "Golden Release - Perfect 7-Language Localization",
+  "version": "0.3.7.32",
+  "title": "Stable 0.3.7.32 — Sync & Polish",
   "items": [
-    "Extension: Real language switching (EN/RU/HI/ZH/AR/KK/TR) in options page",
-    "Extension: Perfect localized links in popup (Website, Privacy, Support, License)",
-    "Extension: 7-day upgrade reminder (local-only, no telemetry)",
-    "Extension: Dark theme for options page (unified with popup)",
-    "Website: Perfect /license page (EN/RU/HI/ZH/AR/KK/TR) with RTL support",
-    "Website: Complete i18n for all 7 locales - no hardcoded text",
-    "Website: Updated hreflang, sitemap, robots.txt, API noindex",
-    "Website: AI assistant on all locales with proper language detection",
-    "Base: 0.3.7.20 logic preserved (no breaking changes)"
+    "Extension: 0.3.7.32 manifests synced (Firefox/Chrome)",
+    "Website: Direct download links (AMO/Win/macOS) on Features/Downloads",
+    "Website: Footer cleanup, support email & Telegram unified",
+    "Website: Version badges & metadata updated"
   ],
   "highlights_en": [
     "Extension: Perfect multi-language UI (EN/RU/HI/ZH/AR/KK/TR)",

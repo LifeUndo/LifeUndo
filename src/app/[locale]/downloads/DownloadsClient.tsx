@@ -263,47 +263,11 @@ export default function DownloadsClient() {
             />
             <button 
               type="submit"
-              className="h-11 md:h-11 rounded-lg bg-green-500 hover:bg-green-600 text-white w-full md:w-auto"
+              className="h-11 md:h-11 rounded-lg bg-green-500 hover:bg-green-600 text-white w-full md:w-auto shrink-0"
             >
               {t.downloads.activate}
             </button>
           </form>
-        </div>
-
-        {/* Features Preview */}
-        <div className="text-center">
-          <h3 className="text-2xl font-bold text-white mb-8">
-            {t.downloads.featuresTitle}
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature1Title}</h4>
-              <p className="text-gray-300">{t.downloads.feature1Description}</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature2Title}</h4>
-              <p className="text-gray-300">{t.downloads.feature2Description}</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature3Title}</h4>
-              <p className="text-gray-300">{t.downloads.feature3Description}</p>
-            </div>
-          </div>
         </div>
 
         {/* Mobile Apps Announcement */}

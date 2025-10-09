@@ -11,11 +11,11 @@ export default function Footer() {
 
   const footerLinks = [
     { name: t('website'), href: `/${locale}` },
+    { name: t('features'), href: `/${locale}/features` },
+    { name: t('pricing'), href: `/${locale}/pricing` },
     { name: t('downloads'), href: `/${locale}/downloads` },
-    { name: t('support'), href: `/${locale}/support` },
-    { name: t('contact'), href: `/${locale}/contact` },
     { name: t('privacy'), href: `/${locale}/privacy` },
-    { name: t('license'), href: `/${locale}/license` },
+    { name: t('terms'), href: `/${locale}/legal/offer` },
   ];
 
   return (
@@ -47,15 +47,14 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://addons.mozilla.org/en-US/firefox/addon/getlifeundo/"
+                href="https://t.me/GetLifeUndoSupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
-                aria-label="Mozilla Add-ons"
+                aria-label="Telegram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-                  <path d="M8.5 12c0-1.933 1.567-3.5 3.5-3.5s3.5 1.567 3.5 3.5-1.567 3.5-3.5 3.5-3.5-1.567-3.5-3.5z"/>
+                  <path d="M9.04 15.34l-.4 5.65c.57 0 .82-.24 1.11-.53l2.66-2.55 5.52 4.04c1.01.56 1.73.27 2-.94l3.62-16.97h.01c.32-1.49-.54-2.07-1.51-1.71L1.6 9.24c-1.46.57-1.44 1.38-.25 1.75l5.64 1.76 13.1-8.26c.62-.38 1.18-.17.72.21"/>
                 </svg>
               </a>
             </div>
@@ -87,10 +86,18 @@ export default function Footer() {
             </h3>
             <div className="space-y-2">
               <a
-                href="mailto:legal@getlifeundo.com"
+                href="mailto:support@getlifeundo.com"
                 className="block text-gray-400 hover:text-white transition-colors"
               >
-                legal@getlifeundo.com
+                support@getlifeundo.com
+              </a>
+              <a
+                href="https://t.me/GetLifeUndoSupport"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
+                Telegram: @GetLifeUndoSupport
               </a>
               <p className="text-gray-400 text-sm">
                 {locale === 'ru' 

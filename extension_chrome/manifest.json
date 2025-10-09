@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GetLifeUndo",
-  "version": "0.3.7.18",
+  "version": "0.3.7.32",
   "default_locale": "en",
   "description": "Ctrl+Z for online life: restore form text, clipboard history, and recently closed tabs. 100% local.",
   "icons": {
@@ -36,6 +36,31 @@
     "matches": ["<all_urls>"]
   }]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
