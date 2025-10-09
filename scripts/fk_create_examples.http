@@ -1,0 +1,45 @@
+# Как пользоваться:
+# 1) Установи VS Code extension "REST Client"
+# 2) В .vscode/settings.json создай переменные окружений:
+#    "rest-client.environmentVariables": {
+#      "dev": { "base": "http://localhost:3000" },
+#      "preview": { "base": "https://<preview>.vercel.app" }
+#    }
+# 3) Выбери окружение (dev/preview) и запускай блоки.
+
+### Health (debug)
+GET {{base}}/api/debug/fk
+
+### Create — pro_month
+POST {{base}}/api/payments/freekassa/create
+Content-Type: application/json
+
+{
+  "plan": "pro_month",
+  "email": "test@example.com"
+}
+
+### Create — vip_lifetime
+POST {{base}}/api/payments/freekassa/create
+Content-Type: application/json
+
+{
+  "plan": "vip_lifetime"
+}
+
+### Create — team_5
+POST {{base}}/api/payments/freekassa/create
+Content-Type: application/json
+
+{
+  "plan": "team_5",
+  "description": "Team 5 seats — monthly"
+}
+
+### Create — starter_6m
+POST {{base}}/api/payments/freekassa/create
+Content-Type: application/json
+
+{
+  "plan": "starter_6m"
+}
