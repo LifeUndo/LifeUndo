@@ -1,3 +1,5 @@
+const isPreview = process.env.VERCEL_ENV === 'preview';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -65,7 +67,15 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { 
             key: 'Content-Security-Policy', 
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://cdn.freekassa.net; connect-src 'self' https://api.getlifeundo.com https://*.getlifeundo.com https://*.lifeundo.ru; frame-ancestors 'self' https://*.getlifeundo.com https://*.lifeundo.ru;"
+            value: [
+              "default-src 'self'",
+              `script-src 'self' 'unsafe-inline'${isPreview ? '' : " 'unsafe-eval'"} https://www.google-analytics.com https://www.googletagmanager.com`,
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: https: https://cdn.freekassa.net",
+              "connect-src 'self' https://api.getlifeundo.com https://*.getlifeundo.com https://*.lifeundo.ru",
+              "frame-ancestors 'self' https://*.getlifeundo.com https://*.lifeundo.ru",
+            ].join('; ')
           },
         ],
       },
