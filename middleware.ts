@@ -1,28 +1,36 @@
-﻿import { NextResponse } from "next/server";
+﻿import { NextResponse, NextRequest } from "next/server";
 
 const locales = ["ru", "en"];
 const defaultLocale = "ru";
 
-// Игнорируем файлы, _next и api
-const IGNORE = /^\/(_next|api)(\/|$)|\.[a-z0-9]+$/i;
+// Мидлварь для подстановки /ru, если локаль не задана.
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-export function middleware(req: Request) {
-  const url = new URL(req.url);
-  const { pathname } = url;
-
-  if (IGNORE.test(pathname)) return;
+  // Игнорируем _next, api и любые файлы c расширением
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".")
+  ) {
+    return NextResponse.next();
+  }
 
   // Первый сегмент пути
-  const seg = pathname.split("/")[1];
+  const seg = pathname.split("/")[1] || "";
 
-  // Если путь уже с локалью — пропускаем
-  if (locales.includes(seg)) return;
+  // Если локаль уже есть — пропускаем
+  if (locales.includes(seg)) {
+    return NextResponse.next();
+  }
 
-  // Иначе подставляем defaultLocale
+  // Иначе — переписываем на /ru/...
+  const url = req.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname}`;
-  return NextResponse.rewrite(url); // rewrite, чтобы не менять адрес в адресной строке
+  return NextResponse.rewrite(url);
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|.*\\..*).*)"],
+  // Пусть идёт на все пути, мы сами фильтруем внутри
+  matcher: ["/:path*"],
 };
