@@ -20,22 +20,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: 'invalid_productId' }, { status: 400 });
     }
     
+    const fkEnabled = String(process.env.NEXT_PUBLIC_FK_ENABLED || '').toLowerCase() === 'true';
+    if (!fkEnabled) {
+      // do not leak details
+      return NextResponse.json({ ok: false, error: 'fk-disabled' }, { status: 400 });
+    }
+    
     const MERCHANT_ID = process.env.FREEKASSA_MERCHANT_ID!;
     const SECRET1 = process.env.FREEKASSA_SECRET1!;
     const AMOUNT = PRODUCT_AMOUNTS[productId].toFixed(2); // "599.00" - строго две цифры
     const ORDER_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const CURRENCY = 'RUB';
     
-    // Проверяем конфигурацию
-    if (!MERCHANT_ID || !SECRET1) {
-      return NextResponse.json({ ok: false, error: 'fk_not_configured' }, { status: 500 });
-    }
-    
-    // Создаем подпись по новой документации: MERCHANT_ID:AMOUNT:SECRET1:CURRENCY:ORDER_ID
-    // Важно: AMOUNT должен быть строкой с двумя знаками после точки
-    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${CURRENCY}:${ORDER_ID}`;
+    // Подпись (без раскрытия деталей в логах)
+    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;
     const SIGN = crypto.createHash('md5').update(signatureString, 'utf8').digest('hex');
-    
+
     // Формируем URL для редиректа
     const qs = new URLSearchParams({
       m: MERCHANT_ID,
