@@ -2,6 +2,7 @@ import ServiceCard from '@/components/ServiceCard';
 import FreeKassaButton from '@/components/payments/FreeKassaButton';
 import { fkPublic } from '@/lib/fk-public';
 import { PLANS } from '@/config/plans';
+import { PLAN_TO_PRODUCT } from '@/business/pricing/plans';
 
 export default function PricingPageEN() {
   return (
@@ -48,7 +49,7 @@ export default function PricingPageEN() {
           isPopular={true}
           ctaText="Get Pro"
           ctaLink="/buy?plan=pro"
-          customCTA={<FreeKassaButton productId="pro_month" />}
+          customCTA={<FreeKassaButton plan="pro_month" />}
         />
 
         {/* VIP */}
@@ -68,7 +69,7 @@ export default function PricingPageEN() {
           period="forever"
           ctaText="Buy VIP"
           ctaLink="/buy?plan=vip"
-          customCTA={<FreeKassaButton productId="vip_lifetime" />}
+          customCTA={<FreeKassaButton plan="vip_lifetime" />}
         />
       </div>
 
@@ -89,7 +90,7 @@ export default function PricingPageEN() {
           period="for 5 seats per month"
           ctaText="Order Team"
           ctaLink="/buy?plan=team"
-          customCTA={<FreeKassaButton productId="team_5" />}
+          customCTA={<FreeKassaButton plan="team_5" />}
         />
       </div>
 

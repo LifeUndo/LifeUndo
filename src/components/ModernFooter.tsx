@@ -1,142 +1,76 @@
-'use client';
+﻿"use client";
+import React from "react";
+import { usePathname } from "next/navigation";
 
-import Link from 'next/link';
-import { SocialIcon } from './icons/SocialIcon';
-import { useTranslations } from '@/hooks/useTranslations';
-
-interface ModernFooterProps {
-  locale?: string;
+// TODO: подключи реальный i18n-хук
+function useI18n() {
+  return (k: string) =>
+    (
+      {
+        "footer.product": "Продукт",
+        "footer.company": "Компания",
+        "footer.legal": "Правовое",
+        "footer.developers": "Разработчикам",
+        "footer.partners": "Партнёрам",
+        "footer.downloads": "Загрузки",
+        "footer.pricing": "Тарифы",
+        "footer.fund": "Фонд",
+        "footer.support": "Поддержка",
+        "footer.privacy": "Конфиденциальность",
+        "footer.offer": "Оферта",
+        "footer.sla": "SLA",
+        "footer.contract": "Договор",
+        "footer.dpa": "DPA",
+        "footer.policy": "Политика",
+        "footer.downloadsTxt": "Текст лицензии/загрузок",
+      } as Record<string, string>
+    )[k] ?? k;
 }
 
-export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
-  const { t } = useTranslations();
-  
+export default function ModernFooter() {
+  const t = useI18n();
+  const pathname = usePathname() || "/";
+  const seg = pathname.split("/").filter(Boolean)[0] || "ru";
+  const withLocale = (p: string) => / ;
+
   const product = [
-    { title: t.footer.features, href: `/${locale}/features` },
-    { title: t.footer.pricing, href: `/${locale}/pricing` },
-    { title: t.footer.downloads, href: `/${locale}/downloads` },
-    { title: t.footer.cases, href: `/${locale}/use-cases` },
+    { href: withLocale("/developers"), label: t("footer.developers") },
+    { href: withLocale("/partners"), label: t("footer.partners") },
+    { href: withLocale("/downloads"), label: t("footer.downloads") },
+    { href: withLocale("/pricing"), label: t("footer.pricing") },
   ];
 
   const company = [
-    { title: t.footer.fund, href: `/${locale}/fund` },
-    { title: t.footer.support, href: `/${locale}/support` },
-    { title: t.footer.contacts, href: `/${locale}/contacts` },
-    { title: t.footer.privacy, href: `/${locale}/privacy` },
+    { href: withLocale("/fund"), label: t("footer.fund") },
+    { href: withLocale("/support"), label: t("footer.support") },
+    { href: withLocale("/privacy"), label: t("footer.privacy") },
+    // /contacts удалён, чтобы не вести на 404
   ];
 
   const legal = [
-    { title: t.footer.offer, href: `/${locale}/legal/offer` },
-    { title: t.footer.sla, href: `/${locale}/legal/sla` },
-    { title: t.footer.contract, href: `/${locale}/legal/contract` },
-    { title: t.footer.dpa, href: `/${locale}/legal/dpa` },
-    { title: t.footer.policy, href: `/${locale}/legal/pdp` },
-    { title: t.footer.downloadsTxt, href: `/${locale}/legal/downloads` },
-  ];
-
-  const socials: Array<{ name: string; href: string; icon: 'telegram'|'x'|'reddit'|'youtube'|'github'|'vcru'|'habr' }> = [
-    { name: 'Telegram', href: 'https://t.me/GetLifeUndo', icon: 'telegram' },
-    { name: 'X (Twitter)', href: 'https://x.com/GetLifeUndo', icon: 'x' },
-    { name: 'Reddit', href: 'https://www.reddit.com/r/GetLifeUndo', icon: 'reddit' },
-    { name: 'YouTube', href: 'https://www.youtube.com/@GetLifeUndo', icon: 'youtube' },
-    { name: 'GitHub', href: 'https://github.com/LifeUndo', icon: 'github' },
-    { name: 'VC.ru', href: 'https://vc.ru/id5309084', icon: 'vcru' },
-    { name: 'Habr', href: 'https://habr.com/ru/users/GetLifeUndo25/', icon: 'habr' },
+    { href: withLocale("/legal/offer"), label: t("footer.offer") },
+    { href: withLocale("/legal/sla"), label: t("footer.sla") },
+    { href: withLocale("/legal/contract"), label: t("footer.contract") },
+    { href: withLocale("/legal/dpa"), label: t("footer.dpa") },
+    { href: withLocale("/privacy"), label: t("footer.policy") },
+    { href: withLocale("/downloads"), label: t("footer.downloadsTxt") },
   ];
 
   return (
-    <footer className="bg-gray-900/50 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Product Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.product}</h3>
-            <ul className="space-y-2">
-              {product.map(item => (
-                <li key={item.title}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.company}</h3>
-            <ul className="space-y-2">
-              {company.map(item => (
-                <li key={item.title}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">{t.footer.legal}</h3>
-            <ul className="space-y-2">
-              {legal.map(item => (
-                <li key={item.title}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Brand Section */}
-        <div className="mt-8 pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="flex items-center space-x-3">
-              <img src="/brand/getlifeundo-round.png" alt="GetLifeUndo" className="h-8 w-8 rounded-full" />
-              <div>
-                <p className="text-gray-400 text-sm max-w-md">
-                  Ctrl+Z для вашей онлайн-жизни. Восстанавливаем случайно удаленные данные на любых устройствах в любой точке мира.
-                </p>
-                <div className="flex items-center gap-4 mt-2">
-                  <img 
-                    src="/brand/freekassa-badge.svg" 
-                    alt="FreeKassa" 
-                    className="h-5 opacity-75 hover:opacity-100 transition-opacity"
-                  />
-                  <span className="text-xs text-gray-500">
-                    Оплата через FreeKassa
-                  </span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex gap-4">
-              {socials.map((social) => (
-                <a 
-                  key={social.name}
-                  href={social.href} 
-                  aria-label={social.name} 
-                  className="text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <SocialIcon name={social.icon} className="w-6 h-6" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <p className="text-gray-400 text-sm text-center">
-            © 2024 GetLifeUndo. Все права защищены.
-          </p>
-        </div>
+    <footer className="px-6 py-10 border-t border-white/10">
+      <div className="grid sm:grid-cols-3 gap-6">
+        <nav>
+          <h4 className="font-semibold mb-2">{t("footer.product")}</h4>
+          <ul className="space-y-1">{product.map((i) => <li key={i.href}><a href={i.href}>{i.label}</a></li>)}</ul>
+        </nav>
+        <nav>
+          <h4 className="font-semibold mb-2">{t("footer.company")}</h4>
+          <ul className="space-y-1">{company.map((i) => <li key={i.href}><a href={i.href}>{i.label}</a></li>)}</ul>
+        </nav>
+        <nav>
+          <h4 className="font-semibold mb-2">{t("footer.legal")}</h4>
+          <ul className="space-y-1">{legal.map((i) => <li key={i.href}><a href={i.href}>{i.label}</a></li>)}</ul>
+        </nav>
       </div>
     </footer>
   );
