@@ -13,6 +13,13 @@ export default {
     rel: "Релиз 0.3.7.15 — новый платёжный поток, RU/EN локализация, мобильная оптимизация",
     download: "Скачать",
   },
+  errors: {
+    unknownPlan: "Неизвестный тариф",
+    fkUnavailable: "Платежи временно недоступны",
+    signature: "Ошибка подписи",
+    network: "Ошибка соединения",
+    tariffUnavailable: "Тариф недоступен. Обновите страницу.",
+  },
   legal: {
     privacy: "Приватность",
     terms: "Условия",
@@ -41,7 +48,11 @@ export default {
   common: {
     learnMore: "Узнать больше",
     install: "Установить", 
-    contactUs: "Связаться с нами"
+    contactUs: "Связаться с нами",
+    comingSoon: "скоро",
+    creatingPayment: "Создание платежа...",
+    payWithFreeKassa: "Оплатить через FreeKassa",
+    securePayment: "Безопасная оплата",
   },
   hero: {
     title: "Ctrl+Z для жизни в интернете",

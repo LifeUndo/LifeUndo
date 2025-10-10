@@ -13,6 +13,13 @@ export default {
     rel: "Release 0.3.7.15 — new payment flow, RU/EN localization, mobile optimization",
     download: "Download",
   },
+  errors: {
+    unknownPlan: "Unknown plan",
+    fkUnavailable: "Payments are temporarily unavailable",
+    signature: "Signature error",
+    network: "Network error",
+    tariffUnavailable: "Plan unavailable. Please refresh the page.",
+  },
   legal: { 
     privacy: "Privacy", 
     terms: "Terms", 
@@ -41,7 +48,11 @@ export default {
   common: { 
     learnMore: "Learn more", 
     install: "Install", 
-    contactUs: "Contact us" 
+    contactUs: "Contact us",
+    comingSoon: "coming soon",
+    creatingPayment: "Creating payment...",
+    payWithFreeKassa: "Pay with FreeKassa",
+    securePayment: "Secure payment",
   },
   hero: {
     title: "Ctrl+Z for your online life",

@@ -1,68 +1,26 @@
-'use client';
+﻿import React from "react";
+import { headers } from "next/headers";
 
-import { useState, useEffect } from 'react';
-import { useTranslations } from '@/hooks/useTranslations';
-
-interface LatestData {
-  version: string;
-  publishedAt: string;
-  files: {
-    firefox?: string;
-    win?: string;
-    mac?: string;
-  };
+async function getVersion() {
+  try {
+    const h = headers();
+    const host = h.get("x-forwarded-host") ?? h.get("host");
+    const proto = h.get("x-forwarded-proto") ?? "https";
+    const url = ${proto}://System.Management.Automation.Internal.Host.InternalHost/version.json;
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) return null;
+    return (await r.json()) as { version: string; timestamp?: string } | null;
+  } catch {
+    return null;
+  }
 }
 
-export default function ReleaseBanner() {
-  const { t, locale } = useTranslations();
-  const [isVisible, setIsVisible] = useState(true);
-  const [latestData, setLatestData] = useState<LatestData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Загружаем latest.json с версионированием для обхода кэша
-    const buildId = Date.now();
-    fetch(`/app/latest/latest.json?v=${buildId}`)
-      .then(res => res.json())
-      .then(data => {
-        setLatestData(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        // Fallback если файл недоступен
-        setLatestData({
-          version: '0.3.7.15',
-          publishedAt: '2025-10-05T18:00:00Z',
-          files: {
-            firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
-          }
-        });
-        setLoading(false);
-      });
-  }, []);
-
-  if (!isVisible || loading) return null;
-
+export default async function ReleaseBanner() {
+  const v = await getVersion();
+  if (!v) return null;
   return (
-    <div className="bg-gradient-to-r from-emerald-500 to-sky-600 text-white py-2 px-4 text-center relative">
-      <div className="container mx-auto flex items-center justify-center gap-3 flex-wrap pr-12">
-        <span className="text-sm font-medium">
-          🎉 {t.banner.rel.replace('0.3.7.12', latestData?.version || '0.3.7.15')}
-        </span>
-        <a 
-          href={`/${locale}/downloads`} 
-          className="text-white underline underline-offset-2 hover:text-gray-200 transition-colors"
-        >
-          {t.banner.download}
-        </a>
-        <button 
-          onClick={() => setIsVisible(false)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 transition-colors opacity-80 hover:opacity-100"
-          aria-label="Закрыть баннер"
-        >
-          ✕
-        </button>
-      </div>
+    <div className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+      Текущая версия: {v.version}
     </div>
   );
 }
