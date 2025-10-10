@@ -1,0 +1,9 @@
+0.3.7.32 (STABLE)
+• Based on stable 0.3.7.31
+• All functionality preserved from working version
+• AMO-compliant square icons
+• Stable language switching
+• Proper section order maintained
+• No undefined entries in Recently Closed
+• Clean UI without debug elements
+No telemetry. Local-only storage. Ready for production.

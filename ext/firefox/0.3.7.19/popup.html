@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GetLifeUndo</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div id="appname">GetLifeUndo</div>
+    <div id="version">Free Version</div>
+  </div>
+
+  <!-- NEW: hint for protected pages (about:/AMO/etc) -->
+  <div id="env-warning"
+       class="note"
+       style="display:none;margin:6px 0;opacity:.8">
+  </div>
+
+  <section>
+    <h3>Latest text inputs</h3>
+    <ul id="inputs"></ul>
+  </section>
+
+  <section>
+    <h3>Recently closed tabs</h3>
+    <ul id="tabs"></ul>
+  </section>
+
+  <section>
+    <h3>Clipboard history</h3>
+    <ul id="clipboard"></ul>
+  </section>
+
+  <nav class="footer">
+    <a href="https://getlifeundo.com" target="_blank" rel="noreferrer">Website</a> ·
+    <a href="https://getlifeundo.com/en/privacy" target="_blank" rel="noreferrer">Privacy</a> ·
+    <a href="https://getlifeundo.com/en/support" target="_blank" rel="noreferrer">Support</a> ·
+    <a href="https://getlifeundo.com/en/license" target="_blank" rel="noreferrer">License</a>
+  </nav>
+
+  <script src="popup.js"></script>
+</body>
+</html>

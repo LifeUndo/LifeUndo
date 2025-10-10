@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-left" data-i18n="app_title"></div>
+    <div class="header-center" id="version"></div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <button class="lang-btn" id="lang-btn" aria-label="Language">
+          🌐 <span id="current-lang">EN</span> ▼
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <div class="lang-option" data-lang="en" data-i18n="lang_en"></div>
+          <div class="lang-option" data-lang="ru" data-i18n="lang_ru"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="free-badge" data-i18n="free_badge"></div>
+  
+  <div id="trial-banner" class="trial-banner" style="display: none;">
+    <div class="trial-banner-title" id="trial-title"></div>
+    <div class="trial-banner-body" id="trial-body"></div>
+    <button class="trial-btn" id="trial-btn" data-i18n="trial_btn_buy"></button>
+    <button class="trial-close" id="trial-close">×</button>
+  </div>
+  
+  <div id="env-warning" class="tip">
+    <div class="tip-title" data-i18n="tip_protected_title"></div>
+    <div class="tip-body" data-i18n="tip_protected_body"></div>
+    <button class="snap-cta-btn" id="snap-cta-btn" data-i18n="tip_protected_cta_snap"></button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="latest_inputs"></div>
+    <div class="list" id="inputs">
+      <div class="empty" data-i18n="no_items_yet"></div>
+    </div>
+    <button class="clear-btn" id="clear-inputs" data-i18n="clear_btn" data-role="clear-inputs"></button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="clipboard_history"></div>
+    <div class="list" id="clipboard">
+      <div class="empty" data-i18n="no_items_yet"></div>
+    </div>
+    <button class="clear-btn" id="clear-clipboard" data-i18n="clear_btn" data-role="clear-clipboard"></button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="screenshots_title"></div>
+    <div class="list" id="screenshots">
+      <div class="empty" data-i18n="no_items_yet"></div>
+    </div>
+    <button class="snap-btn" id="take-screenshot" data-i18n="btn_take_screenshot"></button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="recently_closed"></div>
+    <div class="list" id="tabs">
+      <div class="empty" data-i18n="no_items_yet"></div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <a href="#" data-i18n="links_website" data-i18n-href="website"></a>
+    <a href="#" data-i18n="links_privacy" data-i18n-href="privacy"></a>
+    <a href="#" data-i18n="links_support" data-i18n-href="support"></a>
+    <a href="#" data-i18n="links_license" data-i18n-href="license"></a>
+  </div>
+  
+  <script src="i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

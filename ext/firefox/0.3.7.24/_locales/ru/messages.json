@@ -1,0 +1,15 @@
+{
+  "title": {"message": "GetLifeUndo"},
+  "latest": {"message": "Последние вводы"},
+  "clipboard": {"message": "История буфера обмена"},
+  "recentTabs": {"message": "Недавно закрытые вкладки"},
+  "clear": {"message": "Очистить"},
+  "tip_protected": {"message": "Подсказка: ввод/буфер недоступны на этой странице (политика браузера). Проверьте на обычном сайте."},
+  "website": {"message": "Сайт"},
+  "privacy": {"message": "Конфиденциальность"},
+  "support": {"message": "Поддержка"},
+  "license": {"message": "Лицензия"},
+  "lang": {"message": "Язык"},
+  "lang_en": {"message": "English"},
+  "lang_ru": {"message": "Русский"}
+}

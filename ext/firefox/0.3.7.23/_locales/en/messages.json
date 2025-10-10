@@ -1,0 +1,20 @@
+{
+  "appName": { "message": "GetLifeUndo", "description": "Extension name" },
+  "appDescription": { "message": "Restore lost form text, clipboard history and closed tabs. 100% local, no tracking.", "description": "Description" },
+
+  "popup_title": { "message": "GetLifeUndo" },
+  "tip_protected": { "message": "Tip: inputs/clipboard are unavailable on this page (about:/AMO/etc). Try on a regular website." },
+
+  "latest_inputs": { "message": "Latest text inputs" },
+  "clipboard_history": { "message": "Clipboard history" },
+  "recently_closed_tabs": { "message": "Recently closed tabs" },
+
+  "clear_inputs": { "message": "Clear inputs" },
+  "clear_clipboard": { "message": "Clear clipboard" },
+  "activate_vip": { "message": "Activate VIP" },
+
+  "website": { "message": "Website" },
+  "privacy": { "message": "Privacy" },
+  "support": { "message": "Support" },
+  "license": { "message": "License" }
+}

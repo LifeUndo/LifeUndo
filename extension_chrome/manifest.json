@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "GetLifeUndo",
+  "version": "0.3.7.32",
+  "default_locale": "en",
+  "description": "Ctrl+Z for online life: restore form text, clipboard history, and recently closed tabs. 100% local.",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GetLifeUndo"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "sessions",
+    "clipboardRead"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["contentScript.js"],
+    "run_at": "document_idle"
+  }],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [{
+    "resources": ["icons/*"],
+    "matches": ["<all_urls>"]
+  }]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

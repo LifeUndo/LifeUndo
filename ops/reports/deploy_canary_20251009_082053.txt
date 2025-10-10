@@ -1,0 +1,20 @@
+﻿node.exe : Vercel CLI 48.1.6
+C:\Users\Home\AppData\Roaming\npm\vercel.ps1:24 знак:5
++     & "node$exe"  "$basedir/node_modules/vercel/dist/vc.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Vercel CLI 48.1.6:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Retrieving project…
+Deploying alexs-projects-ef5d9b64/getlifeundo
+Uploading [--------------------] (0.0B/2.3MB)
+Uploading [=====---------------] (588.7KB/2.3MB)
+Uploading [==========----------] (1.1MB/2.3MB)
+Uploading [===============-----] (1.7MB/2.3MB)
+Uploading [====================] (2.3MB/2.3MB)
+Inspect: https://vercel.com/alexs-projects-ef5d9b64/getlifeundo/AxBRka2q6MZYjFfWMFjM9VhEHQ6R [8s]
+Production: https://getlifeundo-atqawgxau-alexs-projects-ef5d9b64.vercel.app [8s]
+Queued
+Building
+Completing
+https://getlifeundo-atqawgxau-alexs-projects-ef5d9b64.vercel.app

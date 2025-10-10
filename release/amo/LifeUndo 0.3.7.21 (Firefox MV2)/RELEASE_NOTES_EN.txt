@@ -1,0 +1,17 @@
+0.3.7.21 — Locale & UX polish
+
+• Options page now has language switch (EN/RU/HI/ZH/AR) and unified dark styling.
+• Popup links and "Activate VIP" open localized website pages.
+• Optional 7-day local reminder to check PRO/VIP (no telemetry, local-only).
+• Minor UI consistency fixes; baseline 0.3.7.20 logic intact.
+
+This release focuses on internationalization and user experience improvements while maintaining the core functionality of version 0.3.7.20. All data collection and core features remain unchanged.
+
+Key improvements:
+- Multi-language support for interface (5 languages)
+- Localized website links based on user's language preference
+- Gentle upgrade reminder after 7 days of usage (completely local)
+- Consistent dark theme styling across all UI elements
+- Better accessibility and user experience
+
+No changes to core functionality, data collection, or permissions.

@@ -1,0 +1,72 @@
+{
+  "hero_title": "Creator Partnership",
+  "hero_sub": "Earn with LifeUndo. Your audience gets −20% with code {code}.",
+  "cta_apply": "Apply as a Partner",
+  "cta_copy_code": "Copy promo code",
+  "why_title": "Why LifeUndo?",
+  "why_points": [
+    "Ctrl+Z for online life: restore forms, clipboard, closed tabs.",
+    "100% local. No telemetry.",
+    "Works on everyday websites."
+  ],
+  "plans_title": "Your audience gets",
+  "plans_points": [
+    "−20% on Pro/Team for 6 months",
+    "VIP Lifetime discount during campaigns"
+  ],
+  "you_get_title": "You get",
+  "you_get_points": [
+    "VIP + 5 Team seats",
+    "30% commission (first 6 months) or 20% LTV (12 months)",
+    "Personal landing and dashboard"
+  ],
+  "how_title": "How it works",
+  "how_steps": ["Get link & coupon", "Publish integration", "Track installs & payouts"],
+  "faq_title": "FAQ",
+  "faq_items": [
+    { "q": "Attribution?", "a": "Coupon at checkout + UTM (30-day cookie). Coupon has priority." },
+    { "q": "Payouts?", "a": "Monthly (RUB/USDT/Bank). Minimum 3,000 RUB to withdraw." },
+    { "q": "Rules?", "a": "No misleading claims or illegal content. Privacy first." }
+  ],
+  "legal_note": "Partner Offer and Program Policy apply.",
+  "contact": "Write us: partners@getlifeundo.com",
+
+  "apply_title": "Partner Application",
+  "apply_desc": "Tell us about your channel. We'll verify and activate your partner account.",
+  "apply_name": "Full name",
+  "apply_email": "Email",
+  "apply_country": "Country",
+  "apply_language": "Content language",
+  "apply_audience": "Subscribers / audience size",
+  "apply_platform": "Primary platform",
+  "apply_channel": "Channel URL",
+  "apply_desired_code": "Desired promo code",
+  "apply_terms": "I accept the Partner Offer and Program Policy",
+  "apply_submit": "Send application",
+  "apply_success": "Thanks! We've received your application.",
+  "apply_error": "Something went wrong. Please try again later.",
+
+  "dashboard_title": "Creator Dashboard",
+  "dashboard_metrics": "Metrics",
+  "metric_installs": "Installs",
+  "metric_purchases": "Purchases",
+  "metric_revenue": "Earnings (RUB)",
+  "metric_ctr": "CTR",
+  "codes_title": "Promo Codes",
+  "codes_active": "Active codes",
+  "codes_generate": "Generate new code",
+  "links_title": "Tracking Links",
+  "links_copy": "Copy UTM link",
+  "table_title": "Recent Purchases",
+  "th_date": "Date",
+  "th_plan": "Plan",
+  "th_amount": "Amount (RUB)",
+  "th_status": "Status",
+  "export_csv": "Export CSV",
+
+  "legal_offer": "Partner Offer",
+  "legal_policy": "Program Policy",
+
+  "fx_note": "Prices are displayed in your local currency for reference. Payment is processed in RUB.",
+  "rtl": "ltr"
+}

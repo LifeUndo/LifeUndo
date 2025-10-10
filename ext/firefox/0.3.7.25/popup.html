@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-left" data-i18n="app_title">GetLifeUndo</div>
+    <div class="header-center" id="version">v0.3.7.25</div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <button class="lang-btn" id="lang-btn">
+          🌐 <span id="current-lang">EN</span> ▼
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <div class="lang-option" data-lang="en" data-i18n="lang_en">English</div>
+          <div class="lang-option" data-lang="ru" data-i18n="lang_ru">Русский</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="free-badge" data-i18n="free_badge">Free Version</div>
+  
+  <div id="trial-banner" class="trial-banner" style="display: none;">
+    <div class="trial-banner-title" id="trial-title"></div>
+    <div class="trial-banner-body" id="trial-body"></div>
+    <button class="trial-btn" id="trial-btn" data-i18n="trial_btn_buy">Buy VIP</button>
+    <button class="trial-close" id="trial-close">×</button>
+  </div>
+  
+  <div id="env-warning">
+    <strong data-i18n="tip_protected_title">Tip:</strong> <span data-i18n="tip_protected_body">inputs/clipboard are unavailable on this page (browser policy). Try a regular website.</span>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="latest_inputs">Latest text inputs</div>
+    <div class="list" id="inputs">
+      <div class="empty">No text inputs yet</div>
+    </div>
+    <button class="clear-btn" id="clear-inputs" data-i18n="clear_btn">Clear</button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="clipboard_history">Clipboard history</div>
+    <div class="list" id="clipboard">
+      <div class="empty">No clipboard history</div>
+    </div>
+    <button class="clear-btn" id="clear-clipboard" data-i18n="clear_btn">Clear</button>
+  </div>
+  
+  <div class="section">
+    <div class="section-title" data-i18n="recently_closed">Recently closed tabs</div>
+    <div class="list" id="tabs">
+      <div class="empty">No recently closed tabs</div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <a href="#" data-k="website" data-i18n="links_website">Website</a>
+    <a href="#" data-k="privacy" data-i18n="links_privacy">Privacy</a>
+    <a href="#" data-k="support" data-i18n="links_support">Support</a>
+    <a href="#" data-k="license" data-i18n="links_license">License</a>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+0.3.7.19 — Firefox Hotfix
+
+• Fixed: Popup shows a clear hint on protected pages (about:/AMO) where inputs/clipboard are unavailable by design.
+• Improved: Stable local capture of form inputs and clipboard (password/hidden fields ignored).
+• Tech: Safer DOM in popup (no innerHTML), manifest tidy-up.
+
+Notes for reviewers:
+- MV2, default_locale=en, icons 16/32/48/128.
+- Content script listens to input/change/copy; excludes passwords; stores in browser.storage.local (local-only).
+- Permissions: storage, tabs, sessions (recently closed tabs), clipboardRead.
+- No telemetry or remote endpoints.
+
+
+

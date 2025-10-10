@@ -1,0 +1,6 @@
+﻿
+ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/ : Удаленный сервер возвратил ошибку: (404) Не найден.
+ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/ru : Удаленный сервер возвратил ошибку: (404) Не найден.
+ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/en : Удаленный сервер возвратил ошибку: (404) Не найден.
+ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/ru/features : Удаленный сервер возвратил ошибку: (404) Не найден.
+ERROR  https://getlifeundo-h04ihqvj6-alexs-projects-ef5d9b64.vercel.app/en/pricing : Удаленный сервер возвратил ошибку: (404) Не найден.

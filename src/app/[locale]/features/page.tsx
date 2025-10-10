@@ -1,206 +1,193 @@
-import Head from "next/head";
-import Link from "next/link";
+import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 
-export default function FeaturesPage({ params }: { params: { locale: string } }) {
-  const locale = params?.locale === 'en' ? 'en' : 'ru';
-  
-  if (locale === 'en') {
-    return (
-      <main className="mx-auto max-w-5xl px-4 py-12">
-        <header className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">GetLifeUndo Features</h1>
-          <p className="text-lg text-gray-300">
-            "Ctrl+Z" for online life: restore lost text, tabs, clipboard history,
-            quick notes and entire work sessions — neatly and safely.
-          </p>
-        </header>
+type Props = {
+  params: { locale: string };
+};
 
-        <section className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h2 className="text-xl font-semibold mb-3">What's included in <span className="text-indigo-300">Pro</span></h2>
-            <ul className="space-y-2 list-disc ml-5 text-gray-300">
-              <li>Clipboard history: up to <strong>50</strong> recent items with quick search</li>
-              <li>"Undo" for closed tabs and sessions</li>
-              <li>Auto-save input fields (forms, posts, comments)</li>
-              <li>Data export (JSON/CSV), local backup</li>
-              <li>Priority support</li>
-            </ul>
-          </div>
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'features' });
 
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h2 className="text-xl font-semibold mb-3">What's included in <span className="text-purple-300">VIP</span></h2>
-            <ul className="space-y-2 list-disc ml-5 text-gray-300">
-              <li>Everything from Pro</li>
-              <li>Unlimited tabs and clipboard history</li>
-              <li>Lifetime license (no monthly payments)</li>
-              <li>10% goes to GetLifeUndo Fund</li>
-              <li>Personal support</li>
-              <li>Early access to new features</li>
-            </ul>
-          </div>
-        </section>
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      canonical: `https://getlifeundo.com/${locale}/features`,
+      languages: {
+        'en': 'https://getlifeundo.com/en/features',
+        'ru': 'https://getlifeundo.com/ru/features',
+      },
+    },
+  };
+}
 
-        <section className="rounded-2xl p-6 bg-white/5 border border-white/10 mb-12">
-          <h2 className="text-xl font-semibold mb-3">How to get started</h2>
-          <ol className="list-decimal ml-5 space-y-2 text-gray-300">
-            <li>Install browser extension (Chrome / Firefox / Edge)</li>
-            <li>Open extension settings and activate license</li>
-            <li>Enable auto-save fields and clipboard history</li>
-            <li>Check "undo panel" on frequently used sites</li>
-          </ol>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
-              Download for Chrome
-            </a>
-            <a href="https://addons.mozilla.org/firefox/addon/lifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
-              For Firefox
-            </a>
-            <a href="#" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
-              For Edge
-            </a>
-            <Link href="/en/support" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 transition-colors">
-              Need help?
-            </Link>
-          </div>
-        </section>
+export default function FeaturesPage({ params: { locale } }: Props) {
+  const t = useTranslations('features');
 
-        <section className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-3">Privacy & Security</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>• 100% local storage — no cloud</li>
-              <li>• No telemetry or data collection</li>
-              <li>• Password fields are never saved</li>
-              <li>• Open source core components</li>
-            </ul>
-          </div>
+  const features = [
+    {
+      icon: '📝',
+      title: locale === 'ru' ? 'Восстановление ввода текста' : 'Text Input Recovery',
+      description: locale === 'ru' 
+        ? 'Автоматически сохраняет текст, который вы вводите в формы, текстовые поля и комментарии. Если страница перезагрузится или вы случайно закроете вкладку, ваш текст не будет потерян.'
+        : 'Automatically saves text you type in forms, text fields, and comments. If the page reloads or you accidentally close the tab, your text won\'t be lost.',
+      demo: 'Screenshot placeholder: Form with saved text'
+    },
+    {
+      icon: '📋',
+      title: locale === 'ru' ? 'История буфера обмена' : 'Clipboard History',
+      description: locale === 'ru' 
+        ? 'Сохраняет историю всех скопированных текстов и ссылок. Быстро находите и вставляйте ранее скопированный контент.'
+        : 'Saves history of all copied texts and links. Quickly find and paste previously copied content.',
+      demo: 'Screenshot placeholder: Clipboard history list'
+    },
+    {
+      icon: '🔗',
+      title: locale === 'ru' ? 'Недавно закрытые вкладки' : 'Recently Closed Tabs',
+      description: locale === 'ru' 
+        ? 'Показывает список недавно закрытых вкладок и окон. Быстро возвращайтесь к важным страницам.'
+        : 'Shows list of recently closed tabs and windows. Quickly return to important pages.',
+      demo: 'Screenshot placeholder: Recently closed tabs'
+    },
+    {
+      icon: '📸',
+      title: locale === 'ru' ? 'Быстрые скриншоты' : 'Quick Screenshots',
+      description: locale === 'ru' 
+        ? 'Делайте скриншоты текущей вкладки по кнопке или горячей клавише Ctrl+Shift+U. Все скриншоты сохраняются локально.'
+        : 'Take screenshots of current tab with button or hotkey Ctrl+Shift+U. All screenshots saved locally.',
+      demo: 'Screenshot placeholder: Screenshot interface'
+    },
+    {
+      icon: '🌐',
+      title: locale === 'ru' ? 'Локализация' : 'Localization',
+      description: locale === 'ru' 
+        ? 'Полная поддержка русского и английского языков. Интерфейс автоматически адаптируется под язык браузера.'
+        : 'Full support for Russian and English languages. Interface automatically adapts to browser language.',
+      demo: 'Screenshot placeholder: Language switcher'
+    },
+    {
+      icon: '🔒',
+      title: locale === 'ru' ? 'Приватность' : 'Privacy',
+      description: locale === 'ru' 
+        ? 'Все данные хранятся локально на вашем устройстве. Никаких облачных синхронизаций, никакой телеметрии.'
+        : 'All data stored locally on your device. No cloud sync, no telemetry.',
+      demo: 'Screenshot placeholder: Privacy settings'
+    }
+  ];
 
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-3">Compatibility</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>• Chrome 88+</li>
-              <li>• Firefox 85+</li>
-              <li>• Edge 88+</li>
-              <li>• Works on all websites</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="text-center">
-          <h2 className="text-2xl font-bold mb-6">Ready to try?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/en/downloads" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              Download Free
-            </Link>
-            <Link href="/en/pricing" className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              View Pricing
-            </Link>
-          </div>
-        </section>
-      </main>
-    );
-  }
-  
-  // Russian version (default)
   return (
-    <>
-      <Head>
-        <title>Возможности — GetLifeUndo</title>
-        <meta name="description" content="Что умеет GetLifeUndo: расширенная история буфера обмена, восстановление закрытых вкладок и сессий, экспорт, безопасность и ещё десятки удобных функций." />
-      </Head>
-
-      <main className="mx-auto max-w-5xl px-4 py-12">
-        <header className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Возможности GetLifeUndo</h1>
-          <p className="text-lg text-gray-300">
-            «Ctrl+Z» для онлайн-жизни: восстанавливайте потерянный текст, вкладки, историю буфера,
-            быстрые заметки и целые рабочие сессии — аккуратно и безопасно.
-          </p>
-        </header>
-
-        <section className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h2 className="text-xl font-semibold mb-3">Что входит в <span className="text-indigo-300">Pro</span></h2>
-            <ul className="space-y-2 list-disc ml-5 text-gray-300">
-              <li>История буфера обмена: до <strong>50</strong> последних элементов с быстрым поиском</li>
-              <li>«Отмена» для закрытых вкладок и сессий</li>
-              <li>Автосохранение полей ввода (формы, посты, комментарии)</li>
-              <li>Экспорт данных (JSON/CSV), локальный бэкап</li>
-              <li>Приоритетная поддержка</li>
-            </ul>
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              {t('title')}
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('description')}
+            </p>
           </div>
 
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h2 className="text-xl font-semibold mb-3">Что входит в <span className="text-purple-300">VIP</span></h2>
-            <ul className="space-y-2 list-disc ml-5 text-gray-300">
-              <li>Всё из Pro</li>
-              <li>Безлимитные вкладки и история буфера</li>
-              <li>Пожизненная лицензия (без ежемесячных платежей)</li>
-              <li>10% идёт в GetLifeUndo Fund</li>
-              <li>Персональная поддержка</li>
-              <li>Ранний доступ к новым функциям</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="rounded-2xl p-6 bg-white/5 border border-white/10 mb-12">
-          <h2 className="text-xl font-semibold mb-3">Как начать</h2>
-          <ol className="list-decimal ml-5 space-y-2 text-gray-300">
-            <li>Установите расширение для браузера (Chrome / Firefox / Edge)</li>
-            <li>Откройте настройки расширения и активируйте лицензию</li>
-            <li>Включите автосохранение полей и историю буфера</li>
-            <li>Проверьте «панель отмены» на часто используемых сайтах</li>
-          </ol>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#" className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" target="_blank" rel="noopener noreferrer">
-              Скачать для Chrome
-            </a>
-            <a href="https://addons.mozilla.org/firefox/addon/lifeundo/" className="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 transition-colors" target="_blank" rel="noopener noreferrer">
-              Для Firefox
-            </a>
-            <a href="#" className="px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
-              Для Edge
-            </a>
-            <Link href="/ru/support" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 transition-colors">
-              Нужна помощь?
-            </Link>
-          </div>
-        </section>
-
-        <section className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-3">Приватность и безопасность</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>• 100% локальное хранение — никаких облаков</li>
-              <li>• Никакой телеметрии и сбора данных</li>
-              <li>• Парольные поля никогда не сохраняются</li>
-              <li>• Открытый исходный код ключевых компонентов</li>
-            </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-lg p-8 border border-gray-200 hover:shadow-xl transition-shadow">
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                <p className="text-gray-600 mb-6">{feature.description}</p>
+                
+                <div className="bg-gray-100 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-2">Demo:</p>
+                  <div className="bg-white rounded border p-3 text-xs text-gray-400">
+                    {feature.demo}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="rounded-2xl p-6 bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-3">Совместимость</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>• Chrome 88+</li>
-              <li>• Firefox 85+</li>
-              <li>• Edge 88+</li>
-              <li>• Работает на всех сайтах</li>
-            </ul>
-          </div>
-        </section>
+          {/* Use Cases Section */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+              {locale === 'ru' ? 'Кейсы использования' : 'Use Cases'}
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-blue-50 rounded-lg p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {locale === 'ru' ? 'Формы и регистрация' : 'Forms and Registration'}
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  {locale === 'ru' 
+                    ? 'Заполняете длинную форму регистрации? GetLifeUndo сохранит ваш прогресс, даже если что-то пойдёт не так.'
+                    : 'Filling out a long registration form? GetLifeUndo saves your progress even if something goes wrong.'
+                  }
+                </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1">
+                  <li>{locale === 'ru' ? 'Автосохранение ввода' : 'Auto-save input'}</li>
+                  <li>{locale === 'ru' ? 'Восстановление после перезагрузки' : 'Recovery after reload'}</li>
+                  <li>{locale === 'ru' ? 'Защита от случайного закрытия' : 'Protection from accidental close'}</li>
+                </ul>
+              </div>
 
-        <section className="text-center">
-          <h2 className="text-2xl font-bold mb-6">Готовы попробовать?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/ru/downloads" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              Скачать бесплатно
-            </Link>
-            <Link href="/ru/pricing" className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              Посмотреть цены
-            </Link>
+              <div className="bg-green-50 rounded-lg p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {locale === 'ru' ? 'Исследования и работа' : 'Research and Work'}
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  {locale === 'ru' 
+                    ? 'Работаете с множеством вкладок и копируете информацию? GetLifeUndo поможет не потерять важные данные.'
+                    : 'Working with many tabs and copying information? GetLifeUndo helps you not lose important data.'
+                  }
+                </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1">
+                  <li>{locale === 'ru' ? 'История буфера обмена' : 'Clipboard history'}</li>
+                  <li>{locale === 'ru' ? 'Быстрый доступ к закрытым вкладкам' : 'Quick access to closed tabs'}</li>
+                  <li>{locale === 'ru' ? 'Скриншоты для документации' : 'Screenshots for documentation'}</li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </section>
-      </main>
-    </>
+
+          {/* Download CTA (direct links) */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+              {locale === 'ru' ? 'Скачать GetLifeUndo' : 'Download GetLifeUndo'}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+              <a
+                href="https://addons.mozilla.org/firefox/addon/lifeundo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-orange-600 hover:bg-orange-700 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                Firefox Add-ons
+              </a>
+              <a
+                href="https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-gray-700 hover:bg-gray-800 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                Windows (.exe)
+              </a>
+              <a
+                href="https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-gray-700 hover:bg-gray-800 text-white rounded-lg py-3 px-4 font-semibold"
+              >
+                macOS (.dmg)
+              </a>
+            </div>
+            <p className="text-center text-gray-500 text-sm mt-4">
+              {locale === 'ru'
+                ? 'Chrome/Edge/RuStore — скоро (кнопки скрыты до релиза)'
+                : 'Chrome/Edge/RuStore — coming soon (hidden until release)'}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

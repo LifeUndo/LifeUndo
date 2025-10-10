@@ -1,0 +1,7 @@
+0.3.7.23 (Final AMO-ready release)
+• Fixed AMO validation errors - added _locales/en/messages.json
+• Restored stable input/clipboard capture from 0.3.7.20
+• Added lightweight local auto-draft to reduce text loss risk
+• Kept protected-pages hint (about:/AMO)
+• All critical bugs from 0.3.7.22 resolved
+No telemetry. Local-only storage. Ready for AMO upload.

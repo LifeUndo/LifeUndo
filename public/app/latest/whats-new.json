@@ -1,10 +1,55 @@
 {
-  "version": "0.3.7.17",
-  "title": "Firefox Hotfix v4",
+  "version": "0.3.7.32",
+  "title": "Stable 0.3.7.32 — Sync & Polish",
   "items": [
-    "Fixed Firefox free mode activation",
-    "Enhanced content script reliability",
-    "Password field protection improved",
-    "Data collection now working in Firefox"
-  ]
+    "Extension: 0.3.7.32 manifests synced (Firefox/Chrome)",
+    "Website: Direct download links (AMO/Win/macOS) on Features/Downloads",
+    "Website: Footer cleanup, support email & Telegram unified",
+    "Website: Version badges & metadata updated"
+  ],
+  "highlights_en": [
+    "Extension: Perfect multi-language UI (EN/RU/HI/ZH/AR/KK/TR)",
+    "Extension: Real localized website links from popup",
+    "Website: Complete /license page with RTL support for Arabic"
+  ],
+  "highlights_ru": [
+    "Расширение: Идеальный многоязычный интерфейс (EN/RU/HI/ZH/AR/KK/TR)",
+    "Расширение: Реальные локализованные ссылки на сайт из попапа",
+    "Сайт: Полная страница /license с поддержкой RTL для арабского"
+  ],
+  "highlights_hi": [
+    "एक्सटेंशन: परफेक्ट मल्टी-लैंग्वेज UI (EN/RU/HI/ZH/AR)",
+    "एक्सटेंशन: पॉपअप से वास्तविक स्थानीयकृत वेबसाइट लिंक",
+    "वेबसाइट: अरबी के लिए RTL समर्थन के साथ पूर्ण /license पेज"
+  ],
+  "highlights_zh": [
+    "扩展：完美的多语言界面 (EN/RU/HI/ZH/AR)",
+    "扩展：从弹出窗口的真实本地化网站链接",
+    "网站：支持阿拉伯语RTL的完整/license页面"
+  ],
+  "highlights_ar": [
+    "الامتداد: واجهة متعددة اللغات مثالية (EN/RU/HI/ZH/AR/KK/TR)",
+    "الامتداد: روابط موقع محلية حقيقية من النافذة المنبثقة",
+    "الموقع: صفحة /license كاملة مع دعم RTL للعربية"
+  ],
+  "highlights_kk": [
+    "Кеңейту: Мінсіз көп тілдік интерфейс (EN/RU/HI/ZH/AR/KK/TR)",
+    "Кеңейту: Попаптан нақты локализацияланған веб-сайт сілтемелері",
+    "Веб-сайт: Араб тілі үшін RTL қолдауымен толық /license беті"
+  ],
+  "highlights_tr": [
+    "Uzantı: Mükemmel çok dilli arayüz (EN/RU/HI/ZH/AR/KK/TR)",
+    "Uzantı: Popup'tan gerçek yerelleştirilmiş web sitesi bağlantıları",
+    "Web Sitesi: Arapça için RTL desteği ile tam /license sayfası"
+  ],
+  "previous": {
+    "version": "0.3.7.20",
+    "title": "Stable baseline",
+    "items": [
+      "Firefox free mode with inputs/clipboard/tabs",
+      "Protected pages warning",
+      "Clean UI with clear buttons",
+      "Reliable data collection logic"
+    ]
+  }
 }

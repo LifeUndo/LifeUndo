@@ -56,3 +56,7 @@ CREATE INDEX IF NOT EXISTS idx_email_templates_tenant_id ON email_templates(tena
 
 
 
+
+
+
+

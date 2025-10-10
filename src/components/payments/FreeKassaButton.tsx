@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { fkPublic } from '@/lib/fk-public';
 import { FK_PLANS } from '@/lib/payments/fk-plans';
 import { type PlanId } from '@/config/plans';
+import { useTranslations } from '@/hooks/useTranslations';
 
 interface FreeKassaButtonProps {
   productId: PlanId | string; // Поддержка старых продуктов и новых планов
@@ -22,17 +23,18 @@ const PRODUCT_AMOUNTS: Record<string, number> = {
 export default function FreeKassaButton({ productId, email, className = '' }: FreeKassaButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslations();
   
-  // Показываем кнопку только если FreeKassa включен через ENV переменную
-  const isEnabled = process.env.NEXT_PUBLIC_FK_ENABLED === 'true';
+  // Показываем кнопку только если платежи не отключены через ENV переменную
+  const paymentsOn = (process.env.NEXT_PUBLIC_PAYMENTS || 'on') !== 'off';
   
-  if (!isEnabled) {
+  if (!paymentsOn) {
     return (
       <button 
         disabled 
         className={`w-full px-6 py-3 bg-gray-600 text-gray-400 rounded-lg cursor-not-allowed ${className}`}
       >
-        Оплата через FreeKassa — скоро
+        {t.payments.pay_via_fk} — soon
       </button>
     );
   }
@@ -40,7 +42,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
   const handlePayment = async () => {
     // Валидация productId
     if (!PRODUCT_AMOUNTS[productId]) {
-      setError('Неизвестный продукт');
+      setError(t.freekassa.invalidProduct);
       return;
     }
     
@@ -65,12 +67,13 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
         // Редирект на FreeKassa
         window.location.href = data.pay_url;
       } else {
-        setError(data.error === 'invalid_productId' ? 'Неизвестный тариф' : 
-                data.error === 'fk_not_configured' ? 'Платежи временно недоступны' :
-                data.error || 'Ошибка подписи');
+        setError(data.error === 'invalid_productId' ? t.freekassa.invalidProduct : 
+                data.error === 'fk_not_configured' ? t.freekassa.error :
+                data.error === 'signature_error' ? t.freekassa.signatureError :
+                data.error || t.freekassa.error);
       }
     } catch (err) {
-      setError('Ошибка соединения');
+      setError(t.freekassa.error);
       console.error('Payment error:', err);
     } finally {
       setIsLoading(false);
@@ -84,7 +87,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
         disabled={isLoading}
         className={`w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       >
-        {isLoading ? 'Создание платежа...' : 'Оплатить через FreeKassa'}
+        {isLoading ? t.freekassa.processing : t.payments.pay_via_fk}
       </button>
       
       {error && (
@@ -99,7 +102,7 @@ export default function FreeKassaButton({ productId, email, className = '' }: Fr
           alt="FreeKassa" 
           className="h-4 w-auto opacity-75"
         />
-        <span>Безопасная оплата</span>
+        <span>{t.payments.secure_fk}</span>
       </div>
     </div>
   );

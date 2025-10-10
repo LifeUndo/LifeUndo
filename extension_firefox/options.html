@@ -2,66 +2,381 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>LifeUndo — License & Settings</title>
-  <link rel="stylesheet" href="popup.css">
+  <title>GetLifeUndo — License & Settings</title>
   <style>
-    .page { max-width:720px; margin:24px auto; }
-    .card { background:#161616; border:1px solid #262626; border-radius:14px; padding:16px; margin-bottom:14px; }
-    .row { display:flex; gap:12px; align-items:center; }
-    .row > * { flex:1 }
-    #license{max-width:640px}
-    #btnImport{padding:8px 14px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;cursor:pointer}
-    .link{margin-left:8px;background:transparent;border:0;color:#2563eb;cursor:pointer}
-    #status{margin-top:10px}
-    .muted{color:#6b7280}
-    .ok{color:#065f46}
-    .err{color:#b91c1c}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a; color: #e5e5e5; line-height: 1.5;
+      padding: 20px; min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    .header { margin-bottom: 32px; }
+    .header h1 { font-size: 28px; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
+    .header p { color: #a3a3a3; font-size: 16px; }
+    
+    .card { 
+      background: #161616; border: 1px solid #262626; border-radius: 16px; 
+      padding: 24px; margin-bottom: 20px;
+    }
+    .card h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #ffffff; }
+    .card h3 { font-size: 18px; font-weight: 500; margin-bottom: 12px; color: #ffffff; }
+    
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #d4d4d4; }
+    .form-group select, .form-group input { 
+      width: 100%; padding: 12px 16px; background: #1f1f1f; border: 1px solid #404040;
+      border-radius: 8px; color: #ffffff; font-size: 14px;
+    }
+    .form-group select:focus, .form-group input:focus {
+      outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    .btn { 
+      padding: 12px 20px; border: none; border-radius: 8px; font-weight: 500; 
+      cursor: pointer; font-size: 14px; transition: all 0.2s;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-secondary { background: #374151; color: white; border: 1px solid #4b5563; }
+    .btn-secondary:hover { background: #4b5563; }
+    .btn-danger { background: #dc2626; color: white; }
+    .btn-danger:hover { background: #b91c1c; }
+    
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-group .btn { flex: 1; min-width: 120px; }
+    
+    .status { margin-top: 16px; padding: 12px; border-radius: 8px; font-size: 14px; }
+    .status.info { background: #1e3a8a; color: #dbeafe; }
+    .status.success { background: #065f46; color: #d1fae5; }
+    .status.error { background: #7f1d1d; color: #fecaca; }
+    
+    .links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .links a { 
+      color: #3b82f6; text-decoration: none; font-weight: 500;
+      padding: 8px 16px; border-radius: 6px; background: #1e3a8a;
+      transition: background 0.2s;
+    }
+    .links a:hover { background: #1e40af; }
+    
+    .muted { color: #a3a3a3; font-size: 14px; }
+    .demo-toggle { margin-bottom: 20px; }
+    .demo-toggle label { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .demo-toggle input[type="checkbox"] { 
+      width: 20px; height: 20px; accent-color: #3b82f6;
+    }
+    
+    #fileInput { display: none; }
   </style>
 </head>
 <body>
-  <div class="page">
-    <h2>LifeUndo Settings</h2>
-
-    <!-- ЕДИНСТВЕННЫЙ блок лицензии с локализацией -->
-    <section class="card" id="license">
-      <h2 data-i18n="lic_title">License</h2>
-      <p class="muted" data-i18n="lic_hint">Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).</p>
-
-      <input id="vipFile" type="file" accept=".lifelic,.json" hidden>
-      <div class="row">
-        <button id="btnChoose" data-i18n="btn_choose">Выбрать .lifelic</button>
-        <button id="btnImport" data-i18n="btn_import">Импортировать</button>
-        <button id="btnVerify" data-i18n="btn_verify">Проверить</button>
-        <button id="btnRemove" data-i18n="btn_remove">Удалить</button>
-      </div>
-
-      <div id="status" class="muted" data-i18n="status_empty">No license installed</div>
-      
-      <ul id="hints" class="muted">
-        <li>Скачайте файл .lifelic с сайта после покупки</li>
-        <li>Нажмите "Выбрать .lifelic" и выберите файл</li>
-        <li>Нажмите "Импортировать" для активации лицензии</li>
-      </ul>
-    </section>
-
-    <div class="card">
-      <div id="plan-line"></div>
-      <div id="trial-line" class="small" style="margin-top:6px"></div>
+  <div class="container">
+    <div class="header">
+      <h1 id="pageTitle">License & Settings</h1>
+      <p id="pageSubtitle">Configure GetLifeUndo extension preferences</p>
     </div>
 
+    <!-- Language Selection -->
     <div class="card">
-      <h3>Links</h3>
-      <div class="row">
-        <a href="https://lifeundo.ru" target="_blank">Website</a>
-        <a href="https://lifeundo.ru/privacy" target="_blank">Privacy</a>
-        <a href="https://addons.mozilla.org/en-US/firefox/addon/lifeundo/" target="_blank">Firefox Add-ons</a>
+      <h3 id="languageTitle">Language</h3>
+      <div class="form-group">
+        <label for="langSelect" id="languageLabel">Select interface language</label>
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="hi">हिन्दी</option>
+          <option value="zh">中文</option>
+          <option value="ar">العربية</option>
+          <option value="kk">Қазақша</option>
+          <option value="tr">Türkçe</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Demo VIP Toggle -->
+    <div class="card">
+      <h3 id="demoTitle">Demo Mode</h3>
+      <div class="demo-toggle">
+        <label>
+          <input type="checkbox" id="demoToggle">
+          <span id="demoLabel">Toggle VIP (demo)</span>
+        </label>
+      </div>
+      <p class="muted" id="demoHint">Enable VIP features for testing without a license</p>
+    </div>
+
+    <!-- License Management -->
+    <div class="card">
+      <h2 id="licenseTitle">License</h2>
+      <p class="muted" id="licenseHint">Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).</p>
+      
+      <input type="file" id="fileInput" accept=".lifelic,.json">
+      
+      <div class="btn-group">
+        <button class="btn btn-secondary" id="btnChoose" data-i18n="btn_choose">Choose .lifelic</button>
+        <button class="btn btn-primary" id="btnImport" data-i18n="btn_import">Import</button>
+        <button class="btn btn-secondary" id="btnVerify" data-i18n="btn_verify">Verify</button>
+        <button class="btn btn-danger" id="btnRemove" data-i18n="btn_remove">Remove</button>
+      </div>
+      
+      <div id="status" class="status info" id="statusText">No license installed</div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="card">
+      <h3 id="linksTitle">Quick Links</h3>
+      <div class="links">
+        <a href="#" id="linkPricing" target="_blank">Open Pricing</a>
+        <a href="#" id="linkSupport" target="_blank">Open Support</a>
+        <a href="#" id="linkWebsite" target="_blank">Website</a>
+        <a href="#" id="linkPrivacy" target="_blank">Privacy</a>
       </div>
     </div>
   </div>
 
-  <script src="i18n.js"></script>
-  <script src="license.js"></script>
-  <script src="shared/licenseCore.js"></script>
-  <script src="options.js"></script>
+  <script>
+    // Встроенный словарь переводов
+    const STR = {
+      en: {
+        title: "License & Settings",
+        subtitle: "Configure GetLifeUndo extension preferences",
+        language: "Language",
+        languageLabel: "Select interface language",
+        demo: "Demo Mode",
+        demoLabel: "Toggle VIP (demo)",
+        demoHint: "Enable VIP features for testing without a license",
+        license: "License",
+        licenseHint: "Import a .lifelic file. Verification is offline (ECDSA P-256 / SHA-256).",
+        links: "Quick Links",
+        btn_choose: "Choose .lifelic",
+        btn_import: "Import",
+        btn_verify: "Verify", 
+        btn_remove: "Remove",
+        status_empty: "No license installed",
+        pricing: "Open Pricing",
+        support: "Open Support",
+        website: "Website",
+        privacy: "Privacy"
+      },
+      ru: {
+        title: "Лицензия и настройки",
+        subtitle: "Настройки расширения GetLifeUndo",
+        language: "Язык",
+        languageLabel: "Выберите язык интерфейса",
+        demo: "Демо режим",
+        demoLabel: "Переключить VIP (демо)",
+        demoHint: "Включить VIP функции для тестирования без лицензии",
+        license: "Лицензия",
+        licenseHint: "Импорт файла .lifelic. Проверка офлайн (ECDSA P-256 / SHA-256).",
+        links: "Быстрые ссылки",
+        btn_choose: "Выбрать .lifelic",
+        btn_import: "Импортировать",
+        btn_verify: "Проверить",
+        btn_remove: "Удалить",
+        status_empty: "Лицензия не установлена",
+        pricing: "Открыть тарифы",
+        support: "Открыть поддержку",
+        website: "Сайт",
+        privacy: "Конфиденциальность"
+      },
+      hi: {
+        title: "लाइसेंस और सेटिंग्स",
+        subtitle: "GetLifeUndo एक्सटेंशन वरीयताएं कॉन्फ़िगर करें",
+        language: "भाषा",
+        languageLabel: "इंटरफ़ेस भाषा चुनें",
+        demo: "डेमो मोड",
+        demoLabel: "VIP टॉगल (डेमो)",
+        demoHint: "लाइसेंस के बिना परीक्षण के लिए VIP सुविधाएं सक्षम करें",
+        license: "लाइसेंस",
+        licenseHint: ".lifelic फ़ाइल आयात करें। सत्यापन ऑफ़लाइन (ECDSA P-256 / SHA-256)।",
+        links: "त्वरित लिंक",
+        btn_choose: ".lifelic चुनें",
+        btn_import: "आयात करें",
+        btn_verify: "सत्यापित करें",
+        btn_remove: "हटाएं",
+        status_empty: "कोई लाइसेंस स्थापित नहीं",
+        pricing: "मूल्य निर्धारण खोलें",
+        support: "सहायता खोलें",
+        website: "वेबसाइट",
+        privacy: "गोपनीयता"
+      },
+      zh: {
+        title: "许可证和设置",
+        subtitle: "配置GetLifeUndo扩展首选项",
+        language: "语言",
+        languageLabel: "选择界面语言",
+        demo: "演示模式",
+        demoLabel: "切换VIP（演示）",
+        demoHint: "在没有许可证的情况下启用VIP功能进行测试",
+        license: "许可证",
+        licenseHint: "导入.lifelic文件。验证离线（ECDSA P-256 / SHA-256）。",
+        links: "快速链接",
+        btn_choose: "选择.lifelic",
+        btn_import: "导入",
+        btn_verify: "验证",
+        btn_remove: "删除",
+        status_empty: "未安装许可证",
+        pricing: "打开定价",
+        support: "打开支持",
+        website: "网站",
+        privacy: "隐私"
+      },
+      ar: {
+        title: "الترخيص والإعدادات",
+        subtitle: "تكوين تفضيلات امتداد GetLifeUndo",
+        language: "اللغة",
+        languageLabel: "اختر لغة الواجهة",
+        demo: "وضع التجربة",
+        demoLabel: "تبديل VIP (تجربة)",
+        demoHint: "تمكين ميزات VIP للاختبار بدون ترخيص",
+        license: "الترخيص",
+        licenseHint: "استيراد ملف .lifelic. التحقق غير متصل (ECDSA P-256 / SHA-256).",
+        links: "روابط سريعة",
+        btn_choose: "اختر .lifelic",
+        btn_import: "استيراد",
+        btn_verify: "تحقق",
+        btn_remove: "حذف",
+        status_empty: "لا يوجد ترخيص مثبت",
+        pricing: "فتح التسعير",
+        support: "فتح الدعم",
+        website: "الموقع",
+        privacy: "الخصوصية"
+      },
+      kk: {
+        title: "Лицензия және баптаулар",
+        subtitle: "GetLifeUndo кеңейтуін баптау",
+        language: "Тіл",
+        languageLabel: "Интерфейс тілін таңдаңыз",
+        demo: "Демо режим",
+        demoLabel: "VIP ауыстыру (демо)",
+        demoHint: "Лицензиясыз тестілеу үшін VIP мүмкіндіктерін қосу",
+        license: "Лицензия",
+        licenseHint: ".lifelic файлын импорттау. Тексеру офлайн (ECDSA P-256 / SHA-256).",
+        links: "Жылдам сілтемелер",
+        btn_choose: ".lifelic таңдау",
+        btn_import: "Импорттау",
+        btn_verify: "Тексеру",
+        btn_remove: "Жою",
+        status_empty: "Лицензия орнатылмаған",
+        pricing: "Бағаларды ашу",
+        support: "Қолдауды ашу",
+        website: "Веб-сайт",
+        privacy: "Құпиялылық"
+      },
+      tr: {
+        title: "Lisans ve Ayarlar",
+        subtitle: "GetLifeUndo uzantısı tercihlerini yapılandır",
+        language: "Dil",
+        languageLabel: "Arayüz dilini seç",
+        demo: "Demo Modu",
+        demoLabel: "VIP değiştir (demo)",
+        demoHint: "Lisans olmadan test etmek için VIP özelliklerini etkinleştir",
+        license: "Lisans",
+        licenseHint: ".lifelic dosyasını içe aktar. Doğrulama çevrimdışı (ECDSA P-256 / SHA-256).",
+        links: "Hızlı Bağlantılar",
+        btn_choose: ".lifelic seç",
+        btn_import: "İçe Aktar",
+        btn_verify: "Doğrula",
+        btn_remove: "Kaldır",
+        status_empty: "Lisans yüklü değil",
+        pricing: "Fiyatlandırmayı Aç",
+        support: "Desteği Aç",
+        website: "Web Sitesi",
+        privacy: "Gizlilik"
+      }
+    };
+
+    let currentLocale = 'en';
+
+    // Получить текущую локаль
+    async function getLocale() {
+      try {
+        const { uiLocale } = await browser.storage.local.get('uiLocale');
+        if (uiLocale && STR[uiLocale]) return uiLocale;
+      } catch (e) {}
+      const l = (navigator.language || 'en').slice(0, 2).toLowerCase();
+      return ['en', 'ru', 'hi', 'zh', 'ar', 'kk', 'tr'].includes(l) ? l : 'en';
+    }
+
+    // Применить переводы
+    function applyTranslations(locale) {
+      currentLocale = locale;
+      const t = STR[locale];
+      
+      document.getElementById('pageTitle').textContent = t.title;
+      document.getElementById('pageSubtitle').textContent = t.subtitle;
+      document.getElementById('languageTitle').textContent = t.language;
+      document.getElementById('languageLabel').textContent = t.languageLabel;
+      document.getElementById('demoTitle').textContent = t.demo;
+      document.getElementById('demoLabel').textContent = t.demoLabel;
+      document.getElementById('demoHint').textContent = t.demoHint;
+      document.getElementById('licenseTitle').textContent = t.license;
+      document.getElementById('licenseHint').textContent = t.licenseHint;
+      document.getElementById('linksTitle').textContent = t.links;
+      document.getElementById('btnChoose').textContent = t.btn_choose;
+      document.getElementById('btnImport').textContent = t.btn_import;
+      document.getElementById('btnVerify').textContent = t.btn_verify;
+      document.getElementById('btnRemove').textContent = t.btn_remove;
+      document.getElementById('linkPricing').textContent = t.pricing;
+      document.getElementById('linkSupport').textContent = t.support;
+      document.getElementById('linkWebsite').textContent = t.website;
+      document.getElementById('linkPrivacy').textContent = t.privacy;
+      
+      // Обновить ссылки
+      document.getElementById('linkPricing').href = `https://getlifeundo.com/${locale}/pricing`;
+      document.getElementById('linkSupport').href = `https://getlifeundo.com/${locale}/support`;
+      document.getElementById('linkWebsite').href = `https://getlifeundo.com/${locale}`;
+      document.getElementById('linkPrivacy').href = `https://getlifeundo.com/${locale}/privacy`;
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Установить текущую локаль
+      const locale = await getLocale();
+      document.getElementById('langSelect').value = locale;
+      applyTranslations(locale);
+
+      // Обработчик смены языка (согласно ТЗ)
+      const SUP = ['en','ru','hi','zh','ar','kk','tr'];
+      document.getElementById('langSelect').addEventListener('change', async (e) => {
+        const newLocale = e.target.value;
+        if (SUP.includes(newLocale)) {
+          await browser.storage.local.set({ uiLocale: newLocale });
+          location.reload();
+        }
+      });
+
+      // Демо режим
+      const { demoMode } = await browser.storage.local.get('demoMode');
+      document.getElementById('demoToggle').checked = demoMode || false;
+      
+      document.getElementById('demoToggle').addEventListener('change', async (e) => {
+        await browser.storage.local.set({ demoMode: e.target.checked });
+      });
+
+      // Лицензия (базовая функциональность)
+      document.getElementById('btnChoose').addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+      });
+
+      document.getElementById('fileInput').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          document.getElementById('status').textContent = `Selected: ${file.name}`;
+          document.getElementById('status').className = 'status info';
+        }
+      });
+
+      // Простая проверка лицензии
+      const { license } = await browser.storage.local.get('license');
+      if (license) {
+        document.getElementById('status').textContent = 'License active';
+        document.getElementById('status').className = 'status success';
+      } else {
+        document.getElementById('status').textContent = STR[currentLocale].status_empty;
+        document.getElementById('status').className = 'status info';
+      }
+    });
+  </script>
 </body>
 </html>

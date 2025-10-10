@@ -1,0 +1,8 @@
+0.3.7.24 (Enhanced UI + Better Capture)
+• Added Russian/English localization with language switcher
+• Enhanced text capture: input, keyup, change, paste, contenteditable
+• Improved filtering: no more file paths, passwords, or fakepath entries
+• Localized protected page warnings
+• Better junk value filtering
+• Maintained stable 0.3.7.23 core functionality
+No telemetry. Local-only storage. Ready for testing.

@@ -1,0 +1,15 @@
+{
+  "title": {"message": "GetLifeUndo"},
+  "latest": {"message": "Latest text inputs"},
+  "clipboard": {"message": "Clipboard history"},
+  "recentTabs": {"message": "Recently closed tabs"},
+  "clear": {"message": "Clear"},
+  "tip_protected": {"message": "Tip: inputs/clipboard are unavailable on this page (protected by browser policy). Try on a regular website."},
+  "website": {"message": "Website"},
+  "privacy": {"message": "Privacy"},
+  "support": {"message": "Support"},
+  "license": {"message": "License"},
+  "lang": {"message": "Language"},
+  "lang_en": {"message": "English"},
+  "lang_ru": {"message": "Русский"}
+}

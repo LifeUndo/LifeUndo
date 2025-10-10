@@ -1,6 +1,6 @@
 {
   "name": "lifeundo-ru",
-  "version": "0.3.7.17",
+  "version": "0.3.7.32",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,6 +16,9 @@
     "build:ff": "node scripts/build-firefox.js",
     "audit": "node scripts/audit-structure.js",
     "legal:sha": "node scripts/legal-sha.mjs",
+    "lint:i18n": "grep -RInE '[А-Яа-я]' src/app | grep -v messages || true",
+    "check:links": "echo 'Link checking not implemented yet'",
+    "crawl": "node scripts/crawl.js",
     "pre-release": "powershell -ExecutionPolicy Bypass -File scripts/release/pre_release_check.ps1"
   },
   "dependencies": {
@@ -25,6 +28,7 @@
     "crypto-js": "^4.2.0",
     "drizzle-orm": "^0.44.5",
     "next": "14.2.33",
+    "next-intl": "^4.3.11",
     "nodemailer": "^7.0.6",
     "otplib": "^12.0.1",
     "pg": "^8.16.3",
@@ -32,7 +36,8 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "recharts": "^3.2.1",
-    "swr": "^2.3.6"
+    "swr": "^2.3.6",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",

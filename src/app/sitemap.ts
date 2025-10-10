@@ -2,51 +2,67 @@ import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getlifeundo.com';
-  return [
-    // Russian pages
-    { url: `${base}/ru`, changeFrequency: 'weekly', priority: 1 },
-    { url: `${base}/ru/downloads`, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${base}/ru/features`, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${base}/ru/pricing`, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${base}/ru/use-cases`, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/ru/support`, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${base}/ru/fund`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/ru/fund/apply`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/ru/contacts`, changeFrequency: 'yearly', priority: 0.5 },
-    { url: `${base}/ru/privacy`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/terms`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/developers`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/ru/partners`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/ru/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/legal/contract`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/legal/dpa`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/legal/pdp`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/ru/legal/downloads`, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${base}/ru/news/mobile-ios`, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${base}/ru/news/mobile-android`, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${base}/ru/news/rustore`, changeFrequency: 'monthly', priority: 0.4 },
-    
-    // English pages
-    { url: `${base}/en`, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${base}/en/downloads`, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${base}/en/features`, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${base}/en/pricing`, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${base}/en/support`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/en/privacy`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/terms`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/developers`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/en/partners`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${base}/en/legal/offer`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/legal/sla`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/legal/contract`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/legal/dpa`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/legal/pdp`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${base}/en/legal/downloads`, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${base}/en/news/mobile-ios`, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${base}/en/news/mobile-android`, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${base}/en/news/rustore`, changeFrequency: 'monthly', priority: 0.4 },
+  const locales = ['ru', 'en']; // Only RU and EN for now
+  
+  const pages = [
+    { path: '', priority: 1.0, changeFrequency: 'daily' }, // home
+    { path: '/about', priority: 0.4, changeFrequency: 'monthly' },
+    { path: '/features', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/pricing', priority: 0.6, changeFrequency: 'monthly' },
+    { path: '/downloads', priority: 0.8, changeFrequency: 'weekly' },
+    { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
+    { path: '/partner', priority: 0.6, changeFrequency: 'monthly' },
+    { path: '/creator/apply', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/support', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/contact', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/license', priority: 0.3, changeFrequency: 'yearly' },
   ];
+
+  // Blog posts
+  const blogPosts = [
+    'lifeundo-037x-golden-whats-inside',
+    'roadmap-desktop-10-mvp'
+  ];
+  
+  const sitemap: MetadataRoute.Sitemap = [];
+  
+  // Add all locales and pages
+  locales.forEach(locale => {
+    pages.forEach(page => {
+      const url = page.path ? `${base}/${locale}${page.path}` : `${base}/${locale}`;
+      sitemap.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: page.changeFrequency as any,
+        priority: page.priority,
+        alternates: {
+          languages: {
+            ru: `${base}/ru${page.path}`,
+            en: `${base}/en${page.path}`,
+          },
+        },
+      });
+    });
+
+    // Add blog posts
+    blogPosts.forEach(postSlug => {
+      const url = `${base}/${locale}/blog/${postSlug}`;
+      sitemap.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as any,
+        priority: 0.6,
+        alternates: {
+          languages: {
+            ru: `${base}/ru/blog/${postSlug}`,
+            en: `${base}/en/blog/${postSlug}`,
+          },
+        },
+      });
+    });
+  });
+  
+  return sitemap;
 }
 
 

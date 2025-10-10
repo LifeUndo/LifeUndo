@@ -1,0 +1,20 @@
+{
+  "appName": { "message": "GetLifeUndo" },
+  "appDescription": { "message": "Восстанавливает потерянный текст форм, историю буфера и закрытые вкладки. 100% локально, без трекинга." },
+
+  "popup_title": { "message": "GetLifeUndo" },
+  "tip_protected": { "message": "Подсказка: сбор ввода/буфера недоступен на этой странице (about:/AMO/и т.п.). Попробуйте обычный сайт." },
+
+  "latest_inputs": { "message": "Последние текстовые вводы" },
+  "clipboard_history": { "message": "История буфера обмена" },
+  "recently_closed_tabs": { "message": "Недавно закрытые вкладки" },
+
+  "clear_inputs": { "message": "Очистить вводы" },
+  "clear_clipboard": { "message": "Очистить буфер" },
+  "activate_vip": { "message": "Активировать VIP" },
+
+  "website": { "message": "Сайт" },
+  "privacy": { "message": "Конфиденциальность" },
+  "support": { "message": "Поддержка" },
+  "license": { "message": "Лицензия" }
+}

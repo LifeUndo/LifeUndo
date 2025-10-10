@@ -1,0 +1,8 @@
+0.3.7.28 (FINAL+3)
+• Fix full EN UI (headers, sections, buttons, empty states, footer links)
+• Remove all hardcoded strings, complete i18n implementation
+• Localized links and date formatting (en-US/ru-RU)
+• Centralized renderAll() with full re-render on language change
+• Anti-regression checks: no Cyrillic in main files
+• Stability and polish
+No telemetry. Local-only storage. Ready for production.

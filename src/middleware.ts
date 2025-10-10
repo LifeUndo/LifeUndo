@@ -1,29 +1,28 @@
-// src/middleware.ts
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+const locales = ["ru", "en"];
+const defaultLocale = "ru";
 
-  // пропускаем статику и API
-  if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
-    pathname.includes('.')
-  ) return NextResponse.next();
+// Игнорируем файлы, _next и api
+const IGNORE = /^\/(_next|api)(\/|$)|\.[a-z0-9]+$/i;
 
-  // Корень -> /ru
-  if (pathname === '/') {
-    const url = req.nextUrl.clone();
-    url.pathname = '/ru';
-    return NextResponse.redirect(url, 308);
-  }
+export function middleware(req: Request) {
+  const url = new URL(req.url);
+  const { pathname } = url;
 
-  // Всё остальное не трогаем
-  return NextResponse.next();
+  if (IGNORE.test(pathname)) return;
+
+  // Первый сегмент пути
+  const seg = pathname.split("/")[1];
+
+  // Если путь уже с локалью — пропускаем
+  if (locales.includes(seg)) return;
+
+  // Иначе подставляем defaultLocale
+  url.pathname = `/${defaultLocale}${pathname}`;
+  return NextResponse.rewrite(url); // rewrite, чтобы не менять адрес в адресной строке
 }
 
-// Обрабатываем только корень и «всё, кроме статики»
 export const config = {
-  matcher: ['/', '/((?!_next|api|.*\\..*).*)'],
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };

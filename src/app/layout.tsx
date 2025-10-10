@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "operatingSystem": "Windows, macOS, Linux",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
             "url": "https://getlifeundo.com/ru",
-            "softwareVersion": "0.3.7.12",
+            "softwareVersion": "0.3.7.32",
             "description": "Restore form text, closed tabs and clipboard history. 100% local, private."
           })}} />
       </head>

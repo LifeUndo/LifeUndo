@@ -1,0 +1,4 @@
+Restore lost form text, clipboard history, and closed tabs. 100% local, no tracking.
+
+
+

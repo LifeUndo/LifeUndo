@@ -1,0 +1,4 @@
+Ctrl+Z for online life: restore form text, clipboard history, and recently closed tabs. 100% local, no telemetry.
+
+
+

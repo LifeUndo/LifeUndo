@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "LifeUndo"
+  },
+  "appDesc": {
+    "message": "Restore form text, clipboard history and closed tabs. Local only."
+  }
+}

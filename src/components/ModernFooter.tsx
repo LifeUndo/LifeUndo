@@ -98,7 +98,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
               <img src="/brand/getlifeundo-round.png" alt="GetLifeUndo" className="h-8 w-8 rounded-full" />
               <div>
                 <p className="text-gray-400 text-sm max-w-md">
-                  Ctrl+Z для вашей онлайн-жизни. Восстанавливаем случайно удаленные данные на любых устройствах в любой точке мира.
+                  {t.footer.description}
                 </p>
                 <div className="flex items-center gap-4 mt-2">
                   <img 
@@ -107,7 +107,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
                     className="h-5 opacity-75 hover:opacity-100 transition-opacity"
                   />
                   <span className="text-xs text-gray-500">
-                    Оплата через FreeKassa
+                    {t.footer.paymentNote}
                   </span>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function ModernFooter({ locale = 'ru' }: ModernFooterProps) {
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8">
           <p className="text-gray-400 text-sm text-center">
-            © 2024 GetLifeUndo. Все права защищены.
+            {t.footer.copyright}
           </p>
         </div>
       </div>

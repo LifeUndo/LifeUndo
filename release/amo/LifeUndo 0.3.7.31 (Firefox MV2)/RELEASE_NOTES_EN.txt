@@ -1,0 +1,9 @@
+0.3.7.31 (STABLE FIX)
+• Based on stable 0.3.7.29 that worked correctly
+• Fixed undefined entries in Recently Closed tabs
+• Removed debug bar that was obstructing view
+• Restored correct section order (Latest Inputs first)
+• Simplified language switching logic
+• AMO-compliant square icons
+• Stability and reliability improvements
+No telemetry. Local-only storage. Ready for production.

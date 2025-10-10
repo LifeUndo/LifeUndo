@@ -1,0 +1,8 @@
+0.3.7.29 (FINAL+4)
+• Fix critical i18n bug: language switching now works correctly
+• setLang() now calls applyI18n() immediately after setting language
+• EN/RU toggle properly updates entire UI (headers, sections, buttons, empty states, footer links)
+• Remove duplicate applyI18n() calls for better performance
+• Debug logging disabled for production
+• Stability and polish
+No telemetry. Local-only storage. Ready for production.
