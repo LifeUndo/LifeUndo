@@ -11,6 +11,14 @@ export default function PricingPage() {
       <header className="text-center mb-12">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Тарифы</h1>
         <p className="text-lg text-gray-300">Выберите подходящий тариф. Все платные планы с 7-дневным пробным периодом.</p>
+        {/* Trial Callout */}
+        <div className="mt-6 inline-flex items-center gap-3 rounded-xl border border-green-400/40 bg-green-500/10 px-4 py-3 text-left">
+          <div className="h-2.5 w-2.5 rounded-full bg-green-400 animate-pulse" />
+          <div>
+            <div className="font-semibold text-white">7 дней бесплатно</div>
+            <div className="text-sm text-white/80">Автопродление, можно отменить в 1 клик до даты списания.</div>
+          </div>
+        </div>
       </header>
 
       <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -49,13 +57,16 @@ export default function PricingPage() {
         />
       </div>
 
-      <section className="max-w-md mx-auto mb-12">
-        <div className="glass-card p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Starter Bundle</h3>
-          <p className="text-gray-300 mb-2">6 месяцев Pro за 3 000 ₽</p>
-          <p className="text-sm text-gray-400 mb-6">Стабильнее проходит у провайдера. Выгода 594 ₽ за пакет!</p>
-          <FreeKassaButton plan="starter_6m" />
-          <p className="text-xs text-gray-500 mt-3">+ бонусный флаг starter_bonus на 6 месяцев</p>
+      {/* Payment Highlight */}
+      <section className="max-w-2xl mx-auto mb-12">
+        <div className="rounded-xl bg-gradient-to-r from-purple-700/40 to-blue-700/40 border border-white/10 p-6 text-center">
+          <h3 className="text-xl font-semibold mb-2">Оплатить через FreeKassa</h3>
+          <p className="text-sm text-white/80 mb-4">Быстрый и безопасный способ оплаты. Начните 7‑дневный trial — метод оплаты потребуется сейчас, автосписание после окончания пробного периода.</p>
+          <div className="flex items-center justify-center gap-3">
+            <FreeKassaButton plan="pro_month" />
+            <FreeKassaButton plan="vip_lifetime" />
+            <FreeKassaButton plan="team_5" />
+          </div>
         </div>
       </section>
 
