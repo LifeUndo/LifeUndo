@@ -1,82 +1,34 @@
-﻿/** @type {import('next').NextConfig} */
+﻿/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-
-  // Не ставить output:'export'
-  // experimental: {
-  //   typedRoutes: true,
-  // },
-
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
+  },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      { protocol: 'https', hostname: 'cdn.freekassa.net' },
-    ],
-  },
-
-  async redirects() {
-    return [
-      // Основной редирект корня
-      { source: '/', destination: '/ru', permanent: false },
-
-      // Хостовые редиректы .ru -> .com
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'lifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.lifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'getlifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.getlifeundo.ru' }],
-        destination: 'https://getlifeundo.com/ru/:path*',
-        permanent: true,
-      },
-    ];
-  },
-
   async headers() {
-    const cspValue = [
-      "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${process.env.VERCEL_ENV === 'production' ? '' : " 'unsafe-eval'"} https://www.google-analytics.com https://www.googletagmanager.com`,
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: https: https://cdn.freekassa.net",
-      "connect-src 'self' https://api.getlifeundo.com https://*.getlifeundo.com https://*.lifeundo.ru",
-      "frame-ancestors 'self' https://*.getlifeundo.com https://*.lifeundo.ru",
-    ].join('; ');
+    const csp = [
+      "default-src 'self';",
+      "img-src 'self' https: data:;",
+      "style-src 'self' 'unsafe-inline';",
+      "script-src 'self' https://*.vercel-insights.com;",
+      "connect-src 'self' https://api.fk.money https://pay.fk.money https://*.vercel-insights.com;",
+      "frame-src https://pay.fk.money;",
+      "font-src 'self' data:;",
+      "object-src 'none';",
+      "base-uri 'self';",
+      "form-action 'self';",
+      "frame-ancestors 'none';",
+      "upgrade-insecure-requests;"
+    ].join(" ");
+
     return [
       {
-        source: "/ok",
+        // распространяем CSP на весь сайт (и ru/en)
+        source: "/(.*)",
         headers: [
-          { key: "Cache-Control", value: "no-store, no-cache, must-revalidate" },
-          { key: "Pragma", value: "no-cache" },
-          { key: "Expires", value: "0" },
-        ],
-      },
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
-          { key: 'Content-Security-Policy', value: cspValue },
+          { key: "Content-Security-Policy", value: csp }
         ],
       },
     ];
