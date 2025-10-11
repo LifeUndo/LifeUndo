@@ -31,7 +31,7 @@ export default function ModernFooter() {
   const t = useI18n();
   const pathname = usePathname() || "/";
   const seg = pathname.split("/").filter(Boolean)[0] || "ru";
-  const withLocale = (p: string) => / ;
+  const withLocale = (p: string) => `/${seg}${p}`;
 
   const product = [
     { href: withLocale("/developers"), label: t("footer.developers") },
@@ -44,7 +44,6 @@ export default function ModernFooter() {
     { href: withLocale("/fund"), label: t("footer.fund") },
     { href: withLocale("/support"), label: t("footer.support") },
     { href: withLocale("/privacy"), label: t("footer.privacy") },
-    // /contacts удалён, чтобы не вести на 404
   ];
 
   const legal = [

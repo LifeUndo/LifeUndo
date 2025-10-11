@@ -6,7 +6,7 @@ async function getVersion() {
     const h = headers();
     const host = h.get("x-forwarded-host") ?? h.get("host");
     const proto = h.get("x-forwarded-proto") ?? "https";
-    const url = ${proto}://System.Management.Automation.Internal.Host.InternalHost/version.json;
+    const url = `${proto}://${host}/version.json`;
     const r = await fetch(url, { cache: "no-store" });
     if (!r.ok) return null;
     return (await r.json()) as { version: string; timestamp?: string } | null;
