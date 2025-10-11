@@ -1,10 +1,7 @@
 import React from 'react';
-import { usePathname } from 'next/navigation';
 
-export default function DevelopersPage() {
-  const pathname = usePathname() || '/ru';
-  const seg = pathname.split('/').filter(Boolean)[0] || 'ru';
-  const isEN = seg === 'en';
+export default function DevelopersPage({ params }: { params: { locale: string } }) {
+  const isEN = params?.locale === 'en';
 
   const t = {
     title: isEN ? 'GetLifeUndo API (beta)' : 'API GetLifeUndo (beta)',
