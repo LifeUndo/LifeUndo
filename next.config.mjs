@@ -1,25 +1,28 @@
 ﻿/** @type {import('next').NextConfig} */
-const nextConfig = {\r\n  typescript: { ignoreBuildErrors: true },\r\n  eslint: { ignoreDuringBuilds: true },
+const nextConfig = {
   reactStrictMode: true,
-  // Р’РђР–РќРћ: РќР• СЃС‚Р°РІРёС‚СЊ output:'export'
+
+  // Не ставить output:'export'
   // experimental: {
   //   typedRoutes: true,
   // },
+
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.freekassa.net',
-      },
+      { protocol: 'https', hostname: 'cdn.freekassa.net' },
     ],
   },
+
   async redirects() {
     return [
-      // РћСЃРЅРѕРІРЅРѕР№ СЂРµРґРёСЂРµРєС‚ РєРѕСЂРЅСЏ
+      // Основной редирект корня
       { source: '/', destination: '/ru', permanent: false },
-      
-      // РҐРѕСЃС‚РѕРІС‹Рµ СЂРµРґРёСЂРµРєС‚С‹ .ru -> .com
+
+      // Хостовые редиректы .ru -> .com
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'lifeundo.ru' }],
@@ -46,6 +49,7 @@ const nextConfig = {\r\n  typescript: { ignoreBuildErrors: true },\r\n  eslint: 
       },
     ];
   },
+
   async headers() {
     const cspValue = [
       "default-src 'self'",
@@ -72,10 +76,7 @@ const nextConfig = {\r\n  typescript: { ignoreBuildErrors: true },\r\n  eslint: 
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
-          { 
-            key: 'Content-Security-Policy', 
-            value: cspValue
-          },
+          { key: 'Content-Security-Policy', value: cspValue },
         ],
       },
     ];
