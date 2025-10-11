@@ -1,4 +1,4 @@
-import './globals.css';
+﻿import './globals.css';
 import type {ReactNode} from 'react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
@@ -95,7 +95,7 @@ export default function LocaleLayout({
                  <Analytics />
                  <ModernHeader />
                  <main className="min-h-dvh pt-20">{children}</main>
-                 <ModernFooter locale={locale} />
+                 <ModernFooter />
              </body>
     </html>
   );
