@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 export default function DevelopersPageEN() {
   return (
@@ -19,9 +19,9 @@ export default function DevelopersPageEN() {
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
             <h2 className="text-2xl font-semibold text-white mb-6">How it works (short)</h2>
             <ul className="space-y-4 text-gray-300">
-              <li>• The extension stores data <strong>locally</strong></li>
-              <li>• API is used for license/org validation and activation events</li>
-              <li>• We <strong>do not receive</strong> or store users' form text</li>
+              <li>вЂў The extension stores data <strong>locally</strong></li>
+              <li>вЂў API is used for license/org validation and activation events</li>
+              <li>вЂў We <strong>do not receive</strong> or store users' form text</li>
             </ul>
           </div>
         </div>
@@ -35,20 +35,20 @@ export default function DevelopersPageEN() {
                 <div className="text-green-400 font-mono text-sm mb-2">POST /api/v1/licenses/verify</div>
                 <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
                 <div className="text-gray-300 text-sm mb-2">Body: {`{ "licenseKey": "GLU-XXXX-..." }`}</div>
-                <div className="text-gray-300 text-sm">→ 200 {`{ "ok": true, "plan": "pro|team|vip", "seatsLeft": 12 }`}</div>
+                <div className="text-gray-300 text-sm">в†’ 200 {`{ "ok": true, "plan": "pro|team|vip", "seatsLeft": 12 }`}</div>
               </div>
               
               <div className="bg-black/20 rounded-lg p-4">
                 <div className="text-green-400 font-mono text-sm mb-2">POST /api/v1/undo/restore</div>
                 <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
                 <div className="text-gray-300 text-sm mb-2">Body: {`{ "clientId": "uuid", "scope": "forms|clipboard|tabs" }`}</div>
-                <div className="text-gray-300 text-sm">→ 202 {`{ "ok": true, "accepted": true }`}</div>
+                <div className="text-gray-300 text-sm">в†’ 202 {`{ "ok": true, "accepted": true }`}</div>
               </div>
               
               <div className="bg-black/20 rounded-lg p-4">
                 <div className="text-green-400 font-mono text-sm mb-2">GET /api/v1/events?from=...&to=...</div>
                 <div className="text-gray-300 text-sm mb-2">Authorization: Bearer &lt;api_key&gt;</div>
-                <div className="text-gray-300 text-sm">→ 200 {`{ "items":[{ "ts":"...", "type":"activation|restore", "clientId":"..." }]}`}</div>
+                <div className="text-gray-300 text-sm">в†’ 200 {`{ "items":[{ "ts":"...", "type":"activation|restore", "clientId":"..." }]}`}</div>
               </div>
             </div>
           </div>
@@ -104,3 +104,4 @@ export default function DevelopersPageEN() {
     </div>
   );
 }
+

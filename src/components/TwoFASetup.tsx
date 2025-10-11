@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 
 interface TwoFASetupProps {
@@ -77,21 +77,21 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
     <div className="max-w-md mx-auto">
       <div className="glass-card p-8">
         <h2 className="text-2xl font-bold gradient-text mb-6 text-center">
-          Настройка 2FA
+          РќР°СЃС‚СЂРѕР№РєР° 2FA
         </h2>
         
         {step === 'setup' && (
           <div className="space-y-6">
             <div className="text-center">
               <p className="text-gray-300 mb-4">
-                Для безопасности админ-панели необходимо настроить двухфакторную аутентификацию.
+                Р”Р»СЏ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё Р°РґРјРёРЅ-РїР°РЅРµР»Рё РЅРµРѕР±С…РѕРґРёРјРѕ РЅР°СЃС‚СЂРѕРёС‚СЊ РґРІСѓС…С„Р°РєС‚РѕСЂРЅСѓСЋ Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёСЋ.
               </p>
               <button
                 onClick={handleSetup}
                 disabled={isLoading}
                 className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {isLoading ? 'Настраиваем...' : 'Начать настройку'}
+                {isLoading ? 'РќР°СЃС‚СЂР°РёРІР°РµРј...' : 'РќР°С‡Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ'}
               </button>
             </div>
           </div>
@@ -100,24 +100,24 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
         {step === 'confirm' && (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-lg font-semibold mb-4">Отсканируйте QR-код</h3>
+              <h3 className="text-lg font-semibold mb-4">РћС‚СЃРєР°РЅРёСЂСѓР№С‚Рµ QR-РєРѕРґ</h3>
               {qrDataUrl && (
                 <div className="mb-4">
                   <img src={qrDataUrl} alt="QR Code" className="mx-auto" />
                 </div>
               )}
               <p className="text-sm text-gray-300 mb-4">
-                Используйте Google Authenticator, Authy или аналогичное приложение
+                РСЃРїРѕР»СЊР·СѓР№С‚Рµ Google Authenticator, Authy РёР»Рё Р°РЅР°Р»РѕРіРёС‡РЅРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ
               </p>
               <div className="bg-white/5 p-4 rounded-lg mb-4">
-                <p className="text-xs text-gray-400 mb-2">Или введите секрет вручную:</p>
+                <p className="text-xs text-gray-400 mb-2">РР»Рё РІРІРµРґРёС‚Рµ СЃРµРєСЂРµС‚ РІСЂСѓС‡РЅСѓСЋ:</p>
                 <code className="text-sm text-purple-300 break-all">{secret}</code>
               </div>
             </div>
             
             <div>
               <label htmlFor="token" className="block text-sm font-medium mb-2">
-                Код из приложения
+                РљРѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ
               </label>
               <input
                 type="text"
@@ -135,7 +135,7 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
               disabled={isLoading || token.length !== 6}
               className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              {isLoading ? 'Проверяем...' : 'Подтвердить'}
+              {isLoading ? 'РџСЂРѕРІРµСЂСЏРµРј...' : 'РџРѕРґС‚РІРµСЂРґРёС‚СЊ'}
             </button>
           </div>
         )}
@@ -143,16 +143,16 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
         {step === 'complete' && (
           <div className="space-y-6">
             <div className="text-center">
-              <div className="text-6xl mb-4">✅</div>
-              <h3 className="text-lg font-semibold mb-4">2FA настроена!</h3>
+              <div className="text-6xl mb-4">вњ…</div>
+              <h3 className="text-lg font-semibold mb-4">2FA РЅР°СЃС‚СЂРѕРµРЅР°!</h3>
               <p className="text-gray-300 mb-6">
-                Сохраните эти коды восстановления в безопасном месте. 
-                Они понадобятся, если вы потеряете доступ к приложению аутентификатора.
+                РЎРѕС…СЂР°РЅРёС‚Рµ СЌС‚Рё РєРѕРґС‹ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РІ Р±РµР·РѕРїР°СЃРЅРѕРј РјРµСЃС‚Рµ. 
+                РћРЅРё РїРѕРЅР°РґРѕР±СЏС‚СЃСЏ, РµСЃР»Рё РІС‹ РїРѕС‚РµСЂСЏРµС‚Рµ РґРѕСЃС‚СѓРї Рє РїСЂРёР»РѕР¶РµРЅРёСЋ Р°СѓС‚РµРЅС‚РёС„РёРєР°С‚РѕСЂР°.
               </p>
             </div>
             
             <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-              <h4 className="font-semibold text-red-300 mb-2">Коды восстановления:</h4>
+              <h4 className="font-semibold text-red-300 mb-2">РљРѕРґС‹ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ:</h4>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 {recoveryCodes.map((code, index) => (
                   <div key={index} className="bg-white/5 p-2 rounded text-center font-mono">
@@ -166,7 +166,7 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
               onClick={handleComplete}
               className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
-              Завершить настройку
+              Р—Р°РІРµСЂС€РёС‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ
             </button>
           </div>
         )}
@@ -180,3 +180,4 @@ export default function TwoFASetup({ onComplete }: TwoFASetupProps) {
     </div>
   );
 }
+

@@ -1,9 +1,9 @@
-export default function MobileIOSPageEN() {
+﻿export default function MobileIOSPageEN() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <div className="text-6xl mb-6">📱</div>
+          <div className="text-6xl mb-6">рџ“±</div>
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-6">
             GetLifeUndo for iOS
           </h1>
@@ -20,11 +20,11 @@ export default function MobileIOSPageEN() {
             <div className="space-y-4 text-yellow-200">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                <span>In development — preparing for release</span>
+                <span>In development вЂ” preparing for release</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                <span>Planned release — Q1 2025</span>
+                <span>Planned release вЂ” Q1 2025</span>
               </div>
             </div>
           </div>
@@ -76,3 +76,4 @@ export default function MobileIOSPageEN() {
     </div>
   );
 }
+

@@ -1,11 +1,11 @@
-import { SOCIALS } from '@/config/socials';
+﻿import { SOCIALS } from '@/config/socials';
 import { SocialIcon } from '@/components/icons/SocialIcon';
 
 export function SocialBar({ place = 'footer' }: { place?: 'header'|'footer'|'hero' }) {
   return (
     <div className="flex items-center gap-3">
       {Object.values(SOCIALS).map(s => {
-        // Пропускаем пустые URL (плейсхолдеры)
+        // РџСЂРѕРїСѓСЃРєР°РµРј РїСѓСЃС‚С‹Рµ URL (РїР»РµР№СЃС…РѕР»РґРµСЂС‹)
         if (!s.url) return null;
         
         const href = s.url;
@@ -20,3 +20,4 @@ export function SocialBar({ place = 'footer' }: { place?: 'header'|'footer'|'her
     </div>
   );
 }
+

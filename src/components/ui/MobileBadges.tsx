@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface MobileBadgesProps {
   className?: string;
@@ -45,3 +45,4 @@ export default function MobileBadges({ className = '' }: MobileBadgesProps) {
     </div>
   );
 }
+

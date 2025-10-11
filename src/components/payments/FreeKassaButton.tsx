@@ -51,3 +51,4 @@ export default function FreeKassaButton({ plan, email = "test@example.com", clas
     </button>
   );
 }
+

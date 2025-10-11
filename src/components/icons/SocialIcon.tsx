@@ -1,4 +1,4 @@
-type Props = { name: 'telegram'|'reddit'|'vcru'|'habr'|'x'|'youtube'|'github'; className?: string };
+﻿type Props = { name: 'telegram'|'reddit'|'vcru'|'habr'|'x'|'youtube'|'github'; className?: string };
 export const SocialIcon = ({ name, className }: Props) => {
   const cn = className ?? 'h-5 w-5';
   switch (name) {
@@ -12,3 +12,4 @@ export const SocialIcon = ({ name, className }: Props) => {
   }
   return null;
 };
+

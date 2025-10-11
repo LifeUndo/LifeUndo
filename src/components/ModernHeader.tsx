@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Social } from '@/config/social';
-import ReleaseBanner from './ReleaseBanner';
+import ReleaseBanner from "@/components/ReleaseBanner";
 import { useTranslations } from '@/hooks/useTranslations';
 
 export default function ModernHeader() {
@@ -241,3 +241,4 @@ export default function ModernHeader() {
     </header>
   );
 }
+

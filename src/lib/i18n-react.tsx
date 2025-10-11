@@ -1,4 +1,4 @@
-// src/lib/i18n-react.tsx
+﻿// src/lib/i18n-react.tsx
 'use client';
 import React, {createContext, useContext, useMemo} from 'react';
 
@@ -10,10 +10,10 @@ const I18nCtx = createContext<Ctx>({ t: () => '' });
 export function I18nProvider({messages, children}: {messages: Record<string, Dict>, children: React.ReactNode}) {
   const value = useMemo(() => ({
     t(ns: string, key: string) {
-      // Простая обработка - ищем ключ напрямую в namespace
+      // РџСЂРѕСЃС‚Р°СЏ РѕР±СЂР°Р±РѕС‚РєР° - РёС‰РµРј РєР»СЋС‡ РЅР°РїСЂСЏРјСѓСЋ РІ namespace
       const nsObj = (messages as any)[ns] ?? {};
       
-      // Если ключ содержит точки, разбиваем его
+      // Р•СЃР»Рё РєР»СЋС‡ СЃРѕРґРµСЂР¶РёС‚ С‚РѕС‡РєРё, СЂР°Р·Р±РёРІР°РµРј РµРіРѕ
       if (key.includes('.')) {
         const keys = key.split('.');
         let val = nsObj;
@@ -23,7 +23,7 @@ export function I18nProvider({messages, children}: {messages: Record<string, Dic
         }
         return (typeof val === 'string') ? val : key;
       } else {
-        // Простой ключ без точек
+        // РџСЂРѕСЃС‚РѕР№ РєР»СЋС‡ Р±РµР· С‚РѕС‡РµРє
         const val = nsObj[key];
         return (typeof val === 'string') ? val : key;
       }
@@ -37,3 +37,4 @@ export function useT(ns: string) {
   const {t} = useContext(I18nCtx);
   return (key: string) => t(ns, key);
 }
+

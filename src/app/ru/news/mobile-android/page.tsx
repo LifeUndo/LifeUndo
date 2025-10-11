@@ -1,15 +1,15 @@
-export default function MobileAndroidPage() {
+﻿export default function MobileAndroidPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="text-6xl mb-6">🤖</div>
+          <div className="text-6xl mb-6">рџ¤–</div>
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-            GetLifeUndo для Android
+            GetLifeUndo РґР»СЏ Android
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Мобильная версия GetLifeUndo готовится к релизу в Google Play
+            РњРѕР±РёР»СЊРЅР°СЏ РІРµСЂСЃРёСЏ GetLifeUndo РіРѕС‚РѕРІРёС‚СЃСЏ Рє СЂРµР»РёР·Сѓ РІ Google Play
           </p>
         </div>
 
@@ -17,20 +17,20 @@ export default function MobileAndroidPage() {
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 backdrop-blur p-8">
             <h2 className="text-2xl font-semibold text-yellow-200 mb-6 text-center">
-              Статус разработки
+              РЎС‚Р°С‚СѓСЃ СЂР°Р·СЂР°Р±РѕС‚РєРё
             </h2>
             <div className="space-y-4 text-yellow-200">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                <span>В разработке — готовим к релизу</span>
+                <span>Р’ СЂР°Р·СЂР°Р±РѕС‚РєРµ вЂ” РіРѕС‚РѕРІРёРј Рє СЂРµР»РёР·Сѓ</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                <span>Планируемый релиз — Q1 2025</span>
+                <span>РџР»Р°РЅРёСЂСѓРµРјС‹Р№ СЂРµР»РёР· вЂ” Q1 2025</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                <span>Google Play Review — в процессе</span>
+                <span>Google Play Review вЂ” РІ РїСЂРѕС†РµСЃСЃРµ</span>
               </div>
             </div>
           </div>
@@ -40,31 +40,31 @@ export default function MobileAndroidPage() {
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">
             <h2 className="text-2xl font-semibold text-white mb-6 text-center">
-              Что будет в мобильной версии
+              Р§С‚Рѕ Р±СѓРґРµС‚ РІ РјРѕР±РёР»СЊРЅРѕР№ РІРµСЂСЃРёРё
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white/5 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">📝 Восстановление форм</h3>
+                <h3 className="text-lg font-semibold text-white mb-3">рџ“ќ Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ С„РѕСЂРј</h3>
                 <p className="text-gray-300 text-sm">
-                  Автоматическое сохранение текста в полях ввода Chrome
+                  РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ СЃРѕС…СЂР°РЅРµРЅРёРµ С‚РµРєСЃС‚Р° РІ РїРѕР»СЏС… РІРІРѕРґР° Chrome
                 </p>
               </div>
               <div className="bg-white/5 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">📋 История буфера</h3>
+                <h3 className="text-lg font-semibold text-white mb-3">рџ“‹ РСЃС‚РѕСЂРёСЏ Р±СѓС„РµСЂР°</h3>
                 <p className="text-gray-300 text-sm">
-                  Локальное хранение скопированного текста
+                  Р›РѕРєР°Р»СЊРЅРѕРµ С…СЂР°РЅРµРЅРёРµ СЃРєРѕРїРёСЂРѕРІР°РЅРЅРѕРіРѕ С‚РµРєСЃС‚Р°
                 </p>
               </div>
               <div className="bg-white/5 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">🔒 100% приватность</h3>
+                <h3 className="text-lg font-semibold text-white mb-3">рџ”’ 100% РїСЂРёРІР°С‚РЅРѕСЃС‚СЊ</h3>
                 <p className="text-gray-300 text-sm">
-                  Все данные остаются на устройстве
+                  Р’СЃРµ РґР°РЅРЅС‹Рµ РѕСЃС‚Р°СЋС‚СЃСЏ РЅР° СѓСЃС‚СЂРѕР№СЃС‚РІРµ
                 </p>
               </div>
               <div className="bg-white/5 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">⚡ Быстрый доступ</h3>
+                <h3 className="text-lg font-semibold text-white mb-3">вљЎ Р‘С‹СЃС‚СЂС‹Р№ РґРѕСЃС‚СѓРї</h3>
                 <p className="text-gray-300 text-sm">
-                  Виджеты и быстрые действия
+                  Р’РёРґР¶РµС‚С‹ Рё Р±С‹СЃС‚СЂС‹Рµ РґРµР№СЃС‚РІРёСЏ
                 </p>
               </div>
             </div>
@@ -75,22 +75,22 @@ export default function MobileAndroidPage() {
         <div className="max-w-2xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">
             <h2 className="text-2xl font-semibold text-white mb-6 text-center">
-              Уведомить о запуске
+              РЈРІРµРґРѕРјРёС‚СЊ Рѕ Р·Р°РїСѓСЃРєРµ
             </h2>
             <p className="text-gray-300 mb-6 text-center">
-              Оставьте email, и мы сообщим, когда приложение появится в Google Play
+              РћСЃС‚Р°РІСЊС‚Рµ email, Рё РјС‹ СЃРѕРѕР±С‰РёРј, РєРѕРіРґР° РїСЂРёР»РѕР¶РµРЅРёРµ РїРѕСЏРІРёС‚СЃСЏ РІ Google Play
             </p>
             <form className="space-y-4">
               <input
                 type="email"
-                placeholder="Ваш email"
+                placeholder="Р’Р°С€ email"
                 className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
               >
-                Уведомить о релизе
+                РЈРІРµРґРѕРјРёС‚СЊ Рѕ СЂРµР»РёР·Рµ
               </button>
             </form>
           </div>
@@ -103,7 +103,7 @@ export default function MobileAndroidPage() {
               href="/ru/downloads"
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
             >
-              Скачать для браузера
+              РЎРєР°С‡Р°С‚СЊ РґР»СЏ Р±СЂР°СѓР·РµСЂР°
             </a>
             <a 
               href="https://t.me/GetLifeUndoSupport"
@@ -111,7 +111,7 @@ export default function MobileAndroidPage() {
               rel="noopener noreferrer"
               className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white font-bold py-3 px-6 rounded-lg transition-colors"
             >
-              Telegram поддержка
+              Telegram РїРѕРґРґРµСЂР¶РєР°
             </a>
           </div>
         </div>
@@ -119,3 +119,4 @@ export default function MobileAndroidPage() {
     </div>
   );
 }
+

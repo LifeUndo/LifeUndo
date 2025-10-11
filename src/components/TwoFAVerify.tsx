@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 
 interface TwoFAVerifyProps {
@@ -45,19 +45,19 @@ export default function TwoFAVerify({ onSuccess, onRecovery }: TwoFAVerifyProps)
     <div className="max-w-md mx-auto">
       <div className="glass-card p-8">
         <h2 className="text-2xl font-bold gradient-text mb-6 text-center">
-          Двухфакторная аутентификация
+          Р”РІСѓС…С„Р°РєС‚РѕСЂРЅР°СЏ Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёСЏ
         </h2>
         
         <div className="space-y-6">
           <div className="text-center">
             <p className="text-gray-300 mb-4">
-              Введите 6-значный код из приложения аутентификатора
+              Р’РІРµРґРёС‚Рµ 6-Р·РЅР°С‡РЅС‹Р№ РєРѕРґ РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ Р°СѓС‚РµРЅС‚РёС„РёРєР°С‚РѕСЂР°
             </p>
           </div>
           
           <div>
             <label htmlFor="token" className="block text-sm font-medium mb-2">
-              Код аутентификации
+              РљРѕРґ Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё
             </label>
             <input
               type="text"
@@ -76,7 +76,7 @@ export default function TwoFAVerify({ onSuccess, onRecovery }: TwoFAVerifyProps)
             disabled={isLoading || token.length !== 6}
             className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {isLoading ? 'Проверяем...' : 'Войти'}
+            {isLoading ? 'РџСЂРѕРІРµСЂСЏРµРј...' : 'Р’РѕР№С‚Рё'}
           </button>
           
           <div className="text-center">
@@ -84,7 +84,7 @@ export default function TwoFAVerify({ onSuccess, onRecovery }: TwoFAVerifyProps)
               onClick={onRecovery}
               className="text-purple-400 hover:text-purple-300 transition-colors text-sm"
             >
-              Использовать код восстановления
+              РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєРѕРґ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ
             </button>
           </div>
         </div>
@@ -98,3 +98,4 @@ export default function TwoFAVerify({ onSuccess, onRecovery }: TwoFAVerifyProps)
     </div>
   );
 }
+

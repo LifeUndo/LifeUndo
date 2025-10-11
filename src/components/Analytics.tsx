@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
 import { useEffect } from 'react';
@@ -24,14 +24,14 @@ export function Analytics() {
   );
 }
 
-// Helper для отправки событий
+// Helper РґР»СЏ РѕС‚РїСЂР°РІРєРё СЃРѕР±С‹С‚РёР№
 export function trackEvent(eventName: string, props?: Record<string, string | number | undefined>) {
   if (typeof window !== 'undefined' && window.plausible) {
     window.plausible(eventName, { props: props || {} });
   }
 }
 
-// Готовые события из ТЗ
+// Р“РѕС‚РѕРІС‹Рµ СЃРѕР±С‹С‚РёСЏ РёР· РўР—
 export const analyticsEvents = {
   pricingClickPay: (plan: string) => trackEvent('pricing_click_pay', { plan }),
   starterClick: () => trackEvent('starter_click'),
@@ -40,4 +40,5 @@ export const analyticsEvents = {
     trackEvent('purchase_success', { plan, order_id: orderId, amount, currency }),
   supportOpened: (orderId?: string, plan?: string) => trackEvent('support_opened', { order_id: orderId, plan })
 };
+
 

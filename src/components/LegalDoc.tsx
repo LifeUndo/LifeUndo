@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { LEGAL } from '@/config/legal';
 
@@ -58,3 +58,4 @@ export default function LegalDoc({ lang, slug }: { lang: 'ru' | 'en'; slug: stri
     );
   }
 }
+

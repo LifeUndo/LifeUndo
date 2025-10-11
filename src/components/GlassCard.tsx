@@ -1,4 +1,4 @@
-export default function GlassCard({
+﻿export default function GlassCard({
   children,
   className = '',
 }: {
@@ -11,3 +11,4 @@ export default function GlassCard({
     </div>
   );
 }
+

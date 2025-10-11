@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 export default function PartnersPageEN() {
   return (
@@ -16,7 +16,7 @@ export default function PartnersPageEN() {
           {/* B2B Disclaimer */}
           <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-4 max-w-2xl mx-auto mb-8">
             <p className="text-yellow-200 font-semibold">
-              For organizations — <strong>100+ VIP seats</strong>. Templates available upon request.
+              For organizations вЂ” <strong>100+ VIP seats</strong>. Templates available upon request.
             </p>
           </div>
           
@@ -26,7 +26,7 @@ export default function PartnersPageEN() {
               href="/en/legal/downloads"
               className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
             >
-              📄 Download .TXT Templates
+              рџ“„ Download .TXT Templates
             </a>
           </div>
         </div>
@@ -36,9 +36,9 @@ export default function PartnersPageEN() {
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
             <h2 className="text-2xl font-semibold text-white mb-6">What's included</h2>
             <ul className="space-y-4 text-gray-300">
-              <li>• Logo/colors/branding; pre-configuration (which "UNDO" types to enable)</li>
-              <li>• Activation and license reports (organizations)</li>
-              <li>• Optional: private update channel</li>
+              <li>вЂў Logo/colors/branding; pre-configuration (which "UNDO" types to enable)</li>
+              <li>вЂў Activation and license reports (organizations)</li>
+              <li>вЂў Optional: private update channel</li>
             </ul>
           </div>
         </div>
@@ -48,9 +48,9 @@ export default function PartnersPageEN() {
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
             <h2 className="text-2xl font-semibold text-white mb-6">Model</h2>
             <ul className="space-y-4 text-gray-300">
-              <li>• One-time setup fee</li>
-              <li>• Subscription: monthly per seat (Team/Org)</li>
-              <li>• Legal entities: invoice payment (offer below)</li>
+              <li>вЂў One-time setup fee</li>
+              <li>вЂў Subscription: monthly per seat (Team/Org)</li>
+              <li>вЂў Legal entities: invoice payment (offer below)</li>
             </ul>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function PartnersPageEN() {
                 <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-2">Technical build and test</h3>
-                  <p className="text-gray-300">1–3 days</p>
+                  <p className="text-gray-300">1вЂ“3 days</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -105,3 +105,4 @@ export default function PartnersPageEN() {
     </div>
   );
 }
+

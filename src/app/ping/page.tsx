@@ -1,1 +1,2 @@
-export default function Ping() { return <pre>pong</pre>; }
+﻿export default function Ping() { return <pre>pong</pre>; }
+
