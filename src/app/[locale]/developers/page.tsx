@@ -1,5 +1,7 @@
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default function DevelopersPage({ params }: { params: { locale: string } }) {
   const isEN = params?.locale === 'en';
 
@@ -7,9 +9,9 @@ export default function DevelopersPage({ params }: { params: { locale: string } 
     title: isEN ? 'GetLifeUndo API (beta)' : 'API GetLifeUndo (beta)',
     subtitle: isEN ? 'Integrate form/buffer recovery into your product' : 'Подключите восстановление форм/буфера в свой продукт',
     how: isEN ? 'How it works (short)' : 'Как это работает (вкратце)',
-    how1: isEN ? '• The extension stores data locally' : '• Расширение хранит данные локально',
-    how2: isEN ? '• API is for license/org validation and activation events' : '• API нужен для валидации лицензий/организаций и событий активаций',
-    how3: isEN ? '• We do not receive or store user form text' : '• Мы не принимаем и не храним пользовательский текст форм',
+    how1: isEN ? 'The extension stores data locally' : 'Расширение хранит данные локально',
+    how2: isEN ? 'API is for license/org validation and activation events' : 'API нужен для валидации лицензий/организаций и событий активаций',
+    how3: isEN ? 'We do not receive or store user form text' : 'Мы не принимаем и не храним пользовательский текст форм',
     public: isEN ? 'Public endpoints (ready)' : 'Публичные эндпоинты (уже есть)',
     ping: isEN ? 'Server ping' : 'Пинг сервера',
     fkdiag: isEN ? 'FreeKassa diagnostics' : 'Диагностика платёжки FreeKassa',
@@ -37,7 +39,7 @@ export default function DevelopersPage({ params }: { params: { locale: string } 
         <div className="max-w-4xl mx-auto mb-16">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6">
             <h2 className="text-2xl font-semibold text-white mb-6">{t.how}</h2>
-            <ul className="space-y-4 text-gray-300">
+            <ul className="space-y-4 text-gray-300 list-disc pl-6">
               <li>{t.how1}</li>
               <li>{t.how2}</li>
               <li>{t.how3}</li>
