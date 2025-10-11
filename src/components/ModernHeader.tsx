@@ -1,11 +1,11 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Social } from '@/config/social';
-import ReleaseBanner from "@/components/ReleaseBanner";
+import ReleaseBannerClient from "@/components/ReleaseBannerClient";
 import { useTranslations } from '@/hooks/useTranslations';
 
 export default function ModernHeader() {
@@ -54,7 +54,7 @@ export default function ModernHeader() {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled ? 'bg-[#0B1220]/95 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2" aria-label="GetLifeUndo">
@@ -135,16 +135,15 @@ export default function ModernHeader() {
           </button>
         </div>
 
-        {/* Release Banner - РїРѕРґ РЅР°РІРёРіР°С†РёРµР№ */}
-        <div className="mt-2 mb-2 text-sm md:text-base leading-tight">
-          <ReleaseBanner />
+        {/* Release Banner under navigation */}
+        <div className="max-w-6xl mx-auto mt-2 mb-2 text-sm md:text-base leading-tight">
         </div>
 
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
           <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setIsMenuOpen(false)} />
         )}
-        
+
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-800 relative z-50 bg-[#0B1220]">
