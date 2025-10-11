@@ -1,25 +1,25 @@
-import "./[locale]/globals.css";
+﻿import "./[locale]/globals.css";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://getlifeundo.com'),
   title: {
-    default: 'GetLifeUndo — Ctrl+Z для браузера: восстановление текста, вкладок и буфера',
-    template: '%s — GetLifeUndo',
+    default: 'GetLifeUndo вЂ” Ctrl+Z РґР»СЏ Р±СЂР°СѓР·РµСЂР°: РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р°, РІРєР»Р°РґРѕРє Рё Р±СѓС„РµСЂР°',
+    template: '%s вЂ” GetLifeUndo',
   },
   description:
-    'Восстановление текста форм, закрытых вкладок и истории буфера. 100% локально, без облака. Расширение для Firefox/Chrome. RU/EN.',
+    'Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р° С„РѕСЂРј, Р·Р°РєСЂС‹С‚С‹С… РІРєР»Р°РґРѕРє Рё РёСЃС‚РѕСЂРёРё Р±СѓС„РµСЂР°. 100% Р»РѕРєР°Р»СЊРЅРѕ, Р±РµР· РѕР±Р»Р°РєР°. Р Р°СЃС€РёСЂРµРЅРёРµ РґР»СЏ Firefox/Chrome. RU/EN.',
   keywords: [
-    'восстановление текста',
-    'откат действий',
-    'закрытые вкладки',
-    'история буфера',
-    'браузерное расширение',
+    'РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р°',
+    'РѕС‚РєР°С‚ РґРµР№СЃС‚РІРёР№',
+    'Р·Р°РєСЂС‹С‚С‹Рµ РІРєР»Р°РґРєРё',
+    'РёСЃС‚РѕСЂРёСЏ Р±СѓС„РµСЂР°',
+    'Р±СЂР°СѓР·РµСЂРЅРѕРµ СЂР°СЃС€РёСЂРµРЅРёРµ',
     'Firefox',
     'Chrome',
     'Ctrl+Z',
-    'приватность',
-    'локально',
+    'РїСЂРёРІР°С‚РЅРѕСЃС‚СЊ',
+    'Р»РѕРєР°Р»СЊРЅРѕ',
     'restore form text',
     'reopen closed tabs',
     'clipboard history',
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: 'GetLifeUndo — Ctrl+Z для браузера',
-    description: 'Restore form text, closed tabs, clipboard — 100% local.',
+    title: 'GetLifeUndo вЂ” Ctrl+Z РґР»СЏ Р±СЂР°СѓР·РµСЂР°',
+    description: 'Restore form text, closed tabs, clipboard вЂ” 100% local.',
     url: 'https://getlifeundo.com/ru',
     siteName: 'GetLifeUndo',
     images: [
@@ -45,14 +45,14 @@ export const metadata: Metadata = {
         url: '/brand/getlifeundo-og.png',
         width: 1200,
         height: 630,
-        alt: 'GetLifeUndo - Восстановление данных и отмена действий в браузере',
+        alt: 'GetLifeUndo - Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… Рё РѕС‚РјРµРЅР° РґРµР№СЃС‚РІРёР№ РІ Р±СЂР°СѓР·РµСЂРµ',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GetLifeUndo — Ctrl+Z for your browser',
-    description: 'Restore form text, tabs and clipboard — 100% local, private.',
+    title: 'GetLifeUndo вЂ” Ctrl+Z for your browser',
+    description: 'Restore form text, tabs and clipboard вЂ” 100% local, private.',
     images: ['/brand/getlifeundo-og.png'],
     creator: '@GetLifeUndo',
   },
@@ -108,3 +108,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

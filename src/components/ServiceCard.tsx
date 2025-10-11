@@ -1,4 +1,4 @@
-import GlassCard from './GlassCard';
+﻿import GlassCard from './GlassCard';
 
 export default function ServiceCard({
   icon,
@@ -35,7 +35,7 @@ export default function ServiceCard({
         <ul className="space-y-2 mb-6">
           {features.map((feature, index) => (
             <li key={index} className="text-sm text-white/70 flex items-start">
-              <span className="text-green-400 mr-2">✓</span>
+              <span className="text-green-400 mr-2">вњ“</span>
               {feature}
             </li>
           ))}

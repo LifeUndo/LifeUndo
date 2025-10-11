@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -74,15 +74,16 @@ export default function Footer() {
             className="h-6"
           />
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm text-slate-800">
-            <span className="font-medium">Мы отдаём 10%</span> — GetLifeUndo Fund
+            <span className="font-medium">РњС‹ РѕС‚РґР°С‘Рј 10%</span> вЂ” GetLifeUndo Fund
           </span>
         </div>
         <p className="text-xs text-slate-500">
-          © {year} GetLifeUndo. Все права защищены ·{" "}
-          <Link href="/privacy" className="hover:underline">Конфиденциальность</Link> ·{" "}
-          <Link href="/support" className="hover:underline">Поддержка</Link>
+          В© {year} GetLifeUndo. Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹ В·{" "}
+          <Link href="/privacy" className="hover:underline">РљРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚СЊ</Link> В·{" "}
+          <Link href="/support" className="hover:underline">РџРѕРґРґРµСЂР¶РєР°</Link>
         </p>
       </div>
     </footer>
   );
 }
+
