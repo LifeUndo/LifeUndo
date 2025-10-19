@@ -33,7 +33,7 @@ curl -X POST https://<git-alias>/api/payments/freekassa/create \
   -H "Content-Type: application/json" \
   -d '{"productId":"getlifeundo_pro"}'
 ```
-**Ожидаемо**: JSON с `pay_url` на `https://pay.freekassa.ru/?m=...&oa=599.00&o=...&s=...&currency=RUB`
+**Ожидаемо**: JSON с `pay_url` на `https://pay.freekassa.net/?m=...&oa=599.00&o=...&s=...&currency=RUB`
 
 **Перейди по `pay_url`** → форма оплаты должна открыться **БЕЗ** «Неправильные параметры ссылки»
 
@@ -48,7 +48,7 @@ curl -X POST https://<git-alias>/api/payments/freekassa/create \
 - ✅ `FREEKASSA_MERCHANT_ID`
 - ✅ `FREEKASSA_SECRET1`
 - ✅ `FREEKASSA_SECRET2`
-- ✅ `FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/`
+- ✅ `FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/`
 
 **Любые `FK_*` (без `FREEKASSA_`)** → **выключить/удалить**
 
@@ -78,7 +78,7 @@ curl -X POST https://<git-alias>/api/payments/freekassa/create \
 
 - [ ] `/api/debug/fk` возвращает `fkEnabled: true`
 - [ ] На `/ru/pricing` видны кнопки FreeKassa
-- [ ] Клик ведёт на `pay.freekassa.ru` **без ошибки**
+- [ ] Клик ведёт на `pay.freekassa.net` **без ошибки**
 - [ ] Правильный брендинг "GetLifeUndo" (не "LifeUndo")
 - [ ] ENV переменные только `FREEKASSA_*` (без `FK_*`)
 

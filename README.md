@@ -122,7 +122,7 @@ NEXT_PUBLIC_FK_ENABLED=true
 FREEKASSA_MERCHANT_ID=your_merchant_id
 FREEKASSA_SECRET1=your_secret1
 FREEKASSA_SECRET2=your_secret2
-FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/
+FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/
 FREEKASSA_CURRENCY=RUB
 ```
 

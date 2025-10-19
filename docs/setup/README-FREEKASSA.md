@@ -57,7 +57,7 @@ sign = md5(`${merchant_id}:${amount}:${secret2}:${order_id}`)
 **Ожидаемый ответ:**
 ```json
 {
-  "url": "https://pay.freekassa.ru/?m=7b11ad5311cc3bbeb608b3cb9c8404a6&oa=2490.00&o=LU-1703123456789-abc123&s=<sign>&currency=RUB&us_email=test@example.com&us_plan=vip_lifetime&us_cid=cid-1703123456789-abc123&lang=ru&em=test@example.com&description=LifeUndo vip_lifetime for test@example.com",
+  "url": "https://pay.freekassa.net/?m=7b11ad5311cc3bbeb608b3cb9c8404a6&oa=2490.00&o=LU-1703123456789-abc123&s=<sign>&currency=RUB&us_email=test@example.com&us_plan=vip_lifetime&us_cid=cid-1703123456789-abc123&lang=ru&em=test@example.com&description=LifeUndo vip_lifetime for test@example.com",
   "order_id": "LU-1703123456789-abc123"
 }
 ```

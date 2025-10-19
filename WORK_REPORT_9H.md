@@ -45,7 +45,7 @@
 **Что сделано:**
 - ✅ Исправлен Merchant ID: `66046` (было неправильное значение)
 - ✅ Исправлен формат подписи: `MERCHANT_ID:AMOUNT:SECRET:CURRENCY:ORDER_ID`
-- ✅ Обновлен Payment URL: `https://pay.freekassa.com/` (по ответу поддержки)
+- ✅ Обновлен Payment URL: `https://pay.freekassa.net/` (по ответу поддержки)
 
 **Результат:** FreeKassa интеграция заработала в Production! 🎉
 
@@ -180,7 +180,7 @@
 FREEKASSA_MERCHANT_ID=66046
 FREEKASSA_SECRET1=ponOk=W5^2W9t][
 FREEKASSA_SECRET2=1rF!PSuEpvj,MJL
-FREEKASSA_PAYMENT_URL=https://pay.freekassa.com/
+FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/
 FREEKASSA_CURRENCY=RUB
 ```
 
@@ -365,7 +365,7 @@ Live: `https://getlifeundo.com`
 - Добавлен CURRENCY в signature string
 
 ### `130ad73` - Payment URL update (CRITICAL)
-- Обновлен URL с `pay.freekassa.ru` на `pay.freekassa.com`
+- Обновлен URL с `pay.freekassa.net` на `pay.freekassa.net`
 - По рекомендации поддержки FreeKassa
 
 ### `5dd0f45` - Starter Bundle + Pages
@@ -453,7 +453,7 @@ Invoke-WebRequest -Uri "$P/ru/pricing" -UseBasicParsing
 FREEKASSA_MERCHANT_ID=<your_merchant_id>
 FREEKASSA_SECRET1=<your_secret1>
 FREEKASSA_SECRET2=<your_secret2>
-FREEKASSA_PAYMENT_URL=https://pay.freekassa.com/
+FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/
 FREEKASSA_CURRENCY=RUB
 NEXT_PUBLIC_FK_ENABLED=true  (Production scope)
 ```

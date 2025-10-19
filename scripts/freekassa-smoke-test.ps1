@@ -47,7 +47,7 @@ try {
         Write-Host "🔗 Payment URL: $($paymentResponse.pay_url)" -ForegroundColor Yellow
         
         # Validate URL format
-        if ($paymentResponse.pay_url -match "https://pay\.freekassa\.ru/") {
+        if ($paymentResponse.pay_url -match "https://pay\.freekassa\.net/") {
             Write-Host "✅ URL points to correct FreeKassa domain" -ForegroundColor Green
         } else {
             Write-Host "❌ Invalid payment URL domain" -ForegroundColor Red

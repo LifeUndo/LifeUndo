@@ -20,7 +20,7 @@ vi.mock('@/lib/fk-env', () => ({
   FK_MERCHANT_ID: 'test-merchant-id',
   FK_SECRET1: 'test-secret1',
   FK_SECRET2: 'test-secret2',
-  FK_PAYMENT_URL: 'https://pay.freekassa.ru/',
+  FK_PAYMENT_URL: 'https://pay.freekassa.net/',
   FK_CURRENCY: 'RUB',
   FK_CONFIGURED: true,
   FK_PRODUCTS: {
@@ -53,11 +53,11 @@ describe('FreeKassa API Integration', () => {
 
       expect(response.status).toBe(200);
       expect(data.ok).toBe(true);
-      expect(data.pay_url).toContain('https://pay.freekassa.ru/');
+      expect(data.pay_url).toContain('https://pay.freekassa.net/');
       expect(data.pay_url).toContain('m=test-merchant-id');
       expect(data.pay_url).toContain('oa=599.00');
       expect(data.pay_url).toContain('currency=RUB');
-      expect(data.order_id).toMatch(/^\d+-[a-z0-9]+$/);
+      expect(data.orderId).toMatch(/^\d+-[a-z0-9]+$/);
     });
 
     it('should reject invalid product ID', async () => {
@@ -152,7 +152,7 @@ describe('FreeKassa API Integration', () => {
       expect(data.fkEnabled).toBe(true);
       expect(data.fkConfigured).toBe(true);
       expect(data.merchantIdMasked).toBe('test***');
-      expect(data.paymentUrl).toBe('https://pay.freekassa.ru/');
+      expect(data.paymentUrl).toBe('https://pay.freekassa.net/');
       expect(data.currency).toBe('RUB');
       expect(data.products).toHaveProperty('getlifeundo_pro');
       expect(data.products).toHaveProperty('getlifeundo_vip');

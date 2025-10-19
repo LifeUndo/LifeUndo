@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       currency: CURRENCY,
     });
 
-    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.fk.money/'}?${qs.toString()}`;
+    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.net/'}?${qs.toString()}`;
 
     // Логируем для отладки (без секретов)
     console.log('FreeKassa payment created:', {
@@ -90,3 +90,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'payment_creation_failed' }, { status: 500 });
   }
 }
+

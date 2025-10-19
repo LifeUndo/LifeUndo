@@ -66,7 +66,7 @@
 ### FreeKassa
 - ✅ Интеграция работает
 - ✅ Merchant ID: `66046` (правильный)
-- ✅ Payment URL: `https://pay.freekassa.com/`
+- ✅ Payment URL: `https://pay.freekassa.net/`
 - ✅ Signature format: исправлен
 - ✅ 4 плана доступны
 

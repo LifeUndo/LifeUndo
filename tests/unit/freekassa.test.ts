@@ -5,7 +5,7 @@ const mockEnv = {
   FREEKASSA_MERCHANT_ID: 'test-merchant-id',
   FREEKASSA_SECRET1: 'test-secret1',
   FREEKASSA_SECRET2: 'test-secret2',
-  FREEKASSA_PAYMENT_URL: 'https://pay.freekassa.ru/',
+  FREEKASSA_PAYMENT_URL: 'https://pay.freekassa.net/',
   NEXT_PUBLIC_FK_ENABLED: 'true'
 };
 
@@ -70,7 +70,7 @@ describe('FreeKassa Integration', () => {
 
   describe('URL Construction', () => {
     it('should construct valid FreeKassa payment URLs', () => {
-      const baseUrl = 'https://pay.freekassa.ru/';
+      const baseUrl = 'https://pay.freekassa.net/';
       const params = {
         m: 'test-merchant-id',
         oa: '599.00',
@@ -85,7 +85,7 @@ describe('FreeKassa Integration', () => {
       });
       
       const finalUrl = url.toString();
-      expect(finalUrl).toContain('https://pay.freekassa.ru/');
+      expect(finalUrl).toContain('https://pay.freekassa.net/');
       expect(finalUrl).toContain('m=test-merchant-id');
       expect(finalUrl).toContain('oa=599.00');
       expect(finalUrl).toContain('currency=RUB');
@@ -108,7 +108,7 @@ describe('Environment Validation', () => {
       FK_MERCHANT_ID: '',
       FK_SECRET1: '',
       FK_SECRET2: '',
-      FK_PAYMENT_URL: 'https://pay.freekassa.ru/',
+      FK_PAYMENT_URL: 'https://pay.freekassa.net/',
       FK_CONFIGURED: false,
       FK_PRODUCTS: {}
     }));

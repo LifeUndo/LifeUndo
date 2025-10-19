@@ -42,16 +42,7 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
     response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   }
   
-  // CSP
-  response.headers.set('Content-Security-Policy', 
-    "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; " +
-    "style-src 'self' 'unsafe-inline'; " +
-    "img-src 'self' data: https:; " +
-    "font-src 'self' data:; " +
-    "connect-src 'self' https://api.freekassa.ru https://pay.freekassa.com; " +
-    "frame-src https://pay.freekassa.com;"
-  );
+  // CSP устанавливается централизованно в next.config.mjs -> headers()
 
   return response;
 }

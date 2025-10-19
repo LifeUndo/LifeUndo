@@ -63,7 +63,7 @@ Content-Type: application/json
 {`200 OK
 {
   "ok": true,
-  "pay_url": "https://pay.fk.money/?...",
+  "pay_url": "https://pay.freekassa.net/?...",
   "orderId": "17597..."
 }
 
