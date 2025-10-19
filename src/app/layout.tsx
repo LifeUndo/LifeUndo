@@ -23,6 +23,13 @@ export const metadata: Metadata = {
     'restore form text',
     'reopen closed tabs',
     'clipboard history',
+    // EN high-intent
+    'undo closed tab chrome',
+    'recover lost form text',
+    'browser undo extension',
+    'restore clipboard history',
+    'privacy first extension',
+    'local only data recovery',
     // RU high-intent
     'восстановить закрытую вкладку',
     'отменить закрытие вкладки chrome',
