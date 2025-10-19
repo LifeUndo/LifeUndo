@@ -50,7 +50,7 @@ Content-Type: application/json
 **Response:**
 ```json
 {
-  "url": "https://pay.freekassa.ru/?m=123&oa=99.00&o=ORDER123&s=SIGNATURE",
+  "url": "https://pay.freekassa.net/?m=123&oa=99.00&o=ORDER123&s=SIGNATURE",
   "order_id": "ORDER123"
 }
 ```

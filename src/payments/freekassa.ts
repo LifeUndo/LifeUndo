@@ -5,7 +5,7 @@ export class FreeKassaAdapter implements GatewayAdapter {
   async createPayment(input: CreatePaymentInput): Promise<CreatePaymentResult> {
     // TODO: sign and call FK create invoice API; for now, return placeholder
     const orderId = `FK-${Date.now()}`;
-    const pay_url = `https://pay.freekassa.ru/?o=${encodeURIComponent(orderId)}`;
+    const pay_url = `https://pay.freekassa.net/?o=${encodeURIComponent(orderId)}`;
     return { ok: true, pay_url, orderId };
   }
 

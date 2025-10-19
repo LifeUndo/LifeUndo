@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { PLAN_TO_PRODUCT, type PlanKey } from "@/business/pricing/plans";
 
@@ -20,7 +20,7 @@ type Props = {
   className?: string;
 };
 
-export default function FreeKassaButton({ plan, email = "test@example.com", className }: Props) {
+export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com", className }: Props) {
   const t = useI18n();
   const productId = PLAN_TO_PRODUCT[plan];
   const disabled = !productId;

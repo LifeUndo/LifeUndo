@@ -7,7 +7,7 @@
 - [ ] `FREEKASSA_MERCHANT_ID` → Preview + Production
 - [ ] `FREEKASSA_SECRET1` → Preview + Production  
 - [ ] `FREEKASSA_SECRET2` → Preview + Production
-- [ ] `FREEKASSA_PAYMENT_URL=https://pay.freekassa.ru/` → Preview + Production
+- [ ] `FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/` → Preview + Production
 - [ ] `FREEKASSA_CURRENCY=RUB` → Preview + Production
 
 ### 2. Remove Deprecated Variables
@@ -41,7 +41,7 @@ Invoke-WebRequest -Uri "$P/api/debug/fk" -UseBasicParsing
   "fkEnabled": true,
   "fkConfigured": true,
   "merchantIdMasked": "abcd***",
-  "paymentUrl": "https://pay.freekassa.ru/",
+  "paymentUrl": "https://pay.freekassa.net/",
   "currency": "RUB",
   "products": {
     "getlifeundo_pro": "599.00",
@@ -60,7 +60,7 @@ $response.pay_url
 
 **Expected:**
 - Status: 200 OK
-- Response contains `pay_url` with `https://pay.freekassa.ru/`
+- Response contains `pay_url` with `https://pay.freekassa.net/`
 - URL contains `currency=RUB` and `oa=599.00`
 
 ### Test 3: UI Check

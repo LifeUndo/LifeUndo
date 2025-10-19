@@ -7,7 +7,7 @@
     "contact": {
       "name": "LifeUndo Support",
       "email": "support@lifeundo.ru",
-      "url": "https://www.getlifeundo.com/contacts"
+      "url": "https://www.getlifeundo.com/support"
     },
     "license": {
       "name": "Proprietary",
@@ -123,7 +123,7 @@
                       "type": "string",
                       "format": "uri",
                       "description": "URL для перехода к оплате",
-                      "example": "https://pay.freekassa.ru/?m=123&oa=99.00&o=ORDER123&s=SIGNATURE"
+                      "example": "https://pay.freekassa.net/?m=123&oa=99.00&o=ORDER123&s=SIGNATURE"
                     },
                     "order_id": {
                       "type": "string",

@@ -98,7 +98,7 @@ api/
 **Response:**
 ```json
 {
-  "url": "https://pay.freekassa.ru/?merchant_id=...",
+  "url": "https://pay.freekassa.net/?merchant_id=...",
   "order_id": "LU-1234567890-abc123"
 }
 ```

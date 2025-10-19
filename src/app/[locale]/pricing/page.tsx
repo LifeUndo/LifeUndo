@@ -57,14 +57,23 @@ export default function PricingPage() {
         />
       </div>
 
-      {/* Payment Highlight */}
+      {/* Оплата и безопасность */}
       <section className="max-w-2xl mx-auto mb-12">
         <div className="rounded-xl bg-gradient-to-r from-purple-700/40 to-blue-700/40 border border-white/10 p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Оплатить через FreeKassa</h3>
-          <p className="text-sm text-white/80 mb-4">Быстрый и безопасный способ оплаты через FreeKassa.</p>
-          <div className="flex items-center justify-center">
+          <h3 className="text-xl font-semibold mb-2">Оплата и безопасность</h3>
+          <p className="text-sm text-white/80 mb-4">Принимаем платежи через FreeKassa. Stripe — скоро. Все платежи проходят по защищённым каналам.</p>
+          <div className="flex items-center justify-center gap-3">
             <FreeKassaButton plan="pro_month" />
+            <button
+              type="button"
+              aria-disabled="true"
+              className="px-4 py-2 rounded border border-white/20 text-white/60 cursor-not-allowed"
+              title="Скоро"
+            >
+              Stripe — скоро
+            </button>
           </div>
+          <div className="mt-4 text-xs text-white/60">Пробный период 7 дней с авто‑продлением. Отменить можно в любой момент до даты списания.</div>
         </div>
       </section>
 

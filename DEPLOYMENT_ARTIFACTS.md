@@ -84,7 +84,7 @@
 FREEKASSA_MERCHANT_ID=<your_merchant_id>
 FREEKASSA_SECRET1=<your_secret1>
 FREEKASSA_SECRET2=<your_secret2>
-FREEKASSA_PAYMENT_URL=https://pay.freekassa.com/
+FREEKASSA_PAYMENT_URL=https://pay.freekassa.net/
 FREEKASSA_CURRENCY=RUB
 ```
 
@@ -146,7 +146,7 @@ Invoke-RestMethod -Method Post -Uri "$P/api/support/ticket" -Body $ticket -Conte
 
 ### Проверка перед промоутом
 1. ✅ Merchant ID правильный (66046)
-2. ✅ Payment URL обновлен (pay.freekassa.com)
+2. ✅ Payment URL обновлен (pay.freekassa.net)
 3. ✅ Signature format исправлен
 4. ⚠️ БД миграции применены
 5. ⚠️ Email сервис настроен
