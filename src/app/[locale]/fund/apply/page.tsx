@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 
-export default function FundApplyPage() {
+export default function FundApplyPage({ params }: { params: { locale: 'ru' | 'en' } }) {
+  const isEn = params.locale === 'en';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,17 +41,18 @@ export default function FundApplyPage() {
             <div className="glass-card p-8">
               <div className="text-6xl mb-6">✅</div>
               <h1 className="text-3xl font-bold gradient-text mb-4">
-                Заявка отправлена!
+                {isEn ? 'Application sent!' : 'Заявка отправлена!'}
               </h1>
               <p className="text-gray-300 mb-6">
-                Спасибо за вашу заявку. Мы рассмотрим её в течение 5 рабочих дней 
-                и свяжемся с вами по указанному email.
+                {isEn
+                  ? 'Thank you for your application. We will review it within 5 business days and contact you via email.'
+                  : 'Спасибо за вашу заявку. Мы рассмотрим её в течение 5 рабочих дней и свяжемся с вами по указанному email.'}
               </p>
               <button 
                 onClick={() => setIsSubmitted(false)}
                 className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
               >
-                Подать новую заявку
+                {isEn ? 'Submit another application' : 'Подать новую заявку'}
               </button>
             </div>
           </div>
@@ -64,14 +66,14 @@ export default function FundApplyPage() {
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-4xl font-bold gradient-text mb-8 text-center">
-            Подать заявку в фонд
+            {isEn ? 'Apply to the fund' : 'Подать заявку в фонд'}
           </h1>
           
           <div className="glass-card p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  ФИО *
+                  {isEn ? 'Full name *' : 'ФИО *'}
                 </label>
                 <input
                   type="text"
@@ -81,7 +83,7 @@ export default function FundApplyPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  placeholder="Введите ваше полное имя"
+                  placeholder={isEn ? 'Enter your full name' : 'Введите ваше полное имя'}
                 />
               </div>
 
@@ -103,7 +105,7 @@ export default function FundApplyPage() {
 
               <div>
                 <label htmlFor="category" className="block text-sm font-medium mb-2">
-                  Категория проекта *
+                  {isEn ? 'Project category *' : 'Категория проекта *'}
                 </label>
                 <select
                   id="category"
@@ -113,23 +115,23 @@ export default function FundApplyPage() {
                   required
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white appearance-none cursor-pointer"
                 >
-                  <option value="" disabled className="text-gray-500">Выберите категорию</option>
-                  <option value="nko" className="text-white bg-gray-800">НКО — инициативы гражданского общества</option>
-                  <option value="medicine" className="text-white bg-gray-800">Медицина — образовательные проекты для медиков/пациентов</option>
-                  <option value="education" className="text-white bg-gray-800">Образование — школы/вузовские кружки</option>
-                  <option value="media" className="text-white bg-gray-800">СМИ — локальные медиа и редакции</option>
-                  <option value="individuals" className="text-white bg-gray-800">Частные лица — студенты, преподаватели, родители</option>
+                  <option value="" disabled className="text-gray-500">{isEn ? 'Choose a category' : 'Выберите категорию'}</option>
+                  <option value="nko" className="text-white bg-gray-800">{isEn ? 'NGOs — civil society initiatives' : 'НКО — инициативы гражданского общества'}</option>
+                  <option value="medicine" className="text-white bg-gray-800">{isEn ? 'Medicine — education for doctors/patients' : 'Медицина — образовательные проекты для медиков/пациентов'}</option>
+                  <option value="education" className="text-white bg-gray-800">{isEn ? 'Education — school/university clubs' : 'Образование — школы/вузовские кружки'}</option>
+                  <option value="media" className="text-white bg-gray-800">{isEn ? 'Media — local media and newsrooms' : 'СМИ — локальные медиа и редакции'}</option>
+                  <option value="individuals" className="text-white bg-gray-800">{isEn ? 'Individuals — students, teachers, parents' : 'Частные лица — студенты, преподаватели, родители'}</option>
                 </select>
                 
                 {/* Описания категорий */}
                 {formData.category && (
                   <div className="mt-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                     <p className="text-sm text-gray-300">
-                      {formData.category === 'nko' && 'Цифровая грамотность, приватность, обучение безопасной работе с данными.'}
-                      {formData.category === 'medicine' && 'Образовательные проекты для медиков/пациентов о защите персональных данных и снижении ошибок коммуникаций.'}
-                      {formData.category === 'education' && 'Гранты на кружки по цифровой гигиене, школьные газеты, студэнсообщества.'}
-                      {formData.category === 'media' && 'Инструменты и тренинги по безопасной публикации и проверке материалов.'}
-                      {formData.category === 'individuals' && 'Микрогранты на софт/обучение, если проект несёт общественную пользу.'}
+                      {formData.category === 'nko' && (isEn ? 'Digital literacy, privacy, safe data practices.' : 'Цифровая грамотность, приватность, обучение безопасной работе с данными.')}
+                      {formData.category === 'medicine' && (isEn ? 'Education for doctors/patients on personal data protection and reducing communication errors.' : 'Образовательные проекты для медиков/пациентов о защите персональных данных и снижении ошибок коммуникаций.')}
+                      {formData.category === 'education' && (isEn ? 'Grants for digital hygiene clubs, school newspapers, student communities.' : 'Гранты на кружки по цифровой гигиене, школьные газеты, студэнсообщества.')}
+                      {formData.category === 'media' && (isEn ? 'Tools and training for safe publishing and fact-checking.' : 'Инструменты и тренинги по безопасной публикации и проверке материалов.')}
+                      {formData.category === 'individuals' && (isEn ? 'Microgrants for software/education if the project brings public benefit.' : 'Микрогранты на софт/обучение, если проект несёт общественную пользу.')}
                     </p>
                   </div>
                 )}
@@ -137,7 +139,7 @@ export default function FundApplyPage() {
 
               <div>
                 <label htmlFor="description" className="block text-sm font-medium mb-2">
-                  Описание проекта *
+                  {isEn ? 'Project description *' : 'Описание проекта *'}
                 </label>
                 <textarea
                   id="description"
@@ -147,7 +149,7 @@ export default function FundApplyPage() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-                  placeholder="Расскажите о вашем проекте, его целях и том, как GetLifeUndo поможет в его реализации..."
+                  placeholder={isEn ? 'Describe your project, its goals and how GetLifeUndo helps...' : 'Расскажите о вашем проекте, его целях и том, как GetLifeUndo поможет в его реализации...'}
                 />
               </div>
 
@@ -162,7 +164,7 @@ export default function FundApplyPage() {
                   className="mt-1 w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500"
                 />
                 <label htmlFor="consent" className="text-sm text-gray-300">
-                  Я согласен на обработку персональных данных и получение уведомлений о статусе заявки *
+                  {isEn ? 'I consent to personal data processing and receiving notifications about the application status *' : 'Я согласен на обработку персональных данных и получение уведомлений о статусе заявки *'}
                 </label>
               </div>
 
@@ -171,15 +173,16 @@ export default function FundApplyPage() {
                 disabled={isSubmitting || !formData.consent}
                 className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Отправляем...' : 'Подать заявку'}
+                {isSubmitting ? (isEn ? 'Submitting...' : 'Отправляем...') : (isEn ? 'Submit application' : 'Подать заявку')}
               </button>
             </form>
 
             <div className="mt-8 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-              <h3 className="font-semibold text-blue-300 mb-2">Информация о фонде</h3>
+              <h3 className="font-semibold text-blue-300 mb-2">{isEn ? 'About the fund' : 'Информация о фонде'}</h3>
               <p className="text-sm text-gray-300">
-                Фонд GetLifeUndo выделяет 10% от всех доходов на поддержку проектов пользователей. 
-                Средства распределяются: 40% на образование, 30% на исследования, 30% на социальные проекты.
+                {isEn
+                  ? 'The GetLifeUndo Fund allocates 10% of all revenue to support user projects. Funds allocation: 40% education, 30% research, 30% social projects.'
+                  : 'Фонд GetLifeUndo выделяет 10% от всех доходов на поддержку проектов пользователей. Средства распределяются: 40% на образование, 30% на исследования, 30% на социальные проекты.'}
               </p>
             </div>
           </div>
