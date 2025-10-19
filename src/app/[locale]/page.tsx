@@ -100,6 +100,28 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
                 {locale === 'en' ? 'View pricing' : 'Посмотреть тарифы'}
               </a>
             </div>
+            {/* Share block */}
+            <div className="mt-6">
+              <div className="flex items-center justify-center gap-3 text-sm">
+                <a
+                  className="text-gray-300 hover:text-white underline-offset-2 hover:underline"
+                  href={`https://t.me/share/url?url=${encodeURIComponent(`https://getlifeundo.com/${locale}`)}&text=${encodeURIComponent(locale === 'en' ? 'Undo your browser fails with GetLifeUndo' : 'Верни потерянный текст и вкладки с GetLifeUndo')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {locale === 'en' ? 'Share in Telegram' : 'Поделиться в Telegram'}
+                </a>
+                <span className="text-gray-500">·</span>
+                <a
+                  className="text-gray-300 hover:text-white underline-offset-2 hover:underline"
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(locale === 'en' ? 'Undo your browser fails with GetLifeUndo' : 'Верни потерянный текст и вкладки с GetLifeUndo')}&url=${encodeURIComponent(`https://getlifeundo.com/${locale}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {locale === 'en' ? 'Share in X' : 'Поделиться в X'}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
