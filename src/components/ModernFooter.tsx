@@ -3,39 +3,58 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 // TODO: подключи реальный i18n-хук
-function useI18n() {
-  return (k: string) =>
-    (
-      {
-        "footer.product": "Продукт",
-        "footer.company": "Компания",
-        "footer.legal": "Правовое",
-        "footer.developers": "Разработчикам",
-        "footer.partners": "Партнёрам",
-        "footer.downloads": "Загрузки",
-        "footer.pricing": "Тарифы",
-        "footer.fund": "Фонд",
-        // Временно переименовываем 'Поддержка' в 'Контакты' согласно ТЗ
-        "footer.support": "Контакты",
-        "footer.privacy": "Конфиденциальность",
-        "footer.offer": "Оферта",
-        "footer.sla": "SLA",
-        "footer.contract": "Договор",
-        "footer.dpa": "DPA",
-        "footer.policy": "Политика",
-        "footer.downloadsTxt": "Текст лицензии/загрузок",
-        // Дополнительные ключи для PR-A1
-        "footer.slogan": "Возвращаем потерянный текст и формы, экономим время и нервы.",
-        "footer.follow": "Мы в соцсетях",
-        "footer.copyright": "© 2024–2025 GetLifeUndo. Все права защищены.",
-      } as Record<string, string>
-    )[k] ?? k;
+function useI18n(locale: 'ru' | 'en') {
+  const RU: Record<string, string> = {
+    "footer.product": "Продукт",
+    "footer.company": "Компания",
+    "footer.legal": "Правовое",
+    "footer.developers": "Разработчикам",
+    "footer.partners": "Партнёрам",
+    "footer.downloads": "Загрузки",
+    "footer.pricing": "Тарифы",
+    "footer.fund": "Фонд",
+    "footer.support": "Контакты",
+    "footer.privacy": "Конфиденциальность",
+    "footer.offer": "Оферта",
+    "footer.sla": "SLA",
+    "footer.contract": "Договор",
+    "footer.dpa": "DPA",
+    "footer.policy": "Политика",
+    "footer.downloadsTxt": "Текст лицензии/загрузок",
+    "footer.slogan": "Возвращаем потерянный текст и формы, экономим время и нервы.",
+    "footer.follow": "Мы в соцсетях",
+    "footer.copyright": "© 2024–2025 GetLifeUndo. Все права защищены.",
+  };
+  const EN: Record<string, string> = {
+    "footer.product": "Product",
+    "footer.company": "Company",
+    "footer.legal": "Legal",
+    "footer.developers": "Developers",
+    "footer.partners": "Partners",
+    "footer.downloads": "Downloads",
+    "footer.pricing": "Pricing",
+    "footer.fund": "Fund",
+    "footer.support": "Contacts",
+    "footer.privacy": "Privacy",
+    "footer.offer": "Offer",
+    "footer.sla": "SLA",
+    "footer.contract": "Contract",
+    "footer.dpa": "DPA",
+    "footer.policy": "Policy",
+    "footer.downloadsTxt": "License/Downloads text",
+    "footer.slogan": "Bring back lost text and forms — save time and nerves.",
+    "footer.follow": "Follow us",
+    "footer.copyright": "© 2024–2025 GetLifeUndo. All rights reserved.",
+  };
+  const dict = locale === 'en' ? EN : RU;
+  return (k: string) => dict[k] ?? k;
 }
 
 export default function ModernFooter() {
-  const t = useI18n();
   const pathname = usePathname() || "/";
   const seg = pathname.split("/").filter(Boolean)[0] || "ru";
+  const locale = seg === 'en' ? 'en' : 'ru';
+  const t = useI18n(locale);
   const withLocale = (p: string) => `/${seg}${p}` ;
 
   const product = [
