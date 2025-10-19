@@ -1,8 +1,12 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const seg = (pathname || '/ru').split('/').filter(Boolean)[0] || 'ru';
+  const locale = (seg === 'en' || seg === 'ru') ? seg : 'ru';
   
   const SocialIcon = ({ href, ariaLabel, children }: { href: string; ariaLabel: string; children: React.ReactNode }) => (
     <a 
@@ -74,16 +78,16 @@ export default function Footer() {
             className="h-6"
           />
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm text-slate-800">
-            <span className="font-medium">РњС‹ РѕС‚РґР°С‘Рј 10%</span> вЂ” GetLifeUndo Fund
+            <span className="font-medium">Мы отдаём 10%</span> — <Link href={`/${locale}/fund`} className="underline hover:no-underline">GetLifeUndo Fund</Link>
           </span>
         </div>
         <p className="text-xs text-slate-500">
-          В© {year} GetLifeUndo. Р’СЃРµ РїСЂР°РІР° Р·Р°С‰РёС‰РµРЅС‹ В·{" "}
-          <Link href="/privacy" className="hover:underline">РљРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅРѕСЃС‚СЊ</Link> В·{" "}
-          <Link href="/support" className="hover:underline">РџРѕРґРґРµСЂР¶РєР°</Link>
+          В© {year} GetLifeUndo ·{' '}
+          <Link href={`/${locale}/privacy`} className="hover:underline">Конфиденциальность</Link> ·{' '}
+          <Link href={`/${locale}/terms`} className="hover:underline">Условия</Link> ·{' '}
+          <Link href={`/${locale}/support`} className="hover:underline">Поддержка</Link>
         </p>
       </div>
     </footer>
   );
 }
-

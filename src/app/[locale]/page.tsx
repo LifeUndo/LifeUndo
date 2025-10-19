@@ -107,12 +107,12 @@ export default function LocaleIndex({ params }: { params: { locale: string } }) 
         <div className="text-center mt-16">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              {locale === 'en' ? 'Mobile Apps Coming Soon' : 'Мобильные приложения скоро'}
+              {locale === 'en' ? 'Mobile Apps Coming Soon' : 'Мобильные приложения — скоро'}
             </h3>
             <p className="text-gray-300 mb-8">
               {locale === 'en' 
-                ? 'GetLifeUndo will be available on iOS, Android, and RuStore in Q1 2025' 
-                : 'GetLifeUndo будет доступен на iOS, Android и RuStore в Q1 2025'
+                ? 'iOS, Android and RuStore versions are in development. Stay tuned.' 
+                : 'Версии для iOS, Android и RuStore в разработке. Следите за новостями.'
               }
             </p>
             <MobileBadges />

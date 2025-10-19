@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 interface MobileBadgesProps {
   className?: string;
@@ -8,7 +8,7 @@ export default function MobileBadges({ className = '' }: MobileBadgesProps) {
   return (
     <div className={`flex gap-3 justify-center ${className}`}>
       <a 
-        href="/news/mobile-ios" 
+        href="/downloads#mobile" 
         className="transition-opacity hover:opacity-80"
         aria-label="App Store"
       >
@@ -20,7 +20,7 @@ export default function MobileBadges({ className = '' }: MobileBadgesProps) {
       </a>
       
       <a 
-        href="/news/mobile-android" 
+        href="/downloads#mobile" 
         className="transition-opacity hover:opacity-80"
         aria-label="Google Play"
       >
@@ -32,7 +32,7 @@ export default function MobileBadges({ className = '' }: MobileBadgesProps) {
       </a>
       
       <a 
-        href="/news/rustore" 
+        href="/downloads#mobile" 
         className="transition-opacity hover:opacity-80"
         aria-label="RuStore"
       >

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: '%s — GetLifeUndo',
   },
   description:
-    'Restore form text, closed tabs and clipboard history. 100% local, no cloud. Browser extension for Firefox/Chrome. RU/EN.',
+    'Restore form text, closed tabs and clipboard history. 100% local, no cloud. Browser extension for Firefox/Chrome. RU/EN. Восстановление форм, вкладок и буфера — 100% локально.',
   keywords: [
     'restore form text',
     'undo actions',
@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     'restore form text',
     'reopen closed tabs',
     'clipboard history',
+    // RU high-intent
+    'восстановить закрытую вкладку',
+    'отменить закрытие вкладки chrome',
+    'потерял текст в форме браузера',
+    'локальное восстановление данных',
+    'ctrl z для интернета',
   ],
   authors: [{ name: 'GetLifeUndo Team' }],
   creator: 'GetLifeUndo',

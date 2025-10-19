@@ -27,8 +27,10 @@ export async function POST(req: NextRequest) {
     const plan = typeof planRaw === 'string' ? planRaw.trim() : undefined;
     const productId = typeof productIdRaw === 'string' ? productIdRaw.trim() : undefined;
 
-    // Включение по флагу (прод/превью одинаково)
-    const fkEnabled = String(process.env.NEXT_PUBLIC_FK_ENABLED || '').toLowerCase() === 'true';
+    // Включение: флаг или наличие секретов (позволяет не падать, если флаг не выставлен, но секреты заданы)
+    const flagEnabled = String(process.env.NEXT_PUBLIC_FK_ENABLED || '').toLowerCase() === 'true';
+    const secretsPresent = Boolean(process.env.FREEKASSA_MERCHANT_ID && process.env.FREEKASSA_SECRET1);
+    const fkEnabled = flagEnabled || secretsPresent;
     if (!fkEnabled) {
       return NextResponse.json({ ok: false, error: 'fk-disabled' }, { status: 400 });
     }
@@ -66,7 +68,11 @@ export async function POST(req: NextRequest) {
       currency: CURRENCY,
     });
 
-    const pay_url = `${process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.net/'}?${qs.toString()}`;
+    // Базовый URL оплаты: защищаемся от устаревших доменов в ENV
+    const rawBase = process.env.FREEKASSA_PAYMENT_URL || 'https://pay.freekassa.net/';
+    const isNet = /^https:\/\/(?:pay\.)?freekassa\.net\/?$/i.test(rawBase);
+    const baseUrl = isNet ? (rawBase.endsWith('/') ? rawBase : rawBase + '/') : 'https://pay.freekassa.net/';
+    const pay_url = `${baseUrl}?${qs.toString()}`;
 
     // Логируем для отладки (без секретов)
     console.log('FreeKassa payment created:', {

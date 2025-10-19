@@ -55,8 +55,8 @@ export default {
     securePayment: "Secure payment",
   },
   hero: {
-    title: "Ctrl+Z for your online life",
-    subtitle: "Forms, tabs, clipboard — 100% local and private.",
+    title: "Lost text? Closed a tab? Ctrl+Z brings it all back",
+    subtitle: "Restore forms, tabs and clipboard. 100% local, no cloud, no tracking.",
     cta_primary: "Download extension",
     cta_secondary: "Learn more"
   },
