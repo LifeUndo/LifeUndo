@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ru-01",
+    "platforms": ["tg", "x"],
+    "locale": "ru",
+    "text": "😩 Потеряли текст в форме? Не переписывайте заново. GetLifeUndo вернёт. Установить: https://getlifeundo.com/ru #CtrlZ #ВосстановитьВкладку"
+  },
+  {
+    "id": "ru-02",
+    "platforms": ["tg", "x"],
+    "locale": "ru",
+    "text": "Случайно закрыли вкладку? Откатите. 100% локально, без облака. https://getlifeundo.com/ru #Приватность #Undo"
+  },
+  {
+    "id": "en-01",
+    "platforms": ["x"],
+    "locale": "en",
+    "text": "Lost your draft? GetLifeUndo brings it back. 100% local. https://getlifeundo.com/en #CtrlZ #UndoBrowser"
+  },
+  {
+    "id": "en-02",
+    "platforms": ["x"],
+    "locale": "en",
+    "text": "Closed a tab by accident? Undo it in seconds. https://getlifeundo.com/en #Productivity"
+  }
+]

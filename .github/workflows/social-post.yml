@@ -1,0 +1,39 @@
+name: Social Auto Post (Dry Run)
+
+on:
+  schedule:
+    - cron: '30 7 * * *' # 10:30 Europe/Moscow
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (true/false)'
+        required: false
+        default: 'true'
+      post_limit:
+        description: 'How many items to post this run'
+        required: false
+        default: '1'
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: |
+          npm init -y >/dev/null 2>&1 || true
+          npm install node-fetch@2 --no-audit --no-fund
+      - name: Run poster (dry)
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'true' }}
+          POST_LIMIT: ${{ github.event.inputs.post_limit || '1' }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: |
+          node scripts/social/poster.js
