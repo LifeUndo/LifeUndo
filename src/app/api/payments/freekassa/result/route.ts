@@ -53,45 +53,35 @@ export async function POST(req: Request) {
         : prefix === 'TEAM5' ? 'team_5'
         : null;
     }
-    
-    // Проверить идемпотентность - не обработан ли уже этот платеж
-    const existing = await db.query.payments.findFirst({
-      where: eq(payments.order_id, orderId)
-    });
-    
-    if (existing && existing.status === 'paid') {
-      console.log('[webhook] Already processed:', orderId);
-      return new Response('YES', { status: 200 });
-    }
-    
-    // Сохранить платеж в БД
-    await db.insert(payments).values({
-      order_id: orderId,
-      plan: plan || 'unknown',
-      amount: amount,
-      currency: 'RUB',
-      status: 'paid',
-      paid_at: new Date(),
-      raw: { merchantId, amount, orderId, status, signature }
-    });
-    
-    // Активация лицензии если есть план
-    if (plan) {
-      try {
-        // Получить email из formData FreeKassa
-        const email = (formData.get('PAYER_EMAIL') as string) || (formData.get('email') as string) || 'unknown@example.com';
-        
-        await activateLicense({
-          email,
-          plan,
-          orderId
-        });
-        
-        console.log('[webhook] License activated:', { orderId, plan, email });
-      } catch (error) {
-        console.error('[webhook] License activation error:', error);
-        // Не падаем - платеж уже прошел
+    const hasDb = Boolean(process.env.DATABASE_URL);
+    if (hasDb) {
+      const existing = await db.query.payments.findFirst({
+        where: eq(payments.order_id, orderId)
+      });
+      if (existing && existing.status === 'paid') {
+        console.log('[webhook] Already processed:', orderId);
+        return new Response('YES', { status: 200 });
       }
+      await db.insert(payments).values({
+        order_id: orderId,
+        plan: plan || 'unknown',
+        amount: amount,
+        currency: 'RUB',
+        status: 'paid',
+        paid_at: new Date(),
+        raw: { merchantId, amount, orderId, status, signature }
+      });
+      if (plan) {
+        try {
+          const email = (formData.get('PAYER_EMAIL') as string) || (formData.get('email') as string) || 'unknown@example.com';
+          await activateLicense({ email, plan, orderId });
+          console.log('[webhook] License activated:', { orderId, plan, email });
+        } catch (error) {
+          console.error('[webhook] License activation error:', error);
+        }
+      }
+    } else {
+      console.log('[webhook] DB not configured; skipping persistence for', orderId);
     }
     
     // Логируем успешную оплату (без секретов)

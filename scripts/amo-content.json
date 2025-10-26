@@ -1,0 +1,36 @@
+{
+  "listing": {
+    "en": {
+      "name": "GetLifeUndo - Ctrl+Z for your browser: restore forms, tabs and clipboard",
+      "summary": "Restore lost form text, closed tabs and clipboard history. 100% local, no cloud. Privacy-first.",
+      "description": "Lost your draft or closed a tab by mistake? GetLifeUndo brings it back.\n\nWhat it does\n- Restore form text (inputs, textareas) so you don't retype\n- Reopen recently closed tabs\n- Keep clipboard history - 100% local, no cloud\n\nPrivacy\n- Local-first: no telemetry, no tracking\n- Payments handled by secure PSPs\n\nGet started\n- 7-day free. Learn more: https://getlifeundo.com/en\n- Privacy: https://getlifeundo.com/en/privacy - Terms: https://getlifeundo.com/en/terms",
+      "tags": [
+        "undo closed tab chrome",
+        "recover lost form text",
+        "browser undo extension",
+        "restore clipboard history",
+        "privacy first extension",
+        "local only data recovery"
+      ]
+    },
+    "ru": {
+      "name": "GetLifeUndo - Ctrl+Z для браузера: возвращает формы, вкладки и буфер",
+      "summary": "Восстановление текста форм, закрытых вкладок и буфера обмена. 100% локально и приватно.",
+      "description": "Потеряли текст или случайно закрыли вкладку? GetLifeUndo вернет.\n\nВозможности\n- Возвращает текст форм (input/textarea), без переписывания\n- Недавно закрытые вкладки за пару кликов\n- История буфера обмена - 100% локально, без облака\n\nПриватность\n- Local-first: без телеметрии, без трекинга\n- Платежи обрабатываются защищенными PSP\n\nСтарт\n- 7 дней бесплатно: https://getlifeundo.com/ru\n- Конфиденциальность: https://getlifeundo.com/ru/privacy - Условия: https://getlifeundo.com/ru/terms",
+      "tags": [
+        "восстановить закрытую вкладку",
+        "отменить закрытие вкладки chrome",
+        "потерял текст в форме браузера",
+        "локальное восстановление данных",
+        "ctrl z для интернета"
+      ]
+    },
+    "category": "Productivity"
+  },
+  "links": {
+    "homepage": { "en": "https://getlifeundo.com/en", "ru": "https://getlifeundo.com/ru" },
+    "privacy": { "en": "https://getlifeundo.com/en/privacy", "ru": "https://getlifeundo.com/ru/privacy" },
+    "terms": { "en": "https://getlifeundo.com/en/terms", "ru": "https://getlifeundo.com/ru/terms" },
+    "support": { "en": "https://getlifeundo.com/en#contact", "ru": "https://getlifeundo.com/ru#contact" }
+  }
+}

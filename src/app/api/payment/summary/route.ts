@@ -3,6 +3,8 @@ import { db } from '@/db/client';
 import { payments, licenses, feature_flags } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+export const runtime = 'nodejs';
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const orderId = searchParams.get('order_id');
@@ -12,6 +14,16 @@ export async function GET(req: Request) {
   }
   
   try {
+    const hasDb = Boolean(process.env.DATABASE_URL);
+    if (!hasDb) {
+      // Без БД возвращаем мягкий ответ, чтобы страница успеха не падала
+      return NextResponse.json({
+        ok: true,
+        order_id: orderId,
+        status: 'processed',
+        note: 'DB not configured; detailed summary unavailable'
+      }, { status: 200 });
+    }
     // Найти платеж
     const payment = await db.query.payments.findFirst({
       where: eq(payments.order_id, orderId)
@@ -47,7 +59,7 @@ export async function GET(req: Request) {
         expires_at: license.expires_at,
         seats: license.seats
       } : null,
-      flags: flags.map(f => ({
+      flags: flags.map((f: any) => ({
         key: f.key,
         value: f.value,
         expires_at: f.expires_at

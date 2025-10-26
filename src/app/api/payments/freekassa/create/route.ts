@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PLANS, isValidPlan, getPlanAmount } from '@/config/plans';
+import { PLANS, isValidPlan, getPlanAmount, type PlanId } from '@/config/plans';
 import crypto from 'crypto';
+import { FK_CURRENCY } from '@/lib/fk-env';
+import { getOrderPrefix } from '@/lib/payments/fk-plans';
 
 // Совместимость: план → productId
 const PLAN_TO_PRODUCT: Record<string, string> = {
@@ -8,6 +10,13 @@ const PLAN_TO_PRODUCT: Record<string, string> = {
   vip_lifetime: 'VIPL',
   team_5: 'TEAM5',
   starter_6m: 'S6M',
+};
+
+const PRODUCT_TO_PLAN: Record<string, PlanId | undefined> = {
+  PROM: 'pro_month',
+  VIPL: 'vip_lifetime',
+  TEAM5: 'team_5',
+  S6M: 'starter_6m' as any,
 };
 
 // Фиксированные суммы по productId (строго две цифры при форматировании)
@@ -52,8 +61,11 @@ export async function POST(req: NextRequest) {
     const MERCHANT_ID = process.env.FREEKASSA_MERCHANT_ID!;
     const SECRET1 = process.env.FREEKASSA_SECRET1!;
     const AMOUNT = PRODUCT_AMOUNTS[effectiveProductId].toFixed(2); // "599.00" - строго две цифры
-    const ORDER_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-    const CURRENCY = 'RUB';
+    // Префикс по плану для удобства дальнейшей обработки webhook
+    const planForPrefix: PlanId | undefined = PRODUCT_TO_PLAN[effectiveProductId];
+    const prefix = planForPrefix ? getOrderPrefix(planForPrefix) : effectiveProductId;
+    const ORDER_ID = `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const CURRENCY = FK_CURRENCY || 'RUB';
 
     // Подпись (без раскрытия деталей в логах)
     const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;

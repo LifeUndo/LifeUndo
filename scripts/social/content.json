@@ -1,26 +1,29 @@
 [
-  {
-    "id": "ru-01",
-    "platforms": ["tg", "x"],
-    "locale": "ru",
-    "text": "😩 Потеряли текст в форме? Не переписывайте заново. GetLifeUndo вернёт. Установить: https://getlifeundo.com/ru #CtrlZ #ВосстановитьВкладку"
-  },
-  {
-    "id": "ru-02",
-    "platforms": ["tg", "x"],
-    "locale": "ru",
-    "text": "Случайно закрыли вкладку? Откатите. 100% локально, без облака. https://getlifeundo.com/ru #Приватность #Undo"
-  },
-  {
-    "id": "en-01",
-    "platforms": ["x"],
-    "locale": "en",
-    "text": "Lost your draft? GetLifeUndo brings it back. 100% local. https://getlifeundo.com/en #CtrlZ #UndoBrowser"
-  },
-  {
-    "id": "en-02",
-    "platforms": ["x"],
-    "locale": "en",
-    "text": "Closed a tab by accident? Undo it in seconds. https://getlifeundo.com/en #Productivity"
-  }
+  {"id":"2025-10-20-ru-cta-download","platforms":["tg"],"locale":"ru","date":"2025-10-20","text":"<b>Скачать GetLifeUndo</b>\n\nCtrl+Z для браузера: восстановление текста форм, недавно закрытых вкладок и истории буфера обмена. 100% локально и приватно.\n\n<b>Скачать</b>\n• https://getlifeundo.com/ru/downloads\n\n#GetLifeUndo #Скачать #CtrlZ #Продуктивность #Приватность"},
+  {"id":"2025-10-21-ru-launch","platforms":["tg"],"locale":"ru","date":"2025-10-20","text":"<b>GetLifeUndo — Ctrl+Z для вашего браузера</b>\n\n😩 Потеряли текст в форме? 🗂️ Случайно закрыли нужную вкладку? 📋 Пропала история буфера обмена?\n\n<b>Что делаем</b>\n• Возвращаем текст форм (input/textarea) — без переписывания\n• Откатываем недавно закрытые вкладки\n• Держим историю буфера обмена\n\n<b>Приватность</b>\n• 100% локально: без облака, без телеметрии, без трекинга\n\n<b>Старт</b>\n• 7 дней бесплатно: https://getlifeundo.com/ru\n• Конфиденциальность: https://getlifeundo.com/ru/privacy • Условия: https://getlifeundo.com/ru/terms\n\n#GetLifeUndo #CtrlZ #Восстановление #Браузер #Продуктивность #Приватность #LocalFirst #Firefox #Chrome #Формы #БуферОбмена"},
+  {"id":"2025-10-23-en-launch","platforms":["tg"],"locale":"en","date":"2025-10-20","text":"<b>GetLifeUndo — Ctrl+Z for your browser</b>\n\n😩 Lost form text? 🗂️ Closed a tab by mistake? 📋 Clipboard history gone?\n\n<b>What we do</b>\n• Restore form text — no retyping\n• Reopen recently closed tabs\n• Keep clipboard history\n\n<b>Privacy</b>\n• 100% local: no cloud, no telemetry, no tracking\n\n<b>Get started</b>\n• 7‑day free: https://getlifeundo.com/en\n• Privacy: https://getlifeundo.com/en/privacy • Terms: https://getlifeundo.com/en/terms\n\n#GetLifeUndo #CtrlZ #Undo #Browser #Productivity #PrivacyFirst #LocalFirst #Firefox #Chrome #RestoreForms #ClipboardHistory"},
+  {"id":"2025-10-28-ru-forms","platforms":["tg"],"locale":"ru","date":"2025-10-28","text":"<b>Формы без страха</b>\n\nСтраница перезагрузилась? Интернет моргнул? Просто вернитесь в поле — GetLifeUndo предложит восстановить ввод.\n\nРаботает локально и мгновенно. Подробнее: https://getlifeundo.com/ru\n\n#GetLifeUndo #Формы #CtrlZ #Продуктивность"},
+  {"id":"2025-10-30-en-tabs","platforms":["tg"],"locale":"en","date":"2025-10-30","text":"<b>Tabs: accidents happen</b>\n\nClosed a tab while multitasking? Reopen it in seconds and keep your flow.\n\nLearn more: https://getlifeundo.com/en\n\n#GetLifeUndo #Tabs #CtrlZ #Productivity"},
+  {"id":"2025-11-04-ru-clipboard","platforms":["tg"],"locale":"ru","date":"2025-11-04","text":"<b>Буфер обмена под контролем</b>\n\nGetLifeUndo сохраняет историю буфера обмена — локально и приватно. Удобно для кода, ссылок и заметок.\n\nhttps://getlifeundo.com/ru\n\n#GetLifeUndo #БуферОбмена #Продуктивность #LocalFirst"},
+  {"id":"2025-11-06-en-clipboard","platforms":["tg"],"locale":"en","date":"2025-11-06","text":"<b>Clipboard history, but private</b>\n\nKeep snippets, links and notes — 100% on your device.\n\nhttps://getlifeundo.com/en\n\n#GetLifeUndo #Clipboard #PrivacyFirst #LocalFirst"},
+  {"id":"2025-11-11-ru-privacy","platforms":["tg"],"locale":"ru","date":"2025-11-11","text":"<b>Приватность по умолчанию</b>\n\nУ нас нет облака и телеметрии — данные не покидают ваше устройство.\n\nПолитика: https://getlifeundo.com/ru/privacy\n\n#GetLifeUndo #Приватность #БезОблака #LocalFirst"},
+  {"id":"2025-11-13-en-privacy","platforms":["tg"],"locale":"en","date":"2025-11-13","text":"<b>Privacy by design</b>\n\nNo cloud. No telemetry. No tracking. Your data stays on your device.\n\nPrivacy: https://getlifeundo.com/en/privacy\n\n#GetLifeUndo #Privacy #NoCloud #LocalFirst"},
+  {"id":"2025-11-18-ru-how","platforms":["tg"],"locale":"ru","date":"2025-11-18","text":"<b>Как это работает</b>\n\nЛёгкое расширение отслеживает ввод и действия вкладок локально, позволяя откатывать ошибки. Никаких серверов.\n\nhttps://getlifeundo.com/ru\n\n#GetLifeUndo #КакЭтоРаботает #CtrlZ"},
+  {"id":"2025-11-20-en-how","platforms":["tg"],"locale":"en","date":"2025-11-20","text":"<b>How it works</b>\n\nA lightweight extension records inputs and tab events locally — so you can undo mistakes. No servers involved.\n\nhttps://getlifeundo.com/en\n\n#GetLifeUndo #HowItWorks #CtrlZ"},
+  {"id":"2025-11-25-ru-cases","platforms":["tg"],"locale":"ru","date":"2025-11-25","text":"<b>Кому полезен GetLifeUndo</b>\n\n• Соцсети/редакторы: длинные тексты без риска\n• Разработчики: код и ссылки под рукой\n• Подбор вакансий/заявки: форма не пропадёт\n\n#GetLifeUndo #UseCases #Продуктивность"},
+  {"id":"2025-11-27-en-cases","platforms":["tg"],"locale":"en","date":"2025-11-27","text":"<b>Who benefits</b>\n\n• Writers/social: long drafts safe\n• Developers: snippets and links handy\n• Job/Forms: no more lost submissions\n\n#GetLifeUndo #UseCases #Productivity"},
+  {"id":"2025-12-02-ru-speed","platforms":["tg"],"locale":"ru","date":"2025-12-02","text":"<b>Скорость и лёгкость</b>\n\nРаботает мгновенно и не мешает повседневной работе.\n\n#GetLifeUndo #Скорость #Лёгкость #UX"},
+  {"id":"2025-12-04-en-speed","platforms":["tg"],"locale":"en","date":"2025-12-04","text":"<b>Fast and lightweight</b>\n\nInstant response. Minimal overhead.\n\n#GetLifeUndo #Fast #Lightweight #UX"},
+  {"id":"2025-12-09-ru-pricing","platforms":["tg"],"locale":"ru","date":"2025-12-09","text":"<b>Старт бесплатно</b>\n\n7 дней бесплатно. Без подписок и скрытых лимитов.\n\nhttps://getlifeundo.com/ru\n\n#GetLifeUndo #Бесплатно #Прозрачно"},
+  {"id":"2025-12-11-en-pricing","platforms":["tg"],"locale":"en","date":"2025-12-11","text":"<b>Free to start</b>\n\n7-day free. No subscriptions. No hidden limits.\n\nhttps://getlifeundo.com/en\n\n#GetLifeUndo #FreeTrial #Transparent"},
+  {"id":"2025-12-16-ru-compare","platforms":["tg"],"locale":"ru","date":"2025-12-16","text":"<b>Чем мы отличаемся</b>\n\n• Нет облака — значит, нет утечек из облака\n• Локально — значит, быстро и приватно\n\n#GetLifeUndo #БезОблака #Локально #Приватность"},
+  {"id":"2025-12-18-en-compare","platforms":["tg"],"locale":"en","date":"2025-12-18","text":"<b>Different by design</b>\n\n• No cloud = no cloud leaks\n• Local-first = fast and private\n\n#GetLifeUndo #NoCloud #LocalFirst #Privacy"},
+  {"id":"2025-12-23-ru-tips","platforms":["tg"],"locale":"ru","date":"2025-12-23","text":"<b>Совет дня</b>\n\nЕсли потеряли текст, нажмите в поле — появится предложение восстановить.\n\n#GetLifeUndo #Совет #CtrlZ"},
+  {"id":"2025-12-25-en-tips","platforms":["tg"],"locale":"en","date":"2025-12-25","text":"<b>Tip of the day</b>\n\nLost a form? Click the field to restore suggestions.\n\n#GetLifeUndo #Tip #CtrlZ"},
+  {"id":"2025-12-30-ru-year","platforms":["tg"],"locale":"ru","date":"2025-12-30","text":"<b>Итоги и планы</b>\n\nСпасибо, что с нами! В новом году — ещё больше удобства и приватности.\n\n#GetLifeUndo #Итоги #НовыйГод"},
+  {"id":"2026-01-01-en-year","platforms":["tg"],"locale":"en","date":"2026-01-01","text":"<b>Happy New Year!</b>\n\nMore speed, more privacy, more control over your browsing.\n\n#GetLifeUndo #NewYear #Privacy"},
+  {"id":"2026-01-06-ru-roadmap","platforms":["tg"],"locale":"ru","date":"2026-01-06","text":"<b>Roadmap</b>\n\nПланируем улучшения по формам, вкладкам и буферу обмена. Следите за новостями!\n\n#GetLifeUndo #Roadmap #Продуктивность"},
+  {"id":"2026-01-08-en-roadmap","platforms":["tg"],"locale":"en","date":"2026-01-08","text":"<b>Roadmap</b>\n\nUpcoming upgrades across forms, tabs and clipboard. Stay tuned!\n\n#GetLifeUndo #Roadmap #Productivity"},
+  {"id":"2026-01-13-ru-support","platforms":["tg"],"locale":"ru","date":"2026-01-13","text":"<b>Нужна помощь?</b>\n\nПишите нам: https://getlifeundo.com/ru#contact — читаем и отвечаем быстро.\n\n#GetLifeUndo #Помощь #Контакты"},
+  {"id":"2026-01-15-en-support","platforms":["tg"],"locale":"en","date":"2026-01-15","text":"<b>Need help?</b>\n\nReach us: https://getlifeundo.com/en#contact — quick responses.\n\n#GetLifeUndo #Support #Contact"}
 ]

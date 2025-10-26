@@ -49,7 +49,7 @@ export default function PricingPageEN() {
           isPopular={true}
           ctaText="Get Pro"
           ctaLink="/buy?plan=pro"
-          customCTA={<FreeKassaButton plan="pro_month" />}
+          customCTA={<FreeKassaButton plan="pro_month" className="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold" />}
         />
 
         {/* VIP */}
@@ -69,7 +69,7 @@ export default function PricingPageEN() {
           period="forever"
           ctaText="Buy VIP"
           ctaLink="/buy?plan=vip"
-          customCTA={<FreeKassaButton plan="vip_lifetime" />}
+          customCTA={<FreeKassaButton plan="vip_lifetime" className="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold" />}
         />
       </div>
 
@@ -90,7 +90,7 @@ export default function PricingPageEN() {
           period="for 5 seats per month"
           ctaText="Order Team"
           ctaLink="/buy?plan=team"
-          customCTA={<FreeKassaButton plan="team_5" />}
+          customCTA={<FreeKassaButton plan="team_5" className="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white font-semibold" />}
         />
       </div>
 

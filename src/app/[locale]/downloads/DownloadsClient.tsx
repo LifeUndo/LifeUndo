@@ -183,7 +183,7 @@ export default function DownloadsClient() {
             href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
             className="bg-orange-600 hover:bg-orange-700 text-white"
             t={t}
-            isAvailable={!!latestData?.files.firefox}
+            isAvailable={true}
           />
 
           {/* Edge */}

@@ -4,9 +4,11 @@
 
 - `NEXT_PUBLIC_SITE_URL` = `https://getlifeundo.com`
 - `NEXT_EMAIL_ENABLED` = `false`
-- `FK_SHOP_ID` = (FreeKassa Shop ID)
-- `FK_SECRET_1` = (FreeKassa Secret 1)
-- `FK_SECRET_2` = (FreeKassa Secret 2)
+- `FREEKASSA_MERCHANT_ID` = (FreeKassa Merchant ID)
+- `FREEKASSA_SECRET1` = (FreeKassa Secret 1)
+- `FREEKASSA_SECRET2` = (FreeKassa Secret 2)
+- `FREEKASSA_PAYMENT_URL` = `https://pay.freekassa.net/`
+- `FREEKASSA_CURRENCY` = `RUB`
 
 ## Current Status:
 - Code is ready for production deployment

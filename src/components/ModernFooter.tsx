@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { usePathname } from "next/navigation";
+import { useTranslations } from '@/hooks/useTranslations';
 
 // TODO: подключи реальный i18n-хук
 function useI18n(locale: 'ru' | 'en') {
@@ -51,11 +51,9 @@ function useI18n(locale: 'ru' | 'en') {
 }
 
 export default function ModernFooter() {
-  const pathname = usePathname() || "/";
-  const seg = pathname.split("/").filter(Boolean)[0] || "ru";
-  const locale = seg === 'en' ? 'en' : 'ru';
-  const t = useI18n(locale);
-  const withLocale = (p: string) => `/${seg}${p}` ;
+  const { locale } = useTranslations();
+  const t = useI18n(locale === 'en' ? 'en' : 'ru');
+  const withLocale = (p: string) => `/${locale}${p}` ;
 
   const product = [
     { href: withLocale("/developers"), label: t("footer.developers") },

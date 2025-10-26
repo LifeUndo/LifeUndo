@@ -1,16 +1,19 @@
-import useCasesData from '@/data/use_cases_ru.json';
+import useCasesRU from '@/data/use_cases_ru.json';
+import useCasesEN from '@/data/use_cases_en.json';
 
-export default function UseCasesPage() {
+export default function UseCasesPage({ params }: { params: { locale: string } }) {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const data = locale === 'en' ? (useCasesEN as typeof useCasesRU) : useCasesRU;
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
-            Кейсы использования
+            {locale === 'en' ? 'Use Cases' : 'Кейсы использования'}
           </h1>
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Как GetLifeUndo помогает в разных сферах
+            {locale === 'en' ? 'How GetLifeUndo helps across different areas' : 'Как GetLifeUndo помогает в разных сферах'}
           </p>
         </div>
       </section>
@@ -19,7 +22,7 @@ export default function UseCasesPage() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {useCasesData.map((useCase, index) => (
+            {data.map((useCase, index) => (
               <div key={index} className="glass-card p-6 hover:scale-105 transition-transform duration-200">
                 <div className="flex items-center mb-4">
                   <span className="text-sm px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full">
@@ -34,7 +37,11 @@ export default function UseCasesPage() {
                 </p>
                 <div className="mt-4">
                   <a
-                    href={useCase.cta === "Узнать о GLU" ? "/ru/email-pause" : "/ru/downloads"}
+                    href={
+                      useCase.cta === 'Узнать о GLU' || useCase.cta === 'Learn about GLU'
+                        ? `/${locale}/email-pause`
+                        : `/${locale}/downloads`
+                    }
                     className="inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
                   >
                     {useCase.cta}
@@ -50,23 +57,25 @@ export default function UseCasesPage() {
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 gradient-text">
-            Готовы попробовать?
+            {locale === 'en' ? 'Ready to try?' : 'Готовы попробовать?'}
           </h2>
           <p className="text-xl text-gray-300 mb-8">
-            Присоединяйтесь к тысячам пользователей, которые уже используют GetLifeUndo
+            {locale === 'en'
+              ? 'Join thousands of users who already use GetLifeUndo'
+              : 'Присоединяйтесь к тысячам пользователей, которые уже используют GetLifeUndo'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/ru/downloads"
+              href={`/${locale}/downloads`}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
             >
-              Скачать бесплатно
+              {locale === 'en' ? 'Download for free' : 'Скачать бесплатно'}
             </a>
             <a
-              href="/ru/pricing"
+              href={`/${locale}/pricing`}
               className="px-8 py-4 border-2 border-purple-500 text-purple-400 rounded-lg font-semibold hover:bg-purple-500 hover:text-white transition-all duration-200"
             >
-              Посмотреть тарифы
+              {locale === 'en' ? 'View pricing' : 'Посмотреть тарифы'}
             </a>
           </div>
         </div>

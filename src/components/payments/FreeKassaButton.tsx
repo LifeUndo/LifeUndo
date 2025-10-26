@@ -1,17 +1,24 @@
 "use client";
 import React from "react";
 import { PLAN_TO_PRODUCT, type PlanKey } from "@/business/pricing/plans";
+import { useTranslations } from "@/hooks/useTranslations";
 
 // TODO: подключи свой i18n-хук (например, useTranslations()) и замени useI18n().
 function useI18n() {
-  return (k: string) =>
-    (
-      {
-        "errors.unknownPlan": "Неизвестный тариф",
-        "errors.fkUnavailable": "Платёж сейчас недоступен. Попробуйте позже.",
-        "common.payWithFreeKassa": "Оплатить через FreeKassa",
-      } as Record<string, string>
-    )[k] ?? k;
+  const { locale } = useTranslations();
+  const isEN = locale === "en";
+  const RU: Record<string, string> = {
+    "errors.unknownPlan": "Неизвестный тариф",
+    "errors.fkUnavailable": "Платёж сейчас недоступен. Попробуйте позже.",
+    "common.payWithFreeKassa": "Оплатить через FreeKassa",
+  };
+  const EN: Record<string, string> = {
+    "errors.unknownPlan": "Unknown plan",
+    "errors.fkUnavailable": "Payment is temporarily unavailable. Please try again later.",
+    "common.payWithFreeKassa": "Pay with FreeKassa",
+  };
+  const dict = isEN ? EN : RU;
+  return (k: string) => dict[k] ?? k;
 }
 
 type Props = {
@@ -46,7 +53,7 @@ export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com
   };
 
   return (
-    <button className={className} disabled={disabled} onClick={onClick} title={disabled ? t("errors.unknownPlan") : ""}>
+    <button type="button" className={className} disabled={disabled} onClick={onClick} title={disabled ? t("errors.unknownPlan") : ""}>
       {t("common.payWithFreeKassa")}
     </button>
   );

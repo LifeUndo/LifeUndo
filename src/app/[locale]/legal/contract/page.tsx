@@ -6,26 +6,21 @@ export default function ContractPage() {
   const { locale } = useTranslations();
   
   return (
-    <div>
-      {/* TXT Templates Button */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <a 
-              href={`/${locale}/legal/downloads`}
-              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors mb-8"
-            >
-              📄 {locale === 'en' ? 'Download .TXT Templates' : 'Скачать .TXT-шаблоны'}
-            </a>
-          </div>
+    <div className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+      <div className="container mx-auto px-4 py-10">
+        {/* TXT Templates Button */}
+        <div className="max-w-4xl mx-auto text-center mb-6">
+          <a 
+            href={`/${locale}/legal/downloads`}
+            className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+          >
+            📄 {locale === 'en' ? 'Download .TXT Templates' : 'Скачать .TXT-шаблоны'}
+          </a>
         </div>
-      </div>
-      
-      {/* Contract Content */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">
+
+        {/* Contract Content */}
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">
               <h1 className="text-3xl md:text-4xl font-semibold text-white mb-8">
                 {locale === 'en' ? 'Software Licensing Agreement (B2B)' : 'Договор лицензирования программного обеспечения (B2B)'}
               </h1>
@@ -107,13 +102,10 @@ export default function ContractPage() {
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* B2B Disclaimer */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 backdrop-blur p-6">
+
+        {/* B2B Disclaimer */}
+        <div className="max-w-4xl mx-auto mt-10">
+          <div className="rounded-2xl border border-yellow-500/30 bg-yellow-500/10 backdrop-blur p-6">
               <h3 className="text-xl font-semibold text-yellow-200 mb-4">
                 {locale === 'en' ? 'Important Information' : 'Важная информация'}
               </h3>
@@ -134,7 +126,6 @@ export default function ContractPage() {
                   </>
                 )}
               </div>
-            </div>
           </div>
         </div>
       </div>
