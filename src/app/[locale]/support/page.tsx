@@ -1,6 +1,6 @@
 "use client";
 
-import Head from "next/head";
+import type { Metadata } from 'next';
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useTranslations } from '@/hooks/useTranslations';
@@ -22,6 +22,29 @@ function getFAQ(isEN: boolean) {
     { q: "Можно вернуть деньги?", a: "Мы придерживаемся честной политики возврата в разумных случаях. Опишите ситуацию в тикете, укажите email и order_id — разберёмся." },
     { q: "Можно сменить тариф?", a: "Да. Напишите нам, укажите текущий план и желаемый. Мы предложим наиболее выгодный вариант." },
   ];
+}
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/support`;
+  const title = locale === 'en' ? 'Support — GetLifeUndo' : 'Поддержка — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'GetLifeUndo Support: answers to common questions and contact form.'
+    : 'Поддержка GetLifeUndo: ответы на частые вопросы и форма связи.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/support`,
+        'en-US': `${base}/en/support`,
+      }
+    },
+    openGraph: { url, title, description },
+    twitter: { title, description },
+  };
 }
 
 export default function SupportPage() {
@@ -55,12 +78,6 @@ export default function SupportPage() {
   }
 
   return (
-    <>
-      <Head>
-        <title>{isEN ? 'Support — GetLifeUndo' : 'Поддержка — GetLifeUndo'}</title>
-        <meta name="description" content={isEN ? 'GetLifeUndo Support. Answers to common questions and contact form.' : 'Поддержка пользователей GetLifeUndo. Ответы на частые вопросы и форма для связи со службой поддержки.'} />
-      </Head>
-
       <main className="mx-auto max-w-5xl px-4 py-12">
         <h1 className="text-3xl md:text-4xl font-bold mb-6">{isEN ? 'Support' : 'Поддержка'}</h1>
 
@@ -166,6 +183,5 @@ export default function SupportPage() {
           </div>
         </section>
       </main>
-    </>
   );
 }
