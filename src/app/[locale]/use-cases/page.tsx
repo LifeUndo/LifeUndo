@@ -1,5 +1,29 @@
 import useCasesRU from '@/data/use_cases_ru.json';
 import useCasesEN from '@/data/use_cases_en.json';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/use-cases`;
+  const title = locale === 'en' ? 'Use Cases — GetLifeUndo' : 'Кейсы использования — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Real-world scenarios: recover lost form text, reopen tabs, clipboard history. For work, study and daily browsing.'
+    : 'Практические сценарии: восстановление текста форм, возврат вкладок, история буфера. Для работы, учёбы и повседневного серфинга.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/use-cases`,
+        'en-US': `${base}/en/use-cases`,
+      }
+    },
+    openGraph: { url, title, description },
+    twitter: { title, description },
+  };
+}
 
 export default function UseCasesPage({ params }: { params: { locale: string } }) {
   const locale = params?.locale === 'en' ? 'en' : 'ru';

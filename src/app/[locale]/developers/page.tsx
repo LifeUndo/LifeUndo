@@ -1,4 +1,28 @@
 import React from 'react';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/developers`;
+  const title = locale === 'en' ? 'Developers — GetLifeUndo API (beta)' : 'Разработчикам — API GetLifeUndo (beta)';
+  const description = locale === 'en'
+    ? 'Integrate local-first form/clipboard recovery. Public endpoints, OpenAPI, security notes. No user text leaves the browser.'
+    : 'Интегрируйте локальное восстановление форм/буфера. Публичные эндпоинты, OpenAPI, заметки по безопасности. Текст форм не отправляется.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/developers`,
+        'en-US': `${base}/en/developers`,
+      }
+    },
+    openGraph: { url, title, description },
+    twitter: { title, description },
+  };
+}
 
 export const dynamic = 'force-dynamic';
 
