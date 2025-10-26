@@ -41,13 +41,15 @@ export const FK_PLANS: Record<PlanId, FKPlan> = {
 } as const;
 
 // Генератор префиксов для order_id
-export function getOrderPrefix(plan: PlanId): string {
-  const prefixes: Record<PlanId, string> = {
+export function getOrderPrefix(plan: string): string {
+  // Поддерживаем как план-идентификаторы, так и исторические/временные значения
+  const map: Record<string, string> = {
     pro_month: "PROM",
     vip_lifetime: "VIPL",
-    team_5: "TEAM5"
+    team_5: "TEAM5",
+    starter_6m: "S6M", // bundle на 6 месяцев
   };
-  return prefixes[plan] || "ORDER";
+  return map[plan] || "ORDER";
 }
 
 // Валидация плана
