@@ -130,6 +130,5 @@ export default function ContractPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
