@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   creator: 'GetLifeUndo',
   publisher: 'GetLifeUndo',
   alternates: { 
-    canonical: 'https://getlifeundo.com/ru',
+    canonical: 'https://getlifeundo.com',
     languages: {
       'ru-RU': 'https://getlifeundo.com/ru',
       'en-US': 'https://getlifeundo.com/en',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'GetLifeUndo — Ctrl+Z for your browser',
     description: 'Restore form text, closed tabs, clipboard — 100% local.',
-    url: 'https://getlifeundo.com/ru',
+    url: 'https://getlifeundo.com',
     siteName: 'GetLifeUndo',
     images: [
       {
