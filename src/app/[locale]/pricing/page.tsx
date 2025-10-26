@@ -1,6 +1,40 @@
 import ServiceCard from '@/components/ServiceCard';
 import FreeKassaButton from '@/components/payments/FreeKassaButton';
 import { PLANS } from '@/config/plans';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/pricing`;
+  const other = locale === 'en' ? 'ru' : 'en';
+  const title = locale === 'en'
+    ? 'Pricing — GetLifeUndo'
+    : 'Тарифы — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Choose a plan: Pro (monthly), VIP (lifetime), Team (5 seats). 7‑day free trial. Payments via FreeKassa. 100% local.'
+    : 'Выберите тариф: Pro (ежемесячно), VIP (навсегда), Team (5 мест). 7‑дней бесплатно. Оплата через FreeKassa. 100% локально.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/pricing`,
+        'en-US': `${base}/en/pricing`,
+      }
+    },
+    openGraph: {
+      url,
+      title,
+      description,
+    },
+    twitter: {
+      title,
+      description,
+    }
+  };
+}
 
 export default function PricingPage({ params }: { params: { locale: string } }) {
   const locale = params?.locale === 'en' ? 'en' : 'ru';
@@ -59,6 +93,30 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "" + (locale === 'en' ? 'Can I pay monthly?' : 'Можно ли платить помесячно?'),
+              "acceptedAnswer": {"@type": "Answer", "text": "" + (locale === 'en' ? 'Yes. If the payment fails — try again or choose Starter Bundle (6 months for 3,000 ₽).' : 'Да. Если плата не прошла — попробуйте снова или выберите Starter Bundle (6 месяцев за 3 000 ₽).')}
+            },
+            {
+              "@type": "Question",
+              "name": "" + (locale === 'en' ? 'What is the difference between Pro and Free?' : 'Чем Pro отличается от Free?'),
+              "acceptedAnswer": {"@type": "Answer", "text": "" + (locale === 'en' ? 'Higher limits, team features and priority support.' : 'Больше лимитов, функции команд и приоритетная поддержка.')}
+            },
+            {
+              "@type": "Question",
+              "name": "" + (locale === 'en' ? 'How does the Team account work?' : 'Как работает Team-аккаунт?'),
+              "acceptedAnswer": {"@type": "Answer", "text": "" + (locale === 'en' ? 'Bring back lost text and forms — save time and nerves.' : 'Возвращайте потерянный текст и формы — экономьте время и нервы.')}
+            }
+          ]
+        }) }}
+      />
       <header className="text-center mb-12">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">{txt.title}</h1>
         <p className="text-lg text-gray-300">{txt.subtitle}</p>
