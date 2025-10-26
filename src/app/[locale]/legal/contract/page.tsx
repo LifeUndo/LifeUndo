@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
 
 export default function ContractPage() {
