@@ -2,6 +2,34 @@
 
 import React from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  // useTranslations is client-only, so we read locale from URL convention
+  // Partners page is under /[locale]/partners
+  const base = 'https://getlifeundo.com';
+  // We can't access params in client file, set both and let Next use route path
+  return {
+    title: 'White‑label / OEM — GetLifeUndo',
+    description: 'Брендируйте GetLifeUndo под вашу компанию. Пакеты WL‑Starter/WL‑Pro/WL‑Enterprise. Для организаций от 100 VIP.',
+    alternates: {
+      canonical: `${base}/ru/partners`,
+      languages: {
+        'ru-RU': `${base}/ru/partners`,
+        'en-US': `${base}/en/partners`,
+      }
+    },
+    openGraph: {
+      url: `${base}/ru/partners`,
+      title: 'White‑label / OEM — GetLifeUndo',
+      description: 'White‑label/OEM пакеты для организаций. От 100 VIP. Бриф, макет, тестовый билд, пилот, прод.',
+    },
+    twitter: {
+      title: 'White‑label / OEM — GetLifeUndo',
+      description: 'Брендируйте GetLifeUndo под вашу компанию. Пакеты WL‑Starter/WL‑Pro/WL‑Enterprise.',
+    }
+  };
+}
 
 export default function PartnersPage() {
   const { locale } = useTranslations();
