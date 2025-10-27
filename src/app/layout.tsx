@@ -114,6 +114,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "softwareVersion": "0.3.7.12",
             "description": "Restore form text, closed tabs and clipboard history. 100% local, private."
           })}} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "GetLifeUndo",
+            "url": "https://getlifeundo.com",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://getlifeundo.com/ru/search?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          })}} />
       </head>
       <body>
         {children}
