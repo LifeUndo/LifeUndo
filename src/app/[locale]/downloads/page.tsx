@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: { locale: string } 
         'en-US': `${base}/en/downloads`,
       }
     },
-    openGraph: { url, title, description },
-    twitter: { title, description },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
   };
 }
 

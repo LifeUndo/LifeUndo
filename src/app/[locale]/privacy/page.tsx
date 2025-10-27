@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: { locale: 'ru' | 'e
         'en-US': `${base}/en/privacy`,
       }
     },
-    openGraph: { url, title, description },
-    twitter: { title, description },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
   };
 }
 
