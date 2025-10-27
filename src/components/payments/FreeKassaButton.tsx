@@ -27,7 +27,7 @@ type Props = {
   className?: string;
 };
 
-export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com", className }: Props) {
+export default function FreeKassaButton({ plan, email, className }: Props) {
   const t = useI18n();
   const productId = PLAN_TO_PRODUCT[plan];
   const disabled = !productId;
@@ -35,7 +35,8 @@ export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com
   const onClick = async () => {
     if (disabled) return;
     try {
-      const payload = { plan, productId, email };
+      const payload: Record<string, any> = { plan, productId };
+      if (email) payload.email = email;
       console.log('[FK] create payment payload', payload);
       const r = await fetch("/api/payments/freekassa/create", {
         method: "POST",

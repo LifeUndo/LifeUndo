@@ -33,8 +33,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({} as any));
     const planRaw = body?.plan;
     const productIdRaw = body?.productId;
+    const emailRaw = body?.email;
     const plan = typeof planRaw === 'string' ? planRaw.trim() : undefined;
     const productId = typeof productIdRaw === 'string' ? productIdRaw.trim() : undefined;
+    const email = typeof emailRaw === 'string' ? emailRaw.trim() : undefined;
 
     // Включение: флаг или наличие секретов (позволяет не падать, если флаг не выставлен, но секреты заданы)
     const flagEnabled = String(process.env.NEXT_PUBLIC_FK_ENABLED || '').toLowerCase() === 'true';
@@ -111,6 +113,7 @@ export async function POST(req: NextRequest) {
           o: ORDER_ID,
           s: SIGN,
           currency: CURRENCY,
+          ...(email ? { us_email: email } : {}),
         }
       }
     });
