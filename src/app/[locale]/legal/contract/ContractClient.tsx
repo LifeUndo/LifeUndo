@@ -1,10 +1,8 @@
 import React from 'react';
 
 export default function ContractClient({ locale }: { locale: 'en' | 'ru' }) {
-  
   return (
-    <div className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-      <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto px-4 py-10">
         {/* TXT Templates Button */}
         <div className="max-w-4xl mx-auto text-center mb-6">
           <a 
@@ -25,9 +23,8 @@ export default function ContractClient({ locale }: { locale: 'en' | 'ru' }) {
               <div className="prose prose-invert max-w-none">
                 <p className="text-gray-300 mb-6">
                   {locale === 'en' 
-                    ? 'This agreement governs the licensing of GetLifeUndo software to organizations with 100+ VIP seats.'
-                    : 'Данный договор регулирует лицензирование программного обеспечения GetLifeUndo организациям от 100+ VIP мест.'
-                  }
+                    ? 'This Agreement governs the provision of a simple (non‑exclusive) license for the "GetLifeUndo" software to organizations (100+ VIP seats).'
+                    : 'Настоящий Договор регулирует предоставление простой (неисключительной) лицензии на программное обеспечение «GetLifeUndo» организациям (100+ VIP мест).'}
                 </p>
 
                 <h2 className="text-2xl font-semibold text-white mb-4">
@@ -36,14 +33,12 @@ export default function ContractClient({ locale }: { locale: 'en' | 'ru' }) {
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
                     ? '1.1. Licensor: LLC "GetLifeUndo", TIN xxx, OGRN xxx, address: xxx.'
-                    : '1.1. Лицензиар: ООО «GetLifeUndo», ИНН xxx, ОГРН xxx, адрес: xxx.'
-                  }
+                    : '1.1. Лицензиар: ООО «GetLifeUndo», ИНН xxx, ОГРН xxx, адрес: xxx.'}
                 </p>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
                     ? '1.2. Licensee: [Organization details to be filled]'
-                    : '1.2. Лицензиат: [Реквизиты организации заполняются индивидуально]'
-                  }
+                    : '1.2. Лицензиат: [Реквизиты организации заполняются индивидуально]'}
                 </p>
 
                 <h2 className="text-2xl font-semibold text-white mb-4">
@@ -51,49 +46,95 @@ export default function ContractClient({ locale }: { locale: 'en' | 'ru' }) {
                 </h2>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
-                    ? '2.1. The Licensor grants the Licensee a non-exclusive license for GetLifeUndo software.'
-                    : '2.1. Лицензиар предоставляет Лицензиату неисключительную лицензию на программное обеспечение GetLifeUndo.'
-                  }
+                    ? '2.1. The Licensor grants the Licensee a simple (non‑exclusive), non‑transferable license for the Software for internal use, worldwide, for the paid period (perpetual — indefinitely).'
+                    : '2.1. Лицензиар предоставляет Лицензиату простую (неисключительную), непередаваемую лицензию на ПО для внутреннего использования, на территории всего мира, на срок оплаченного периода (для бессрочной — бессрочно).'}
                 </p>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
-                    ? '2.2. License covers 100+ VIP seats as specified in the order.'
-                    : '2.2. Лицензия покрывает 100+ VIP мест согласно спецификации заказа.'
-                  }
+                    ? '2.2. Sublicensing, distribution of copies and disclosure of license keys are prohibited unless expressly permitted by law or an additional agreement.'
+                    : '2.2. Сублицензирование, распространение копий и разглашение лицензионных ключей запрещены, если иное прямо не предусмотрено законом либо дополнительным соглашением.'}
                 </p>
 
                 <h2 className="text-2xl font-semibold text-white mb-4">
-                  {locale === 'en' ? '3. Payment Terms' : '3. Условия оплаты'}
+                  {locale === 'en' ? '3. Best‑Effort, No Data Guarantee' : '3. Best‑effort и отсутствие гарантий данных'}
                 </h2>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
-                    ? '3.1. Payment is made according to the agreed schedule and pricing.'
-                    : '3.1. Оплата производится согласно согласованному графику и ценообразованию.'
-                  }
+                    ? '3.1. The Software operates on a “best‑effort” basis. The Licensor does not guarantee recovery of tabs/text or the preservation of any specific user data.'
+                    : '3.1. ПО работает по принципу «best‑effort». Лицензиар не гарантирует восстановление вкладок/текста и сохранность каких‑либо конкретных пользовательских данных.'}
+                </p>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '3.2. The Software stores data locally on the user device. No telemetry or remote collection is performed by default.'
+                    : '3.2. Данные хранятся локально на устройстве пользователя. По умолчанию телеметрия или удалённый сбор не осуществляются.'}
                 </p>
 
                 <h2 className="text-2xl font-semibold text-white mb-4">
-                  {locale === 'en' ? '4. Support and Maintenance' : '4. Поддержка и сопровождение'}
+                  {locale === 'en' ? '4. Evidence and Claims' : '4. Доказательства и претензии'}
                 </h2>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
-                    ? '4.1. Licensor provides technical support and software updates.'
-                    : '4.1. Лицензиар предоставляет техническую поддержку и обновления программного обеспечения.'
-                  }
+                    ? '4.1. Claims regarding “data loss” are accepted only with verifiable artifacts: explicit user consent to provide logs, extension logs with timestamps, reproducible steps, system/browser events.'
+                    : '4.1. Претензии о «потере данных» принимаются только при наличии верифицируемых артефактов: явное согласие пользователя на предоставление логов, логи расширения с таймстемпами, воспроизводимые шаги, события системы/браузера.'}
+                </p>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '4.2. Without such artifacts, any claim is deemed unsubstantiated.'
+                    : '4.2. При отсутствии указанных артефактов претензия считается необоснованной.'}
                 </p>
 
                 <h2 className="text-2xl font-semibold text-white mb-4">
-                  {locale === 'en' ? '5. Liability' : '5. Ответственность'}
+                  {locale === 'en' ? '5. Exclusions and Limitations' : '5. Исключения и ограничения'}
                 </h2>
                 <p className="text-gray-300 mb-4">
                   {locale === 'en' 
-                    ? '5.1. Licensor liability is limited to the contract value and excludes indirect damages.'
-                    : '5.1. Ответственность Лицензиара ограничена стоимостью договора и исключает косвенные убытки.'
-                  }
+                    ? '5.1. Exclusions include, among others: power/network failures; OS/browser bugs or updates; third‑party extensions; user actions; corporate policies; storage quotas; anti‑virus/EDR; force majeure.'
+                    : '5.1. К исключениям относятся, в частности: сбои электропитания/сети; ошибки или обновления ОС/браузера; сторонние расширения; действия пользователя; корпоративные политики; квоты хранилища; антивирус/EDR; форс‑мажор.'}
+                </p>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '5.2. Liability of the Licensor is limited to the amount paid for the last three (3) months for the relevant plan, and in any case excludes indirect, incidental, and consequential damages.'
+                    : '5.2. Ответственность Лицензиара ограничена суммой, уплаченной за последние три (3) месяца по соответствующему тарифу, и во всех случаях исключает косвенные, случайные и последующие убытки.'}
+                </p>
+
+                <h2 className="text-2xl font-semibold text-white mb-4">
+                  {locale === 'en' ? '6. Payment and Taxes' : '6. Оплата и налоги'}
+                </h2>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '6.1. Payment is processed by a payment provider; the moment of payment constitutes acceptance of this Agreement.'
+                    : '6.1. Оплату обрабатывает платёжный провайдер; момент оплаты является акцептом настоящего Договора.'}
+                </p>
+
+                <h2 className="text-2xl font-semibold text-white mb-4">
+                  {locale === 'en' ? '7. Updates and Support' : '7. Обновления и поддержка'}
+                </h2>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '7.1. Software may update automatically; support is provided via support@getlifeundo.com within two business days.'
+                    : '7.1. ПО может обновляться автоматически; поддержка оказывается по адресу support@getlifeundo.com в течение двух рабочих дней.'}
+                </p>
+
+                <h2 className="text-2xl font-semibold text-white mb-4">
+                  {locale === 'en' ? '8. Governing Law and Dispute Resolution' : '8. Применимое право и споры'}
+                </h2>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '8.1. Governing law — Russian Federation. Disputes are resolved through negotiations; if unresolved — by a competent court at the Licensor’s location.'
+                    : '8.1. Применимое право — Российская Федерация. Споры разрешаются путём переговоров; при недостижении — в компетентном суде по месту нахождения Лицензиара.'}
+                </p>
+
+                <h2 className="text-2xl font-semibold text-white mb-4">
+                  {locale === 'en' ? '9. Miscellaneous' : '9. Прочие условия'}
+                </h2>
+                <p className="text-gray-300 mb-4">
+                  {locale === 'en' 
+                    ? '9.1. The Agreement may be updated; the current version is available on the website. Continued use constitutes acceptance of changes.'
+                    : '9.1. Договор может обновляться; актуальная версия размещена на сайте. Продолжение использования означает акцепт изменений.'}
                 </p>
 
                 <p className="text-gray-400 text-sm mt-8">
-                  <em>{locale === 'en' ? 'Last updated: 2025-10-04' : 'Дата обновления: 2025-10-04'}</em>
+                  <em>{locale === 'en' ? 'Last updated: 2025-10-27' : 'Дата обновления: 2025-10-27'}</em>
                 </p>
               </div>
             </div>

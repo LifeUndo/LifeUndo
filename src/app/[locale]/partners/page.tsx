@@ -27,12 +27,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-      <div className="container mx-auto px-4 py-16">
-        <PartnersClient />
-
-        {/* содержимое перенесено в <PartnersClient /> */}
-      </div>
+    <div className="container mx-auto px-4 py-16">
+      <PartnersClient />
+      {/* содержимое перенесено в <PartnersClient /> */}
     </div>
   );
 }
