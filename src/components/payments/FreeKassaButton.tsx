@@ -36,6 +36,7 @@ export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com
     if (disabled) return;
     try {
       const payload = { plan, productId, email };
+      console.log('[FK] create payment payload', payload);
       const r = await fetch("/api/payments/freekassa/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,11 +44,30 @@ export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com
       });
       const j = await r.json().catch(() => ({} as any));
       if (!r.ok || !j?.pay_url) {
-        alert(t("errors.fkUnavailable"));
+        console.error('[FK] create payment failed', { status: r.status, body: j });
+        alert(`${t("errors.fkUnavailable")}\n${j?.error ? `(${j.error})` : ''}`.trim());
         return;
       }
-      window.location.href = j.pay_url as string;
+      const url = String(j.pay_url);
+      console.log('[FK] redirecting to', url);
+      try {
+        window.location.assign(url);
+      } catch (e) {
+        console.warn('[FK] location.assign failed, trying window.open', e);
+        window.open(url, '_blank', 'noopener');
+        return;
+      }
+      // Fallback: если браузер/расширение заблокировало прямой редирект — пробуем открыть в новой вкладке
+      setTimeout(() => {
+        try {
+          if (!document.hidden) {
+            console.warn('[FK] fallback open new tab');
+            window.open(url, '_blank', 'noopener');
+          }
+        } catch {}
+      }, 800);
     } catch {
+      console.error('[FK] unexpected error during payment init');
       alert(t("errors.fkUnavailable"));
     }
   };
