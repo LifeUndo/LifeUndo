@@ -1,10 +1,6 @@
-'use client';
-
 import React from 'react';
-import { useTranslations } from '@/hooks/useTranslations';
 
-export default function ContractClient() {
-  const { locale } = useTranslations();
+export default function ContractClient({ locale }: { locale: 'en' | 'ru' }) {
   
   return (
     <div className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">

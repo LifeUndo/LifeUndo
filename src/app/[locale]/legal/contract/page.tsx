@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export default function ContractPage() {
-  return <ContractClient />;
+export default function ContractPage({ params }: { params: { locale: string } }) {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  return <ContractClient locale={locale} />;
 }
