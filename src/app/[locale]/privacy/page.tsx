@@ -1,5 +1,29 @@
 import ModernHeader from '@/components/ModernHeader';
 import ModernFooter from '@/components/ModernFooter';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: 'ru' | 'en' } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/privacy`;
+  const title = locale === 'en' ? 'Privacy Policy — GetLifeUndo' : 'Политика конфиденциальности — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Privacy Policy of GetLifeUndo: what data we collect, how we use and protect it, your rights.'
+    : 'Политика конфиденциальности GetLifeUndo: какие данные мы собираем, как используем и защищаем, ваши права.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/privacy`,
+        'en-US': `${base}/en/privacy`,
+      }
+    },
+    openGraph: { url, title, description },
+    twitter: { title, description },
+  };
+}
 
 export default function PrivacyPage({ params }: { params: { locale: 'ru' | 'en' } }) {
   const isEn = params.locale === 'en';
