@@ -50,22 +50,42 @@ export default function FreeKassaButton({ plan, email = "privacy@getlifeundo.com
       }
       const url = String(j.pay_url);
       console.log('[FK] redirecting to', url);
+      let redirected = false;
       try {
         window.location.assign(url);
+        redirected = true;
       } catch (e) {
-        console.warn('[FK] location.assign failed, trying window.open', e);
-        window.open(url, '_blank', 'noopener');
-        return;
+        console.warn('[FK] location.assign failed', e);
       }
-      // Fallback: если браузер/расширение заблокировало прямой редирект — пробуем открыть в новой вкладке
-      setTimeout(() => {
+      // Форма POST по новой документации (надежный способ, если редирект/открытие блокируются)
+      const formData = j?.form as { action?: string; method?: string; fields?: Record<string,string> } | undefined;
+      const action = formData?.action || 'https://pay.freekassa.net/';
+      const fields = formData?.fields || {};
+      const doPostForm = () => {
         try {
-          if (!document.hidden) {
-            console.warn('[FK] fallback open new tab');
-            window.open(url, '_blank', 'noopener');
-          }
-        } catch {}
-      }, 800);
+          const form = document.createElement('form');
+          form.action = action;
+          form.method = 'POST';
+          form.target = '_self';
+          Object.entries(fields).forEach(([k, v]) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = k;
+            input.value = String(v);
+            form.appendChild(input);
+          });
+          document.body.appendChild(form);
+          console.log('[FK] submitting POST form to', action, fields);
+          form.submit();
+        } catch (e) {
+          console.warn('[FK] form POST failed, trying window.open as last resort', e);
+          window.open(url, '_blank', 'noopener');
+        }
+      };
+      // Если прямой редирект не сработал — отправляем POST форму
+      setTimeout(() => {
+        if (!redirected) doPostForm();
+      }, 500);
     } catch {
       console.error('[FK] unexpected error during payment init');
       alert(t("errors.fkUnavailable"));

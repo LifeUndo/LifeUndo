@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;
     const SIGN = crypto.createHash('md5').update(signatureString, 'utf8').digest('hex');
 
-    // Формируем URL для редиректа
+    // Формируем поля формы и URL для редиректа
     const qs = new URLSearchParams({
       m: MERCHANT_ID,
       oa: AMOUNT,
@@ -102,6 +102,17 @@ export async function POST(req: NextRequest) {
       pay_url,
       orderId: ORDER_ID,
       productId: effectiveProductId,
+      form: {
+        action: baseUrl, // всегда https://pay.freekassa.net/
+        method: 'POST',
+        fields: {
+          m: MERCHANT_ID,
+          oa: AMOUNT,
+          o: ORDER_ID,
+          s: SIGN,
+          currency: CURRENCY,
+        }
+      }
     });
   } catch (error) {
     console.error('FreeKassa payment error:', error);
