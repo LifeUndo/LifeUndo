@@ -11,14 +11,14 @@ const nextConfig = {
     const csp = [
       "default-src 'self';",
       "img-src 'self' https: data:;",
-      "style-src 'self' 'unsafe-inline';",
-      "script-src 'self' https://*.vercel-insights.com;",
-      "connect-src 'self' https://api.freekassa.net https://pay.freekassa.net https://*.vercel-insights.com;",
-      "frame-src https://pay.freekassa.net;",
-      "font-src 'self' data:;",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
+      "script-src 'self' 'unsafe-inline' https://*.vercel-insights.com;",
+      "connect-src 'self' https://api.freekassa.net https://pay.freekassa.net https://pay.fk.money https://*.vercel-insights.com;",
+      "frame-src https://pay.freekassa.net https://pay.fk.money;",
+      "font-src 'self' https://fonts.gstatic.com data:;",
       "object-src 'none';",
       "base-uri 'self';",
-      "form-action 'self';",
+      "form-action 'self' https://pay.freekassa.net https://pay.fk.money;",
       "frame-ancestors 'none';",
       "upgrade-insecure-requests;"
     ].join(" ");
