@@ -69,8 +69,8 @@ export async function POST(req: NextRequest) {
     const ORDER_ID = `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const CURRENCY = FK_CURRENCY || 'RUB';
 
-    // Подпись (без раскрытия деталей в логах)
-    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${ORDER_ID}`;
+    // Подпись (без раскрытия деталей в логах) по новой доке: MERCHANT_ID:AMOUNT:SECRET1:CURRENCY:ORDER_ID
+    const signatureString = `${MERCHANT_ID}:${AMOUNT}:${SECRET1}:${CURRENCY}:${ORDER_ID}`;
     const SIGN = crypto.createHash('md5').update(signatureString, 'utf8').digest('hex');
 
     // Формируем поля формы и URL для редиректа
