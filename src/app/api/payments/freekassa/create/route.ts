@@ -99,6 +99,10 @@ export async function POST(req: NextRequest) {
       payUrl: pay_url.substring(0, 50) + '...',
     });
 
+    // Опциональные настройки метода/языка из ENV
+    const LANG = (process.env.FREEKASSA_LANG || '').trim(); // например, 'ru' | 'en'
+    const METHOD_ID = (process.env.FREEKASSA_METHOD_ID || '').trim(); // например, '4' (карты RUB), см. доку
+
     return NextResponse.json({
       ok: true,
       pay_url,
@@ -114,6 +118,8 @@ export async function POST(req: NextRequest) {
           s: SIGN,
           currency: CURRENCY,
           ...(email ? { us_email: email } : {}),
+          ...(LANG ? { lang: LANG } : {}),
+          ...(METHOD_ID ? { i: METHOD_ID } : {}),
         }
       }
     });
