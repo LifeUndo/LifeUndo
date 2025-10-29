@@ -37,6 +37,15 @@ export default function ContractPage({ params }: { params: { locale: string } })
           ? 'This agreement governs the licensing of GetLifeUndo software to organizations with 100+ VIP seats.'
           : 'Данный договор регулирует лицензирование программного обеспечения GetLifeUndo организациям от 100+ VIP мест.'}
       </p>
+      <div className="mt-6">
+        <a
+          href={`/legal/contracts/${locale.toUpperCase()}/contract_b2b_template.txt`}
+          download
+          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        >
+          {locale === 'en' ? 'Download Contract (.TXT)' : 'Скачать договор (.TXT)'}
+        </a>
+      </div>
     </main>
   );
 }
