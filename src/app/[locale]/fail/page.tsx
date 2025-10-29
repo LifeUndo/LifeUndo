@@ -25,11 +25,6 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 }
 
-export const metadata = { 
-  title: "Ошибка платежа — GetLifeUndo",
-  description: "Произошла ошибка при обработке платежа. Попробуйте еще раз или обратитесь в поддержку."
-};
-
 export default function FailPage() {
   return (
     <main className="min-h-screen">
