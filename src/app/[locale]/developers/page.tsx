@@ -17,10 +17,11 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       languages: {
         'ru-RU': `${base}/ru/developers`,
         'en-US': `${base}/en/developers`,
+        'x-default': `${base}/en/developers`,
       }
     },
-    openGraph: { url, title, description },
-    twitter: { title, description },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
   };
 }
 
@@ -51,7 +52,7 @@ export default function DevelopersPage({ params }: { params: { locale: string } 
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-16">
         {/* Hero */}
         <div className="text-center mb-16">

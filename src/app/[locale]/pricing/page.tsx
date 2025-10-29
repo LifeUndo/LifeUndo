@@ -22,16 +22,19 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       languages: {
         'ru-RU': `${base}/ru/pricing`,
         'en-US': `${base}/en/pricing`,
+        'x-default': `${base}/en/pricing`,
       }
     },
     openGraph: {
       url,
       title,
       description,
+      images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }]
     },
     twitter: {
       title,
       description,
+      images: ['/brand/getlifeundo-og.png']
     }
   };
 }

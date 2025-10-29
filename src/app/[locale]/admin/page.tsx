@@ -56,7 +56,7 @@ export default function AdminPage() {
 
   if (authState === 'login') {
     return (
-      <div className="min-h-screen bg-[#0B1220] text-white">
+      <div className="min-h-screen text-white">
         <ModernHeader />
         
         <main className="container mx-auto px-4 py-16">
@@ -126,7 +126,7 @@ export default function AdminPage() {
 
   if (authState === '2fa-setup') {
     return (
-      <div className="min-h-screen bg-[#0B1220] text-white">
+      <div className="min-h-screen text-white">
         <ModernHeader />
         
         <main className="container mx-auto px-4 py-16">
@@ -140,7 +140,7 @@ export default function AdminPage() {
 
   if (authState === '2fa-verify') {
     return (
-      <div className="min-h-screen bg-[#0B1220] text-white">
+      <div className="min-h-screen text-white">
         <ModernHeader />
         
         <main className="container mx-auto px-4 py-16">
@@ -154,7 +154,7 @@ export default function AdminPage() {
 
   // Dashboard
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen text-white">
       <ModernHeader />
       
       <main className="container mx-auto px-4 py-16">

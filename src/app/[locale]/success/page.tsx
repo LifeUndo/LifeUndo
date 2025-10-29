@@ -97,7 +97,7 @@ export default function SuccessPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
+    <main className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 py-12">
         {isTestMode && (
           <div className="mb-4 p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-400 dark:border-yellow-600 rounded-lg text-center">
