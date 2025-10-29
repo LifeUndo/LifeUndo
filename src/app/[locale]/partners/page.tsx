@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       languages: {
         'ru-RU': `${base}/ru/partners`,
         'en-US': `${base}/en/partners`,
+        'x-default': `${base}/en/partners`,
       }
     },
     openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },

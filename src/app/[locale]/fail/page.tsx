@@ -1,4 +1,29 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/fail`;
+  const title = locale === 'en' ? 'Payment failed — GetLifeUndo' : 'Ошибка платежа — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Your payment was not completed. Try again or contact support.'
+    : 'Произошла ошибка при обработке платежа. Попробуйте ещё раз или обратитесь в поддержку.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/fail`,
+        'en-US': `${base}/en/fail`,
+        'x-default': `${base}/en/fail`,
+      }
+    },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
+  };
+}
 
 export const metadata = { 
   title: "Ошибка платежа — GetLifeUndo",
@@ -7,7 +32,7 @@ export const metadata = {
 
 export default function FailPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-red-50 to-rose-100">
+    <main className="min-h-screen">
       <div className="max-w-2xl mx-auto px-4 py-12">
         <div className="bg-white rounded-lg shadow-sm border p-8 text-center">
           {/* Error Icon */}

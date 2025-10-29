@@ -1,3 +1,29 @@
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: 'ru' | 'en' } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/fund`;
+  const title = locale === 'en' ? 'GetLifeUndo Fund' : 'Фонд GetLifeUndo';
+  const description = locale === 'en'
+    ? 'We allocate 10% of revenue to support user projects: education, research, social initiatives.'
+    : 'Мы выделяем 10% дохода на поддержку пользовательских проектов: образование, исследования, социальные инициативы.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/fund`,
+        'en-US': `${base}/en/fund`,
+        'x-default': `${base}/en/fund`,
+      },
+    },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
+  };
+}
+
 export default function FundPage({ params }: { params: { locale: 'ru' | 'en' } }) {
   const isEn = params.locale === 'en';
   return (

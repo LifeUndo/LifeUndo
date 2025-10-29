@@ -118,7 +118,7 @@ export default function GrantForm() {
   };
 
       return (
-        <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8">
           {/* Database warning banner */}
           {showDbWarning && (
             <div className="bg-orange-500/20 backdrop-blur-sm rounded-xl p-6 mb-6">

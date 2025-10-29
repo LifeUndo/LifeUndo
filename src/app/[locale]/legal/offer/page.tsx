@@ -19,16 +19,17 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       languages: {
         'ru-RU': `${base}/ru/legal/offer`,
         'en-US': `${base}/en/legal/offer`,
+        'x-default': `${base}/en/legal/offer`,
       }
     },
-    openGraph: { url, title, description },
-    twitter: { title, description },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
   };
 }
 
 export default function OfferPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">

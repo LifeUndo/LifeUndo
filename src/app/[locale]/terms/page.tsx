@@ -1,3 +1,29 @@
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: 'ru' | 'en' } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/terms`;
+  const title = locale === 'en' ? 'Terms of Use — GetLifeUndo' : 'Условия использования — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Terms of Use of GetLifeUndo: service description, registration, subscriptions, restrictions, liability, changes.'
+    : 'Условия использования GetLifeUndo: описание сервиса, регистрация, подписки, ограничения, ответственность, изменения.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/terms`,
+        'en-US': `${base}/en/terms`,
+        'x-default': `${base}/en/terms`,
+      },
+    },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
+  };
+}
+
 export default function TermsPage({ params }: { params: { locale: 'ru' | 'en' } }) {
   const isEn = params.locale === 'en';
   return (

@@ -106,7 +106,6 @@ export default function SuccessClient() {
         )}
 
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-8 text-center">
-          {/* Success Icon */}
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -116,7 +115,6 @@ export default function SuccessClient() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{txt.title}</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">{txt.subtitle}</p>
 
-          {/* Payment Details */}
           {loading ? (
             <div className="mb-6 text-gray-500">{txt.loading}</div>
           ) : data ? (
@@ -145,7 +143,6 @@ export default function SuccessClient() {
             </div>
           ) : null}
 
-          {/* Next Steps */}
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-8 text-left">
             <h2 className="text-lg font-semibold mb-4 dark:text-white">{txt.next}</h2>
             <div className="space-y-3">
@@ -168,65 +165,43 @@ export default function SuccessClient() {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={`/${locale}/features${orderId ? `?order_id=${orderId}` : ''}`}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-            >
+            <Link href={`/${locale}/features${orderId ? `?order_id=${orderId}` : ''}`} className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
               {txt.ctaLearn}
             </Link>
-            <Link
-              href={`/${locale}/support${orderId ? `?order_id=${orderId}` : ''}${data?.email ? `&email=${data.email}` : ''}`}
-              className="bg-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors"
-            >
+            <Link href={`/${locale}/support${orderId ? `?order_id=${orderId}` : ''}${data?.email ? `&email=${data.email}` : ''}`} className="bg-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors">
               {txt.ctaHelp}
             </Link>
             {orderId && (
-              <Link
-                href={`/${locale}/account?order_id=${orderId}`}
-                className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
-              >
+              <Link href={`/${locale}/account?order_id=${orderId}`} className="bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
                 {txt.account}
               </Link>
             )}
           </div>
 
-          {/* Additional Info */}
           <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{txt.notReceived}</p>
             <div className="flex gap-4 justify-center">
-              <a
-                href="mailto:support@getlifeundo.com"
-                className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
-              >
+              <a href="mailto:support@getlifeundo.com" className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
                 {txt.contactSupport}
               </a>
               <span className="text-gray-400">•</span>
-              <a
-                href="https://t.me/GetLifeUndoSupport"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
-              >
+              <a href="https://t.me/GetLifeUndoSupport" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline text-sm">
                 {txt.tgSupport}
               </a>
             </div>
           </div>
         </div>
 
-        {/* Footer Links */}
         <div className="mt-8 text-center">
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-            <Link href={`/${locale}`} className="hover:text-gray-700 dark:hover:text-gray-300">{txt.footerHome}</Link>
-            <Link href={`/${locale}/pricing`} className="hover:text-gray-700 dark:hover:text-gray-300">{txt.footerPricing}</Link>
-            <Link href={`/${locale}/features`} className="hover:text-gray-700 dark:hover:text-gray-300">{txt.footerFeatures}</Link>
-            <Link href={`/${locale}/support`} className="hover:text-gray-700 dark:hover:text-gray-300">{txt.footerSupport}</Link>
+            <Link href={`/${locale}`}>{txt.footerHome}</Link>
+            <Link href={`/${locale}/pricing`}>{txt.footerPricing}</Link>
+            <Link href={`/${locale}/features`}>{txt.footerFeatures}</Link>
+            <Link href={`/${locale}/support`}>{txt.footerSupport}</Link>
           </div>
         </div>
       </div>
     </main>
   );
 }
-
-

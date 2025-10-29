@@ -18,10 +18,11 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       languages: {
         'ru-RU': `${base}/ru/legal/sla`,
         'en-US': `${base}/en/legal/sla`,
+        'x-default': `${base}/en/legal/sla`,
       }
     },
-    openGraph: { url, title, description },
-    twitter: { title, description },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
   };
 }
 

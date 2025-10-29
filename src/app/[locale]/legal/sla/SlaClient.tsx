@@ -5,7 +5,7 @@ import { useTranslations } from '@/hooks/useTranslations';
 export default function SlaClient() {
   const { locale } = useTranslations();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-8">

@@ -1,8 +1,29 @@
-// src/app/docs/page.tsx
-export const metadata = { 
-  title: "API Документация — GetLifeUndo",
-  description: "Полная документация API для интеграции с платформой GetLifeUndo."
-};
+// src/app/[locale]/docs/page.tsx
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params?.locale === 'en' ? 'en' : 'ru';
+  const base = 'https://getlifeundo.com';
+  const url = `${base}/${locale}/docs`;
+  const title = locale === 'en' ? 'API Documentation — GetLifeUndo' : 'API Документация — GetLifeUndo';
+  const description = locale === 'en'
+    ? 'Complete API documentation for integrating with GetLifeUndo.'
+    : 'Полная документация API для интеграции с платформой GetLifeUndo.';
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ru-RU': `${base}/ru/docs`,
+        'en-US': `${base}/en/docs`,
+        'x-default': `${base}/en/docs`,
+      },
+    },
+    openGraph: { url, title, description, images: [{ url: '/brand/getlifeundo-og.png', width: 1200, height: 630 }] },
+    twitter: { title, description, images: ['/brand/getlifeundo-og.png'] },
+  };
+}
 
 export default function DocsPage() {
   return (
