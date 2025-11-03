@@ -13,6 +13,8 @@ on:
 jobs:
   sign:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,6 +26,18 @@ jobs:
 
       - name: Install web-ext
         run: npm i -g web-ext@7
+
+      - name: Check secrets presence (masked)
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          if [ -z "$AMO_JWT_ISSUER" ] || [ -z "$AMO_JWT_SECRET" ]; then
+            echo "AMO secrets are missing" >&2
+            exit 1
+          fi
+          echo "Issuer length: ${#AMO_JWT_ISSUER}"
+          echo "Secret length: ${#AMO_JWT_SECRET}"
 
       - name: Prepare build
         run: |
@@ -37,16 +51,18 @@ jobs:
         run: |
           CHANNEL=${{ github.event.inputs.channel }}
           if [ -z "$CHANNEL" ]; then CHANNEL="unlisted"; fi
-          web-ext sign \
+          web-ext sign --verbose \
             --source-dir=extension_firefox \
             --channel="$CHANNEL" \
             --api-key="$AMO_JWT_ISSUER" \
             --api-secret="$AMO_JWT_SECRET" \
-            --artifacts-dir=web-ext-artifacts
+            --artifacts-dir=web-ext-artifacts | tee web-ext-sign.log
 
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: web-ext-artifacts
-          path: web-ext-artifacts/**
+          path: |
+            web-ext-artifacts/**
+            web-ext-sign.log
