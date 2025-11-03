@@ -55,8 +55,8 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         vipCta: 'Buy VIP',
         teamCta: 'Order Team',
         payTitle: 'Payment and Security',
-        payDesc: 'We accept payments via FreeKassa. Stripe — coming soon. All payments are processed over secure channels.',
-        stripeSoon: 'Stripe — coming soon',
+        payDesc: 'We accept payments via FreeKassa. YooKassa — coming soon. All payments are processed over secure channels.',
+        stripeSoon: 'YooKassa — coming soon',
         trialNote: '7‑day trial with auto‑renewal. You can cancel anytime before the billing date.',
         faq: 'Frequently Asked Questions',
         q1: 'Can I pay monthly?',
@@ -80,8 +80,8 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         vipCta: 'Купить VIP',
         teamCta: 'Заказать Team',
         payTitle: 'Оплата и безопасность',
-        payDesc: 'Принимаем платежи через FreeKassa. Stripe — скоро. Все платежи проходят по защищённым каналам.',
-        stripeSoon: 'Stripe — скоро',
+        payDesc: 'Принимаем платежи через FreeKassa. YooKassa — скоро. Все платежи проходят по защищённым каналам.',
+        stripeSoon: 'YooKassa — скоро',
         trialNote: 'Пробный период 7 дней с авто‑продлением. Отменить можно в любой момент до даты списания.',
         faq: 'Часто задаваемые вопросы',
         q1: 'Можно ли платить помесячно?',
@@ -137,6 +137,21 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
           </div>
         </div>
       </header>
+
+      {/* Currency notice */}
+      <div className="max-w-4xl mx-auto mb-8">
+        <div className="rounded-xl border border-yellow-400/30 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-100">
+          {isEN ? (
+            <>
+              Default invoice on FreeKassa shows RUB. To pay in USD, choose the <span className="font-semibold">USD</span> tile on the right on the payment page.
+            </>
+          ) : (
+            <>
+              На странице оплаты FreeKassa по умолчанию показывается счёт в рублях. Чтобы оплатить в долларах, выберите плитку <span className="font-semibold">USD</span> справа.
+            </>
+          )}
+        </div>
+      </div>
 
       <div className="grid md:grid-cols-3 gap-8 mb-12">
         <ServiceCard
