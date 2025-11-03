@@ -44,13 +44,34 @@ jobs:
           echo "Using source: extension_firefox"
           ls -la extension_firefox
 
+      - name: Generate icons from brand image
+        run: |
+          BRAND=public/brand/getlifeundo-round.png
+          if [ ! -f "$BRAND" ]; then echo "Brand source not found: $BRAND" && exit 1; fi
+          sudo apt-get update >/dev/null 2>&1 || true
+          sudo apt-get install -y imagemagick >/dev/null 2>&1 || true
+          mkdir -p extension_firefox
+          convert "$BRAND" -resize 16x16 extension_firefox/icon16.png
+          convert "$BRAND" -resize 32x32 extension_firefox/icon32.png
+          convert "$BRAND" -resize 48x48 extension_firefox/icon48.png
+          convert "$BRAND" -resize 128x128 extension_firefox/icon128.png
+          ls -la extension_firefox | grep icon || true
+
       - name: Sign with AMO
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
         run: |
           CHANNEL=${{ github.event.inputs.channel }}
-          if [ -z "$CHANNEL" ]; then CHANNEL="unlisted"; fi
+          if [ -z "$CHANNEL" ]; then
+            # Detect from tag name: if tag contains 'listed' → listed, else unlisted
+            REF_NAME="${GITHUB_REF_NAME:-${GITHUB_REF##*/}}"
+            if echo "$REF_NAME" | grep -qi listed; then
+              CHANNEL="listed"
+            else
+              CHANNEL="unlisted"
+            fi
+          fi
           web-ext sign --verbose \
             --source-dir=extension_firefox \
             --channel="$CHANNEL" \
