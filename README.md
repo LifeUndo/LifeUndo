@@ -20,6 +20,7 @@
 - YouTube: https://youtube.com/@getlifeundo
 - Reddit: https://reddit.com/r/getlifeundo
 - GitHub: https://github.com/LifeUndo
+- VK: https://vk.ru/GetLifeUndo
 
 Площадки (по мере готовности):
 - RuStore: https://store.nashstore.ru/
