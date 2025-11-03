@@ -39,7 +39,6 @@ jobs:
         continue-on-error: true
 
   sign-amo:
-    if: ${{ secrets.AMO_JWT_ISSUER != '' && secrets.AMO_JWT_SECRET != '' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -91,6 +90,7 @@ jobs:
         with:
           name: zips
           path: dist
+        continue-on-error: true
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
