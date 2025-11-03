@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -38,6 +39,7 @@ jobs:
         continue-on-error: true
 
   sign-amo:
+    if: ${{ secrets.AMO_JWT_ISSUER != '' && secrets.AMO_JWT_SECRET != '' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
