@@ -12,7 +12,23 @@
 - Ограничения Android: ретроскан вкладок невозможен без Accessibility; текущие вкладки подхватываются при посещении экранов «Недавние/История» браузера.
 - Приватность: данные хранятся локально на устройстве, не отправляются на сервер.
 
-Полезные ссылки:
+## Соцсети и площадки
+
+Соцсети:
+- Telegram: https://t.me/getlifeundo
+- X/Twitter: https://x.com/getlifeundo
+- YouTube: https://youtube.com/@getlifeundo
+- Reddit: https://reddit.com/r/getlifeundo
+- GitHub: https://github.com/LifeUndo
+
+Площадки (по мере готовности):
+- RuStore: https://store.nashstore.ru/
+- Huawei AppGallery: https://appgallery.huawei.com/
+- Samsung Galaxy Store: https://galaxystore.samsung.com/
+- F-Droid: (будет добавлено)
+- RuStore Apps: https://apps.rustore.ru/app/
+
+## Полезные ссылки:
 - Сайт: https://getlifeundo.com
 - Загрузки: https://getlifeundo.com/ru/downloads
 - Тарифы: https://getlifeundo.com/ru/pricing
