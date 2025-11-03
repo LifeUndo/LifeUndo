@@ -1,5 +1,23 @@
 # GetLifeUndo
 
+## Android (1.0.0+10 rev5a)
+
+- Скачать APK: https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a
+- Что делает: восстанавливает недавно закрытые вкладки, введённый текст в полях и историю буфера. 100% локально, без облака.
+- Требования: Android 8.0+.
+- Установка APK:
+  1) Скачайте APK по ссылке выше.
+  2) Разрешите установку из неизвестных источников.
+  3) Откройте приложение → включите «Input & closed tabs tracking» и выдайте доступ в «Специальных возможностях».
+- Ограничения Android: ретроскан вкладок невозможен без Accessibility; текущие вкладки подхватываются при посещении экранов «Недавние/История» браузера.
+- Приватность: данные хранятся локально на устройстве, не отправляются на сервер.
+
+Полезные ссылки:
+- Сайт: https://getlifeundo.com
+- Загрузки: https://getlifeundo.com/ru/downloads
+- Тарифы: https://getlifeundo.com/ru/pricing
+- Поддержка: https://getlifeundo.com/ru/support
+
 **Ctrl+Z для вашей онлайн-жизни** — восстанавливает случайно удаленные данные на любых устройствах.
 
 [![Website](https://img.shields.io/badge/Website-getlifeundo.com-blue)](https://getlifeundo.com)

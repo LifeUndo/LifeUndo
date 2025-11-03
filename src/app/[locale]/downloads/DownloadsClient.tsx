@@ -231,6 +231,21 @@ export default function DownloadsClient() {
             t={t}
           />
 
+          {/* Android APK (GitHub Release) */}
+          <DownloadCard
+            icon={
+              <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.6 9.48l1.84-3.18-.86-.5-1.86 3.22a7.06 7.06 0 00-8.64 0L5.32 5.8l-.86.5 1.84 3.18A6.98 6.98 0 004 14v5a1 1 0 001 1h2a1 1 0 001-1v-3h8v3a1 1 0 001 1h2a1 1 0 001-1v-5c0-2.09-.86-3.98-2.4-5.52zM9 12a1 1 0 110-2 1 1 0 010 2zm6 0a1 1 0 110-2 1 1 0 010 2z"/>
+              </svg>
+            }
+            title="Android (APK)"
+            description={t.downloads.android}
+            href="https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a"
+            className="bg-green-600 hover:bg-green-700 text-white"
+            isAvailable={true}
+            t={t}
+          />
+
           {/* Android RuStore */}
           <DownloadCard
             icon={
