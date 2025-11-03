@@ -1,0 +1,29 @@
+[
+  {
+    "version": "1.0.0+10 (rev5a)",
+    "platform": "Android",
+    "publishedAt": "2025-11-03T10:00:00Z",
+    "items": [
+      "Android APK релиз (rev5a)",
+      "Tabs capture: бренд‑иконки (в т.ч. DuckDuckGo), список 8+2",
+      "Убраны Open/Install и раздел ‘Специальные’, описания Tor/Venator внизу",
+      "EN‑локализация и подсказки обновлены"
+    ],
+    "links": {
+      "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a"
+    }
+  },
+  {
+    "version": "0.3.7.32",
+    "platform": "Extensions/Desktop",
+    "publishedAt": "2025-10-06T12:00:00Z",
+    "items": [
+      "Stability improvements",
+      "Better form recovery",
+      "Clipboard history fixes"
+    ],
+    "links": {
+      "firefox": "https://addons.mozilla.org/firefox/addon/getlifeundo/"
+    }
+  }
+]

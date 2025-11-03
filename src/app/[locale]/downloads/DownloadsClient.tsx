@@ -64,9 +64,18 @@ interface WhatsNewData {
   items: string[];
 }
 
+interface NewsItem {
+  version: string;
+  platform: string;
+  publishedAt: string;
+  items: string[];
+  links?: Record<string, string>;
+}
+
 export default function DownloadsClient() {
   const [latestData, setLatestData] = useState<LatestData | null>(null);
   const [whatsNewData, setWhatsNewData] = useState<WhatsNewData | null>(null);
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const { t, locale } = useTranslations();
 
@@ -76,11 +85,13 @@ export default function DownloadsClient() {
     
     Promise.all([
       fetch(`/app/latest/latest.json?v=${buildId}`).then(res => res.json()),
-      fetch(`/app/latest/whats-new.json?v=${buildId}`).then(res => res.json())
+      fetch(`/app/latest/whats-new.json?v=${buildId}`).then(res => res.json()),
+      fetch(`/app/latest/news.json?v=${buildId}`).then(res => res.json()).catch(() => [])
     ])
-    .then(([latest, whatsNew]) => {
+    .then(([latest, whatsNew, news]) => {
       setLatestData(latest);
       setWhatsNewData(whatsNew);
+      if (Array.isArray(news)) setNewsList(news);
       setLoading(false);
     })
     .catch(() => {
@@ -150,6 +161,35 @@ export default function DownloadsClient() {
                   </ul>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* News Feed */}
+          {newsList.length > 0 && (
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 max-w-3xl mx-auto mb-10">
+              <h3 className="text-2xl font-semibold text-white mb-4">{locale === 'en' ? 'Recent releases' : 'Последние релизы'}</h3>
+              <ul className="space-y-4">
+                {newsList.map((n, idx) => (
+                  <li key={idx} className="border border-white/10 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-white font-semibold">{n.platform} — {n.version}</div>
+                      <div className="text-sm text-gray-400">{new Date(n.publishedAt).toLocaleDateString(locale === 'en' ? 'en-US' : 'ru-RU')}</div>
+                    </div>
+                    <ul className="list-disc list-inside text-gray-300 text-sm mb-2">
+                      {n.items.map((it, i) => (<li key={i}>{it}</li>))}
+                    </ul>
+                    {n.links && (
+                      <div className="flex flex-wrap gap-3 mt-2">
+                        {Object.entries(n.links).map(([k, v]) => (
+                          <a key={k} href={v} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">
+                            {k.toUpperCase()}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
