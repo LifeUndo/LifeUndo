@@ -91,6 +91,15 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
         q3: 'Как работает Team-аккаунт?',
       };
 
+  // Отображаемые суммы и символ валюты
+  const isEN = locale === 'en';
+  const currencySymbol = isEN ? '$' : '₽';
+  const display = {
+    pro: isEN ? 7.40 : PLANS.pro_month.amount,
+    vip: isEN ? 123.33 : PLANS.vip_lifetime.amount,
+    team: isEN ? 36.91 : PLANS.team_5.amount,
+  } as const;
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
       <script
@@ -134,7 +143,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
           icon="⭐"
           title={PLANS.pro_month.label}
           description={txt.proDesc}
-          price={`${PLANS.pro_month.amount} ₽`}
+          price={`${currencySymbol}${display.pro}`}
           period={txt.perMonth}
           isPopular={true}
           ctaText={txt.proCta}
@@ -146,7 +155,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
           icon="👑"
           title={PLANS.vip_lifetime.label}
           description={txt.vipDesc}
-          price={`${PLANS.vip_lifetime.amount} ₽`}
+          price={`${currencySymbol}${display.vip}`}
           period={txt.vipPeriod}
           ctaText={txt.vipCta}
           ctaLink={`/${locale}/buy?plan=vip`}
@@ -157,7 +166,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
           icon="👥"
           title={PLANS.team_5.label}
           description={txt.teamDesc}
-          price={`${PLANS.team_5.amount} ₽`}
+          price={`${currencySymbol}${display.team}`}
           period={txt.teamPeriod}
           ctaText={txt.teamCta}
           ctaLink={`/${locale}/buy?plan=team`}

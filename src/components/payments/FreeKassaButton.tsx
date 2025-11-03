@@ -29,13 +29,14 @@ type Props = {
 
 export default function FreeKassaButton({ plan, email, className }: Props) {
   const t = useI18n();
+  const { locale } = useTranslations();
   const productId = PLAN_TO_PRODUCT[plan];
   const disabled = !productId;
 
   const onClick = async () => {
     if (disabled) return;
     try {
-      const payload: Record<string, any> = { plan, productId };
+      const payload: Record<string, any> = { plan, productId, locale };
       if (email) payload.email = email;
       console.log('[FK] create payment payload', payload);
       const r = await fetch("/api/payments/freekassa/create", {
