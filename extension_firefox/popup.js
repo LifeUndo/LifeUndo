@@ -42,13 +42,7 @@ const i18n = {
     ],
     status_importing: "Importing...",
     status_vip_ok: "VIP activated ✅",
-    status_import_err: "Import error: ",
-    ui_latest_inputs: "Latest inputs",
-    ui_clipboard: "Clipboard history",
-    ui_screenshots: "Screenshots",
-    ui_make_screenshot: "Make screenshot",
-    ui_recent_tabs: "Recently closed",
-    ui_no_items: "No items yet"
+    status_import_err: "Import error: "
   },
   ru: {
     badge_free: "Бесплатная версия",
@@ -69,13 +63,7 @@ const i18n = {
     ],
     status_importing: "Импорт...",
     status_vip_ok: "VIP активирован ✅",
-    status_import_err: "Ошибка импорта: ",
-    ui_latest_inputs: "Последние вводы",
-    ui_clipboard: "История буфера обмена",
-    ui_screenshots: "Скриншоты",
-    ui_make_screenshot: "Сделать скрин",
-    ui_recent_tabs: "Недавно закрытые",
-    ui_no_items: "Пока нет элементов"
+    status_import_err: "Ошибка импорта: "
   }
 };
 
@@ -113,13 +101,6 @@ function applyLang() {
     if (!key) return;
     const msg = t(key);
     if (msg && msg !== key) el.textContent = msg;
-  });
-
-  // Localize empty states
-  document.querySelectorAll('[data-i18n-empty]').forEach(el => {
-    const key = el.getAttribute('data-i18n-empty');
-    const msg = t(key);
-    if (el.classList.contains('empty') && msg) el.textContent = msg;
   });
 
   // Update What's New modal
@@ -237,9 +218,6 @@ api.storage.onChanged.addListener((changes, area) => {
   if (changes.lu_plan) {
     refreshVipUi();
   }
-  if (changes.lu_inputs || changes.lu_clipboard || changes.lu_tab_history || changes.lu_shots) {
-    refreshDataSections();
-  }
 });
 
 // ==== Initialize ====
@@ -261,84 +239,4 @@ currentLang = localStorage.getItem('lu_lang') || 'en';
   
   applyLang();
   refreshVipUi();
-  await refreshDataSections();
 })();
-
-// ===== Data sections =====
-async function refreshDataSections() {
-  try {
-    const store = await api.storage.local.get(['lu_inputs','lu_clipboard','lu_shots','lu_tab_history']);
-    renderInputs(store.lu_inputs || []);
-    renderClipboard(store.lu_clipboard || []);
-    renderShots(store.lu_shots || []);
-    renderTabs(store.lu_tab_history || []);
-  } catch (e) {
-    console.error('refreshDataSections error', e);
-  }
-}
-
-function setEmptyState(container, isEmpty) {
-  if (!container) return;
-  if (isEmpty) {
-    container.classList.add('empty');
-    const k = container.getAttribute('data-i18n-empty') || 'ui_no_items';
-    container.textContent = t(k);
-  } else {
-    container.classList.remove('empty');
-  }
-}
-
-function renderInputs(items) {
-  const box = document.getElementById('inputsList');
-  if (!box) return;
-  if (!items.length) { setEmptyState(box, true); return; }
-  setEmptyState(box, false);
-  box.innerHTML = items.map(i => `<div class="li"><div class="txt">${escapeHtml(i.text || i.value || '')}</div><div class="meta">${new Date(i.timestamp||i.ts||Date.now()).toLocaleString()} · ${i.url?'<a href="'+i.url+'" target="_blank">link</a>':''}</div></div>`).join('');
-}
-
-function renderClipboard(items) {
-  const box = document.getElementById('clipList');
-  if (!box) return;
-  if (!items.length) { setEmptyState(box, true); return; }
-  setEmptyState(box, false);
-  box.innerHTML = items.map(i => `<div class="li"><div class="txt">${escapeHtml(i.text || i.value || '')}</div><div class="meta">${new Date(i.timestamp||i.ts||Date.now()).toLocaleString()}</div></div>`).join('');
-}
-
-function renderTabs(items) {
-  const box = document.getElementById('tabsList');
-  if (!box) return;
-  if (!items.length) { setEmptyState(box, true); return; }
-  setEmptyState(box, false);
-  box.innerHTML = items.map(i => `<div class="li"><a href="${i.url}" target="_blank">${escapeHtml(i.title||i.url)}</a><div class="meta">${new Date(i.closedAt||Date.now()).toLocaleString()}</div></div>`).join('');
-}
-
-function renderShots(items) {
-  const box = document.getElementById('shotsList');
-  if (!box) return;
-  if (!items.length) { setEmptyState(box, true); return; }
-  setEmptyState(box, false);
-  box.innerHTML = items.map((s,idx) => `<div class="shot"><a href="${s.dataUrl}" target="_blank"><img src="${s.dataUrl}" alt="shot ${idx+1}"/></a><div class="meta">${new Date(s.ts||Date.now()).toLocaleString()}</div></div>`).join('');
-}
-
-function escapeHtml(str){
-  return String(str).replace(/[&<>\"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
-}
-
-// Screenshot button
-document.getElementById('btnShot')?.addEventListener('click', async () => {
-  try {
-    const dataUrl = await new Promise((res, rej) => {
-      try { api.tabs.captureVisibleTab(null, { format: 'png' }, (url) => {
-        if (api.runtime.lastError) rej(api.runtime.lastError);
-        else res(url);
-      }); } catch(e){ rej(e); }
-    });
-    if (!dataUrl) return;
-    const { lu_shots=[] } = await api.storage.local.get('lu_shots');
-    const next = [{ dataUrl, ts: Date.now() }, ...lu_shots].slice(0, 20);
-    await api.storage.local.set({ lu_shots: next });
-    renderShots(next);
-  } catch (e) {
-    console.error('screenshot error', e);
-  }
-});
