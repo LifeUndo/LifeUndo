@@ -299,6 +299,51 @@ export default function DownloadsClient() {
             isAvailable={false}
             t={t}
           />
+
+          {/* Android (NashStore) */}
+          <DownloadCard
+            icon={
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            }
+            title="Android (NashStore)"
+            description={locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
+            href="#"
+            className="bg-green-600 hover:bg-green-700 text-white"
+            isAvailable={false}
+            t={t}
+          />
+
+          {/* Huawei AppGallery */}
+          <DownloadCard
+            icon={
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            }
+            title="Huawei AppGallery"
+            description={locale === 'en' ? 'Preparing publication.' : 'Готовим публикацию.'}
+            href="#"
+            className="bg-red-600 hover:bg-red-700 text-white"
+            isAvailable={false}
+            t={t}
+          />
+
+          {/* F‑Droid */}
+          <DownloadCard
+            icon={
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            }
+            title="F‑Droid"
+            description={locale === 'en' ? 'MR is open, pending review.' : 'MR открыт, ожидаем ревью.'}
+            href="#"
+            className="bg-blue-700 hover:bg-blue-800 text-white"
+            isAvailable={false}
+            t={t}
+          />
         </div>
 
         {/* License Key Input */}
@@ -356,56 +401,6 @@ export default function DownloadsClient() {
               </div>
               <h4 className="text-lg font-bold text-white mb-2">{t.downloads.feature3Title}</h4>
               <p className="text-gray-300">{t.downloads.feature3Description}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Apps Announcement */}
-        <div className="text-center mt-16">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              {t.downloads.mobileComingSoon}
-            </h3>
-            <p className="text-gray-300 mb-8">
-              {t.downloads.mobileDescription}
-            </p>
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="text-white font-semibold mb-2">RuStore</div>
-                <p className="text-gray-300 text-sm mb-3">
-                  {locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
-                </p>
-                <div className="text-xs inline-block px-2 py-1 rounded-full bg-yellow-200/20 text-yellow-200">
-                  {locale === 'en' ? 'Under review' : 'На модерации'}
-                </div>
-              </div>
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="text-white font-semibold mb-2">NashStore</div>
-                <p className="text-gray-300 text-sm mb-3">
-                  {locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
-                </p>
-                <div className="text-xs inline-block px-2 py-1 rounded-full bg-yellow-200/20 text-yellow-200">
-                  {locale === 'en' ? 'Under review' : 'На модерации'}
-                </div>
-              </div>
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="text-white font-semibold mb-2">Huawei AppGallery</div>
-                <p className="text-gray-300 text-sm mb-3">
-                  {locale === 'en' ? 'Preparing publication.' : 'Готовим публикацию.'}
-                </p>
-                <div className="text-xs inline-block px-2 py-1 rounded-full bg-white/20 text-gray-200">
-                  {locale === 'en' ? 'Coming soon' : 'Скоро'}
-                </div>
-              </div>
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="text-white font-semibold mb-2">F‑Droid</div>
-                <p className="text-gray-300 text-sm mb-3">
-                  {locale === 'en' ? 'MR is open, pending review.' : 'MR открыт, ожидаем ревью.'}
-                </p>
-                <div className="text-xs inline-block px-2 py-1 rounded-full bg-white/20 text-gray-200">
-                  {locale === 'en' ? 'Coming soon' : 'Скоро'}
-                </div>
-              </div>
             </div>
           </div>
         </div>
