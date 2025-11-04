@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from '@/hooks/useTranslations';
-import MobileBadges from '@/components/ui/MobileBadges';
 
 interface LatestData {
   version: string;
@@ -370,7 +369,44 @@ export default function DownloadsClient() {
             <p className="text-gray-300 mb-8">
               {t.downloads.mobileDescription}
             </p>
-            <MobileBadges />
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
+              <div className="bg-white/10 rounded-xl p-4">
+                <div className="text-white font-semibold mb-2">RuStore</div>
+                <p className="text-gray-300 text-sm mb-3">
+                  {locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
+                </p>
+                <div className="text-xs inline-block px-2 py-1 rounded-full bg-yellow-200/20 text-yellow-200">
+                  {locale === 'en' ? 'Under review' : 'На модерации'}
+                </div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4">
+                <div className="text-white font-semibold mb-2">NashStore</div>
+                <p className="text-gray-300 text-sm mb-3">
+                  {locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
+                </p>
+                <div className="text-xs inline-block px-2 py-1 rounded-full bg-yellow-200/20 text-yellow-200">
+                  {locale === 'en' ? 'Under review' : 'На модерации'}
+                </div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4">
+                <div className="text-white font-semibold mb-2">Huawei AppGallery</div>
+                <p className="text-gray-300 text-sm mb-3">
+                  {locale === 'en' ? 'Preparing publication.' : 'Готовим публикацию.'}
+                </p>
+                <div className="text-xs inline-block px-2 py-1 rounded-full bg-white/20 text-gray-200">
+                  {locale === 'en' ? 'Coming soon' : 'Скоро'}
+                </div>
+              </div>
+              <div className="bg-white/10 rounded-xl p-4">
+                <div className="text-white font-semibold mb-2">F‑Droid</div>
+                <p className="text-gray-300 text-sm mb-3">
+                  {locale === 'en' ? 'MR is open, pending review.' : 'MR открыт, ожидаем ревью.'}
+                </p>
+                <div className="text-xs inline-block px-2 py-1 rounded-full bg-white/20 text-gray-200">
+                  {locale === 'en' ? 'Coming soon' : 'Скоро'}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
