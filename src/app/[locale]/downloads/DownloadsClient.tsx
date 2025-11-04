@@ -270,6 +270,21 @@ export default function DownloadsClient() {
             t={t}
           />
 
+          {/* App Store (iOS) */}
+          <DownloadCard
+            icon={
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            }
+            title="App Store (iOS)"
+            description={locale === 'en' ? 'iOS app' : 'Приложение для iOS'}
+            href="#"
+            className="bg-black hover:bg-black text-white"
+            isAvailable={false}
+            t={t}
+          />
+
           {/* Android APK (GitHub Release) */}
           <DownloadCard
             icon={
@@ -292,8 +307,8 @@ export default function DownloadsClient() {
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
             }
-            title="Android"
-            description={t.downloads.android}
+            title="Android (RuStore)"
+            description={locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
             href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID"
             className="bg-green-600 hover:bg-green-700 text-white"
             isAvailable={false}
