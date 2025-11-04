@@ -1,138 +1,178 @@
-// Firefox MV2 content script - Enhanced for 0.3.7.17
-// Reliable input/change/copy listeners, password field protection
+/* global browser */
 
-(function() {
-  if (window.hasRunContentScript) {
-    return;
-  }
-  window.hasRunContentScript = true;
+// Debug logging
+const dbg = (...args) => console && console.debug('[LU]', ...args);
 
-  console.log('LifeUndo Content Script Loaded');
+// Protected pages - don't collect data
+const PROTECTED = location.protocol === 'about:' ||
+                  location.protocol === 'moz-extension:' ||
+                  location.protocol === 'view-source:' ||
+                  location.hostname.includes('addons.mozilla.org');
 
-  const api = window.browser || window.chrome;
+if (PROTECTED) {
+  dbg('Protected page detected, skipping data collection');
+}
 
-  function isPasswordField(element) {
-    if (!element) return false;
-    
-    // Check type attribute
-    if (element.type === 'password' || element.type === 'hidden') {
-      return true;
-    }
-    
-    // Check name/id attributes for password-related keywords
-    const name = (element.name || '').toLowerCase();
-    const id = (element.id || '').toLowerCase();
-    const className = (element.className || '').toLowerCase();
-    
-    const passwordKeywords = ['password', 'passwd', 'pwd', 'secret', 'token', 'key'];
-    
-    return passwordKeywords.some(keyword => 
-      name.includes(keyword) || 
-      id.includes(keyword) || 
-      className.includes(keyword)
-    );
-  }
-
-  function saveTextInput(text, url) {
-    if (!text || text.trim() === '') return;
-
-    api.storage.local.get(['lu_inputs']).then((data) => {
-      const inputs = data.lu_inputs || [];
-      const newInput = { 
-        text: text.slice(0, 2000), 
-        timestamp: Date.now(), 
-        url: url || window.location.href 
-      };
-      
-      // Keep only last 20 entries
-      const updatedInputs = [newInput, ...inputs].slice(0, 20);
-      
-      api.storage.local.set({ lu_inputs: updatedInputs });
-    }).catch(error => {
-      console.error('Error saving text input:', error);
-    });
-  }
-
-  function saveClipboardText(text) {
-    if (!text || text.trim() === '') return;
-
-    api.storage.local.get(['lu_clipboard']).then((data) => {
-      const clipboard = data.lu_clipboard || [];
-      const newEntry = { 
-        text: text.slice(0, 2000), 
-        timestamp: Date.now(), 
-        url: window.location.href 
-      };
-      
-      // Keep only last 20 entries
-      const updatedClipboard = [newEntry, ...clipboard].slice(0, 20);
-      
-      api.storage.local.set({ lu_clipboard: updatedClipboard });
-    }).catch(error => {
-      console.error('Error saving clipboard:', error);
-    });
-  }
-
-  // Input and change event listeners
-  document.addEventListener('input', (event) => {
-    const target = event.target;
-    
-    // Skip password fields
-    if (isPasswordField(target)) return;
-    
-    // Handle text inputs and textareas
-    if ((target.tagName === 'TEXTAREA' || 
-         (target.tagName === 'INPUT' && target.type !== 'password')) && 
-        target.value) {
-      saveTextInput(target.value);
-    }
-    
-    // Handle contentEditable elements
-    if (target.isContentEditable && target.textContent) {
-      saveTextInput(target.textContent);
-    }
-  }, true); // Use capture phase
-
-  document.addEventListener('change', (event) => {
-    const target = event.target;
-    
-    // Skip password fields
-    if (isPasswordField(target)) return;
-    
-    // Handle text inputs and textareas
-    if ((target.tagName === 'TEXTAREA' || 
-         (target.tagName === 'INPUT' && target.type !== 'password')) && 
-        target.value) {
-      saveTextInput(target.value);
-    }
-  }, true); // Use capture phase
-
-  // Copy event listener
-  document.addEventListener('copy', (event) => {
-    const text = document.getSelection()?.toString() || '';
-    if (text) {
-      saveClipboardText(text);
-    }
-  }, true); // Use capture phase
-
-  // Message listener for text restoration
-  api.runtime.onMessage.addListener((message) => {
-    if (message?.type === 'LU_RESTORE_TEXT') {
-      const active = document.activeElement;
-      const value = message.payload?.value || '';
-      
-      if (active && (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement)) {
-        active.value = value;
-        active.dispatchEvent(new Event('input', { bubbles: true }));
-      } else if (active && active.isContentEditable) {
-        active.textContent = value;
-        active.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    }
-  });
-
+// Debounced saving
+const saveDebounced = (() => {
+  let timeout;
+  return (key, value) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => save(key, value), 150);
+  };
 })();
 
+// Enhanced junk value filtering
+const isJunkValue = (element, text) => {
+  if (!element) return true;
+  if (element.type === 'password') return true;
+  if (element.type === 'hidden') return true;
+  if (element.type === 'file') return true;
+  if (/password|passwd|pwd/i.test(element.name || '')) return true;
+  if (/password|passwd|pwd/i.test(element.id || '')) return true;
+  if (element.getAttribute('autocomplete') === 'current-password') return true;
+  if (typeof text === 'string' && text.trim().length < 2) return true; // Too short
+  if (text && /:\\fakepath/i.test(text)) return true; // Case-insensitive fakepath
+  return false;
+};
 
+// Check if element is supported for text capture
+const isSupportedElement = (element) => {
+  if (!element) return false;
+  
+  // Input elements
+  if (element.tagName === 'INPUT') {
+    const supportedTypes = ['text', 'search', 'email', 'url', 'tel', 'number'];
+    return supportedTypes.includes(element.type);
+  }
+  
+  // Textarea elements
+  if (element.tagName === 'TEXTAREA') {
+    return true;
+  }
+  
+  // Contenteditable elements
+  if (element.contentEditable === 'true' || element.contentEditable === '') {
+    return true;
+  }
+  
+  return false;
+};
 
+// Capture text input
+function onInputEvent(event) {
+  if (PROTECTED) return;
+  
+  const element = event.target;
+  if (!isSupportedElement(element)) return;
+  
+  let text = '';
+  
+  if (element.isContentEditable || element.contentEditable === 'true' || element.contentEditable === '') {
+    text = (element.innerText || '').trim();
+  } else if (element.value !== undefined) {
+    text = (element.value || '').trim();
+  } else {
+    return; // Unknown element type
+  }
+  
+  if (isJunkValue(element, text)) return;
+  
+  const record = {
+    text: text,
+    ts: Date.now(),
+    origin: location.origin || document.referrer || 'unknown'
+  };
+  
+  dbg('Input captured:', record);
+  saveDebounced('lu_inputs', record);
+}
 
+// Capture copy event
+function onCopy(event) {
+  if (PROTECTED) return;
+  
+  try {
+    const selection = (document.getSelection() || '').toString().trim();
+    if (!selection || isJunkValue(null, selection)) return; // Check for junk
+    
+    const record = {
+      text: selection,
+      ts: Date.now(),
+      origin: location.origin || document.referrer || 'unknown'
+    };
+    
+    dbg('Copy captured:', record);
+    saveDebounced('lu_clipboard', record);
+  } catch (error) {
+    console.error('[LifeUndo] Copy error:', error);
+  }
+}
+
+// Save with limit
+async function save(key, record) {
+  try {
+    const data = await browser.storage.local.get({ [key]: [] });
+    const array = Array.isArray(data[key]) ? data[key] : [];
+    
+    // Add to beginning
+    array.unshift(record);
+    
+    // Limit to 50 items
+    const limited = array.slice(0, 50);
+    
+    await browser.storage.local.set({ [key]: limited });
+    dbg('Saved to storage:', key, limited.length, 'items');
+  } catch (error) {
+    console.error('[LifeUndo] Save error:', error);
+  }
+}
+
+// MutationObserver for contenteditable elements
+const setupMutationObserver = (element) => {
+  const observer = new MutationObserver(() => {
+    onInputEvent({ target: element });
+  });
+  observer.observe(element, { 
+    childList: true, 
+    subtree: true, 
+    characterData: true 
+  });
+};
+
+// Setup event listeners
+if (!PROTECTED) {
+  // Main input events
+  document.addEventListener('input', onInputEvent, true);
+  document.addEventListener('keyup', onInputEvent, true); // Backup event
+  document.addEventListener('change', onInputEvent, true);
+  document.addEventListener('paste', onInputEvent, true); // Backup event
+  
+  // Copy event
+  document.addEventListener('copy', onCopy, true);
+  
+  // Setup observers for existing contenteditable elements
+  document.querySelectorAll('[contenteditable="true"], [contenteditable=""]').forEach(setupMutationObserver);
+  
+  // Watch for dynamically added contenteditable elements
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.contentEditable === 'true' || node.contentEditable === '') {
+            setupMutationObserver(node);
+          }
+          // Check child elements
+          node.querySelectorAll && node.querySelectorAll('[contenteditable="true"], [contenteditable=""]').forEach(setupMutationObserver);
+        }
+      });
+    });
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  
+  dbg('Content script loaded successfully');
+}

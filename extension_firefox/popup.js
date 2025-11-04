@@ -1,242 +1,404 @@
-// LifeUndo Popup - v0.3.7.17
-// Firefox free mode enabled, enhanced content script, fixed data collection
+/* global browser */
 
-const api = window.browser || window.chrome;
-
-// ==== DOM Elements ====
-const btnVip = document.getElementById('btnVip');
-const btnPro = document.getElementById('btnPro');
-const vipFile = document.getElementById('vipFile');
-const flashEl = document.getElementById('flash');
-const planTag = document.getElementById('planLabel');
-const whatsNewBtn = document.getElementById('btnWhatsNew');
-const wnModal = document.getElementById('wnModal');
-const versionTag = document.getElementById('version');
-const btnEN = document.getElementById('btnEN');
-const btnRU = document.getElementById('btnRU');
-const linkWebsite = document.getElementById('linkWebsite');
-const linkPrivacy = document.getElementById('linkPrivacy');
-const linkSupport = document.getElementById('linkSupport');
-const linkSettings = document.getElementById('linkSettings');
-
-// ==== I18n ====
-let currentLang = navigator.language.split('-')[0] || 'en';
-
-const i18n = {
-  en: {
-    badge_free: "Free Version",
-    badge_vip: "VIP",
-    btn_activate_vip: "Activate VIP",
-    btn_vip_active: "VIP active",
-    btn_upgrade_pro: "Upgrade to Pro",
-    footer_website: "Website",
-    footer_privacy: "Privacy",
-    footer_support: "Support",
-    footer_license: "License",
-    whats_new: "What's new",
-    whats_new_title: "What's new (v0.3.7)",
-    whats_new_points: [
-      "One-click VIP activation from popup",
-      "Unified license verification core",
-      "Stable RU/EN switching and UI polish"
-    ],
-    status_importing: "Importing...",
-    status_vip_ok: "VIP activated ✅",
-    status_import_err: "Import error: "
-  },
-  ru: {
-    badge_free: "Бесплатная версия",
-    badge_vip: "VIP",
-    btn_activate_vip: "Активировать VIP",
-    btn_vip_active: "VIP активен",
-    btn_upgrade_pro: "Перейти на Pro",
-    footer_website: "Сайт",
-    footer_privacy: "Конфиденциальность",
-    footer_support: "Поддержка",
-    footer_license: "Лицензия",
-    whats_new: "Что нового",
-    whats_new_title: "Что нового (v0.3.7)",
-    whats_new_points: [
-      "Активация VIP одним кликом из попапа",
-      "Единое ядро проверки лицензий",
-      "Стабильное переключение RU/EN и полировка UI"
-    ],
-    status_importing: "Импорт...",
-    status_vip_ok: "VIP активирован ✅",
-    status_import_err: "Ошибка импорта: "
-  }
-};
-
-// ==== Functions ====
-
-async function isFirefox() {
-  try {
-    const info = await (api.runtime.getBrowserInfo?.() || Promise.resolve(null));
-    return !!info && /firefox|gecko/i.test(`${info.name} ${info.vendor || ''}`);
-  } catch { 
-    return /firefox/i.test(navigator.userAgent); 
-  }
-}
-
-function t(key) {
-  return (i18n[currentLang] && i18n[currentLang][key]) || key;
-}
-
-function applyLang() {
-  // Update UI texts
-  if (planTag) planTag.textContent = t('badge_free');
-  if (btnVip) btnVip.textContent = t('btn_activate_vip');
-  if (btnPro) btnPro.textContent = t('btn_upgrade_pro');
-  if (whatsNewBtn) whatsNewBtn.textContent = t('whats_new');
-
-  // Update footer links
-  if (linkWebsite) linkWebsite.textContent = t('footer_website');
-  if (linkPrivacy) linkPrivacy.textContent = t('footer_privacy');
-  if (linkSupport) linkSupport.textContent = t('footer_support');
-  if (linkSettings) linkSettings.textContent = t('footer_license');
-
-  // Localize any [data-i18n] elements (headings etc.)
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (!key) return;
-    const msg = t(key);
-    if (msg && msg !== key) el.textContent = msg;
+// Wait for i18n helper to be available
+function waitForI18n() {
+  return new Promise((resolve) => {
+    const checkI18n = () => {
+      if (window.i18n) {
+        resolve(window.i18n);
+      } else {
+        setTimeout(checkI18n, 10);
+      }
+    };
+    checkI18n();
   });
-
-  // Update What's New modal
-  const wnTitle = document.getElementById('wnTitle');
-  const wnList = document.getElementById('wnList');
-  if (wnTitle) wnTitle.textContent = t('whats_new_title');
-  if (wnList && Array.isArray(i18n[currentLang].whats_new_points)) {
-    wnList.innerHTML = i18n[currentLang].whats_new_points.map(point => `<li>${point}</li>`).join('');
-  }
-
-  // Refresh VIP UI after language change
-  refreshVipUi();
 }
 
-// ==== Event Listeners ====
-
-// Pro button → /pricing (RU) or /en/pricing (EN)
-(function() {
-  const el = document.getElementById('btnPro');
-  if (!el) return;
-  try {
-    const lang = currentLang;
-    const href = lang === 'ru' ? 'https://getlifeundo.com/ru/pricing' : 'https://getlifeundo.com/en/pricing';
-    el.addEventListener('click', () => { try { browser.tabs.create({ url: href }); } catch(_) { window.open(href, '_blank'); } });
-  } catch (e) {
-    el.addEventListener('click', () => window.open('https://getlifeundo.com/en/pricing', '_blank'));
-  }
-})();
-
-// Language switching
-btnEN?.addEventListener('click', () => {
-  currentLang = 'en';
-  localStorage.setItem('lu_lang', 'en');
-  applyLang();
-});
-
-btnRU?.addEventListener('click', () => {
-  currentLang = 'ru';
-  localStorage.setItem('lu_lang', 'ru');
-  applyLang();
-});
-
-// VIP activation
-btnVip?.addEventListener('click', () => {
-  if (btnVip.disabled) return;
+// Create list item
+function createListItem(text, origin, timestamp) {
+  const item = document.createElement('div');
+  item.className = 'list-item';
   
-  // Check if VIP is already active
-  const { lu_plan } = api.storage.local.get('lu_plan');
-  if (lu_plan === 'vip') {
-    // VIP is active, open buy page
-    const lang = currentLang;
-    const href = lang === 'ru' ? 'https://getlifeundo.com/ru/buy' : 'https://getlifeundo.com/en/buy';
-    try { 
-      browser.tabs.create({ url: href }); 
-    } catch(_) { 
-      window.open(href, '_blank'); 
+  const title = document.createElement('div');
+  title.className = 'item-title';
+  title.textContent = text;
+  
+  const sub = document.createElement('div');
+  sub.className = 'item-sub';
+  sub.textContent = origin + ' • ' + window.i18n.formatDateTime(timestamp);
+  
+  item.appendChild(title);
+  item.appendChild(sub);
+  
+  return item;
+}
+
+// Create screenshot item
+function createScreenshotItem(screenshot) {
+  const item = document.createElement('div');
+  item.className = 'screenshot-item';
+  
+  const thumb = document.createElement('img');
+  thumb.className = 'screenshot-thumb';
+  thumb.src = screenshot.dataUrl;
+  thumb.alt = 'Screenshot';
+  
+  const info = document.createElement('div');
+  info.className = 'screenshot-info';
+  
+  const title = document.createElement('div');
+  title.className = 'screenshot-title';
+  title.textContent = screenshot.title || screenshot.origin || 'Screenshot';
+  
+  const sub = document.createElement('div');
+  sub.className = 'screenshot-sub';
+  sub.textContent = screenshot.origin + ' • ' + window.i18n.formatDateTime(screenshot.ts);
+  
+  info.appendChild(title);
+  info.appendChild(sub);
+  
+  item.appendChild(thumb);
+  item.appendChild(info);
+  
+  return item;
+}
+
+// Clear list with localized empty state
+function clearList(listId) {
+  const list = document.getElementById(listId);
+  const emptyDiv = document.createElement('div');
+  emptyDiv.className = 'empty';
+  emptyDiv.setAttribute('data-i18n', 'no_items_yet');
+  emptyDiv.textContent = window.i18n.t('no_items_yet');
+  list.innerHTML = '';
+  list.appendChild(emptyDiv);
+}
+
+// Fill list with localized empty state
+function fillList(listId, items, clickHandler) {
+  const list = document.getElementById(listId);
+  list.innerHTML = '';
+  
+  if (!items || items.length === 0) {
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'empty';
+    emptyDiv.setAttribute('data-i18n', 'no_items_yet');
+    emptyDiv.textContent = window.i18n.t('no_items_yet');
+    list.appendChild(emptyDiv);
+    return;
+  }
+  
+  items.forEach(item => {
+    let listItem;
+    if (listId === 'screenshots') {
+      listItem = createScreenshotItem(item);
+    } else {
+      listItem = createListItem(item.text, item.origin, item.ts);
     }
-  } else {
-    // VIP not active, show file picker
-    vipFile?.click();
-  }
-});
+    listItem.addEventListener('click', () => clickHandler(item));
+    list.appendChild(listItem);
+  });
+}
 
-// VIP file import
-vipFile?.addEventListener('change', async (ev) => {
-  const file = ev.target.files?.[0];
-  if (!file) return;
-  
+// Read data from storage
+async function readData() {
   try {
-    flash(t('status_importing'));
-    const lic = await LicenseCore.importFromFile(file, null);
-    flash(t('status_vip_ok'), 'ok');
-  } catch (e) {
-    console.error('VIP import error:', e);
-    flash(t('status_import_err') + e.message, 'err');
-  } finally {
-    ev.target.value = '';
+    const data = await browser.storage.local.get(['lu_inputs', 'lu_clipboard', 'recentShots']);
+    return {
+      inputs: data.lu_inputs || [],
+      clipboard: data.lu_clipboard || [],
+      screenshots: data.recentShots || []
+    };
+  } catch (error) {
+    console.error('[LifeUndo] Error reading data:', error);
+    return { inputs: [], clipboard: [], screenshots: [] };
   }
-});
+}
 
-// What's New modal
-whatsNewBtn?.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleWhatsNew();
-});
-
-// Footer links
-linkWebsite?.addEventListener('click', (e) => {
-  e.preventDefault();
-  const lang = currentLang;
-  const href = lang === 'ru' ? 'https://getlifeundo.com/ru' : 'https://getlifeundo.com/en';
-  window.open(href, '_blank');
-});
-
-linkPrivacy?.addEventListener('click', (e) => {
-  e.preventDefault();
-  const lang = currentLang;
-  const href = lang === 'ru' ? 'https://getlifeundo.com/ru/privacy' : 'https://getlifeundo.com/en/privacy';
-  window.open(href, '_blank');
-});
-
-linkSupport?.addEventListener('click', (e) => {
-  e.preventDefault();
-  window.open('https://t.me/LifeUndoSupport', '_blank');
-});
-
-document.getElementById('linkSettings')?.addEventListener('click', (e) => {
-  e.preventDefault();
-  api.runtime.openOptionsPage();
-});
-
-// Storage change listener for live VIP updates
-api.storage.onChanged.addListener((changes, area) => {
-  if (area !== 'local') return;
-  if (changes.lu_plan) {
-    refreshVipUi();
+// Check if current page is protected
+async function checkProtectedPage() {
+  try {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tabs.length === 0) return;
+    
+    const url = tabs[0].url;
+    const isProtected = url.startsWith('about:') || 
+                       url.startsWith('moz-extension:') || 
+                       url.startsWith('view-source:') ||
+                       url.includes('addons.mozilla.org');
+    
+    const warning = document.getElementById('env-warning');
+    warning.style.display = isProtected ? 'block' : 'none';
+  } catch (error) {
+    console.error('[LifeUndo] Error checking protected page:', error);
   }
-});
+}
 
-// ==== Initialize ====
-// Set version in modal
-try {
-  const v = api.runtime?.getManifest?.()?.version || '';
-  if (versionTag) versionTag.textContent = v ? `(v${v})` : '';
-} catch {}
+// Handle item click
+function handleItemClick(item) {
+  // Copy to clipboard
+  navigator.clipboard.writeText(item.text).then(() => {
+    console.log('[LifeUndo] Text copied to clipboard');
+  }).catch(err => {
+    console.error('[LifeUndo] Failed to copy text:', err);
+  });
+}
 
-// Load saved language
-currentLang = localStorage.getItem('lu_lang') || 'en';
+// Handle screenshot click
+function handleScreenshotClick(screenshot) {
+  // Open screenshot in new tab
+  browser.tabs.create({ url: screenshot.dataUrl });
+}
 
-// Initialize UI with Firefox free mode
-(async () => {
-  const isFirefoxBrowser = await isFirefox();
-  if (isFirefoxBrowser) {
-    window.LU_FEATURE_LEVEL = 'free-firefox';
+// Handle tab click
+function handleTabClick(tab) {
+  if (tab.url && !tab.url.startsWith('about:') && !tab.url.startsWith('chrome:')) {
+    browser.tabs.create({ url: tab.url });
   }
+}
+
+// Clear data
+async function clearData(key) {
+  try {
+    await browser.storage.local.set({ [key]: [] });
+    console.log(`[LifeUndo] Cleared ${key}`);
+  } catch (error) {
+    console.error(`[LifeUndo] Error clearing ${key}:`, error);
+  }
+}
+
+// Take screenshot
+async function takeScreenshot() {
+  try {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tabs.length === 0) return;
+    
+    const tab = tabs[0];
+    const dataUrl = await browser.tabs.captureVisibleTab(tab.windowId, {
+      format: 'jpeg',
+      quality: 60
+    });
+    
+    const screenshot = {
+      dataUrl: dataUrl,
+      origin: tab.url,
+      title: tab.title || 'Screenshot',
+      ts: Date.now(),
+      w: 0,
+      h: 0
+    };
+    
+    // Save to storage
+    const data = await browser.storage.local.get({ recentShots: [] });
+    const screenshots = data.recentShots || [];
+    screenshots.unshift(screenshot);
+    
+    // Limit to 10 items
+    const limited = screenshots.slice(0, 10);
+    
+    await browser.storage.local.set({ recentShots: limited });
+    
+    // Refresh display
+    await renderAll(window.i18n.currentLang());
+    
+    console.log('[LifeUndo] Screenshot taken and saved');
+  } catch (error) {
+    console.error('[LifeUndo] Screenshot error:', error);
+  }
+}
+
+// Trial logic
+async function initTrial() {
+  try {
+    const trialData = await browser.storage.local.get(['trial_startTs', 'trial_snoozeUntilTs']);
+    const now = Date.now();
+    
+    // Initialize trial start time if not exists
+    if (!trialData.trial_startTs) {
+      await browser.storage.local.set({ trial_startTs: now });
+      return; // Don't show banner on first day
+    }
+    
+    // Check if snoozed
+    if (trialData.trial_snoozeUntilTs && now < trialData.trial_snoozeUntilTs) {
+      return; // Still snoozed
+    }
+    
+    // Calculate days since trial start
+    const daysSinceStart = (now - trialData.trial_startTs) / 86400000;
+    
+    const banner = document.getElementById('trial-banner');
+    const title = document.getElementById('trial-title');
+    const body = document.getElementById('trial-body');
+    
+    if (daysSinceStart >= 6 && daysSinceStart < 7) {
+      // Day 6: Soon to expire
+      banner.style.display = 'block';
+      banner.classList.remove('expired');
+      title.textContent = window.i18n.t('trial_soon_title');
+      body.textContent = window.i18n.t('trial_soon_body');
+    } else if (daysSinceStart >= 7) {
+      // Day 7+: Expired
+      banner.style.display = 'block';
+      banner.classList.add('expired');
+      title.textContent = window.i18n.t('trial_expired_title');
+      body.textContent = window.i18n.t('trial_expired_body');
+    }
+  } catch (error) {
+    console.error('[LifeUndo] Trial initialization error:', error);
+  }
+}
+
+// Centralized render all data with full i18n support
+async function renderAll(lang) {
+  const data = await readData();
   
-  applyLang();
-  refreshVipUi();
-})();
+  fillList('inputs', data.inputs, handleItemClick);
+  fillList('clipboard', data.clipboard, handleItemClick);
+  fillList('screenshots', data.screenshots, handleScreenshotClick);
+  
+  // Get recently closed tabs
+  try {
+    const sessions = await browser.sessions.getRecentlyClosed({ maxResults: 10 });
+    const tabs = [];
+    
+    sessions.forEach(session => {
+      if (session.tab) {
+        const tab = session.tab;
+        tabs.push({
+          title: tab.title || tab.url || 'Untitled',
+          url: tab.url,
+          ts: tab.lastAccessed || tab.closedAt || Date.now()
+        });
+      } else if (session.window && session.window.tabs) {
+        const tabCount = session.window.tabs.length;
+        const windowLabel = window.i18n.t('recently_closed_window_label', [String(tabCount)]);
+        tabs.push({
+          title: windowLabel,
+          url: null, // Not clickable
+          ts: session.closedAt || Date.now()
+        });
+      }
+    });
+    
+    fillList('tabs', tabs, handleTabClick);
+  } catch (error) {
+    console.error('[LifeUndo] Error getting recently closed tabs:', error);
+    clearList('tabs');
+  }
+}
+
+// Setup trial handlers
+function setupTrialHandlers() {
+  const banner = document.getElementById('trial-banner');
+  const closeBtn = document.getElementById('trial-close');
+  const buyBtn = document.getElementById('trial-btn');
+  
+  closeBtn.addEventListener('click', async () => {
+    const snoozeUntil = Date.now() + 86400000; // 24 hours
+    await browser.storage.local.set({ trial_snoozeUntilTs: snoozeUntil });
+    banner.style.display = 'none';
+  });
+  
+  buyBtn.addEventListener('click', () => {
+    const lang = window.i18n.currentLang();
+    const baseUrl = lang === 'ru' ? 'https://getlifeundo.com/ru' : 'https://getlifeundo.com/en';
+    browser.tabs.create({ url: baseUrl + '/pricing' });
+  });
+}
+
+// Bind UI handlers
+function bindUI() {
+  // Language switcher logic
+  const langBtn = document.getElementById('lang-btn');
+  const langDropdown = document.getElementById('lang-dropdown');
+  const langSwitcher = document.querySelector('.lang-switcher');
+  
+  langBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+    langDropdown.classList.toggle('show');
+  });
+  
+  langDropdown.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', async (event) => {
+      const newLang = event.target.getAttribute('data-lang');
+      if (newLang) {
+        await onLangChange(newLang);
+        langDropdown.classList.remove('show');
+      }
+    });
+  });
+  
+  // Close dropdown if clicked outside
+  document.addEventListener('click', (event) => {
+    if (!langSwitcher.contains(event.target)) {
+      langDropdown.classList.remove('show');
+    }
+  });
+  
+  // Setup trial handlers
+  setupTrialHandlers();
+  
+  // Clear buttons
+  document.getElementById('clear-inputs').addEventListener('click', async () => {
+    await clearData('lu_inputs');
+    clearList('inputs');
+  });
+  
+  document.getElementById('clear-clipboard').addEventListener('click', async () => {
+    await clearData('lu_clipboard');
+    clearList('clipboard');
+  });
+  
+  // Screenshot button
+  document.getElementById('take-screenshot').addEventListener('click', takeScreenshot);
+  
+  // Screenshot CTA button (for protected pages)
+  document.getElementById('snap-cta-btn').addEventListener('click', takeScreenshot);
+  
+  // Handle keyboard command
+  browser.commands.onCommand.addListener((command) => {
+    if (command === 'take_quick_snap') {
+      takeScreenshot();
+    }
+  });
+}
+
+// Handle language change with full re-render
+async function onLangChange(newLang) {
+  await window.i18n.setLang(newLang); // setLang calls applyI18n internally
+  // No need to call renderAll here as setLang already applies i18n
+}
+
+// Initialize data and render
+async function initDataAndRender(lang) {
+  await checkProtectedPage();
+  await initTrial();
+  await renderAll(lang);
+}
+
+// Main initialization function
+async function init() {
+  try {
+    // Wait for i18n helper
+    await waitForI18n();
+    
+    // Step 1: Get language
+    const lang = await window.i18n.getLang();
+    
+    // Step 2: Apply i18n (no rendering before this)
+    await window.i18n.applyI18n(lang);
+    
+    // Step 3: Initialize data and render
+    await initDataAndRender(lang);
+    
+    // Step 4: Bind UI handlers
+    bindUI();
+    
+  } catch (error) {
+    console.error('[LifeUndo] Initialization error:', error);
+  }
+}
+
+// Start initialization when DOM is ready
+document.addEventListener('DOMContentLoaded', init);
