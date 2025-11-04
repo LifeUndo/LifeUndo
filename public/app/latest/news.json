@@ -14,16 +14,17 @@
     }
   },
   {
-    "version": "0.3.7.32",
+    "version": "0.3.7.33",
     "platform": "Extensions/Desktop",
-    "publishedAt": "2025-10-06T12:00:00Z",
+    "publishedAt": "2025-11-04T00:00:00Z",
     "items": [
-      "Stability improvements",
-      "Better form recovery",
-      "Clipboard history fixes"
+      "Popup RU/EN localization (header, content, footer)",
+      "Lists: latest inputs, clipboard, recently closed",
+      "Screenshots: Make screenshot button with previews",
+      "New round icon"
     ],
     "links": {
-      "firefox": "https://addons.mozilla.org/firefox/addon/getlifeundo/"
+      "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/"
     }
   }
 ]

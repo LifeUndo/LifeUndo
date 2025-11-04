@@ -1,9 +1,10 @@
 {
-  "version": "0.3.7.32",
-  "title": "Release 0.3.7.32",
+  "version": "0.3.7.33",
+  "title": "Release 0.3.7.33",
   "items": [
-    "Stability improvements",
-    "Better form recovery",
-    "Clipboard history fixes"
+    "Popup RU/EN localization (header, content, footer)",
+    "Lists: latest inputs, clipboard, recently closed",
+    "Screenshots: Make screenshot button with previews",
+    "New round icon"
   ]
 }
