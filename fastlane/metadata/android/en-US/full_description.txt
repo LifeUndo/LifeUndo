@@ -1,0 +1,11 @@
+﻿Get Life Undo works fully offline: it keeps form input history, clipboard history,
+helps you return to recently closed tabs, and take quick screenshots with preview.
+No data leaves your device. No ads or trackers.
+
+Features:
+- Input history (restore text in fields)
+- Clipboard history
+- Recent tabs
+- Quick screenshots (stored locally)
+
+Privacy: everything stays on your device.
