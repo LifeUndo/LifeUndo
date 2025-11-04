@@ -249,9 +249,9 @@ export default function DownloadsClient() {
             }
             title="Windows"
             description={t.downloads.windows}
-            href={latestData?.files.win || "https://cdn.getlifeundo.com/app/latest/undo-setup-latest.exe"}
+            href={latestData?.files.win || "#"}
             className="bg-gray-600 hover:bg-gray-700 text-white"
-            isAvailable={!!latestData?.files.win}
+            isAvailable={false}
             t={t}
           />
 
@@ -264,9 +264,9 @@ export default function DownloadsClient() {
             }
             title="macOS"
             description={t.downloads.macos}
-            href={latestData?.files.mac || "https://cdn.getlifeundo.com/app/latest/undo-latest.dmg"}
+            href={latestData?.files.mac || "#"}
             className="bg-gray-700 hover:bg-gray-800 text-white"
-            isAvailable={!!latestData?.files.mac}
+            isAvailable={false}
             t={t}
           />
 
