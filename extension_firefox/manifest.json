@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "GetLifeUndo",
   "description": "Undo last actions: text input, closed tabs, clipboard history.",
-  "version": "0.3.7.35",
+  "version": "0.3.7.36",
   "homepage_url": "https://getlifeundo.com",
   "browser_action": {
     "default_title": "GetLifeUndo",
