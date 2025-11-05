@@ -1,22 +1,22 @@
-[
+﻿[
   {
     "version": "1.0.0+10 (rev5a)",
     "platform": "Android",
-    "publishedAt": "2025-11-03T10:00:00Z",
+    "publishedAt": "2025-11-05T15:51:19Z",
     "items": [
-      "Android APK релиз (rev5a)",
-      "Tabs capture: бренд‑иконки (в т.ч. DuckDuckGo), список 8+2",
-      "Убраны Open/Install и раздел ‘Специальные’, описания Tor/Venator внизу",
-      "EN‑локализация и подсказки обновлены"
+      "Android APK СЂРµР»РёР· (rev5a)",
+      "Tabs capture: Р±СЂРµРЅРґвЂ‘РёРєРѕРЅРєРё (РІ С‚.С‡. DuckDuckGo), СЃРїРёСЃРѕРє 8+2",
+      "РЈР±СЂР°РЅС‹ Open/Install Рё СЂР°Р·РґРµР» вЂРЎРїРµС†РёР°Р»СЊРЅС‹РµвЂ™, РѕРїРёСЃР°РЅРёСЏ Tor/Venator РІРЅРёР·Сѓ",
+      "ENвЂ‘Р»РѕРєР°Р»РёР·Р°С†РёСЏ Рё РїРѕРґСЃРєР°Р·РєРё РѕР±РЅРѕРІР»РµРЅС‹"
     ],
     "links": {
       "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a"
     }
   },
   {
-    "version": "0.3.7.38",
+    "version": "0.3.7.44",
     "platform": "Extensions/Desktop",
-    "publishedAt": "2025-11-04T02:50:00Z",
+    "publishedAt": "2025-11-05T15:51:19Z",
     "items": [
       "Popup RU/EN localization (header, content, footer)",
       "Lists: latest inputs, clipboard, recently closed",
@@ -24,7 +24,8 @@
       "New round icon"
     ],
     "links": {
-      "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/"
+      "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/"
     }
   }
 ]
+

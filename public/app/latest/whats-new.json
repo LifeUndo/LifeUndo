@@ -1,6 +1,6 @@
-{
-  "version": "0.3.7.38",
-  "title": "Release 0.3.7.38",
+﻿{
+  "version": "0.3.7.44",
+  "title": "Release 0.3.7.44",
   "items": [
     "Popup RU/EN localization (header, content, footer)",
     "Lists: latest inputs, clipboard, recently closed",
