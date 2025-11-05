@@ -300,7 +300,7 @@ export default function DownloadsClient() {
             t={t}
           />
 
-          {/* Android RuStore */}
+          {/* Android (RuStore) */}
           <DownloadCard
             icon={
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -308,10 +308,10 @@ export default function DownloadsClient() {
               </svg>
             }
             title="Android (RuStore)"
-            description={locale === 'en' ? 'Submitted for review.' : 'Отправлено на модерацию.'}
-            href="https://www.rustore.ru/catalog/app/PLACEHOLDER_RUSTORE_ID"
+            description={locale === 'en' ? 'Available in RuStore.' : 'Доступно в RuStore.'}
+            href="https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app"
             className="bg-green-600 hover:bg-green-700 text-white"
-            isAvailable={false}
+            isAvailable={true}
             t={t}
           />
 
