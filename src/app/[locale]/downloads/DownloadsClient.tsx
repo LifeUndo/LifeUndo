@@ -8,6 +8,7 @@ interface LatestData {
   publishedAt: string;
   files: {
     firefox?: string;
+    firefox_xpi?: string;
     win?: string;
     mac?: string;
   };
@@ -211,19 +212,33 @@ export default function DownloadsClient() {
           />
 
           {/* Firefox */}
-          <DownloadCard
-            icon={
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            }
-            title="Firefox"
-            description={t.downloads.firefox}
-            href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
-            className="bg-orange-600 hover:bg-orange-700 text-white"
-            t={t}
-            isAvailable={true}
-          />
+          <div>
+            <DownloadCard
+              icon={
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              }
+              title="Firefox"
+              description={t.downloads.firefox}
+              href={latestData?.files.firefox || "https://addons.mozilla.org/firefox/addon/getlifeundo/"}
+              className="bg-orange-600 hover:bg-orange-700 text-white"
+              t={t}
+              isAvailable={true}
+            />
+            {latestData?.files.firefox_xpi && (
+              <div className="mt-2 text-xs text-gray-400 text-center">
+                <a
+                  href={latestData.files.firefox_xpi}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                >
+                  {locale === 'en' ? 'Download XPI directly (advanced)' : 'Скачать XPI напрямую (для опытных)'}
+                </a>
+              </div>
+            )}
+          </div>
 
           {/* Edge */}
           <DownloadCard
