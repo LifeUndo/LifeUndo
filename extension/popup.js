@@ -18,6 +18,8 @@ const versionTag = document.getElementById('version');
 const textList = document.getElementById('textList');
 const tabList = document.getElementById('tabList');
 const clipList = document.getElementById('clipList');
+const shotList = document.getElementById('shotList');
+const btnMakeShot = document.getElementById('btnMakeShot');
 
 // Pro badges
 const textProBadge = document.getElementById('textProBadge');
@@ -97,6 +99,103 @@ const i18n = {
   }
 };
 
+// ---- Screenshots ----
+async function loadScreenshots() {
+  try {
+    const res = await api.runtime.sendMessage({ type: 'LU_GET_SCREENSHOTS' });
+    const list = res?.list || [];
+    if (!shotList) return;
+    shotList.textContent = '';
+    if (list.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'item muted';
+      empty.textContent = 'No screenshots yet';
+      shotList.appendChild(empty);
+      return;
+    }
+    list.forEach((it, i) => {
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.dataset.index = String(i);
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.gap = '8px';
+      const img = document.createElement('img');
+      img.src = it.dataUrl;
+      img.alt = 'shot';
+      img.style.width = '128px';
+      img.style.borderRadius = '4px';
+      img.style.border = '1px solid #333';
+      const meta = document.createElement('div');
+      meta.className = 'muted';
+      meta.textContent = new Date(it.ts || Date.now()).toLocaleString();
+      const btnOpen = document.createElement('button');
+      btnOpen.textContent = 'Open';
+      btnOpen.addEventListener('click', (e) => {
+        e.stopPropagation();
+        api.tabs.create({ url: it.dataUrl });
+      });
+      const btnDel = document.createElement('button');
+      btnDel.textContent = 'Delete';
+      btnDel.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const res2 = await api.runtime.sendMessage({ type: 'LU_DELETE_SCREENSHOT', payload: { index: i } });
+        if (res2?.ok) loadScreenshots();
+      });
+      row.appendChild(img);
+      row.appendChild(meta);
+      row.appendChild(btnOpen);
+      row.appendChild(btnDel);
+      item.appendChild(row);
+      shotList.appendChild(item);
+    });
+  } catch (e) {
+    // silent
+  }
+}
+
+// Clipboard search
+document.getElementById('clipSearch')?.addEventListener('input', (e) => {
+  const val = e.target.value || '';
+  loadClipboardHistory(val);
+});
+
+// Make screenshot
+btnMakeShot?.addEventListener('click', async () => {
+  try {
+    const res = await api.runtime.sendMessage({ type: 'LU_TAKE_SCREENSHOT' });
+    if (!res?.ok) throw new Error(res?.reason || 'capture_failed');
+    await loadScreenshots();
+    flash('Screenshot saved', 'ok');
+  } catch (e) {
+    flash('Screenshot failed', 'err');
+  }
+});
+
+// Load and persist clipboard protection settings
+(async function initClipboardProtectionSettings() {
+  try {
+    const { lu_protect_clipboard = false, lu_exclude_domains = '' } = await api.storage.local.get(['lu_protect_clipboard', 'lu_exclude_domains']);
+    const chk = document.getElementById('chkProtect');
+    const excl = document.getElementById('excludeDomains');
+    if (chk) chk.checked = !!lu_protect_clipboard;
+    if (excl) excl.value = String(lu_exclude_domains || '');
+    chk?.addEventListener('change', async (ev) => {
+      await api.storage.local.set({ lu_protect_clipboard: !!ev.target.checked });
+      flash(ev.target.checked ? 'Clipboard protection ON' : 'Clipboard protection OFF');
+    });
+    let saveTimer;
+    excl?.addEventListener('input', (ev) => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(async () => {
+        await api.storage.local.set({ lu_exclude_domains: String(ev.target.value || '') });
+        flash('Excluded domains saved');
+      }, 400);
+    });
+  } catch (_) {}
+})();
+
 // ==== Functions ====
 
 function t(key) {
@@ -143,6 +242,40 @@ function flash(message, type = '') {
   if (!flashEl) return;
   flashEl.textContent = message || '';
   flashEl.className = type ? `flash ${type}` : 'flash';
+}
+
+// ---- Session Backups helpers ----
+async function loadBackups() {
+  try {
+    const res = await api.runtime.sendMessage({ type: 'LU_GET_BACKUPS' });
+    const backups = res?.backups || [];
+    const list = document.getElementById('backupList');
+    if (!list) return;
+    list.textContent = '';
+    if (backups.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'item muted';
+      empty.textContent = 'No backups yet';
+      list.appendChild(empty);
+      return;
+    }
+    backups.slice(0, 10).forEach((snap, i) => {
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.dataset.index = String(i);
+      const title = document.createElement('div');
+      title.textContent = new Date(snap.ts || Date.now()).toLocaleString();
+      const meta = document.createElement('div');
+      meta.className = 'muted';
+      const count = (snap.windows || []).reduce((acc, w) => acc + (w.tabs?.length || 0), 0);
+      meta.textContent = `${(snap.windows || []).length} windows, ${count} tabs`;
+      item.appendChild(title);
+      item.appendChild(meta);
+      list.appendChild(item);
+    });
+  } catch (e) {
+    flash('Failed to load backups', 'err');
+  }
 }
 
 async function refreshVipUi() {
@@ -274,9 +407,14 @@ async function loadRecentTabs() {
   }
 }
 
-async function loadClipboardHistory() {
+async function loadClipboardHistory(query = '') {
   try {
-    const { clipboardHistory = [] } = await api.storage.local.get('clipboardHistory');
+    const result = await api.storage.local.get('lu_clipboard_history');
+    let clipboardHistory = result.lu_clipboard_history || [];
+    const q = String(query || '').toLowerCase();
+    if (q) {
+      clipboardHistory = clipboardHistory.filter(it => String(it.value || '').toLowerCase().includes(q));
+    }
     
     if (clipList) {
       // Clear existing content
@@ -295,11 +433,13 @@ async function loadClipboardHistory() {
           
           const textDiv = document.createElement('div');
           textDiv.className = 'mono';
-          textDiv.textContent = item.text.substring(0, 50) + (item.text.length > 50 ? '...' : '');
+          const val = String(item.value || '');
+          textDiv.textContent = val.substring(0, 50) + (val.length > 50 ? '...' : '');
           
           const timeDiv = document.createElement('div');
           timeDiv.className = 'muted';
-          timeDiv.textContent = new Date(item.timestamp).toLocaleString();
+          const ts = item.ts || item.timestamp || Date.now();
+          timeDiv.textContent = new Date(ts).toLocaleString();
           
           itemDiv.appendChild(textDiv);
           itemDiv.appendChild(timeDiv);
@@ -377,6 +517,137 @@ vipFile?.addEventListener('change', async (ev) => {
   }
 });
 
+// ===== CSV helpers =====
+function csvEscape(val = '') {
+  const s = String(val ?? '');
+  if (/[",\n]/.test(s)) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function csvRowsToBackups(rows) {
+  // rows: header + data rows with columns: ts,windowIndex,tabIndex,url,title
+  const backupsMap = new Map();
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r || r.length < 5) continue;
+    const ts = Number(r[0]) || Date.now();
+    const wIdx = Number(r[1]) || 0;
+    const tIdx = Number(r[2]) || 0;
+    const url = r[3] || '';
+    const title = r[4] || '';
+    if (!url) continue;
+    if (!backupsMap.has(ts)) backupsMap.set(ts, { ts, windows: [] });
+    const snap = backupsMap.get(ts);
+    while (snap.windows.length <= wIdx) snap.windows.push({ tabs: [] });
+    while (snap.windows[wIdx].tabs.length < tIdx) snap.windows[wIdx].tabs.push({ url: '', title: '' });
+    snap.windows[wIdx].tabs[tIdx] = { url, title };
+  }
+  return Array.from(backupsMap.values());
+}
+
+function parseCsv(text) {
+  // Simple CSV parser supporting quotes
+  const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  const out = [];
+  for (const line of lines) {
+    if (line === '') continue;
+    const row = [];
+    let cur = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (inQuotes) {
+        if (ch === '"') {
+          if (i + 1 < line.length && line[i + 1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = false;
+          }
+        } else {
+          cur += ch;
+        }
+      } else {
+        if (ch === '"') {
+          inQuotes = true;
+        } else if (ch === ',') {
+          row.push(cur);
+          cur = '';
+        } else {
+          cur += ch;
+        }
+      }
+    }
+    row.push(cur);
+    out.push(row);
+  }
+  return out;
+}
+
+function backupsToCsv(backups = []) {
+  const header = ['ts', 'windowIndex', 'tabIndex', 'url', 'title'];
+  const rows = [header.join(',')];
+  backups.forEach(snap => {
+    const ts = snap.ts || Date.now();
+    (snap.windows || []).forEach((w, wi) => {
+      (w.tabs || []).forEach((t, ti) => {
+        const url = csvEscape(t.url || '');
+        const title = csvEscape(t.title || '');
+        rows.push([ts, wi, ti, url, title].join(','));
+      });
+    });
+  });
+  return rows.join('\n');
+}
+
+// Export CSV
+document.getElementById('btnExportCsv')?.addEventListener('click', async () => {
+  try {
+    const res = await api.runtime.sendMessage({ type: 'LU_GET_BACKUPS' });
+    const backups = res?.backups || [];
+    const csv = backupsToCsv(backups);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    a.download = `lifeundo-backups-${stamp}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    flash('Exported CSV', 'ok');
+  } catch (e) {
+    flash('Export CSV failed', 'err');
+  }
+});
+
+// Import CSV
+document.getElementById('btnImportCsv')?.addEventListener('click', () => {
+  document.getElementById('importFileCsv')?.click();
+});
+
+document.getElementById('importFileCsv')?.addEventListener('change', async (ev) => {
+  const file = ev.target.files?.[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const rows = parseCsv(text);
+    const backups = csvRowsToBackups(rows);
+    const res = await api.runtime.sendMessage({ type: 'LU_IMPORT_BACKUPS', payload: { content: JSON.stringify({ backups }), encrypted: false } });
+    if (!res?.ok) throw new Error(res?.reason || 'Import failed');
+    await loadBackups();
+    flash('Imported CSV', 'ok');
+  } catch (e) {
+    console.error(e);
+    flash('Import CSV failed', 'err');
+  } finally {
+    ev.target.value = '';
+  }
+});
+
 // Upgrade button
 upgradeBtn?.addEventListener('click', () => {
   const locale = currentLang === 'ru' ? 'ru' : 'en';
@@ -432,6 +703,110 @@ tabList?.addEventListener('click', (e) => {
   const item = e.target.closest('.item');
   if (item && item.dataset.sessionId) {
     restoreTab(item.dataset.sessionId);
+  }
+});
+
+// Clipboard list click-to-copy
+clipList?.addEventListener('click', async (e) => {
+  const item = e.target.closest('.item');
+  if (!item) return;
+  const idx = Number(item.dataset.index || -1);
+  if (Number.isNaN(idx) || idx < 0) return;
+  try {
+    const result = await api.storage.local.get('lu_clipboard_history');
+    const arr = result.lu_clipboard_history || [];
+    const val = String(arr[idx]?.value || '');
+    if (!val) return;
+    await navigator.clipboard.writeText(val);
+    flash('Copied', 'ok');
+  } catch (err) {
+    flash('Copy failed', 'err');
+  }
+});
+
+// Backup list click-to-restore
+document.getElementById('backupList')?.addEventListener('click', async (e) => {
+  const item = e.target.closest('.item');
+  if (!item) return;
+  const idx = Number(item.dataset.index || -1);
+  if (Number.isNaN(idx) || idx < 0) return;
+  try {
+    const res = await api.runtime.sendMessage({ type: 'LU_GET_BACKUPS' });
+    const backups = res?.backups || [];
+    const snap = backups[idx];
+    if (!snap) return;
+    await api.runtime.sendMessage({ type: 'LU_RESTORE_BACKUP', payload: { snapshot: snap } });
+    flash('Session restored', 'ok');
+  } catch (e1) {
+    flash('Restore failed', 'err');
+  }
+});
+
+// Snapshot now
+document.getElementById('btnSnapshot')?.addEventListener('click', async () => {
+  try {
+    await api.runtime.sendMessage({ type: 'LU_TAKE_SNAPSHOT' });
+    await loadBackups();
+    flash('Snapshot saved', 'ok');
+  } catch (e) {
+    flash('Snapshot failed', 'err');
+  }
+});
+
+// Export backups (optionally encrypted)
+document.getElementById('btnExport')?.addEventListener('click', async () => {
+  try {
+    const pwd = document.getElementById('pwdField')?.value || '';
+    const res = await api.runtime.sendMessage({ type: 'LU_EXPORT_BACKUPS', payload: { password: pwd } });
+    if (!res?.ok) throw new Error(res?.reason || 'Export failed');
+    let content = '';
+    if (res.encrypted) {
+      content = JSON.stringify({ encrypted: true, iv: res.iv, salt: res.salt, data: res.data });
+    } else {
+      content = res.data;
+    }
+    const blob = new Blob([content], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    a.download = `lifeundo-backups-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    flash('Exported', 'ok');
+  } catch (e) {
+    flash('Export failed', 'err');
+  }
+});
+
+// Import backups
+document.getElementById('btnImport')?.addEventListener('click', () => {
+  document.getElementById('importFile')?.click();
+});
+
+document.getElementById('importFile')?.addEventListener('change', async (ev) => {
+  const file = ev.target.files?.[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    let payload = { content: text, encrypted: false };
+    try {
+      const obj = JSON.parse(text);
+      if (obj && (obj.encrypted || (obj.iv && obj.salt && obj.data))) {
+        const pwd = document.getElementById('pwdField')?.value || '';
+        payload = { content: obj.data, encrypted: true, iv: obj.iv, salt: obj.salt, password: pwd };
+      }
+    } catch (_) {}
+    const res = await api.runtime.sendMessage({ type: 'LU_IMPORT_BACKUPS', payload });
+    if (!res?.ok) throw new Error(res?.reason || 'Import failed');
+    await loadBackups();
+    flash('Imported', 'ok');
+  } catch (e) {
+    flash('Import failed', 'err');
+  } finally {
+    ev.target.value = '';
   }
 });
 
@@ -553,6 +928,9 @@ api.storage.onChanged.addListener((changes, area) => {
   if (changes.lu_plan) {
     refreshVipUi();
   }
+  if (changes.lu_clipboard_history) {
+    loadClipboardHistory();
+  }
 });
 
 // ==== Initialize ====
@@ -569,15 +947,14 @@ currentLang = localStorage.getItem('lu_lang') || 'en';
 applyLang();
 refreshVipUi();
 
-// Load data for Firefox (enable free features)
+// Load data
+loadClipboardHistory();
+loadScreenshots();
+// Keep Firefox-specific free features
 if (IS_FIREFOX) {
-  // Hide PRO badges for Firefox
   if (textProBadge) textProBadge.classList.add('hidden');
   if (tabProBadge) tabProBadge.classList.add('hidden');
   if (clipProBadge) clipProBadge.classList.add('hidden');
-  
-  // Load data
   loadTextInputs();
   loadRecentTabs();
-  loadClipboardHistory();
 }

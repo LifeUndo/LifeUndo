@@ -21,7 +21,8 @@ const STORAGE_KEYS = {
   tabHistory: 'lu_tab_history',
   clipboardHistory: 'lu_clipboard_history',
   stats: 'lu_stats',
-  pro: 'lu_pro'
+  pro: 'lu_pro',
+  screenshots: 'lu_screenshots'
 };
 
 /**
@@ -245,6 +246,33 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ ok: true });
         break;
       }
+      case 'LU_TAKE_SCREENSHOT': {
+        const dataUrl = await takeVisibleTabScreenshot();
+        if (!dataUrl) {
+          sendResponse({ ok: false, reason: 'capture_failed' });
+          break;
+        }
+        const shot = { ts: Date.now(), dataUrl };
+        const list = await saveScreenshotEntry(shot);
+        sendResponse({ ok: true, item: shot, list });
+        break;
+      }
+      case 'LU_GET_SCREENSHOTS': {
+        const store = await getStore([STORAGE_KEYS.screenshots]);
+        sendResponse({ ok: true, list: store[STORAGE_KEYS.screenshots] || [] });
+        break;
+      }
+      case 'LU_DELETE_SCREENSHOT': {
+        const idx = Number(payload?.index ?? -1);
+        const store = await getStore([STORAGE_KEYS.screenshots]);
+        const arr = Array.isArray(store[STORAGE_KEYS.screenshots]) ? store[STORAGE_KEYS.screenshots] : [];
+        if (idx >= 0 && idx < arr.length) {
+          arr.splice(idx, 1);
+          await setStore({ [STORAGE_KEYS.screenshots]: arr });
+        }
+        sendResponse({ ok: true, list: arr });
+        break;
+      }
       case 'LU_UNDO_LAST': {
         // Priority: text > tab > clipboard
         const store = await getStore(Object.values(STORAGE_KEYS));
@@ -296,3 +324,28 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   return true; // keep channel open for async
 });
+
+// Screenshot helpers (Firefox)
+async function takeVisibleTabScreenshot() {
+  try {
+    const dataUrl = await new Promise((resolve, reject) => {
+      try {
+        browser.tabs.captureVisibleTab({ format: 'png' }).then(resolve).catch(reject);
+      } catch (e) {
+        // Fallback older API
+        browser.tabs.captureVisibleTab().then(resolve).catch(reject);
+      }
+    });
+    return dataUrl;
+  } catch (_) {
+    return null;
+  }
+}
+
+async function saveScreenshotEntry(entry) {
+  const store = await getStore([STORAGE_KEYS.screenshots]);
+  const list = Array.isArray(store[STORAGE_KEYS.screenshots]) ? store[STORAGE_KEYS.screenshots] : [];
+  const next = pushWithCap(list, entry, 20);
+  await setStore({ [STORAGE_KEYS.screenshots]: next });
+  return next;
+}

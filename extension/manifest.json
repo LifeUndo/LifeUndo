@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GetLifeUndo",
   "description": "Ctrl+Z for your online life. Restore lost form text, clipboard history and closed tabs — 100% local, private.",
-  "version": "0.3.7.13",
+  "version": "0.3.7.39",
   "homepage_url": "https://getlifeundo.com",
   "browser_specific_settings": {
     "gecko": {
@@ -12,7 +12,11 @@
   },
   "action": {
     "default_title": "GetLifeUndo",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png"
+    }
   },
   "icons": {
     "16": "icon16.png",
@@ -25,7 +29,10 @@
     "tabs",
     "activeTab",
     "scripting",
-    "sessions"
+    "sessions",
+    "alarms",
+    "clipboardRead",
+    "clipboardWrite"
   ],
   "host_permissions": ["<all_urls>"],
   "background": {
@@ -42,6 +49,14 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
+  },
+  "commands": {
+    "lu_quick_undo": {
+      "suggested_key": {
+        "default": "Alt+U"
+      },
+      "description": "Undo last (text/tab/clipboard)"
+    }
   }
 }
 
