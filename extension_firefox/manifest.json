@@ -1,7 +1,7 @@
 ﻿{
     "manifest_version":  2,
     "name":  "GetLifeUndo",
-    "version": "0.3.7.42",
+    "version": "0.3.7.43",
     "description":  "Ctrl+Z для жизни в интернете. Возврат текста форм, буфера, вкладок — локально.",
     "browser_specific_settings":  {
                                       "gecko":  {
@@ -43,4 +43,5 @@
               },
     "default_locale":  "en"
 }
+
 
