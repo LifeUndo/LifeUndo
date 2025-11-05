@@ -5,7 +5,7 @@ on:
       channel:
         description: "AMO channel (listed or unlisted)"
         required: false
-        default: "unlisted"
+        default: "listed"
   push:
     tags:
       - "ext-v*"
