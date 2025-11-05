@@ -4,10 +4,10 @@
     "platform": "Android",
     "publishedAt": "2025-11-05T15:51:19Z",
     "items": [
-      "Android APK релиз (rev5a)",
-      "Tabs capture: бренд‑иконки (в т.ч. DuckDuckGo), список 8+2",
-      "Убраны Open/Install и раздел ‘Специальные’, описания Tor/Venator внизу",
-      "EN‑локализация и подсказки обновлены"
+      "Android APK release (rev5a)",
+      "Tabs capture: brand icons (incl. DuckDuckGo), 8+2 list",
+      "Removed Open/Install and the ‘Special’ section; Tor/Venator descriptions moved to bottom",
+      "EN localization and tooltips updated"
     ],
     "links": {
       "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a"
@@ -24,8 +24,7 @@
       "New round icon"
     ],
     "links": {
-      "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/"
+      "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/"
     }
   }
 ]
-

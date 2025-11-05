@@ -80,41 +80,59 @@ export default function DownloadsClient() {
   const { t, locale } = useTranslations();
 
   useEffect(() => {
-    // Загружаем latest.json и whats-new.json с версионированием для обхода кэша
     const buildId = Date.now();
-    
-    Promise.all([
-      fetch(`/app/latest/latest.json?v=${buildId}`).then(res => res.json()),
-      fetch(`/app/latest/whats-new.json?v=${buildId}`).then(res => res.json()),
-      fetch(`/app/latest/news.json?v=${buildId}`).then(res => res.json()).catch(() => [])
-    ])
-    .then(([latest, whatsNew, news]) => {
-      setLatestData(latest);
-      setWhatsNewData(whatsNew);
-      if (Array.isArray(news)) setNewsList(news);
-      setLoading(false);
-    })
-    .catch(() => {
-      // Fallback если файлы недоступны
-      setLatestData({
-        version: '0.3.7.13',
-        publishedAt: '2025-10-04T10:00:00Z',
-        files: {
-          firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
-        }
-      });
-      setWhatsNewData({
-        version: '0.3.7.13',
-        items: [
-          'Исправлены ссылки в попапе (Website/Privacy/Support → getlifeundo.com)',
-          'Полная синхронизация RU/EN строк',
-          'Баннер и шапка — корректные отступы',
-          'Кнопки оплаты на сайте активированы'
-        ]
-      });
-      setLoading(false);
+
+    const fetchJson = (url: string) => fetch(url).then(r => {
+      if (!r.ok) throw new Error(String(r.status));
+      return r.json();
     });
-  }, []);
+
+    const loadNews = async () => {
+      const candidates = [
+        `/app/latest/news.${locale}.json?v=${buildId}`,
+        `/app/latest/news.json?v=${buildId}`,
+      ];
+      for (const url of candidates) {
+        try {
+          const data = await fetchJson(url);
+          if (Array.isArray(data)) return data;
+        } catch (_) { /* try next */ }
+      }
+      return [] as NewsItem[];
+    };
+
+    Promise.all([
+      fetchJson(`/app/latest/latest.json?v=${buildId}`),
+      fetchJson(`/app/latest/whats-new.json?v=${buildId}`),
+      loadNews(),
+    ])
+      .then(([latest, whatsNew, news]) => {
+        setLatestData(latest);
+        setWhatsNewData(whatsNew);
+        setNewsList(news);
+        setLoading(false);
+      })
+      .catch(() => {
+        // Fallback если файлы недоступны
+        setLatestData({
+          version: '0.3.7.13',
+          publishedAt: '2025-10-04T10:00:00Z',
+          files: {
+            firefox: "https://addons.mozilla.org/firefox/addon/lifeundo/"
+          }
+        });
+        setWhatsNewData({
+          version: '0.3.7.13',
+          items: [
+            'Исправлены ссылки в попапе (Website/Privacy/Support → getlifeundo.com)',
+            'Полная синхронизация RU/EN строк',
+            'Баннер и шапка — корректные отступы',
+            'Кнопки оплаты на сайте активированы'
+          ]
+        });
+        setLoading(false);
+      });
+  }, [locale]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
