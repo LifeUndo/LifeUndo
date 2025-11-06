@@ -23,11 +23,11 @@
 - VK: https://vk.ru/GetLifeUndo
 
 Площадки (по мере готовности):
-- RuStore: https://store.nashstore.ru/
+- RuStore: https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app
 - Huawei AppGallery: https://appgallery.huawei.com/
 - Samsung Galaxy Store: https://galaxystore.samsung.com/
 - F-Droid: (будет добавлено)
-- RuStore Apps: https://apps.rustore.ru/app/
+- RuStore Apps: https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app
 
 ## Полезные ссылки:
 - Сайт: https://getlifeundo.com
