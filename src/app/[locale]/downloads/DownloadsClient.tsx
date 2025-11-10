@@ -101,9 +101,23 @@ export default function DownloadsClient() {
       return [] as NewsItem[];
     };
 
+    const loadWhatsNew = async () => {
+      const candidates = [
+        `/app/latest/whats-new.${locale}.json?v=${buildId}`,
+        `/app/latest/whats-new.json?v=${buildId}`,
+      ];
+      for (const url of candidates) {
+        try {
+          const data = await fetchJson(url);
+          if (data && typeof data === 'object' && Array.isArray((data as any).items)) return data as WhatsNewData;
+        } catch (_) { /* try next */ }
+      }
+      return null as unknown as WhatsNewData;
+    };
+
     Promise.all([
       fetchJson(`/app/latest/latest.json?v=${buildId}`),
-      fetchJson(`/app/latest/whats-new.json?v=${buildId}`),
+      loadWhatsNew(),
       loadNews(),
     ])
       .then(([latest, whatsNew, news]) => {
