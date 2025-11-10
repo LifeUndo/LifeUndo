@@ -1,30 +1,33 @@
-[
+﻿[
   {
-    "version": "1.0.0+10 (rev5a)",
-    "platform": "Android",
-    "publishedAt": "2025-11-05T15:51:19Z",
+    "version": "0.4.3.5",
+    "platform": "Extensions/Desktop",
+    "publishedAt": "2025-11-10T20:46:01Z",
     "items": [
-      "Android APK release (rev5a)",
-      "Tabs capture: brand icons (incl. DuckDuckGo), 8+2 list",
-      "Removed Open/Install and the ‘Special’ section; Tor/Venator descriptions moved to bottom",
-      "EN localization and tooltips updated"
+      "Fully revamped subscriptions and checkout.",
+      "Reliable background checkout with window fallback.",
+      "Reuse existing checkout tab, debounce clicks.",
+      "Fixed popup 'api is not defined'.",
+      "Safer DOM operations."
     ],
     "links": {
-      "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a"
+      "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/",
+      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/v0.4.3.5"
     }
   },
   {
-    "version": "0.3.7.44",
-    "platform": "Extensions/Desktop",
-    "publishedAt": "2025-11-05T15:51:19Z",
+    "version": "1.0.0+10 (rev5a)",
+    "platform": "Android",
+    "publishedAt": "2025-11-05T00:00:00Z",
     "items": [
-      "Popup RU/EN localization (header, content, footer)",
-      "Lists: latest inputs, clipboard, recently closed",
-      "Screenshots: Make screenshot button with previews",
-      "New round icon"
+      "Android APK release (rev5a).",
+      "Tabs capture: brand icons (incl. DuckDuckGo), list 8+2.",
+      "Removed Open/Install and 'Special' section; updated descriptions.",
+      "EN localization and hints."
     ],
     "links": {
-      "firefox": "https://addons.mozilla.org/firefox/addon/lifeundo/"
+      "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a",
+      "rustore": "https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app"
     }
   }
 ]

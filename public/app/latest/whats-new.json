@@ -1,10 +1,10 @@
 ﻿{
-  "version": "0.3.7.44",
-  "title": "Release 0.3.7.44",
+  "version": "0.4.3.5",
   "items": [
-    "Popup RU/EN localization (header, content, footer)",
-    "Lists: latest inputs, clipboard, recently closed",
-    "Screenshots: Make screenshot button with previews",
-    "New round icon"
+    "Полностью обновлена система подписок и оплаты.",
+    "Надёжный запуск оплаты из фонового процесса (обход блокировок).",
+    "Без дублей вкладок: переиспользование вкладки оплаты + дебаунс кликов.",
+    "Исправлен api is not defined в попапе.",
+    "Безопаснее DOM: убраны небезопасные вставки HTML."
   ]
 }

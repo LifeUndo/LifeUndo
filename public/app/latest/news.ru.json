@@ -1,0 +1,33 @@
+﻿[
+  {
+    "version": "0.4.3.5",
+    "platform": "Extensions/Desktop",
+    "publishedAt": "2025-11-10T20:46:01Z",
+    "items": [
+      "Полностью обновлена система подписок и оплаты.",
+      "Оплата из фонового процесса + резервное окно.",
+      "Переиспользование вкладки оплаты, дебаунс кликов.",
+      "Исправлен api is not defined в попапе.",
+      "Безопасные операции с DOM."
+    ],
+    "links": {
+      "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/",
+      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/v0.4.3.5"
+    }
+  },
+  {
+    "version": "1.0.0+10 (rev5a)",
+    "platform": "Android",
+    "publishedAt": "2025-11-05T00:00:00Z",
+    "items": [
+      "Android APK релиз (rev5a).",
+      "Tabs capture: бренд-иконки (в т.ч. DuckDuckGo), список 8+2.",
+      "Убраны Open/Install и раздел «Специальные», обновлены описания.",
+      "EN-локализация и подсказки."
+    ],
+    "links": {
+      "apk": "https://github.com/LifeUndo/LifeUndo/releases/tag/v1.0.0-10-rev5a",
+      "rustore": "https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app"
+    }
+  }
+]

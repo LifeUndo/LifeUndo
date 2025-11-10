@@ -1,8 +1,7 @@
-{
-    "publishedAt":  "2025-11-05T15:32:51Z",
-    "files":  {
-                  "firefox":  "https://addons.mozilla.org/ru/firefox/addon/lifeundo/",
-                  "firefox_xpi": "https://addons.mozilla.org/firefox/downloads/file/4613184/lifeundo-0.3.7.44.xpi"
-              },
-    "version":  "0.3.7.44"
+﻿{
+  "version": "0.4.3.5",
+  "publishedAt": "2025-11-10T20:46:01Z",
+  "files": {
+    "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/"
+  }
 }
