@@ -1,4 +1,4 @@
-# Финальный отчёт: Bulletproof render + error boundaries
+﻿# Финальный отчёт: Bulletproof render + error boundaries
 
 ## ✅ ТЗ выполнено полностью
 
