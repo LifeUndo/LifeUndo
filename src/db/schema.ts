@@ -50,3 +50,61 @@ export const support_tickets = pgTable('support_tickets', {
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow()
 });
+
+// Devices table
+export const devices = pgTable('devices', {
+  id: serial('id').primaryKey(),
+  user_email: varchar('user_email', { length: 255 }).notNull(),
+  device_id: varchar('device_id', { length: 255 }).notNull(),
+  kind: varchar('kind', { length: 50 }).notNull(), // extension / desktop / android
+  label: varchar('label', { length: 255 }),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  last_seen_at: timestamp('last_seen_at')
+});
+
+// Pairing sessions table
+export const pairing_sessions = pgTable('pairing_sessions', {
+  id: serial('id').primaryKey(),
+  short_code: varchar('short_code', { length: 32 }).notNull().unique(),
+  initiator_device_id: integer('initiator_device_id').notNull(),
+  target_device_id: integer('target_device_id'),
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // pending / linked / expired
+  expires_at: timestamp('expires_at').notNull(),
+  meta: jsonb('meta'),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow()
+});
+
+// Email validations
+export const email_validations = pgTable('email_validations', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 255 }).notNull(),
+  token: varchar('token', { length: 255 }).notNull().unique(),
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // pending / confirmed / expired
+  reason: varchar('reason', { length: 100 }),
+  expires_at: timestamp('expires_at').notNull(),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow()
+});
+
+// Email domain rules (blacklist / whitelist)
+export const email_domain_rules = pgTable('email_domain_rules', {
+  id: serial('id').primaryKey(),
+  domain: varchar('domain', { length: 255 }).notNull().unique(),
+  mode: varchar('mode', { length: 20 }).notNull(), // blacklist / whitelist
+  comment: text('comment'),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow()
+});
+
+// Email change requests
+export const email_change_requests = pgTable('email_change_requests', {
+  id: serial('id').primaryKey(),
+  old_email: varchar('old_email', { length: 255 }).notNull(),
+  new_email: varchar('new_email', { length: 255 }).notNull(),
+  token: varchar('token', { length: 255 }).notNull().unique(),
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // pending / confirmed / canceled / expired
+  expires_at: timestamp('expires_at').notNull(),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+  updated_at: timestamp('updated_at').notNull().defaultNow()
+});

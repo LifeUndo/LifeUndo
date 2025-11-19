@@ -1,0 +1,7 @@
+# Minimal Netlify config for Next.js app
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PRIVATE_TARGET = "server"

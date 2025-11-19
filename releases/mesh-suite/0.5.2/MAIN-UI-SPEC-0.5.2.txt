@@ -1,0 +1,613 @@
+GetLifeUndo Mesh 0.5.2 — Unified UI Spec
+=======================================
+
+GOLD reference: Windows build screenshots in folder:
+  Скрины_готовой_Windows (mesh-suite/0.5.2)
+
+All platforms (Windows / Android / iOS+macOS / browser extension) MUST follow this spec.
+
+1. Design tokens
+----------------
+
+Colors
+------
+- Background main:        #0e1621
+- Background panel/card:  #122336
+- Text primary:           #e9f1f7
+- Text muted:             #9fb2c5 (can use #94a3b8 for secondary muted)
+- Border card:            rgba(255,255,255,0.08)
+- Primary gradient:       from #7cc7ff to #4aa7f0 (top -> bottom)
+- Purple gradient:        from #7e7bff to #5a5cf6
+- Green gradient:         from #34d399 to #059669
+
+Radii
+-----
+- Card / popup blocks: 16px
+- Pills / tags / badges: full pill (999px)
+- Gear / small rounded buttons: 12px
+
+Typography
+----------
+- Base font: system-ui (platform default), size 14px, regular weight
+- Headings (popup hero, section titles): 18px, semi-bold/bold
+- Small text / hints / labels: 12px
+
+2. Shared components
+--------------------
+
+2.1 Popup Header (main screen)
+------------------------------
+Layout:
+- Left block: brand + version badge
+  - Brand text: "GetLifeUndo" (18px, bold)
+  - Version badge: pill with text "v0.5.2" in gray gradient, thin light border.
+- Right block: badges
+  - Free badge: pill with text "Free" (same visual style as version: neutral gradient).
+  - Locale badge: pill "RU" in PRIMARY gradient (blue), white text.
+  - Gear button: rounded rect with gear icon, neutral gradient background.
+
+Spacing:
+- Vertical padding of header block: as on Windows screenshot (roughly 10–12px).
+- Horizontal spacing between badges: small, visually compact group.
+
+All platforms must render exactly this structure and order:
+  GetLifeUndo  [v0.5.2]            [Free] [RU] [gear]
+
+2.2 Settings HeaderBar
+----------------------
+- Left: circular button with "←"
+- Center: text "Настройки"
+- Right: circular button with "×"
+- Background: glassy capsule (dark gradient + subtle border + blur), as on Windows.
+- Same shape and proportions on all platforms.
+
+2.3 TopTabs (settings)
+----------------------
+Tabs (order and labels):
+- Общие
+- Приложения
+- Подписка
+- О нас
+- FAQ
+- Лента
+- Ваши устройства
+
+Visual:
+- Tabs are pills in a horizontal row.
+- Active tab: brighter background (slightly tinted by primary), clear inner outline.
+- Inactive: dark background, muted text.
+- Spacing between tabs is small, tabs look as one group (see Windows reference).
+
+2.4 FooterBar
+-------------
+Footer content is ALWAYS in a single line:
+
+  Сайт   GitHub   Приватность   © GetLifeUndo™
+
+- Links: click targets for site, GitHub, privacy policy.
+- Copy: non-clickable label. On narrow screens stays on same line (use `white-space: nowrap`).
+- Background: glass bar with blur and inner border as on Windows.
+
+2.5 Pills ON/OFF (General settings)
+----------------------------------
+- Label on the left, pill on the right.
+- Pill states:
+  - ON: green gradient, white text.
+  - OFF: dark fill, muted text.
+
+Used for keys: showHere, screens, video, eventMode.
+
+2.6 Timeline Tabs
+-----------------
+- Pills: "Вкладки", "Скрины", "Текст".
+- Layout: horizontal row inside the Timeline card.
+  - Active tab: fully highlighted (primary for tabs, purple/green only for content chips, not for timeline tabs).
+
+2.7 Language selection
+----------------------
+
+- Global locale key: `locale` in chrome.storage.local (values: `ru`, `en`).
+- Main popup:
+  - Badge with RU / EN toggles locale and immediately updates all texts and footer.
+- Settings → General:
+  - Card "Language" with dropdown:
+    - RU: "Русский"
+    - EN: "English".
+  - Changing dropdown also writes `locale` and re-applies UI texts (tabs, sections, footer, header title).
+  - On open, dropdown MUST reflect current `locale`.
+
+3. Screens
+----------
+
+3.1 Main screen (popup / main window)
+-------------------------------------
+Header:
+- As described in 2.1.
+
+Hero:
+- Title (two lines):
+  "Потеряли текст? Закрыли вкладку?"
+  "Ctrl+Z вернёт всё обратно."
+- Subtitle:
+  "Восстанавливайте формы, вкладки и буфер обмена. 100% локально, без облака и слежки."
+
+Cards (stacked vertically):
+1) "Что умеет:" — list of 8 bullet points (exact texts as in popup.html).
+2) "Зачем это нужно:" — bullet list, 3 points.
+3) "Принципы приватности:" — 3 bullet points.
+4) "Примечания:" — 2 bullet points.
+
+Hint under cards:
+- Text: "В приложении есть подписка."
+
+Footer:
+- As in 2.4.
+
+3.2 Settings → Общие
+--------------------
+Blocks (top to bottom):
+
+1) Language selector
+- Label: "Язык".
+- Dropdown: values include "Русский" (and later English).
+
+2) Toggles
+- Four rows:
+  - Показывать список здесь (ON/OFF pill)
+  - Скриншоты (ON/OFF pill)
+  - Запись видео (ON/OFF pill)
+  - Режим мероприятия (ON/OFF pill)
+
+3) Email
+- Title: "Подписаться на обновления (email):"
+- Input: placeholder "you@example.com".
+- Button: "OK".
+
+4) Watch paths
+- Title: "Пути наблюдения".
+- Hint text: as in options.html (RU text about paths and user folders).
+- Bullets:
+  - Скриншоты: Pictures/Screenshots, OneDrive, Dropbox + пользовательские пути
+  - Документы: Documents + пользовательские пути
+  - Загрузки: Downloads + пользовательские пути
+- Buttons (all active):
+  - Добавить путь для скринов
+  - Добавить путь для текстов
+  - Открыть логи
+  - Экспорт логов
+
+5) Limits
+- Title: "Лимиты".
+- Text: "Скрины: ≤200 / 500MB, Текст: ≤10MB".
+
+3.3 Settings → Приложения
+-------------------------
+Cards shown on Windows are the reference:
+- Top grid with store tiles (Huawei AppGallery, Samsung Store etc.) with subtitle "скоро" where applicable.
+- Separate card "Desktop" with text:
+  - Windows — в разработке
+  - macOS — в разработке
+- Card "Ваши устройства" with "скоро".
+
+All platforms must provide the same structure and labels, adapted visually to platform but following the same grouping.
+
+3.4 Settings → Подписка
+-----------------------
+Header:
+- Title: "Подписка".
+- Status label: "Статус: Free".
+
+Cards:
+- PRO (месяц)
+  - Subtitle: "ежемесячно".
+  - Button: "Оплатить" (purple gradient).
+- VIP (пожизненно)
+  - Subtitle: "единовременно".
+  - Button: "Оплатить" (green gradient).
+- TEAM 5
+  - Subtitle: "для команды".
+  - Button: "Оплатить" (primary).
+
+License activation:
+- Input placeholder: "LU-XXXX-XXXX".
+- Button: "Активировать код".
+- Hint: about local activation, .lifelic, devices (as in options.html).
+
+3.5 Settings → Лента
+--------------------
+Tabs:
+- Pills: "Вкладки", "Скрины", "Текст".
+
+Mode: Вкладки
+- Under tabs: static explanatory block (exact RU text approved during extension work):
+  - title line "Вкладки" (bold)
+  - text explaining that user should install extension, sign in, tabs appear here.
+  - text about sync between devices and privacy (no server without explicit decision).
+
+Mode: Скрины
+- Section head:
+  - Left text: "Последние N из M" (N = number shown, M = total in storage).
+  - Right button: "Открыть папку" (primary rectangular button).
+- Chips row:
+  - Label: "Лимит скринов:".
+  - Chips: 5, 10, 25, 50 (pill buttons, only one selected).
+- Note:
+  - Text: "По умолчанию показываем N последних скринов.".
+- List:
+  - Entries show either file path or label "Скриншот #N" and time.
+  - Button "Показать" for each entry opens preview.
+
+Mode: Текст
+- Head row:
+  - Left: label "Срок хранения текста:".
+  - Right: button "Открыть архив" (green rectangular button).
+- Chips row:
+  - Chips: 12 ч, 24 ч, 48 ч (pill buttons, one selected). 24 ч default.
+- Note:
+  - Text: "По умолчанию показываем последние записи за выбранный период (макс. 20).".
+- Content:
+  - Reference is Windows UI: a scrollable text area or list showing text entries with timestamps.
+  - All platforms must show at least most recent 20 entries filtered by selected time window.
+
+3.6 Settings → Ваши устройства
+------------------------------
+Card layout matches Windows reference:
+- Title: "Ваши устройства".
+- Steps (3 lines):
+  1) Create Offer → передайте offer (base64).
+  2) На другом устройстве вставьте offer → получите answer.
+  3) Верните answer (Apply Answer).
+
+Controls:
+- Row with buttons:
+  - "Create Offer"
+  - "Accept Offer"
+- Label: "Offer (base64)".
+- Textarea `offer` (readonly on some platforms).
+- Row: button "Copy Offer" below.
+- Label: "Answer (base64)".
+- Textarea `answer`.
+- Row: button "Copy Answer".
+- Row: input for offer and button "Use Answer" (or equivalent) as per Windows build.
+- Row: input for answer and button "Apply Answer".
+- Second card inside: "Вкладки" section with
+  - Button "Send Active Tab".
+  - Input for URL and button "Send".
+  - Label "Received" and list of entries.
+  - Label "Соединение: idle/…".
+
+3.7 Settings → О нас
+--------------------
+Links (at least):
+- Telegram
+- VK
+- X
+- YouTube
+- Firefox
+- GitHub
+- Reddit
+- RuStore
+
+3.8 Settings → FAQ
+------------------
+  - Cards with Q&A exactly as in Windows build. Full list of questions/answers in RU:
+
+    1) Что такое GetLifeUndo?
+       Это локальный таймлайн вашей деятельности: скриншоты и текст из буфера. Помогает вернуться к тому, что вы делали 5 минут/час/день назад.
+
+    2) Как это работает?
+       Приложение отслеживает системные папки скриншотов и сохраняет текст из буфера обмена. Всё остаётся на вашем диске.
+
+    3) Где хранятся данные?
+       Локально, в %AppData%/GetLifeUndo. Папку можно открыть через настройки.
+
+    4) Нужно ли что‑то настраивать?
+       По умолчанию всё работает сразу. Дополнительно вы можете добавить свои папки для наблюдения и выбрать место хранения.
+
+    5) Почему антивирус ругается?
+       Из-за отсутствия подписи кода у новых билдов возможны ложные срабатывания. Мы подключаем европейский сертификат.
+
+    6) Что если отменить подписку?
+       Локальный доступ к вашим данным сохранится. Премиум‑функции и облачные возможности (когда появятся) станут недоступны.
+
+    7) Как поменять папку хранения?
+       Настройки → Общие → «Выбрать папку хранения» (в онбординге) или вручную перенесите папку и укажите путь в конфиге.
+
+    8) Как экспортировать данные?
+       Откройте папку данных через настройки и скопируйте нужные файлы. Логи можно экспортировать отдельной кнопкой.
+
+    9) Запуск из ZIP не работает
+       Распакуйте архив целиком: EXE должен видеть системные файлы Chromium/ffmpeg рядом.
+
+  - All platforms must reuse these Q&A texts (localized where appropriate).
+
+4. Data model (for Timeline)
+----------------------------
+Tabs data
+---------
+- Structure: array of entries with timestamp `t` and URL/title information.
+- Extension uses storage key `recv` (chrome.storage.local); other platforms can use local DB but must provide equivalent list.
+
+Screenshots data
+----------------
+- Structure: array `shots[]` with objects:
+  - `t`: timestamp (ms)
+  - `dataUrl` or file path/URL
+  - optional `path`/`copy_path` for display.
+- Limit: up to 200 recent entries.
+
+Text data
+---------
+- Structure: array `textLog[]` with objects:
+  - `t`: timestamp (ms)
+  - `text`: clipped to reasonable length (e.g. 2k chars for extension).
+- Filter by time window: 12 / 24 / 48 hours.
+- Show up to 20 recent entries for selected window.
+
+All platforms must conform to this model so Timeline UI behaves identically.
+
+4.1 System roles (who writes what)
+----------------------------------
+
+LifeUndo is a system of several clients. Each platform has a clear responsibility:
+
+- Desktop app (Windows/macOS/Linux)
+  - System-level text capture (any apps, editors, messengers).
+  - System screenshot folders (local and cloud: OneDrive/Dropbox/etc.).
+  - Clipboard history on OS level.
+  - Writes full history into local DB (SQL/SQLite) in a shape compatible with `recv[]`, `shots[]`, `textLog[]`.
+
+- Mobile app (Android/iOS)
+  - Text and screenshots from mobile apps (where OS permits).
+  - Sends events into the same Timeline model (locally or via sync).
+
+- Browser extensions (Firefox/Chromium/Safari)
+  - Tabs and tab history for this browser.
+  - Forms and clipboard inside the browser (where permissions allow).
+  - Optional tab screenshots.
+  - Shows the unified Timeline, but only directly captures browser-side events.
+
+On all platforms UI must clearly explain this split:
+- Extensions do not scan arbitrary folders or system files.
+- System-level monitoring (any app, any editor) is done by desktop/mobile clients.
+- Timeline screen describes that it aggregates events from all LifeUndo apps.
+
+4.2 Trial & subscription UX (system-wide)
+----------------------------------------
+
+- During trial:
+  - All clients work with full functionality (within limits in 3.2.5 and 3.5.5).
+  - Timeline shows events from all connected devices.
+
+- After trial ends or subscription expires:
+  - Local capture continues on all clients so user does not lose history.
+  - Premium features can be limited (deeper history, advanced search, cloud backup when available).
+  - Non-intrusive prompts must appear:
+    - On Timeline screens (desktop/mobile/extension): small block reminding that user actively uses the system (tabs, screenshots, long texts) and recommending to renew subscription to avoid risk of losing critical recovery options.
+    - Prompts must be polite, not blocking normal local access.
+
+UX requirement:
+- Any screen that relies on system-wide monitoring (e.g. text from non-browser apps) MUST offer a clear path:
+  - If user is in extension and there is no desktop/mobile client, show a card like "To see text and screenshots from other apps, install LifeUndo for Windows/Android" with platform-specific download links.
+  - Desktop/mobile apps, in turn, may recommend installing browser extension to see tabs/forms in Timeline.
+
+4.3 Admin backend (devices, licenses, payments)
+----------------------------------------------
+
+The admin backend is a separate service that knows about users, devices and licenses, but **never stores raw Timeline data** (no tabs, no screenshots, no text).
+
+Core entities
+-------------
+
+- User
+  - id (UUID)
+  - email
+  - createdAt
+
+- Device
+  - id (deviceId from client, e.g. extension/device/app GUID)
+  - userId (FK to User)
+  - platform: `extension`, `desktop`, `android`, `apple` etc.
+  - name (human readable, optional, provided by client)
+  - appVersion
+  - firstSeenAt, lastSeenAt
+  - status: `active`, `disabled`
+
+- License
+  - id
+  - key (e.g. `LU-XXXX-XXXX` or opaque token)
+  - userId
+  - tier: `free`, `pro`, `vip`, `team` etc.
+  - status: `trial`, `active`, `expired`, `revoked`
+  - trialStart, trialEnd
+  - createdAt, updatedAt
+
+- DeviceLicense (link table)
+  - deviceId
+  - licenseId
+  - linkedAt
+
+- Payment
+  - id
+  - userId
+  - licenseId
+  - gateway: `freekassa`, `store`, `manual`
+  - amount, currency
+  - createdAt
+  - status: `pending`, `paid`, `failed`, `refunded`
+
+Minimal REST API (JSON)
+-----------------------
+
+- POST /api/device/register
+  - Body: { deviceId, platform, name?, appVersion, locale }
+  - Auth: optional (for now tokenless, later with admin/user auth).
+  - Result: { ok, device: {...}, user: {...}? }
+
+- POST /api/license/validate
+  - Body: { deviceId, platform, appVersion }
+  - Result:
+    - { ok:true, status, tier, trialStart, trialEnd }
+    - Extension/desktop/mobile must **only cache these fields locally** and never infer more.
+
+- POST /api/license/activate
+  - Body: { deviceId, platform, key }
+  - Result: { ok, status, tier, trialStart, trialEnd, error? }
+
+- GET /api/admin/devices (admin only)
+  - Filters: by user/email, platform, status, tier.
+  - Result: list of devices with joined license info.
+
+- POST /api/admin/device/disable (admin only)
+  - Body: { deviceId, reason? }
+  - Result: { ok }
+  - Clients that call `license/validate` and see status `revoked` or device `disabled` must:
+    - stop syncing with admin backend,
+    - show a polite UI state explaining that subscription has been revoked.
+
+- POST /api/admin/license/grant (admin only)
+  - Body: { email, tier, durationDays?, isTrial?, note? }
+  - Use cases: grant test keys, gift licenses.
+
+All clients (desktop, mobile, extension) must:
+
+- Always identify themselves with { deviceId, platform, appVersion }.
+- Never send Timeline payloads to admin backend.
+- Respect status/tier returned by backend (trial/active/expired/revoked).
+
+
+5. Platform notes
+-----------------
+
+Windows (new build)
+-------------------
+- Use same layout, fonts, colors and texts as described above.
+- Implement components HeaderBar, TopTabs, FooterBar, Pill, Tag, TimelineTabs with the same behavior.
+- Timeline reads/writes from local DB but should map to `recv[]`, `shots[]`, `textLog[]` shape.
+
+Android (phone + tablet)
+------------------------
+- Define design tokens matching this spec (colors, radii, typography).
+- Main screen = popup layout;
+- Settings screen = tabbed layout (General, Apps, Subscription, About, FAQ, Timeline, Devices).
+- Implement Timeline, Subscription and Devices screens with same labels and flows.
+
+Apple (iOS / macOS / Safari)
+----------------------------
+- Follow same structures for screens and components.
+- Width can be larger, but card layouts, header/footers, texts and Timeline behavior must stay consistent with this spec.
+
+6. Admin app UI (multi-platform)
+--------------------------------
+
+Admin UI purpose
+----------------
+
+- Provide a single place for the project owner to:
+  - see users and their devices;
+  - see active trials/subscriptions and payments;
+  - disable devices or revoke licenses when needed;
+  - grant test and permanent keys without going through a payment gateway.
+
+Admin screens (minimal v1)
+--------------------------
+
+1) Login / auth
+  - Simple admin login (email + password or token).
+  - This can be a separate app or protected web UI; spec does not force a concrete method.
+
+2) Dashboard
+  - Cards with aggregate numbers:
+    - Total users, active devices, active trials, active subscriptions.
+    - Today/7 days payments (count + amount).
+
+3) Users & devices
+  - Table with columns:
+    - User email.
+    - DeviceId (shortened), platform, appVersion.
+    - License tier/status.
+    - Last seen.
+  - Filters: by email, platform, tier, status.
+  - Actions (per device):
+    - "Disable device" (sets Device.status = disabled).
+    - "Re-enable device".
+
+4) Licenses & keys
+  - Table with columns: key, tier, status, user, createdAt, trialStart/trialEnd.
+  - Action: "Grant license" (opens form with email, tier, trial/forever, note).
+  - Action: "Revoke license".
+
+5) Payments
+  - Table with columns: user, license, gateway, amount, status, createdAt.
+  - Filters: by date range, status, gateway.
+
+UI guidelines for admin app
+---------------------------
+
+- Reuse the same tokens (colors, typography) where reasonable, but admin UI may be lighter and more table-focused.
+- No Timeline data on admin screens (only metadata:
+  users, devices, licenses, payments).
+- Admin actions must be explicit and reversible where possible (e.g. re-enable device).
+
+Platforms
+---------
+
+- Web admin (primary):
+  - Implemented as a responsive web app that can be opened from any device.
+
+- Windows / Android / Apple admin clients:
+  - Either thin wrappers around web admin (WebView) or native apps consuming the same REST API.
+  - MUST show the same set of screens and actions:
+    - Users & devices,
+    - Licenses & keys,
+    - Payments dashboard.
+
+This file is the single source of truth for GetLifeUndo Mesh 0.5.2 UI and admin flows across all platforms.
+
+7. Implementation roadmap for 0.5.2
+-----------------------------------
+
+This roadmap defines the recommended order of implementation and testing so that
+all parts of the system can be finished iteratively without jumping between
+features.
+
+Step 1 — Firefox extension core (Mesh 0.5.2)
+- Finalize EN/RU localization for all screens (popup + options).
+- Refine "Your devices" UI:
+  - Keep current offer/answer block as Advanced mode for debugging.
+  - Add a new top block for pairing via QR + short code (WhatsApp-style).
+  - Define client-side hooks for /api/pair/create and /api/pair/consume.
+- Ensure manifest icons and AMO requirements are satisfied.
+
+Step 2 — Pairing backend on Vercel
+- Implement minimal REST API for pairing and licenses:
+  - /api/license/validate
+  - /api/pair/create
+  - /api/pair/consume
+- Data model: User, License, Device, PairingSession (as described above).
+- Make sure trial is stored on License level and is shared across devices
+  (no trial reset when new device is added).
+
+Step 3 — Email and anti-spam logic
+- Add backend validation for emails (syntax + domain filters).
+- Implement email verification flow and email change request flow.
+- Maintain basic black/white lists of domains inside admin backend.
+
+Step 4 — Admin panel (web)
+- Implement web admin UI for the owner and staff roles:
+  - Users & devices table with filters and actions.
+  - Licenses & keys management, including bulk key issuance for teams.
+  - Basic payments list.
+- Add AdminAuditLog so that all staff actions are tracked and reversible
+  by the owner where possible (disable/re-enable device, revoke license,
+  revoke bulk-issued keys, etc.).
+
+Step 5 — Android and desktop clients (minimum viable)
+- Android app with onboarding via activation key or QR code using the same
+  pairing API.
+- Windows desktop client that also uses the same license and pairing flows.
+- Use these two clients + Firefox extension to run end-to-end tests of the
+  multi-device system (trial sharing, device limits, admin actions).
+
+This file is the single source of truth for GetLifeUndo Mesh 0.5.2 UI,
+admin flows and the implementation roadmap across all platforms.

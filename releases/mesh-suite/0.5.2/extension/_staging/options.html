@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>LifeUndo Mesh — Options</title>
+  <style>
+    :root{--bg:#0e1621;--panel:#122336;--text:#e9f1f7;--muted:#9fb2c5;--border:rgba(255,255,255,.08);--radius:10px;--p1:#17a6ff;--p2:#00b3a4}
+    body{font:14px system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;display:flex;justify-content:center}
+    .wrap{width:392px;padding:12px;line-height:1.6;padding-bottom:92px}
+    .screen{display:none}
+    .screen.active{display:block}
+    .home-frame{width:100%;height:520px;border:0;border-radius:16px;overflow:hidden}
+    .tag{font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid rgba(15,23,42,.8);background:#0b1220;color:var(--text);box-shadow:0 1px 0 rgba(15,23,42,.9) inset}
+    /* Кнопки назад/закрыть в шапке настроек — более тёмные пилюли, как в Windows */
+    #hdr-back, #hdr-close{background:linear-gradient(180deg, rgba(10,19,32,.9), rgba(12,24,38,.9));border-color:rgba(255,255,255,.16);color:#e5edf7;box-shadow:0 1px 0 rgba(255,255,255,.1) inset}
+  .tag.active{outline:2px solid rgba(23,166,255,.45)}
+  .tag.selected{outline:2px solid rgba(255,255,255,.25)}
+  /* Выбранные чипы для скринов и текста */
+  #tl-shots-chips .tag.selected{background:linear-gradient(180deg,#7cc7ff 0%,#4aa7f0 100%);color:#0b1220;border-color:transparent}
+  #tl-text-chips .tag.selected{background:linear-gradient(180deg,#7e7bff 0%,#5a5cf6 100%);color:#fff;border-color:transparent}
+    .tag-blue{background:linear-gradient(180deg,#7cc7ff 0%,#4aa7f0 100%);color:#0b1220}
+    .tag-purple{background:linear-gradient(180deg,#7e7bff 0%,#5a5cf6 100%)}
+    .tag-green{background:linear-gradient(180deg,#34d399 0%,#059669 100%)}
+    h2{margin:0 0 8px;font-size:18px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:12px;margin-bottom:12px;box-shadow:0 1px 0 rgba(0,0,0,.2) inset}
+    .glass{position:sticky;top:8px;z-index:10;background:linear-gradient(180deg, rgba(20,34,54,.7), rgba(20,34,54,.5));backdrop-filter:blur(14px) saturate(1.1);border:1px solid rgba(255,255,255,.08);box-shadow:0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);border-radius:18px}
+    .btn{height:32px;padding:0 14px;border-radius:999px;border:0;background:linear-gradient(180deg,#7cc7ff 0%,#4aa7f0 100%);color:#0b1220;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.25) inset, 0 1px 2px rgba(0,0,0,.35);font-weight:600}
+    .btn-rect{border-radius:12px;border:1px solid var(--border)}
+    .btn-purple{background:linear-gradient(180deg,#7e7bff 0%,#5a5cf6 100%);color:#fff}
+    .btn-green{background:linear-gradient(180deg,#34d399 0%,#059669 100%);color:#fff}
+    .btn:hover{filter:brightness(1.08)}
+    .btn:active{transform:scale(.98)}
+    textarea{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:12px;padding:8px}
+    input{background:var(--panel);border:1px solid var(--border);color:var(--text)}
+    .row{display:flex;gap:8px;align-items:center}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .tab{padding:8px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:background .18s,color .18s,box-shadow .18s}
+    .tab:hover{color:var(--text);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
+    .tab.active{color:var(--text);background:linear-gradient(180deg, color-mix(in oklab, var(--p1) 18%, transparent), color-mix(in oklab, var(--p1) 6%, transparent));box-shadow:0 0 0 1px color-mix(in oklab, var(--p1) 35%, transparent) inset}
+    .muted{color:var(--muted);font-size:12px}
+    .sp{height:8px}
+    .hidden{display:none}
+    a{color:#67e8f9;text-decoration:none}
+    a:hover{text-decoration:underline}
+    #page-title{font-size:20px;margin:0 0 8px}
+    /* Apps grid */
+    .apps-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .tile{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:10px}
+    .tile .left{display:flex;align-items:center;gap:8px}
+    .tile .muted-small{font-size:12px;color:var(--muted)}
+    .tile.disabled{opacity:.65}
+    /* About / socials */
+    .social-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+    .social-pill{display:flex;align-items:center;gap:8px;justify-content:flex-start;padding:8px 10px;border-radius:12px;border:1px solid var(--border);background:#0b1220;color:var(--text);font-size:13px;text-decoration:none}
+    .social-pill:hover{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));text-decoration:none}
+    .social-pill img{width:16px;height:16px;border-radius:4px}
+    .social-pill span{flex:1}
+    /* Pills ON/OFF */
+    .pill{display:inline-flex;align-items:center;justify-content:center;height:30px;min-width:60px;padding:0 14px;border-radius:12px;border:1px solid var(--border);font-weight:700;font-size:12px;letter-spacing:.2px;cursor:pointer;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+    .pill.on{background:linear-gradient(180deg,#1ec49a 0%,#0f8e6d 100%);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.08) inset}
+    .pill.off{background:linear-gradient(180deg,#223347 0%,#1b2a3f 100%);color:#9fb2c5}
+    /* Switch */
+    .switch{position:relative;display:inline-block;width:42px;height:24px;vertical-align:middle}
+    .switch input{opacity:0;width:0;height:0}
+    .switch .slider{position:absolute;cursor:pointer;inset:0;background:#233447;border:1px solid var(--border);transition:.2s;border-radius:999px}
+    .switch .slider:before{content:"";position:absolute;height:18px;width:18px;left:3px;top:2px;background:#9fb2c5;border-radius:50%;transition:.2s}
+    .switch input:checked + .slider{background:linear-gradient(180deg, color-mix(in oklab, var(--p2) 40%, transparent), color-mix(in oklab, var(--p2) 18%, transparent));}
+    .switch input:checked + .slider:before{transform:translateX(18px);background:#e9f1f7}
+    /* Footer (glass) */
+    .footer{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:392px;z-index:100;display:flex;gap:14px;align-items:center;justify-content:flex-start;background:linear-gradient(180deg, rgba(20,34,54,.65), rgba(20,34,54,.5));backdrop-filter:blur(12px) saturate(1.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;box-shadow:0 2px 10px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06)}
+    .footer a{color:#a5f3fc}
+    .footer .muted{margin-left:auto}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+  <div class="card glass" style="margin-top:6px">
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div class="row" style="gap:8px">
+        <button id="hdr-back" class="tag" title="Назад">←</button>
+        <h2 id="hdr-title" style="margin:0">Настройки</h2>
+      </div>
+      <div class="row" style="gap:8px">
+        <button id="hdr-close" class="tag" title="Закрыть">×</button>
+      </div>
+    </div>
+    <div class="tabs" id="tabs-settings" role="tablist">
+      <button id="tab-btn-general" class="tab active" data-tab="general">Общие</button>
+      <button id="tab-btn-apps" class="tab" data-tab="apps">Приложения</button>
+      <button id="tab-btn-subs" class="tab" data-tab="subs">Подписка</button>
+      <button id="tab-btn-about" class="tab" data-tab="about">О нас</button>
+      <button id="tab-btn-faq" class="tab" data-tab="faq">FAQ</button>
+      <button id="tab-btn-timeline" class="tab" data-tab="timeline">Лента</button>
+      <button id="tab-btn-devices" class="tab" data-tab="devices">Ваши устройства</button>
+    </div>
+  </div>
+
+  <!-- Экран: Главная (встраиваем попап) -->
+  <div id="screen-home" class="screen">
+    <iframe class="home-frame" src="popup.html"></iframe>
+  </div>
+
+  <!-- Экран: Настройки -->
+  <div id="screen-settings" class="screen active">
+  <div id="panel-general" class="card">
+    <h3 id="sec-general-title">Общие</h3>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="justify-content:space-between"><div id="lbl-lang">Язык</div></div>
+      <div class="row" style="margin-top:6px">
+        <select id="select-lang" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:10px;color:#e2e8f0;padding:0 10px">
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="justify-content:space-between;padding-right:8px"><div id="lbl-show-here">Показывать список здесь</div><span id="hint-show-here" class="tag" style="font-size:10px;padding:2px 8px;cursor:help;margin-right:auto;margin-left:4px">!</span><button id="pill-show-here" class="pill off"><span id="pill-text-show-here">OFF</span></button></div>
+      <div class="row" style="justify-content:space-between;padding-right:8px"><div id="lbl-screens">Скриншоты</div><span id="hint-screens" class="tag" style="font-size:10px;padding:2px 8px;cursor:help;margin-right:auto;margin-left:4px">!</span><button id="pill-screens" class="pill on"><span id="pill-text-screens">ON</span></button></div>
+      <div class="row" style="justify-content:space-between;padding-right:8px"><div id="lbl-video">Запись видео</div><span id="hint-video" class="tag" style="font-size:10px;padding:2px 8px;cursor:help;margin-right:auto;margin-left:4px">!</span><button id="pill-video" class="pill off"><span id="pill-text-video">OFF</span></button></div>
+      <div class="row" style="justify-content:space-between;padding-right:8px"><div id="lbl-event">Режим мероприятия</div><span id="hint-event" class="tag" style="font-size:10px;padding:2px 8px;cursor:help;margin-right:auto;margin-left:4px">!</span><button id="pill-event" class="pill off"><span id="pill-text-event">OFF</span></button></div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="justify-content:space-between"><div id="lbl-email">Подписаться на обновления (email):</div><span id="hint-email" class="tag" style="font-size:10px;padding:2px 8px;cursor:help">!</span></div>
+      <div class="row" style="margin-top:6px;justify-content:space-between;padding-right:8px">
+        <input id="input-email" placeholder="you@example.com" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:10px;color:#e2e8f0;padding:0 10px;margin-right:8px"/>
+        <button id="btn-email-ok" class="btn btn-rect" style="width:64px;padding:0">OK</button>
+      </div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="justify-content:space-between"><div id="sec-paths-title">Пути наблюдения</div><span id="hint-paths" class="tag" style="font-size:10px;padding:2px 8px;cursor:help">!</span></div>
+      <div id="lbl-paths-hint" class="muted" style="margin-top:6px">Подсказка: добавьте свои папки, если системные пути отличаются. Эти пути используются настольной версией LifeUndo для наблюдения за скринами и текстом, в том числе в облачных папках (OneDrive, Dropbox и т.п.). Само расширение не открывает файлы и отдельного доступа к диску не запрашивает.</div>
+      <ul class="muted" style="margin:8px 0 0 18px; padding:0; list-style:disc">
+        <li id="li-screens">Скриншоты: Pictures/Screenshots, OneDrive, Dropbox + пользовательские пути</li>
+        <li id="li-docs">Документы: Documents + пользовательские пути</li>
+        <li id="li-downloads">Загрузки: Downloads + пользовательские пути</li>
+      </ul>
+      <div style="margin-top:8px; display:grid; grid-template-columns:1fr 1fr; gap:8px">
+        <button id="btn-add-screens" class="btn btn-rect">Добавить путь для скринов</button>
+        <button id="btn-add-texts" class="btn btn-rect">Добавить путь для текстов</button>
+        <button id="btn-open-logs" class="btn btn-rect">Открыть логи</button>
+        <button id="btn-export-logs" class="btn btn-rect">Экспорт логов</button>
+      </div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="justify-content:space-between"><div id="sec-limits-title">Лимиты</div></div>
+      <div id="lbl-limits" class="muted" style="margin-top:6px">Скрины: ≤200 / 500MB, Текст: ≤10MB</div>
+    </div>
+  </div>
+  <div id="panel-apps" class="card hidden">
+    <h3 id="sec-apps-title">Приложения</h3>
+    <div class="apps-grid">
+      <div class="tile"><div class="left"><img src="https://icons.duckduckgo.com/ip3/rustore.ru.ico" width="18" height="18" alt=""/><div>RuStore<div id="apps-rustore-sub" class="muted-small">Скачать</div></div></div><a id="apps-rustore-btn" class="btn" href="https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app" target="_blank">Открыть</a></div>
+      <div class="tile"><div class="left"><img src="https://icons.duckduckgo.com/ip3/github.com.ico" width="18" height="18" alt=""/><div>GitHub<div id="apps-github-sub" class="muted-small">Скачать</div></div></div><a id="apps-github-btn" class="btn" href="https://github.com/LifeUndo" target="_blank">Открыть</a></div>
+      <div class="tile disabled"><div class="left"><img src="https://icons.duckduckgo.com/ip3/store.nashstore.ru.ico" width="18" height="18" alt=""/><div>NashStore<div id="apps-nash-sub" class="muted-small">скоро</div></div></div></div>
+      <div class="tile disabled"><div class="left"><img src="https://icons.duckduckgo.com/ip3/f-droid.org.ico" width="18" height="18" alt=""/><div>F‑Droid<div id="apps-fdroid-sub" class="muted-small">скоро</div></div></div></div>
+      <div class="tile disabled"><div class="left"><img src="https://icons.duckduckgo.com/ip3/appgallery.huawei.com.ico" width="18" height="18" alt=""/><div>Huawei AppGallery<div id="apps-huawei-sub" class="muted-small">скоро</div></div></div></div>
+      <div class="tile disabled"><div class="left"><img src="https://icons.duckduckgo.com/ip3/galaxystore.samsung.com.ico" width="18" height="18" alt=""/><div>Samsung Store<div id="apps-samsung-sub" class="muted-small">скоро</div></div></div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div id="apps-desktop-title" class="title">Desktop</div>
+      <ul class="muted" style="margin:6px 0 0 18px; padding:0; list-style:disc">
+        <li id="apps-desktop-win">Windows — в разработке</li>
+        <li id="apps-desktop-mac">macOS — в разработке</li>
+      </ul>
+    </div>
+  </div>
+  <div id="panel-subs" class="card hidden">
+    <h3 id="sec-subs-title">Подписка</h3>
+    <div class="muted" id="lbl-status">Статус: Free</div>
+    <div class="muted" id="trial-left" style="margin-top:4px;display:none"></div>
+    <div class="sp"></div>
+    <div class="card" style="margin:6px 0">
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:130px;margin:0">
+          <div id="subs-pro-title" class="muted">PRO (месяц)</div>
+          <div id="subs-pro-sub" class="muted" style="font-size:12px">ежемесячно</div>
+          <div class="sp"></div>
+          <button id="pay-pro" class="btn btn-purple">Оплатить</button>
+        </div>
+        <div class="card" style="flex:1;min-width:130px;margin:0">
+          <div id="subs-vip-title" class="muted">VIP (пожизненно)</div>
+          <div id="subs-vip-sub" class="muted" style="font-size:12px">единовременно</div>
+          <div class="sp"></div>
+          <button id="pay-vip" class="btn btn-green">Оплатить</button>
+        </div>
+        <div class="card" style="flex:1;min-width:130px;margin:0">
+          <div id="subs-team-title" class="muted">TEAM 5</div>
+          <div id="subs-team-sub" class="muted" style="font-size:12px">для команды</div>
+          <div class="sp"></div>
+          <button id="pay-team" class="btn">Оплатить</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="gap:6px">
+      <input id="lic-code" placeholder="LU-XXXX-XXXX" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:10px;color:#e2e8f0;padding:0 10px"/>
+      <button id="btn-activate" class="btn">Активировать код</button>
+    </div>
+    <div class="muted" id="lic-hint" style="margin-top:6px">Введите активационный ключ, который вы получили после оплаты или в письме от поддержки. Ключ привязывается к вашим устройствам через единую систему GetLifeUndo и включает оплаченный тариф. Не передавайте код третьим лицам.</div>
+  </div>
+  <div id="panel-about" class="card hidden">
+    <h3 id="sec-about-title">О нас</h3>
+    <div id="about-socials-title" class="muted" style="margin-top:4px;margin-bottom:4px">Соцсети</div>
+    <div class="social-grid">
+      <a class="social-pill" href="https://t.me/getlifeundo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/t.me.ico" alt=""/><span>Telegram</span></a>
+      <a class="social-pill" href="https://vk.ru/GetLifeUndo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/vk.ru.ico" alt=""/><span>VK</span></a>
+      <a class="social-pill" href="https://x.com/getlifeundo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/x.com.ico" alt=""/><span>X</span></a>
+      <a class="social-pill" href="https://youtube.com/@getlifeundo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/youtube.com.ico" alt=""/><span>YouTube</span></a>
+      <a class="social-pill" href="https://addons.mozilla.org/firefox/addon/lifeundo/" target="_blank"><img src="https://icons.duckduckgo.com/ip3/addons.mozilla.org.ico" alt=""/><span>Firefox</span></a>
+      <a class="social-pill" href="https://github.com/LifeUndo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/github.com.ico" alt=""/><span>GitHub</span></a>
+      <a class="social-pill" href="https://reddit.com/r/getlifeundo" target="_blank"><img src="https://icons.duckduckgo.com/ip3/reddit.com.ico" alt=""/><span>Reddit</span></a>
+      <a class="social-pill" href="https://www.rustore.ru/catalog/app/com.getlifeundo.lifeundo_app" target="_blank"><img src="https://icons.duckduckgo.com/ip3/rustore.ru.ico" alt=""/><span>RuStore</span></a>
+    </div>
+    <div class="row" style="gap:8px;margin-top:12px">
+      <button id="btn-share" class="btn btn-green" style="flex:1">Поделиться</button>
+      <button id="btn-rate" class="btn" style="flex:1">Оценить</button>
+    </div>
+  </div>
+  <div id="panel-faq" class="card hidden">
+    <h3 id="sec-faq-title">FAQ</h3>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q1" class="muted" style="font-weight:600;color:#e2e8f0">Что такое GetLifeUndo?</div>
+      <div id="faq-a1" class="muted">Это локальный таймлайн вашей деятельности: скриншоты и текст из буфера. Помогает вернуться к тому, что вы делали 5 минут/час/день назад.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q2" class="muted" style="font-weight:600;color:#e2e8f0">Как это работает?</div>
+      <div id="faq-a2" class="muted">Приложение отслеживает системные папки скриншотов и сохраняет текст из буфера обмена. Всё остаётся на вашем диске.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q3" class="muted" style="font-weight:600;color:#e2e8f0">Где хранятся данные?</div>
+      <div id="faq-a3" class="muted">Локально, в %AppData%/GetLifeUndo. Папку можно открыть через настройки.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q4" class="muted" style="font-weight:600;color:#e2e8f0">Нужно ли что‑то настраивать?</div>
+      <div id="faq-a4" class="muted">По умолчанию всё работает сразу. Дополнительно вы можете добавить свои папки для наблюдения и выбрать место хранения.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q5" class="muted" style="font-weight:600;color:#e2e8f0">Почему антивирус ругается?</div>
+      <div id="faq-a5" class="muted">Из-за отсутствия подписи кода у новых билдов возможны ложные срабатывания. Мы подключаем европейский сертификат.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q6" class="muted" style="font-weight:600;color:#e2e8f0">Что если отменить подписку?</div>
+      <div id="faq-a6" class="muted">Локальный доступ к вашим данным сохранится. Премиум‑функции и облачные возможности (когда появятся) станут недоступны.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q7" class="muted" style="font-weight:600;color:#e2e8f0">Как поменять папку хранения?</div>
+      <div id="faq-a7" class="muted">Настройки → Общие → «Выбрать папку хранения» (в онбординге) или вручную перенесите папку и укажите путь в конфиге.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q8" class="muted" style="font-weight:600;color:#e2e8f0">Как экспортировать данные?</div>
+      <div id="faq-a8" class="muted">Откройте папку данных через настройки и скопируйте нужные файлы. Логи можно экспортировать отдельной кнопкой.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q9" class="muted" style="font-weight:600;color:#e2e8f0">Запуск из ZIP не работает</div>
+      <div id="faq-a9" class="muted">Распакуйте архив целиком: EXE должен видеть системные файлы Chromium/ffmpeg рядом.</div>
+    </div>
+    <div class="card" style="margin:6px 0">
+      <div id="faq-q10" class="muted" style="font-weight:600;color:#e2e8f0">Как всё работает вместе (ПК + расширение + Android)?</div>
+      <div id="faq-a10-1" class="muted">1) ПК/ноутбук: установите основное приложение LifeUndo для Windows (0.4.x) и включите наблюдение за скринами/текстом.</div>
+      <div id="faq-a10-2" class="muted">2) Расширение: поставьте это расширение в Firefox, войдите в тот же аккаунт (когда появится) или свяжите устройство через код в разделе «Ваши устройства».</div>
+      <div id="faq-a10-3" class="muted">3) Телефон (Android): установите мобильное приложение из RuStore и включите отправку скринов/текста. Позже всё будет видно в общей Ленте и на ПК, и в браузере, и на телефоне.</div>
+      <div id="faq-a10-4" class="muted">Сейчас эта схема в стадии перехода: часть функций уже работает локально, а единую подписку и облачную синхронизацию мы включим постепенно.</div>
+    </div>
+  </div>
+  <div id="panel-timeline" class="card hidden">
+    <h3 id="sec-timeline-title">Лента <span id="hint-timeline" class="tag" style="font-size:10px;padding:2px 8px;cursor:help">!</span></h3>
+    <div class="row" style="flex-wrap:wrap;gap:8px">
+      <button id="tl-tab" class="tag tag-blue" style="cursor:pointer">Вкладки</button>
+      <button id="tl-shot" class="tag tag-purple" style="cursor:pointer">Скрины</button>
+      <button id="tl-text" class="tag tag-green" style="cursor:pointer">Текст</button>
+    </div>
+    <!-- Tabs help -->
+    <div id="tl-help-tabs" class="muted" style="margin-top:8px">
+      <div style="font-weight:600;margin-bottom:4px">Вкладки</div>
+      <div>Чтобы фиксировать вкладки, установите браузерное расширение GetLifeUndo и войдите в аккаунт. После этого вкладки появятся здесь.</div>
+      <div>Синхронизация работает между устройствами. Управляйте списком устройств в разделе Подписка → Устройства (позже).</div>
+      <div>Всё локально, никакой передачи на сервер без вашего явного решения.</div>
+    </div>
+
+    <!-- Секция скринов -->
+    <div id="tl-shots-head" class="row" style="margin-top:8px;justify-content:space-between;display:none">
+      <div class="muted"><span id="tl-shots-count">Последние 0 из 0</span></div>
+      <div class="row" style="gap:8px">
+        <button id="tl-open-folder" class="btn btn-rect">Открыть папку</button>
+      </div>
+    </div>
+    <div id="tl-shots-chips" class="row" style="gap:8px;margin-top:6px;display:none">
+      <div id="tl-shots-limit-label" class="muted">Лимит скринов:</div>
+      <button class="tag" data-shots-limit="5">5</button>
+      <button class="tag" data-shots-limit="10">10</button>
+      <button class="tag" data-shots-limit="25">25</button>
+      <button class="tag" data-shots-limit="50">50</button>
+    </div>
+    <div id="tl-shots-note" class="muted" style="margin-top:6px;display:none">По умолчанию показываем N последних скринов.</div>
+
+    <!-- Секция текста -->
+    <div id="tl-text-head" class="row" style="margin-top:12px;justify-content:space-between;display:none">
+      <div class="muted"><span id="tl-text-store">Срок хранения текста:</span></div>
+      <div class="row" style="gap:8px">
+        <button id="tl-open-archive" class="btn btn-green btn-rect">Открыть архив</button>
+      </div>
+    </div>
+    <div id="tl-text-chips" class="row" style="gap:8px;margin-top:6px;display:none">
+      <button class="tag" data-text-hrs="12">12 ч</button>
+      <button class="tag" data-text-hrs="24">24 ч</button>
+      <button class="tag" data-text-hrs="48">48 ч</button>
+    </div>
+    <div id="tl-text-note" class="muted" style="margin-top:6px;display:none">По умолчанию показываем последние записи за выбранный период (макс. 20).</div>
+
+    <div id="tl-empty" class="muted" style="margin-top:8px"></div>
+    <div id="tl-list" class="list" style="margin-top:8px;max-height:320px;overflow:auto"></div>
+  </div>
+
+  <div id="panel-devices" class="card hidden">
+    <h3 id="sec-devices-title">Ваши устройства <span id="hint-devices" class="tag" style="font-size:10px;padding:2px 8px;cursor:help">!</span></h3>
+    <div id="dev-intro-1" class="muted">Свяжите этот браузер с ПК и телефоном через короткий код или QR — как в мессенджерах.</div>
+    <div id="dev-intro-2" class="muted" style="margin-top:4px">1) На устройстве‑ИСТОЧНИКЕ нажмите «Показать код» и откройте QR. 2) На устройстве‑ПРИЁМНИКЕ отсканируйте QR или введите код вручную. 3) После подтверждения вкладки и другие события смогут ходить между устройствами.</div>
+    <div id="dev-intro-3" class="muted" style="margin-top:4px;font-size:12px">Код действует ограниченное время и привязан к вашей подписке. Всё происходит через зашифрованный канал.</div>
+    <div id="dev-intro-4" class="muted" style="margin-top:4px;font-size:12px;font-family:monospace">Схема: ПК ⇄ QR/код ⇄ Телефон</div>
+    <div class="muted" style="margin-top:6px;font-size:12px"><span id="dev-this-device-label">Это устройство:</span> <span id="dev-device-id" style="font-family:monospace;color:#e2e8f0">—</span></div>
+    <div class="muted" style="margin-top:2px;font-size:12px"><span id="dev-status-label">Статус:</span> <span id="dev-license-status">trial / free</span></div>
+
+    <div class="card" style="margin-top:10px">
+      <div class="row" style="justify-content:space-between;align-items:center;gap:8px">
+        <div class="muted" id="dev-pairing-title">Связать с другим устройством</div>
+        <button id="btn-pair-start" class="btn btn-rect" style="white-space:nowrap">Показать код</button>
+      </div>
+      <div class="muted" id="dev-pairing-sub" style="margin-top:4px;font-size:12px">Откройте раздел «Ваши устройства» на втором устройстве и выберите «Подтвердить код».</div>
+      <div id="dev-pairing-code-block" class="card" style="margin-top:8px;display:none">
+        <div class="muted" id="dev-pairing-code-label">Код для этого устройства (введите на втором устройстве):</div>
+        <div id="dev-pairing-code" style="margin-top:4px;font-family:monospace;font-size:18px;letter-spacing:2px">— — — —</div>
+        <div id="dev-pairing-status" class="muted" style="margin-top:6px;font-size:12px"></div>
+      </div>
+      <div id="dev-pairing-accept-block" class="card" style="margin-top:8px">
+        <div class="muted" id="dev-pairing-accept-label">У меня уже есть код другого устройства:</div>
+        <div class="row" style="margin-top:6px;gap:8px">
+          <input id="dev-pairing-input" placeholder="XXXX-XXXX" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:999px;color:#e2e8f0;padding:0 12px"/>
+          <button id="btn-pair-accept" class="btn">Подтвердить код</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <details id="dev-advanced-details">
+        <summary class="muted" id="dev-advanced-title" style="cursor:pointer;list-style:none">Режим разработчика (offer/answer)</summary>
+        <div class="muted" id="dev-advanced-note" style="margin-top:4px;font-size:12px">Низкоуровневый режим для отладки WebRTC‑соединения между устройствами. В обычной жизни используйте код/QR выше.</div>
+        <div class="sp"></div>
+        <div class="row" style="gap:8px"><button id="btn-offer" class="btn">Создать код связи</button><button id="btn-accept-offer" class="btn">Вставить код связи</button></div>
+        <div class="label" id="dev-offer-label">Исходящий код (offer, base64)</div>
+        <textarea id="offer" rows="4" readonly></textarea>
+        <div class="row" style="margin-top:6px"><button id="btn-copy-offer" class="btn">Copy Offer</button></div>
+        <div class="label" id="dev-answer-label">Ответный код (answer, base64)</div>
+        <textarea id="answer" rows="4" readonly></textarea>
+        <div class="row" style="margin-top:6px"><button id="btn-copy-answer" class="btn">Copy Answer</button></div>
+        <div class="row" style="margin-top:10px"><input id="input-offer" placeholder="paste offer (base64)" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:999px;color:#e2e8f0;padding:0 12px"/><button id="btn-use-answer" class="btn" disabled>Use Answer</button></div>
+        <div class="row" style="margin-top:8px"><input id="input-answer" placeholder="paste answer (base64)" style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:999px;color:#e2e8f0;padding:0 12px"/><button id="btn-apply-answer" class="btn">Apply Answer</button></div>
+      </details>
+      <div class="card" style="margin-top:12px">
+        <div class="title" id="dev-tabs-title">Вкладки</div>
+        <div class="row"><button id="btn-send-active" class="btn">Send Active Tab</button><input id="input-url" placeholder="https://..." style="flex:1;height:32px;background:#0b1220;border:1px solid #1f2a44;border-radius:999px;color:#e2e8f0;padding:0 12px"/><button id="btn-send-url" class="btn">Send</button></div>
+        <div class="label">Received</div>
+        <div id="list" class="list"></div>
+        <div class="label"><span id="dev-conn-label">Соединение:</span> <span id="status">idle</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (fixed, вне .wrap) -->
+  <div class="footer" role="contentinfo" style="display:flex;align-items:center;justify-content:center;gap:24px;white-space:nowrap">
+    <div>
+      <a id="f-site" href="https://getlifeundo.com" target="_blank">Сайт</a>
+      <span style="margin:0 8px"></span>
+      <a id="f-github" href="https://github.com/LifeUndo" target="_blank">GitHub</a>
+      <span style="margin:0 8px"></span>
+      <a id="f-privacy" href="https://getlifeundo.com/privacy" target="_blank">Приватность</a>
+    </div>
+    <span id="f-copy" class="muted"> GetLifeUndo</span>
+  </div>
+
+  <script src="options.js" type="module"></script>
+  </div>
+</body>
+</html>
