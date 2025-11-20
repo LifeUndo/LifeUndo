@@ -16,6 +16,7 @@ export default function DeviceClientPage() {
   const [deviceId, setDeviceId] = useState('');
   const [shortCode, setShortCode] = useState('');
   const [lastCode, setLastCode] = useState('');
+  const [pairStatus, setPairStatus] = useState('');
   const [license, setLicense] = useState<LicenseStatus | null>(null);
   const [log, setLog] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
@@ -80,6 +81,7 @@ export default function DeviceClientPage() {
   async function acceptCode() {
     if (!deviceId || !shortCode.trim()) return;
     setBusy(true);
+    setPairStatus('Отправляем запрос на подтверждение кода...');
     try {
       const res = await fetch('https://getlifeundo.com/api/pair/consume', {
         method: 'POST',
@@ -88,8 +90,20 @@ export default function DeviceClientPage() {
       });
       const data = await res.json();
       appendLog('pair/consume: ' + JSON.stringify(data));
+      if (data && data.ok) {
+        setPairStatus(
+          'Код принят. Устройства связаны (если оба устройства привязаны к одной лицензии). Этот код больше не действует.'
+        );
+      } else {
+        const msg = (data && (data.error || data.message)) ||
+          'Не удалось подтвердить код. Проверьте, что он введён без ошибок и не истёк (код живёт около 15 минут и одноразовый).';
+        setPairStatus(String(msg));
+      }
     } catch (e: any) {
       appendLog('pair/consume error: ' + (e?.message || String(e)));
+      setPairStatus(
+        'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз. Если проблема повторяется, посмотрите детали в логах ниже.'
+      );
     } finally {
       setBusy(false);
     }
@@ -174,7 +188,7 @@ export default function DeviceClientPage() {
             </div>
 
             <div className="space-y-2">
-              <div className="text-[11px] text-slate-400">Принять код с другого устройства</div>
+              <div className="text-[11px] text-slate-400">Подтвердить код другого устройства</div>
               <input
                 placeholder="ABCD-1234"
                 className="w-full rounded-md border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
@@ -188,7 +202,25 @@ export default function DeviceClientPage() {
               >
                 Подтвердить код
               </button>
+              {pairStatus && (
+                <div className="text-[11px] text-slate-300 leading-snug">{pairStatus}</div>
+              )}
             </div>
+          </div>
+          <div className="mt-3 text-[11px] text-slate-500 leading-snug">
+            <p>
+              Сценарий: на ПЕРВОМ устройстве (например, этот веб-клиент или расширение) нажмите «Создать код» / «Показать код» и
+              передайте короткий код.
+            </p>
+            <p className="mt-1">
+              На ВТОРОМ устройстве откройте раздел «Ваши устройства» или эту страницу `/device`, введите код в поле «Подтвердить код» и
+              нажмите кнопку. Код действует примерно 15 минут и <span className="font-semibold">используется один раз</span>. После
+              успешной связки он перестаёт работать.
+            </p>
+            <p className="mt-1">
+              Например: на ПК откройте этот веб-клиент или админ-панель, нажмите «Создать код», а на телефоне в расширении откройте
+              «Ваши устройства» и введите этот код в поле «Подтвердить код».
+            </p>
           </div>
         </section>
 

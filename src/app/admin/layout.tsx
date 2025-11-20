@@ -10,6 +10,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <a href="/admin/licenses" className="px-3 py-2 rounded-md hover:bg-slate-800">Лицензии</a>
           <a href="/admin/devices" className="px-3 py-2 rounded-md hover:bg-slate-800">Устройства</a>
           <a href="/admin/email-domains" className="px-3 py-2 rounded-md hover:bg-slate-800">Доменные правила</a>
+          <a href="/admin/payments" className="px-3 py-2 rounded-md hover:bg-slate-800">Платежи</a>
+          <a href="/admin/exports" className="px-3 py-2 rounded-md hover:bg-slate-800">Экспорт</a>
           <a href="/device" className="px-3 py-2 rounded-md hover:bg-slate-800">Ops-консоль (web-клиент)</a>
         </nav>
       </aside>

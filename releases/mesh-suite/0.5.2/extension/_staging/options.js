@@ -346,7 +346,7 @@ const I18N = {
       appsDesktopMac:'macOS — в разработке',
       devIntro1:'Свяжите этот браузер с ПК и телефоном через короткий код или QR — как в мессенджерах.',
       devIntro2:'1) На этом устройстве нажмите «Показать код». 2) На втором устройстве (веб-клиент на getlifeundo.com/device или другое расширение) введите короткий код в поле «Подтвердить код». 3) После подтверждения вкладки и другие события смогут ходить между устройствами.',
-      devIntro3:'Код действует ограниченное время, одноразовый и привязан к вашей подписке. После успешной связки он становится недействительным.',
+      devIntro3:'Код действует ограниченное время, одноразовый и привязан к вашей подписке. После успешной связки он становится недействительным. Например: на ПК нажмите «Показать код» / «Создать код», а на телефоне в расширении откройте «Ваши устройства» и введите этот код в поле «Подтвердить код».',
       devIntro4:'Схема: ПК ⇄ QR/код ⇄ Телефон',
       devThisDeviceLabel:'Это устройство:',
       devStatusLabel:'Статус:',
@@ -447,7 +447,7 @@ const I18N = {
       appsDesktopMac:'macOS — in development',
       devIntro1:'Link this browser with your other devices (PC, laptop, phone) using a short code or QR, similar to messengers.',
       devIntro2:'1) On this device click “Show code”. 2) On the second device (web client at getlifeundo.com/device or another extension) type the short code into “Confirm code”. 3) After confirmation tabs and other events can flow between devices.',
-      devIntro3:'The code is time-limited, one-time and tied to your subscription. After a successful link it becomes invalid.',
+      devIntro3:'The code is time-limited, one-time and tied to your subscription. After a successful link it becomes invalid. For example: on your PC click “Show code” / “Create code”, and on your phone in the extension open “Your devices” and type this code into “Confirm code”.',
       devIntro4:'Scheme: PC ⇄ QR/code ⇄ Phone',
       devThisDeviceLabel:'This device:',
       devStatusLabel:'Status:',
@@ -1241,6 +1241,15 @@ btnPairAccept && btnPairAccept.addEventListener('click', async ()=>{
     const raw = pairingInputEl && pairingInputEl.value || ''
     const code = String(raw).trim()
     if (!code) return
+    if (pairingCodeBlock){
+      pairingCodeBlock.style.display = 'block'
+    }
+    if (pairingStatusEl){
+      const L = (window.__loc && I18N[window.__loc]) || I18N.ru
+      const checkingRu = 'Проверяем код...'
+      const checkingEn = 'Checking the code...'
+      pairingStatusEl.textContent = (window.__loc==='en' ? checkingEn : checkingRu)
+    }
     const deviceId = await ensureDeviceId()
     const payload = { deviceId, platform:'extension', shortCode: code }
     const res = await fetch('https://getlifeundo.com/api/pair/consume',{
@@ -1248,7 +1257,13 @@ btnPairAccept && btnPairAccept.addEventListener('click', async ()=>{
     })
     const data = await res.json().catch(()=>null)
     if (!data || !data.ok){
-      pairingStatusEl && (pairingStatusEl.textContent = (data && data.error) ? String(data.error) : 'Не удалось подтвердить код')
+      if (pairingStatusEl){
+        const L = (window.__loc && I18N[window.__loc]) || I18N.ru
+        const fallbackRu = 'Не удалось подтвердить код. Проверьте, что он введён без ошибок и не истёк (код живёт около 15 минут и одноразовый).'
+        const fallbackEn = 'Failed to confirm the code. Make sure it is typed correctly and has not expired (code is one-time and lives about 15 minutes).'
+        const base = (data && data.error) ? String(data.error) : (window.__loc==='en' ? fallbackEn : fallbackRu)
+        pairingStatusEl.textContent = base
+      }
       return
     }
     try{ await chrome.storage.local.set({ lastAcceptedPairCode: code, lastAcceptedAt: Date.now() }) }catch{}
