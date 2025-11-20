@@ -49,9 +49,23 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ ok: true, items: rows });
+    const body = JSON.stringify({ ok: true, items: rows });
+    return new NextResponse(body, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="devices.json"',
+      },
+    });
   } catch (error) {
     console.error('[admin.exports.devices] Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const body = JSON.stringify({ ok: false, error: 'Internal server error' });
+    return new NextResponse(body, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="devices-error.json"',
+      },
+    });
   }
 }

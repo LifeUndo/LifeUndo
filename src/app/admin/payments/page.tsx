@@ -111,11 +111,11 @@ export default function AdminPaymentsPage() {
               <th className="px-2 py-2 text-left">ID</th>
               <th className="px-2 py-2 text-left">Order ID</th>
               <th className="px-2 py-2 text-left">Email</th>
-              <th className="px-2 py-2 text-left">Plan</th>
-              <th className="px-2 py-2 text-left">Amount</th>
-              <th className="px-2 py-2 text-left">Currency</th>
-              <th className="px-2 py-2 text-left">Status</th>
-              <th className="px-2 py-2 text-left">Created</th>
+              <th className="px-2 py-2 text-left">План</th>
+              <th className="px-2 py-2 text-left">Сумма</th>
+              <th className="px-2 py-2 text-left">Валюта</th>
+              <th className="px-2 py-2 text-left">Статус</th>
+              <th className="px-2 py-2 text-left">Создано</th>
             </tr>
           </thead>
           <tbody>

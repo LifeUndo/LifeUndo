@@ -115,11 +115,11 @@ export default function AdminLicensesPage() {
             <tr>
               <th className="px-2 py-2 text-left">ID</th>
               <th className="px-2 py-2 text-left">Email</th>
-              <th className="px-2 py-2 text-left">Level</th>
-              <th className="px-2 py-2 text-left">Plan</th>
-              <th className="px-2 py-2 text-left">Expires</th>
-              <th className="px-2 py-2 text-left">Seats</th>
-              <th className="px-2 py-2 text-left">Actions</th>
+              <th className="px-2 py-2 text-left">Уровень</th>
+              <th className="px-2 py-2 text-left">План</th>
+              <th className="px-2 py-2 text-left">Истекает</th>
+              <th className="px-2 py-2 text-left">Мест</th>
+              <th className="px-2 py-2 text-left">Действия</th>
             </tr>
           </thead>
           <tbody>

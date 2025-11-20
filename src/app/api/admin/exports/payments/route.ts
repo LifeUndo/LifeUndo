@@ -61,9 +61,23 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ ok: true, items: mapped });
+    const body = JSON.stringify({ ok: true, items: mapped });
+    return new NextResponse(body, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="payments.json"',
+      },
+    });
   } catch (error) {
     console.error('[admin.exports.payments] Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const body = JSON.stringify({ ok: false, error: 'Internal server error' });
+    return new NextResponse(body, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="payments-error.json"',
+      },
+    });
   }
 }
