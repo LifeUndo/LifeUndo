@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/client';
-import { licenses } from '@/db/schema';
+import { sql } from 'drizzle-orm';
 
 function isAdmin(request: NextRequest): boolean {
   const header = request.headers.get('X-Admin-Token');
@@ -20,19 +20,17 @@ export async function GET(request: NextRequest) {
     const format = (searchParams.get('format') || 'json').toLowerCase();
     const limit = Math.min(parseInt(searchParams.get('limit') || '5000', 10) || 5000, 20000);
 
-    const rows = await db.query.licenses.findMany({
-      limit,
-      orderBy: (t: any, helpers: any) => [helpers.asc(t.id)],
-    });
+    const result = await db.execute(sql`select * from licenses order by id asc limit ${limit}`);
+    const rows = result.rows as any[];
 
-    const mapped = (rows as any[]).map((r) => ({
+    const mapped = rows.map((r) => ({
       id: r.id,
-      user_email: r.user_email,
-      level: r.level,
-      plan: r.plan,
-      expires_at: r.expires_at,
-      seats: r.seats,
-      created_at: r.created_at,
+      user_email: r.user_email ?? r.email ?? null,
+      level: r.level ?? null,
+      plan: r.plan ?? null,
+      expires_at: r.expires_at ?? null,
+      seats: r.seats ?? null,
+      created_at: r.created_at ?? null,
     }));
 
     if (format === 'csv') {
