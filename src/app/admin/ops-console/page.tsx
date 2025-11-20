@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function AdminOpsConsolePage() {
   const [hasToken, setHasToken] = useState(false);
-  const [frameKey, setFrameKey] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -33,33 +32,12 @@ export default function AdminOpsConsolePage() {
       </div>
 
       <div className="rounded-lg border border-slate-800 bg-slate-900/60 overflow-hidden">
-        <div className="border-b border-slate-800 px-3 py-2 text-[11px] text-slate-400 flex items-center justify-between gap-2">
-          <span className="truncate">
-            Встроенный web-клиент по адресу <code>/device</code>. Можно быстро проверить
-            генерацию и подтверждение коротких кодов, не выходя из админки.
-          </span>
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              className="px-2 py-1 rounded-md bg-slate-800 text-[10px] text-slate-200 hover:bg-slate-700"
-              onClick={() => {
-                if (typeof window !== "undefined") window.open("/device", "_blank");
-              }}
-            >
-              Открыть в новой вкладке
-            </button>
-            <button
-              type="button"
-              className="px-2 py-1 rounded-md bg-slate-800 text-[10px] text-slate-200 hover:bg-slate-700"
-              onClick={() => setFrameKey((k) => k + 1)}
-            >
-              Перезагрузить
-            </button>
-          </div>
+        <div className="border-b border-slate-800 px-3 py-2 text-[11px] text-slate-400">
+          Встроенный web-клиент по адресу <code>/device</code>. Всё, что вы делаете здесь,
+          происходит внутри той же вкладки админ-панели.
         </div>
         <div className="w-full bg-slate-950 min-h-[640px]">
           <iframe
-            key={frameKey}
             src="/device"
             className="w-full h-[640px] border-0"
             title="Device web client"
