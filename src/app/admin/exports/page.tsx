@@ -64,16 +64,18 @@ export default function AdminExportsPage() {
           </p>
           <div className="flex gap-2 flex-wrap">
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-indigo-600 text-[11px] text-slate-50 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("devices", "csv")}
             >
-              CSV (скоро)
+              CSV
             </button>
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-200 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("devices", "json")}
             >
-              JSON (скоро)
+              JSON
             </button>
           </div>
         </div>
@@ -86,24 +88,27 @@ export default function AdminExportsPage() {
           </p>
           <div className="flex gap-2 flex-wrap">
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-indigo-600 text-[11px] text-slate-50 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("payments", "csv")}
             >
-              CSV (скоро)
+              CSV
             </button>
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-200 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("payments", "json")}
             >
-              JSON (скоро)
+              JSON
             </button>
           </div>
         </div>
       </div>
 
       <p className="text-[11px] text-slate-500 max-w-xl">
-        Когда подключим реальные эндпоинты экспорта, здесь появятся активные кнопки,
-        параметры фильтрации (диапазон дат, план, статус) и счётчики строк.
+        Для экспорта используется тот же <code>X-Admin-Token</code>, что и в других
+        разделах админки: он подставляется в параметр <code>?token=</code>. Позже здесь
+        можно добавить фильтры (диапазон дат, план, статус) и счётчики строк.
       </p>
     </div>
   );
