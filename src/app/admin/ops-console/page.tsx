@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function AdminOpsConsolePage() {
   const [hasToken, setHasToken] = useState(false);
+  const [frameKey, setFrameKey] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -32,24 +33,45 @@ export default function AdminOpsConsolePage() {
       </div>
 
       <div className="rounded-lg border border-slate-800 bg-slate-900/60 overflow-hidden">
-        <div className="border-b border-slate-800 px-3 py-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>
-            Встроенный web-клиент по адресу <code>/device</code>.
+        <div className="border-b border-slate-800 px-3 py-2 text-[11px] text-slate-400 flex items-center justify-between gap-2">
+          <span className="truncate">
+            Встроенный web-клиент по адресу <code>/device</code>. Можно быстро проверить
+            генерацию и подтверждение коротких кодов, не выходя из админки.
           </span>
-          {!hasToken && (
-            <span className="text-[10px] text-amber-400">
-              Для админских API убедитесь, что вы вошли через /admin/login и задали
-              X-Admin-Token.
-            </span>
-          )}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              className="px-2 py-1 rounded-md bg-slate-800 text-[10px] text-slate-200 hover:bg-slate-700"
+              onClick={() => {
+                if (typeof window !== "undefined") window.open("/device", "_blank");
+              }}
+            >
+              Открыть в новой вкладке
+            </button>
+            <button
+              type="button"
+              className="px-2 py-1 rounded-md bg-slate-800 text-[10px] text-slate-200 hover:bg-slate-700"
+              onClick={() => setFrameKey((k) => k + 1)}
+            >
+              Перезагрузить
+            </button>
+          </div>
         </div>
-        <div className="aspect-[16/9] w-full bg-slate-950">
+        <div className="w-full bg-slate-950 min-h-[640px]">
           <iframe
+            key={frameKey}
             src="/device"
-            className="w-full h-full border-0"
+            className="w-full h-[640px] border-0"
             title="Device web client"
           />
         </div>
+        {!hasToken && (
+          <div className="border-t border-slate-800 px-3 py-2 text-[10px] text-amber-400">
+            Для вызовов админских API убедитесь, что вы вошли через <code>/admin/login</code>
+            и задали <code>X-Admin-Token</code>. Сам web-клиент устройства может работать и
+            без него.
+          </div>
+        )}
       </div>
     </div>
   );
