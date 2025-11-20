@@ -71,7 +71,8 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('[admin.exports.payments] Error:', error);
-    const body = JSON.stringify({ ok: false, error: 'Internal server error' });
+    const message = error instanceof Error ? error.message : String(error);
+    const body = JSON.stringify({ ok: false, error: message });
     return new NextResponse(body, {
       status: 200,
       headers: {
