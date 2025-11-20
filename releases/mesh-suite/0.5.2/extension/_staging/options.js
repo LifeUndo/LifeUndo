@@ -345,8 +345,8 @@ const I18N = {
       appsDesktopWin:'Windows — в разработке',
       appsDesktopMac:'macOS — в разработке',
       devIntro1:'Свяжите этот браузер с ПК и телефоном через короткий код или QR — как в мессенджерах.',
-      devIntro2:'1) На устройстве‑ИСТОЧНИКЕ нажмите «Показать код» и откройте QR. 2) На устройстве‑ПРИЁМНИКЕ отсканируйте QR или введите код вручную. 3) После подтверждения вкладки и другие события смогут ходить между устройствами.',
-      devIntro3:'Код действует ограниченное время и привязан к вашей подписке. Всё происходит через зашифрованный канал.',
+      devIntro2:'1) На этом устройстве нажмите «Показать код». 2) На втором устройстве (веб-клиент на getlifeundo.com/device или другое расширение) введите короткий код в поле «Подтвердить код». 3) После подтверждения вкладки и другие события смогут ходить между устройствами.',
+      devIntro3:'Код действует ограниченное время, одноразовый и привязан к вашей подписке. После успешной связки он становится недействительным.',
       devIntro4:'Схема: ПК ⇄ QR/код ⇄ Телефон',
       devThisDeviceLabel:'Это устройство:',
       devStatusLabel:'Статус:',
@@ -357,11 +357,11 @@ const I18N = {
       devTabsTitle:'Вкладки',
       devConnLabel:'Соединение:',
       devPairingTitle:'Связать с другим устройством',
-      devPairingSub:'Откройте раздел «Ваши устройства» на втором устройстве и выберите «Подтвердить код».',
-      devPairingCodeLabel:'Код для этого устройства (введите на втором устройстве):',
+      devPairingSub:'На втором устройстве откройте раздел «Ваши устройства» (или веб-клиент getlifeundo.com/device) и введите этот код один раз в поле «Подтвердить код».',
+      devPairingCodeLabel:'Код для этого устройства (введите на втором устройстве один раз):',
       devPairingAcceptLabel:'У меня уже есть код другого устройства:',
-      devPairingStatusReady:'Код сгенерирован. Введите его на втором устройстве.',
-      devPairingStatusLinked:'Устройства связаны (мок-режим, без реального сервера).',
+      devPairingStatusReady:'Код сгенерирован. Введите его на втором устройстве в течение 15 минут. После успешной связки код больше не работает.',
+      devPairingStatusLinked:'Устройства связаны. Этот код уже использован и больше не действителен.',
       devAdvancedTitle:'Режим разработчика (offer/answer)',
       devAdvancedNote:'Низкоуровневый режим для отладки WebRTC‑соединения между устройствами. В обычной жизни используйте код/QR выше.',
       aboutSocialsTitle:'Соцсети',
@@ -446,8 +446,8 @@ const I18N = {
       appsDesktopWin:'Windows — in development',
       appsDesktopMac:'macOS — in development',
       devIntro1:'Link this browser with your other devices (PC, laptop, phone) using a short code or QR, similar to messengers.',
-      devIntro2:'Steps: 1) On the SOURCE device click “Show code” and open the QR. 2) On the RECEIVER device scan the QR or type the code. 3) After confirmation tabs and other events can flow between devices.',
-      devIntro3:'The code is time-limited and tied to your subscription. All communication is encrypted.',
+      devIntro2:'1) On this device click “Show code”. 2) On the second device (web client at getlifeundo.com/device or another extension) type the short code into “Confirm code”. 3) After confirmation tabs and other events can flow between devices.',
+      devIntro3:'The code is time-limited, one-time and tied to your subscription. After a successful link it becomes invalid.',
       devIntro4:'Scheme: PC ⇄ QR/code ⇄ Phone',
       devThisDeviceLabel:'This device:',
       devStatusLabel:'Status:',
@@ -458,11 +458,11 @@ const I18N = {
       devTabsTitle:'Tabs',
       devConnLabel:'Connection:',
       devPairingTitle:'Link with another device',
-      devPairingSub:'Open “Your devices” on the second device and choose “Confirm code”.',
-      devPairingCodeLabel:'Code for this device (enter it on the second device):',
+      devPairingSub:'On the second device open “Your devices” (or the web client at getlifeundo.com/device) and enter this code once into “Confirm code”.',
+      devPairingCodeLabel:'Code for this device (enter it on the second device once):',
       devPairingAcceptLabel:'I already have a code from another device:',
-      devPairingStatusReady:'Code generated. Enter it on the second device.',
-      devPairingStatusLinked:'Devices are linked (mock mode, no real server yet).',
+      devPairingStatusReady:'Code generated. Enter it on the second device within 15 minutes. After a successful link the code no longer works.',
+      devPairingStatusLinked:'Devices are linked. This code is already used and no longer valid.',
       devAdvancedTitle:'Developer mode (offer/answer)',
       devAdvancedNote:'Low-level mode for debugging WebRTC between devices. In normal life, use the code/QR above.',
       aboutSocialsTitle:'Socials',
@@ -1222,6 +1222,9 @@ btnPairStart && btnPairStart.addEventListener('click', async ()=>{
     })
     const data = await res.json().catch(()=>null)
     if (!data || !data.ok || !data.shortCode){
+      pairingCodeBlock.style.display = 'block'
+      pairingCodeEl.textContent = '— — — —'
+      pairingStatusEl && (pairingStatusEl.textContent = (data && data.error) ? String(data.error) : 'Ошибка создания кода')
       return
     }
     const code = String(data.shortCode||'')
@@ -1245,6 +1248,7 @@ btnPairAccept && btnPairAccept.addEventListener('click', async ()=>{
     })
     const data = await res.json().catch(()=>null)
     if (!data || !data.ok){
+      pairingStatusEl && (pairingStatusEl.textContent = (data && data.error) ? String(data.error) : 'Не удалось подтвердить код')
       return
     }
     try{ await chrome.storage.local.set({ lastAcceptedPairCode: code, lastAcceptedAt: Date.now() }) }catch{}
@@ -1252,3 +1256,20 @@ btnPairAccept && btnPairAccept.addEventListener('click', async ()=>{
     updateDevicesMeta(deviceId, CURRENT_LICENSE)
   }catch{}
 })
+
+// Восстановить последний сгенерированный код пейринга при открытии настроек (если он ещё актуален)
+;(async ()=>{
+  try{
+    if (!pairingCodeEl || !pairingCodeBlock) return
+    const r = await chrome.storage.local.get(['lastPairCode','lastPairAt']).catch(()=>({}))
+    const code = r && r.lastPairCode ? String(r.lastPairCode) : ''
+    const ts = typeof r.lastPairAt === 'number' ? r.lastPairAt : 0
+    const ageMs = Date.now() - ts
+    const ttlMs = 15*60*1000 // 15 минут отображения в UI
+    if (code && ageMs>=0 && ageMs <= ttlMs){
+      pairingCodeEl.textContent = code
+      pairingCodeBlock.style.display = 'block'
+      setPairingStatus('ready')
+    }
+  }catch{}
+})()

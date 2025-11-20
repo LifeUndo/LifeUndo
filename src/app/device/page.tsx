@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 interface LicenseStatus {
@@ -102,7 +103,16 @@ export default function DeviceClientPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 px-4 py-8 flex flex-col items-center">
       <div className="w-full max-w-3xl space-y-6">
-        <h1 className="text-2xl font-semibold tracking-tight">Устройство (Web-клиент)</h1>
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/admin"
+            className="inline-flex items-center text-[11px] text-slate-400 hover:text-slate-100 transition-colors"
+          >
+            <span className="mr-1">←</span>
+            <span>В админ-панель</span>
+          </Link>
+          <h1 className="text-2xl font-semibold tracking-tight">Устройство (Web-клиент)</h1>
+        </div>
         <p className="text-sm text-slate-400">
           Это браузерный клиент устройства. Он использует тот же backend, что и расширение: лицензии, пейринг,
           короткие коды. Можно застейджить и отладить Mesh без нативного клиента.
