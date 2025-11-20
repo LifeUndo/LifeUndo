@@ -1,6 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function AdminExportsPage() {
+  const [adminToken, setAdminToken] = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem("adminToken") || "";
+    if (stored) setAdminToken(stored);
+  }, []);
+
+  function openExport(path: string, format: "csv" | "json") {
+    if (!adminToken || typeof window === "undefined") return;
+    const url = `/api/admin/exports/${path}?format=${format}&token=${encodeURIComponent(adminToken)}`;
+    window.open(url, "_blank");
+  }
+
+  const canExport = !!adminToken;
+
   return (
     <div className="space-y-6 text-xs">
       <div className="space-y-1">
@@ -22,16 +40,18 @@ export default function AdminExportsPage() {
           </p>
           <div className="flex gap-2 flex-wrap">
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-indigo-600 text-[11px] text-slate-50 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("licenses", "csv")}
             >
-              CSV (скоро)
+              CSV
             </button>
             <button
-              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-400 cursor-not-allowed"
-              disabled
+              className="px-3 h-8 rounded-md bg-slate-800 text-[11px] text-slate-200 disabled:opacity-50"
+              disabled={!canExport}
+              onClick={() => openExport("licenses", "json")}
             >
-              JSON (скоро)
+              JSON
             </button>
           </div>
         </div>

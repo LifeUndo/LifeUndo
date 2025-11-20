@@ -61,10 +61,7 @@ export async function POST(request: NextRequest) {
     if (action === 'disable') {
       const [row] = await db
         .update(devices)
-        .set({
-          label: (row: any) => row.label || null,
-          last_seen_at: now,
-        } as any)
+        .set({ last_seen_at: now } as any)
         .where(eq(devices.id, id))
         .returning();
       return NextResponse.json({ ok: true, device: row });
@@ -77,6 +74,21 @@ export async function POST(request: NextRequest) {
         .where(eq(devices.id, id))
         .returning();
       return NextResponse.json({ ok: true, device: row });
+    }
+
+    if (action === 'setLabel') {
+      const label = typeof body.label === 'string' ? body.label.trim() : '';
+      const [row] = await db
+        .update(devices)
+        .set({ label: label || null } as any)
+        .where(eq(devices.id, id))
+        .returning();
+      return NextResponse.json({ ok: true, device: row });
+    }
+
+    if (action === 'delete') {
+      await db.delete(devices).where(eq(devices.id, id));
+      return NextResponse.json({ ok: true });
     }
 
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 });

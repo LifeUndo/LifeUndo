@@ -38,6 +38,20 @@ export default function AdminDevicesPage() {
     }
   }
 
+  async function mutate(id: number, action: 'disable' | 'enable' | 'setLabel' | 'delete', extra?: { label?: string }) {
+    if (!adminToken) return;
+    const body: any = { id, action };
+    if (action === 'setLabel' && typeof extra?.label === 'string') {
+      body.label = extra.label;
+    }
+    const res = await fetch('/api/admin/devices', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Token': adminToken },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) load();
+  }
+
   useEffect(() => {
     const stored = window.localStorage.getItem('adminToken') || '';
     if (stored) setAdminToken(stored);
@@ -100,6 +114,7 @@ export default function AdminDevicesPage() {
               <th className="px-2 py-2 text-left">Label</th>
               <th className="px-2 py-2 text-left">Created</th>
               <th className="px-2 py-2 text-left">Last seen</th>
+              <th className="px-2 py-2 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +127,39 @@ export default function AdminDevicesPage() {
                 <td className="px-2 py-1">{it.label || '-'}</td>
                 <td className="px-2 py-1">{it.created_at}</td>
                 <td className="px-2 py-1">{it.last_seen_at || '-'}</td>
+                <td className="px-2 py-1 space-x-1">
+                  <button
+                    onClick={() => mutate(it.id, 'disable')}
+                    className="px-2 py-1 rounded bg-slate-800 text-[11px] hover:bg-slate-700"
+                  >
+                    Отключить
+                  </button>
+                  <button
+                    onClick={() => mutate(it.id, 'enable')}
+                    className="px-2 py-1 rounded bg-emerald-700 text-[11px] hover:bg-emerald-600"
+                  >
+                    Включить
+                  </button>
+                  <button
+                    onClick={() => {
+                      const next = window.prompt('Новая метка устройства', it.label || '') || '';
+                      mutate(it.id, 'setLabel', { label: next });
+                    }}
+                    className="px-2 py-1 rounded bg-sky-700 text-[11px] hover:bg-sky-600"
+                  >
+                    Метка
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Удалить устройство из списка? Это не сотрёт данные на стороне клиента.')) {
+                        mutate(it.id, 'delete');
+                      }
+                    }}
+                    className="px-2 py-1 rounded bg-red-700 text-[11px] hover:bg-red-600"
+                  >
+                    Удалить
+                  </button>
+                </td>
               </tr>
             ))}
             {!items.length && (
