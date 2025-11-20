@@ -11,6 +11,14 @@ function requireAdmin(request: NextRequest) {
   }
 }
 
+async function logAdminEvent(values: typeof admin_events.$inferInsert) {
+  try {
+    await db.insert(admin_events).values(values as any);
+  } catch (error) {
+    console.error('[admin.devices.logEvent] Failed to insert admin_event:', error);
+  }
+}
+
 export async function GET(request: NextRequest) {
   try {
     requireAdmin(request);
@@ -65,7 +73,7 @@ export async function POST(request: NextRequest) {
         .where(eq(devices.id, id))
         .returning();
 
-      await db.insert(admin_events).values({
+      await logAdminEvent({
         actor: 'admin-panel',
         section: 'devices',
         action: 'disable',
@@ -84,7 +92,7 @@ export async function POST(request: NextRequest) {
         .where(eq(devices.id, id))
         .returning();
 
-      await db.insert(admin_events).values({
+      await logAdminEvent({
         actor: 'admin-panel',
         section: 'devices',
         action: 'enable',
@@ -104,7 +112,7 @@ export async function POST(request: NextRequest) {
         .where(eq(devices.id, id))
         .returning();
 
-      await db.insert(admin_events).values({
+      await logAdminEvent({
         actor: 'admin-panel',
         section: 'devices',
         action: 'setLabel',
@@ -122,7 +130,7 @@ export async function POST(request: NextRequest) {
         .set({ label: '[удалено админом]' } as any)
         .where(eq(devices.id, id));
 
-      await db.insert(admin_events).values({
+      await logAdminEvent({
         actor: 'admin-panel',
         section: 'devices',
         action: 'softDelete',

@@ -18,10 +18,12 @@ export default function AdminDevicesPage() {
   const [kind, setKind] = useState('');
   const [loading, setLoading] = useState(false);
   const [adminToken, setAdminToken] = useState('');
+  const [actionStatus, setActionStatus] = useState<string | null>(null);
 
   async function load() {
     if (!adminToken) return;
     setLoading(true);
+    setActionStatus(null);
     try {
       const qs = new URLSearchParams();
       if (email) qs.set('email', email);
@@ -40,16 +42,33 @@ export default function AdminDevicesPage() {
 
   async function mutate(id: number, action: 'disable' | 'enable' | 'setLabel' | 'delete', extra?: { label?: string }) {
     if (!adminToken) return;
+    setActionStatus(null);
     const body: any = { id, action };
     if (action === 'setLabel' && typeof extra?.label === 'string') {
       body.label = extra.label;
     }
-    const res = await fetch('/api/admin/devices', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Admin-Token': adminToken },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) load();
+    try {
+      const res = await fetch('/api/admin/devices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Token': adminToken },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data || data.error) {
+        setActionStatus(
+          `Ошибка действия "${action}": ${
+            data && data.error ? String(data.error) : `HTTP ${res.status}`
+          }`,
+        );
+        return;
+      }
+
+      setActionStatus('Действие применено, список обновлён.');
+      await load();
+    } catch (e: any) {
+      setActionStatus(`Ошибка сети при действии "${action}": ${String(e?.message || e)}`);
+    }
   }
 
   useEffect(() => {
@@ -112,6 +131,12 @@ export default function AdminDevicesPage() {
           {loading ? 'Загрузка…' : 'Обновить'}
         </button>
       </div>
+
+      {actionStatus && (
+        <div className="text-[11px] text-slate-300 bg-slate-900/70 border border-slate-800 rounded-md px-3 py-2">
+          {actionStatus}
+        </div>
+      )}
 
       <div className="border border-slate-800 rounded-lg overflow-hidden text-xs">
         <table className="w-full border-collapse">
