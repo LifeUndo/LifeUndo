@@ -19,7 +19,7 @@ const nextConfig = {
       "object-src 'none';",
       "base-uri 'self';",
       "form-action 'self' https://pay.freekassa.net https://pay.fk.money;",
-      "frame-ancestors 'none';",
+      "frame-ancestors 'self';",
       "upgrade-insecure-requests;"
     ].join(" ");
 
