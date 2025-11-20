@@ -108,3 +108,15 @@ export const email_change_requests = pgTable('email_change_requests', {
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow()
 });
+
+// Admin events log
+export const admin_events = pgTable('admin_events', {
+  id: serial('id').primaryKey(),
+  actor: varchar('actor', { length: 255 }).notNull(),
+  section: varchar('section', { length: 50 }).notNull(), // licenses / devices / payments / etc
+  action: varchar('action', { length: 50 }).notNull(),
+  target_type: varchar('target_type', { length: 50 }).notNull(), // license / device / payment
+  target_id: integer('target_id').notNull(),
+  meta: jsonb('meta'),
+  created_at: timestamp('created_at').notNull().defaultNow(),
+});

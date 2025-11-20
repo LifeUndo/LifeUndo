@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/client';
-import { devices } from '@/db/schema';
+import { admin_events, devices } from '@/db/schema';
 import { and, eq, ilike } from 'drizzle-orm';
 
 function requireAdmin(request: NextRequest) {
@@ -64,6 +64,16 @@ export async function POST(request: NextRequest) {
         .set({ last_seen_at: now } as any)
         .where(eq(devices.id, id))
         .returning();
+
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'devices',
+        action: 'disable',
+        target_type: 'device',
+        target_id: id,
+        meta: { last_seen_at: now },
+      } as any);
+
       return NextResponse.json({ ok: true, device: row });
     }
 
@@ -73,6 +83,16 @@ export async function POST(request: NextRequest) {
         .set({ last_seen_at: now } as any)
         .where(eq(devices.id, id))
         .returning();
+
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'devices',
+        action: 'enable',
+        target_type: 'device',
+        target_id: id,
+        meta: { last_seen_at: now },
+      } as any);
+
       return NextResponse.json({ ok: true, device: row });
     }
 
@@ -83,6 +103,16 @@ export async function POST(request: NextRequest) {
         .set({ label: label || null } as any)
         .where(eq(devices.id, id))
         .returning();
+
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'devices',
+        action: 'setLabel',
+        target_type: 'device',
+        target_id: id,
+        meta: { label: label || null },
+      } as any);
+
       return NextResponse.json({ ok: true, device: row });
     }
 
@@ -91,6 +121,16 @@ export async function POST(request: NextRequest) {
         .update(devices)
         .set({ label: '[удалено админом]' } as any)
         .where(eq(devices.id, id));
+
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'devices',
+        action: 'softDelete',
+        target_type: 'device',
+        target_id: id,
+        meta: { label: '[удалено админом]' },
+      } as any);
+
       return NextResponse.json({ ok: true });
     }
 

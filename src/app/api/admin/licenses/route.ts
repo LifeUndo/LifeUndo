@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/client';
-import { licenses } from '@/db/schema';
+import { admin_events, licenses } from '@/db/schema';
 import { and, eq, ilike } from 'drizzle-orm';
 
 function requireAdmin(request: NextRequest) {
@@ -64,6 +64,14 @@ export async function POST(request: NextRequest) {
         .set({ expires_at: now, updated_at: now })
         .where(eq(licenses.id, id))
         .returning();
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'licenses',
+        action: 'revoke',
+        target_type: 'license',
+        target_id: id,
+        meta: { expires_at: now },
+      } as any);
       return NextResponse.json({ ok: true, license: row });
     }
 
@@ -79,7 +87,14 @@ export async function POST(request: NextRequest) {
         .set(patch)
         .where(eq(licenses.id, id))
         .returning();
-
+      await db.insert(admin_events).values({
+        actor: 'admin-panel',
+        section: 'licenses',
+        action: 'update',
+        target_type: 'license',
+        target_id: id,
+        meta: patch,
+      } as any);
       return NextResponse.json({ ok: true, license: row });
     }
 
