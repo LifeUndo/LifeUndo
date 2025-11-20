@@ -63,6 +63,16 @@ export default function AdminDevicesPage() {
 
   return (
     <div className="space-y-4">
+      <div className="space-y-1 text-xs">
+        <h1 className="text-sm font-semibold tracking-tight text-slate-50">Устройства</h1>
+        <p className="text-slate-400 max-w-2xl">
+          Раздел для просмотра устройств, привязанных к лицензиям, и базовых операций
+          (отключение, включение, метки, удаление). Для API-запросов используется заголовок
+          <code className="mx-1">X-Admin-Token</code>, который вводится один раз на странице
+          входа <code>/admin/login</code> и сохраняется в браузере.
+        </p>
+      </div>
+
       <div className="flex items-end gap-3 flex-wrap">
         <div className="flex flex-col text-xs text-slate-400">
           <label className="mb-1">X-Admin-Token</label>
