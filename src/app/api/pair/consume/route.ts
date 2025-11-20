@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/db/client';
-import { devices, pairing_sessions, licenses } from '@/db/schema';
-import { eq, and, gt } from 'drizzle-orm';
+import { devices, pairing_sessions } from '@/db/schema';
+import { eq, and, gt, sql } from 'drizzle-orm';
 
 export async function POST(req: Request) {
   try {
@@ -75,17 +75,22 @@ export async function POST(req: Request) {
       .where(eq(pairing_sessions.id, session.id))
       .returning();
 
-    // Попробовать вытащить уровень лицензии по email инициатора
+    // Попробовать вытащить уровень лицензии по email инициатора.
+    // Используем сырой SQL, чтобы не зависеть от расхождений схемы (например, столбца seats) между кодом и прод-БД.
     let licenseLevel: string | null = null;
     if (initiator.user_email) {
-      const lic = await db.query.licenses.findFirst({
-        where: and(
-          eq(licenses.user_email, initiator.user_email),
-          gt(licenses.expires_at, now) as any
-        ),
-      });
-      if (lic) {
-        licenseLevel = lic.level;
+      try {
+        const rows = await db.execute(
+          sql`select level, expires_at from licenses where user_email = ${
+            initiator.user_email
+          } and (expires_at is null or expires_at > now()) order by expires_at desc limit 1` as any,
+        );
+        const lic: any = Array.isArray(rows) ? rows[0] : (rows as any).rows?.[0];
+        if (lic && typeof lic.level === 'string') {
+          licenseLevel = lic.level;
+        }
+      } catch (e) {
+        console.error('[pair.consume] Failed to load license level:', e);
       }
     }
 
