@@ -25,10 +25,20 @@ export async function GET(request: NextRequest) {
       orderBy: (t: any, helpers: any) => [helpers.asc(t.id)],
     });
 
+    const mapped = (rows as any[]).map((r) => ({
+      id: r.id,
+      user_email: r.user_email,
+      level: r.level,
+      plan: r.plan,
+      expires_at: r.expires_at,
+      seats: r.seats,
+      created_at: r.created_at,
+    }));
+
     if (format === 'csv') {
       const header = ['id', 'user_email', 'level', 'plan', 'expires_at', 'seats', 'created_at'];
       const lines = [header.join(',')];
-      for (const r of rows as any[]) {
+      for (const r of mapped as any[]) {
         lines.push([
           r.id,
           r.user_email,
@@ -49,7 +59,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ ok: true, items: rows });
+    return NextResponse.json({ ok: true, items: mapped });
   } catch (error) {
     console.error('[admin.exports.licenses] Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

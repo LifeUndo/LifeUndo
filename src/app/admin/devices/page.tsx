@@ -119,12 +119,12 @@ export default function AdminDevicesPage() {
             <tr>
               <th className="px-2 py-2 text-left">ID</th>
               <th className="px-2 py-2 text-left">Email</th>
-              <th className="px-2 py-2 text-left">Device ID</th>
-              <th className="px-2 py-2 text-left">Kind</th>
-              <th className="px-2 py-2 text-left">Label</th>
-              <th className="px-2 py-2 text-left">Created</th>
-              <th className="px-2 py-2 text-left">Last seen</th>
-              <th className="px-2 py-2 text-left">Actions</th>
+              <th className="px-2 py-2 text-left">ID устройства</th>
+              <th className="px-2 py-2 text-left">Тип устройства</th>
+              <th className="px-2 py-2 text-left">Метка (внутренняя)</th>
+              <th className="px-2 py-2 text-left">Создано</th>
+              <th className="px-2 py-2 text-left">Последняя активность</th>
+              <th className="px-2 py-2 text-left">Действия</th>
             </tr>
           </thead>
           <tbody>
@@ -137,7 +137,8 @@ export default function AdminDevicesPage() {
                 <td className="px-2 py-1">{it.label || '-'}</td>
                 <td className="px-2 py-1">{it.created_at}</td>
                 <td className="px-2 py-1">{it.last_seen_at || '-'}</td>
-                <td className="px-2 py-1 space-x-1">
+                <td className="px-2 py-1">
+                  <div className="flex flex-wrap items-center gap-1">
                   <button
                     onClick={() => mutate(it.id, 'disable')}
                     className="px-2 py-1 rounded bg-slate-800 text-[11px] hover:bg-slate-700"
@@ -152,7 +153,11 @@ export default function AdminDevicesPage() {
                   </button>
                   <button
                     onClick={() => {
-                      const next = window.prompt('Новая метка устройства', it.label || '') || '';
+                      const next =
+                        window.prompt(
+                          'Внутренняя метка устройства (например, "ПК дома" или "Телефон жены")',
+                          it.label || ''
+                        ) || '';
                       mutate(it.id, 'setLabel', { label: next });
                     }}
                     className="px-2 py-1 rounded bg-sky-700 text-[11px] hover:bg-sky-600"
@@ -161,7 +166,11 @@ export default function AdminDevicesPage() {
                   </button>
                   <button
                     onClick={() => {
-                      if (window.confirm('Удалить устройство из списка? Это не сотрёт данные на стороне клиента.')) {
+                      if (
+                        window.confirm(
+                          'Пометить устройство как удалённое в админке? Данные на стороне клиента это не сотрёт.'
+                        )
+                      ) {
                         mutate(it.id, 'delete');
                       }
                     }}
@@ -169,6 +178,7 @@ export default function AdminDevicesPage() {
                   >
                     Удалить
                   </button>
+                  </div>
                 </td>
               </tr>
             ))}

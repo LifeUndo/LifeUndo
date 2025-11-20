@@ -87,7 +87,10 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === 'delete') {
-      await db.delete(devices).where(eq(devices.id, id));
+      await db
+        .update(devices)
+        .set({ label: '[удалено админом]' } as any)
+        .where(eq(devices.id, id));
       return NextResponse.json({ ok: true });
     }
 
