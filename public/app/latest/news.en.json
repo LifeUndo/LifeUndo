@@ -4,11 +4,12 @@
     "platform": "Extensions/Desktop",
     "publishedAt": "2025-11-25T00:00:00Z",
     "items": [
-      "GOLD release of Windows desktop client 0.6.1.1 with refreshed UI.",
-      "New \"Apps\" section in Settings + QR code for the downloads page.",
-      "Updated footer (Site, GitHub, Privacy, Offer, GetLifeUndo22).",
-      "GOLD artifacts for extensions (Firefox XPI and Chrome ZIP) fixed for 0.6.1.1.",
-      "Downloads page updated to serve this release."
+      "GOLD release of Windows desktop client and extensions 0.6.1.1 as a unified licensing system.",
+      "TEAM plan: up to 5 devices per subscription and many (50+) keys for users/devices.",
+      "Clear license states (trial/TEAM) with device and key counters.",
+      "Preparation for B2B/B2G: unified activation/renewal model for organizations.",
+      "New TEAM subscription screen (PRO/VIP/TEAM + FreeKassa) and explanatory texts in Settings.",
+      "'Apps' section in Settings, QR code for downloads page, updated footer and /downloads UI."
     ],
     "links": {
       "firefox": "https://addons.mozilla.org/firefox/addon/getlifeundo/",
