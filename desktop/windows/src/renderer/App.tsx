@@ -227,20 +227,59 @@ function FooterGlass({ siteLabel, githubLabel, privacyLabel }:{ siteLabel:string
           <a className='hover:text-slate-100' href='https://getlifeundo.com/privacy/privacy' target='_blank'>{privacyLabel}</a>
           <a className='hover:text-slate-100' href='https://getlifeundo.com/privacy/legal/offer' target='_blank'>Оферта</a>
         </div>
-        <div className='text-slate-500'>© GetLifeUndo™</div>
+        <div className='text-slate-500'> GetLifeUndo</div>
       </div>
     </div>
   )
 }
 
-declare global { interface Window { api: { fkCreate: (plan:string, locale:string)=>Promise<any>, getVersion: ()=>Promise<string>, getLocale: ()=>Promise<'ru'|'en'>, setLocale: (locale:'ru'|'en')=>Promise<any>, getSettings: ()=>Promise<any>, setSettings:(patch:any)=>Promise<any>, listShots:(limit?:number)=>Promise<any>, listTextHistory:(limit?:number)=>Promise<any[]>, openPath:(p:string)=>Promise<any>, revealFile:(p:string)=>Promise<any>, openLogsDir: ()=>Promise<any>, exportLogsCopy: ()=>Promise<{ok:boolean, path?:string}>, pickDir: ()=>Promise<{ok:boolean, path?:string}>, openShotsDir: ()=>Promise<any>, getUserDataDir: ()=>Promise<string>, openUserDataDir: ()=>Promise<any>, onResetUI?: (cb:()=>void)=>void, licenseValidate?: ()=>Promise<{ok:boolean, raw:any, deviceId?:string}>, pairCreate?: ()=>Promise<any>, pairConsume?: (code:string)=>Promise<any>, meshGetPubkey?: ()=>Promise<{ok:boolean, deviceId?:string, publicKey?:string}>, meshListPeers?: ()=>Promise<{ok:boolean, peers:any[]}>, meshStartPair?: ()=>Promise<{ok:boolean, pin:string, uri:string, payload:any}>, meshAcceptPair?: (payload:any)=>Promise<{ok:boolean, peers:any[]}>, meshDiscoveryStart?: ()=>Promise<{ok:boolean}>, meshDiscoveryStop?: ()=>Promise<{ok:boolean}>, meshListDiscovered?: ()=>Promise<{ok:boolean, items:any[]}>, getOrgStatus?: ()=>Promise<{ok:boolean, org?:any, keys?:any[], error?:string}>, exportOrgKeysCsv?: ()=>Promise<{ok:boolean, path?:string, error?:string}> } } }
+declare global {
+  interface Window {
+    api: {
+      fkCreate: (plan:string, locale:string)=>Promise<any>
+      getVersion: ()=>Promise<string>
+      getLocale: ()=>Promise<'ru'|'en'>
+      setLocale: (locale:'ru'|'en')=>Promise<any>
+      getSettings: ()=>Promise<any>
+      setSettings:(patch:any)=>Promise<any>
+      listShots:(limit?:number)=>Promise<any>
+      listTextHistory:(limit?:number)=>Promise<any[]>
+      openPath:(p:string)=>Promise<any>
+      revealFile:(p:string)=>Promise<any>
+      openLogsDir: ()=>Promise<any>
+      exportLogsCopy: ()=>Promise<{ok:boolean, path?:string}>
+      pickDir: ()=>Promise<{ok:boolean, path?:string}>
+      openShotsDir: ()=>Promise<any>
+      getUserDataDir: ()=>Promise<string>
+      openUserDataDir: ()=>Promise<any>
+      onResetUI?: (cb:()=>void)=>void
+      licenseValidate?: ()=>Promise<{ok:boolean, raw:any, deviceId?:string}>
+      pairCreate?: ()=>Promise<any>
+      pairConsume?: (code:string)=>Promise<any>
+      meshGetPubkey?: ()=>Promise<{ok:boolean, deviceId?:string, publicKey?:string}>
+      meshListPeers?: ()=>Promise<{ok:boolean, peers:any[]}>
+      meshStartPair?: ()=>Promise<{ok:boolean, pin:string, uri:string, payload:any}>
+      meshAcceptPair?: (payload:any)=>Promise<{ok:boolean, peers:any[]}>
+      meshDiscoveryStart?: ()=>Promise<{ok:boolean}>
+      meshDiscoveryStop?: ()=>Promise<{ok:boolean}>
+      meshListDiscovered?: ()=>Promise<{ok:boolean, items:any[]}>
+      getOrgStatus?: ()=>Promise<{ok:boolean, org?:any, keys?:any[], error?:string}>
+      exportOrgKeysCsv?: ()=>Promise<{ok:boolean, path?:string, error?:string}>
+    }
+  }
+}
 
 function SegButton({ active, children, onClick }:{active:boolean, children:React.ReactNode, onClick:()=>void}){
   return (
-    <button onClick={(e)=>{ try{ e.preventDefault(); e.stopPropagation() }catch{}; onClick() }} className={[
-      'px-3 h-8 rounded-full text-xs leading-tight transition',
-      active ? 'bg-cyan-900/60 text-cyan-100 ring-1 ring-cyan-500' : 'bg-slate-800/60 text-slate-200 hover:bg-slate-700/60'
-    ].join(' ')}>{children}</button>
+    <button
+      onClick={(e)=>{ try{ e.preventDefault(); e.stopPropagation() }catch{}; onClick() }}
+      className={[
+        'px-2.5 h-8 rounded-full text-[11px] leading-tight transition ring-2 whitespace-nowrap',
+        active
+          ? 'bg-slate-900/60 text-cyan-50 ring-cyan-300 shadow-md shadow-cyan-900/40'
+          : 'bg-slate-900/40 text-slate-100 ring-slate-600 hover:bg-slate-800/70'
+      ].join(' ')}
+    >{children}</button>
   )
 }
 
@@ -497,13 +536,13 @@ export default function App(){
             {innerTab!=='menu' && (
               <div className='mt-3'>
                 <div className='rounded-2xl bg-slate-800/60 ring-1 ring-slate-700 p-4'>
-                  <div className='grid grid-cols-4 gap-2'>
+                  <div className='grid grid-cols-[0.8fr,1.4fr,1.4fr,0.8fr] gap-2'>
                     <SegButton active={innerTab==='general'} onClick={()=>setInnerTab('general')}>{L('general')}</SegButton>
                     <SegButton active={innerTab==='apps'} onClick={()=>setInnerTab('apps')}>{L('app')}</SegButton>
                     <SegButton active={innerTab==='subs'} onClick={()=>setInnerTab('subs')}>{L('subs')}</SegButton>
                     <SegButton active={innerTab==='about'} onClick={()=>setInnerTab('about')}>{L('about')}</SegButton>
                   </div>
-                  <div className='mt-3 grid grid-cols-4 gap-2'>
+                  <div className='mt-3 grid grid-cols-[0.8fr,1.4fr,1.4fr,0.8fr] gap-2'>
                     <SegButton active={innerTab==='faq'} onClick={()=>setInnerTab('faq')}>{L('faq')}</SegButton>
                     <SegButton active={innerTab==='timeline2'} onClick={()=>setInnerTab('timeline2')}>{L('timeline2')}</SegButton>
                     <SegButton active={innerTab==='devices'} onClick={()=>setInnerTab('devices')}>{L('devices')}</SegButton>
@@ -515,13 +554,13 @@ export default function App(){
             {innerTab==='menu' && (
               <div className='mt-3'>
                 <div className='rounded-2xl bg-slate-800/60 ring-1 ring-slate-700 p-4'>
-                  <div className='grid grid-cols-4 gap-2'>
+                  <div className='grid grid-cols-[0.8fr,1.4fr,1.4fr,0.8fr] gap-2'>
                     <SegButton active={false} onClick={()=> setInnerTab('general') }>{L('general')}</SegButton>
                     <SegButton active={false} onClick={()=> setInnerTab('apps') }>{L('app')}</SegButton>
                     <SegButton active={false} onClick={()=> setInnerTab('subs') }>{L('subs')}</SegButton>
                     <SegButton active={false} onClick={()=> setInnerTab('about') }>{L('about')}</SegButton>
                   </div>
-                  <div className='mt-3 grid grid-cols-4 gap-2'>
+                  <div className='mt-3 grid grid-cols-[0.8fr,1.4fr,1.4fr,0.8fr] gap-2'>
                     <SegButton active={false} onClick={()=> setInnerTab('faq') }>{L('faq')}</SegButton>
                     <SegButton active={false} onClick={()=> setInnerTab('timeline2') }>{L('timeline2')}</SegButton>
                     <SegButton active={false} onClick={()=> setInnerTab('devices') }>{L('devices')}</SegButton>
