@@ -84,8 +84,8 @@ export default function OfferClient() {
               </h2>
               <p className="text-gray-300 mb-4">
                 {locale === 'en' 
-                  ? '5.1. Software works locally; no telemetry is conducted. Personal data transmitted during payment is processed by the payment provider.'
-                  : '5.1. ПО работает локально; телеметрия не ведётся. Персональные данные, передаваемые при оплате, обрабатываются провайдером платежей.'
+                  ? '5.1. The Software works locally; no telemetry is conducted, and timeline content or browsing history are not uploaded to the server. On the backend (getlifeundo.com) we process account e-mail, device identifiers and license / 7-day trial status, as well as minimal payment data required by the payment provider.'
+                  : '5.1. ПО работает локально; телеметрия не ведётся, контент таймлайна и история браузера не передаются на сервер. На сервере (getlifeundo.com) обрабатываются учётные данные (e-mail), идентификаторы устройств и статус лицензии/7‑дневного пробного периода, а также минимальные платёжные данные, необходимые платёжным провайдером.'
                 }
               </p>
               <p className="text-gray-300 mb-4">

@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/db/client';
 import { devices, licenses } from '@/db/schema';
-import { eq, and, gt } from 'drizzle-orm';
+import { eq, and, gt, desc } from 'drizzle-orm';
+
+const TRIAL_DAYS = 7;
 
 export async function POST(req: Request) {
   try {
@@ -25,10 +27,14 @@ export async function POST(req: Request) {
       trialStart: null as string | null,
       trialEnd: null as string | null,
       deviceStatus: 'active' as const,
+      devicesUsed: 0,
+      deviceLimit: 5,
     };
 
     // Зарегистрировать/обновить устройство, если БД сконфигурирована
     let userEmail: string | null = email || null;
+
+    let devicesUsed = 0;
 
     try {
       let deviceRow = await db.query.devices.findFirst({
@@ -62,6 +68,14 @@ export async function POST(req: Request) {
       if (!userEmail && deviceRow.user_email) {
         userEmail = deviceRow.user_email;
       }
+
+      // посчитаем количество устройств, привязанных к этому email
+      if (userEmail) {
+        const userDevices = await db.query.devices.findMany({
+          where: eq(devices.user_email, userEmail),
+        });
+        devicesUsed = (userDevices || []).length;
+      }
     } catch (e) {
       // Если DATABASE_URL не задана или другая ошибка — просто вернём базовый ответ
       console.warn('[license.validate] DB unavailable, returning base response');
@@ -70,28 +84,111 @@ export async function POST(req: Request) {
 
     // Если есть email — попробовать найти действующую лицензию
     if (!userEmail) {
-      return NextResponse.json(base);
+      return NextResponse.json({
+        ...base,
+        devicesUsed,
+      });
     }
 
-    const lic = await db.query.licenses.findFirst({
+    // 1) ищем любую актуальную лицензию (trial или платную)
+    const existingLic = await db.query.licenses.findFirst({
       where: and(
         eq(licenses.user_email, userEmail),
         gt(licenses.expires_at, now) as any
       ),
     });
 
-    if (!lic) {
-      return NextResponse.json(base);
+    // 2) ищем последний когда-либо созданный триал для этого email
+    const lastTrial = await db.query.licenses.findFirst({
+      where: and(
+        eq(licenses.user_email, userEmail),
+        eq(licenses.plan, 'trial-7d'),
+      ),
+      orderBy: [desc(licenses.created_at as any)],
+    } as any);
+
+    // Обновим статус устройства по лимиту
+    const deviceLimit = 5;
+    const deviceStatus = devicesUsed > deviceLimit ? 'limit_exceeded' as const : 'active' as const;
+
+    // Если активной лицензии нет и триала ещё никогда не было — создаём первый централизованный 7-дневный триал
+    if (!existingLic && !lastTrial) {
+      const trialStart = now;
+      const trialEnd = new Date(trialStart.getTime() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
+
+      const [trialLic] = await db
+        .insert(licenses)
+        .values({
+          user_email: userEmail,
+          level: 'free',
+          plan: 'trial-7d',
+          expires_at: trialEnd,
+          seats: 1,
+          activated_at: trialStart,
+        })
+        .returning();
+
+      return NextResponse.json({
+        ok: true,
+        status: 'trial' as const,
+        tier: 'free',
+        trialStart: (trialLic.activated_at || trialStart).toISOString(),
+        trialEnd: (trialLic.expires_at || trialEnd).toISOString(),
+        deviceStatus,
+        devicesUsed,
+        deviceLimit,
+      });
     }
 
-    // Есть действующая лицензия
+    // Если есть активная лицензия — различаем платную и триальную
+    if (existingLic) {
+      const isTrial = existingLic.plan === 'trial-7d' || existingLic.level === 'free';
+
+      if (isTrial) {
+        return NextResponse.json({
+          ok: true,
+          status: 'trial' as const,
+          tier: 'free',
+          trialStart: (existingLic.activated_at || existingLic.created_at || now).toISOString(),
+          trialEnd: (existingLic.expires_at || null) ? existingLic.expires_at!.toISOString() : null,
+          deviceStatus,
+          devicesUsed,
+          deviceLimit,
+        });
+      }
+
+      const resp = {
+        ok: true,
+        status: 'active' as const,
+        tier: existingLic.level || 'pro',
+        trialStart: null as string | null,
+        trialEnd: (existingLic.expires_at || null) ? existingLic.expires_at!.toISOString() : null,
+        deviceStatus,
+        devicesUsed,
+        deviceLimit,
+      };
+
+      return NextResponse.json(resp);
+    }
+
+    // Активной лицензии уже нет, зато есть исторический триал — не создаём новый, а честно возвращаем истёкший триал
+    if (lastTrial) {
+      return NextResponse.json({
+        ok: true,
+        status: 'trial' as const,
+        tier: 'free',
+        trialStart: (lastTrial.activated_at || lastTrial.created_at || now).toISOString(),
+        trialEnd: (lastTrial.expires_at || null) ? lastTrial.expires_at!.toISOString() : null,
+        deviceStatus,
+        devicesUsed,
+        deviceLimit,
+      });
+    }
+
+    // На всякий случай —fallback к базовой модели с устройствами
     const resp = {
-      ok: true,
-      status: 'active' as const,
-      tier: lic.level || 'pro',
-      trialStart: null as string | null,
-      trialEnd: (lic.expires_at || null) ? lic.expires_at!.toISOString() : null,
-      deviceStatus: 'active' as const,
+      ...base,
+      devicesUsed,
     };
 
     return NextResponse.json(resp);

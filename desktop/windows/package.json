@@ -1,0 +1,79 @@
+{
+  "name": "lifeundo-desktop",
+  "version": "0.6.1",
+  "private": true,
+  "main": "dist/main/index.js",
+  "scripts": {
+    "dev": "cross-env TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/build-main.ts && concurrently -k \"cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\" \"vite\"",
+    "build": "vite build && cross-env TS_NODE_TRANSPILE_ONLY=true ts-node ./scripts/build-main.ts",
+    "dist": "npm run build && electron-builder --win nsis",
+    "start": "electron .",
+    "make:icon": "ts-node ./scripts/make-icon.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/simple-peer": "^9.11.9",
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3",
+    "esbuild": "^0.23.0",
+    "png-to-ico": "^2.1.8",
+    "postcss": "^8.4.38",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.0",
+    "qrcode": "^1.5.3",
+    "simple-peer": "^9.11.1"
+  },
+  "build": {
+    "appId": "com.getlifeundo.desktop",
+    "productName": "GetLifeUndo",
+    "compression": "normal",
+    "directories": {
+      "output": "releases/desktop/windows/0.6.1.1-test",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "npmRebuild": true,
+    "win": {
+      "icon": "build/icon.ico",
+      "artifactName": "GetLifeUndo-${version}-${arch}-win.${ext}",
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false
+    },
+    "extraResources": [
+      {
+        "from": "public/icon-512.png",
+        "to": "tray.png"
+      },
+      {
+        "from": "extra/FAQ_ru.txt",
+        "to": "FAQ_ru.txt"
+      },
+      {
+        "from": "extra/FAQ_en.txt",
+        "to": "FAQ_en.txt"
+      }
+    ]
+  }
+}

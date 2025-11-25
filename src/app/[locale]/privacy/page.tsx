@@ -51,10 +51,10 @@ export default function PrivacyPage({ params }: { params: { locale: 'ru' | 'en' 
                 {isEn ? 'We collect only what is necessary to provide our services:' : 'Мы собираем только необходимую информацию для предоставления наших услуг:'}
               </p>
               <ul className="list-disc list-inside text-gray-300 mt-4 space-y-2">
-                <li>{isEn ? 'Email address for registration and notifications' : 'Email адрес для регистрации и уведомлений'}</li>
-                <li>{isEn ? 'Browser and device information' : 'Информация о браузере и устройстве'}</li>
-                <li>{isEn ? 'Extension usage data' : 'Данные об использовании расширения'}</li>
-                <li>{isEn ? 'Payment information (processed via secure PSPs)' : 'Платежная информация (обрабатывается через защищенные PSP)'}</li>
+                <li>{isEn ? 'Account e-mail used for trial, licenses and important notifications' : 'Учётный e-mail, используемый для триала, лицензий и важных уведомлений'}</li>
+                <li>{isEn ? 'Device identifiers to manage connected apps and protect your account' : 'Идентификаторы устройств для управления подключёнными приложениями и защиты учётной записи'}</li>
+                <li>{isEn ? 'License and 7-day trial status stored on our backend (without uploading your timeline content)' : 'Статус лицензии и 7‑дневного пробного периода, хранящиеся на сервере (без загрузки контента вашего таймлайна)'}</li>
+                <li>{isEn ? 'Payment information (processed via secure payment service providers)' : 'Платёжная информация (обрабатывается через защищённые платёжные провайдеры)'}</li>
               </ul>
             </section>
 
