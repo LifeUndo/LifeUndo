@@ -1,18 +1,18 @@
 ﻿[
   {
-    "version": "0.4.3.5",
+    "version": "0.6.1.1",
     "platform": "Extensions/Desktop",
-    "publishedAt": "2025-11-10T20:46:01Z",
+    "publishedAt": "2025-11-25T00:00:00Z",
     "items": [
-      "Fully revamped subscriptions and checkout.",
-      "Reliable background checkout with window fallback.",
-      "Reuse existing checkout tab, debounce clicks.",
-      "Fixed popup 'api is not defined'.",
-      "Safer DOM operations."
+      "GOLD release of Windows desktop client 0.6.1.1 with refreshed UI.",
+      "New \"Apps\" section in Settings + QR code for the downloads page.",
+      "Updated footer (Site, GitHub, Privacy, Offer, GetLifeUndo22).",
+      "GOLD artifacts for extensions (Firefox XPI and Chrome ZIP) fixed for 0.6.1.1.",
+      "Downloads page updated to serve this release."
     ],
     "links": {
-      "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/",
-      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/v0.4.3.5"
+      "firefox": "https://addons.mozilla.org/firefox/addon/getlifeundo/",
+      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/desktop-0.6.1.1-ui-gold3"
     }
   },
   {

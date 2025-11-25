@@ -1,18 +1,18 @@
 ﻿[
   {
-    "version": "0.4.3.5",
+    "version": "0.6.1.1",
     "platform": "Extensions/Desktop",
-    "publishedAt": "2025-11-10T20:46:01Z",
+    "publishedAt": "2025-11-25T00:00:00Z",
     "items": [
-      "Полностью обновлена система подписок и оплаты.",
-      "Оплата из фонового процесса + резервное окно.",
-      "Переиспользование вкладки оплаты, дебаунс кликов.",
-      "Исправлен api is not defined в попапе.",
-      "Безопасные операции с DOM."
+      "GOLD-релиз Windows desktop-клиента 0.6.1.1 с обновлённым UI.",
+      "Новый раздел \"Приложения\" + QR-код страницы загрузок.",
+      "Обновлён футер (Сайт, GitHub, Приватность, Оферта, GetLifeUndo22).",
+      "Зафиксированы GOLD-артефакты расширений (Firefox XPI и Chrome ZIP) для 0.6.1.1.",
+      "Страница /downloads обновлена под этот релиз."
     ],
     "links": {
       "firefox": "https://addons.mozilla.org/ru/firefox/addon/lifeundo/",
-      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/v0.4.3.5"
+      "github": "https://github.com/LifeUndo/LifeUndo/releases/tag/desktop-0.6.1.1-ui-gold3"
     }
   },
   {
