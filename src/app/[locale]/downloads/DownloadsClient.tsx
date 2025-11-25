@@ -298,7 +298,7 @@ export default function DownloadsClient() {
             description={t.downloads.windows}
             href={latestData?.files.win || "#"}
             className="bg-gray-600 hover:bg-gray-700 text-white"
-            isAvailable={false}
+            isAvailable={true}
             t={t}
           />
 

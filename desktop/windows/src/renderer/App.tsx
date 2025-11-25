@@ -227,7 +227,7 @@ function FooterGlass({ siteLabel, githubLabel, privacyLabel }:{ siteLabel:string
           <a className='hover:text-slate-100' href='https://getlifeundo.com/privacy/privacy' target='_blank'>{privacyLabel}</a>
           <a className='hover:text-slate-100' href='https://getlifeundo.com/privacy/legal/offer' target='_blank'>Оферта</a>
         </div>
-        <div className='text-slate-500'> GetLifeUndo</div>
+        <div className='text-slate-500'>GetLifeUndo™</div>
       </div>
     </div>
   )
@@ -971,6 +971,46 @@ export default function App(){
                   <li>{locale==='ru' ? 'Windows — Mesh 0.6.1.1 (эта сборка)' : 'Windows — Mesh 0.6.1.1 (this build)'}</li>
                   <li>{locale==='ru' ? 'macOS — в разработке' : 'macOS — in development'}</li>
                 </ul>
+                <div className='mt-3 flex flex-col sm:flex-row gap-3 items-center'>
+                  <div className='shrink-0 rounded-xl bg-slate-900/70 ring-1 ring-slate-700 p-2'>
+                    <img
+                      src='https://api.qrserver.com/v1/create-qr-code/?size=256x256&margin=2&data=https%3A%2F%2Fgetlifeundo.com%2Fru%2Fdownloads'
+                      alt={locale==='ru' ? 'QR-код загрузок GetLifeUndo' : 'GetLifeUndo downloads QR code'}
+                      className='w-28 h-28'
+                    />
+                  </div>
+                  <div className='flex-1 space-y-2'>
+                    <div className='text-slate-200 text-sm'>
+                      {locale==='ru'
+                        ? 'Сканируйте QR, чтобы открыть страницу загрузок GetLifeUndo.'
+                        : 'Scan the QR to open the GetLifeUndo downloads page.'}
+                    </div>
+                    <div className='text-slate-400 text-xs break-all'>https://getlifeundo.com/ru/downloads</div>
+                    <div>
+                      <GButton
+                        accent='cyan'
+                        onClick={async()=>{
+                          const url = 'https://getlifeundo.com/ru/downloads'
+                          try{
+                            const n:any = navigator
+                            if (n?.share){
+                              await n.share({ title:'GetLifeUndo downloads', url })
+                              return
+                            }
+                          }catch{}
+                          try{
+                            await navigator.clipboard.writeText(url)
+                            alert(locale==='ru'
+                              ? 'Ссылка на загрузки скопирована в буфер обмена.'
+                              : 'Downloads link copied to clipboard.')
+                          }catch{
+                            try{ window.open(url, '_blank') }catch{}
+                          }
+                        }}
+                      >{locale==='ru' ? 'Поделиться ссылкой' : 'Share link'}</GButton>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className='rounded-xl ring-1 ring-slate-700 p-3'>
                 <div className='text-slate-200 mb-2'>Android</div>
